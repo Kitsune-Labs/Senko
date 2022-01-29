@@ -1,5 +1,5 @@
 const ShopItems = require("../../Data/Shop/Items.json");
-const pagination = require("../../API/modules/discord-pagination-advanced2");
+const pagination = require("../../API/modules/discord-pagination-advanced");
 
 //! prepare for a mess!
 
