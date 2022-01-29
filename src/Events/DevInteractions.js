@@ -1,0 +1,39 @@
+/* eslint-disable */
+
+//? Used in discord.gg/kitsune-softworks
+
+const { Client } = require("discord.js");
+const Icons = require("../Data/Icons.json");
+const { print } = require("../API/dev/functions.js");
+const fs = require("fs");
+
+module.exports = {
+    /**
+     * @param {Client} SenkoClient
+     */
+    execute: async (SenkoClient) => {
+        for (var file of fs.readdirSync("./src/DevInteractions/")) {
+            const pull = require(`../DevInteractions/${file}`);
+
+            SenkoClient.SlashCommands.set(pull.name, pull);
+
+            const ServerCommands = SenkoClient.guilds.cache.get("887393173150777357").commands;
+
+            try {
+                const CommandData = {
+                    name: pull.name,
+                    description: pull.desc || "No description",
+                };
+
+                if (pull.options) CommandData.options = pull.options;
+
+                await ServerCommands.create(CommandData);
+            } catch(e) {
+                print("red", "ERROR", `${pull} - ${e}`);
+                console.log(e);
+            }
+
+            print("orange", "SETUP", `Set ${pull.name}`);
+        }
+    }
+};

@@ -1,0 +1,76 @@
+{
+    "NewFloofer": {
+        "Name": "New Floofer",
+        "Description": "Fluff Senko 10 times!",
+        "YenReward": 200
+    },
+
+    "AdeptFloofer": {
+        "Name": "Adept Floofer",
+        "Description": "Fluff Senko 50 times!",
+        "YenReward": 500
+    },
+
+    "MasterFloofer": {
+        "Name": "Master Floofer",
+        "Description": "Fluff Senko 100 times!",
+        "YenReward": 1000
+    },
+
+
+
+    "NewDrinker": {
+        "Name": "New Drinker",
+        "Description": "Have 10 drinks!",
+        "YenReward": 200
+    },
+
+    "AdeptDrinker": {
+        "Name": "Adept Drinker",
+        "Description": "Have 25 drinks!",
+        "YenReward": 500
+    },
+
+    "MasterDrinker": {
+        "Name": "Master Drinker",
+        "Description": "Have 50 drinks!",
+        "YenReward": 1000
+    },
+
+
+
+    "NewPatter": {
+        "Name": "New Patter",
+        "Description": "Pat Senko 10 times!",
+        "YenReward": 200
+    },
+
+    "AdeptPatter": {
+        "Name": "Adept Patter",
+        "Description": "Pat Senko 50 times!",
+        "YenReward": 500
+    },
+
+    "MasterPatter": {
+        "Name": "Master Patter",
+        "Description": "Pat Senko 100 times!",
+        "YenReward": 1000
+    },
+
+
+
+    "PoorAccounting": {
+        "Name": "Poor Accounting",
+        "Description": "Acquire 500 Yen"
+    },
+
+    "AdeptAccounting": {
+        "Name": "Adept Accounting",
+        "Description": "Acquire 10,000 Yen"
+    },
+
+    "ProAccounting": {
+        "Name": "Professional Accounting",
+        "Description": "Acquire 100,000 Yen"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "multiplier": 1,
+    "cooldowns" : {
+        "daily": 86400000,
+        "week": 604800000,
+        "thirty": 30000
+    },
+
+    "currentVersion": "1.8.2"
+}

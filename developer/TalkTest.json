@@ -1,0 +1,39 @@
+{
+    "chatOne": {
+        "Title": "Welcome home dear!",
+        "description": "Do you want some tea?",
+        "reactions": ["A","B"],
+        "image": "happy.png",
+        "color": "BLUE",
+
+        "1": {
+            "Title": "Very well then!",
+            "description": "I will brew up some tea!",
+            "image": "attachment//SenkoHappy.png"
+        },
+        "2": {
+            "Title": "Oh... okay...",
+            "description": "I won't make tea then...",
+            "image": "attachment//SenkoUpset.png"
+        }
+    },
+
+    "chatTwo": {
+        "Title": "Hello dear!",
+        "description": "Do you want to fluff me?",
+        "reactions": ["A","B"],
+        "image": "attachment//SenkoHappy.png",
+        "color": "GREEN",
+
+        "1": {
+            "Title": "Very well then!",
+            "description": "I will brew up some tea!",
+            "image": "attachment//SenkoHappy.png"
+        },
+        "2": {
+            "Title": "Oh... okay...",
+            "description": "I won't make tea then...",
+            "image": "attachment//SenkoUpset.png"
+        }
+    }
+}
