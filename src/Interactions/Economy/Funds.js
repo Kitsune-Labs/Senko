@@ -1,4 +1,3 @@
-const { MessageAttachment } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 
 module.exports = {
@@ -34,7 +33,7 @@ module.exports = {
                         }
                     }
                 ],
-                files: [ new MessageAttachment("./src/Data/content/senko/senko_hat_tip.png", "image.png")],
+                files: [  { attachment: "./src/Data/content/senko/senko_hat_tip.png", name: "image.png" }],
                 ephemeral: true
             });
         } else {
@@ -52,7 +51,7 @@ module.exports = {
                         }
                     }
                 ],
-                files: [ new MessageAttachment("./src/Data/content/senko/senko_hat_tip.png", "image.png")]
+                files: [  { attachment: "./src/Data/content/senko/senko_hat_tip.png", name: "image.png" }]
             });
         }
     }

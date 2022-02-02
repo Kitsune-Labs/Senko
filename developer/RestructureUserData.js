@@ -193,10 +193,13 @@ Firestore.collection("Users").get().then(async querySnapshot => {
             if (AccountData.Rewards.Work) DataStructure.Rewards.Work = AccountData.Rewards.Work;
         }
 
-        Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
-            console.log(`Finished ${DataStructure.LocalUser.userID}`);
-        }).catch(err => {
-            throw new Error(`USER UPDATE: ${err}`);
-        });
+        console.log(DataStructure.Inventory);
+
+        return;
+        // Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
+        //     console.log(`Finished ${DataStructure.LocalUser.userID}`);
+        // }).catch(err => {
+        //     throw new Error(`USER UPDATE: ${err}`);
+        // });
     });
 });

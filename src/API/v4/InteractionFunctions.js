@@ -1,4 +1,3 @@
-const { MessageAttachment } = require("discord.js");
 const { spliceArray } = require("../dev/functions.js");
 const Icons = require("../../Data/Icons.json");
 const RateLimitedUsers = [];
@@ -21,7 +20,7 @@ function rateLimit(interaction, time) {
                     }
                 }
             ],
-            files: [new MessageAttachment("src/Data/content/senko/bummed.png", "image.png")],
+            files: [ { attachment: "src/Data/content/senko/bummed.png", name: "image.png" }],
 
             ephemeral: true
         });
@@ -57,7 +56,7 @@ function eRes({ title, description, interaction }) {
 
     interaction.reply({
         embeds: [EmbedData],
-        files: [ new MessageAttachment(`src/Data/content/${ChosenImage}`, "image.png")],
+        files: [  { attachment:  `src/Data/content/${ChosenImage}`, name: "image.png" }],
         ephemeral: true
     });
 }
