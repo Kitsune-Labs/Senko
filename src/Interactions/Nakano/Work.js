@@ -65,7 +65,7 @@ module.exports = {
         } else {
             if (RNG <= 25) {
                 await update(interaction, {
-                    Currency: { Yen: (3000 - Item.price) + Currency.Yen },
+                    Currency: { Yen: (700 - Item.price) + Currency.Yen },
                     Rewards: { Work: Date.now() }
                 });
 

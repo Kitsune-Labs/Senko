@@ -48,9 +48,9 @@ async function getNewData(interaction, NoDataCheck) {
 
         FB_DATA = await RawData.get();
         return FB_DATA.data();
-    } else {
-        return FB_DATA.data();
     }
+
+    return FB_DATA.data();
 }
 
 async function deleteGuild(Guild) {

@@ -71,6 +71,10 @@ async function newUser(User) {
             Smile_Rate: {
                 Date: 1627710691,
                 Amount: 0
+            },
+            Eat_Rate: {
+                Date: 1627710691,
+                Amount: 0
             }
         },
         Rewards: {

@@ -85,6 +85,10 @@ Firestore.collection("Users").get().then(async querySnapshot => {
                 Smile_Rate: {
                     Date: 1627710691,
                     Amount: 0
+                },
+                Eat_Rate: {
+                    Date: 1627710691,
+                    Amount: 0
                 }
             },
 
@@ -193,7 +197,7 @@ Firestore.collection("Users").get().then(async querySnapshot => {
             if (AccountData.Rewards.Work) DataStructure.Rewards.Work = AccountData.Rewards.Work;
         }
 
-        console.log(DataStructure.Inventory);
+        console.log("Done");
 
         return;
         // Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{

@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-//? Used in discord.gg/kitsune-softworks
+//? Used in discord.gg/senko
 
 const { Client } = require("discord.js");
 const Icons = require("../Data/Icons.json");
@@ -17,7 +17,7 @@ module.exports = {
 
             SenkoClient.SlashCommands.set(pull.name, pull);
 
-            const ServerCommands = SenkoClient.guilds.cache.get("887393173150777357").commands;
+            const ServerCommands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
             try {
                 const CommandData = {
