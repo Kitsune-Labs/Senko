@@ -97,7 +97,7 @@ module.exports = {
 
                 } else {
                     await update(interaction, {
-                        Currency: { Yen: AccountData.Currency.Yen + 3000 },
+                        Currency: { Yen: AccountData.Currency.Yen + 2000 },
                         Rewards: { Weekly: Date.now() }
                     });
 
@@ -105,7 +105,7 @@ module.exports = {
                         embeds: [
                             {
                                 title: `${Icons.heart}  Here you go dear!`,
-                                description: `I have given you your yen for this week. Spend it wisely as it can only be used once a week!\n\n— ${Icons.yen} 3000x added`,
+                                description: `I have given you your yen for this week. Spend it wisely as it can only be used once a week!\n\n— ${Icons.yen} 2000x added`,
                                 color: SenkoClient.colors.light,
                                 thumbnail: {
                                     url: "attachment://image.png"

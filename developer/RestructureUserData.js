@@ -85,6 +85,10 @@ Firestore.collection("Users").get().then(async querySnapshot => {
                 Smile_Rate: {
                     Date: 1627710691,
                     Amount: 0
+                },
+                Eat_Rate: {
+                    Date: 1627710691,
+                    Amount: 0
                 }
             },
 
@@ -193,10 +197,13 @@ Firestore.collection("Users").get().then(async querySnapshot => {
             if (AccountData.Rewards.Work) DataStructure.Rewards.Work = AccountData.Rewards.Work;
         }
 
-        Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
-            console.log(`Finished ${DataStructure.LocalUser.userID}`);
-        }).catch(err => {
-            throw new Error(`USER UPDATE: ${err}`);
-        });
+        console.log("Done");
+
+        return;
+        // Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
+        //     console.log(`Finished ${DataStructure.LocalUser.userID}`);
+        // }).catch(err => {
+        //     throw new Error(`USER UPDATE: ${err}`);
+        // });
     });
 });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const { CommandInteraction, MessageAttachment } = require("discord.js");
 const ms = require("ms");
 
@@ -16,7 +17,9 @@ module.exports = {
                     description: "I am here to pamper to your hearts content!",
                     color: SenkoClient.colors.dark,
                     fields: [
-                        { name: "Uptime", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true }
+                        { name: "Uptime", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true },
+                        { name: "Lead Development", value: "Senko-san#0001", inline: true },
+                        { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒#1989\nsakuya izayoi#3553\nSilkthorne#3062\nKaori Aiko#6710\nTheReal_Enderboy#0999", inline: true },
                     ],
                     thumbnail: {
                         url: "attachment://image.png"
@@ -24,7 +27,7 @@ module.exports = {
                 }
             ],
 
-            files: [ new MessageAttachment("./src/Data/content/senko/senko_hat_huh.png", "image.png")],
+            files: [ { attachment: "./src/Data/content/senko/senko_hat_huh.png", name: "image.png" } ],
 
             components: [
                 {
@@ -38,8 +41,7 @@ module.exports = {
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Support Server (Kitsune Softworks)", style: 5, url: "https://discord.gg/kitsune-softworks" },
-                        { type: 2, label: "Community Server (Senko's World!)", style: 5, url: "https://discord.gg/senko" }
+                        { type: 2, label: "Support and Community", style: 5, url: "https://discord.gg/senko" }
                     ]
                 }
             ],
