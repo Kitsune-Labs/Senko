@@ -18,7 +18,6 @@ module.exports = {
                     color: SenkoClient.colors.dark,
                     fields: [
                         { name: "Uptime", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true },
-                        { name: "Lead Development", value: "Senko-san#0001", inline: true },
                         { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒#1989\nsakuya izayoi#3553\nSilkthorne#3062\nKaori Aiko#6710\nTheReal_Enderboy#0999", inline: true },
                     ],
                     thumbnail: {

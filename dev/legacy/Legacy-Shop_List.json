@@ -1,0 +1,513 @@
+{
+  "raspberrybox": {
+    "codename": "raspberrybox",
+    "name": "<:raspberry:819296164272144404> Box of Raspberries'",
+    "amount": 1,
+    "description": "Freshly Picked!",
+    "price": 500,
+    "rarity": "uncommon",
+    "onsale": true,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "#FFFFFA",
+      "titles": [ "You open the raspberry box", "Your mouth gets watery looking at the raspberries" ],
+      "responses": [ "You take some raspberries out of the box and eat them.", "You eat all the raspberries in the box." ]
+    }
+  },
+
+
+  "senkokeychain": {
+    "codename": "senkokeychain",
+    "name": "Senko tail key-chain.",
+    "amount": 1,
+    "description": "I wonder where this was made?",
+    "rarity": "divine",
+    "price": 3000,
+    "onsale": true
+  },
+
+
+  "shirokeychain": {
+    "codename": "shirokeychain",
+    "name": "Shiro tail key-chain.",
+    "amount": 1,
+    "description": "\"Shiro is superior\" - Shiro-sama",
+    "rarity": "divine",
+    "price": 3000,
+    "onsale": false
+  },
+
+
+  "yozorakeychain": {
+    "codename": "yozorakeychain",
+    "name": "Yozora tail key-chain.",
+    "amount": 1,
+    "description": "You think Yozora has 8 tails now?",
+    "rarity": "divine",
+    "price": 3000,
+    "onsale": false
+  },
+
+
+  "segg": {
+    "codename": "segg",
+    "name": "Senko Egg",
+    "event": "Easter 2021",
+    "amount": 1,
+    "description": "This is the segg. The Senko egg is a limited time item sold for 5 hours on easter 2021.",
+    "rarity": "divine",
+    "price": 1111,
+    "onsale": false
+  },
+
+
+  "yokodoll": {
+    "codename": "yokodoll",
+    "name": "Little Yoko Doll",
+    "amount": 1,
+    "description": "A little yoko doll of Nakano.",
+    "rarity": "Rare",
+    "price": 750,
+    "onsale": true
+  },
+
+
+  "snowball": {
+    "codename": "snowball",
+    "name": "Snowball",
+    "seasonal": {
+      "isSeasonal": true,
+      "season": "winter"
+    },
+    "amount": 1,
+    "description": "A snowball made from some fine ice.",
+    "price": 30,
+    "onsale": false
+  },
+
+
+  "sakurroseawine": {
+    "codename": "sakurroseawine",
+    "name": "Sakura Rose Wine",
+    "seasonal": {
+      "isSeasonal": true,
+      "season": "spring"
+    },
+    "amount": 1,
+    "description": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
+    "price": 300,
+    "onsale": false
+  },
+
+
+  "pumpkinpie": {
+    "codename": "pumpkinpie",
+    "name": "pumpkin pie",
+    "seasonal": {
+      "isSeasonal": true,
+      "season": "fall"
+    },
+    "amount": 1,
+    "description": "Perfectly spiced.",
+    "price": 400,
+    "onsale": false
+  },
+
+  "yakitori": {
+    "codename": "yakitori",
+    "name": "<:yakitori:830285209408372756> Yakitori",
+    "amount": 2,
+    "description": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
+    "rarity": "common",
+    "price": 947,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "RED",
+      "titles": [ "You see the juicy Yakitori on the plate.", "You're stare at the Yakitori." ],
+      "responses": [ "You eat the Yakitori and it was delicious!", "You eat the Yakitori and have a sip of your drink." ]
+    }
+  },
+
+
+  "omurice": {
+    "codename": "omurice",
+    "name": "<:omurice:830285418649223228> Omurice",
+    "amount": 1,
+    "description": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
+    "rarity": "uncommon",
+    "price": 712,
+    "onsale": false,
+
+    "useFunction": {
+      "type": "edible",
+      "color": "RED",
+      "titles": [ "You see the juicy Yakitori on the plate.", "You're stare at the Yakitori." ],
+      "responses": [ "You eat the Yakitori and it was delicious!", "You eat the Yakitori and have a sip of your drink." ]
+    }
+  },
+  "hojicha": {
+    "codename": "hojicha",
+    "name": "<:HojichaTea:830284879509454848> Classic Hojicha",
+    "amount": 1,
+    "description": "Low in caffeine, delicious, and an alternative to coffee!",
+    "rarity": "Rare",
+    "price": 1754,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "GREEN",
+      "titles": [ "You brew some hojicha tea" ],
+      "responses": [ "After brewing it you take a drink of it. It was delicious.", "You take a sip of your fresh hojicha tea." ]
+    }
+  },
+  "taiyaki": {
+    "codename": "taiyaki",
+    "name": "<:taiyaki:830285733147312178> Taiyaki",
+    "amount": 1,
+    "description": "Fish-shaped cake with a read bean paste filling.",
+    "rarity": "common",
+    "price": 636,
+    "onsale": true,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "You stare at the taiyaki.", "You smell the taiyaki and it smells great!" ],
+      "responses": [ "You start to eat the taiyaki.", "You take a bite out of the taiyaki.", "You ask if Nakano wants a part of your taiyaki, he declined and you eat it." ]
+    }
+  },
+  "udon": {
+    "codename": "udon",
+    "name": "<:udon:830285978739539999> Udon Noodles",
+    "amount": 1,
+    "description": "Some comforting food.",
+    "rarity": "common",
+    "price": 500,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "You can smell the freshly made Udon.", "Your nose was filled with the smell of Udon." ],
+      "responses": [ "You eat the Udon.", "You take bites out of your Udon." ]
+    }
+  },
+  "brush": {
+    "codename": "brush",
+    "name": "<:brush:831710056265285672> Brush",
+    "amount": 1,
+    "description": "Brush",
+    "rarity": "common",
+    "price": 1,
+    "onsale": false
+  },
+  "sushi": {
+    "codename": "sushi",
+    "name": "🍣 Sushi",
+    "amount": 4,
+    "description": "Seafood is great! You should try it out",
+    "rarity": "common",
+    "price": 381,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "You see the Sushi rolls." ],
+      "responses": [ "You eat some with Nakano, he said they were delicious." ]
+    }
+  },
+  "bento": {
+    "codename": "bento",
+    "name": ":bento: Bento Box",
+    "amount": 1,
+    "description": "Hey, hey! Can I take some of your rice?",
+    "rarity": "common",
+    "price": 1305,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "You eat the bento box that you bought from earlier." ],
+      "responses": [ "It was pretty good" ]
+    }
+  },
+  "ramen": {
+    "codename": "ramen",
+    "name": "<:s_ramen:832865324553863188> Ramen Bowl",
+    "amount": 1,
+    "description": "Ramen is delicious.",
+    "rarity": "common",
+    "price": 1283,
+    "onsale": true,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "The ramen smell fills up the room." ],
+      "responses": [ "You give a bowl to Nakano and eat yours.", "You eat the bowl of ramen you made." ]
+    }
+  },
+  "ozoni": {
+    "codename": "ozoni",
+    "name": "<:ozoni:832868119080075264> Ozōni Bowl",
+    "amount": 1,
+    "description": "It isn't new years, yet",
+    "rarity": "common",
+    "price": 1283,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "Delicious" ],
+      "responses": [ "You eat the ozōni bowl and it was great" ]
+    }
+  },
+  "leaningbanner": {
+    "codename": "leaningbanner",
+    "name": "~~Leaning's~~ Shiro-sama's Banner",
+    "amount": 1,
+    "description": "<a:protogenbop:853524564910407680> Shiro-sama **IS** a toaster <a:protogenbop:853524564910407680>",
+    "rarity": "divine",
+    "price": 7777,
+    "onsale": false,
+    "options": {
+      "class": "banner",
+      "tradable": false
+    }
+  },
+  "senkobanner_1": {
+    "codename": "senkobanner_1",
+    "name": "Manga Senko Banner!",
+    "amount": 1,
+    "description": "A banner made of Senko's from the manga!",
+    "rarity": "divine",
+    "price": 7777,
+    "onsale": false,
+    "options": {
+      "class": "banner",
+      "tradable": false
+    }
+  },
+  "thehelpfulfoxsenko": {
+    "codename": "thehelpfulfoxsenko",
+    "name": "The Helpful fox Senko-san!",
+    "amount": 1,
+    "description": "The helpful fox Senko-san, Here for your pampering needs!",
+    "rarity": "divine",
+    "price": 7777,
+    "onsale": false,
+    "options": {
+      "class": "banner",
+      "tradable": true
+    }
+  },
+  "degg": {
+    "codename": "degg",
+    "name": "developer Egg",
+    "amount": 1e+36,
+    "description": "<:D:833912860291235871><:E:833912860387442739><:V:833912860962324490><:E:833912860387442739><:L:833912860693364766><:O:833912860513665045><:P:833912860718661632><:E:833912860387442739><:R_:833912860706996235>",
+    "rarity": "dev",
+    "price": 1e+36,
+    "onsale": false
+  },
+  "dango": {
+    "codename": "dango",
+    "name": ":dango: Dango",
+    "amount": 3,
+    "description": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
+    "rarity": "uncommon",
+    "price": 210,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "You have 3 dango's" ],
+      "responses": [ "You eat one dango and give the other's to Nakano." ]
+    }
+  },
+  "greentea": {
+    "codename": "greentea",
+    "name": "<:greentea:834640187442331648> Green Tea",
+    "amount": 1,
+    "description": "It's actually quite good",
+    "rarity": "common",
+    "price": 130,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "*sip*" ],
+      "responses": [ "You take a drink of your tea Senko made for you. You thank her for it.", "Delicious." ]
+    }
+  },
+  "md_1": {
+    "codename": "md_1",
+    "name": "Music Disk #1 - Koyoi Mofumofu!!",
+    "amount": 1,
+    "description": "Forever ashubiduba mofu-mofu!",
+    "rarity": "divine",
+    "price": 10000,
+    "onsale": false
+  },
+  "md_2": {
+    "codename": "md_2",
+    "name": "Music Disk #2 - Koyoi Mofumofu!!",
+    "amount": 1,
+    "description": "Forever ashubiduba mofu-mofu!",
+    "rarity": "divine",
+    "price": 10000,
+    "onsale": false
+  },
+  "sknss_v1": {
+    "codename": "sknss_v1",
+    "name": "<:tail:813562650306674708> Sewayaki Kitsune no Senko-san - Volume 1 Ch.1  - First Tail!",
+    "amount": 1,
+    "description": "The first tail of the Sewayaki Kitsune no Senko-san manga!",
+    "rarity": "ultimate",
+    "price": 10000,
+    "onsale": false
+  },
+
+  "sknss_v2": {
+    "codename": "sknss_v2",
+    "name": "<:tail:813562650306674708> Sewayaki Kitsune no Senko-san - Volume 1 Ch.2  - Second Tail!",
+    "amount": 1,
+    "description": "The second tail of the Sewayaki Kitsune no Senko-san manga!",
+    "rarity": "ultimate",
+    "price": 10000,
+    "onsale": false
+  },
+  "sknss_v3": {
+    "codename": "sknss_v3",
+    "name": "<:tail:813562650306674708> Sewayaki Kitsune no Senko-san - Volume 1 Ch.3 - Third Tail!",
+    "amount": 1,
+    "description": "The third tail of the Sewayaki Kitsune no Senko-san manga!",
+    "rarity": "ultimate",
+    "price": 10000,
+    "onsale": false
+  },
+  "sknss_v4": {
+    "codename": "sknss_v4",
+    "name": "<:tail:813562650306674708> Sewayaki Kitsune no Senko-san - Volume 1 Ch.4 - Fourth Tail!",
+    "amount": 1,
+    "description": "The fourth tail of the Sewayaki Kitsune no Senko-san manga!",
+    "rarity": "ultimate",
+    "onsale": false,
+    "price": 10000
+  },
+  "sknss_v5": {
+    "codename": "sknss_v5",
+    "name": "<:tail:813562650306674708> Sewayaki Kitsune no Senko-san - Volume 1 Ch.5 - Fifth Tail!",
+    "amount": 1,
+    "description": "The fifth tail of the Sewayaki Kitsune no Senko-san manga!",
+    "rarity": "ultimate",
+    "price": 10000,
+    "onsale": false
+  },
+  "sknss_v6": {
+    "codename": "sknss_v6",
+    "name": "<:tail:813562650306674708> Sewayaki Kitsune no Senko-san - Volume 1 Ch.6 - Sixth Tail!",
+    "amount": 1,
+    "description": "The sixth tail of the Sewayaki Kitsune no Senko-san manga!",
+    "rarity": "ultimate",
+    "price": 10000,
+    "onsale": false
+  },
+  "sknss_v7": {
+    "codename": "sknss_v7",
+    "name": "<:tail:813562650306674708> Sewayaki Kitsune no Senko-san - Volume 1 Ch.7 - Seventh Tail!",
+    "amount": 1,
+    "description": "The seventh tail of the Sewayaki Kitsune no Senko-san manga!",
+    "rarity": "ultimate",
+    "price": 10000,
+    "onsale": false
+  },
+
+  "tempura": {
+    "codename": "tempura",
+    "name": "Tempura",
+    "amount": 1,
+    "description": "Tempura is a dish of battered and fried fish, seafood, or vegetables. This one has vegetables.",
+    "rarity": "common",
+    "price": 300,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "GREEN",
+      "titles": [ "You can smell the fish in this tempura Senko made.", "You ready your utensils for eating." ],
+      "responses": [ "You take a bite out of the fish in it.", "You eat the tempura, and thanked Senko for the meal." ]
+    }
+  },
+  "kaiseki": {
+    "codename": "kaiseki",
+    "name": "Kaiseki ryori",
+    "amount": 1,
+    "description": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
+    "rarity": "rare",
+    "price": 500,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "You take a look on what Senko put on the table." ],
+      "responses": [ "You can smell the food, it smells really good.", "You thank Senko and start eating the food." ]
+    }
+  },
+  "tsukemono": {
+    "codename": "tsukemono",
+    "name": "Tsukemono pickles",
+    "amount": 3,
+    "description": "Traditional pickles that have been eaten in Japan since prehistoric times. Extremely healthy too!",
+    "rarity": "common",
+    "price": 300,
+    "onsale": false,
+
+
+    "useFunction": {
+      "type": "edible",
+      "color": "ORANGE",
+      "titles": [ "You can smell the pickles" ],
+      "responses": [ "You eat them." ]
+    }
+  },
+  "soba": {
+    "codename": "soba",
+    "name": "Soba",
+    "amount": 1,
+    "description": "Very delicious & healthy, Also similar to Udon.",
+    "rarity": "uncommon",
+    "price": 1000,
+    "onsale": false,
+
+    "useFunction": {
+      "type": "edible",
+      "color": "#FFFFFA",
+      "titles": [ "You can feel the warmth of the Soba", "You can smell the Soba and couldn't wait any longer." ],
+      "responses": [ "You have some Soba, it was great!", "You had some Soba with Nakano, you both thought it was very good.", "You had some Soba by yourself, it was delicious." ]
+    }
+  }
+}

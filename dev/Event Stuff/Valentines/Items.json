@@ -1,0 +1,32 @@
+{
+	"chocolate_box": {
+		"class": "food",
+		"id": "chocolate_box",
+		"name": "Box of heart shaped chocolate",
+		"desc": "Awww! How sweet of you!",
+		"amount": 1,
+		"price": 20,
+		"onsale": false,
+		"max": 1,
+		"season": "Valentines",
+		"seasonal": {
+			"isSeasonal": true,
+			"season": "Valentines"
+		}
+	},
+	"roses": {
+		"class": "profile",
+		"id": "roses",
+		"name": "Bundle of Roses",
+		"desc": "You didnt have to!",
+		"amount": 1,
+		"price": 20,
+		"onsale": false,
+		"max": 1,
+		"season": "Valentines",
+		"seasonal": {
+			"isSeasonal": true,
+			"season": "Valentines"
+		}
+	}
+}

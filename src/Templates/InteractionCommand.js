@@ -1,4 +1,3 @@
-/* eslint-disable */
 
 const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");

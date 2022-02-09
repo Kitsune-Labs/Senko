@@ -1,5 +1,367 @@
 {
-    "test": {
-        "response": "English"
+    "config": {
+        "EmptyInventory": "You don't have anything, you can find items to buy with /shop!",
+        "DefaultBannerLabel": "Default Banner",
+        "DefaultBannerDesc": "The banner everyone gets",
+        "NoBanners": "You don't own any banners, you can find them in the shop when they're onsale!",
+        "SelectBanner": "Select a banner to equip in the dropdown menu! (Will equip on click)",
+        "currently": "Currently",
+
+        "AccountSettings": "Account Settings",
+        "OptionOne": "Change Privacy",
+        "OneFieldTrue": { "name": "Private Profile", "value": "ICON_TICK  private. Only you can view your profile." },
+        "OneFieldFalse": { "name": "Private Profile", "value": "ICON_TICK  not private. Everyone can view your profile.", "inline": true },
+
+        "DefaultTitleLabel": "No Title",
+        "DefaultTitleDesc": "Default",
+        "NoTitles": "You don't own any titles, you can find them in the shop when they're onsale!",
+        "SelectTitle": "Select a title to equip in the dropdown menu! (Will equip on click)",
+
+        "ColorLabel": "Default Color",
+        "ColorDesc": "The color everyone gets",
+        "NoColors": "You don't own any colors, you can find them in the shop when they're onsale!",
+        "SelectColor": "Select a color to equip in the dropdown menu! (Will equip on click)"
+    },
+    "DataRemoval": {
+        "AccountEmbed": {
+            "title": "Data Removal",
+            "description": "Please confirm that you want to delete all your data.\n\n**⚠️ This is irreversible! ⚠️**"
+        },
+        "confirmation": "I wan't to delete ALL my data and I know this is irreversible."
+    },
+    "Inventory": {
+        "Page": "Page",
+        "Missing": "Missing Data"
+    },
+    "profile": {
+        "AccountPrivate": "Sorry! This user has set their profile to private.",
+        "AboutMe": "About Me",
+        "Stats": "ICON_TAIL1  **DATA_FLUFFS**x fluffs\nICON_MEDAL  **DATA_ACHIEVEMENTS** awards",
+        "Badges": "Badges"
+    },
+    "Stats": {
+        "Title": ["Here are your stats dear!", "Here you go!"],
+        "Pats": "Pats",
+        "Hugs": "Hugs",
+        "Sleeps": "Sleeps",
+        "Smiles": "Smiles",
+        "Steps": "Steps",
+        "Drinks": "Drinks"
+    },
+    "Claim": {
+        "daily": {
+            "AlreadyClaimedTitle": "ICON_EXCLAMATION  Sorry dear!",
+            "AlreadyClaimed": "You've already claimed your Yen! Come back in TIME_LEFT!",
+
+            "claimTitle": "ICON_HEART  Here you go dear!",
+            "claimDesc": "I have given you your yen for today. Spend it wisely and come back tomorrow!\n\n— ICON_YEN 300x added"
+        },
+        "weekly": {
+            "AlreadyClaimedTitle": "ICON_EXCLAMATION  Sorry dear!",
+            "AlreadyClaimed": "You've already claimed your Yen! Come back in TIME_LEFT!",
+
+            "claimTitle": "ICON_HEART  Here you go dear!",
+            "claimDesc": "I have given you your yen for this week. Spend it wisely as it can only be used once a week!\n\n— ICON_YEN 2000x added"
+        },
+        "items": {
+            "title": "Hmmm.....",
+            "desc": "You have no items to claim!"
+        }
+    },
+    "funds": {
+        "title": "ICON_HEART  Here are your funds dear, don't forget to spend them wisely!"
+    },
+    "rate": {
+        "title": "Let me think...",
+        "EasterEgg1Title": "I don't need to think!",
+        "EasterEgg1Desc": "I'm obviously a 10/10! But Shiro, she is sneaky!",
+        "desc": "I rate **ITEM_TO_RATE** a RATE_NUMBER/10!"
+    },
+    "channel": {
+        "list": {
+            "title": "I will allow the use of my commands in:",
+            "descAlt": "Everywhere"
+        },
+        "add": {
+            "error": "Unable to set channel",
+            "errorDesc": "CHANNEL_MENTION has already been added and cannot be set again.",
+            "addedTitle": "Channel added",
+            "addedDesc": "CHANNEL_MENTION is now a whitelisted channel! My commands can be used in "
+        },
+        "remove": {
+            "error": "Unable to remove channel",
+            "errorDesc": "CHANNEL_MENTION has not been added and cannot be removed.",
+            "removedTitle": "Channel removed",
+            "removedDesc": "CHANNEL_MENTION has been removed! My commands can be used in "
+        }
+    },
+    "work": {
+        "destructableItems": [
+            {
+                "name": "air conditioner",
+                "price": 300,
+                "type": "replace"
+            },
+            {
+                "name": "refrigerator",
+                "price": 500,
+                "type": "repair"
+            },
+            {
+                "name": "rice cooker",
+                "price": 100,
+                "type": "replace"
+            },
+            {
+                "name": "TV",
+                "price": 500,
+                "type": "replace"
+            },
+            {
+                "name": "vacuum",
+                "price": 300,
+                "type": "repair"
+            }
+        ],
+
+        "notHappen": "ICON_EXCLAMATION  Not going to happen.",
+        "notDesc": "Come back in TIME_LEFT if you want your next paycheck.",
+
+        "title1": "ICON_EXCLAMATION  You arrived at your home and something happened.",
+        "desc1": "Senko told you ITEM_BROKEN had broken. It cost you ICON_YEN  ITEM_PRICEx to ITEM_TYPE.\n\n— ICON_YEN  ITEM_PRICEx removed",
+
+        "fineTitle": "ICON_YEN  Here is your check.",
+        "fineDesc": "I'll make sure to pay you again tomorrow.\n\n— ICON_YEN 500x added"
+    },
+    "cuddle": "You cuddle with Senko.\n\n— ICON_YEN  10x added",
+    "drink": {
+        "say": [
+            "Don't drink too fast!",
+            "Make sure to savor it",
+            "*sip sip*"
+        ],
+        "noDrinktitle": "ICON_EXCLAMATION  I don't think you should drink more.",
+        "noDrinkDesc": "If you drink any more Hojicha we'll have to spend more money. We can have some more in TIME_LEFT!",
+        "footer": "We have a limit of 5 drinks in a day!"
+    },
+    "eat": {
+        "noEatTitle": "ICON_EXCLAMATION  I don't think you should eat anything else",
+        "noDesc": "You'll gain weight if you do! I'll cook more in TIME_LEFT!",
+        "footer": "You can only eat 5 times today!",
+
+        "successDesc": "You have something to eat with Senko\n\n— ICON_YEN  10x added"
+    },
+    "fluff": {
+        "Reactions": {
+            "User": [
+                "strokes Senko's tail",
+                "fluffs Senko",
+                "caresses Senko's tail",
+                "ingulfs in Senko's fluffy tail",
+                "hugs Senko's silky tail"
+            ],
+
+            "Senko": [
+                "euH", "mhMh", "Uya!", "Uh-Uya!", "HYaa", "UYAAA!", "Umu~", "Uya..."
+            ],
+
+            "say": [
+                "Please be more gentle to my tail!",
+                "Do you have to be so verbose?",
+                "You can't stay like that forever, can you?"
+            ]
+        },
+
+        "footer": "You've fluffed my tail FLUFF_AMOUNT times."
+    },
+    "hug": {
+        "messages": [
+            "INTERACTION_USER hugs FOUND_USER!",
+            "FOUND_USER has been hugged by INTERACTION_USER!"
+        ],
+
+        "noHugTitle": "ICON_EXCLAMATION  Sorry!",
+        "noHugDesc": "I've already given you 20 hugs, i'll give you more in TIME_LEFT",
+
+        "title": "INTER_USER hugs Senko",
+        "desc": "You've hugged me AMOUNT times"
+    },
+    "pat": {
+        "reactions": {
+            "User": [
+                "pats Senko's head",
+                "pets Senko",
+                "gives Senko a pat on her head",
+                "ruffles through Senko's hair",
+                "caresses Senko's ears",
+                "touches Senko's ears"
+            ],
+
+            "Senko": [
+                "Uya...", "Umu~", "euH", "mhMh", "Uh-Uya!", "mmu", "Hnng"
+            ],
+
+            "say": [
+                "Please be more gentle with my ears dear, they're very precious!",
+                "Don't be rough with my hair.",
+                "Please remember to not put your fingers in my ears...!"
+            ]
+        },
+
+        "noPatTitle": "ICON_EXCLAMATION  Sorry dear...",
+        "noPatDesc": "I don't think I need any more pats today, come back in TIME_LEFT!",
+        "noPatFooter": "The limit of patting me is 20 per day!",
+        "footer": "You've pat me AMOUNT times."
+    },
+    "rest": {
+        "reactions": {
+            "User": [
+                "rest's on Senko's lap",
+                "is being pampered by Senko"
+            ],
+
+            "Senko": [
+                "Umu~", "Umu Umu"
+            ],
+
+            "say": [
+                "It's alright dear, i'm here for you...",
+                "Relax dear, don't stress yourself too much.",
+                "Rest now, you'll need your energy tomorrow."
+            ]
+        },
+
+        "noRestDesc": "I don't think you should rest anymore for today, I'll give you more in TIME_LEFT!",
+        "noRestFooter": "Lets just stick to 5 today...",
+
+        "footer": "You've rested AMOUNT times."
+    },
+    "sleep": {
+        "reactions": {
+            "User": [
+                "rest's on Senko's lap",
+                "sleeps on Senko's lap",
+                "Passes out while being pampered",
+                "gets pampered by Senko's tail"
+            ],
+
+            "Senko": [
+                "mhMh mmm mmm!", "mmu"
+            ],
+
+            "say": [
+                "There there dear, you've had a stressful day today.",
+                "Have sweet dreams dear.",
+                "ICON_THINK  *I hope you sleep well...*",
+                "I'll continue to pamper you with my tail dear!"
+            ]
+        },
+
+        "noSleepTitle": "ICON_EXCLAMATION  ${Icons.exclamation}  Sorry dear...",
+        "noSleepDesc": "I don't you should sleep yet, try in TIME_LEFT!",
+        "noSleepFooter": "You may only rest 1 time per day to not mess up your schedule!",
+
+        "footer": "You've slept AMOUNT times."
+    },
+    "smile": {
+        "reactions": {
+            "User": [
+                "smiles at Senko",
+                "smiles"
+            ],
+
+            "Senko": [
+                "Umu~"
+            ],
+
+            "say": []
+        },
+
+        "noSmileTitle": "ICON_SLEEP  It looks like Senko is sleeping",
+        "noSmileDesc": "You shouldn't wake her, come back in TIME_LEFT!",
+        "noSmileFooter": "I can only smile 20 times a day",
+
+        "footer": "We've smiled AMOUNT times."
+    },
+    "coinflip": {
+        "start": {
+            "title": "Ding!",
+            "desc": "Shiro flipped the coin and we're now anticipating the outcome."
+        },
+        "lost": {
+            "title": "Bonk!",
+            "desc": "The coin flipped and the outcome is...\n\nShiro won..."
+        },
+        "win": {
+            "title": "Ting!",
+            "desc": "The coin flipped and the outcome is...\n\nYou won!\n\n— ICON_YEN  30x added"
+        },
+        "tie": {
+            "title": "Thunk!",
+            "desc": "The coin flipped and the outcome is...\n\nA tie!?!?"
+        }
+    },
+    "rps": {
+        "start": {
+            "title": "Rock, Paper, Scissors",
+            "desc": "Shiro seems determined to win"
+        },
+        "tie": "It's a tie!\n\nShiro looks confused",
+        "ShiroLost": "Shiro lost!\n\nShiro does not look happy...\n\n— ICON_YEN  30x added",
+        "ShiroWon": "Shiro won!\n\nShiro looks happy!"
+    },
+    "buy": {
+        "CantFindItem": "I cant find this. Returned \"RETURN_VALUE\"",
+        "NotEnoughYen": "You don't have enough ICON_YEN to buy this item.",
+
+        "title": "ICON_HEART  See you next time!",
+        "desc": "And many thanks for purchasing __ITEM_NAME__ for ICON_YEN __ITEM_PRICEx__!",
+
+        "maxed": "ICON_EXCLAMATION  Sorry about this INTERACTION_USER",
+        "maxDesc": "You can only have __ITEM_MAX ITEM_NAME__!"
+    },
+    "preview": {
+        "title": "Title",
+        "badge": "Badge",
+        "colored": "Colored"
+    },
+    "shop": {
+        "title": "Senko's Market",
+        "desc": "Please take your time and review what is available in the market.\n\nYou can use these commands to interact with the market:\n> `/buy <item>` to buy an item\n> `/preview <item>` preview the item's description, price, and possible preview images\n\n__ICON_YEN  ACCOUNT_YENx in your savings__",
+        "cosmetic_booth": "> **Cosmetic Booth**\nITEM_STUFF",
+        "general_goods": "\n\n> **General Goods**\nITEM_STUFF",
+        "food_items": "\n\n> **Food Items**\nITEM_STUFF",
+        "material_items": "\n\n> **Material Items**\nITEM_STUFF",
+        "event_items": "\n\n> **Event Booth**\nITEM_STUFF"
+    },
+    "avatar": {
+        "avatar": "Avatar",
+        "banner": "Banner"
+    },
+    "ping": "Websocket: PING",
+    "poll": "Which will you pick?",
+    "support": {
+        "title": "Hello, I'm Senko-san, a divine messenger Kitsune!",
+        "desc": "I am here to pamper to your hearts content!",
+        "fields": {
+            "Uptime": "Uptime",
+            "Contributors": "Contributors",
+
+            "invite": "Invite me",
+            "issue": "Submit an issue",
+            "support": "Support and Community"
+        }
+    },
+    "whois": {
+        "roles": "Roles",
+        "nickname": "Nickname",
+        "user": "User",
+        "ID": "ID",
+        "avatar": "Avatar",
+        "banner": "Banner",
+        "bot": "Bot",
+        "created": "Created",
+        "joined": "Joined",
+        "booster": "Booster"
     }
 }

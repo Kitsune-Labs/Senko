@@ -84,7 +84,7 @@ module.exports = {
                 });
             } else {
                 await update(interaction, {
-                    Currency: { Yen: Currency.Yen + 700 },
+                    Currency: { Yen: Currency.Yen + 500 },
                     Rewards: { Work: Date.now() }
                 });
 
@@ -92,7 +92,7 @@ module.exports = {
                     embeds: [
                         {
                             title: `${Icons.yen}  Here is your check.`,
-                            description: `I'll make sure to pay you again tomorrow.\n\n— ${Icons.yen} 700x added`,
+                            description: `I'll make sure to pay you again tomorrow.\n\n— ${Icons.yen} 500x added`,
                             color: SenkoClient.colors.light,
                             thumbnail: {
                                 url: "attachment://image.png"
