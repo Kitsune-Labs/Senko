@@ -29,7 +29,7 @@
     "desc": "Adds \"Divine\" to your profile name",
     "price": 777,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "title": "✨ Divine"
   },
   "sakurashiro": {
@@ -103,7 +103,7 @@
     "desc": "It has a beak like a bird.",
     "price": 100,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "badge": "<:Hat:911085376284819547>"
   },
   "purrfect_loaf": {
@@ -113,6 +113,7 @@
     "price": 100,
     "amount": 1,
     "onsale": false,
+    "max": 1,
     "badge": "🍞"
   },
   "color_purple": {
@@ -122,6 +123,7 @@
     "price": 500,
     "amount": 1,
     "onsale": false,
+    "max": 1,
     "color": "PURPLE",
     "type": "color"
   },
@@ -203,7 +205,7 @@
     "desc": "Seafood is great! You should try it out",
     "price": 381,
     "amount": 4,
-    "onsale": false
+    "onsale": true
   },
   "bento": {
     "class": "food",
@@ -219,7 +221,7 @@
     "desc": "Ramen is delicious.",
     "price": 1283,
     "amount": 1,
-    "onsale": false
+    "onsale": true
   },
   "ozoni": {
     "class": "food",
@@ -249,8 +251,8 @@
   },
   "thehelpfulfoxsenko": {
     "class": "profile",
-    "name": "Old Senko Pout Banner",
-    "desc": "The helpful fox Senko-san, Here for your pampering needs!",
+    "name": "Rustic Senko Pout Banner",
+    "desc": "A relic from the past, This helpful fox Senko-san is here for your pampering needs!",
     "price": 7777,
     "amount": 1,
     "onsale": false,
@@ -270,7 +272,7 @@
     "desc": "Its actually quite good",
     "price": 130,
     "amount": 1,
-    "onsale": true
+    "onsale": false
   },
   "md_1": {
     "class": "general",
@@ -286,7 +288,7 @@
     "desc": "Forever ashubiduba mofu-mofu!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": true
   },
   "sknss_v1": {
     "class": "general",
@@ -326,7 +328,7 @@
     "desc": "The fifth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": true
   },
   "sknss_v6": {
     "class": "general",
@@ -390,7 +392,8 @@
     "desc": "Make your profile card white like Shiro!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
+    "max": 1,
     "color": "#FFFFF9",
     "type": "color"
   },
@@ -410,6 +413,7 @@
     "price": 100,
     "amount": 1,
     "onsale": false,
+    "max": 1,
     "badge": "<:CandyCane:926930144852078672>"
   },
   "present": {
@@ -427,6 +431,7 @@
     "price": 100,
     "amount": 1,
     "onsale": false,
+    "max": 1,
     "badge": "<a:snowflake_a:917908202459390042>"
   },
   "holly_title": {
@@ -444,7 +449,8 @@
     "desc": "Make your profile card red!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
+    "max": 1,
     "color": "#CC3333",
     "type": "color"
   },
@@ -455,6 +461,7 @@
     "price": 100,
     "amount": 1,
     "onsale": false,
+    "max": 1,
     "badge": "🎄"
   },
   "color_teal": {
@@ -464,6 +471,7 @@
     "price": 300,
     "amount": 1,
     "onsale": false,
+    "max": 1,
     "color": "#4AD1FF",
     "type": "color"
   },
@@ -500,7 +508,7 @@
     "desc": "🏳️‍⚧️🏳️‍⚧️🏳️‍⚧️",
     "price": 0,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "type": "banner"
   },
   "MooseKaiBanner": {
@@ -518,6 +526,7 @@
     "desc": "Do you think it's a good idea to eat it?",
     "price": 50,
     "amount": 3,
+    "max": 1,
     "onsale": false,
     "badge": "🍒"
   },
@@ -527,7 +536,7 @@
     "desc": "They taste like butter",
     "price": 50,
     "amount": 1,
-    "onsale": false
+    "onsale": true
   },
   "RiceBall": {
     "class": "food",
@@ -536,6 +545,7 @@
     "price": 50,
     "amount": 1,
     "onsale": false,
+    "max": 1,
     "badge": "🍙"
   },
   "NewYearsPresent_2021": {
@@ -560,8 +570,19 @@
     "name": "Popcorn Badge",
     "desc": "nom nom nom",
     "price": 50,
-    "amount": 3,
-    "onsale": true,
+    "amount": 1,
+    "max": 1,
+    "onsale": false,
     "badge": "🍿"
+  },
+  "bacon": {
+    "class": "profile",
+    "name": "Bacon Badge",
+    "desc": "Why would anyone stick bacon on themselves?",
+    "price": 50,
+    "amount": 1,
+    "onsale": false,
+    "max": 1,
+    "badge": "🥓"
   }
 }

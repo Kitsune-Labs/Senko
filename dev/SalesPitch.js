@@ -11,7 +11,7 @@ for (var index in Shop_List) {
     if (item.onsale == true) {
         Items.push({ ID: item.id, Name: item.name });
 
-        item.onsale = false;
+        // item.onsale = false;
     }
 }
 

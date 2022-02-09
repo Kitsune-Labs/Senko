@@ -39,7 +39,7 @@ module.exports = {
                     embeds: [
                         {
                             title: "Avatar",
-                            description: `[Avatar Link](${AvatarURL})`,
+                            description: `[URL](${AvatarURL})`,
                             color: SenkoClient.colors.light,
                             image: {
                                 url: AvatarURL
@@ -47,7 +47,7 @@ module.exports = {
                         },
                         {
                             title: "Banner",
-                            description: `[Banner Link](https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048)`,
+                            description: `[URL](https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048)`,
                             color: SenkoClient.colors.dark,
                             image: {
                                 url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`
@@ -59,7 +59,7 @@ module.exports = {
                 interaction.reply({
                     embeds: [
                         {
-                            description: `[Avatar Link](${AvatarURL})`,
+                            description: `[URL](${AvatarURL})`,
                             color: SenkoClient.colors.light,
                             image: {
                                 url: AvatarURL

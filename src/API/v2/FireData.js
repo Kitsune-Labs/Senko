@@ -144,6 +144,10 @@ async function makeGuild(Guild) {
     await GuildStore.doc(Guild.id).set({
         ID: Guild.id,
         flags: new Bitfield(50).toHex(),
+        WelcomeChannel: {
+            id: null,
+            message: ""
+        },
         Channels: []
     }).catch(err => {
         throw new Error(`GUILD CREATION: ${err}`);

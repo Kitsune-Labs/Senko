@@ -98,36 +98,37 @@ module.exports = {
                 ],
                 ephemeral: true
             });
-        } else {
-            if (!hasPerm(interaction, "MANAGE_CHANNELS")) return listChannel();
-
-            if (!Channels.includes(channel.id)) return interaction.reply({
-                embeds: [
-                    {
-                        title: "Unable to remove channel",
-                        description: `${channel} is not on the channel list!`,
-                        color: SenkoClient.colors.dark
-                    }
-                ],
-                ephemeral: true
-            });
-
-            Channels.splice(Channels.indexOf(channel.id), 1);
-
-            updateGuild(interaction.guild, {
-                Channels: Channels
-            });
-
-            return interaction.reply({
-                embeds: [
-                    {
-                        title: "Channel removed",
-                        description: `${channel} has been removed! I will be able to be used in ${Channels.map(i=>`<#${i}>`)}`,
-                        color: SenkoClient.colors.light
-                    }
-                ],
-                ephemeral: true
-            });
         }
+
+        if (!hasPerm(interaction, "MANAGE_CHANNELS")) return listChannel();
+
+        if (!Channels.includes(channel.id)) return interaction.reply({
+            embeds: [
+                {
+                    title: "Unable to remove channel",
+                    description: `${channel} is not on the channel list!`,
+                    color: SenkoClient.colors.dark
+                }
+            ],
+            ephemeral: true
+        });
+
+        Channels.splice(Channels.indexOf(channel.id), 1);
+
+        updateGuild(interaction.guild, {
+            Channels: Channels
+        });
+
+        return interaction.reply({
+            embeds: [
+                {
+                    title: "Channel removed",
+                    description: `${channel} has been removed! I will be able to be used in ${Channels.map(i=>`<#${i}>`)}`,
+                    color: SenkoClient.colors.light
+                }
+            ],
+            ephemeral: true
+        });
+        
     }
 };
