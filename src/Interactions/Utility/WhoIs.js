@@ -31,7 +31,7 @@ module.exports = {
             method: "GET",
             headers: {
                 "User-Agent": process.env.AGENT,
-                "Authorization": `Bot ${process.env.TOKEN}`
+                "Authorization": `Bot ${SenkoClient.token}`
             },
         };
 

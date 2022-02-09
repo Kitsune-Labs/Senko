@@ -7,6 +7,14 @@ const BitData = require("../../API/Bits.json");
 module.exports = {
     name: "profile",
     desc: "View yours or someone's profile",
+    options: [
+        {
+            name: "user",
+            description: "View someone else's profile",
+            required: false,
+            type: "USER"
+        }
+    ],
     /**
      * @param {CommandInteraction} interaction
      */

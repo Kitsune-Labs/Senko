@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 const { update } = require("../../API/v4/Fire");
