@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
@@ -15,6 +15,7 @@ module.exports = {
     ],
     no_data: true,
     /**
+     * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction) => {
@@ -25,7 +26,7 @@ module.exports = {
             method: "GET",
             headers: {
                 "User-Agent": process.env.AGENT,
-                "Authorization": `Bot ${process.env.TOKEN}`
+                "Authorization": `Bot ${SenkoClient.token}`
             },
         };
 
