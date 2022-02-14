@@ -1,11 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 const { User, Guild, Interaction, Permissions } = require("discord.js");
 const chalk = require("chalk");
-const config = require("../../Data/DataConfig.json");
+const config = require("../Data/DataConfig.json");
 
 
 const { getData, updateUser } = require("./v2/FireData.js");
-
 
 
 const FirebaseAdmin = require("firebase-admin");
@@ -14,7 +13,7 @@ const DataBase = FirebaseAdmin.firestore();
 const UserStore = DataBase.collection("Users");
 const GuildStore = DataBase.collection("Guilds");
 
-const DataConfig = require("../../Data/DataConfig.json");
+const DataConfig = config;
 const uuid = require("uuid");
 const { Bitfield } = require("bitfields");
 

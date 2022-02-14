@@ -4,7 +4,7 @@ const { Client, Collection } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
-const { print } = require("./API/Master.js");
+const { print } = require("./API/dev/functions");
 
 const SenkoClient = new Client({
     intents: ["GUILDS"],
