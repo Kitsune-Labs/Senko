@@ -1,4 +1,4 @@
-const { spliceArray } = require("../../API/dev/functions.js");
+const { spliceArray } = require("../../API/Master.js");
 
 module.exports = {
     name: "rate",

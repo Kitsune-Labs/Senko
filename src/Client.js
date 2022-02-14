@@ -4,7 +4,7 @@ const { Client, Collection } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
-const { print } = require("./API/dev/functions.js");
+const { print } = require("./API/Master.js");
 
 const SenkoClient = new Client({
     intents: ["GUILDS"],
@@ -55,7 +55,7 @@ SenkoClient.once("ready", async () => {
 
     for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
         require(`./Events/${file}`).execute(SenkoClient);
-        print("yellow", "EVENTS", `Running ${file}`);
+        print("#FFFB00", "EVENTS", `Running ${file}`);
     }
 
     let commands = SenkoClient.application.commands;
@@ -70,14 +70,17 @@ SenkoClient.once("ready", async () => {
     readdirSync("./src/Interactions/").forEach(async Folder => {
         const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
 
-
-        // return;
-
-        // eslint-disable-next-line no-unreachable
         for (let interact of Interactions) {
             let pull = require(`./Interactions/${Folder}/${interact}`);
-
             SenkoClient.SlashCommands.set(pull.name, pull);
+        }
+    });
+
+    readdirSync("./src/Interactions/").forEach(async Folder => {
+        const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
+
+        for (let interact of Interactions) {
+            let pull = require(`./Interactions/${Folder}/${interact}`);
 
             try {
                 const CommandData = {
@@ -89,11 +92,11 @@ SenkoClient.once("ready", async () => {
 
                 await commands.create(CommandData);
             } catch(e) {
-                print("red", "ERROR", `${interact} - ${e}`);
+                print("#FF5454", "ERROR", `${interact} - ${e}`);
                 console.log(e);
             }
 
-            print("green", "SETUP", `Set ${pull.name}`);
+            print("#77FF2B", "SETUP", `Running ${pull.name}`);
         }
     });
 });

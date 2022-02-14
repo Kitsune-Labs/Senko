@@ -1,4 +1,4 @@
-const { spliceArray } = require("../dev/functions.js");
+const { spliceArray } = require("../Master.js");
 const Icons = require("../../Data/Icons.json");
 const RateLimitedUsers = [];
 

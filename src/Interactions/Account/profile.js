@@ -3,6 +3,7 @@ const { getData } = require("../../API/v2/FireData.js");
 const ShopItems = require("../../Data/Shop/Items.json");
 const { Bitfield } = require("bitfields");
 const BitData = require("../../API/Bits.json");
+const { stringEndsWithS } = require("../../API/Master");
 
 module.exports = {
     name: "profile",
@@ -31,7 +32,7 @@ module.exports = {
         const MessageBuilt = {
             embeds: [
                 {
-                    description: `${AccountData.LocalUser.config.title || ""} **${User.user.username.endsWith("s") ? User.user.username : User.user.username + "'s"}** Profile\n${Icons.yen}  ${AccountData.Currency.Yen}x\n${Icons.tofu}  ${AccountData.Currency.Tofu}x`,
+                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.user.username || User.username)}** Profile\n${Icons.yen}  ${AccountData.Currency.Yen}x\n${Icons.tofu}  ${AccountData.Currency.Tofu}x`,
                     fields: [
                         { name: "About Me", value: `${AccountData.LocalUser.AboutMe || "** **"}` },
                         { name: "Stats", value: `${Icons.tail1}  **${AccountData.Stats.Fluffs}**x fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** awards`, inline: true }

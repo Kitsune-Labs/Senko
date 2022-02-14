@@ -4,7 +4,7 @@
 
 const { Client } = require("discord.js");
 const Icons = require("../Data/Icons.json");
-const { print } = require("../API/dev/functions.js");
+const { print } = require("../API/Master.js");
 const fs = require("fs");
 
 module.exports = {
@@ -29,11 +29,11 @@ module.exports = {
 
                 await ServerCommands.create(CommandData);
             } catch(e) {
-                print("red", "ERROR", `${pull} - ${e}`);
+                print("#FF762B", "DEV ERROR", `${pull} - ${e}`);
                 console.log(e);
             }
 
-            print("orange", "SETUP", `Set ${pull.name}`);
+            print("#FFA72B", "DEV SETUP", `Running ${pull.name}`);
         }
     }
 };

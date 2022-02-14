@@ -584,5 +584,15 @@
     "onsale": false,
     "max": 1,
     "badge": "🥓"
+  },
+  "croissant": {
+    "class": "profile",
+    "name": "Croissant Badge",
+    "desc": "🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐",
+    "price": 50,
+    "amount": 1,
+    "onsale": false,
+    "max": 1,
+    "badge": "🥐"
   }
 }

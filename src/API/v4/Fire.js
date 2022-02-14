@@ -1,9 +1,9 @@
 const FirebaseAdmin = require("firebase-admin");
+const Master = require("../Master");
 const { newUser } = require("../v2/FireData");
 const DataBase = FirebaseAdmin.firestore();
 
 const UserStore = DataBase.collection("Users");
-const GuildStore = DataBase.collection("Guilds");
 
 
 /**
@@ -53,8 +53,11 @@ async function getNewData(interaction, NoDataCheck) {
     return FB_DATA.data();
 }
 
+/**
+ * @deprecated
+ */
 async function deleteGuild(Guild) {
-    return GuildStore.doc(Guild.id).delete();
+    Master.deleteGuild(Guild);
 }
 
 module.exports = { getNewData, update, deleteGuild };

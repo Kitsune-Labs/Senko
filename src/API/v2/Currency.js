@@ -1,32 +1,21 @@
-const config = require("../../Data/DataConfig.json");
-const { getData, updateUser } = require("./FireData.js");
+const Master = require("../Master.js");
 
 /**
  * @param `user` message.author
  * @param `amount` number
+ * @deprecated
 */
 async function addYen(user, amount) {
-    let Data = await getData(user);
-
-    updateUser(user, {
-        Currency: {
-            Yen: Data.Currency.Yen + (amount * config.multiplier)
-        }
-    });
+    Master.addYen(user, amount);
 }
 
 /**
  * @param `user` message.author
  * @param `amount` number
+ * @deprecated
  */
 async function removeYen(user, amount) {
-    let Data = await getData(user);
-
-    updateUser(user, {
-        Currency: {
-            Yen: Data.Currency.Yen - amount
-        }
-    });
+    Master.removeYen(user, amount);
 }
 
 

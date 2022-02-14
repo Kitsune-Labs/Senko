@@ -3,7 +3,7 @@
 const { CommandInteraction, Client, MessageActionRow, MessageSelectMenu } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
-const math = require("../API/modules/mathjs");
+// const math = require("../API/modules/mathjs");
 
 module.exports = {
     name: "solve",

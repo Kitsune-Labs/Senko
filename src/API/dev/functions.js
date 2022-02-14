@@ -1,17 +1,38 @@
-function print(Color, Type, Details) {
-    console.log(`%c[%c${Type}%c]%c: ${Details}`, "color: orange", `color: ${Color || "red"}`, "color: orange", "color: white");
-}
+const chalk = require("chalk");
 
-function wait(time) {
-    return new Promise(resolve => setTimeout(resolve, time));
-}
+module.exports = {
+    /**
+     * @param {String} Color
+     * @param {String} Type
+     * @param {String} content
+     * @deprecated
+    */
+    print(Color, Type, content) {
+        console.log(`[${chalk.hex(Color || "#252525").underline(Type)}]: ${content}`);
+    },
 
-function spliceArray(Array, item) {
-    return Array.splice(Array.indexOf(item), 1);
-}
+    /**
+     * @param {Number} time
+     * @deprecated
+    */
+    wait(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    },
 
-function stringEndsWithS (string) {
-    return string.endsWith("s") ? `${string}'` : `${string}'s`;
-}
+    /**
+     * @param {Array} Array
+     * @param {String} item
+     * @deprecated
+    */
+    spliceArray(Array, item) {
+        return Array.splice(Array.indexOf(item), 1);
+    },
 
-module.exports = { print, wait, spliceArray, stringEndsWithS };
+    /**
+     * @param {String} string
+     * @deprecated
+     */
+    stringEndsWithS(string) {
+        return string.endsWith("s") ? `${string}'` : `${string}'s`;
+    }
+};

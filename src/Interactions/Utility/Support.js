@@ -32,7 +32,7 @@ module.exports = {
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Invite me", style: 5, url: "https://senkosworld.com/invite", disabled: false },
+                        { type: 2, label: "Invite me", style: 5, url: "https://discord.com/api/oauth2/authorize?client_id=777676015887319050&permissions=137439266880&scope=bot%20applications.commands", disabled: false },
                         { type: 2, label: "Submit an issue", style: 5, url: "https://github.com/Kitsune-Softworks/Senko-Issues/issues/new/choose" },
                         // { type: 2, label: "GitHub", style: 5, url: "https://github.com/Kitsune-Softworks/Senko" }
                     ]

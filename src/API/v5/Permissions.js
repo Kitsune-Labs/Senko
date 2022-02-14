@@ -3,6 +3,7 @@ const { Interaction, Permissions } = require("discord.js");
 
 /**
  * @param {Interaction} interaction
+ * @deprecated
  */
 function CheckPermission(interaction, Permission, User) {
     let perms = interaction.channel.permissionsFor(User, Permission);

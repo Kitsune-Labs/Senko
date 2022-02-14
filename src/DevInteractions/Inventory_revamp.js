@@ -2,7 +2,7 @@
 
 const { CommandInteraction } = require("discord.js");
 const Icons = require("../Data/Icons.json");
-const { stringEndsWithS } = require("../API/dev/functions.js");
+const { stringEndsWithS } = require("../API/Master.js");
 
 module.exports = {
     name: `inventory_revamp`,

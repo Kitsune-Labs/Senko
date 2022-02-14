@@ -1,6 +1,6 @@
 const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
-const { wait } = require("../../API/dev/functions.js");
+const { wait } = require("../../API/Master.js");
 const { addYen } = require("../../API/v2/Currency");
 
 module.exports = {

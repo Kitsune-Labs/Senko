@@ -2,7 +2,7 @@ const { getNewData, update } = require("../API/v4/Fire");
 const { Bitfield } = require("bitfields");
 const BitData = require("../API/Bits.json");
 const Icons = require("../Data/Icons.json");
-const { print } = require("../API/dev/functions.js");
+const { print } = require("../API/Master.js");
 const ShopItems = require("../Data/Shop/Items.json");
 const BannerList = require("../Data/Banners.json");
 

@@ -5,7 +5,7 @@ const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../API/v5/Permissions");
 const { getGuild } = require("../API/v2/FireData.js");
 const AllowedCommands = ["ping", "channel", "channels", "avatar", "av", "prefix", "poll"];
-const { print } = require("../API/dev/functions");
+const { print } = require("../API/Master");
 
 // eslint-disable-next-line no-unused-vars
 const { awardAchievement } = require("../API/v5/Achievement.js");
