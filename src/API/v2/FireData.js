@@ -1,4 +1,4 @@
-const Master = require("../Master.js");
+const { createUser, createGuild } = require("../Master");
 
 
 const FirebaseAdmin = require("firebase-admin");
@@ -11,7 +11,7 @@ const GuildStore = DataBase.collection("Guilds");
  * @deprecated
  */
 async function newUser(User) {
-    await Master.createUser(User);
+    await createUser(User);
 }
 
 /**
@@ -68,7 +68,7 @@ async function updateUser(User, Data, Merge) {
  * @deprecated
  */
 async function makeGuild(Guild) {
-    await Master.makeGuild(Guild);
+    createGuild(Guild);
 }
 
 /**

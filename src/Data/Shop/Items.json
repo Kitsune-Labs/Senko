@@ -296,7 +296,8 @@
     "desc": "The first tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": false,
+    "manga": "Tail_1"
   },
   "sknss_v2": {
     "class": "general",
@@ -304,7 +305,8 @@
     "desc": "The second tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": false,
+    "manga": "Tail_2"
   },
   "sknss_v3": {
     "class": "general",
@@ -312,7 +314,8 @@
     "desc": "The third tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": false,
+    "manga": "Tail_3"
   },
   "sknss_v4": {
     "class": "general",
@@ -320,7 +323,8 @@
     "desc": "The fourth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": false,
+    "manga": "Tail_4"
   },
   "sknss_v5": {
     "class": "general",
@@ -328,7 +332,8 @@
     "desc": "The fifth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": true
+    "onsale": true,
+    "manga": "Tail_5"
   },
   "sknss_v6": {
     "class": "general",
@@ -336,7 +341,8 @@
     "desc": "The sixth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": false,
+    "manga": "Tail_6"
   },
   "sknss_v7": {
     "class": "general",
@@ -344,7 +350,8 @@
     "desc": "The seventh tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false
+    "onsale": false,
+    "manga": "Tail_7"
   },
   "tempura": {
     "class": "food",

@@ -3,10 +3,6 @@ const { User, Guild, Interaction, Permissions } = require("discord.js");
 const chalk = require("chalk");
 const config = require("../Data/DataConfig.json");
 
-
-const { getData, updateUser } = require("./v2/FireData.js");
-
-
 const FirebaseAdmin = require("firebase-admin");
 const DataBase = FirebaseAdmin.firestore();
 
@@ -15,9 +11,7 @@ const GuildStore = DataBase.collection("Guilds");
 
 const DataConfig = config;
 const uuid = require("uuid");
-const {
-    Bitfield
-} = require("bitfields");
+const { Bitfield } = require("bitfields");
 
 
 /**
@@ -135,9 +129,58 @@ async function createUser(User) {
 }
 
 /**
+ * @param {User} user
+ * @param {Number} returnType
+ */
+async function fetchData(user, returnType) {
+    let Fetched = user.user ? user.user : user;
+
+    const UD = UserStore.doc(Fetched.id);
+    let UserData = await UD.get().catch(err => {
+        throw new Error(`USER DATA FETCH: ${err}`);
+    });
+
+    if (!UserData.exists && returnType === 1) return 0;
+
+    if (!UserData.exists) await createUser(Fetched);
+
+    while (!UserData.exists) {
+        UserData = await UD.get();
+    }
+
+    return UserData.data();
+}
+
+/**
+ * @param {User} User
+ * @param {JSON} Data
+ * @param {Number} merge
+ */
+ async function updateUser(User, Data, Merge) {
+    let Fetched = User;
+
+    const UD = UserStore.doc(Fetched.id);
+
+    let UserData = await UD.get();
+    if (!UserData.exists) await createUser(Fetched);
+
+    if (!Merge) {
+        UserStore.doc(Fetched.id).set(Data, { merge: true }).catch(err => {
+            throw new Error(`USER UPDATE: ${err}`);
+        });
+    } else {
+        UserStore.doc(Fetched.id).update(Data).catch(err => {
+            throw new Error(`USER UPDATE: ${err}`);
+        });
+    }
+
+    return true;
+}
+
+/**
  * @param {Guild} Guild
  */
-async function makeGuild(Guild) {
+async function createGuild(Guild) {
     await GuildStore.doc(Guild.id).set({
         ID: Guild.id,
         flags: new Bitfield(50).toHex(),
@@ -165,7 +208,7 @@ async function deleteGuild(Guild) {
  * @param {Number} amount
  */
 async function addYen(user, amount) {
-    let Data = await getData(user);
+    let Data = await fetchData(user);
 
     updateUser(user, {
         Currency: {
@@ -179,7 +222,7 @@ async function addYen(user, amount) {
  * @param {Number} amount
  */
 async function removeYen(user, amount) {
-    let Data = await getData(user);
+    let Data = await fetchData(user);
 
     updateUser(user, {
         Currency: {
@@ -236,12 +279,14 @@ module.exports = {
     spliceArray,
     stringEndsWithS,
     createUser,
-    makeGuild,
+    createGuild,
     deleteGuild,
+    updateUser,
     addYen,
     removeYen,
     hasPerm,
     selfPerm,
     getName,
-    CheckPermission
+    CheckPermission,
+    fetchData
 };

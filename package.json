@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node src/Client.js",
+    "start": "node src/Client.js --trace-warnings",
     "shop": "node developer/SalesPitch.js"
   },
   "dependencies": {
