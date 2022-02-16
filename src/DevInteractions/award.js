@@ -1,7 +1,8 @@
 const Icons = require("../Data/Icons.json");
 const ShopItems = require("../Data/Shop/Items.json");
 const { getData, updateUser } = require("../API/v2/FireData.js");
-const { Client } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
+const { Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
     name: "award",

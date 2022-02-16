@@ -1,19 +1,17 @@
-const Master = require("../Master");
-
+const Master = require("../Master.js");
 
 
 const FirebaseAdmin = require("firebase-admin");
 const DataBase = FirebaseAdmin.firestore();
 const UserStore = DataBase.collection("Users");
 const GuildStore = DataBase.collection("Guilds");
-const { Bitfield } = require("bitfields");
 
 /**
  * @param {User} User
  * @deprecated
  */
 async function newUser(User) {
-    await Master.newUser(User);
+    await Master.createUser(User);
 }
 
 /**

@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, Client } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
