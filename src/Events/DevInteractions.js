@@ -12,28 +12,29 @@ module.exports = {
      * @param {Client} SenkoClient
      */
     execute: async (SenkoClient) => {
+        const ServerCommands = SenkoClient.guilds.cache.get("777251087592718336").commands;
+        // await ServerCommands.set([]);
+
+
         for (var file of fs.readdirSync("./src/DevInteractions/")) {
             const pull = require(`../DevInteractions/${file}`);
 
-            SenkoClient.SlashCommands.set(pull.name, pull);
-
-            const ServerCommands = SenkoClient.guilds.cache.get("777251087592718336").commands;
+            await SenkoClient.SlashCommands.set(`${pull.name}`, pull);
 
             try {
                 const CommandData = {
-                    name: pull.name,
+                    name: `${pull.name}`,
                     description: pull.desc || "No description",
                 };
 
                 if (pull.options) CommandData.options = pull.options;
 
                 await ServerCommands.create(CommandData);
+                print("#FFA72B", "DEV SETUP", `Running ${pull.name}`);
             } catch(e) {
                 print("#FF762B", "DEV ERROR", `${pull} - ${e}`);
                 console.log(e);
             }
-
-            print("#FFA72B", "DEV SETUP", `Running ${pull.name}`);
         }
     }
 };

@@ -1,7 +1,6 @@
 const ShopItems = require("../../Data/Shop/Items.json");
-const pagination = require("../../API/modules/discord-pagination-advanced");
-
-//! prepare for a mess!
+const Paginate = require("../../API/Pagination/Main");
+const Icons = require("../../Data/Icons.json");
 
 module.exports = {
     name: "inventory",
@@ -43,45 +42,32 @@ module.exports = {
             color: SenkoClient.colors.light
         };
 
-
         for (var Item of Inventory) {
             const ShopData = await ShopItems[Item.codename];
 
+            const Field = {
+                name: `${number}`,
+                value: `${Icons.tick}  Missing Data`,
+                inline: true
+            };
+
+            if (ShopData) {
+                Field.name = `${ShopData.name}`;
+                Field.value = `${ShopData.desc}`;
+            }
+
+            number++;
+
             if (number <= 6) {
-                if (!ShopData) {
-                    Page1.fields.push({ name: `${number}`, value: "Missing Data" });
-                } else {
-                    Page1.fields.push({ name: `${ShopData.name}`, value: `— ${ShopData.desc}` });
-                }
-                number++;
+                Page1.fields.push(Field);
             } else if (number <= 12 && number > 6) {
-                if (!ShopData) {
-                    Page2.fields.push({ name: `${number}`, value: "Missing Data" });
-                } else {
-                    Page2.fields.push({ name: `${ShopData.name}`, value: `— ${ShopData.desc}` });
-                }
-                number++;
+                Page2.fields.push(Field);
             } else if (number <= 24 && number > 12) {
-                if (!ShopData) {
-                    Page3.fields.push({ name: `${number}`, value: "Missing Data" });
-                } else {
-                    Page3.fields.push({ name: `${ShopData.name}`, value: `— ${ShopData.desc}` });
-                }
-                number++;
+                Page3.fields.push(Field);
             } else if (number <= 30 && number > 24) {
-                if (!ShopData) {
-                    Page4.fields.push({ name: `${number}`, value: "Missing Data" });
-                } else {
-                    Page4.fields.push({ name: `${ShopData.name}`, value: `— ${ShopData.desc}` });
-                }
-                number++;
+                Page4.fields.push(Field);
             } else if (number <= 36 && number > 30) {
-                if (!ShopData) {
-                    Page5.fields.push({ name: `${number}`, value: "Missing Data" });
-                } else {
-                    Page5.fields.push({ name: `${ShopData.name}`, value: `— ${ShopData.desc}` });
-                }
-                number++;
+                Page5.fields.push(Field);
             }
         }
 
@@ -91,13 +77,8 @@ module.exports = {
         if (Page4.fields.length >= 1) Pages.push(Page4);
         if (Page5.fields.length >= 1) Pages.push(Page5);
 
-        if (Page2.fields.length <= 0) {
-            interaction.reply({
-                embeds: [Page1],
-                ephemeral: true
-            });
-        } else {
-            pagination(interaction, Pages, { autoDelete: 1, ephemeral: true });
-        }
+
+        if (Page2.fields.length <= 0) return interaction.reply({ embeds: [Page1], ephemeral: true });
+        Paginate(interaction, Pages, 60000);
     }
 };

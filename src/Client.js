@@ -63,21 +63,22 @@ SenkoClient.once("ready", async () => {
     // Used for debugging specific guilds that break for some reason (rarely gets used)
     // commands = SenkoClient.guilds.cache.get("000000000000").commands;
 
-    commands.set([]);
-
     if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("887393173150777357").commands;
 
+    await commands.set([]);
+
+    // readdirSync("./src/Interactions/").forEach(async Folder => {
+    //     const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
+
+    //     for (let interact of Interactions) {
+    //         let pull = require(`./Interactions/${Folder}/${interact}`);
+    //         SenkoClient.SlashCommands.set(pull.name, pull);
+    //     }
+    // });
+
     readdirSync("./src/Interactions/").forEach(async Folder => {
         const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
-
-        for (let interact of Interactions) {
-            let pull = require(`./Interactions/${Folder}/${interact}`);
-            SenkoClient.SlashCommands.set(pull.name, pull);
-        }
-    });
-
-    readdirSync("./src/Interactions/").forEach(async Folder => {
-        const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
+        if (process.env.NIGHTLY === "true") return;
 
         for (let interact of Interactions) {
             let pull = require(`./Interactions/${Folder}/${interact}`);
@@ -88,15 +89,17 @@ SenkoClient.once("ready", async () => {
                     description: pull.desc || "No description",
                 };
 
+                // if (process.env.NIGHTLY === "true") CommandData.name = `dev-${pull.name}`;
                 if (pull.options) CommandData.options = pull.options;
 
+                await SenkoClient.SlashCommands.set(pull.name, pull);
+
                 await commands.create(CommandData);
+                print("#77FF2B", "SETUP", `Running ${pull.name}`);
             } catch(e) {
                 print("#FF5454", "ERROR", `${interact} - ${e}`);
                 console.log(e);
             }
-
-            print("#77FF2B", "SETUP", `Running ${pull.name}`);
         }
     });
 });
