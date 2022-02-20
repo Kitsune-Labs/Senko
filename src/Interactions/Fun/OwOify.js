@@ -11,7 +11,6 @@ module.exports = {
             required: true
         }
     ],
-    no_data: true,
     /**
      * @param {CommandInteraction} interaction
      */

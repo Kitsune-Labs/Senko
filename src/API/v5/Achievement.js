@@ -1,7 +1,7 @@
 const Icons = require("../../Data/Icons.json");
 const Achievements = require("../../Data/Achievements.json");
 const Colors = require("../../Data/Palettes/Main.js");
-const { addYen } = require("../v2/Currency.js");
+const { addYen } = require("../Master");
 const FirebaseAdmin = require("firebase-admin");
 const Firestore = FirebaseAdmin.firestore();
 

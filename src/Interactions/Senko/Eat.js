@@ -1,20 +1,19 @@
 const Icons = require("../../Data/Icons.json");
-const { addYen } = require("../../../src/API/v2/Currency.js");
+const { addYen, updateUser } = require("../../API/Master");
 const { eRes } = require("../../API/v4/InteractionFunctions");
-const { update } = require("../../API/v4/Fire");
 const config = require("../../Data/DataConfig.json");
 const ms = require("ms");
 
 module.exports = {
     name: "eat",
     desc: "nom nom nom",
-    no_data: true,
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction, GuildData, { RateLimits }) => {
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Eat_Rate.Date) >= 0) {
-            await update(interaction, {
+            await updateUser(interaction.user, {
                 RateLimits: {
                     Eat_Rate: {
                         Amount: 0,

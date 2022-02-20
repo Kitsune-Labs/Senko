@@ -9,7 +9,7 @@ for (var index in Shop_List) {
     var item = Shop_List[index];
 
     if (item.onsale == true) {
-        Items.push({ ID: item.id, Name: item.name });
+        Items.push({ Name: item.name });
 
         // item.onsale = false;
     }

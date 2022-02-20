@@ -10,7 +10,6 @@ const UserStore = DataBase.collection("Users");
 const GuildStore = DataBase.collection("Guilds");
 
 const DataConfig = config;
-const uuid = require("uuid");
 const { Bitfield } = require("bitfields");
 
 
@@ -46,12 +45,19 @@ function stringEndsWithS(string) {
 }
 
 /**
+ * @param {Interaction} interaction
+ */
+function getName(interaction) {
+    return interaction.member.nickname || interaction.member.user.username;
+}
+
+/**
  * @param {User} User
  */
 async function createUser(User) {
     await UserStore.doc(User.id).set({
         LocalUser: {
-            user: `User_${uuid.v4()}`.slice(0, 13),
+            user: null,
             version: DataConfig.currentVersion,
             userID: User.id,
             Banner: "DefaultBanner.png",
@@ -133,7 +139,7 @@ async function createUser(User) {
  * @param {Number} returnType
  */
 async function fetchData(user, returnType) {
-    let Fetched = user.user ? user.user : user;
+    let Fetched = user.user || user;
 
     const UD = UserStore.doc(Fetched.id);
     let UserData = await UD.get().catch(err => {
@@ -157,19 +163,17 @@ async function fetchData(user, returnType) {
  * @param {Number} merge
  */
  async function updateUser(User, Data, Merge) {
-    let Fetched = User;
-
-    const UD = UserStore.doc(Fetched.id);
+    const UD = UserStore.doc(User.id);
 
     let UserData = await UD.get();
-    if (!UserData.exists) await createUser(Fetched);
+    if (!UserData.exists) await createUser(User);
 
     if (!Merge) {
-        UserStore.doc(Fetched.id).set(Data, { merge: true }).catch(err => {
+        UserStore.doc(User.id).set(Data, { merge: true }).catch(err => {
             throw new Error(`USER UPDATE: ${err}`);
         });
     } else {
-        UserStore.doc(Fetched.id).update(Data).catch(err => {
+        UserStore.doc(User.id).update(Data).catch(err => {
             throw new Error(`USER UPDATE: ${err}`);
         });
     }
@@ -197,10 +201,44 @@ async function createGuild(Guild) {
 /**
  * @param {Guild} Guild
  */
+async function fetchGuild(Guild) {
+    try {
+        const GD = DataBase.collection("Guilds").doc(Guild.id);
+
+        let GuildData = await GD.get().catch(err => {
+            throw new Error(`GUILD FETCH: ${err}`);
+        });
+
+        if (!GuildData.exists) await createGuild(Guild);
+
+        while (!GuildData.exists) {
+            GuildData = await GD.get();
+        }
+
+        return GuildData.data();
+    } catch(err) {
+        console.error(`Guild Fetch Error: ${err}`);
+    }
+}
+
+/**
+ * @param {Guild} Guild
+ */
 async function deleteGuild(Guild) {
     await GuildStore.doc(Guild.id).delete();
 
     this.print("#FFFFF1", "GUILD", "Left and removed guild data");
+}
+
+/**
+ * @param {Guild} Guild
+ * @param {JSON} Data
+ */
+async function updateGuild(Guild, Data) {
+    await fetchGuild(Guild);
+    GuildStore.doc(Guild.id).set(Data, { merge: true }).catch(err => {
+        throw new Error(`GUILD UPDATE: ${err}`);
+    });
 }
 
 /**
@@ -288,5 +326,7 @@ module.exports = {
     selfPerm,
     getName,
     CheckPermission,
-    fetchData
+    fetchData,
+    fetchGuild,
+    updateGuild
 };

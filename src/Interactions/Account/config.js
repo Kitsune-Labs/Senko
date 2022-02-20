@@ -10,6 +10,7 @@ const BitData = require("../../API/Bits.json");
 module.exports = {
     name: "config",
     desc: "Configure your profile and account settings",
+    userData: true,
     options: [
         {
             name: "banner",

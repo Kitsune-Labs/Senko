@@ -1,12 +1,13 @@
 const { MessageAttachment } = require("discord.js");
-const { update } = require("../../API/v4/Fire");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const ms = require("ms");
+const { updateUser } = require("../../API/Master");
 
 module.exports = {
     name: "work",
-    desc: "Provide yourself with 700 Yen by going to work",
+    desc: "Have Nakano go to work to provide us with income",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -64,7 +65,7 @@ module.exports = {
             });
         } else {
             if (RNG <= 25) {
-                await update(interaction, {
+                await updateUser(interaction.user, {
                     Currency: { Yen: (700 - Item.price) + Currency.Yen },
                     Rewards: { Work: Date.now() }
                 });
@@ -83,7 +84,7 @@ module.exports = {
                     files: [ { attachment: "./src/Data/content/senko/heh.png", name: "image.png" } ]
                 });
             } else {
-                await update(interaction, {
+                await updateUser(interaction.user, {
                     Currency: { Yen: Currency.Yen + 500 },
                     Rewards: { Work: Date.now() }
                 });

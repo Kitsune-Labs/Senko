@@ -1,11 +1,12 @@
 const Icons = require("../Data/Icons.json");
 const ShopItems = require("../Data/Shop/Items.json");
-const { getData, updateUser } = require("../API/v2/FireData.js");
+const { updateUser } = require("../API/Master");
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
+const { fetchData } = require("../API/Master");
 
 module.exports = {
-    name: "award",
+    name: "award-dev",
     desc: "dev",
     options: [
         {
@@ -21,6 +22,14 @@ module.exports = {
             required: true
         }
     ],
+    permissions: [
+        {
+            id: "609097445825052701",
+            type: "USER",
+            permission: true
+        }
+    ],
+    defaultPermission: false,
     /**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
@@ -38,7 +47,7 @@ module.exports = {
 
         if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
 
-        const { Inventory } = await getData(FetchedUser);
+        const { Inventory } = await fetchData(FetchedUser);
 
         for (var Item of Inventory) {
             if (Item.codename === DevItem) {

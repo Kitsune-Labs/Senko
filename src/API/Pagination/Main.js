@@ -72,5 +72,11 @@ module.exports = async (interaction, pages, timeout = 120000) => {
         }
     });
 
+    process.once("beforeExit", () => {
+        MessageStructure.components[0].components[0].disabled = true;
+        MessageStructure.components[0].components[1].disabled = true;
+        interaction.update(MessageStructure);
+    });
+
     return curPage;
 };

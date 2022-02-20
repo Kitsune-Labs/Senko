@@ -1,7 +1,6 @@
 module.exports = {
     name: "delete_data",
     desc: "Delete all your Account data",
-    no_data: true,
     /**
      * @param {CommandInteraction} interaction
      */

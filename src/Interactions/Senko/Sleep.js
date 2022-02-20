@@ -1,9 +1,9 @@
 const { MessageAttachment } = require("discord.js");
 const { eRes } = require("../../API/v4/InteractionFunctions");
-const { update } = require("../../API/v4/Fire");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const ms = require("ms");
+const { updateUser } = require("../../API/Master");
 
 const Reactions = {
     User: [
@@ -28,12 +28,13 @@ const Reactions = {
 module.exports = {
     name: "sleep",
     desc: "Sleep on Senko's lap",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Sleep_Rate.Date) >= 0) {
-            await update(interaction, {
+            await updateUser(interaction.user, {
                 RateLimits: {
                     Sleep_Rate: {
                         Amount: 0,
@@ -75,7 +76,7 @@ module.exports = {
             files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
         });
 
-        await update(interaction, {
+        await updateUser(interaction.user, {
             Stats: { Sleeps: Stats.Sleeps },
 
             RateLimits: {

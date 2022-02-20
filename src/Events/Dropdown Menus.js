@@ -1,8 +1,7 @@
-const { getNewData, update } = require("../API/v4/Fire");
 const { Bitfield } = require("bitfields");
 const BitData = require("../API/Bits.json");
 const Icons = require("../Data/Icons.json");
-const { print } = require("../API/Master.js");
+const { print, fetchData, updateUser } = require("../API/Master.js");
 const ShopItems = require("../Data/Shop/Items.json");
 const BannerList = require("../Data/Banners.json");
 
@@ -12,7 +11,7 @@ module.exports = {
      */
     execute: async (SenkoClient) => {
         SenkoClient.on("interactionCreate", async Interaction => {
-            const AccountData = await getNewData(Interaction);
+            const AccountData = await fetchData(Interaction.user);
             const AccountFlags = Bitfield.fromHex(await AccountData.LocalUser.config.flags);
 
             if (Interaction.isButton()) {
@@ -20,7 +19,7 @@ module.exports = {
                     case "user_privacy":
                         if (AccountFlags.get(BitData.privacy)) {
                             AccountFlags.set(BitData.privacy, false);
-                            await update(Interaction, {
+                            await updateUser(Interaction.user, {
                                 LocalUser: {
                                     config: {
                                         flags: AccountFlags.toHex().toString()
@@ -44,7 +43,7 @@ module.exports = {
                             });
                         } else {
                             AccountFlags.set(BitData.privacy, true);
-                            await update(Interaction, {
+                            await updateUser(Interaction.user, {
                                 LocalUser: {
                                     config: {
                                         flags: AccountFlags.toHex().toString()
@@ -89,7 +88,7 @@ module.exports = {
                 switch (Interaction.values[0]) {
                     case "banner_change_default":
                         console.log("Banner change default");
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.defaultbanner
                             }
@@ -100,7 +99,7 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         break;
                     case "banner_change_Christmas_Banner_21":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.Christmas_Banner_21
                             }
@@ -111,7 +110,7 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         break;
                     case "banner_change_sakurashiro":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.sakurashiro
                             }
@@ -122,7 +121,7 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         break;
                     case "banner_change_thehelpfulfoxsenko":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.thehelpfulfoxsenko
                             }
@@ -133,7 +132,7 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         break;
                     case "banner_change_senkobanner_1":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.senkobanner_1
                             }
@@ -144,7 +143,7 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         break;
                     case "banner_change_leaningbanner":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.sakurashiro
                             }
@@ -155,7 +154,7 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         break;
                     case "banner_change_Transgender_Pride_Flag":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.Transgender_Pride_Flag
                             }
@@ -167,7 +166,7 @@ module.exports = {
                         break;
 
                     case "banner_change_MooseKaiBanner":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.MooseKaiBanner
                             }
@@ -180,7 +179,7 @@ module.exports = {
                     // Profile Colors
 
                     case "color_change_color_white":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 config: {
                                     color: ShopItems.color_white.color
@@ -193,7 +192,7 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         break;
                     case "color_change_color_purple":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 config: {
                                     color: ShopItems.color_purple.color
@@ -211,7 +210,7 @@ module.exports = {
                     // Profile Titles
 
                     case "title_developer_kitsune_title":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 config: {
                                     title: ShopItems.developer_kitsune_title.title
@@ -219,13 +218,13 @@ module.exports = {
                             }
                         });
 
-                        ReplyEmbed.embeds[0].description = "Your title is now set to __${ShopItems.developer_kitsune_title.name}__!";
+                        ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItems.developer_kitsune_title.name}__!`;
 
                         Interaction.update(ReplyEmbed);
                     break;
 
                     case "title_divine_title":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 config: {
                                     title: ShopItems.divine_title.title
@@ -233,13 +232,13 @@ module.exports = {
                             }
                         });
 
-                        ReplyEmbed.embeds[0].description = "Your title is now set to __${ShopItems.divine_title.name}__!";
+                        ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItems.divine_title.name}__!`;
 
                         Interaction.update(ReplyEmbed);
                     break;
 
                     case "title_master_thrower":
-                        await update(Interaction, {
+                        await updateUser(Interaction.user, {
                             LocalUser: {
                                 config: {
                                     title: ShopItems.master_thrower.title
@@ -247,7 +246,7 @@ module.exports = {
                             }
                         });
 
-                        ReplyEmbed.embeds[0].description = "Your title is now set to __${ShopItems.master_thrower.name}__!";
+                        ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItems.master_thrower.name}__!`;
 
                         Interaction.update(ReplyEmbed);
                     break;

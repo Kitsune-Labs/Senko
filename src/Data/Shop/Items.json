@@ -38,7 +38,7 @@
     "desc": "Shiro with some sakura on the edges!",
     "price": 777,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "type": "banner"
   },
   "pumpkinpie": {
@@ -75,27 +75,27 @@
   },
   "senkokeychain": {
     "class": "general",
-    "name": "Senko tail key-chain.",
-    "desc": "The softest tail made.",
+    "name": "Senko tail key-chain",
+    "desc": "The softest tail made",
     "price": 3000,
     "amount": 1,
     "onsale": false
   },
   "shirokeychain": {
     "class": "general",
-    "name": "Shiro tail key-chain.",
-    "desc": "Shiro tail key-chain.",
+    "name": "Shiro tail key-chain",
+    "desc": "Shiro won't like this I bet",
     "price": 3000,
     "amount": 1,
     "onsale": false
   },
   "yozorakeychain": {
     "class": "general",
-    "name": "Yozora tail key-chain.",
+    "name": "Yozora tail key-chain",
     "desc": "What will Yozora think of this?",
     "price": 3000,
     "amount": 1,
-    "onsale": false
+    "onsale": true
   },
   "tiny_green_hat": {
     "class": "profile",
@@ -103,7 +103,7 @@
     "desc": "It has a beak like a bird.",
     "price": 100,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "badge": "<:Hat:911085376284819547>"
   },
   "purrfect_loaf": {
@@ -205,7 +205,7 @@
     "desc": "Seafood is great! You should try it out",
     "price": 381,
     "amount": 4,
-    "onsale": true
+    "onsale": false
   },
   "bento": {
     "class": "food",
@@ -213,7 +213,7 @@
     "desc": "Hey, hey! Can I take some of your rice?",
     "price": 1305,
     "amount": 1,
-    "onsale": false
+    "onsale": true
   },
   "ramen": {
     "class": "food",
@@ -221,7 +221,7 @@
     "desc": "Ramen is delicious.",
     "price": 1283,
     "amount": 1,
-    "onsale": true
+    "onsale": false
   },
   "ozoni": {
     "class": "food",
@@ -264,7 +264,7 @@
     "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
     "price": 210,
     "amount": 3,
-    "onsale": true
+    "onsale": false
   },
   "greentea": {
     "class": "food",
@@ -272,7 +272,7 @@
     "desc": "Its actually quite good",
     "price": 130,
     "amount": 1,
-    "onsale": false
+    "onsale": true
   },
   "md_1": {
     "class": "general",
@@ -288,7 +288,7 @@
     "desc": "Forever ashubiduba mofu-mofu!",
     "price": 500,
     "amount": 1,
-    "onsale": true
+    "onsale": false
   },
   "sknss_v1": {
     "class": "general",
@@ -296,7 +296,8 @@
     "desc": "The first tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "max": 1,
+    "onsale": true,
     "manga": "Tail_1"
   },
   "sknss_v2": {
@@ -305,7 +306,8 @@
     "desc": "The second tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "max": 1,
+    "onsale": true,
     "manga": "Tail_2"
   },
   "sknss_v3": {
@@ -314,6 +316,7 @@
     "desc": "The third tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
+    "max": 1,
     "onsale": false,
     "manga": "Tail_3"
   },
@@ -323,6 +326,7 @@
     "desc": "The fourth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
+    "max": 1,
     "onsale": false,
     "manga": "Tail_4"
   },
@@ -332,7 +336,8 @@
     "desc": "The fifth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "max": 1,
+    "onsale": false,
     "manga": "Tail_5"
   },
   "sknss_v6": {
@@ -341,6 +346,7 @@
     "desc": "The sixth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
+    "max": 1,
     "onsale": false,
     "manga": "Tail_6"
   },
@@ -350,6 +356,7 @@
     "desc": "The seventh tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
+    "max": 1,
     "onsale": false,
     "manga": "Tail_7"
   },
@@ -424,7 +431,7 @@
     "badge": "<:CandyCane:926930144852078672>"
   },
   "present": {
-    "class": "food",
+    "class": "special",
     "name": "Present",
     "desc": "I wonder whats inside?",
     "price": 50,
@@ -477,7 +484,7 @@
     "desc": "I think it has to do with ice?",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "color": "#4AD1FF",
     "type": "color"
@@ -543,7 +550,7 @@
     "desc": "They taste like butter",
     "price": 50,
     "amount": 1,
-    "onsale": true
+    "onsale": false
   },
   "RiceBall": {
     "class": "food",
@@ -603,46 +610,46 @@
     "badge": "🥐"
   },
   "chocolate_box": {
-		"class": "food",
-		"name": "Box of heart shaped chocolate",
-		"desc": "Awww! How sweet of you!",
-		"amount": 1,
-		"price": 10,
-		"onsale": true,
-		"max": 1,
-		"season": "Valentines",
-		"seasonal": {
-			"isSeasonal": true,
-			"season": "Valentines"
-		}
-	},
-	"roses": {
-		"class": "profile",
-		"name": "Rose Badge",
-		"desc": "AWwwww, You didnt have to!",
-		"amount": 1,
-		"price": 10,
-		"onsale": true,
-		"max": 1,
+    "class": "food",
+    "name": "Box of heart shaped chocolate",
+    "desc": "Awww! How sweet of you!",
+    "amount": 1,
+    "price": 10,
+    "onsale": false,
+    "max": 1,
+    "season": "Valentines",
+    "seasonal": {
+      "isSeasonal": true,
+      "season": "Valentines"
+    }
+  },
+  "roses": {
+    "class": "profile",
+    "name": "Rose Badge",
+    "desc": "AWwwww, You didnt have to!",
+    "amount": 1,
+    "price": 10,
+    "onsale": false,
+    "max": 1,
     "badge": "🌹",
-		"season": "Valentines",
-		"seasonal": {
-			"isSeasonal": true,
-			"season": "Valentines"
-		}
-	},
+    "season": "Valentines",
+    "seasonal": {
+      "isSeasonal": true,
+      "season": "Valentines"
+    }
+  },
   "conversation_hearts": {
-		"class": "food",
-		"name": "Tiny Conversation Hearts",
-		"desc": "Flavored in Banana, Orange, Grape, Cherry, and lemon!",
-		"amount": 1,
-		"price": 10,
-		"onsale": true,
-		"max": 1,
-		"season": "Valentines",
-		"seasonal": {
-			"isSeasonal": true,
-			"season": "Valentines"
-		}
-	}
+    "class": "food",
+    "name": "Tiny Conversation Hearts",
+    "desc": "Flavored in Banana, Orange, Grape, Cherry, and lemon!",
+    "amount": 1,
+    "price": 10,
+    "onsale": false,
+    "max": 1,
+    "season": "Valentines",
+    "seasonal": {
+      "isSeasonal": true,
+      "season": "Valentines"
+    }
+  }
 }

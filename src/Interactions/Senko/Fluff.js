@@ -1,7 +1,7 @@
 const { MessageAttachment } = require("discord.js");
 const { rateLimit } = require("../../API/v4/InteractionFunctions.js");
-const { update } = require("../../API/v4/Fire");
 const Icons = require("../../Data/Icons.json");
+const { updateUser } = require("../../API/Master.js");
 
 const Reactions = {
     User: [
@@ -26,6 +26,7 @@ const Reactions = {
 module.exports = {
     name: "fluff",
     desc: "Mofumofu!",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -39,7 +40,7 @@ module.exports = {
         if (rateLimit(interaction, 1)) return;
         Stats.Fluffs++;
 
-        await update(interaction, {
+        await updateUser(interaction.user, {
             Stats: {
                 Fluffs: Stats.Fluffs
             }

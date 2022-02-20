@@ -5,6 +5,7 @@ const Icons = require("../../Data/Icons.json");
 module.exports = {
     name: "inventory",
     desc: "View the items in your inventory",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -46,14 +47,13 @@ module.exports = {
             const ShopData = await ShopItems[Item.codename];
 
             const Field = {
-                name: `${number}`,
-                value: `${Icons.tick}  Missing Data`,
-                inline: true
+                name: `Item ${number}`,
+                value: `${Icons.tick}  Missing Data`
             };
 
             if (ShopData) {
                 Field.name = `${ShopData.name}`;
-                Field.value = `${ShopData.desc}`;
+                Field.value = `— ${ShopData.desc}\n— ${Icons.yen}  ${ShopData.price}x\n— ${ShopData.class} class`;
             }
 
             number++;

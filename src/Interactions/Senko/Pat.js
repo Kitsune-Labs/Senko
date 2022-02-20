@@ -1,9 +1,9 @@
 const { MessageAttachment } = require("discord.js");
 const { eRes } = require("../../API/v4/InteractionFunctions");
-const { update } = require("../../API/v4/Fire");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const ms = require("ms");
+const { updateUser } = require("../../API/Master");
 
 const Reactions = {
     User: [
@@ -29,6 +29,7 @@ const Reactions = {
 module.exports = {
     name: "pat",
     desc: "Pat Senko's Head (Don't touch her ears!)",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -38,7 +39,7 @@ module.exports = {
         // if (Stats.Drinks >= 100) await awardAchievement(interaction.user, "MasterPatter");
 
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Pat_Rate.Date) >= 0) {
-            await update(interaction, {
+            await updateUser(interaction.user, {
                 RateLimits: {
                     Pat_Rate: {
                         Amount: 0,
@@ -79,7 +80,7 @@ module.exports = {
             files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
         });
 
-        await update(interaction, {
+        await updateUser(interaction.user, {
             Stats: { Pats: Stats.Pats },
 
             RateLimits: {

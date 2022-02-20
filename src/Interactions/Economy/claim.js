@@ -1,11 +1,12 @@
 const Icons = require("../../Data/Icons.json");
-const { update } = require("../../API/v4/Fire");
 const ms = require("ms");
+const { updateUser } = require("../../API/Master");
 
 
 module.exports = {
     name: "claim",
     desc: "Claim rewards from Senko",
+    userData: true,
     options: [
         {
             name: "daily",
@@ -53,7 +54,7 @@ module.exports = {
                     });
 
                 } else {
-                    await update(interaction, {
+                    await updateUser(interaction.user, {
                         Currency: { Yen: AccountData.Currency.Yen + 300 },
                         Rewards: { Daily: Date.now() }
                     });
@@ -96,7 +97,7 @@ module.exports = {
                     });
 
                 } else {
-                    await update(interaction, {
+                    await updateUser(interaction.user, {
                         Currency: { Yen: AccountData.Currency.Yen + 2000 },
                         Rewards: { Weekly: Date.now() }
                     });

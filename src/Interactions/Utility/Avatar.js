@@ -13,7 +13,6 @@ module.exports = {
             required: false
         },
     ],
-    no_data: true,
     /**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
