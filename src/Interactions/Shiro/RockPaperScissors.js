@@ -1,7 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
-const { wait } = require("../../API/dev/functions.js");
-const { addYen } = require("../../API/v2/Currency");
+const { wait } = require("../../API/Master.js");
+const { addYen } = require("../../API/Master");
 
 module.exports = {
     name: "rock-paper-scissors",
@@ -28,7 +29,6 @@ module.exports = {
             ]
         }
     ],
-    no_data: true,
     /**
      * @param {CommandInteraction} interaction
      */

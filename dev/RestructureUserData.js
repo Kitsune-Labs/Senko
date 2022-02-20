@@ -14,7 +14,6 @@ Firebase.initializeApp({
 });
 
 const DataConfig = require("../src/Data/DataConfig.json");
-const uuid = require("uuid");
 const { Bitfield } = require("bitfields");
 
 const Firestore = Firebase.firestore();
@@ -25,7 +24,7 @@ Firestore.collection("Users").get().then(async querySnapshot => {
 
         const DataStructure = {
             LocalUser: {
-                user: `User_${uuid.v4()}`.slice(0, 13),
+                user: null,
                 version: DataConfig.currentVersion,
                 userID: AccountData.LocalUser.userID,
                 Banner: "DefaultBanner.png",

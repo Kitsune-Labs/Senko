@@ -1,9 +1,9 @@
 const { MessageAttachment } = require("discord.js");
 const { eRes } = require("../../API/v4/InteractionFunctions");
-const { update } = require("../../API/v4/Fire");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const ms = require("ms");
+const { updateUser } = require("../../API/Master");
 
 const Reactions = {
     User: [
@@ -26,6 +26,7 @@ const Reactions = {
 module.exports = {
     name: "drink",
     desc: "Have a drink with Senko",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -35,7 +36,7 @@ module.exports = {
         // if (Stats.Drinks >= 50) await awardAchievement(interaction.user, "MasterDrinker");
 
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Drink_Rate.Date) >= 0) {
-            await update(interaction, {
+            await updateUser(interaction.user, {
                 RateLimits: {
                     Drink_Rate: {
                         Amount: 0,
@@ -76,7 +77,7 @@ module.exports = {
             files: [ new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png") ]
         });
 
-        await update(interaction, {
+        await updateUser(interaction.user, {
             Stats: { Drinks: Stats.Drinks },
 
             RateLimits: {

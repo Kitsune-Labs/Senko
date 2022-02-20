@@ -4,7 +4,6 @@ const { Client, Collection } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
-const { print } = require("./API/dev/functions.js");
 
 const SenkoClient = new Client({
     intents: ["GUILDS"],
@@ -15,6 +14,8 @@ const SenkoClient = new Client({
     }
 });
 
+require("discord-modal")(SenkoClient);
+
 if (process.env.NIGHTLY === "true") {
     Firebase.initializeApp({
         credential: Firebase.credential.cert({
@@ -23,10 +24,11 @@ if (process.env.NIGHTLY === "true") {
             "client_email": process.env.NIGHTLY_FIREBASE_CLIENT_EMAIL
         })
     });
+    let { print } = require("./API/Master");
 
-    SenkoClient.login(process.env.BETA_TOKEN);
+    SenkoClient.login(process.env.SUZU);
 
-    print("#FF6633", "Senko", "BETA Mode");
+    print("#FF6633", "Senko", "NIGHTLY Mode");
 } else {
     Firebase.initializeApp({
         credential: Firebase.credential.cert({
@@ -35,11 +37,14 @@ if (process.env.NIGHTLY === "true") {
             "client_email": process.env.FIREBASE_CLIENT_EMAIL
         })
     });
+    let { print } = require("./API/Master");
 
     SenkoClient.login(process.env.TOKEN);
 
     print("#5865F2", "Senko", "PRODUCTION Mode");
 }
+
+const { print } = require("./API/Master");
 
 SenkoClient.Commands = new Collection();
 SenkoClient.Aliases = new Collection();
@@ -55,45 +60,62 @@ SenkoClient.once("ready", async () => {
 
     for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
         require(`./Events/${file}`).execute(SenkoClient);
-        print("yellow", "EVENTS", `Running ${file}`);
+        print("#FFFB00", "EVENTS", `Running ${file}`);
     }
 
     let commands = SenkoClient.application.commands;
+    if (process.env.NIGHTLY === "true") commands = (await SenkoClient.guilds.fetch("777251087592718336")).commands;
 
-    // Used for debugging specific guilds that break for some reason (rarely gets used)
-    // commands = SenkoClient.guilds.cache.get("000000000000").commands;
+    await commands.set([]);
 
-    commands.set([]);
+    const commandsToSet = [];
 
-    if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("887393173150777357").commands;
+    async function setCommands() {
+        readdirSync("./src/Interactions/").forEach(async Folder => {
+            const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
 
-    readdirSync("./src/Interactions/").forEach(async Folder => {
-        const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
+            for (let interact of Interactions) {
+                let pull = require(`./Interactions/${Folder}/${interact}`);
 
-
-        // return;
-
-        // eslint-disable-next-line no-unreachable
-        for (let interact of Interactions) {
-            let pull = require(`./Interactions/${Folder}/${interact}`);
-
-            SenkoClient.SlashCommands.set(pull.name, pull);
-
-            try {
-                const CommandData = {
-                    name: pull.name,
-                    description: pull.desc || "No description",
-                };
-
-                if (pull.options) CommandData.options = pull.options;
-
-                await commands.create(CommandData);
-            } catch(e) {
-                print("red", "ERROR", `${interact} - ${e}`);
-                console.log(e);
+                SenkoClient.SlashCommands.set(`${pull.name}`, pull);
             }
+        });
 
-            print("green", "SETUP", `Set ${pull.name}`);
+        for (var file of readdirSync("./src/DevInteractions/")) {
+            const pull = require(`./DevInteractions/${file}`);
+
+            SenkoClient.SlashCommands.set(`${pull.name}`, pull);
         }
-    });
+    }
+
+    await setCommands();
+
+    async function setTheCommands() {
+        for (var cmd of SenkoClient.SlashCommands) {
+
+            const CommandData = {
+                name: `${cmd[0]}`,
+                description: `${cmd[1].desc}`,
+                defaultPermission: typeof cmd[1].defaultPermission === "boolean" ? cmd[1].defaultPermission : true,
+            };
+
+            if (cmd[1].options) CommandData.options = cmd[1].options;
+            if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
+
+            commandsToSet.push(CommandData);
+        }
+    }
+
+    await setTheCommands();
+
+    await commands.set(commandsToSet);
+
+    // await commands.set([
+    //     {
+    //         name: "read",
+    //         description: "Read the manga chapters you get from the market!"
+    //     }
+    // ]);
+
+    console.log("Commands have been set");
 });

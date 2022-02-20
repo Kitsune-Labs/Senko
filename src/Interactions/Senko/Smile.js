@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, MessageAttachment } = require("discord.js");
 const { eRes } = require("../../API/v4/InteractionFunctions");
-const { update } = require("../../API/v4/Fire");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const ms = require("ms");
+const { updateUser } = require("../../API/Master");
 
 const Reactions = {
     User: [
@@ -22,12 +22,13 @@ const Reactions = {
 module.exports = {
     name: "smile",
     desc: ":)",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Smile_Rate.Date) >= 0) {
-            await update(interaction, {
+            await updateUser(interaction.user, {
                 RateLimits: {
                     Smile_Rate: {
                         Amount: 0,
@@ -38,7 +39,6 @@ module.exports = {
 
             RateLimits.Smile_Rate.Amount = 0;
         }
-
 
         if (RateLimits.Smile_Rate.Amount >= 20) return eRes({
             interaction: interaction,
@@ -70,7 +70,7 @@ module.exports = {
             files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
         });
 
-        update(interaction, {
+        updateUser(interaction.user, {
             Stats: { Smiles: Stats.Smiles },
 
             RateLimits: {

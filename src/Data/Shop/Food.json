@@ -1,0 +1,188 @@
+{
+	"pumpkinpie": {
+		"class": "food",
+		"name": "Pumpkin Pie",
+		"desc": "Perfectly spiced.",
+		"price": 400,
+		"amount": 1,
+		"onsale": false
+	},
+	"chestnuts": {
+		"class": "food",
+		"name": "Chestnuts",
+		"desc": "くり",
+		"price": 500,
+		"amount": 20,
+		"onsale": false
+	},
+	"apples": {
+		"class": "food",
+		"name": "3 Apples",
+		"desc": "\"Fruits of autumn\"",
+		"price": 300,
+		"amount": 3,
+		"onsale": false
+	},
+	"raspberrybox": {
+		"class": "food",
+		"name": "raspberrybox",
+		"desc": "Freshly Picked!",
+		"price": 500,
+		"amount": 1,
+		"onsale": false
+	},
+	"sakurroseawine": {
+		"class": "food",
+		"name": "Sakura Rose Wine",
+		"desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
+		"price": 300,
+		"amount": 1,
+		"onsale": false
+	},
+	"yakitori": {
+		"class": "food",
+		"name": "Yakitori",
+		"desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
+		"price": 947,
+		"amount": 2,
+		"onsale": false
+	},
+	"omurice": {
+		"class": "food",
+		"name": "Omurice",
+		"desc": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
+		"price": 712,
+		"amount": 1,
+		"onsale": false
+	},
+	"hojicha": {
+		"class": "food",
+		"name": "Hojicha",
+		"desc": "Low in caffeine, delicious, and an alternative to coffee!",
+		"price": 1754,
+		"amount": 1,
+		"onsale": false
+	},
+	"taiyaki": {
+		"class": "food",
+		"name": "Taiyaki",
+		"desc": "Fish-shaped cake with a read bean paste filling.",
+		"price": 636,
+		"amount": 1,
+		"onsale": false
+	},
+	"udon": {
+		"class": "food",
+		"name": "Udon",
+		"desc": "Some comforting food.",
+		"price": 500,
+		"amount": 1,
+		"onsale": false
+	},
+	"sushi": {
+		"class": "food",
+		"name": "Sushi",
+		"desc": "Seafood is great! You should try it out",
+		"price": 381,
+		"amount": 4,
+		"onsale": true
+	},
+	"bento": {
+		"class": "food",
+		"name": "Bento",
+		"desc": "Hey, hey! Can I take some of your rice?",
+		"price": 1305,
+		"amount": 1,
+		"onsale": false
+	},
+	"ramen": {
+		"class": "food",
+		"name": "Ramen",
+		"desc": "Ramen is delicious.",
+		"price": 1283,
+		"amount": 1,
+		"onsale": true
+	},
+	"ozoni": {
+		"class": "food",
+		"name": "Ozoni",
+		"desc": "It isn't new years, yet",
+		"price": 1283,
+		"amount": 1,
+		"onsale": false
+	},
+	"dango": {
+		"class": "food",
+		"name": "Dango",
+		"desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
+		"price": 210,
+		"amount": 3,
+		"onsale": true
+	},
+	"greentea": {
+		"class": "food",
+		"name": "Green Tea",
+		"desc": "Its actually quite good",
+		"price": 130,
+		"amount": 1,
+		"onsale": false
+	},
+	"tempura": {
+		"class": "food",
+		"name": "Tempura",
+		"desc": "Tempura is a dish of battered and fried fish, seafood, or vegetables. This one has vegetables.",
+		"price": 300,
+		"amount": 1,
+		"onsale": false
+	},
+	"kaiseki": {
+		"class": "food",
+		"name": "Kaiseki",
+		"desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
+		"price": 500,
+		"amount": 1,
+		"onsale": false
+	},
+	"tsukemono": {
+		"class": "food",
+		"name": "Tsukemono",
+		"desc": "Traditional pickles that have been eaten in Japan since prehistoric times. Extremely healthy too!",
+		"price": 300,
+		"amount": 3,
+		"onsale": false
+	},
+	"soba": {
+		"class": "food",
+		"name": "Soba",
+		"desc": "Very delicious & healthy, Also similar to Udon.",
+		"price": 1000,
+		"amount": 1,
+		"onsale": false
+	},
+	"present": {
+		"class": "food",
+		"name": "Present",
+		"desc": "I wonder whats inside?",
+		"price": 50,
+		"amount": 1,
+		"onsale": false
+	},
+	"ButterCrackers": {
+		"class": "food",
+		"name": "Butter Crackers",
+		"desc": "They taste like butter",
+		"price": 50,
+		"amount": 1,
+		"onsale": true
+	},
+	"RiceBall": {
+		"class": "food",
+		"name": "Rice Ball Badge",
+		"desc": "🍙🍙🍙",
+		"price": 50,
+		"amount": 1,
+		"onsale": false,
+		"max": 1,
+		"badge": "🍙"
+	}
+}

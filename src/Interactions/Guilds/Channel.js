@@ -1,7 +1,5 @@
-const { updateGuild } = require("../../API/v2/FireData.js");
+const { updateGuild, CheckPermission, hasPerm } = require("../../API/Master");
 const { eRes } = require("../../API/v4/InteractionFunctions");
-const { hasPerm } = require("../../API/v4/Guild.js");
-const { CheckPermission } = require("../../API/v5/Permissions.js");
 
 module.exports = {
     name: "channel",
@@ -129,6 +127,5 @@ module.exports = {
             ],
             ephemeral: true
         });
-        
     }
 };

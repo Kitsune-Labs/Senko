@@ -29,7 +29,6 @@ module.exports = {
             choices: PrevItems
         }
     ],
-    no_data: true,
     /**
      * @param {CommandInteraction} interaction
      */

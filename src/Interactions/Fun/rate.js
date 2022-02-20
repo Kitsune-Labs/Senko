@@ -1,4 +1,4 @@
-const { spliceArray } = require("../../API/dev/functions.js");
+const { spliceArray } = require("../../API/Master.js");
 
 module.exports = {
     name: "rate",
@@ -11,7 +11,6 @@ module.exports = {
             required: true
         }
     ],
-    no_data: true,
     /**
      * @param {CommandInteraction} interaction
      */

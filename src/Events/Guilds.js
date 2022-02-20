@@ -1,4 +1,4 @@
-const { deleteGuild } = require("../API/v4/Fire");
+const { deleteGuild } = require("../API/Master");
 
 module.exports = {
     /**
@@ -7,7 +7,6 @@ module.exports = {
     execute: async (SenkoClient) => {
         SenkoClient.on("guildDelete", async guild => {
             await deleteGuild(guild);
-            console.log("Finished Guild Removal");
         });
     }
 };

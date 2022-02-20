@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
-const { update } = require("../../API/v4/Fire");
-const { getName } = require("../../API/v4/Guild.js");
+const { getName } = require("../../API/Master");
 
 const ShopItems = require("../../Data/Shop/Items.json");
+const { updateUser } = require("../../API/Master");
 const ForSale = [];
 
 for (var item of Object.keys(ShopItems)) {
@@ -21,6 +21,7 @@ for (var item of Object.keys(ShopItems)) {
 module.exports = {
     name: "buy",
     desc: "Buy an item from the shop",
+    userData: true,
     options: [
         {
             name: "onsale-item",
@@ -78,7 +79,7 @@ module.exports = {
 
                 Item.amount++;
 
-                await update(interaction, {
+                await updateUser(interaction.user, {
                     Currency: {
                         Yen:  Currency.Yen - ShopItem.price
                     },
@@ -91,7 +92,7 @@ module.exports = {
 
         Inventory.push({ codename: ItemToBuy, amount: ShopItem.amount });
 
-        await update(interaction, {
+        await updateUser(interaction.user, {
             Currency: {
                 Yen: Currency.Yen - ShopItem.price
             },

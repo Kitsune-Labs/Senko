@@ -5,7 +5,6 @@ const ms = require("ms");
 module.exports = {
     name: "support",
     desc: "Support links, info, and other things.",
-    no_data: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -18,6 +17,7 @@ module.exports = {
                     color: SenkoClient.colors.dark,
                     fields: [
                         { name: "Uptime", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true },
+                        { name: "Websocket Ping", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true },
                         { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒#1989\nsakuya izayoi#3553\nSilkthorne#3062\nKaori Aiko#6710\nTheReal_Enderboy#0999", inline: true },
                     ],
                     thumbnail: {
@@ -40,7 +40,8 @@ module.exports = {
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Support and Community", style: 5, url: "https://discord.gg/senko" }
+                        { type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" },
+                        // { type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" }
                     ]
                 }
             ],

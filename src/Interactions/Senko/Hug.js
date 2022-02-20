@@ -1,10 +1,10 @@
 const { MessageAttachment } = require("discord.js");
 const { eRes } = require("../../API/v4/InteractionFunctions");
-const { update, getNewData } = require("../../API/v4/Fire");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const ms = require("ms");
 const randomFile = require("../../API/modules/image");
+const { fetchData, updateUser } = require("../../API/Master");
 
 module.exports = {
     name: "hug",
@@ -16,7 +16,6 @@ module.exports = {
             type: "USER",
         }
     ],
-    no_data: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -47,10 +46,10 @@ module.exports = {
             return;
         }
 
-        const { RateLimits, Stats } = await getNewData(interaction);
+        const { RateLimits, Stats } = await fetchData(interaction.user);
 
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Hug_Rate.Date) >= 0) {
-            await update(interaction, {
+            await updateUser(interaction.user, {
                 RateLimits: {
                     Hug_Rate: {
                         Amount: 0,
@@ -91,7 +90,7 @@ module.exports = {
             files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
         });
 
-        await update(interaction, {
+        await updateUser(interaction.user, {
             Stats: { Hugs: Stats.Hugs },
 
             RateLimits: {

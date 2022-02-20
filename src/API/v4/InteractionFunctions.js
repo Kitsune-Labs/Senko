@@ -1,4 +1,4 @@
-const { spliceArray } = require("../dev/functions.js");
+const { spliceArray } = require("../Master.js");
 const Icons = require("../../Data/Icons.json");
 const RateLimitedUsers = [];
 
@@ -6,6 +6,7 @@ const RateLimitedUsers = [];
  * @param {CommandInteraction} interaction
  * @param {Number} time
  * @returns true || false
+ * @deprecated
  */
 function rateLimit(interaction, time) {
     if (RateLimitedUsers.includes(interaction.user.id)) {
@@ -35,8 +36,10 @@ function rateLimit(interaction, time) {
     }, (time || 5) * 1000);
 }
 
-const { selfPerm } = require("./Guild");
-
+const { selfPerm } = require("../Master");
+/**
+ * @deprecated
+ */
 function eRes({ title, description, interaction }) {
     if (!interaction) return console.error("No message given");
     if(selfPerm(interaction, "EMBED_LINKS") !== true) return interaction.reply({ content: `Please make sure I am able to use embeds!\n\n${description}` });

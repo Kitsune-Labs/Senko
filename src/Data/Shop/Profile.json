@@ -1,0 +1,262 @@
+{
+    "divine_title": {
+        "class": "profile",
+        "name": "Divine Title",
+        "desc": "Adds \"Divine\" to your profile name",
+        "price": 777,
+        "amount": 1,
+        "onsale": false,
+        "title": "✨ Divine"
+    },
+    "sakurashiro": {
+        "class": "profile",
+        "name": "Shiro Sakura Banner",
+        "desc": "Shiro with some sakura on the edges!",
+        "price": 777,
+        "amount": 1,
+        "onsale": false,
+        "type": "banner",
+        "banner": "SakuraShiro.png"
+    },
+    "tiny_green_hat": {
+        "class": "profile",
+        "name": "Tiny Green Hat Badge",
+        "desc": "It has a beak like a bird.",
+        "price": 100,
+        "amount": 1,
+        "onsale": true,
+        "badge": "<:Hat:911085376284819547>"
+    },
+    "purrfect_loaf": {
+        "class": "profile",
+        "name": "Purrfect Loaf Badge",
+        "desc": "A freshly baked loaf of bread to brighten your day",
+        "price": 100,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "badge": "🍞"
+    },
+    "color_purple": {
+        "class": "profile",
+        "name": "Purple card color",
+        "desc": "Make your profile card purple like Yozora!",
+        "price": 500,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "color": "PURPLE",
+        "type": "color"
+    },
+    "segg": {
+        "class": "profile",
+        "name": "segg",
+        "desc": "This is the segg. The Senko egg is a limited time item sold for 5 hours on easter 2021.",
+        "price": 1111,
+        "amount": 1,
+        "onsale": false
+    },
+    "senkobanner_1": {
+        "class": "profile",
+        "name": "Senko Manga Banner",
+        "desc": "A banner made of Senkos from the manga!",
+        "price": 7777,
+        "amount": 1,
+        "onsale": false,
+        "type": "banner"
+    },
+    "thehelpfulfoxsenko": {
+        "class": "profile",
+        "name": "Rustic Senko Pout Banner",
+        "desc": "A relic from the past, This helpful fox Senko-san is here for your pampering needs!",
+        "price": 7777,
+        "amount": 1,
+        "onsale": false,
+        "type": "banner"
+    },
+    "color_white": {
+        "class": "profile",
+        "name": "White card color",
+        "desc": "Make your profile card white like Shiro!",
+        "price": 500,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "color": "#FFFFF9",
+        "type": "color"
+    },
+    "Christmas_Banner_21": {
+        "class": "profile",
+        "name": "Senko's Christmas Present Banner",
+        "desc": "I hope it's everyone's favorite holiday!",
+        "price": 500,
+        "amount": 1,
+        "onsale": false,
+        "type": "banner"
+    },
+    "CandyCane": {
+        "class": "profile",
+        "name": "Candy Cane",
+        "desc": "A tiny candy cane badge",
+        "price": 100,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "badge": "<:CandyCane:926930144852078672>"
+    },
+    "snowflake": {
+        "class": "profile",
+        "name": "Snowflake",
+        "desc": "A snowflake badge",
+        "price": 100,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "badge": "<a:snowflake_a:917908202459390042>"
+    },
+    "holly_title": {
+        "class": "profile",
+        "name": "Holly Title",
+        "desc": "Adds \"Holly\" to your profile name",
+        "price": 777,
+        "amount": 1,
+        "onsale": false,
+        "title": "Holly"
+    },
+    "color_red": {
+        "class": "profile",
+        "name": "Red card color",
+        "desc": "Make your profile card red!",
+        "price": 500,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "color": "#CC3333",
+        "type": "color"
+    },
+    "ChristmasTree": {
+        "class": "profile",
+        "name": "Christmas Tree Badge",
+        "desc": "Adds a Christmas Tree to your profile",
+        "price": 100,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "badge": "🎄"
+    },
+    "color_teal": {
+        "class": "profile",
+        "name": "Teal card color",
+        "desc": "I think it has to do with ice?",
+        "price": 300,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "color": "#4AD1FF",
+        "type": "color"
+    },
+    "special_title_641851eb": {
+        "class": "profile",
+        "name": "Special Bee title",
+        "desc": "For a \"June Bee\"",
+        "price": 99999999999999,
+        "amount": 1,
+        "onsale": false,
+        "title": "Special Bee"
+    },
+    "developer_kitsune_title": {
+        "class": "profile",
+        "name": "Developer Title",
+        "desc": "For the developers",
+        "price": 99999999999999,
+        "amount": 1,
+        "onsale": false,
+        "title": "Developer Kitsune"
+    },
+    "contributing_title": {
+        "class": "profile",
+        "name": "Contributing Title",
+        "desc": "For the Contributors",
+        "price": 99999999999999,
+        "amount": 1,
+        "onsale": false,
+        "title": "Contributor Kitsune"
+    },
+    "Transgender_Pride_Flag": {
+        "class": "profile",
+        "name": "Transgender Pride Flag Banner",
+        "desc": "🏳️‍⚧️🏳️‍⚧️🏳️‍⚧️",
+        "price": 0,
+        "amount": 1,
+        "onsale": false,
+        "type": "banner"
+    },
+    "MooseKaiBanner": {
+        "class": "profile",
+        "name": "MooseKai's Snowsgiving 2021 Banner",
+        "desc": "For MooseKai#6097",
+        "price": 99999999999999,
+        "amount": 1,
+        "onsale": false,
+        "type": "banner"
+    },
+    "cherry": {
+        "class": "profile",
+        "name": "Cherry Badge",
+        "desc": "Do you think it's a good idea to eat it?",
+        "price": 50,
+        "amount": 3,
+        "max": 1,
+        "onsale": false,
+        "badge": "🍒"
+    },
+    "RiceBall": {
+        "class": "profile",
+        "name": "Rice Ball Badge",
+        "desc": "🍙🍙🍙",
+        "price": 50,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "badge": "🍙"
+    },
+    "master_thrower": {
+        "class": "profile",
+        "name": "Master Thrower",
+        "desc": "Adds \"Master Thrower\" to your profile name",
+        "price": 99999999999999,
+        "amount": 1,
+        "onsale": false,
+        "title": "Master Thrower"
+    },
+    "popcorn": {
+        "class": "profile",
+        "name": "Popcorn Badge",
+        "desc": "nom nom nom",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "onsale": false,
+        "badge": "🍿"
+    },
+    "bacon": {
+        "class": "profile",
+        "name": "Bacon Badge",
+        "desc": "Why would anyone stick bacon on themselves?",
+        "price": 50,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "badge": "🥓"
+    },
+    "croissant": {
+        "class": "profile",
+        "name": "Croissant Badge",
+        "desc": "🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐",
+        "price": 50,
+        "amount": 1,
+        "onsale": false,
+        "max": 1,
+        "badge": "🥐"
+    }
+}

@@ -3,6 +3,7 @@ const Icons = require("../../Data/Icons.json");
 module.exports = {
     name: "funds",
     desc: "View your YEN & TOFU",
+    userData: true,
     options: [
         {
             name: "private",

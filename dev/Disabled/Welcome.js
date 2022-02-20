@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
-const { getGuild } = require("../../src/API/v2/FireData.js");
+const { fetchGuild } = require("../../src/API/Master.js");
 
 module.exports = {
     /**
@@ -8,7 +8,7 @@ module.exports = {
      */
     execute: async (SenkoClient) => {
         SenkoClient.on("guildMemberAdd", async (Member) => {
-            const GuildData = await getGuild(Member.guild);
+            const GuildData = await fetchGuild(Member.guild);
             console.log("New User");
 
             if (GuildData.WelcomeChannel.id != null) {

@@ -1,8 +1,9 @@
+// eslint-disable-next-line no-unused-vars
 const { CommandInteraction, MessageAttachment } = require("discord.js");
 
 module.exports = {
     name: "poll",
-    desc: "Standard poll thing",
+    desc: "Create a poll",
     options: [
         {
             name: "topic",
@@ -85,7 +86,7 @@ module.exports = {
                         name: interaction.member.nickname || interaction.member.user.username,
                         iconURL: interaction.user.avatarURL({ dynamic: true })
                     },
-                    description: `**${Topic}**\n\n${OptionString}\n\nWhich will you pick?`,
+                    description: `**${Topic}**\n\n${OptionString}\n\nWhat will you pick?`,
                     color: SenkoClient.colors.light,
                     thumbnail: {
                         url: "attachment://image.png"

@@ -1,9 +1,12 @@
 const Icons = require("../Data/Icons.json");
 const ShopItems = require("../Data/Shop/Items.json");
-const { getData, updateUser } = require("../API/v2/FireData.js");
+const { updateUser } = require("../API/Master");
+// eslint-disable-next-line no-unused-vars
+const { Client, CommandInteraction } = require("discord.js");
+const { fetchData } = require("../API/Master");
 
 module.exports = {
-    name: "award",
+    name: "award-dev",
     desc: "dev",
     options: [
         {
@@ -19,25 +22,35 @@ module.exports = {
             required: true
         }
     ],
+    permissions: [
+        {
+            id: "609097445825052701",
+            type: "USER",
+            permission: true
+        }
+    ],
+    defaultPermission: false,
     /**
      * @param {CommandInteraction} interaction
+     * @param {Client} SenkoClient
      */
     start: async (SenkoClient, interaction) => {
         if (interaction.user.id !== "609097445825052701") return interaction.reply({ content: "🗿", ephemeral: true });
+        interaction.deferReply({ ephemeral: true });
 
         const User = interaction.options.getString("user");
         const DevItem = ShopItems[interaction.options.getString("dev-item")];
 
-        if (!DevItem) return interaction.reply({ content: "item null", ephemeral: true });
+        if (!DevItem) return interaction.followUp({ content: "item null", ephemeral: true });
 
-        const FetchedUser = await SenkoClient.users.cache.get(User);
+        const FetchedUser = await SenkoClient.users.fetch(User);
 
-        if (!FetchedUser) return interaction.reply({ content: "user null", ephemeral: true });
+        if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
 
-        const { Inventory } = await getData(FetchedUser);
+        const { Inventory } = await fetchData(FetchedUser);
 
         for (var Item of Inventory) {
-            if (Item.codename === DevItem.id) {
+            if (Item.codename === DevItem) {
                 Item.amount++;
 
                 await updateUser(FetchedUser, {
@@ -54,7 +67,7 @@ module.exports = {
                     ]
                 }).catch();
 
-                return interaction.reply({
+                return interaction.followUp({
                     content: `Added ${DevItem.name} to inventory`,
                     ephemeral: true
                 });
@@ -62,7 +75,7 @@ module.exports = {
         }
 
         var InvItem = {
-            codename: DevItem.id,
+            codename: DevItem,
             amount: DevItem.amount
         };
 
@@ -82,7 +95,7 @@ module.exports = {
             ]
         }).catch();
 
-        interaction.reply({
+        interaction.followUp({
             content: `Added ${DevItem.name} to inventory (Created new)`,
             ephemeral: true
         });

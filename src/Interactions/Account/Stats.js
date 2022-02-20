@@ -4,6 +4,7 @@ const Icons = require("../../Data/Icons.json");
 module.exports = {
     name: "stats",
     desc: "View your account stats",
+    userData: true,
     /**
      * @param {CommandInteraction} interaction
      */

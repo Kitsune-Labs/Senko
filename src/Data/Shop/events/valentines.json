@@ -1,0 +1,33 @@
+{
+    "chocolate_box": {
+        "class": "food",
+        "name": "Box of heart shaped chocolate",
+        "desc": "Awww! How sweet of you!",
+        "amount": 1,
+        "price": 10,
+        "onsale": true,
+        "max": 1,
+        "season": "Valentines"
+    },
+    "roses": {
+        "class": "profile",
+        "name": "Rose Badge",
+        "desc": "AWwwww, You didnt have to!",
+        "amount": 1,
+        "price": 10,
+        "onsale": true,
+        "max": 1,
+        "badge": "🌹",
+        "season": "Valentines"
+    },
+    "conversation_hearts": {
+        "class": "food",
+        "name": "Tiny Conversation Hearts",
+        "desc": "Flavored in Banana, Orange, Grape, Cherry, and lemon!",
+        "amount": 1,
+        "price": 10,
+        "onsale": true,
+        "max": 1,
+        "season": "Valentines"
+    }
+}

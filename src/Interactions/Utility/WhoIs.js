@@ -1,9 +1,10 @@
-const { CommandInteraction } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
+const { Client, Interaction } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
     name: "whois",
-    desc: "View info about a user",
+    desc: "User information",
     options: [
         {
             name: "user",
@@ -12,105 +13,75 @@ module.exports = {
             required: false
         }
     ],
-    no_data: true,
     /**
-     * @param {CommandInteraction} interaction
+     * @param {Interaction} interaction
+     * @param {Client} SenkoClient
      */
-    start: async (SenkoClient, interaction) => {
-        /**
-         * @type {GuildMember} Member
-         */
-        let Member = interaction.options.getUser("user") || interaction.member;
+    // eslint-disable-next-line no-unused-vars
+    start: async (SenkoClient, interaction, GuildData, AccountData) => {
+        const guildMember = await interaction.guild.members.fetch(interaction.options.getUser("user") || interaction.user);
+        const guildUser = guildMember.user;
 
-        if(!Member) return interaction.reply({ content: "I can't find this user.", ephemeral: true });
+        const messageStructure = {
+            embeds: [
+                {
+                    color: SenkoClient.colors.random(),
+                    fields: [
+                        { name: "Nickname", value: `${guildMember.nickname || "None"}`, inline: true },
+                        { name: "User", value: `${guildUser}\n${guildUser.tag}`, inline: true },
+                        { name: "ID", value: `${guildUser.id}`, inline: true },
 
-        if (!Member.user) Member = interaction.guild.members.cache.get(Member.id);
+                        { name: "Avatar", value: "None", inline: true },
+                        { name: "Banner", value: "None", inline: true },
+                        { name: "Bot", value: "False", inline: true },
 
-        const reqOptions = {
-            url: `https://discord.com/api/v9/users/${Member.id}`,
+                        { name: "Created", value: `<t:${parseInt(guildUser.createdTimestamp / 1000)}:R>`, inline: true },
+                        { name: "Joined", value: `<t:${parseInt(guildMember.joinedTimestamp / 1000)}:R>`, inline: true },
+                        { name: "Boosted", value: `${guildMember.premiumSinceTimestamp ? `Since <t:${parseInt(guildMember.premiumSinceTimestamp / 1000)}:R>` : "False"}`, inline: true },
+
+                        { name: "Roles", value: `__${guildMember.roles.cache.size}__ roles` },
+                    ],
+                    thumbnail: {
+                        url: null
+                    },
+                    image: {
+                        url: null
+                    }
+                }
+            ]
+        };
+
+
+        axios.request({
+            url: `https://discord.com/api/v9/users/${guildUser.id}`,
             method: "GET",
             headers: {
                 "User-Agent": process.env.AGENT,
                 "Authorization": `Bot ${SenkoClient.token}`
-            },
-        };
-
-        const AvatarURL = Member.user ? Member.user.avatarURL({ dynamic: true, size: 2048 }) : Member.avatarURL({ dynamic: true, size: 2048 });
-
-        axios.request(reqOptions).then(async (response) => {
-            let MemberRoles = Member.roles;
-
-            if (MemberRoles.cache.size <= 10) {
-                if (MemberRoles.cache.size === 1) {
-                    MemberRoles = "No Roles";
-                } else {
-                    MemberRoles = MemberRoles.cache.map(u=>u).join(" ").replace("@everyone", "");
-                }
-            } else {
-                MemberRoles = `**${MemberRoles.cache.size}** Roles`;
             }
+        }).then(async (response) => {
+            const avatarUrl = guildUser.displayAvatarURL({ dynamic: true, size: 2048 });
+            const messageStructureEmbed = messageStructure.embeds[0];
+
+            messageStructureEmbed.fields[3].value = `[URL](${avatarUrl})`;
+            messageStructureEmbed.thumbnail.url = avatarUrl;
 
             if (response.data.banner) {
-                const ext = await response.data.banner.startsWith("a_") ? ".gif" : ".png";
+                const extension = await response.data.banner.startsWith("a_") ? ".gif" : ".png";
 
-                interaction.reply({
-                    embeds: [
-                        {
-                            color: response.data.banner_color || SenkoClient.colors.random(),
-                            fields: [
-                                { name: "Nickname", value: `${Member.nickname || "None"}`, inline: true },
-                                { name: "User", value: `${Member}\n${Member.user.tag}`, inline: true },
-                                { name: "ID", value: `${Member.id}`, inline: true },
-                                { name: "Avatar", value: `[Avatar Link](${AvatarURL})`, inline: true },
-                                { name: "Banner", value: `[Banner Link](https://cdn.discordapp.com/banners/${Member.id}/${response.data.banner}${ext})`, inline: true },
-                                { name: "Bot", value: `${Member.user.bot ? "True" : "False"}`, inline: true },
-                                { name: "Created", value: `<t:${parseInt(Member.user.createdTimestamp / 1000)}:R>`, inline: true },
-                                { name: "Joined", value: `<t:${parseInt(Member.joinedTimestamp / 1000)}:R>`, inline: true },
-                                { name: "Booster", value: `${Member.premiumSinceTimestamp ? `Since <t:${parseInt(Member.premiumSinceTimestamp / 1000)}:R>` : "False"}`, inline: true },
-                                // { name: "Bannable", value: `${Member.bannable}`, inline: true },
-                                // { name: "Kickable", value: `${Member.kickable}`, inline: true },
-                                // { name: "Manageable", value: `${Member.manageable}`, inline: true },
-                                { name: "Roles", value: `${MemberRoles}` },
-                            ],
-
-                            thumbnail: {
-                                url: AvatarURL
-                            },
-                            image: {
-                                url: `https://cdn.discordapp.com/banners/${Member.id}/${response.data.banner}${ext}?size=2048`
-                            }
-                        }
-                    ]
-                });
-            } else {
-                interaction.reply({
-                    embeds: [
-                        {
-                            color: response.data.banner_color || SenkoClient.colors.random(),
-                            fields: [
-                                { name: "Nickname", value: `${Member.nickname || "None"}`, inline: true },
-                                { name: "Username", value: `${Member.user.username}`, inline: true },
-                                { name: "Discriminator", value: `#${Member.user.discriminator}`, inline: true },
-                                { name: "ID", value: `${Member.id}`, inline: true },
-                                { name: "Avatar", value: `[Avatar Link](${AvatarURL})`, inline: true },
-                                { name: "Banner", value: "No Banner", inline: true },
-                                { name: "Bot", value: `${Member.user.bot ? "True" : "False"}`, inline: true },
-                                { name: "Created", value: `<t:${parseInt(Member.user.createdTimestamp / 1000)}:R>`, inline: true },
-                                { name: "Joined", value: `<t:${parseInt(Member.joinedTimestamp / 1000)}:R>`, inline: true },
-                                { name: "Booster", value: `${Member.premiumSinceTimestamp ? `Since <t:${parseInt(Member.premiumSinceTimestamp / 1000)}:R>` : "False"}`, inline: true },
-                                // { name: "Bannable", value: `${Member.bannable}`, inline: true },
-                                // { name: "Kickable", value: `${Member.kickable}`, inline: true },
-                                // { name: "Manageable", value: `${Member.manageable}`, inline: true },
-                                { name: "Roles", value: `${MemberRoles}` },
-                            ],
-
-                            thumbnail: {
-                                url: AvatarURL
-                            }
-                        }
-                    ]
-                });
+                messageStructureEmbed.fields[4].value = `[URL](https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension})`;
+                messageStructureEmbed.image.url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
             }
+
+            if (guildMember.roles.cache.size <= 30) {
+                if (guildMember.roles.cache.size === 1) {
+                    messageStructureEmbed.fields[9].value = "None";
+                } else {
+                    messageStructureEmbed.fields[9].value = `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}`;
+                }
+            }
+
+            interaction.reply(messageStructure);
         });
     }
 };

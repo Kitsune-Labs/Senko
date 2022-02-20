@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const { CommandInteraction, MessageAttachment } = require("discord.js");
 const ShopItems = require("../../Data/Shop/Items.json");
 const Icons = require("../../Data/Icons.json");
@@ -5,11 +6,13 @@ const Icons = require("../../Data/Icons.json");
 module.exports = {
     name: "shop",
     desc: "Buy an item from Senko's Market",
-    shop_data: true,
+    shopData: false,
+    userData: true,
 
     /**
      * @param {CommandInteraction} interaction
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData, ShopData) => {
         const Shop = {
             title: "Senko's Market",
