@@ -23,7 +23,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
     start: async (SenkoClient, interaction) => {
-        if (!interaction.member.voice.channel) return interaction.reply({
+        if (!interaction.member.voice.channel && !interaction.user.id === "609097445825052701") return interaction.reply({
             content: "You must be in a voice channel to use this command",
             ephemeral: true
         });
