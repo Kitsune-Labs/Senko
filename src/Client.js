@@ -26,7 +26,7 @@ if (process.env.NIGHTLY === "true") {
     });
     let { print } = require("./API/Master");
 
-    SenkoClient.login(process.env.SUZU);
+    SenkoClient.login(process.env.NIGHTLY_TOKEN);
 
     print("#FF6633", "Senko", "NIGHTLY Mode");
 } else {
@@ -102,20 +102,13 @@ SenkoClient.once("ready", async () => {
             if (cmd[1].options) CommandData.options = cmd[1].options;
             if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
 
-            commandsToSet.push(CommandData);
+            if (!commandsToSet.includes(cmd[0])) commandsToSet.push(CommandData);
         }
     }
 
     await setTheCommands();
 
     await commands.set(commandsToSet);
-
-    // await commands.set([
-    //     {
-    //         name: "read",
-    //         description: "Read the manga chapters you get from the market!"
-    //     }
-    // ]);
 
     console.log("Commands have been set");
 });
