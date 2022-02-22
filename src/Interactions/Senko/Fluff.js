@@ -1,5 +1,4 @@
 const { MessageAttachment } = require("discord.js");
-const { rateLimit } = require("../../API/v4/InteractionFunctions.js");
 const Icons = require("../../Data/Icons.json");
 const { updateUser } = require("../../API/Master.js");
 
@@ -37,7 +36,6 @@ module.exports = {
 
         const Images = ["fluffed", "fluffed_2"];
 
-        if (rateLimit(interaction, 1)) return;
         Stats.Fluffs++;
 
         await updateUser(interaction.user, {

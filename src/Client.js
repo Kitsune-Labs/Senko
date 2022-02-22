@@ -66,20 +66,22 @@ SenkoClient.once("ready", async () => {
     let commands = SenkoClient.application.commands;
     if (process.env.NIGHTLY === "true") commands = (await SenkoClient.guilds.fetch("777251087592718336")).commands;
 
-    await commands.set([]);
+    // await commands.set([]);
 
     const commandsToSet = [];
 
     async function setCommands() {
-        readdirSync("./src/Interactions/").forEach(async Folder => {
-            const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
+        if (process.env.NIGHTLY !== "true") {
+            readdirSync("./src/Interactions/").forEach(async Folder => {
+                const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
 
-            for (let interact of Interactions) {
-                let pull = require(`./Interactions/${Folder}/${interact}`);
+                for (let interact of Interactions) {
+                    let pull = require(`./Interactions/${Folder}/${interact}`);
 
-                SenkoClient.SlashCommands.set(`${pull.name}`, pull);
-            }
-        });
+                    SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+                }
+            });
+        }
 
         for (var file of readdirSync("./src/DevInteractions/")) {
             const pull = require(`./DevInteractions/${file}`);

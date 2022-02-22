@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, Client, MessageActionRow, MessageSelectMenu } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../../Data/Icons.json");
-const ShopItems = require("../../Data/Shop/Items.json");
+const Icons = require("../../Data/Icons.jsonson");
+const ShopItems = require("../../Data/Shop/Items.jsonson");
 
 module.exports = {
     name: "read",
