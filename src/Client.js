@@ -64,7 +64,7 @@ SenkoClient.once("ready", async () => {
     }
 
     let commands = SenkoClient.application.commands;
-    if (process.env.NIGHTLY === "true") commands = (await SenkoClient.guilds.fetch("777251087592718336")).commands;
+    // if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
     // await commands.set([]);
 
@@ -109,8 +109,6 @@ SenkoClient.once("ready", async () => {
     }
 
     await setTheCommands();
-
-    await commands.set(commandsToSet);
-
-    console.log("Commands have been set");
+    // await commands.set(commandsToSet);
+    console.log("Commands Ready");
 });

@@ -85,171 +85,79 @@ module.exports = {
                     components: []
                 };
 
-                switch (Interaction.values[0]) {
-                    case "banner_change_default":
-                        console.log("Banner change default");
+                const InteractionValue = Interaction.values[0].replace("title_", "").replace("banner_change_", "").replace("color_change_", "");
+                const ShopItem = ShopItems[InteractionValue];
+
+                if (Interaction.values[0].startsWith("banner_")) {
+                    if (InteractionValue === "default") {
                         await updateUser(Interaction.user, {
                             LocalUser: {
                                 Banner: BannerList.defaultbanner
                             }
                         });
 
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __Default__!";
-
+                        ReplyEmbed.embeds[0].description = "Your banner has been reset";
                         Interaction.update(ReplyEmbed);
-                        break;
-                    case "banner_change_Christmas_Banner_21":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                Banner: BannerList.Christmas_Banner_21
-                            }
-                        });
+                        return;
+                    }
 
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __Senko's Christmas Present__!";
+                    await updateUser(Interaction.user, {
+                        LocalUser: {
+                            Banner: BannerList[InteractionValue]
+                        }
+                    });
 
-                        Interaction.update(ReplyEmbed);
-                        break;
-                    case "banner_change_sakurashiro":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                Banner: BannerList.sakurashiro
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __Shiro Sakura__!";
-
-                        Interaction.update(ReplyEmbed);
-                        break;
-                    case "banner_change_thehelpfulfoxsenko":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                Banner: BannerList.thehelpfulfoxsenko
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __The Helpful Fox Senko__!";
-
-                        Interaction.update(ReplyEmbed);
-                        break;
-                    case "banner_change_senkobanner_1":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                Banner: BannerList.senkobanner_1
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __Senko Banner 1__!";
-
-                        Interaction.update(ReplyEmbed);
-                        break;
-                    case "banner_change_leaningbanner":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                Banner: BannerList.sakurashiro
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __Leaning's Banner__!";
-
-                        Interaction.update(ReplyEmbed);
-                        break;
-                    case "banner_change_Transgender_Pride_Flag":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                Banner: BannerList.Transgender_Pride_Flag
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __Transgender Pride Flag Banner__!";
-
-                        Interaction.update(ReplyEmbed);
-                        break;
-
-                    case "banner_change_MooseKaiBanner":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                Banner: BannerList.MooseKaiBanner
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = "Your banner is now set to __MooseKai's Snowsgiving 2021 Banner__!";
-
-                        Interaction.update(ReplyEmbed);
-                        break;
-                    // Profile Colors
-
-                    case "color_change_color_white":
+                    ReplyEmbed.embeds[0].description = `Your banner is now set to __${ShopItem.name}__!`;
+                    Interaction.update(ReplyEmbed);
+                } else if (Interaction.values[0].startsWith("color_")) {
+                    if (InteractionValue === "default") {
                         await updateUser(Interaction.user, {
                             LocalUser: {
                                 config: {
-                                    color: ShopItems.color_white.color
+                                    color: "#FF9933"
                                 }
                             }
                         });
 
-                        ReplyEmbed.embeds[0].description = "Your color is now set to __White__!";
-
+                        ReplyEmbed.embeds[0].description = "Your color has been reset";
                         Interaction.update(ReplyEmbed);
-                        break;
-                    case "color_change_color_purple":
+                        return;
+                    }
+
+                    await updateUser(Interaction.user, {
+                        LocalUser: {
+                            config: {
+                                color: ShopItem.color
+                            }
+                        }
+                    });
+
+                    ReplyEmbed.embeds[0].description = `Your color is now set to __${ShopItem.name}__`;
+                    Interaction.update(ReplyEmbed);
+                } else if (Interaction.values[0].startsWith("title_")) {
+                    if (InteractionValue === "none") {
                         await updateUser(Interaction.user, {
                             LocalUser: {
                                 config: {
-                                    color: ShopItems.color_purple.color
+                                    title: null
                                 }
                             }
                         });
 
-                        ReplyEmbed.embeds[0].description = "Your color is now set to __Purple__!";
-
+                        ReplyEmbed.embeds[0].description = "Your title has been removed";
                         Interaction.update(ReplyEmbed);
-                    break;
-
-
-
-                    // Profile Titles
-
-                    case "title_developer_kitsune_title":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                config: {
-                                    title: ShopItems.developer_kitsune_title.title
-                                }
+                        return;
+                    }
+                    await updateUser(Interaction.user, {
+                        LocalUser: {
+                            config: {
+                                title: ShopItem.title
                             }
-                        });
+                        }
+                    });
 
-                        ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItems.developer_kitsune_title.name}__!`;
-
-                        Interaction.update(ReplyEmbed);
-                    break;
-
-                    case "title_divine_title":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                config: {
-                                    title: ShopItems.divine_title.title
-                                }
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItems.divine_title.name}__!`;
-
-                        Interaction.update(ReplyEmbed);
-                    break;
-
-                    case "title_master_thrower":
-                        await updateUser(Interaction.user, {
-                            LocalUser: {
-                                config: {
-                                    title: ShopItems.master_thrower.title
-                                }
-                            }
-                        });
-
-                        ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItems.master_thrower.name}__!`;
-
-                        Interaction.update(ReplyEmbed);
-                    break;
+                    ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItem.name}__!`;
+                    Interaction.update(ReplyEmbed);
                 }
             }
         });

@@ -2,7 +2,6 @@
 const { Client } = require("discord.js");
 const Paginate = require("../API/Pagination/Event");
 const Manga = require("../Data/MangaList.json");
-const axios = require("axios").default;
 
 module.exports = {
     /**
@@ -10,7 +9,7 @@ module.exports = {
      */
     execute: async (SenkoClient) => {
         SenkoClient.on("interactionCreate", async Interaction => {
-            if (Interaction.isSelectMenu()) {
+            if (Interaction.isSelectMenu() && Interaction.values[0].match("read_")) {
                 let Page = 1;
                 const SelectedManga = Manga[Interaction.values[0].replace("read_", "")];
                 const Embeds = [];
