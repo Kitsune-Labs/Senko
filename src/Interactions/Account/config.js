@@ -57,7 +57,7 @@ module.exports = {
                         const ShopItem = ShopItems[Item.codename];
 
                         if (ShopItem.type && ShopItem.type === "banner") {
-                            Banners.push({ label: `${ShopItem.name}`, value: `banner_change_${ShopItem.id}`, description: `${ShopItem.desc}`});
+                            Banners.push({ label: `${ShopItem.name}`, value: `banner_change_${Item.codename}`, description: `${ShopItem.desc}`});
                         }
                     }
 
@@ -110,7 +110,6 @@ module.exports = {
                     components: Components
                 });
             break;
-
             case "title":
                 if (!AccountData.Inventory[0]) return interaction.followUp({
                     content: "You don't have anything, you can find items to buy with /shop!",
@@ -118,7 +117,7 @@ module.exports = {
                 });
 
                 var TitleColors = [
-                    { label: "No Title", value: "title_none", description: "Default"}
+                    { label: "No Title", value: "title_none", description: "No Title"}
                 ];
 
                 new Promise((resolve) => {
@@ -126,7 +125,7 @@ module.exports = {
                         const ShopItem = ShopItems[Item.codename];
 
                         if (ShopItem.title) {
-                            TitleColors.push({ label: `${ShopItem.name}`, value: `title_${ShopItem.id}`, description: `${ShopItem.desc}`});
+                            TitleColors.push({ label: `${ShopItem.name}`, value: `title_${Item.codename}`, description: `${ShopItem.desc}`});
                         }
                     }
 
@@ -149,7 +148,6 @@ module.exports = {
                     });
                 });
             break;
-
             case "color":
                 if (!AccountData.Inventory[0]) return interaction.followUp({
                     content: "You don't have anything, you can find items to buy with /shop!",
@@ -161,16 +159,21 @@ module.exports = {
                 ];
 
                 new Promise((resolve) => {
+                    let CurrentColor = null;
+
                     for (var Item of AccountData.Inventory) {
                         const ShopItem = ShopItems[Item.codename];
-
                         if (ShopItem.color) {
-                            ColorColors.push({ label: `${ShopItem.name}`, value: `color_change_${ShopItem.id}`, description: `${ShopItem.desc}`});
+                            ColorColors.push({ label: `${ShopItem.name}`, value: `color_change_${Item.codename}`, description: `${ShopItem.desc}`});
+
+                            if (AccountData.LocalUser.config.color === ShopItem.color) {
+                                CurrentColor = ShopItem.name;
+                            }
                         }
                     }
 
-                    resolve();
-                }).then(() => {
+                    resolve(CurrentColor);
+                }).then((CurrentColor) => {
                     if (!ColorColors[1]) return interaction.followUp({
                         content: "You don't own any colors, you can find them in the shop when they're onsale!",
                         ephemeral: true
@@ -181,7 +184,7 @@ module.exports = {
                         components: [ new MessageActionRow().addComponents([
                             new MessageSelectMenu()
                             .setCustomId("banner_set")
-                            .setPlaceholder(`Currently ${AccountData.LocalUser.config.color})`)
+                            .setPlaceholder(`Currently ${CurrentColor}`)
                             .setOptions(ColorColors)
                         ])],
                         ephemeral: true

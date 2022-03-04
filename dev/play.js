@@ -17,16 +17,23 @@ module.exports = {
             type: 1
         }
     ],
-    no_data: true,
+    permissions: [
+        {
+            id: "609097445825052701",
+            type: "USER",
+            permission: true
+        }
+    ],
+    defaultPermission: false,
     /**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
      */
     start: async (SenkoClient, interaction) => {
-        if (!interaction.member.voice.channel) return interaction.reply({
-            content: "You must be in a voice channel to use this command",
-            ephemeral: true
-        });
+        // if (!interaction.member.voice.channel) return interaction.reply({
+        //     content: "You must be in a voice channel to use this command",
+        //     ephemeral: true
+        // });
 
         const Command = interaction.options.getSubcommand();
 

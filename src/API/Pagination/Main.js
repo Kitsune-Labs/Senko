@@ -63,20 +63,25 @@ module.exports = async (interaction, pages, timeout = 120000) => {
         collector.resetTimer();
     });
 
+    function disable(type) {
+        MessageStructure.components[0].components[0].disabled = true;
+        MessageStructure.components[0].components[1].disabled = true;
+
+        interaction.editReply(MessageStructure);
+        console.log(type);
+    }
+
     collector.on("end", (_, reason) => {
         if (reason !== "messageDelete") {
-            MessageStructure.components[0].components[0].disabled = true;
-            MessageStructure.components[0].components[1].disabled = true;
-
-            interaction.editReply(MessageStructure);
+            disable();
         }
     });
 
-    process.once("beforeExit", () => {
-        MessageStructure.components[0].components[0].disabled = true;
-        MessageStructure.components[0].components[1].disabled = true;
-        interaction.update(MessageStructure);
-    });
+    // process.on("SIGTERM", ()=>{disable("sigterm");});
+    // process.on("beforeExit", ()=>{disable("before");});
+    // process.on("exit", ()=>{disable("exit");});
+    // process.on("SIGINT", ()=>{disable("int");});
+
 
     return curPage;
 };

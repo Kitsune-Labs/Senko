@@ -1,9 +1,9 @@
-const Icons = require("../Data/Icons.json");
-const ShopItems = require("../Data/Shop/Items.json");
-const { updateUser } = require("../API/Master");
+const Icons = require("../src/Data/Icons.json");
+const ShopItems = require("../src/Data/Shop/Items.json");
+const { updateUser } = require("../src/API/Master");
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { fetchData } = require("../API/Master");
+const { fetchData } = require("../src/API/Master");
 
 module.exports = {
     name: "award-dev",

@@ -46,8 +46,7 @@ module.exports = {
         if (RateLimits.Rest_Rate.Amount >= 5) return eRes({
             interaction: interaction,
             title: `${Icons.zzz}`,
-            description: `I don't think you should rest anymore for today, I'll give you more in ${ms(config.cooldowns.daily - (Date.now() - RateLimits.Rest_Rate.Date), { long: true })}!`,
-            footer: "Lets just stick to 5 today..."
+            description: `I don't think you should rest anymore for today, You can continue in ${ms(config.cooldowns.daily - (Date.now() - RateLimits.Rest_Rate.Date), { long: true })}!`
         });
 
         RateLimits.Rest_Rate.Amount++;

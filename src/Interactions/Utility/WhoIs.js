@@ -71,6 +71,13 @@ module.exports = {
 
                 messageStructureEmbed.fields[4].value = `[URL](https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension})`;
                 messageStructureEmbed.image.url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
+
+                // messageStructure.embeds[messageStructure.embeds.length + 1] = {
+                //     color: SenkoClient.colors.random(),
+                //     image: {
+                //         url: `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`
+                //     }
+                // };
             }
 
             if (guildMember.roles.cache.size <= 30) {

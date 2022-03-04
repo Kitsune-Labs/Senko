@@ -1,4 +1,4 @@
-const owoify = require("../../API/modules/owoify").default;
+const { owoify } = require("../../API/modules/owoify");
 
 module.exports = {
     name: "owoify",
@@ -16,7 +16,7 @@ module.exports = {
      */
     start: async (SenkoClient, interaction) => {
         interaction.reply({
-            content: `${owoify(interaction.options.getString("text"))}`
+            content: owoify(interaction.options.getString("text"))
         });
     }
 };

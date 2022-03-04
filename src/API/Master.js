@@ -227,7 +227,7 @@ async function fetchGuild(Guild) {
 async function deleteGuild(Guild) {
     await GuildStore.doc(Guild.id).delete();
 
-    this.print("#FFFFF1", "GUILD", "Left and removed guild data");
+    print("#FFFFF1", "GUILD", "Left and removed guild data");
 }
 
 /**
