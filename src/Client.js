@@ -73,9 +73,9 @@ SenkoClient.once("ready", async () => {
                 for (let interact of Interactions) {
                     let pull = require(`./Interactions/${Folder}/${interact}`);
 
-                    if (pull.name !== "buy") {
+                    // if (pull.name !== "buy") {
                         SenkoClient.SlashCommands.set(`${pull.name}`, pull);
-                    }
+                    // }
                 }
             });
         }

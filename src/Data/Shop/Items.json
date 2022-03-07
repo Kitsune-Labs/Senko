@@ -49,7 +49,7 @@
     "desc": "Perfectly spiced.",
     "price": 400,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "pumpkin": {
@@ -58,7 +58,7 @@
     "desc": "An orange colored sphere.",
     "price": 100,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "chestnuts": {
@@ -162,7 +162,7 @@
     "desc": "A little yoko doll of Nakano.",
     "price": 750,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "sakurroseawine": {
@@ -171,7 +171,7 @@
     "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "yakitori": {
@@ -189,7 +189,7 @@
     "desc": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
     "price": 712,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "hojicha": {
@@ -207,7 +207,7 @@
     "desc": "Fish-shaped cake with a read bean paste filling.",
     "price": 636,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "udon": {
@@ -216,7 +216,7 @@
     "desc": "Some comforting food.",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "sushi": {
@@ -225,7 +225,7 @@
     "desc": "Seafood is great! You should try it out",
     "price": 381,
     "amount": 4,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "bento": {
@@ -234,7 +234,7 @@
     "desc": "Hey, hey! Can I take some of your rice?",
     "price": 1305,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "ramen": {
@@ -288,7 +288,7 @@
     "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
     "price": 210,
     "amount": 3,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "greentea": {
@@ -306,7 +306,7 @@
     "desc": "Forever ashubiduba mofu-mofu!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "md_2": {
@@ -325,7 +325,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_1",
     "autoSale": true
   },
@@ -401,7 +401,7 @@
     "desc": "Tempura is a dish of battered and fried fish, seafood, or vegetables. This one has vegetables.",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "sknss_v8": {
@@ -410,7 +410,7 @@
     "desc": "The eighth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "kaiseki": {
@@ -446,7 +446,7 @@
     "desc": "Make your profile card white like Shiro!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "color": "#FFFFF9",
     "type": "color",
@@ -584,7 +584,7 @@
     "price": 50,
     "amount": 3,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "badge": "🍒",
     "autoSale": true
   },
@@ -653,7 +653,7 @@
     "desc": "🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐",
     "price": 50,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "badge": "🥐",
     "autoSale": true
@@ -707,7 +707,7 @@
     "desc": "Pastel Green is kinda soft",
     "price": 300,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "color": "#1EFFB5",
     "type": "color",

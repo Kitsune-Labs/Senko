@@ -6,7 +6,7 @@ const Firebase = require("firebase-admin");
 const Firestore = Firebase.firestore();
 const shopDoc = Firestore.collection("config").doc("shop");
 
-const Shop_List = require("../Data/Shop/Items.json");
+const Shop_List = require("../src/Data/Shop/Items.json");
 const fs = require("fs");
 
 module.exports = {
@@ -32,28 +32,30 @@ module.exports = {
 
                 fs.writeFileSync("./src/Data/Shop/Items.json", JSON.stringify(Shop_List, null, 2));
 
-                const pull = require("../Interactions/Shop/Buy.js");
+                const pull = require("../src/Interactions/Shop/Buy.js");
 
                 SenkoClient.SlashCommands.set(`${pull.name}`, pull);
 
-                const CommandData = {
-                    name: `${pull.name}`,
-                    description: `${pull.desc}`,
-                    options: pull.options
-                };
+                let commandsToSet = [];
 
-                let idRemove = null;
+                async function setTheCommands() {
+                    for (var cmd of SenkoClient.SlashCommands) {
 
-                // if (idRemove) {
-                //     SenkoClient.guilds.cache.get("777251087592718336").commands.edit(idRemove, CommandData);
-                // } else {
-                    SenkoClient.application.commands.set([CommandData]);//.then(async data => {
-                //         idRemove = data.id;
+                        const CommandData = {
+                            name: `${cmd[0]}`,
+                            description: `${cmd[1].desc}`,
+                            defaultPermission: typeof cmd[1].defaultPermission === "boolean" ? cmd[1].defaultPermission : true,
+                        };
 
-                //         console.log(data.entries);
-                //     });
-                // }
+                        if (cmd[1].options) CommandData.options = cmd[1].options;
+                        if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
 
+                        if (!commandsToSet.includes(cmd[0])) commandsToSet.push(CommandData);
+                    }
+                }
+
+                await setTheCommands();
+                await SenkoClient.application.commands.set(commandsToSet);
                 console.log("Updated buy");
             });
         });
