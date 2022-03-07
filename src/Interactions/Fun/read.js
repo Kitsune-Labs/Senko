@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, Client, MessageActionRow, MessageSelectMenu } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../../Data/Icons.jsonson");
-const ShopItems = require("../../Data/Shop/Items.jsonson");
+const Icons = require("../../Data/Icons.json");
+const ShopItems = require("../../Data/Shop/Items.json");
 
 module.exports = {
     name: "read",
@@ -14,7 +14,7 @@ module.exports = {
      */
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const OwnedChapters = [];
-        await interaction.deferReply();
+        // await interaction.deferReply();
 
         new Promise((resolve) => {
             for (var Item of AccountData.Inventory) {
@@ -26,12 +26,12 @@ module.exports = {
 
             resolve();
         }).then(() => {
-            if (!OwnedChapters[0]) return interaction.followUp({
+            if (!OwnedChapters[0]) return interaction.reply({
                 content: "You don't own any Tails of the Senko Manga, you can find them in the shop when they're onsale!",
                 ephemeral: true
             });
 
-            interaction.followUp({
+            interaction.reply({
                 content: "** **",
                 components: [
                     new MessageActionRow().addComponents([

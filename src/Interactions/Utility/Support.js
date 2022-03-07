@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction, MessageAttachment } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js");
 const ms = require("ms");
 
 module.exports = {
     name: "support",
     desc: "Support links, info, and other things.",
     /**
+     * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction) => {
@@ -17,8 +18,8 @@ module.exports = {
                     color: SenkoClient.colors.dark,
                     fields: [
                         { name: "Uptime", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true },
-                        { name: "Websocket Ping", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true },
-                        { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒#1989\nsakuya izayoi#3553\nSilkthorne#3062\nKaori Aiko#6710\nTheReal_Enderboy#0999", inline: true },
+                        { name: "Websocket Ping", value: `${Math.floor(SenkoClient.ws.ping)}`, inline: true },
+                        { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒\nsakuya izayoi\nSilkthorne\nKaori Aiko\nTheReal_Enderboy", inline: true },
                     ],
                     thumbnail: {
                         url: "attachment://image.png"

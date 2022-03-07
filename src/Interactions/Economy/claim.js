@@ -29,6 +29,7 @@ module.exports = {
      */
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const Command = interaction.options.getSubcommand();
+        await interaction.deferReply();
 
         switch (Command) {
             case "daily":
@@ -38,7 +39,7 @@ module.exports = {
                 if (DailyCooldown - (Date.now() - DailyTimeStamp) >= 0) {
                     const DailyTimeLeft = ms(DailyCooldown - (Date.now() - DailyTimeStamp), { long: true });
 
-                    interaction.reply({
+                    interaction.followUp({
                         embeds: [
                             {
                                 title: `${Icons.exclamation}  Sorry dear!`,
@@ -59,7 +60,7 @@ module.exports = {
                         Rewards: { Daily: Date.now() }
                     });
 
-                    interaction.reply({
+                    interaction.followUp({
                         embeds: [
                             {
                                 title: `${Icons.heart}  Here you go dear!`,
@@ -81,7 +82,7 @@ module.exports = {
                 if (WeeklyCooldown - (Date.now() - WeeklyTimeStamp) >= 0) {
                     const WeeklyTimeLeft = ms(WeeklyCooldown - (Date.now() - WeeklyTimeStamp), { long: true });
 
-                    interaction.reply({
+                    interaction.followUp({
                         embeds: [
                             {
                                 title: `${Icons.exclamation}  Sorry dear!`,
@@ -102,7 +103,7 @@ module.exports = {
                         Rewards: { Weekly: Date.now() }
                     });
 
-                    interaction.reply({
+                    interaction.followUp({
                         embeds: [
                             {
                                 title: `${Icons.heart}  Here you go dear!`,
@@ -118,7 +119,7 @@ module.exports = {
                 }
                 break;
             case "items":
-                interaction.reply({
+                interaction.followUp({
                     embeds: [
                         {
                             title: "Hmmm.....",
