@@ -47,7 +47,7 @@ module.exports = {
                 // if (idRemove) {
                 //     SenkoClient.guilds.cache.get("777251087592718336").commands.edit(idRemove, CommandData);
                 // } else {
-                    SenkoClient.guilds.cache.get("777251087592718336").commands.set([CommandData]);//.then(async data => {
+                    SenkoClient.application.commands.set([CommandData]);//.then(async data => {
                 //         idRemove = data.id;
 
                 //         console.log(data.entries);
