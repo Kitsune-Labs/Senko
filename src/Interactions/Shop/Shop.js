@@ -6,14 +6,13 @@ const Icons = require("../../Data/Icons.json");
 module.exports = {
     name: "shop",
     desc: "Buy an item from Senko's Market",
-    shopData: false,
     userData: true,
 
     /**
      * @param {CommandInteraction} interaction
      */
     // eslint-disable-next-line no-unused-vars
-    start: async (SenkoClient, interaction, GuildData, AccountData, ShopData) => {
+    start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const Shop = {
             title: "Senko's Market",
             description: `

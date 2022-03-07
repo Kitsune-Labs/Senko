@@ -58,11 +58,6 @@ process.on("unhandledRejection",async(reason)=>{console.log(reason);});
 SenkoClient.once("ready", async () => {
     print("#FF6633", "Senko", "Started\n");
 
-    for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
-        require(`./Events/${file}`).execute(SenkoClient);
-        print("#FFFB00", "EVENTS", `Running ${file}`);
-    }
-
     let commands = SenkoClient.application.commands;
     // if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
@@ -78,7 +73,9 @@ SenkoClient.once("ready", async () => {
                 for (let interact of Interactions) {
                     let pull = require(`./Interactions/${Folder}/${interact}`);
 
-                    SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+                    if (pull.name !== "buy") {
+                        SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+                    }
                 }
             });
         }
@@ -109,6 +106,12 @@ SenkoClient.once("ready", async () => {
     }
 
     await setTheCommands();
-    // await commands.set(commandsToSet);
+    await commands.set(commandsToSet);
     console.log("Commands Ready");
+
+
+    for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
+        require(`./Events/${file}`).execute(SenkoClient);
+        print("#FFFB00", "EVENTS", `Running ${file}`);
+    }
 });

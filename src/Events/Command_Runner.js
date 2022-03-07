@@ -1,13 +1,8 @@
 const IDB = require("../Data/IDB.json");
 const DataConfig = require("../Data/DataConfig.json");
-const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../API/Master");
 const AllowedCommands = ["ping", "channel", "channels", "avatar", "prefix", "poll", "whois", "config"];
 const { print, fetchGuild, fetchData, updateUser } = require("../API/Master");
-
-// eslint-disable-next-line no-unused-vars
-// const { awardAchievement } = require("../API/v5/Achievement.js");
-
 const Firebase = require("firebase-admin");
 const Firestore = Firebase.firestore();
 
@@ -19,12 +14,12 @@ module.exports = {
     execute: async (SenkoClient) => {
         SenkoClient.on("interactionCreate", async (interaction) => {
             if (!interaction.isCommand()) return;
-            if (!interaction.guild) return interaction.reply({ content: "I cannot be used in DM's!" });
+            if (!interaction.guild) return interaction.reply({ content: "I cannot be used outside of guild channels!" });
 
             if (IDB.includes(interaction.user.id)) return;
 
             const PermissionEmbed = {
-                title: "Permission Error",
+                title: "Permission(s) Error",
                 description: "Please make sure I have the following permissions:\n\n",
                 color: SenkoClient.colors.dark,
                 footer: {

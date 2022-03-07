@@ -6,18 +6,17 @@ module.exports = {
     userData: true,
     options: [
         {
-            name: "private",
+            name: "hidden",
             description: "Optionally show other people your funds (Default: True)",
             type: 5,
-            default: true,
-            required: false
+            default: true
         }
     ],
     /**
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction, GuildData, { Currency }) => {
-        const IsPrivate = interaction.options.getBoolean("private");
+        const IsPrivate = interaction.options.getBoolean("hidden");
 
         if (IsPrivate === true || IsPrivate === null) {
             interaction.reply({
