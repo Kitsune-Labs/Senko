@@ -1,39 +1,55 @@
-const { MessageAttachment } = require("discord.js");
-const { eRes } = require("../../API/v4/InteractionFunctions");
-const config = require("../../Data/DataConfig.json");
+// eslint-disable-next-line no-unused-vars
+const { Client, Interaction } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const ms = require("ms");
-const { updateUser } = require("../../API/Master");
+const config = require("../../Data/DataConfig.json");
+const { updateUser, randomNumber, addYen, randomBummedImageName, randomArray } = require("../../API/Master");
 
-const Reactions = {
-    User: [
-        "takes a sip",
-        "has a drink",
-        "drinks"
-    ],
+const Responses = [
+    "Senko-san takes a drink of her Hojicha",
+    `${Icons.flushed}  You compliment Senko-san with her skills of Tea making`,
+    "You tell Senko-san that her tea is the best"
+];
 
-    Senko: [
-        "Umu~", "Umu Umu"
-    ],
+const NoMore = [
+    "I think you've had enough for today",
+    "If you drink anymore we won't have any more for tomorrow!",
+    "Senko-san thinks you're drinking too much Hojicha",
+];
 
-    say: [
-        "Don't drink too fast!",
-        "Make sure to savor it",
-        "*sip sip*"
-    ]
-};
+const Sounds = [
+    "Umu~",
+    "Umu Umu"
+];
+
+const MoreResponses = [
+    `${Icons.bubble}  Senko-san says you can have more _TIMELEFT_`,
+    `${Icons.exclamation}  Senko-san tells you to drink more _TIMELEFT_`,
+];
 
 module.exports = {
     name: "drink",
-    desc: "Have a drink with Senko",
+    desc: "Have Senko-san prepare you a drink",
     userData: true,
+    defer: true,
     /**
-     * @param {CommandInteraction} interaction
+     * @param {Interaction} interaction
+     * @param {Client} SenkoClient
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
-        // if (Stats.Drinks >= 10) await awardAchievement(interaction.user, "NewDrinker");
-        // if (Stats.Drinks >= 25) await awardAchievement(interaction.user, "AdeptDrinker");
-        // if (Stats.Drinks >= 50) await awardAchievement(interaction.user, "MasterDrinker");
+        const MessageStruct = {
+            embeds: [
+                {
+                    description: `${Icons.hojicha}  ${randomArray(Responses)}`,
+                    color: SenkoClient.colors.light,
+                    thumbnail: {
+                        url: "attachment://image.png"
+                    }
+                }
+            ],
+            files: [{ attachment: "./src/Data/content/senko/drink.png", name: "image.png" }]
+        };
 
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Drink_Rate.Date) >= 0) {
             await updateUser(interaction.user, {
@@ -48,34 +64,15 @@ module.exports = {
             RateLimits.Drink_Rate.Amount = 0;
         }
 
-        if (RateLimits.Drink_Rate.Amount >= 5) return eRes({
-            interaction: interaction,
-            title: `${Icons.exclamation}  I don't think you should drink more.`,
-            description: `If you drink any more Hojicha we'll have to spend more money. We can have some more in ${ms(config.cooldowns.daily - (Date.now() - RateLimits.Drink_Rate.Date), { long: true })}!`,
-            footer: "We have a limit of 5 drinks today!"
-        });
+        if (RateLimits.Drink_Rate.Amount >= 5) {
+            MessageStruct.embeds[0].description = `**${randomArray(NoMore).replace("_USER_", interaction.user.username)}**\n\n${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+
+            return interaction.followUp(MessageStruct);
+        }
 
         RateLimits.Drink_Rate.Amount++;
         Stats.Drinks++;
-
-        const Images = ["drink"];
-
-        interaction.reply({
-            embeds: [
-                {
-                    title: `${Icons.hojicha}  ${interaction.member.nickname || interaction.user.username} ${Reactions.User[Math.floor(Math.random() * Reactions.User.length)]}`,
-                    description: `*${Reactions.Senko[Math.floor(Math.random() * Reactions.Senko.length)]}*\n\n${Reactions.say[Math.floor(Math.random() * Reactions.say.length)]}`,
-                    color: SenkoClient.colors.light,
-                    thumbnail: {
-                        url: "attachment://image.png"
-                    },
-                    footer: {
-                        text: `You have ${Stats.Drinks} drinks.`
-                    }
-                }
-            ],
-            files: [ new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png") ]
-        });
 
         await updateUser(interaction.user, {
             Stats: { Drinks: Stats.Drinks },
@@ -87,5 +84,19 @@ module.exports = {
                 }
             }
         });
+
+        if (RateLimits.Drink_Rate.Amount >= 5) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last drink for today`;
+
+
+        if (randomNumber(100) > 75) {
+            addYen(interaction.user, 50);
+
+            MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  50x added for interaction`;
+        }
+
+        MessageStruct.embeds[0].title = randomArray(Sounds);
+
+
+        interaction.followUp(MessageStruct);
     }
 };

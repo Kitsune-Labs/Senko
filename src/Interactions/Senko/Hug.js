@@ -1,14 +1,30 @@
-const { MessageAttachment } = require("discord.js");
-const { eRes } = require("../../API/v4/InteractionFunctions");
-const config = require("../../Data/DataConfig.json");
+// eslint-disable-next-line no-unused-vars
+const { Client, Interaction } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const ms = require("ms");
+
+const config = require("../../Data/DataConfig.json");
 const randomFile = require("../../API/modules/image");
-const { fetchData, updateUser } = require("../../API/Master");
+const { fetchData, updateUser, randomNumber, addYen, randomBummedImageName, randomArray } = require("../../API/Master");
+
+const Responses = [
+    "_USER_ hugs Senko-san"
+];
+
+const Sounds = [
+    "Umu~",
+    "Umu Umu"
+];
+
+const MoreResponses = [
+    `${Icons.heart}  We can hug more _TIMELEFT_`,
+    `${Icons.exclamation}  We can hug more _TIMELEFT_! Geez, you're so spoiled!`,
+    `${Icons.heart}  I'll be pampering you more _TIMELEFT_, look forward to it!`,
+];
 
 module.exports = {
     name: "hug",
-    desc: "Hug Senko!",
+    desc: "Hug Senko-san or a server member!",
     options: [
         {
             name: "user",
@@ -16,9 +32,12 @@ module.exports = {
             type: "USER",
         }
     ],
+    defer: true,
     /**
-     * @param {CommandInteraction} interaction
+     * @param {Interaction} interaction
+     * @param {Client} SenkoClient
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction) => {
         const OptionalUser = interaction.options.getUser("user");
 
@@ -29,17 +48,17 @@ module.exports = {
                     `${OptionalUser} has been hugged by ${interaction.user}!`,
                 ];
 
-                interaction.reply({
+                interaction.followUp({
                     embeds: [
                         {
-                            description: `${Messages[Math.floor(Math.random() * Messages.length)]}`,
+                            description: `${randomArray(Messages)}`,
                             image: {
-                                url: `attachment://${file.endsWith(".png") ? "image.png" : "image.gif"}`
+                                url: `attachment://${file.endsWith(".png") ? "hug.png" : "hug.gif"}`
                             },
                             color: SenkoClient.colors.light
                         }
                     ],
-                    files: [ { attachment: `./src/Data/content/hug/${file}`, name: file.endsWith(".png") ? "image.png" : "image.gif" } ]
+                    files: [ { attachment: `./src/Data/content/hug/${file}`, name: file.endsWith(".png") ? "hug.png" : "hug.gif" } ]
                 });
             });
 
@@ -47,6 +66,20 @@ module.exports = {
         }
 
         const { RateLimits, Stats } = await fetchData(interaction.user);
+
+        const MessageStruct = {
+            embeds: [
+                {
+                    description: randomArray(Responses).replace("_USER_", interaction.user.username),
+                    color: SenkoClient.colors.light,
+                    thumbnail: {
+                        url: "attachment://image.png"
+                    }
+                }
+            ],
+            files: [{ attachment: "./src/Data/content/Senko/hug.png", name: "image.png" }]
+        };
+
 
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Hug_Rate.Date) >= 0) {
             await updateUser(interaction.user, {
@@ -61,34 +94,27 @@ module.exports = {
             RateLimits.Hug_Rate.Amount = 0;
         }
 
-        if (RateLimits.Hug_Rate.Amount >= 20) {
-            const TimeLeft = ms(config.cooldowns.daily - (Date.now() - RateLimits.Hug_Rate.Date), { long: true });
 
-            return eRes({
-                interaction: interaction,
-                title: `${Icons.exclamation}  Sorry!`,
-                description: `I've already given you 20 hugs, i'll give you more in ${TimeLeft}`
-            });
+
+        if (RateLimits.Hug_Rate.Amount >= 20) {
+            MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Hug_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+
+            return interaction.followUp(MessageStruct);
         }
 
-        RateLimits.Hug_Rate.Amount++;
+
+        if (randomNumber(100) > 75) {
+            addYen(interaction.user, 50);
+
+            MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  50x added for interaction`;
+        }
+
+
+        MessageStruct.embeds[0].title = randomArray(Sounds);
+
         Stats.Hugs++;
-
-        const Images = ["happy"];
-
-        interaction.reply({
-            embeds: [
-                {
-                    title: `${interaction.member.nickname || interaction.user.username} hugs Senko`,
-                    description: `You've hugged me ${Stats.Hugs} times`,
-                    color: SenkoClient.colors.light,
-                    thumbnail: {
-                        url: "attachment://image.png"
-                    }
-                }
-            ],
-            files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
-        });
+        RateLimits.Hug_Rate.Amount++;
 
         await updateUser(interaction.user, {
             Stats: { Hugs: Stats.Hugs },
@@ -100,5 +126,9 @@ module.exports = {
                 }
             }
         });
+
+        if (RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
+
+        interaction.followUp(MessageStruct);
     }
 };

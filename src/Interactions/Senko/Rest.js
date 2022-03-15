@@ -1,35 +1,53 @@
-const { MessageAttachment } = require("discord.js");
-const { eRes } = require("../../API/v4/InteractionFunctions");
-const config = require("../../Data/DataConfig.json");
+// eslint-disable-next-line no-unused-vars
+const { Client, Interaction } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const ms = require("ms");
-const { updateUser } = require("../../API/Master");
 
-const Reactions = {
-    User: [
-        "rest's on Senko's lap",
-        "is being pampered by Senko"
-    ],
+const config = require("../../Data/DataConfig.json");
+const { updateUser, randomBummedImageName, randomNumber, addYen, randomArray } = require("../../API/Master");
 
-    Senko: [
-        "Umu~", "Umu Umu"
-    ],
 
-    say: [
-        "It's alright dear, i'm here for you...",
-        "Relax dear, don't stress yourself too much.",
-        "Rest now, you'll need your energy tomorrow."
-    ]
-};
+const UserActions = [
+    "_USER_ rest's on Senko's lap",
+    "_USER_ gets pampered by Senko-san"
+];
+
+const Responses = [
+    "It's alright dear, i'm here for you...",
+    "Relax dear, don't stress yourself too much",
+    "*Senko-san starts to hum*",
+    `${Icons.heart}  Rest now, you'll need your energy tomorrow`
+];
+
+const NoMore = [
+    "I do not think you should rest anymore today\nYou may rest more _TIMELEFT_",
+    "If you rest more you won't be tired tonight!\nYou can rest again _TIMELEFT_"
+];
 
 module.exports = {
     name: "rest",
     desc: "Rest on Senkos lap",
     userData: true,
+    defer: true,
     /**
-     * @param {CommandInteraction} interaction
+     * @param {Interaction} interaction
+     * @param {Client} SenkoClient
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
+        const MessageStruct = {
+            embeds: [
+                {
+                    description: `**${randomArray(Responses)}**\n\n*${randomArray(UserActions).replace("_USER_", interaction.user.username)}*`,
+                    color: SenkoClient.colors.light,
+                    thumbnail: {
+                        url: "attachment://image.png"
+                    }
+                }
+            ],
+            files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
+        };
+
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Rest_Rate.Date) >= 0) {
             await updateUser(interaction.user, {
                 RateLimits: {
@@ -43,33 +61,24 @@ module.exports = {
             RateLimits.Rest_Rate.Amount = 0;
         }
 
-        if (RateLimits.Rest_Rate.Amount >= 5) return eRes({
-            interaction: interaction,
-            title: `${Icons.zzz}`,
-            description: `I don't think you should rest anymore for today, You can continue in ${ms(config.cooldowns.daily - (Date.now() - RateLimits.Rest_Rate.Date), { long: true })}!`
-        });
+
+        if (RateLimits.Rest_Rate.Amount >= 5) {
+            MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Rest_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+
+            return interaction.followUp(MessageStruct);
+        }
+
 
         RateLimits.Rest_Rate.Amount++;
         Stats.Rests++;
 
-        const Images = ["cuddle"];
+        if (randomNumber(100) > 75) {
+            addYen(interaction.user, 50);
 
-        interaction.reply({
-            embeds: [
-                {
-                    title: `${interaction.member.nickname || interaction.user.username} ${Reactions.User[Math.floor(Math.random() * Reactions.User.length)]}`,
-                    description: `*${Reactions.Senko[Math.floor(Math.random() * Reactions.Senko.length)]}*\n\n${Reactions.say[Math.floor(Math.random() * Reactions.say.length)]}`,
-                    thumbnail: {
-                        url: "attachment://image.png"
-                    },
-                    footer: {
-                        text: `You've rested ${Stats.Rests} times.`
-                    },
-                    color: SenkoClient.colors.light
-                }
-            ],
-            files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
-        });
+            MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  50x added for interaction`;
+        }
+
 
         await updateUser(interaction.user, {
             Stats: { Rests: Stats.Rests },
@@ -81,5 +90,10 @@ module.exports = {
                 }
             }
         });
+
+        if (RateLimits.Rest_Rate.Amount >= 5) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop resting for today`;
+
+
+        interaction.followUp(MessageStruct);
     }
 };
