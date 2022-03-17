@@ -3,20 +3,19 @@ const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const ShopItems = require("../../Data/Shop/Items.json");
-const { updateUser } = require("../../API/Master");
-const { reject } = require("bcrypt/promises");
+const { updateUser, randomArray } = require("../../API/Master");
 
 module.exports = {
     name: "eat",
     desc: "Eat something with Senko",
     userData: true,
+    defer: true,
     /**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
-        await interaction.deferReply();
         const EdibleItems = {};
 
         new Promise((Resolve, Reject) => {
@@ -55,8 +54,6 @@ module.exports = {
 
                         return resolve(ShopItems[RandomFoodItem]);
                     }
-
-                    reject();
                 }
             }).then((ShopItem) => {
                 interaction.followUp({
@@ -70,7 +67,7 @@ module.exports = {
                             }
                         }
                     ],
-                    files: [ { attachment: "./src/Data/content/senko/SenkoEat.png", name: "image.png" } ]
+                    files: [ { attachment: `./src/Data/content/senko/${randomArray(["SenkoEat", "SenkoBless"])}.png`, name: "image.png" } ]
                 });
             }).catch(() => {
                 interaction.followUp({ content: "You don't own any food Items, Buy some at Senko's Market when they're onsale!" });

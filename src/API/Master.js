@@ -290,14 +290,6 @@ function selfPerm(interaction, Permission, ClientID) {
 
 /**
  * @param {Interaction} interaction
- * @returns String
- */
-function getName(interaction) {
-    return interaction.member.nickname || interaction.member.user.username;
-}
-
-/**
- * @param {Interaction} interaction
  * @param {String} Permission
  * @param {User} User
  */
@@ -308,6 +300,63 @@ async function CheckPermission(interaction, Permission, User) {
 
     if (Result) return true;
     return false;
+}
+
+
+async function rateLimitCoolDown(interaction, RateLimits, Stat) {
+    const TimeStamp = Date.now();
+
+    if (!config.cooldowns.daily - (TimeStamp - RateLimits[Stat].Date) >= 0) {
+        await updateUser(interaction.user, {
+            RateLimits: {
+                [Stat]: {
+                    Amount: 0,
+                    Date: TimeStamp
+                }
+            }
+        });
+
+        RateLimits[Stat].Amount = 0;
+        return {
+            maxed: false,
+            current: RateLimits[Stat].Amount,
+            TimeStamp: TimeStamp
+        };
+    }
+
+    return {
+        maxed: true,
+        current: RateLimits[Stat].Amount,
+        TimeStamp: TimeStamp
+    };
+}
+
+async function addStats(interaction, CurrentStats, Stat) {
+    await updateUser(interaction.user, {
+        RateLimits: {
+            [Stat]: {
+                Amount: CurrentStats.Amount++,
+                Date: Date.now()
+            }
+        }
+    });
+}
+
+function randomArray(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+function randomNumber(num) {
+    return Math.floor(Math.random() * num);
+}
+
+function randomBummedImageName() {
+    const Images = [
+        "huh",
+        "senko_think"
+    ];
+
+    return randomArray(Images);
 }
 
 
@@ -328,5 +377,10 @@ module.exports = {
     CheckPermission,
     fetchData,
     fetchGuild,
-    updateGuild
+    updateGuild,
+    rateLimitCoolDown,
+    addStats,
+    randomNumber,
+    randomBummedImageName,
+    randomArray
 };

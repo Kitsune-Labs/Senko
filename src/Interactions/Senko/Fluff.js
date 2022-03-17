@@ -1,41 +1,42 @@
-const { MessageAttachment } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
+const { Client, Interaction } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const { updateUser } = require("../../API/Master.js");
+const { updateUser, randomArray, randomNumber, addYen } = require("../../API/Master.js");
 
-const Reactions = {
-    User: [
-        "strokes Senko's tail",
-        "fluffs Senko",
-        "caresses Senko's tail",
-        "ingulfs in Senko's fluffy tail",
-        "hugs Senko's silky tail"
-    ],
+const UserInput = [
+    "_USER_ strokes Senko's tail",
+    "_USER_ fluffs Senko-san",
+    "_USER_ caresses Senko's tail",
+    "_USER_ ingulfs in Senko's fluffy tail",
+    "_USER_ hugs Senko's silky tail"
+];
 
-    Senko: [
-        "euH", "mhMh", "Uya!", "Uh-Uya!", "HYaa", "UYAAA!", "Umu~", "Uya..."
-    ],
+const Responses = [
+    `${Icons.flushed}  Please be more gentle with my tail!`,
+    `${Icons.exclamation}  Do you have to be so verbose?`,
+    `${Icons.question}  You can't stay like that forever, can you?`
+];
 
-    say: [
-        "Please be more gentle to my tail!",
-        "Do you have to be so verbose?",
-        "You can't stay like that forever, can you?"
-    ]
-};
+const Sounds = [
+    "euH",
+    "mhMh",
+    "Uya!",
+    "HYaa",
+    "Umu~",
+    "Uya..."
+];
 
 module.exports = {
     name: "fluff",
     desc: "Mofumofu!",
     userData: true,
     /**
-     * @param {CommandInteraction} interaction
+     * @param {Interaction} interaction
+     * @param {Client} SenkoClient
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, { Stats }) => {
-        // if (Stats.Fluffs >= 10) awardAchievement(interaction.user, "NewFloofer");
-        // if (Stats.Fluffs >= 50) awardAchievement(interaction.user, "AdeptFloofer");
-        // if (Stats.Fluffs >= 100) awardAchievement(interaction.user, "MasterFloofer");
-
-        const Images = ["fluffed", "fluffed_2"];
-
         Stats.Fluffs++;
 
         await updateUser(interaction.user, {
@@ -44,21 +45,26 @@ module.exports = {
             }
         });
 
-        interaction.reply({
+        const MessageStruct = {
             embeds: [
                 {
-                    title: `${Icons.tail1} ${Reactions.Senko[Math.floor(Math.random() * Reactions.Senko.length)]}`,
-                    description: `${interaction.member.nickname || interaction.user.username} ${Reactions.User[Math.floor(Math.random() * Reactions.User.length)]}\n\n${Reactions.say[Math.floor(Math.random() * Reactions.say.length)]}`,
+                    title: `${randomArray(Sounds)}`,
+                    description: `${randomArray(Responses)}\n\n*${randomArray(UserInput).replace("_USER_", interaction.user.username)}*`,
                     color: SenkoClient.colors.light,
                     thumbnail: {
                         url: "attachment://image.png"
-                    },
-                    footer: {
-                        text: `You've fluffed my tail ${Stats.Fluffs} times.`
                     }
                 }
             ],
-            files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
-        });
+            files: [{ attachment: `./src/Data/content/senko/${randomArray(["fluffed", "fluffed_2"])}.png`, name: "image.png" }]
+        };
+
+        if (randomNumber(100) > 75) {
+            addYen(interaction.user, 10);
+
+            MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  10x added for interaction`;
+        }
+
+        interaction.reply(MessageStruct);
     }
 };

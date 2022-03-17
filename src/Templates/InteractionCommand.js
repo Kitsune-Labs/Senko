@@ -8,6 +8,8 @@ module.exports = {
     desc: "",
     options: [],
     userData: false,
+    defer: false,
+    ephemeral: false,
     /**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient

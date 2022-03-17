@@ -1,42 +1,55 @@
-const { MessageAttachment } = require("discord.js");
-const { eRes } = require("../../API/v4/InteractionFunctions");
+
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
-const ms = require("ms");
-const { updateUser } = require("../../API/Master");
+const { updateUser, randomArray, randomBummedImageName, randomNumber, addYen } = require("../../API/Master");
 
-const Reactions = {
-    User: [
-        "pats Senko's head",
-        "pets Senko",
-        "gives Senko a pat on her head",
-        "ruffles through Senko's hair",
-        "caresses Senko's ears",
-        "touches Senko's ears"
-    ],
+const Responses = [
+    "_USER_ pats Senko's head",
+    "_USER_ pats Senko-san",
+    "_USER_ gives Senko a pat on her head",
+    "_USER_ ruffles Senko's hair",
+    "_USER_ caresses Senko's ears",
+    "_USER_ touches Senko's ears",
+    `${Icons.flushed}  _USER_, Please be more gentle with my ears, they're very precious!`
+];
 
-    Senko: [
-        "Uya...", "Umu~", "euH", "mhMh", "Uh-Uya!", "mmu", "Hnng"
-    ],
+const Sounds = [
+    "Uya...",
+    "Umu~",
+    "euH",
+    "mhMh",
+    "Uh-Uya!",
+    "mmu",
+    "Hnng"
+];
 
-    say: [
-        "Please be more gentle with my ears dear, they're very precious!",
-        "Don't be rough with my hair.",
-        "Please remember to not put your fingers in my ears...!"
-    ]
-};
+const MoreResponses = [
+    `${Icons.heart}  You can pat me more _TIMELEFT_`,
+    `${Icons.exclamation}  No more patting today, come back _TIMELEFT_!`,
+    `${Icons.heart}  You can expect more pats _TIMELEFT_, look forward to it!`,
+];
 
 module.exports = {
     name: "pat",
     desc: "Pat Senko's Head (Don't touch her ears!)",
     userData: true,
+    defer: true,
     /**
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
-        // if (Stats.Drinks >= 10) await awardAchievement(interaction.user, "NewPatter");
-        // if (Stats.Drinks >= 50) await awardAchievement(interaction.user, "AdeptPatter");
-        // if (Stats.Drinks >= 100) await awardAchievement(interaction.user, "MasterPatter");
+        const MessageStruct = {
+            embeds: [
+                {
+                    description: randomArray(Responses).replace("_USER_", interaction.user.username),
+                    color: SenkoClient.colors.light,
+                    thumbnail: {
+                        url: "attachment://image.png"
+                    }
+                }
+            ],
+            files: [{ attachment: "./src/Data/content/Senko/pat.png", name: "image.png" }]
+        };
 
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Pat_Rate.Date) >= 0) {
             await updateUser(interaction.user, {
@@ -51,37 +64,29 @@ module.exports = {
             RateLimits.Pat_Rate.Amount = 0;
         }
 
-        if (RateLimits.Pat_Rate.Amount >= 20) return eRes({
-            interaction: interaction,
-            title: `${Icons.exclamation}  Sorry dear...`,
-            description: `I don't think I need any more pats today, come back in ${ms(config.cooldowns.daily - (Date.now() - RateLimits.Pat_Rate.Date), { long: true })}!`,
-            footer: "The limit of patting me is 20 per day!"
-        });
 
-        RateLimits.Pat_Rate.Amount++;
+        if (RateLimits.Pat_Rate.Amount >= 20) {
+            MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Pat_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+
+            return interaction.followUp(MessageStruct);
+        }
+
+
         Stats.Pats++;
+        RateLimits.Pat_Rate.Amount++;
 
-        const Images = ["Pat"];
+        if (randomNumber(100) > 75) {
+            addYen(interaction.user, 50);
 
-        interaction.reply({
-            embeds: [
-                {
-                    title: `${interaction.member.nickname || interaction.user.username} ${Reactions.User[Math.floor(Math.random() * Reactions.User.length)]}`,
-                    description: `*${Reactions.Senko[Math.floor(Math.random() * Reactions.Senko.length)]}*\n\n${Reactions.say[Math.floor(Math.random() * Reactions.say.length)]}`,
-                    color: SenkoClient.colors.light,
-                    thumbnail: {
-                        url: "attachment://image.png"
-                    },
-                    footer: {
-                        text: `You've pat me ${Stats.Pats} times.`
-                    }
-                }
-            ],
-            files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
-        });
+            MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  50x added for interaction`;
+        }
+
+
+        MessageStruct.embeds[0].title = randomArray(Sounds);
 
         await updateUser(interaction.user, {
-            Stats: { Pats: Stats.Pats },
+            Stats: { Hugs: Stats.Hugs },
 
             RateLimits: {
                 Pat_Rate: {
@@ -90,5 +95,10 @@ module.exports = {
                 }
             }
         });
+
+        if (RateLimits.Pat_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop patting her for today`;
+
+
+        interaction.followUp(MessageStruct);
     }
 };

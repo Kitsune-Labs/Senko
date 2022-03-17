@@ -1,38 +1,55 @@
-const { MessageAttachment } = require("discord.js");
-const { eRes } = require("../../API/v4/InteractionFunctions");
-const config = require("../../Data/DataConfig.json");
+// eslint-disable-next-line no-unused-vars
+const { Client, Interaction } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const ms = require("ms");
-const { updateUser } = require("../../API/Master");
 
-const Reactions = {
-    User: [
-        "rest's on Senko's lap",
-        "sleeps on Senko's lap",
-        "Passes out while being pampered",
-        "gets pampered by Senko's tail"
-    ],
+const config = require("../../Data/DataConfig.json");
+const { updateUser, randomArray, randomBummedImageName } = require("../../API/Master");
 
-    Senko: [
-        "mhMh mmm mmm!", "mmu"
-    ],
+const UserActions = [
+    "_USER_ rest's on Senko's lap",
+    "_USER_ sleeps on Senko's lap",
+    "_USER_ passes out while being pampered",
+    "_USER_ gets pampered by Senko's tail"
+];
 
-    say: [
-        "There there dear, you've had a stressful day today.",
-        "Have sweet dreams dear.",
-        `${Icons.ThinkCloud}  *I hope you sleep well...*`,
-        "I'll continue to pamper you with my tail dear!"
-    ]
-};
+const Responses = [
+    "There there dear, you've had a stressful day today",
+    "Sweet dreams dear",
+    `${Icons.ThinkCloud}  *I hope you sleep well...*`,
+    "I'll continue to pamper you with my tail dear!"
+];
+
+const NoMore = [
+    "I do not think you should sleep again\nYou may sleep  _TIMELEFT_",
+    "Don't sleep dear!\nYou should sleep _TIMELEFT_"
+];
+
 
 module.exports = {
     name: "sleep",
     desc: "Sleep on Senko's lap",
     userData: true,
+    defer: true,
     /**
-     * @param {CommandInteraction} interaction
+     * @param {Interaction} interaction
+     * @param {Client} SenkoClient
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
+        const MessageStruct = {
+            embeds: [
+                {
+                    description: `**${randomArray(Responses)}**\n\n*${randomArray(UserActions).replace("_USER_", interaction.user.username)}*`,
+                    color: SenkoClient.colors.light,
+                    thumbnail: {
+                        url: "attachment://image.png"
+                    }
+                }
+            ],
+            files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
+        };
+
         if (!config.cooldowns.daily - (Date.now() - RateLimits.Sleep_Rate.Date) >= 0) {
             await updateUser(interaction.user, {
                 RateLimits: {
@@ -47,34 +64,15 @@ module.exports = {
         }
 
 
-        if (RateLimits.Sleep_Rate.Amount >= 1) return eRes({
-            interaction: interaction,
-            title: `${Icons.exclamation}  Sorry dear...`,
-            description: `I don't you should sleep yet, try in ${ms(config.cooldowns.daily - (Date.now() - RateLimits.Sleep_Rate.Date), { long: true })}!`,
-            footer: "You may only rest 1 time per day to not mess up your schedule!"
-        });
+        if (RateLimits.Sleep_Rate.Amount >= 1) {
+            MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+
+            return interaction.followUp(MessageStruct);
+        }
 
         RateLimits.Sleep_Rate.Amount++;
         Stats.Sleeps++;
-
-        const Images = ["SenkoSleep", "SleepingSenko"];
-
-        interaction.reply({
-            embeds: [
-                {
-                    title: `${Icons.zzz}  ${interaction.member.nickname || interaction.user.username} ${Reactions.User[Math.floor(Math.random() * Reactions.User.length)]}`,
-                    description: `*${Reactions.Senko[Math.floor(Math.random() * Reactions.Senko.length)]}*\n\n${Reactions.say[Math.floor(Math.random() * Reactions.say.length)]}`,
-                    thumbnail: {
-                        url: "attachment://image.png"
-                    },
-                    footer: {
-                        text: `You've slept ${Stats.Rests} times.`
-                    },
-                    color: SenkoClient.colors.dark
-                }
-            ],
-            files: [new MessageAttachment(`src/Data/content/senko/${Images[Math.floor(Math.random() * Images.length)]}.png`, "image.png")]
-        });
 
         await updateUser(interaction.user, {
             Stats: { Sleeps: Stats.Sleeps },
@@ -86,5 +84,8 @@ module.exports = {
                 }
             }
         });
+
+        interaction.followUp(MessageStruct);
+
     }
 };

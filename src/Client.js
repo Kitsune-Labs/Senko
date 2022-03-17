@@ -59,7 +59,7 @@ SenkoClient.once("ready", async () => {
     print("#FF6633", "Senko", "Started\n");
 
     let commands = SenkoClient.application.commands;
-    // if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
+    if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
     // await commands.set([]);
 
@@ -73,9 +73,9 @@ SenkoClient.once("ready", async () => {
                 for (let interact of Interactions) {
                     let pull = require(`./Interactions/${Folder}/${interact}`);
 
-                    if (pull.name !== "buy") {
+                    // if (pull.name !== "buy") {
                         SenkoClient.SlashCommands.set(`${pull.name}`, pull);
-                    }
+                    // }
                 }
             });
         }
@@ -106,6 +106,7 @@ SenkoClient.once("ready", async () => {
     }
 
     await setTheCommands();
+    await commands.set([]);
     await commands.set(commandsToSet);
     console.log("Commands Ready");
 

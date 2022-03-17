@@ -46,6 +46,14 @@ module.exports = {
                 files: [ { attachment: "./src/Data/content/senko/heh.png", name: "image.png" } ],
             });
 
+            if (InteractionCommand.defer) {
+                if (InteractionCommand.ephemeral && InteractionCommand.ephemeral === true) {
+                    await interaction.deferReply({ ephemeral: true });
+                } else {
+                    await interaction.deferReply();
+                }
+            }
+
             let Permissions = "";
             const GlobalPermissions = ["EMBED_LINKS", "ATTACH_FILES", "USE_EXTERNAL_EMOJIS", "ADD_REACTIONS", "VIEW_CHANNEL"];
 

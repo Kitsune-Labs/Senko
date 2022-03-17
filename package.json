@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node src/Client.js",
     "dev": "node src/Client.js --trace-warnings",
-    "shop": "node dev/SalesPitch.js"
+    "shop": "node dev/RefShop.js"
   },
   "dependencies": {
     "axios": "0.26.1",
