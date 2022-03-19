@@ -29,7 +29,7 @@
     "desc": "Adds \"Divine\" to your profile name",
     "price": 777,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "title": "✨ Divine",
     "autoSale": true
   },
@@ -76,7 +76,7 @@
     "desc": "\"Fruits of autumn\"",
     "price": 300,
     "amount": 3,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "senkokeychain": {
@@ -85,7 +85,7 @@
     "desc": "The softest tail made",
     "price": 3000,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "shirokeychain": {
@@ -180,7 +180,7 @@
     "desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
     "price": 947,
     "amount": 2,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "omurice": {
@@ -198,7 +198,7 @@
     "desc": "Low in caffeine, delicious, and an alternative to coffee!",
     "price": 1754,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "taiyaki": {
@@ -225,7 +225,7 @@
     "desc": "Seafood is great! You should try it out",
     "price": 381,
     "amount": 4,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "bento": {
@@ -243,7 +243,7 @@
     "desc": "Ramen is delicious.",
     "price": 1283,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "ozoni": {
@@ -252,7 +252,7 @@
     "desc": "It isn't new years, yet",
     "price": 1283,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "leaningbanner": {
@@ -297,7 +297,7 @@
     "desc": "Its actually quite good",
     "price": 130,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "md_1": {
@@ -358,7 +358,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_4",
     "autoSale": true
   },
@@ -369,7 +369,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_5",
     "autoSale": true
   },
@@ -419,7 +419,7 @@
     "desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "tsukemono": {
@@ -437,7 +437,7 @@
     "desc": "Very delicious & healthy, Also similar to Udon.",
     "price": 1000,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "color_white": {
@@ -446,7 +446,7 @@
     "desc": "Make your profile card white like Shiro!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "color": "#FFFFF9",
     "type": "color",
@@ -504,7 +504,7 @@
     "desc": "Make your profile card red!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "color": "#CC3333",
     "type": "color",

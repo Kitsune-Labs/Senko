@@ -23,7 +23,7 @@ const avaliableItems = 8;
 for (var i = 0; i < avaliableItems; i++) {
     let Item = getItem();
     ShopItems[Item].onsale = true;
+    console.log(Item);
 }
-
 
 fs.writeFileSync("./src/Data/Shop/Items.json", JSON.stringify(ShopItems, null, 2));
