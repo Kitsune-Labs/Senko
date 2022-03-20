@@ -107,7 +107,7 @@ SenkoClient.once("ready", async () => {
 
     await setTheCommands();
     // await commands.set([]);
-    await commands.set(commandsToSet);
+    // await commands.set(commandsToSet);
     console.log("Commands Ready");
 
 

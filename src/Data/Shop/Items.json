@@ -29,7 +29,7 @@
     "desc": "Adds \"Divine\" to your profile name",
     "price": 777,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "title": "✨ Divine",
     "autoSale": true
   },
@@ -49,7 +49,7 @@
     "desc": "Perfectly spiced.",
     "price": 400,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "pumpkin": {
@@ -76,7 +76,7 @@
     "desc": "\"Fruits of autumn\"",
     "price": 300,
     "amount": 3,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "senkokeychain": {
@@ -85,7 +85,7 @@
     "desc": "The softest tail made",
     "price": 3000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "shirokeychain": {
@@ -94,7 +94,7 @@
     "desc": "Shiro won't like this I bet",
     "price": 3000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yozorakeychain": {
@@ -103,7 +103,7 @@
     "desc": "What will Yozora think of this?",
     "price": 3000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "tiny_green_hat": {
@@ -180,7 +180,7 @@
     "desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
     "price": 947,
     "amount": 2,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "omurice": {
@@ -189,7 +189,7 @@
     "desc": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
     "price": 712,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "hojicha": {
@@ -198,7 +198,7 @@
     "desc": "Low in caffeine, delicious, and an alternative to coffee!",
     "price": 1754,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "taiyaki": {
@@ -207,7 +207,7 @@
     "desc": "Fish-shaped cake with a read bean paste filling.",
     "price": 636,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "udon": {
@@ -225,7 +225,7 @@
     "desc": "Seafood is great! You should try it out",
     "price": 381,
     "amount": 4,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "bento": {
@@ -234,7 +234,7 @@
     "desc": "Hey, hey! Can I take some of your rice?",
     "price": 1305,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "ramen": {
@@ -243,7 +243,7 @@
     "desc": "Ramen is delicious.",
     "price": 1283,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "ozoni": {
@@ -252,7 +252,7 @@
     "desc": "It isn't new years, yet",
     "price": 1283,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "leaningbanner": {
@@ -297,7 +297,7 @@
     "desc": "Its actually quite good",
     "price": 130,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "md_1": {
@@ -306,7 +306,7 @@
     "desc": "Forever ashubiduba mofu-mofu!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "md_2": {
@@ -336,7 +336,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_2",
     "autoSale": true
   },
@@ -358,7 +358,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_4",
     "autoSale": true
   },
@@ -369,7 +369,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_5",
     "autoSale": true
   },
@@ -401,7 +401,7 @@
     "desc": "Tempura is a dish of battered and fried fish, seafood, or vegetables. This one has vegetables.",
     "price": 300,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "sknss_v8": {
@@ -410,7 +410,7 @@
     "desc": "The eighth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "kaiseki": {
@@ -419,7 +419,7 @@
     "desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "tsukemono": {
@@ -437,7 +437,7 @@
     "desc": "Very delicious & healthy, Also similar to Udon.",
     "price": 1000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "color_white": {
@@ -446,7 +446,7 @@
     "desc": "Make your profile card white like Shiro!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "color": "#FFFFF9",
     "type": "color",
@@ -504,7 +504,7 @@
     "desc": "Make your profile card red!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "color": "#CC3333",
     "type": "color",
@@ -594,7 +594,7 @@
     "desc": "They taste like butter",
     "price": 50,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "RiceBall": {
