@@ -67,7 +67,8 @@ async function createUser(User) {
                 color: "#FF9933",
                 flags: new Bitfield(100).toHex(),
                 title: null
-            }
+            },
+            AboutMe: null
         },
 
         Stats: {
@@ -128,7 +129,11 @@ async function createUser(User) {
 
         Inventory: [],
         Achievements: [],
-        ActivePowers: []
+        ActivePowers: [],
+        Rank: {
+            XP: 0,
+            Level: 1
+        }
     }).catch(err => {
         this.print("#FF0000", "DATA ERROR", `Could not make USER data \n\n— ${err}`);
     });

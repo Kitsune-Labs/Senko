@@ -2,6 +2,7 @@
 
 
 require("dotenv/config");
+const fs = require("fs");
 
 const Firebase = require("firebase-admin");
 
@@ -33,7 +34,8 @@ Firestore.collection("Users").get().then(async querySnapshot => {
                     color: "#FF9933",
                     flags: new Bitfield(100).toHex(),
                     title: null
-                }
+                },
+                AboutMe: null
             },
 
             Stats: {
@@ -100,7 +102,11 @@ Firestore.collection("Users").get().then(async querySnapshot => {
             Inventory: [],
             Achievements: [],
             ActivePowers: [],
-            Claimables: []
+            Claimables: [],
+            Rank: {
+                XP: 0,
+                Level: 1
+            }
         };
 
         if (AccountData.Inventory) DataStructure.Inventory.push(...AccountData.Inventory);
@@ -198,11 +204,13 @@ Firestore.collection("Users").get().then(async querySnapshot => {
 
         console.log("Done");
 
-        return;
-        // Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
-        //     console.log(`Finished ${DataStructure.LocalUser.userID}`);
-        // }).catch(err => {
-        //     throw new Error(`USER UPDATE: ${err}`);
-        // });
+        // fs.writeFileSync(`./dev/out/${DataStructure.LocalUser.userID}.json`, JSON.stringify(DataStructure, null, 4));
+
+        // return;
+        Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
+            console.log(`Finished ${DataStructure.LocalUser.userID}`);
+        }).catch(err => {
+            throw new Error(`USER UPDATE: ${err}`);
+        });
     });
 });

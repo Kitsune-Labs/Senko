@@ -7,6 +7,7 @@ module.exports = {
     name: "shop",
     desc: "Buy an item from Senko's Market",
     userData: true,
+    defer: true,
 
     /**
      * @param {CommandInteraction} interaction
@@ -20,7 +21,7 @@ module.exports = {
 
                 You can use these commands to interact with the market:
                 > \`/buy <item>\` to buy an item
-                > \`/preview <item>\` preview the item's description, price, and possible preview images
+                > \`/preview <item>\` preview an item description, price, banner, and color
 
 
                 __${Icons.yen}  ${AccountData.Currency.Yen}x in your savings__
@@ -44,39 +45,37 @@ module.exports = {
             if (Item.onsale) {
                 let ItemString = "";
 
-                if (Item.seasonal && Item.seasonal.isSeasonal === true) {
-                    ItemString += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  ${Item.name} [${Icons.yen}  ${Item.price}x]`;
+                if (Item.seasonal && Item.seasonal.isSeasonal === true)
+                    EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
 
-                    EventItems += `${ItemString}\n`;
-                } else {
-                    switch(Item.class) {
-                        case "food":
-                            ItemString += `— ${Item.name} [${Icons.yen}  ${Item.price}x]`;
 
-                            FoodItems += `${ItemString}\n`;
-                        break;
+                switch(Item.class) {
+                    case "food":
+                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
 
-                        case "material":
-                            ItemString += `— ${Item.name} [${Icons.yen}  ${Item.price}x]`;
+                        FoodItems += `${ItemString}\n`;
+                    break;
 
-                            MaterialItems += `${ItemString}\n`;
-                        break;
+                    case "material":
+                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
 
-                        case "profile":
-                            ItemString += `— ${Item.name} [${Icons.yen}  ${Item.price}x]`;
+                        MaterialItems += `${ItemString}\n`;
+                    break;
 
-                            ProfileItems += `${ItemString}\n`;
-                        break;
+                    case "profile":
+                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
 
-                        case "general":
-                            ItemString += `— ${Item.name} [${Icons.yen}  ${Item.price}x]`;
+                        ProfileItems += `${ItemString}\n`;
+                    break;
 
-                            GeneralItems += `${ItemString}\n`;
-                        break;
+                    case "general":
+                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
 
-                        default:
-                            console.log(`${Item.name} doesn't have a correct category.`);
-                    }
+                        GeneralItems += `${ItemString}\n`;
+                    break;
+
+                    default:
+                        console.log(`${Item.name} doesn't have a correct category.`);
                 }
             }
         }
@@ -89,12 +88,11 @@ module.exports = {
         if (MaterialItems.length > 0) ShopString += `\n\n> **Material Booth**\n${MaterialItems}`;
         if (EventItems.length > 0) ShopString += `\n\n> **Event Booth**\n${EventItems}`;
 
-
         Shop.description += `\n\n${ShopString}`;
 
-        interaction.reply({
+        interaction.followUp({
             embeds: [ Shop ],
-            files: [ new MessageAttachment("./src/Data/content/senko/senko_package.png", "image.png") ]
+            files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
         });
     }
 };

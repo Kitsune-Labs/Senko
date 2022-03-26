@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, CommandInteraction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 
@@ -11,7 +11,7 @@ module.exports = {
     defer: false,
     ephemeral: false,
     /**
-     * @param {Interaction} interaction
+     * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars

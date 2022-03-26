@@ -162,7 +162,7 @@
     "desc": "A little yoko doll of Nakano.",
     "price": 750,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "sakurroseawine": {
@@ -171,7 +171,7 @@
     "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
     "price": 300,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yakitori": {
@@ -216,7 +216,7 @@
     "desc": "Some comforting food.",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "sushi": {
@@ -325,7 +325,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_1",
     "autoSale": true
   },
@@ -391,7 +391,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_7",
     "autoSale": true
   },
@@ -496,7 +496,7 @@
     "price": 777,
     "amount": 1,
     "onsale": false,
-    "title": "Holly"
+    "title": "🎁 Holly"
   },
   "color_red": {
     "class": "profile",
@@ -539,7 +539,7 @@
     "price": 99999999999999,
     "amount": 1,
     "onsale": false,
-    "title": "Special Bee"
+    "title": "🐝 Special Bee"
   },
   "developer_kitsune_title": {
     "class": "profile",
@@ -548,7 +548,7 @@
     "price": 99999999999999,
     "amount": 1,
     "onsale": false,
-    "title": "Developer Kitsune"
+    "title": "🛠️ Developer Kitsune"
   },
   "contributing_title": {
     "class": "profile",
@@ -557,7 +557,7 @@
     "price": 99999999999999,
     "amount": 1,
     "onsale": false,
-    "title": "Contributor Kitsune"
+    "title": "🏗️ Contributor Kitsune"
   },
   "Transgender_Pride_Flag": {
     "class": "profile",
@@ -584,7 +584,7 @@
     "price": 50,
     "amount": 3,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "badge": "🍒",
     "autoSale": true
   },
@@ -623,7 +623,7 @@
     "price": 99999999999999,
     "amount": 1,
     "onsale": false,
-    "title": "Master Thrower"
+    "title": "☃️ Master Thrower"
   },
   "popcorn": {
     "class": "profile",
@@ -653,7 +653,7 @@
     "desc": "🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐",
     "price": 50,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "badge": "🥐",
     "autoSale": true
@@ -711,6 +711,73 @@
     "max": 1,
     "color": "#1EFFB5",
     "type": "color",
+    "autoSale": true
+  },
+  "kitsune_title": {
+    "class": "profile",
+    "name": "Kitsune Title",
+    "desc": "For true kitsune's",
+    "price": 300,
+    "amount": 1,
+    "onsale": true,
+    "max": 1,
+    "title": "🦊 Kitsune",
+    "autoSale": true
+  },
+  "fluffy_title": {
+    "class": "profile",
+    "name": "Fluffy Title",
+    "desc": "For the fluffiest kitsune's out there!",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "onsale": true,
+    "autoSale": true,
+    "title": "Fluffy"
+  },
+  "light_blue_color": {
+    "class": "profile",
+    "name": "Light Blue card color",
+    "desc": "A nice light blue color, similar to the sky above",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "onsale": true,
+    "autoSale": true,
+    "color": "#36b7ff",
+    "type": "color"
+  },
+  "light_red_color": {
+    "class": "profile",
+    "name": "Light Red card color",
+    "desc": "As light as Koenji's clothing",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "onsale": true,
+    "autoSale": true,
+    "color": "#e75a6f",
+    "type": "color"
+  },
+  "pastel_yellow": {
+    "class": "profile",
+    "name": "Pastel Yellow card color",
+    "desc": "Sunny yellow, like the sun",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "onsale": true,
+    "autoSale": true,
+    "color": "#f8f060",
+    "type": "color"
+  },
+  "lemon_cake": {
+    "class": "food",
+    "name": "Lemon Cake",
+    "desc": "Lemon cake is quite sweet",
+    "price": 50,
+    "amount": 1,
+    "onsale": true,
     "autoSale": true
   }
 }

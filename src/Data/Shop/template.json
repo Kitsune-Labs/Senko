@@ -1,0 +1,21 @@
+{
+    "base": {
+        "class": "profile|material|food|general",
+        "name": "",
+        "desc": "",
+
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+
+        "onsale": false,
+        "autoSale": true,
+
+        "color": "",
+        "banner": "",
+        "type": "color|banner",
+        "badge": "",
+        "title": "",
+        "season": ""
+    }
+}
