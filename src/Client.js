@@ -1,6 +1,6 @@
 require("dotenv/config");
 
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, ButtonInteraction, MessageComponentInteraction, Message } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
@@ -55,6 +55,19 @@ process.SenkoClient = SenkoClient;
 
 process.on("unhandledRejection",async(reason)=>{console.log(reason);});
 
+
+// ButtonInteraction.__custom = {
+//     shop_id: null
+// };
+
+// Reflect.defineProperty(MessageComponentInteraction.prototype, "property", {
+//     shop_id: null
+// });
+
+Message.prototype.custom_data = {
+    shop_data: {}
+};
+
 SenkoClient.once("ready", async () => {
     print("#FF6633", "Senko", "Started\n");
 
@@ -106,10 +119,19 @@ SenkoClient.once("ready", async () => {
     }
 
     await setTheCommands();
-    // await commands.set([]);
-    await commands.set(commandsToSet);
-    console.log("Commands Ready");
 
+    commands.set(commandsToSet).then(commandList => {
+        console.log("Commands Ready");
+        commandList.forEach(command => {
+            const fCmd = commandsToSet.find(cmd => cmd.name === command.name);
+
+            if (fCmd.permissions) {
+                let permissions  = fCmd.permissions;
+                command.permissions.add({ permissions });
+                console.log(`Added permissions to ${command.name}`);
+            }
+        });
+    });
 
     for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
         require(`./Events/${file}`).execute(SenkoClient);
