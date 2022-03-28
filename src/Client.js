@@ -93,11 +93,14 @@ SenkoClient.once("ready", async () => {
             });
         }
 
-        for (var file of readdirSync("./src/DevInteractions/")) {
-            const pull = require(`./DevInteractions/${file}`);
+        if (process.env.NIGHTLY === "true") {
+            for (var file of readdirSync("./src/DevInteractions/")) {
+                const pull = require(`./DevInteractions/${file}`);
 
-            SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+                SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+            }
         }
+
     }
 
     await setCommands();
