@@ -94,7 +94,7 @@
     "desc": "Shiro won't like this I bet",
     "price": 3000,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "yozorakeychain": {
@@ -171,7 +171,7 @@
     "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "yakitori": {
@@ -234,7 +234,7 @@
     "desc": "Hey, hey! Can I take some of your rice?",
     "price": 1305,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "ramen": {
@@ -358,7 +358,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_4",
     "autoSale": true
   },
@@ -380,7 +380,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_6",
     "autoSale": true
   },
@@ -437,7 +437,7 @@
     "desc": "Very delicious & healthy, Also similar to Udon.",
     "price": 1000,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "color_white": {
@@ -632,7 +632,7 @@
     "price": 50,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "badge": "🍿",
     "autoSale": true
   },
