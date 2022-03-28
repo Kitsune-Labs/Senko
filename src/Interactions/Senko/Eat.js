@@ -70,10 +70,10 @@ module.exports = {
                     files: [ { attachment: `./src/Data/content/senko/${randomArray(["SenkoEat", "SenkoBless"])}.png`, name: "image.png" } ]
                 });
             }).catch(() => {
-                interaction.followUp({ content: "You don't own any food Items, Buy some at Senko's Market when they're onsale!" });
+                interaction.followUp({ content: "You don't own any food Items, Buy some at Senko's Market when they're onsale!", ephemeral: true });
             });
         }).catch(() => {
-            interaction.followUp({ content: "You don't own any food Items, Buy some at Senko's Market when they're onsale!" });
+            interaction.followUp({ content: "You don't own any food Items, Buy some at Senko's Market when they're onsale!", ephemeral: true  });
         });
     }
 };

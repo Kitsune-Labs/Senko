@@ -22,6 +22,8 @@ module.exports = {
         const User = interaction.options.getUser("user") || interaction.user;
         AccountData = await fetchData(User, 1);
 
+        if (User.id === interaction.user.id) AccountData = await fetchData(User);
+
         if (!AccountData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
 
         const AccountFlags = Bitfield.fromHex(AccountData.LocalUser.config.flags);
@@ -34,9 +36,8 @@ module.exports = {
         const MessageBuilt = {
             embeds: [
                 {
-                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n${Icons.yen}  ${AccountData.Currency.Yen}x\n${Icons.tofu}  ${AccountData.Currency.Tofu}x`,
+                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile${AccountData.LocalUser.AboutMe !== null ? `\n**About Me**\n${AccountData.LocalUser.AboutMe || "** **"}\n` : ""}\n${Icons.yen}  ${AccountData.Currency.Yen}x\n${Icons.tofu}  ${AccountData.Currency.Tofu}x`,
                     fields: [
-                        { name: "About Me", value: `${AccountData.LocalUser.AboutMe || "** **"}` },
                         { name: "Stats", value: `${Icons.tail1}  **${AccountData.Stats.Fluffs}**x fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** awards`, inline: true }
 
                     ],

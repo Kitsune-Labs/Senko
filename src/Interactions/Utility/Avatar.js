@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction, Client } = require("discord.js");
+const { CommandInteraction, Client, Message } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
@@ -13,61 +13,63 @@ module.exports = {
             required: false
         },
     ],
+    defer: true,
     /**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction) => {
         const User = interaction.options.getUser("user") || interaction.member;
+        const AvatarURL = User.user ? User.user.avatarURL({ dynamic: true, size: 2048 }) : User.avatarURL({ dynamic: true, size: 2048 });
 
-        const reqOptions = {
+        /**
+         * @type {Message}
+         */
+        const messageStruct = {
+            embeds: [
+                {
+                    title: "Avatar",
+                    color: SenkoClient.colors.light,
+                    image: {
+                        url: AvatarURL
+                    }
+                }
+            ],
+            components: [
+                {
+                    type: "ACTION_ROW",
+                    components: [
+                        { type: 2, label: "Avatar", style: 5, url: AvatarURL },
+                        // { type: 2, label: "Banner", style: 5, url: AvatarURL }
+                    ]
+                }
+            ]
+        };
+
+
+        await axios.request({
             url: `https://discord.com/api/v9/users/${User.id}`,
             method: "GET",
             headers: {
                 "User-Agent": process.env.AGENT,
                 "Authorization": `Bot ${SenkoClient.token}`
             },
-        };
-
-        const AvatarURL = User.user ? User.user.avatarURL({ dynamic: true, size: 2048 }) : User.avatarURL({ dynamic: true, size: 2048 });
-
-        await axios.request(reqOptions).then(async (response) => {
+        }).then(async (response) => {
             if (response.data.banner) {
                 const ext = await response.data.banner.startsWith("a_") ? ".gif" : ".png";
 
-                interaction.reply({
-                    embeds: [
-                        {
-                            title: "Avatar",
-                            description: `[URL](${AvatarURL})`,
-                            color: SenkoClient.colors.light,
-                            image: {
-                                url: AvatarURL
-                            }
-                        },
-                        {
-                            title: "Banner",
-                            description: `[URL](https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048)`,
-                            color: SenkoClient.colors.dark,
-                            image: {
-                                url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`
-                            }
-                        }
-                    ]
+                messageStruct.embeds.push({
+                    title: "Banner",
+                    color: SenkoClient.colors.dark,
+                    image: {
+                        url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`
+                    }
                 });
-            } else {
-                interaction.reply({
-                    embeds: [
-                        {
-                            description: `[URL](${AvatarURL})`,
-                            color: SenkoClient.colors.light,
-                            image: {
-                                url: AvatarURL
-                            }
-                        }
-                    ]
-                });
+
+                messageStruct.components[0].components.push({ type: 2, label: "Banner", style: 5, url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048` });
             }
+
+            interaction.followUp(messageStruct);
         });
     }
 };

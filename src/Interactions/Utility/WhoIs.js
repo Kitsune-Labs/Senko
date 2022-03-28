@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, Interaction, Message } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
@@ -11,8 +11,15 @@ module.exports = {
             description: "User",
             type: 6,
             required: false
+        },
+        {
+            name: "hide-roles",
+            description: "Hides the roles from showing",
+            type: "BOOLEAN",
+            default: false
         }
     ],
+    defer: true,
     /**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
@@ -20,19 +27,27 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const guildMember = await interaction.guild.members.fetch(interaction.options.getUser("user") || interaction.user);
-        const guildUser = guildMember.user;
 
-        const messageStructure = {
+        if (!guildMember) return interaction.followUp({ content: "I can't find this user", ephemeral: true });
+
+        const guildUser = guildMember.user;
+        const AvatarURL = guildUser.avatarURL({ dynamic: true, size: 2048 });
+
+        /**
+         * @type {Message}
+         */
+        const messageStruct = {
             embeds: [
                 {
+                    description: `${typeof guildMember.nickname === "string" ? `(${guildMember.user.tag})` : ""} ${guildUser} [${guildUser.id}]`,
                     color: SenkoClient.colors.random(),
                     fields: [
-                        { name: "Nickname", value: `${guildMember.nickname || "None"}`, inline: true },
-                        { name: "User", value: `${guildUser}\n${guildUser.tag}`, inline: true },
-                        { name: "ID", value: `${guildUser.id}`, inline: true },
+                        // { name: "Nickname", value: `${guildMember.nickname || "None"}`, inline: true },
+                        // { name: "User", value: `${guildUser}\n${guildUser.tag}`, inline: true },
+                        // { name: "ID", value: `${guildUser.id}`, inline: true },
 
-                        { name: "Avatar", value: "None", inline: true },
-                        { name: "Banner", value: "None", inline: true },
+                        // { name: "Avatar", value: "None", inline: true },
+                        // { name: "Banner", value: "None", inline: true },
                         { name: "Bot", value: "False", inline: true },
 
                         { name: "Created", value: `<t:${parseInt(guildUser.createdTimestamp / 1000)}:R>`, inline: true },
@@ -42,15 +57,24 @@ module.exports = {
                         { name: "Roles", value: `__${guildMember.roles.cache.size}__ roles` },
                     ],
                     thumbnail: {
-                        url: null
+                        url: AvatarURL
                     },
                     image: {
                         url: null
                     }
                 }
+            ],
+            components: [
+                {
+                    type: "ACTION_ROW",
+                    components: [
+                        { type: 2, label: "Avatar", style: 5, url: AvatarURL },
+                    ]
+                }
             ]
         };
 
+        // if (!interaction.options.getBoolean("hide-roles")) messageStruct.embeds[0].fields.push({ name: "Roles", value: `__${guildMember.roles.cache.size}__ roles` });
 
         axios.request({
             url: `https://discord.com/api/v9/users/${guildUser.id}`,
@@ -60,35 +84,21 @@ module.exports = {
                 "Authorization": `Bot ${SenkoClient.token}`
             }
         }).then(async (response) => {
-            const avatarUrl = guildUser.displayAvatarURL({ dynamic: true, size: 2048 });
-            const messageStructureEmbed = messageStructure.embeds[0];
-
-            messageStructureEmbed.fields[3].value = `[URL](${avatarUrl})`;
-            messageStructureEmbed.thumbnail.url = avatarUrl;
-
             if (response.data.banner) {
                 const extension = await response.data.banner.startsWith("a_") ? ".gif" : ".png";
-
-                messageStructureEmbed.fields[4].value = `[URL](https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension})`;
-                messageStructureEmbed.image.url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
-
-                // messageStructure.embeds[messageStructure.embeds.length + 1] = {
-                //     color: SenkoClient.colors.random(),
-                //     image: {
-                //         url: `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`
-                //     }
-                // };
+                messageStruct.embeds[0].image.url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
+                messageStruct.components[0].components.push({ type: 2, label: "Banner", style: 5, url: `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048` });
             }
 
-            if (guildMember.roles.cache.size <= 30) {
+            if (guildMember.roles.cache.size <= 30 && !interaction.options.getBoolean("hide-roles")) {
                 if (guildMember.roles.cache.size === 1) {
-                    messageStructureEmbed.fields[9].value = "None";
+                    messageStruct.embeds[0].fields[4].value = "None";
                 } else {
-                    messageStructureEmbed.fields[9].value = `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}`;
+                    messageStruct.embeds[0].fields[4].value = `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}`;
                 }
             }
 
-            interaction.reply(messageStructure);
+            interaction.followUp(messageStruct);
         });
     }
 };

@@ -1,4 +1,4 @@
-const IDB = require("../Data/IDB.json");
+// const IDB = require("../Data/IDB.json");
 const DataConfig = require("../Data/DataConfig.json");
 const { CheckPermission } = require("../API/Master");
 const AllowedCommands = ["ping", "channel", "channels", "avatar", "prefix", "poll", "whois", "config"];
@@ -16,7 +16,7 @@ module.exports = {
             if (!interaction.isCommand()) return;
             if (!interaction.guild) return interaction.reply({ content: "I cannot be used outside of guild channels!" });
 
-            if (IDB.includes(interaction.user.id)) return;
+            // if (IDB.includes(interaction.user.id)) return;
 
             const PermissionEmbed = {
                 title: "Permission(s) Error",
@@ -111,7 +111,7 @@ module.exports = {
             });
 
 
-            if (IDB.includes(interaction.user.id)) return;
+            // if (IDB.includes(interaction.user.id)) return;
 
             if (AccountData && AccountData.LocalUser.version !== DataConfig.currentVersion) {
                 await updateUser(interaction.user, {
