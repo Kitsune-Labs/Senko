@@ -1,6 +1,6 @@
 require("dotenv/config");
 
-const { Client, Collection, ButtonInteraction, MessageComponentInteraction, Message } = require("discord.js");
+const { Client, Collection, Message } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
