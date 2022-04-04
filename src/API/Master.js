@@ -296,10 +296,9 @@ function selfPerm(interaction, Permission, ClientID) {
 /**
  * @param {Interaction} interaction
  * @param {String} Permission
- * @param {User} User
  */
-async function CheckPermission(interaction, Permission, User) {
-    let perms = interaction.channel.permissionsFor(User, Permission);
+async function CheckPermission(interaction, Permission) {
+    let perms = interaction.channel.permissionsFor(interaction.user, Permission);
     const bitPermissions = new Permissions(perms.bitfield);
     const Result = bitPermissions.has([Permissions.FLAGS[Permission]]);
 

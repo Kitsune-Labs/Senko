@@ -50,39 +50,39 @@ module.exports = {
             files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
         };
 
-        if (!config.cooldowns.daily - (Date.now() - RateLimits.Sleep_Rate.Date) >= 0) {
-            await updateUser(interaction.user, {
-                RateLimits: {
-                    Sleep_Rate: {
-                        Amount: 0,
-                        Date: Date.now()
-                    }
-                }
-            });
+        // if (!config.cooldowns.daily - (Date.now() - RateLimits.Sleep_Rate.Date) >= 0) {
+        //     await updateUser(interaction.user, {
+        //         RateLimits: {
+        //             Sleep_Rate: {
+        //                 Amount: 0,
+        //                 Date: Date.now()
+        //             }
+        //         }
+        //     });
 
-            RateLimits.Sleep_Rate.Amount = 0;
-        }
+        //     RateLimits.Sleep_Rate.Amount = 0;
+        // }
 
 
-        if (RateLimits.Sleep_Rate.Amount >= 1) {
-            MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+        // if (RateLimits.Sleep_Rate.Amount >= 1) {
+        //     MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+        //     MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
 
-            return interaction.followUp(MessageStruct);
-        }
+        //     return interaction.followUp(MessageStruct);
+        // }
 
-        RateLimits.Sleep_Rate.Amount++;
+        // RateLimits.Sleep_Rate.Amount++;
         Stats.Sleeps++;
 
         await updateUser(interaction.user, {
             Stats: { Sleeps: Stats.Sleeps },
 
-            RateLimits: {
-                Sleep_Rate: {
-                    Amount: RateLimits.Sleep_Rate.Amount,
-                    Date: Date.now()
-                }
-            }
+            // RateLimits: {
+            //     Sleep_Rate: {
+            //         Amount: RateLimits.Sleep_Rate.Amount,
+            //         Date: Date.now()
+            //     }
+            // }
         });
 
         interaction.followUp(MessageStruct);

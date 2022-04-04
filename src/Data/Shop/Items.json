@@ -49,7 +49,7 @@
     "desc": "Perfectly spiced.",
     "price": 400,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "pumpkin": {
@@ -58,7 +58,7 @@
     "desc": "An orange colored sphere.",
     "price": 100,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "chestnuts": {
@@ -94,7 +94,7 @@
     "desc": "Shiro won't like this I bet",
     "price": 3000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yozorakeychain": {
@@ -103,7 +103,7 @@
     "desc": "What will Yozora think of this?",
     "price": 3000,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "tiny_green_hat": {
@@ -171,7 +171,7 @@
     "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
     "price": 300,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yakitori": {
@@ -225,7 +225,7 @@
     "desc": "Seafood is great! You should try it out",
     "price": 381,
     "amount": 4,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "bento": {
@@ -234,7 +234,7 @@
     "desc": "Hey, hey! Can I take some of your rice?",
     "price": 1305,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "ramen": {
@@ -243,7 +243,7 @@
     "desc": "Ramen is delicious.",
     "price": 1283,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "ozoni": {
@@ -358,7 +358,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_4",
     "autoSale": true
   },
@@ -380,7 +380,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_6",
     "autoSale": true
   },
@@ -419,7 +419,7 @@
     "desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "tsukemono": {
@@ -632,7 +632,7 @@
     "price": 50,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "badge": "🍿",
     "autoSale": true
   },

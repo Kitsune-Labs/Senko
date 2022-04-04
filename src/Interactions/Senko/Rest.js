@@ -48,29 +48,29 @@ module.exports = {
             files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
         };
 
-        if (!config.cooldowns.daily - (Date.now() - RateLimits.Rest_Rate.Date) >= 0) {
-            await updateUser(interaction.user, {
-                RateLimits: {
-                    Rest_Rate: {
-                        Amount: 0,
-                        Date: Date.now()
-                    }
-                }
-            });
+        // if (!config.cooldowns.daily - (Date.now() - RateLimits.Rest_Rate.Date) >= 0) {
+        //     await updateUser(interaction.user, {
+        //         RateLimits: {
+        //             Rest_Rate: {
+        //                 Amount: 0,
+        //                 Date: Date.now()
+        //             }
+        //         }
+        //     });
 
-            RateLimits.Rest_Rate.Amount = 0;
-        }
-
-
-        if (RateLimits.Rest_Rate.Amount >= 5) {
-            MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Rest_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
-
-            return interaction.followUp(MessageStruct);
-        }
+        //     RateLimits.Rest_Rate.Amount = 0;
+        // }
 
 
-        RateLimits.Rest_Rate.Amount++;
+        // if (RateLimits.Rest_Rate.Amount >= 5) {
+        //     MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Rest_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+        //     MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+
+        //     return interaction.followUp(MessageStruct);
+        // }
+
+
+        // RateLimits.Rest_Rate.Amount++;
         Stats.Rests++;
 
         if (randomNumber(100) > 75) {
@@ -83,15 +83,15 @@ module.exports = {
         await updateUser(interaction.user, {
             Stats: { Rests: Stats.Rests },
 
-            RateLimits: {
-                Rest_Rate: {
-                    Amount: RateLimits.Rest_Rate.Amount,
-                    Date: Date.now()
-                }
-            }
+            // RateLimits: {
+            //     Rest_Rate: {
+            //         Amount: RateLimits.Rest_Rate.Amount,
+            //         Date: Date.now()
+            //     }
+            // }
         });
 
-        if (RateLimits.Rest_Rate.Amount >= 5) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop resting for today`;
+        // if (RateLimits.Rest_Rate.Amount >= 5) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop resting for today`;
 
 
         interaction.followUp(MessageStruct);

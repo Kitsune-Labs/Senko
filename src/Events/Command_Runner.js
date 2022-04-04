@@ -5,7 +5,7 @@ const AllowedCommands = ["ping", "channel", "channels", "avatar", "prefix", "pol
 const { print, fetchGuild, fetchData, updateUser } = require("../API/Master");
 const Firebase = require("firebase-admin");
 const Firestore = Firebase.firestore();
-
+const LocalOutlaws = require("../Data/LocalOutlawed.json");
 
 module.exports = {
     /**
@@ -95,23 +95,45 @@ module.exports = {
             if (InteractionCommand.userData === true) AccountData = await fetchData(interaction.user);
             if (InteractionCommand.shopData === true) ShopData = (await Firestore.collection("config").doc("shop").get()).data();
 
-            if (GuildData.Channels[0] && !GuildData.Channels.includes(interaction.channelId) && !AllowedCommands.includes(interaction.commandName)) return interaction.reply({
-                embeds: [
-                    {
-                        title: "Sorry!",
-                        description: `${interaction.guild.name} has requested you use ${GuildData.Channels.map(i=>`<#${i}>`)}!`,
-                        color: SenkoClient.colors.dark,
-                        thumbnail: {
-                            url: "attachment://image.png"
+            function sendAllowedChannels() {
+                var messageStruct1 = {
+                    embeds: [
+                        {
+                            title: "S-Sorry dear!",
+                            description: `${interaction.guild.name} has requested you use ${GuildData.Channels.map(i=>`<#${i}>`)}!`,
+                            color: SenkoClient.colors.dark,
+                            thumbnail: {
+                                url: "attachment://image.png"
+                            }
                         }
-                    }
-                ],
-                ephemeral: true,
-                files: [ { attachment: "./src/Data/content/senko/heh.png", name: "image.png" } ],
-            });
+                    ],
+                    ephemeral: true,
+                    files: [ { attachment: "./src/Data/content/senko/heh.png", name: "image.png" } ],
+                };
+
+                if (interaction.deferred) return interaction.followUp(messageStruct1);
+                return interaction.reply(messageStruct1);
+            }
 
 
-            // if (IDB.includes(interaction.user.id)) return;
+            if (InteractionCommand.usableAnywhere && InteractionCommand.usableAnywhere === false) sendAllowedChannels();
+            if (GuildData.Channels[0] && !GuildData.Channels.includes(interaction.channelId)) sendAllowedChannels();
+
+
+            if (LocalOutlaws.includes(interaction.user.id)) {
+                var messageStruct2 = {
+                    embeds: [
+                        {
+                            title: "You are outlawed!",
+                            description: "You have broken our ToS and no longer have access to Senko.\nThis cannot be appealed.",
+                            color: "DARK_RED"
+                        }
+                    ]
+                };
+
+                if (!interaction.deferred) await interaction.deferReply({ ephemeral: true });
+                return interaction.followUp(messageStruct2);
+            }
 
             if (AccountData && AccountData.LocalUser.version !== DataConfig.currentVersion) {
                 await updateUser(interaction.user, {

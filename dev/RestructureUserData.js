@@ -3,14 +3,14 @@
 
 require("dotenv/config");
 const fs = require("fs");
-
+const config = require("../src/Data/DataConfig.json");
 const Firebase = require("firebase-admin");
 
 Firebase.initializeApp({
     credential: Firebase.credential.cert({
-        "projectId": process.env.FIREBASE_PROJECT_ID,
-        "private_key": process.env.FIREBASE_PRIVATE_KEY,
-        "client_email": process.env.FIREBASE_CLIENT_EMAIL
+        "projectId": process.env.NIGHTLY_FIREBASE_PROJECT_ID,
+        "private_key": process.env.NIGHTLY_FIREBASE_PRIVATE_KEY,
+        "client_email": process.env.NIGHTLY_FIREBASE_CLIENT_EMAIL
     })
 });
 
@@ -56,47 +56,47 @@ Firestore.collection("Users").get().then(async querySnapshot => {
 
             RateLimits: {
                 Rest_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() - config.cooldowns.daily,
                     Amount: 0
                 },
                 Fluff_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 },
                 Pat_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 },
                 Step_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 },
                 Hug_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 },
                 Sleep_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 },
                 Drink_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 },
                 Smile_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 },
                 Eat_Rate: {
-                    Date: 1627710691,
+                    Date: Date.now() + config.cooldowns.week,
                     Amount: 0
                 }
             },
 
             Rewards: {
-                Daily: 1627710691,
-                Weekly: 1627710691,
-                Work: 1627710691
+                Daily: Date.now() + config.cooldowns.week,
+                Weekly: Date.now() + config.cooldowns.week,
+                Work: Date.now() + config.cooldowns.week
             },
 
             Inventory: [],
@@ -156,42 +156,42 @@ Firestore.collection("Users").get().then(async querySnapshot => {
 
         if (AccountData.RateLimits) {
             if (AccountData.RateLimits.Rest_Rate) {
-                if (AccountData.RateLimits.Rest_Rate.Date) DataStructure.RateLimits.Rest_Rate.Date = AccountData.RateLimits.Rest_Rate.Date;
+                // if (AccountData.RateLimits.Rest_Rate.Date) DataStructure.RateLimits.Rest_Rate.Date = AccountData.RateLimits.Rest_Rate.Date;
                 if (AccountData.RateLimits.Rest_Rate.Amount) DataStructure.RateLimits.Rest_Rate.Amount = AccountData.RateLimits.Rest_Rate.Amount;
             }
 
             if (AccountData.RateLimits.Pat_Rate) {
-                if (AccountData.RateLimits.Pat_Rate.Date) DataStructure.RateLimits.Pat_Rate.Date = AccountData.RateLimits.Pat_Rate.Date;
+                // if (AccountData.RateLimits.Pat_Rate.Date) DataStructure.RateLimits.Pat_Rate.Date = AccountData.RateLimits.Pat_Rate.Date;
                 if (AccountData.RateLimits.Pat_Rate.Amount) DataStructure.RateLimits.Pat_Rate.Amount = AccountData.RateLimits.Pat_Rate.Amount;
             }
 
             if (AccountData.RateLimits.Fluff_Rate) {
-                if (AccountData.RateLimits.Fluff_Rate.Date) DataStructure.RateLimits.Fluff_Rate.Date = AccountData.RateLimits.Fluff_Rate.Date;
+                // if (AccountData.RateLimits.Fluff_Rate.Date) DataStructure.RateLimits.Fluff_Rate.Date = AccountData.RateLimits.Fluff_Rate.Date;
                 if (AccountData.RateLimits.Fluff_Rate.Amount) DataStructure.RateLimits.Fluff_Rate.Amount = AccountData.RateLimits.Fluff_Rate.Amount;
             }
 
             if (AccountData.RateLimits.Step_Rate) {
-                if (AccountData.RateLimits.Step_Rate.Date) DataStructure.RateLimits.Step_Rate.Date = AccountData.RateLimits.Step_Rate.Date;
+                // if (AccountData.RateLimits.Step_Rate.Date) DataStructure.RateLimits.Step_Rate.Date = AccountData.RateLimits.Step_Rate.Date;
                 if (AccountData.RateLimits.Step_Rate.Amount) DataStructure.RateLimits.Step_Rate.Amount = AccountData.RateLimits.Step_Rate.Amount;
             }
 
             if (AccountData.RateLimits.Hug_Rate) {
-                if (AccountData.RateLimits.Hug_Rate.Date) DataStructure.RateLimits.Hug_Rate.Date = AccountData.RateLimits.Hug_Rate.Date;
+                // if (AccountData.RateLimits.Hug_Rate.Date) DataStructure.RateLimits.Hug_Rate.Date = AccountData.RateLimits.Hug_Rate.Date;
                 if (AccountData.RateLimits.Hug_Rate.Amount) DataStructure.RateLimits.Hug_Rate.Amount = AccountData.RateLimits.Hug_Rate.Amount;
             }
 
             if (AccountData.RateLimits.Sleep_Rate) {
-                if (AccountData.RateLimits.Sleep_Rate.Date) DataStructure.RateLimits.Sleep_Rate.Date = AccountData.RateLimits.Sleep_Rate.Date;
+                // if (AccountData.RateLimits.Sleep_Rate.Date) DataStructure.RateLimits.Sleep_Rate.Date = AccountData.RateLimits.Sleep_Rate.Date;
                 if (AccountData.RateLimits.Sleep_Rate.Amount) DataStructure.RateLimits.Sleep_Rate.Amount = AccountData.RateLimits.Sleep_Rate.Amount;
             }
 
             if (AccountData.RateLimits.Drink_Rate) {
-                if (AccountData.RateLimits.Drink_Rate.Date) DataStructure.RateLimits.Drink_Rate.Date = AccountData.RateLimits.Drink_Rate.Date;
+                // if (AccountData.RateLimits.Drink_Rate.Date) DataStructure.RateLimits.Drink_Rate.Date = AccountData.RateLimits.Drink_Rate.Date;
                 if (AccountData.RateLimits.Drink_Rate.Amount) DataStructure.RateLimits.Drink_Rate.Amount = AccountData.RateLimits.Drink_Rate.Amount;
             }
 
             if (AccountData.RateLimits.Smile_Rate) {
-                if (AccountData.RateLimits.Smile_Rate.Date) DataStructure.RateLimits.Smile_Rate.Date = AccountData.RateLimits.Smile_Rate.Date;
+                // if (AccountData.RateLimits.Smile_Rate.Date) DataStructure.RateLimits.Smile_Rate.Date = AccountData.RateLimits.Smile_Rate.Date;
                 if (AccountData.RateLimits.Smile_Rate.Amount) DataStructure.RateLimits.Smile_Rate.Amount = AccountData.RateLimits.Smile_Rate.Amount;
             }
         }
@@ -200,6 +200,12 @@ Firestore.collection("Users").get().then(async querySnapshot => {
             if (AccountData.Rewards.Daily) DataStructure.Rewards.Daily = AccountData.Rewards.Daily;
             if (AccountData.Rewards.Weekly) DataStructure.Rewards.Weekly = AccountData.Rewards.Weekly;
             if (AccountData.Rewards.Work) DataStructure.Rewards.Work = AccountData.Rewards.Work;
+        }
+
+        if (AccountData.Claimables) DataStructure.Claimables = AccountData.Claimables;
+        if (AccountData.Rank) {
+            DataStructure.Rank.Level = AccountData.Rank.Level;
+            DataStructure.Rank.XP = AccountData.Rank.XP;
         }
 
         console.log("Done");
