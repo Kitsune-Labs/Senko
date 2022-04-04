@@ -10,6 +10,7 @@ module.exports = {
     userData: false,
     defer: false,
     ephemeral: false,
+    usableAnywhere: false,
     /**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient

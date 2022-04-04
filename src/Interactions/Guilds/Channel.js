@@ -1,131 +1,171 @@
-const { updateGuild, CheckPermission, hasPerm } = require("../../API/Master");
-const { eRes } = require("../../API/v4/InteractionFunctions");
+/* eslint-disable no-redeclare */
+// eslint-disable-next-line no-unused-vars
+const { Client, CommandInteraction } = require("discord.js");
+const { updateGuild, spliceArray, CheckPermission } = require("../../API/Master");
+// eslint-disable-next-line no-unused-vars
+const Icons = require("../../Data/Icons.json");
 
 module.exports = {
     name: "channel",
     desc: "Add/Remove channels where Senko can be used in",
     options: [
         {
-            name: "add_or_remove",
-            description: "To add or remove the channel",
-            type: 3,
-            required: true,
-            choices: [
+            name: "add",
+            type: 1,
+            description: "Add a channel",
+            options: [
                 {
-                    name: "add",
-                    value: "add_channel",
-                },
-                {
-                    name: "remove",
-                    value: "remove_channel"
-                },
-                {
-                    name: "list",
-                    value: "list_channel"
+                    name: "channel",
+                    description: "channel",
+                    type: 7,
+                    required: true,
+                    value: "add_channel"
                 }
             ]
         },
         {
-            name: "channel",
-            description: "The channel to add/remove.",
-            type: 7,
-            required: false
+            name: "remove",
+            description: "Remove a channel",
+            type: 1,
+            options: [
+                {
+                    name: "channel",
+                    description: "channel",
+                    type: 7,
+                    required: true,
+                    value: "remove_channel"
+                }
+            ]
+        },
+        {
+            name: "list",
+            description: "List all channels",
+            type: 1
+        },
+        {
+            name: "remove-all-channels",
+            description: "Remove all channels",
+            type: 1
+        },
+        {
+            name: "remove-deleted-channels",
+            description: "Remove deleted channels",
+            type: 1
         }
     ],
+    defer: true,
+    ephemeral: true,
+    usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction
+     * @param {Client} SenkoClient
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, { Channels }) => {
-        const channel = interaction.options.getChannel("channel");
-        const Type = interaction.options.getString("add_or_remove");
+        const command = interaction.options.getSubcommand();
+        const command_permission = await CheckPermission(interaction, "MANAGE_CHANNELS");
 
-        function listChannel() {
-            interaction.reply({
+        function listChannels() {
+            interaction.followUp({
                 embeds: [
                     {
-                        title: "I will allow the use of my commands in:",
-                        description: `${Channels[0] ? Channels.map(i => `<#${i}>`) : "Everywhere"}`,
+                        title: "I have gathered my commands and you may use them in",
+                        description: `${Channels[0] ? Channels.map(i => `<#${i}>`) : "every channel"}`,
                         color: SenkoClient.colors.light,
                         thumbnail: {
                             url: "attachment://image.png"
                         }
                     }
                 ],
-                files: [ { attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" } ]
+                files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
             });
         }
 
-        if (!CheckPermission(interaction, "MANAGE_CHANNELS", interaction.user)) return listChannel();
+        switch (command) {
+            case "add":
+                if (!command_permission) return listChannels();
+                var channel = interaction.options.getChannel("channel");
 
-        if (Type === "list_channel") return listChannel();
+                if (channel.type != "GUILD_TEXT") return interaction.followUp({
+                    content: "Invalid channel type, only text channels can be used"
+                });
 
-        if (channel.type !== "GUILD_TEXT") return eRes({
-            interaction: interaction,
-            description: "Please use a Text channel."
-        });
+                Channels.push(channel.id);
 
-        if (Type === "add_channel") {
-            if (!hasPerm(interaction, "MANAGE_CHANNELS")) return listChannel();
+                await updateGuild(interaction.guild, {
+                    Channels: Channels
+                });
 
-            if (!Channels) Channels = [];
+                interaction.followUp({ content: `${channel} has been added` });
+                break;
+            case "remove":
+                if (!command_permission) return listChannels();
 
-            if (Channels.includes(channel.id)) return interaction.reply({
-                embeds: [
-                    {
-                        title: "Unable to set channel",
-                        description: `${channel} has already been added and cannot be set again.`,
-                        color: SenkoClient.colors.dark
+                var channel = interaction.options.getChannel("channel");
+                if (!Channels.includes(channel.id)) return interaction.followUp({
+                    content: "This channel has not been added"
+                });
+
+                interaction.followUp({ content: "remove" });
+                break;
+            case "list":
+                listChannels();
+                break;
+            case "remove-all-channels":
+                if (!command_permission) return listChannels();
+                if (!Channels[0]) return interaction.followUp({ content: "No channels to remove" });
+
+                interaction.followUp({
+                    embeds: [
+                        {
+                            title: "Are you sure you want to remove all these channels?",
+                            description: `${Channels.map(i => `<#${i}>`)}\n\nThis cannot be undone`,
+                            color: SenkoClient.colors.dark,
+                            thumbnail: {
+                                url: "attachment://image.png"
+                            }
+                        }
+                    ],
+                    files: [ { attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" } ],
+                    components: [
+                        {
+                            type: 1,
+                            components: [
+                                { type: 2, label: "Remove channels", style: 4, custom_id: "confirm_channel_removal" },
+                                { type: 2, label: "Cancel", style: 2, custom_id: "cancel_channel_removal" }
+                            ]
+                        }
+                    ]
+                });
+                break;
+            case "remove-deleted-channels":
+                if (!command_permission) return listChannels();
+                if (!Channels[0]) return interaction.followUp({ content: "No channels to remove" });
+
+                var removed_channels = 0;
+
+                for (var v_channel of Channels) {
+                    var channel = interaction.guild.channels.cache.get(v_channel);
+                    if (!channel) {
+                        spliceArray(Channels, v_channel);
+                        removed_channels++;
                     }
-                ],
-                ephemeral: true
-            });
+                }
 
-            Channels.push(channel.id);
-
-            updateGuild(interaction.guild, {
-                Channels: Channels
-            });
-
-            return interaction.reply({
-                embeds: [
-                    {
-                        title: "Channel added",
-                        description: `${channel} is now a whitelisted channel! I will be able to be used in ${Channels.map(i=>`<#${i}>`)}`,
-                        color: SenkoClient.colors.light
-                    }
-                ],
-                ephemeral: true
-            });
+                interaction.followUp({
+                    embeds: [
+                        {
+                            title: "I have gathered your channels and reviewed them",
+                            description: `I have found ${removed_channels} that no longer exist and have removed them!`,
+                            color: SenkoClient.colors.light,
+                            thumbnail: {
+                                url: "attachment://image.png"
+                            }
+                        }
+                    ],
+                    files: [ { attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" } ]
+                });
+                break;
         }
-
-        if (!hasPerm(interaction, "MANAGE_CHANNELS")) return listChannel();
-
-        if (!Channels.includes(channel.id)) return interaction.reply({
-            embeds: [
-                {
-                    title: "Unable to remove channel",
-                    description: `${channel} is not on the channel list!`,
-                    color: SenkoClient.colors.dark
-                }
-            ],
-            ephemeral: true
-        });
-
-        Channels.splice(Channels.indexOf(channel.id), 1);
-
-        updateGuild(interaction.guild, {
-            Channels: Channels
-        });
-
-        return interaction.reply({
-            embeds: [
-                {
-                    title: "Channel removed",
-                    description: `${channel} has been removed! I will be able to be used in ${Channels.map(i=>`<#${i}>`)}`,
-                    color: SenkoClient.colors.light
-                }
-            ],
-            ephemeral: true
-        });
     }
 };

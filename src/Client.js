@@ -100,7 +100,6 @@ SenkoClient.once("ready", async () => {
                 SenkoClient.SlashCommands.set(`${pull.name}`, pull);
             }
         }
-
     }
 
     await setCommands();

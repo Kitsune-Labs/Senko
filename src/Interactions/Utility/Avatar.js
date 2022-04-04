@@ -28,6 +28,9 @@ module.exports = {
         const messageStruct = {
             embeds: [
                 {
+                    author: {
+                        name: User.user ? User.user.tag : User.tag,
+                    },
                     title: "Avatar",
                     color: SenkoClient.colors.light,
                     image: {
