@@ -77,7 +77,7 @@ module.exports = {
                     }
                 }
             ],
-            files: [{ attachment: "./src/Data/content/Senko/hug.png", name: "image.png" }]
+            files: [{ attachment: "./src/Data/content/senko/hug.png", name: "image.png" }]
         };
 
 
