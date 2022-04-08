@@ -48,7 +48,7 @@ module.exports = {
                     }
                 }
             ],
-            files: [{ attachment: "./src/Data/content/Senko/pat.png", name: "image.png" }]
+            files: [{ attachment: "./src/Data/content/senko/pat.png", name: "image.png" }]
         };
 
         // if (!config.cooldowns.daily - (Date.now() - RateLimits.Pat_Rate.Date) >= 0) {
