@@ -12,7 +12,7 @@ module.exports = {
             if (interaction.isButton()) {
                 switch (interaction.customId) {
                     case "confirm_channel_removal":
-                        await updateGuild(interaction.guildId, {
+                        await updateGuild(interaction.guild, {
                             Channels: []
                         });
 
@@ -22,11 +22,12 @@ module.exports = {
                                     title: `${Icons.exclamation}  Alright dear`,
                                     description: "All of the channels have been removed",
                                     color: SenkoClient.colors.light,
-                                    image: {
+                                    thumbnail: {
                                         url: "attachment://image.png"
                                     }
                                 }
-                            ]
+                            ],
+                            components: []
                         });
                         break;
                 }

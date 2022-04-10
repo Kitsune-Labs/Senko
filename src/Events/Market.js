@@ -14,9 +14,9 @@ module.exports = {
     execute: async (SenkoClient) => {
         SenkoClient.on("interactionCreate", async interaction => {
             if (interaction.isButton()) {
-                console.log(interaction);
+                // console.log(interaction);
 
-                console.log(interaction.message.prototype);
+                // console.log(interaction.message.prototype);
             }
         });
     }

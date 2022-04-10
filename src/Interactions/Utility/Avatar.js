@@ -14,6 +14,7 @@ module.exports = {
         },
     ],
     defer: true,
+    usableAnywhere: true,
     /**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
@@ -32,22 +33,34 @@ module.exports = {
                         name: User.user ? User.user.tag : User.tag,
                     },
                     title: "Avatar",
-                    color: SenkoClient.colors.light,
-                    image: {
-                        url: AvatarURL
-                    }
+                    color: SenkoClient.colors.light
                 }
             ],
             components: [
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Avatar", style: 5, url: AvatarURL },
-                        // { type: 2, label: "Banner", style: 5, url: AvatarURL }
+                        { type: 2, label: "Avatar", style: 5, url: "https://discord.com/404", disabled: true }
                     ]
                 }
             ]
         };
+
+        if (AvatarURL) {
+            messageStruct.embeds[0].image = {
+                url: AvatarURL
+            };
+
+            messageStruct.components[0].components[0].url = AvatarURL;
+            messageStruct.components[0].components[0].disabled = false;
+        } else {
+            messageStruct.embeds[0].description = "This user doesn't have an avatar 😔";
+
+            messageStruct.files = [{ attachment: "./src/Data/content/DiscordAvatar.png", name: "image.png" }];
+            messageStruct.embeds[0].image = {
+                url: "attachment://image.png"
+            };
+        }
 
 
         await axios.request({

@@ -1,4 +1,13 @@
 {
+  "DefaultBanner": {
+    "class": "profile",
+    "name": "Default Banner",
+    "desc": "The banner everyone gets",
+    "price": 0,
+    "amount": 1,
+    "max": 1,
+    "banner": "DefaultBanner.png"
+  },
   "kitsunebi_orange": {
     "class": "material",
     "name": "Kitsune Bi - Orange",
@@ -39,9 +48,10 @@
     "desc": "Shiro with some sakura on the edges!",
     "price": 777,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "type": "banner",
-    "autoSale": true
+    "autoSale": true,
+    "banner": "SakuraShiro.png"
   },
   "pumpkinpie": {
     "class": "food",
@@ -112,7 +122,7 @@
     "desc": "It has a beak like a bird.",
     "price": 100,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "badge": "<:Hat:911085376284819547>",
     "autoSale": true
   },
@@ -162,7 +172,7 @@
     "desc": "A little yoko doll of Nakano.",
     "price": 750,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "sakurroseawine": {
@@ -189,7 +199,7 @@
     "desc": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
     "price": 712,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "hojicha": {
@@ -198,7 +208,7 @@
     "desc": "Low in caffeine, delicious, and an alternative to coffee!",
     "price": 1754,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "taiyaki": {
@@ -255,15 +265,6 @@
     "onsale": false,
     "autoSale": true
   },
-  "leaningbanner": {
-    "class": "profile",
-    "name": "Leanings Banner",
-    "desc": "<a:protogenbop:853524564910407680> Shiro-sama **IS** a toaster <a:protogenbop:853524564910407680>",
-    "price": 7777,
-    "amount": 1,
-    "onsale": false,
-    "type": "banner"
-  },
   "senkobanner_1": {
     "class": "profile",
     "name": "Senko Manga Banner",
@@ -271,7 +272,8 @@
     "price": 7777,
     "amount": 1,
     "onsale": false,
-    "type": "banner"
+    "type": "banner",
+    "banner": "SenkoBanner.png"
   },
   "thehelpfulfoxsenko": {
     "class": "profile",
@@ -280,7 +282,8 @@
     "price": 7777,
     "amount": 1,
     "onsale": false,
-    "type": "banner"
+    "type": "banner",
+    "banner": "TheHelpfulFoxSenko-san.png"
   },
   "dango": {
     "class": "food",
@@ -369,7 +372,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_5",
     "autoSale": true
   },
@@ -446,7 +449,7 @@
     "desc": "Make your profile card white like Shiro!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "color": "#FFFFF9",
     "type": "color",
@@ -459,7 +462,8 @@
     "price": 500,
     "amount": 1,
     "onsale": false,
-    "type": "banner"
+    "type": "banner",
+    "banner": "ChristmasBanner21.png"
   },
   "CandyCane": {
     "class": "profile",
@@ -566,7 +570,8 @@
     "price": 0,
     "amount": 1,
     "onsale": false,
-    "type": "banner"
+    "type": "banner",
+    "banner": "TransPrideFlag.png"
   },
   "MooseKaiBanner": {
     "class": "profile",
@@ -575,7 +580,8 @@
     "price": 99999999999999,
     "amount": 1,
     "onsale": false,
-    "type": "banner"
+    "type": "banner",
+    "banner": "MooseKai.png"
   },
   "cherry": {
     "class": "profile",

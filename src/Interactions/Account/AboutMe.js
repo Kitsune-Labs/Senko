@@ -28,6 +28,7 @@ module.exports = {
             type: 1
         }
     ],
+    usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient

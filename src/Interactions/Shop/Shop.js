@@ -5,7 +5,7 @@ const Icons = require("../../Data/Icons.json");
 
 module.exports = {
     name: "shop",
-    desc: "Buy an item from Senko's Market",
+    desc: "Buy item's from Senko's Market",
     userData: true,
     defer: true,
 

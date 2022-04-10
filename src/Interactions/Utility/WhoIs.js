@@ -4,7 +4,7 @@ const axios = require("axios");
 
 module.exports = {
     name: "whois",
-    desc: "User information",
+    desc: "Public account information",
     options: [
         {
             name: "user",
@@ -20,6 +20,7 @@ module.exports = {
         }
     ],
     defer: true,
+    usableAnywhere: true,
     /**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
@@ -50,14 +51,14 @@ module.exports = {
                         // { name: "Banner", value: "None", inline: true },
                         { name: "Bot", value: "False", inline: true },
 
-                        { name: "Created", value: `<t:${parseInt(guildUser.createdTimestamp / 1000)}:R>`, inline: true },
-                        { name: "Joined", value: `<t:${parseInt(guildMember.joinedTimestamp / 1000)}:R>`, inline: true },
-                        { name: "Boosted", value: `${guildMember.premiumSinceTimestamp ? `Since <t:${parseInt(guildMember.premiumSinceTimestamp / 1000)}:R>` : "False"}`, inline: true },
+                        { name: "Created", value: `<t:${parseInt(guildUser.createdTimestamp / 1000)}>\n\n(<t:${parseInt(guildUser.createdTimestamp / 1000)}:R>)`, inline: true },
+                        { name: "Joined", value: `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>\n\n(<t:${parseInt(guildMember.joinedTimestamp / 1000)}:R>)`, inline: true },
+                        { name: "Boosted", value: `${guildMember.premiumSinceTimestamp ? `On <t:${parseInt(guildMember.premiumSinceTimestamp / 1000)}>\n\n(<t:${parseInt(guildMember.premiumSinceTimestamp / 1000)}:R>)` : "False"}`, inline: true },
 
                         { name: "Roles", value: `__${guildMember.roles.cache.size}__ roles` },
                     ],
                     thumbnail: {
-                        url: AvatarURL
+                        url: null
                     },
                     image: {
                         url: null
@@ -68,13 +69,18 @@ module.exports = {
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Avatar", style: 5, url: AvatarURL },
+                        { type: 2, label: "Avatar", style: 5, url: "https://discord.com/404", disabled: true },
                     ]
                 }
             ]
         };
 
-        // if (!interaction.options.getBoolean("hide-roles")) messageStruct.embeds[0].fields.push({ name: "Roles", value: `__${guildMember.roles.cache.size}__ roles` });
+        if (AvatarURL) {
+            messageStruct.embeds[0].thumbnail.url = AvatarURL;
+
+            messageStruct.components[0].components[0].url = AvatarURL;
+            messageStruct.components[0].components[0].disabled = false;
+        }
 
         axios.request({
             url: `https://discord.com/api/v9/users/${guildUser.id}`,

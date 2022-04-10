@@ -90,6 +90,10 @@ module.exports = {
                     content: "Invalid channel type, only text channels can be used"
                 });
 
+                if (Channels.includes(channel.id)) return interaction.followUp({
+                    content: "This channel is already in the list"
+                });
+
                 Channels.push(channel.id);
 
                 await updateGuild(interaction.guild, {

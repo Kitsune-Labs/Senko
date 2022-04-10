@@ -24,6 +24,6 @@ module.exports = {
 
         switchActivity();
 
-        setInterval(switchActivity, 120 * 1000 * 60);
+        setInterval(switchActivity,  3600000);
     }
 };

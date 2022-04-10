@@ -61,6 +61,7 @@ module.exports = {
         }
     ],
     no_data: true,
+    usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction
      */

@@ -5,6 +5,7 @@ module.exports = {
     name: "stats",
     desc: "View your account stats",
     userData: true,
+    usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction
      */

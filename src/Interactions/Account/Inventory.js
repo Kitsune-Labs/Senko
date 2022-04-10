@@ -4,7 +4,7 @@ const Icons = require("../../Data/Icons.json");
 
 module.exports = {
     name: "inventory",
-    desc: "View the items in your inventory",
+    desc: "View the items you have collected",
     userData: true,
     /**
      * @param {CommandInteraction} interaction

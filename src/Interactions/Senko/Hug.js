@@ -24,7 +24,7 @@ const MoreResponses = [
 
 module.exports = {
     name: "hug",
-    desc: "Hug Senko-san or a server member!",
+    desc: "Hug Senko-san or another kitsune in your guild!",
     options: [
         {
             name: "user",

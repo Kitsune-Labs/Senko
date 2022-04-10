@@ -2,7 +2,6 @@ const { MessageActionRow, MessageSelectMenu } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 
 const ShopItems = require("../../Data/Shop/Items.json");
-const BannerList = require("../../Data/Banners.json");
 const { Bitfield } = require("bitfields");
 const BitData = require("../../API/Bits.json");
 
@@ -33,6 +32,7 @@ module.exports = {
             type: 1
         }
     ],
+    usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -73,7 +73,7 @@ module.exports = {
                         components: [ new MessageActionRow().addComponents([
                             new MessageSelectMenu()
                             .setCustomId("banner_set")
-                            .setPlaceholder(`Currently ${BannerList[AccountData.LocalUser.Banner]}`)
+                            .setPlaceholder(`Currently ${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].name : "Default Banner"}`)
                             .setOptions(Banners)
                         ])],
                         ephemeral: true

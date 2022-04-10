@@ -3,7 +3,6 @@ const BitData = require("../API/Bits.json");
 const Icons = require("../Data/Icons.json");
 const { print, fetchData, updateUser } = require("../API/Master.js");
 const ShopItems = require("../Data/Shop/Items.json");
-const BannerList = require("../Data/Banners.json");
 
 module.exports = {
     /**
@@ -92,7 +91,7 @@ module.exports = {
                     if (InteractionValue === "default") {
                         await updateUser(Interaction.user, {
                             LocalUser: {
-                                Banner: BannerList.defaultbanner
+                                Banner: "DefaultBanner"
                             }
                         });
 
@@ -103,7 +102,7 @@ module.exports = {
 
                     await updateUser(Interaction.user, {
                         LocalUser: {
-                            Banner: BannerList[InteractionValue]
+                            Banner: InteractionValue
                         }
                     });
 
