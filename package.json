@@ -2,7 +2,8 @@
   "scripts": {
     "start": "node src/Client.js",
     "dev": "node src/Client.js --trace-warnings",
-    "shop": "node dev/RefShop.js"
+    "shop": "node dev/RefShop.js",
+    "build": "node dev/BN.js"
   },
   "dependencies": {
     "axios": "0.26.1",

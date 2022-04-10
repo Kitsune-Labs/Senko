@@ -47,7 +47,7 @@ module.exports = {
                     color: AccountData.LocalUser.config.color || SenkoClient.colors.light
                 }
             ],
-            files: [ { attachment: `src/Data/content/banners/${AccountData.LocalUser.Banner}`, name: AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif"} ]
+            files: [{ attachment: `src/Data/content/banners/${(ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner : ShopItems.DefaultBanner.banner)}`, name: AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif" }]
         };
 
         let BadgeString = "";

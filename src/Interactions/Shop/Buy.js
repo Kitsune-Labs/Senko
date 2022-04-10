@@ -20,7 +20,7 @@ for (var item of Object.keys(ShopItems)) {
 
 module.exports = {
     name: "buy",
-    desc: "Buy an item from the shop",
+    desc: "Buy an item from Senko's Market",
     userData: true,
     options: [
         {

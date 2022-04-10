@@ -2,7 +2,7 @@ const Icons = require("../../Data/Icons.json");
 
 module.exports = {
     name: "funds",
-    desc: "View your YEN & TOFU",
+    desc: "View the amount of currency you have saved",
     userData: true,
     options: [
         {

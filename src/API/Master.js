@@ -195,9 +195,10 @@ async function createGuild(Guild) {
         flags: new Bitfield(50).toHex(),
         WelcomeChannel: {
             id: null,
-            message: ""
+            message: null
         },
-        Channels: []
+        Channels: [],
+        MessageLogging: null
     }).catch(err => {
         this.print("#FF0000", "DATA ERROR", `Could not make GUILD data \n\n— ${err}`);
     });
@@ -241,6 +242,7 @@ async function deleteGuild(Guild) {
  */
 async function updateGuild(Guild, Data) {
     await fetchGuild(Guild);
+
     GuildStore.doc(Guild.id).set(Data, { merge: true }).catch(err => {
         throw new Error(`GUILD UPDATE: ${err}`);
     });

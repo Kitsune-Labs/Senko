@@ -4,7 +4,6 @@ const Icons = require("../../Data/Icons.json");
 
 const ShopItems = require("../../Data/Shop/Items.json");
 const PrevItems = [];
-const Banners = require("../../Data/Banners.json");
 
 for (var item of Object.keys(ShopItems)) {
     const Item = ShopItems[item];
@@ -19,7 +18,7 @@ for (var item of Object.keys(ShopItems)) {
 
 module.exports = {
     name: "preview",
-    desc: "Preview an item from the shop",
+    desc: "Preview an item from Senko's Market",
     options: [
         {
             name: "available-item",
@@ -29,6 +28,7 @@ module.exports = {
             choices: PrevItems
         }
     ],
+    usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction
      */
@@ -56,8 +56,8 @@ module.exports = {
         if (ShopItem.badge) MessageStructure.embeds[0].fields.push({ name: "Badge", value: `${ShopItem.badge || Icons.tick}`, inline: true });
         if (ShopItem.color) MessageStructure.embeds[0].fields.push({ name: "Colored", value: "** **", inline: true });
         if (ShopItem.banner) {
-            MessageStructure.embeds[0].image = { url: `attachment://${Banners[ItemToView].endsWith(".png") ? "banner.png" : "banner.gif"}` };
-            MessageStructure.files.push({ attachment: `./src/Data/content/banners/${Banners[ItemToView]}`, name: `${Banners[ItemToView].endsWith(".png") ? "banner.png" : "banner.gif"}` });
+            MessageStructure.embeds[0].image = { url: `attachment://${ShopItem.banner}` };
+            MessageStructure.files.push({ attachment: `./src/Data/content/banners/${ShopItem.banner}`, name: ShopItem.banner });
         }
 
         interaction.reply(MessageStructure);

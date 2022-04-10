@@ -5,6 +5,7 @@ const ms = require("ms");
 module.exports = {
     name: "support",
     desc: "Support links, info, and other things.",
+    usableAnywhere: true,
     /**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction

@@ -11,6 +11,7 @@ module.exports = {
             required: true
         }
     ],
+    usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction
      */

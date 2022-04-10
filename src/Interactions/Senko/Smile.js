@@ -17,7 +17,7 @@ const Sounds = [
 
 module.exports = {
     name: "smile",
-    desc: ":)",
+    desc: ":>",
     userData: true,
     defer: true,
     /**
