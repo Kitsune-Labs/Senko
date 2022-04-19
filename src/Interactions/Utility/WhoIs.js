@@ -13,8 +13,8 @@ module.exports = {
             required: false
         },
         {
-            name: "hide-roles",
-            description: "Hides the roles from showing",
+            name: "show-roles",
+            description: "Shows the roles the member has",
             type: "BOOLEAN",
             default: false
         }
@@ -96,7 +96,7 @@ module.exports = {
                 messageStruct.components[0].components.push({ type: 2, label: "Banner", style: 5, url: `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048` });
             }
 
-            if (guildMember.roles.cache.size <= 30 && !interaction.options.getBoolean("hide-roles")) {
+            if (guildMember.roles.cache.size <= 30 && interaction.options.getBoolean("show-roles")) {
                 if (guildMember.roles.cache.size === 1) {
                     messageStruct.embeds[0].fields[4].value = "None";
                 } else {

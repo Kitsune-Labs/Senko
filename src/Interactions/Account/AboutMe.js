@@ -3,6 +3,7 @@ const { Client, CommandInteraction } = require("discord.js");
 const { updateUser } = require("../../API/Master");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
+const DiscordModal = require("discord-modal");
 
 module.exports = {
     name: "about-me",
@@ -11,16 +12,7 @@ module.exports = {
         {
             name: "change",
             description: "Update your about me message",
-            type: 1,
-            options: [
-                {
-                    name: "text",
-                    description: "The text to change your about me message to",
-                    value: "amt_update",
-                    type: "STRING",
-                    required: true
-                }
-            ]
+            type: 1
         },
         {
             name: "remove",
@@ -36,58 +28,44 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const commandType = interaction.options.getSubcommand();
-        await interaction.deferReply();
-
         if (commandType === "change") {
+            const textinput = new DiscordModal.TextInput()
+            .setCustomId("submit_about_me")
+            .setTitle("Change your About Me")
+            .addComponents(
+                new DiscordModal.TextInputField()
+                .setLabel("About Me")
+                .setStyle(2)
+                .setPlaceholder("Enter your new about me")
+                .setCustomId("submit_about_me_1")
+                .setRequired(true)
+                .setMax(100)
+                .setMin(1)
+            );
+
+            await SenkoClient.TextInputs.open(interaction, textinput);
+        }
+
+        if (commandType === "remove") {
             await updateUser(interaction.user, {
                 LocalUser: {
-                    AboutMe: `${interaction.options._hoistedOptions[0].value}`
+                    AboutMe: null
                 }
             });
 
-            await SenkoClient.channels.cache.get("957131449675423794").send({
+            interaction.followUp({
                 embeds: [
                     {
-                        title: `${interaction.user.id} has updated their about me`,
-                        description: `${interaction.options._hoistedOptions[0].value}`,
-                        color: SenkoClient.colors.light
-                    }
-                ]
-            });
-
-            return interaction.followUp({
-                embeds: [
-                    {
-                        title: `${Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
-                        description: "Check it out with **/profile**",
+                        title: `${Icons.question}  I have removed your About Me ${interaction.user.username}`,
+                        description: "But I am confused on why you would remove it!",
                         color: SenkoClient.colors.light,
                         thumbnail: {
                             url: "attachment://image.png"
                         }
                     }
                 ],
-                files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
+                files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
             });
         }
-
-        await updateUser(interaction.user, {
-            LocalUser: {
-                AboutMe: null
-            }
-        });
-
-        interaction.followUp({
-            embeds: [
-                {
-                    title: `${Icons.question}  I have removed your About Me ${interaction.user.username}`,
-                    description: "But I am confused on why you would remove it!",
-                    color: SenkoClient.colors.light,
-                    thumbnail: {
-                        url: "attachment://image.png"
-                    }
-                }
-            ],
-            files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
-        });
     }
 };

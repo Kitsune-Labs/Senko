@@ -181,7 +181,7 @@
     "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "yakitori": {
@@ -190,7 +190,7 @@
     "desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
     "price": 947,
     "amount": 2,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "omurice": {
@@ -394,7 +394,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_7",
     "autoSale": true
   },
@@ -609,7 +609,7 @@
     "desc": "🍙🍙🍙",
     "price": 50,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "badge": "🍙",
     "autoSale": true

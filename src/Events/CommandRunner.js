@@ -16,21 +16,20 @@ module.exports = {
             if (!interaction.isCommand() || interaction.user.bot) return;
             if (!interaction.guild) return interaction.reply({ content: "I cannot be used outside of guild channels!" });
 
-            if (LocalOutlaws.includes(interaction.user.id)) {
-                var messageStruct2 = {
+            if (LocalOutlaws.includes(interaction.user.id)) return interaction.reply({
                     embeds: [
-                        {
-                            title: "You are outlawed!",
-                            description: "You have broken our ToS and no longer have access to Senko.\nThis cannot be appealed.",
-                            color: "DARK_RED"
+                    {
+                        title: "You are outlawed!",
+                        description: "You have broken our divine user agreement and the gods have outlawed you from our care!",
+                        color: "DARK_RED",
+                        thumbnail: {
+                            url: "attachment://image.png"
                         }
-                    ],
-                    ephemeral: true
-                };
-
-                await interaction.deferReply({ ephemeral: true });
-                return interaction.followUp(messageStruct2);
-            }
+                    }
+                ],
+                ephemeral: true,
+                files: [{ attachment: "./src/Data/content/senko/pout.png", name: "image.png" }]
+            });
 
             const PermissionEmbed = {
                 title: "Permission Error",

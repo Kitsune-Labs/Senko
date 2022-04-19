@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, WebhookClient } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { print } = require("../API/Master.js");
+const { print, updateUser } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
 
@@ -49,14 +49,41 @@ module.exports = {
                     });
                 break;
 
+                case "submit_about_me":
+                    await updateUser(interaction.user, {
+                        LocalUser: {
+                            AboutMe: `${interaction.fields[0].value}`
+                        }
+                    });
+
+                    await interaction.editReply({
+                        embeds: [
+                            {
+                                title: `${Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
+                                description: "Check it out with **/profile**",
+                                color: SenkoClient.colors.light,
+                                thumbnail: {
+                                    url: "attachment://image.png"
+                                }
+                            }
+                        ],
+                        files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
+                    });
+                break;
+
                 default:
                     interaction.editReply({
                         embeds: [
                             {
                                 title: `${Icons.tick}  Error`,
-                                description: "Unable to submit"
+                                description: "I was unable to submit your content",
+                                color: SenkoClient.colors.dark,
+                                thumbnail: {
+                                    url: "attachment://image.png"
+                                }
                             }
-                        ]
+                        ],
+                        files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
                     });
             }
         });
