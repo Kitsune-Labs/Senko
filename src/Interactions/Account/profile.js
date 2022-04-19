@@ -6,7 +6,7 @@ const { stringEndsWithS, fetchData } = require("../../API/Master");
 
 module.exports = {
     name: "profile",
-    desc: "View yours or someone's profile",
+    desc: "View your profile, or another user's",
     options: [
         {
             name: "user",
@@ -36,10 +36,9 @@ module.exports = {
         const MessageBuilt = {
             embeds: [
                 {
-                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile${AccountData.LocalUser.AboutMe !== null ? `\n**About Me**\n${AccountData.LocalUser.AboutMe || "** **"}\n` : ""}\n${Icons.yen}  ${AccountData.Currency.Yen}x\n${Icons.tofu}  ${AccountData.Currency.Tofu}x`,
+                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile${AccountData.LocalUser.AboutMe !== null ? `\n\n**About Me**\n${AccountData.LocalUser.AboutMe || "** **"}\n` : ""}\n${Icons.yen}  ${AccountData.Currency.Yen}x\n${Icons.tofu}  ${AccountData.Currency.Tofu}x`,
                     fields: [
                         { name: "Stats", value: `${Icons.tail1}  **${AccountData.Stats.Fluffs}**x fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** awards`, inline: true }
-
                     ],
                     image: {
                         url: `attachment://${(AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif")}`
