@@ -95,7 +95,7 @@
     "desc": "The softest tail made",
     "price": 3000,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "shirokeychain": {
@@ -530,7 +530,7 @@
     "desc": "I think it has to do with ice?",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "color": "#4AD1FF",
     "type": "color",
@@ -648,7 +648,7 @@
     "desc": "Why would anyone stick bacon on themselves?",
     "price": 50,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "badge": "🥓",
     "autoSale": true

@@ -1,11 +1,12 @@
 // const IDB = require("../Data/IDB.json");
 const DataConfig = require("../Data/DataConfig.json");
 const { CheckPermission } = require("../API/Master");
-const AllowedCommands = ["ping", "channel", "channels", "avatar", "prefix", "poll", "whois", "config"];
-const { print, fetchGuild, fetchData, updateUser } = require("../API/Master");
-const Firebase = require("firebase-admin");
-const Firestore = Firebase.firestore();
+// const AllowedCommands = ["ping", "channel", "channels", "avatar", "prefix", "poll", "whois", "config"];
+const { print, fetchData } = require("../API/Master");
+// const Firebase = require("firebase-admin");
+// const Firestore = Firebase.firestore();
 const LocalOutlaws = require("../Data/LocalOutlawed.json");
+const { fetchSuperGuild } = require("../API/super.js");
 
 module.exports = {
     /**
@@ -15,9 +16,8 @@ module.exports = {
         SenkoClient.on("interactionCreate", async (interaction) => {
             if (!interaction.isCommand() || interaction.user.bot) return;
             if (!interaction.guild) return interaction.reply({ content: "I cannot be used outside of guild channels!" });
-
             if (LocalOutlaws.includes(interaction.user.id)) return interaction.reply({
-                    embeds: [
+                embeds: [
                     {
                         title: "You are outlawed!",
                         description: "You have broken our divine user agreement and the gods have outlawed you from our care!",
@@ -31,44 +31,51 @@ module.exports = {
                 files: [{ attachment: "./src/Data/content/senko/pout.png", name: "image.png" }]
             });
 
-            const PermissionEmbed = {
-                title: "Permission Error",
-                description: "Please make sure I have the following permissions:\n\n",
-                color: SenkoClient.colors.dark,
-                footer: {
-                    text: "This can include individual channel & category permissions."
-                }
-            };
-
-            let MissingPermissions = [];
-
             const InteractionCommand = SenkoClient.SlashCommands.get(interaction.commandName);
+            const superGuildData = await fetchSuperGuild(interaction.guild);
+            let AccountData = null;
 
-            if (!InteractionCommand) return interaction.reply({
+            if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!",description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`,color:SenkoClient.colors.dark,thumbnail:{url:"attachment://image.png"}}],ephemeral:true,files:[{attachment:"./src/Data/content/senko/heh.png",name:"image.png"}]});
+            if (InteractionCommand.userData === true) AccountData = await fetchData(interaction.user);
+
+            if (InteractionCommand.defer){if(InteractionCommand.ephemeral&&InteractionCommand.ephemeral===true){await interaction.deferReply({ephemeral:true});}else{await interaction.deferReply();}}
+
+
+            const permissionEmbed = {
                 embeds: [
                     {
-                        title: "Woops!",
-                        description: `I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`,
-                        color: SenkoClient.colors.dark,
-                        thumbnail: {
-                            url: "attachment://image.png"
-                        }
+                        title: "Oh dear...",
+                        description: "It looks like im missing some permissions, here is what I am missing:\n\n",
+                        color: SenkoClient.colors.dark
                     }
                 ],
-                ephemeral: true,
-                files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
-            });
+                ephemeral: true
+            };
 
-            let AccountData = null;
-            let GuildData = await fetchGuild(interaction.guild);
-            let ShopData = null;
+            const permissionMessage = {
+                content: "Oh dear...\n\nIt looks like im missing some permissions, here is what I am missing:\n\n",
+                ephemeral: true
+            };
 
-            if (GuildData.Channels.length > 0 && !GuildData.Channels.includes(interaction.channelId) && !InteractionCommand.usableAnywhere) {
+            for (var permission of DataConfig.clientPermissions) {
+                if (!CheckPermission(interaction, permission)) {
+                    permissionEmbed.embeds[0].description += `${permission}\n`;
+                    permissionMessage.content += `${permission}\n`;
+                }
+            }
+
+            if (!permissionEmbed.embeds[0].description.endsWith("\n")) {
+                if (CheckPermission(interaction, "EMBED_LINKS")) return interaction.reply(permissionEmbed);
+                return interaction.reply(permissionMessage);
+            }
+
+
+            if (superGuildData.Channels.length > 0 && !superGuildData.Channels.includes(interaction.channelId) && !InteractionCommand.usableAnywhere) {
                 var messageStruct1 = {
                     embeds: [
                         {
                             title: "S-Sorry dear!",
-                            description: `${interaction.guild.name} has requested you use ${GuildData.Channels.map(i=>`<#${i}>`)}!`,
+                            description: `${interaction.guild.name} has requested you use ${superGuildData.Channels.map(i=>`<#${i}>`)}!`,
                             color: SenkoClient.colors.dark,
                             thumbnail: {
                                 url: "attachment://image.png"
@@ -83,62 +90,10 @@ module.exports = {
                 return interaction.followUp(messageStruct1);
             }
 
-            if (InteractionCommand.defer) {
-                if (InteractionCommand.ephemeral && InteractionCommand.ephemeral === true) {
-                    await interaction.deferReply({ ephemeral: true });
-                } else {
-                    await interaction.deferReply();
-                }
-            }
-
-            let Permissions = "";
-            const GlobalPermissions = ["EMBED_LINKS", "ATTACH_FILES", "USE_EXTERNAL_EMOJIS", "ADD_REACTIONS", "VIEW_CHANNEL"];
-
-            for (var GlobalPermission of GlobalPermissions) {
-                if (!CheckPermission(interaction, GlobalPermission, SenkoClient.user)) {
-                    Permissions += `${GlobalPermission}\n`;
-                    MissingPermissions.push(GlobalPermission);
-                }
-            }
-
-            if (InteractionCommand.permissions) {
-                for (var permission of InteractionCommand.permissions) {
-                    if (!CheckPermission(interaction, permission, SenkoClient.user)) {
-                        Permissions += `${permission}\n`;
-                        MissingPermissions.push(permission);
-                    }
-                }
-            }
-
-            if (Permissions !== "") {
-                PermissionEmbed.description += Permissions;
-
-                if (!CheckPermission(interaction, "EMBED_LINKS", SenkoClient.user)) {
-                    return interaction.reply({
-                        content: `Please make sure I have the following permissions:\n\n${MissingPermissions}`
-                    });
-                }
-
-                return interaction.reply({
-                    embeds: [PermissionEmbed]
-                });
-            }
-
-            if (InteractionCommand.userData === true) AccountData = await fetchData(interaction.user);
-            if (InteractionCommand.shopData === true) ShopData = (await Firestore.collection("config").doc("shop").get()).data();
-
-            if (AccountData && AccountData.LocalUser.version !== DataConfig.currentVersion) {
-                await updateUser(interaction.user, {
-                    LocalUser: {
-                        version: DataConfig.currentVersion
-                    }
-                });
-            }
-
             print("teal", "CS", interaction.commandName);
 
             try {
-                InteractionCommand.start(SenkoClient, interaction, GuildData, AccountData, ShopData);
+                InteractionCommand.start(SenkoClient, interaction, superGuildData, AccountData);
             } catch (e) {
                 interaction.reply({
                     embeds: [

@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
-const { updateGuild } = require("../API/Master");
+const { updateSuperGuild } = require("../API/super");
 const Icons = require("../Data/Icons.json");
 
 module.exports = {
@@ -11,8 +11,8 @@ module.exports = {
         SenkoClient.on("interactionCreate", async (interaction) => {
             if (interaction.isButton()) {
                 switch (interaction.customId) {
-                    case "confirm_channel_removal":
-                        await updateGuild(interaction.guild, {
+                    case "confirm_super_channel_removal":
+                        await updateSuperGuild(interaction.guild, {
                             Channels: []
                         });
 

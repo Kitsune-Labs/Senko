@@ -11,6 +11,8 @@ module.exports = {
     defer: false,
     ephemeral: false,
     usableAnywhere: false,
+    defaultPermission: true,
+    permissions: [],
     /**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient

@@ -1,12 +1,13 @@
 require("dotenv/config");
 
-const { Client, Collection, Message } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
 
+
 const SenkoClient = new Client({
-    intents: ["GUILDS"],
+    intents: ["GUILDS", "GUILD_MEMBERS"],
 
     allowedMentions: {
         parse: ["users", "roles"],
@@ -46,8 +47,8 @@ if (process.env.NIGHTLY === "true") {
 
 const { print } = require("./API/Master");
 
-SenkoClient.Commands = new Collection();
-SenkoClient.Aliases = new Collection();
+// SenkoClient.Commands = new Collection();
+// SenkoClient.Aliases = new Collection();
 SenkoClient.SlashCommands = new Collection();
 SenkoClient.colors = require("./Data/Palettes/Main.js");
 
@@ -64,9 +65,9 @@ process.on("unhandledRejection",async(reason)=>{console.log(reason);});
 //     shop_id: null
 // });
 
-Message.prototype.custom_data = {
-    shop_data: {}
-};
+// Message.prototype.custom_data = {
+//     shop_data: {}
+// };
 
 SenkoClient.once("ready", async () => {
     print("#FF6633", "Senko", "Started\n");
@@ -138,6 +139,6 @@ SenkoClient.once("ready", async () => {
 
     for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
         require(`./Events/${file}`).execute(SenkoClient);
-        print("#FFFB00", "EVENTS", `Running ${file}`);
+        // print("#FFFB00", "EVENTS", `Running ${file}`);
     }
 });

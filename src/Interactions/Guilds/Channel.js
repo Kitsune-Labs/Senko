@@ -1,9 +1,10 @@
 /* eslint-disable no-redeclare */
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { updateGuild, spliceArray, CheckPermission } = require("../../API/Master");
+const { spliceArray, CheckPermission } = require("../../API/Master");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
+const { updateSuperGuild } = require("../../API/super");
 
 module.exports = {
     name: "channel",
@@ -61,7 +62,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars
-    start: async (SenkoClient, interaction, { Channels }) => {
+    start: async (SenkoClient, interaction, GuildData, AccountData, { Channels }) => {
         const command = interaction.options.getSubcommand();
         const command_permission = await CheckPermission(interaction, "MANAGE_CHANNELS");
 
@@ -90,13 +91,15 @@ module.exports = {
                     content: "Invalid channel type, only text channels can be used"
                 });
 
+                console.log(Channels);
+
                 if (Channels.includes(channel.id)) return interaction.followUp({
                     content: "This channel is already in the list"
                 });
 
                 Channels.push(channel.id);
 
-                await updateGuild(interaction.guild, {
+                await updateSuperGuild(interaction.guild, {
                     Channels: Channels
                 });
 
@@ -106,11 +109,18 @@ module.exports = {
                 if (!command_permission) return listChannels();
 
                 var channel = interaction.options.getChannel("channel");
+
                 if (!Channels.includes(channel.id)) return interaction.followUp({
                     content: "This channel has not been added"
                 });
 
-                interaction.followUp({ content: "remove" });
+                spliceArray(Channels, channel.id);
+
+                await updateSuperGuild(interaction.guild, {
+                    Channels: Channels
+                });
+
+                interaction.followUp({ content: `Removed ${channel}` });
                 break;
             case "list":
                 listChannels();
@@ -135,7 +145,7 @@ module.exports = {
                         {
                             type: 1,
                             components: [
-                                { type: 2, label: "Remove channels", style: 4, custom_id: "confirm_channel_removal" },
+                                { type: 2, label: "Remove channels", style: 4, custom_id: "confirm_super_channel_removal" },
                                 { type: 2, label: "Cancel", style: 2, custom_id: "cancel_channel_removal" }
                             ]
                         }
@@ -150,11 +160,18 @@ module.exports = {
 
                 for (var v_channel of Channels) {
                     var channel = interaction.guild.channels.cache.get(v_channel);
+
                     if (!channel) {
                         spliceArray(Channels, v_channel);
                         removed_channels++;
                     }
                 }
+
+                if (removed_channels === 0) return interaction.followUp({ content: "No channels to remove" });
+
+                await updateSuperGuild(interaction.guild, {
+                    Channels: Channels
+                });
 
                 interaction.followUp({
                     embeds: [

@@ -7,7 +7,6 @@ const FirebaseAdmin = require("firebase-admin");
 const DataBase = FirebaseAdmin.firestore();
 
 const UserStore = DataBase.collection("Users");
-const GuildStore = DataBase.collection("Guilds");
 
 const DataConfig = config;
 const { Bitfield } = require("bitfields");
@@ -187,68 +186,6 @@ async function fetchData(user, returnType) {
 }
 
 /**
- * @param {Guild} Guild
- */
-async function createGuild(Guild) {
-    await GuildStore.doc(Guild.id).set({
-        ID: Guild.id,
-        flags: new Bitfield(50).toHex(),
-        WelcomeChannel: {
-            id: null,
-            message: null
-        },
-        Channels: [],
-        MessageLogging: null
-    }).catch(err => {
-        this.print("#FF0000", "DATA ERROR", `Could not make GUILD data \n\n— ${err}`);
-    });
-}
-
-/**
- * @param {Guild} Guild
- */
-async function fetchGuild(Guild) {
-    try {
-        const GD = DataBase.collection("Guilds").doc(Guild.id);
-
-        let GuildData = await GD.get().catch(err => {
-            throw new Error(`GUILD FETCH: ${err}`);
-        });
-
-        if (!GuildData.exists) await createGuild(Guild);
-
-        while (!GuildData.exists) {
-            GuildData = await GD.get();
-        }
-
-        return GuildData.data();
-    } catch(err) {
-        console.error(`Guild Fetch Error: ${err}`);
-    }
-}
-
-/**
- * @param {Guild} Guild
- */
-async function deleteGuild(Guild) {
-    await GuildStore.doc(Guild.id).delete();
-
-    print("#FFFFF1", "GUILD", "Left and removed guild data");
-}
-
-/**
- * @param {Guild} Guild
- * @param {JSON} Data
- */
-async function updateGuild(Guild, Data) {
-    await fetchGuild(Guild);
-
-    GuildStore.doc(Guild.id).set(Data, { merge: true }).catch(err => {
-        throw new Error(`GUILD UPDATE: ${err}`);
-    });
-}
-
-/**
  * @param {User} message.author
  * @param {Number} amount
  */
@@ -372,8 +309,6 @@ module.exports = {
     spliceArray,
     stringEndsWithS,
     createUser,
-    createGuild,
-    deleteGuild,
     updateUser,
     addYen,
     removeYen,
@@ -382,8 +317,6 @@ module.exports = {
     getName,
     CheckPermission,
     fetchData,
-    fetchGuild,
-    updateGuild,
     rateLimitCoolDown,
     addStats,
     randomNumber,
