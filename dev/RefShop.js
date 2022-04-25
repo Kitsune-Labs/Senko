@@ -6,6 +6,8 @@ const SellableItems = [];
 for (var index in ShopItems) {
     const Item = ShopItems[index];
 
+    Item.onsale = false;
+
     if (Item.autoSale && Item.autoSale === true) {
         RawItems.push(index);
     }
@@ -19,7 +21,7 @@ function getItem() {
 }
 
 
-const avaliableItems = 4;
+const avaliableItems = 16;
 
 for (var i = 0; i <= avaliableItems; i++) {
     let Item = getItem();
