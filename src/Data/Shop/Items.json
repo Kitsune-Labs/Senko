@@ -78,7 +78,7 @@
     "desc": "くり",
     "price": 500,
     "amount": 20,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "apples": {
@@ -123,7 +123,7 @@
     "desc": "It has a beak like a bird.",
     "price": 100,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "badge": "<:Hat:911085376284819547>",
     "autoSale": true
   },
@@ -164,7 +164,7 @@
     "desc": "Freshly Picked!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yokodoll": {
@@ -182,7 +182,7 @@
     "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "yakitori": {
@@ -209,7 +209,7 @@
     "desc": "Low in caffeine, delicious, and an alternative to coffee!",
     "price": 1754,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "taiyaki": {
@@ -254,7 +254,7 @@
     "desc": "Ramen is delicious.",
     "price": 1283,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "ozoni": {
@@ -292,7 +292,7 @@
     "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
     "price": 210,
     "amount": 3,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "greentea": {
@@ -405,7 +405,7 @@
     "desc": "Tempura is a dish of battered and fried fish, seafood, or vegetables. This one has vegetables.",
     "price": 300,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "sknss_v8": {
@@ -423,7 +423,7 @@
     "desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "tsukemono": {
@@ -450,7 +450,7 @@
     "desc": "Make your profile card white like Shiro!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "color": "#FFFFF9",
     "type": "color",
@@ -509,7 +509,7 @@
     "desc": "Make your profile card red!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "color": "#CC3333",
     "type": "color",
@@ -591,7 +591,7 @@
     "price": 50,
     "amount": 3,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "badge": "🍒",
     "autoSale": true
   },
@@ -649,7 +649,7 @@
     "desc": "Why would anyone stick bacon on themselves?",
     "price": 50,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "badge": "🥓",
     "autoSale": true
@@ -660,7 +660,7 @@
     "desc": "🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐",
     "price": 50,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "badge": "🥐",
     "autoSale": true
@@ -726,7 +726,7 @@
     "desc": "For true kitsune's",
     "price": 300,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "title": "🦊 Kitsune",
     "autoSale": true
@@ -738,7 +738,7 @@
     "price": 300,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true,
     "title": "Fluffy"
   },
