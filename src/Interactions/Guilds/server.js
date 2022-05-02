@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../Data/Icons.json");
+const Icons = require("../../Data/Icons.json");
 const { Bitfield } = require("bitfields");
-const bits = require("../API/Bits.json");
-const { updateSuperGuild } = require("../API/super");
+const bits = require("../../API/Bits.json");
+const { updateSuperGuild } = require("../../API/super");
 
 module.exports = {
     name: "server",
