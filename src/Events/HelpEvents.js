@@ -155,8 +155,8 @@ module.exports = {
                                 author: {
                                     name: "Index ≻ Administration",
                                 },
-                                title: "📑 Administration Commands\n\nPermissions the user will require is in the brackets below the command",
-                                description: "≻ **Channel** — Add/Remove channels where Senko can be used in\n[ **MANAGE_CHANNELS** ]\n\n≻ **avatar** — View someone's avatar, and banner if they have one\n[ ]\n\n≻ **WhoIs** — Public account information\n[ ]",
+                                title: "📑 Administration Commands",
+                                description: "≻ **channel** — Add/Remove channels where Senko can be used in; Member must be able to Manage Channels for use\n≻ **avatar** — View someone's avatar, and banner if they have one\n≻ **whois** — Public account information\n≻ **server** — Server configuration; Member must be an Administrator to edit\n≻ **warn** — Warn a user; Member must be able to Moderate Members\n≻ **clean** — Clean a channel of it's messages; Member must be able to Manage Messages",
                                 color: SenkoClient.colors.random(),
                             }
                         ],

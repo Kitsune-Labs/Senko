@@ -73,9 +73,10 @@ SenkoClient.once("ready", async () => {
     print("#FF6633", "Senko", "Started\n");
 
     let commands = SenkoClient.application.commands;
+    // return commands.set([]);
     if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
-    // await commands.set([]);
+    // return commands.set([]);
 
     const commandsToSet = [];
 
@@ -124,10 +125,9 @@ SenkoClient.once("ready", async () => {
 
     await setTheCommands();
 
-    commands.set(commandsToSet).then(commandList => {
-        console.log("Commands Ready");
-        commandList.forEach(command => {
-            const fCmd = commandsToSet.find(cmd => cmd.name === command.name);
+    await commands.set(commandsToSet).then(async commandList => {
+        commandList.forEach(async command => {
+            const fCmd = await commandsToSet.find(cmd => cmd.name === command.name);
 
             if (fCmd.permissions) {
                 let permissions  = fCmd.permissions;
@@ -137,8 +137,12 @@ SenkoClient.once("ready", async () => {
         });
     });
 
+    console.log("Commands Ready");
+
     for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
         require(`./Events/${file}`).execute(SenkoClient);
         // print("#FFFB00", "EVENTS", `Running ${file}`);
     }
+
+    console.log("Events Ready");
 });

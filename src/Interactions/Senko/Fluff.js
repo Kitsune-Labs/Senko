@@ -36,7 +36,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars
-    start: async (SenkoClient, interaction, GuildData, { Stats }) => {
+    start: async (SenkoClient, interaction, GuildData, { Stats, Currency }) => {
         Stats.Fluffs++;
 
         await updateUser(interaction.user, {
@@ -63,6 +63,16 @@ module.exports = {
             addYen(interaction.user, 10);
 
             MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  10x added for interaction`;
+        }
+
+        if (randomNumber(500) < 5) {
+            MessageStruct.embeds[0].description += `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
+
+            await updateUser(interaction.user, {
+                Currency: {
+                    Tofu: Currency.Tofu + 1
+                }
+            });
         }
 
         interaction.reply(MessageStruct);

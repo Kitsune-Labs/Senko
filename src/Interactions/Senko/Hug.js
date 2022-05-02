@@ -80,6 +80,12 @@ module.exports = {
             files: [{ attachment: "./src/Data/content/senko/hug.png", name: "image.png" }]
         };
 
+        // console.log(Math.ceil((Date.now() / 1000) - RateLimits.Hug_Rate.Date));
+        // console.log(RateLimits.Hug_Rate.Amount, RateLimits.Hug_Rate.Amount >= 20);
+
+
+        // return interaction.followUp({ content: `<t:${Math.ceil((Date.now() / 1000) - (RateLimits.Hug_Rate.Date / 1000))}:R>` });
+
 
         // if (!config.cooldowns.daily - (Date.now() - RateLimits.Hug_Rate.Date) >= 0) {
         //     await updateUser(interaction.user, {

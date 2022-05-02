@@ -5,6 +5,7 @@ module.exports = {
     name: "help",
     desc: "Help",
     defer: true,
+    ephemeral: true,
     usableAnywhere: true,
     /**
      * @param {CommandInteraction} interaction

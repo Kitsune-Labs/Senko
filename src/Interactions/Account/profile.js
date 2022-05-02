@@ -36,10 +36,7 @@ module.exports = {
         const MessageBuilt = {
             embeds: [
                 {
-                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile${AccountData.LocalUser.AboutMe !== null ? `\n\n**About Me**\n${AccountData.LocalUser.AboutMe || "** **"}\n` : ""}\n${Icons.yen}  ${AccountData.Currency.Yen}x\n${Icons.tofu}  ${AccountData.Currency.Tofu}x`,
-                    fields: [
-                        { name: "Stats", value: `${Icons.tail1}  **${AccountData.Stats.Fluffs}**x fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** awards`, inline: true }
-                    ],
+                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  ${AccountData.Currency.Yen} yen\n${Icons.tofu}  ${AccountData.Currency.Tofu} tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** achievements\n\n`,
                     image: {
                         url: `attachment://${(AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif")}`
                     },
@@ -49,7 +46,7 @@ module.exports = {
             files: [{ attachment: `src/Data/content/banners/${(ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner : ShopItems.DefaultBanner.banner)}`, name: AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif" }]
         };
 
-        let BadgeString = "";
+        let BadgeString = "**__Badges__**\n";
         let BAmount = 0;
 
         for (var item of AccountData.Inventory) {
@@ -65,7 +62,7 @@ module.exports = {
         if (BAmount > 10) BadgeString += `\n+${BAmount}`;
 
         if (BadgeString.length === 0) BadgeString = "** **";
-        MessageBuilt.embeds[0].fields.push({ name: "Badges", value: BadgeString, inline: true });
+        MessageBuilt.embeds[0].description += BadgeString;
 
         interaction.reply(MessageBuilt);
     }

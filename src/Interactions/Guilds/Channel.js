@@ -62,7 +62,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars
-    start: async (SenkoClient, interaction, GuildData, AccountData, { Channels }) => {
+    start: async (SenkoClient, interaction, { Channels }, AccountData) => {
         const command = interaction.options.getSubcommand();
         const command_permission = await CheckPermission(interaction, "MANAGE_CHANNELS");
 
@@ -87,14 +87,12 @@ module.exports = {
                 if (!command_permission) return listChannels();
                 var channel = interaction.options.getChannel("channel");
 
-                if (channel.type != "GUILD_TEXT") return interaction.followUp({
+                if (channel.chan != "GUILD_TEXT") return interaction.followUp({
                     content: "Invalid channel type, only text channels can be used"
                 });
 
-                console.log(Channels);
-
                 if (Channels.includes(channel.id)) return interaction.followUp({
-                    content: "This channel is already in the list"
+                    content: "This channel is already exists!"
                 });
 
                 Channels.push(channel.id);
@@ -103,7 +101,19 @@ module.exports = {
                     Channels: Channels
                 });
 
-                interaction.followUp({ content: `${channel} has been added` });
+                interaction.followUp({
+                    embeds: [
+                        {
+                            title: "Done!",
+                            description: `I've added <#${channel.id}> to your list of usable channels!`,
+                            color: SenkoClient.colors.light,
+                            thumbnail: {
+                                url: "attachment://image.png"
+                            }
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
+                });
                 break;
             case "remove":
                 if (!command_permission) return listChannels();
@@ -111,7 +121,7 @@ module.exports = {
                 var channel = interaction.options.getChannel("channel");
 
                 if (!Channels.includes(channel.id)) return interaction.followUp({
-                    content: "This channel has not been added"
+                    content: "This channel has not been added!"
                 });
 
                 spliceArray(Channels, channel.id);
@@ -120,7 +130,19 @@ module.exports = {
                     Channels: Channels
                 });
 
-                interaction.followUp({ content: `Removed ${channel}` });
+                interaction.followUp({
+                    embeds: [
+                        {
+                            title: "Alright dear!",
+                            description: `I have removed ${channel} as per your request`,
+                            color: SenkoClient.colors.dark,
+                            thumbnail: {
+                                url: "attachment://image.png"
+                            }
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
+                });
                 break;
             case "list":
                 listChannels();

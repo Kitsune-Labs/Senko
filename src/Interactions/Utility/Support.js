@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, Client } = require("discord.js");
-const ms = require("ms");
+// eslint-disable-next-line no-unused-vars
+const Icons = require("../../Data/Icons.json");
 
 module.exports = {
     name: "support",
@@ -14,36 +15,27 @@ module.exports = {
         interaction.reply({
             embeds: [
                 {
-                    title: "Hello, I'm Senko-san, a divine messenger Kitsune!",
-                    description: "I am here to pamper to your hearts content!",
-                    color: SenkoClient.colors.dark,
+                    title: "Hello I am Senko-san, a Divine Messenger Kitsune!",
+                    description: `${Icons.heart}  I'm here to pamper you to your heart's content!`,
+                    color: SenkoClient.colors.random(),
                     fields: [
-                        { name: "Uptime", value: `${ms(SenkoClient.uptime, { long: true })}`, inline: true },
-                        { name: "Websocket Ping", value: `${Math.floor(SenkoClient.ws.ping)}`, inline: true },
                         { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒\nsakuya izayoi\nSilkthorne\nKaori Aiko\nTheReal_Enderboy", inline: true },
+                        { name: "Started", value: `<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>`, inline: true },
+                        { name: "Ping", value: `${Math.floor(SenkoClient.ws.ping)}`, inline: true },
                     ],
                     thumbnail: {
                         url: "attachment://image.png"
                     }
                 }
             ],
-
-            files: [ { attachment: "./src/Data/content/senko/senko_hat_huh.png", name: "image.png" } ],
-
+            files: [{ attachment: "./src/Data/content/senko/senko_hat_huh.png", name: "image.png" }],
             components: [
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Invite me", style: 5, url: "https://senkosworld.com/invite", disabled: false },
-                        { type: 2, label: "Submit an issue", style: 5, url: "https://github.com/Kitsune-Softworks/Senko-Issues/issues/new/choose" },
-                        // { type: 2, label: "GitHub", style: 5, url: "https://github.com/Kitsune-Softworks/Senko" }
-                    ]
-                },
-                {
-                    type: "ACTION_ROW",
-                    components: [
+                        { type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${SenkoClient.user.id}&permissions=137439266880`, disabled: false },
                         { type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" },
-                        // { type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" }
+                        // { type: 2, label: "GitHub", style: 5, url: "https://github.com/Kitsune-Softworks/Senko" }
                     ]
                 }
             ],

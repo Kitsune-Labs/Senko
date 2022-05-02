@@ -52,7 +52,7 @@ module.exports = {
                 case "submit_about_me":
                     await updateUser(interaction.user, {
                         LocalUser: {
-                            AboutMe: `${interaction.fields[0].value}`
+                            AboutMe: `${interaction.fields[0].value.replaceAll(/[\r\n]+/gm, "\n")}`
                         }
                     });
 

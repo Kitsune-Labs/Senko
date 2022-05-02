@@ -47,7 +47,8 @@ async function makeSuperGuild(guild) {
                 }
             },
             MessageLogs: null,
-            ActionLogs: null
+            ActionLogs: null,
+            warns: {}
         }
     ]);
 
@@ -63,7 +64,9 @@ async function makeSuperGuild(guild) {
  * @param {JSON} Data
  */
 async function updateSuperGuild(guild, Data) {
-    const { error } = await Supabase.from("Guilds").upsert(JSON.stringify({ guildId: guild.id, ...Data }));
+    Data = JSON.stringify({ guildId: guild.id, ...Data });
+
+    const { data, error } = await Supabase.from("Guilds").upsert(JSON.parse(Data));
 
     if (error) {
         console.log(error);

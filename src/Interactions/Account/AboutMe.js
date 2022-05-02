@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { updateUser } = require("../../API/Master");
+const { updateUser } = require("../API/Master");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../../Data/Icons.json");
+const Icons = require("../Data/Icons.json");
 const DiscordModal = require("discord-modal");
 
 module.exports = {

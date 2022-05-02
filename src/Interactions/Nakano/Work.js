@@ -1,7 +1,6 @@
 const { MessageAttachment } = require("discord.js");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
-const ms = require("ms");
 const { updateUser } = require("../../API/Master");
 
 module.exports = {
@@ -47,13 +46,11 @@ module.exports = {
         const Cooldown = config.cooldowns.daily;
 
         if (Cooldown - (Date.now() - Rewards.Work) >= 0) {
-            const TimeLeft = ms(Cooldown - (Date.now() - Rewards.Work), { long: true });
-
             interaction.reply({
                 embeds: [
                     {
                         title: `${Icons.exclamation}  Not going to happen.`,
-                        description: `Come back in ${TimeLeft} if you want your next paycheck.`,
+                        description: `Come back <t:${Math.floor((Rewards.Work + Cooldown) / 1000)}:R> if you want your next paycheck.`,
                         color: SenkoClient.colors.dark,
                         thumbnail: {
                             url: "attachment://image.png"
@@ -74,7 +71,7 @@ module.exports = {
                     embeds: [
                         {
                             title: `${Icons.exclamation}  You arrived at your home and something happened.`,
-                            description: `Senko told you ${Item.name} had broken. It cost you ${Icons.yen}  ${Item.price}x to ${Item.type}.\n\n— ${Icons.yen}  ${Item.price}x removed`,
+                            description: `Senko told you ${Item.name} had broken. It cost you ${Icons.yen}  ${Item.price}x to ${Item.type}.\n\n— ${Icons.yen}  ${700 - Item.price}x added`,
                             color: SenkoClient.colors.dark,
                             thumbnail: {
                                 url: "attachment://image.png"

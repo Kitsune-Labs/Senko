@@ -1,8 +1,6 @@
 // const IDB = require("../Data/IDB.json");
 const DataConfig = require("../Data/DataConfig.json");
-const { CheckPermission } = require("../API/Master");
-// const AllowedCommands = ["ping", "channel", "channels", "avatar", "prefix", "poll", "whois", "config"];
-const { print, fetchData } = require("../API/Master");
+const { CheckPermission, print, fetchData } = require("../API/Master");
 // const Firebase = require("firebase-admin");
 // const Firestore = Firebase.firestore();
 const LocalOutlaws = require("../Data/LocalOutlawed.json");

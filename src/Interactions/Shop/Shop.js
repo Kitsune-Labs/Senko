@@ -16,16 +16,7 @@ module.exports = {
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const Shop = {
             title: "Senko's Market",
-            description: `
-                Please take your time and review what is available in the market.
-
-                You can use these commands to interact with the market:
-                > \`/buy <item>\` to buy an item
-                > \`/preview <item>\` preview an item description, price, banner, and color
-
-
-                __${Icons.yen}  ${AccountData.Currency.Yen}x in your savings__
-            `,
+            description: `Please take your time and review what is available in the market.\n\nYou can use these commands to interact with the market:\n> \`/buy <item>\` to buy an item\n> \`/preview <item>\` preview an item description, price, banner, and color\n\n\n__${Icons.yen}  ${AccountData.Currency.Yen}x in your savings__`,
             color: SenkoClient.colors.light,
             thumbnail: {
                 url: "attachment://image.png"

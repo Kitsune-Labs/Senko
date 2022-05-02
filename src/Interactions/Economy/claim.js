@@ -1,5 +1,4 @@
 const Icons = require("../../Data/Icons.json");
-const ms = require("ms");
 const { updateUser } = require("../../API/Master");
 
 
@@ -37,13 +36,11 @@ module.exports = {
                 var DailyCooldown = 86400000;
 
                 if (DailyCooldown - (Date.now() - DailyTimeStamp) >= 0) {
-                    const DailyTimeLeft = ms(DailyCooldown - (Date.now() - DailyTimeStamp), { long: true });
-
                     interaction.followUp({
                         embeds: [
                             {
                                 title: `${Icons.exclamation}  Sorry dear!`,
-                                description: `You've already claimed your Yen! Come back in ${DailyTimeLeft}!`,
+                                description: `You've already claimed your Yen! Come back <t:${Math.floor((DailyTimeStamp + DailyCooldown) / 1000)}:R>!`,
                                 color: SenkoClient.colors.dark,
                                 thumbnail: {
                                     url: "attachment://image.png"
@@ -80,13 +77,11 @@ module.exports = {
                 var WeeklyCooldown = 604800000;
 
                 if (WeeklyCooldown - (Date.now() - WeeklyTimeStamp) >= 0) {
-                    const WeeklyTimeLeft = ms(WeeklyCooldown - (Date.now() - WeeklyTimeStamp), { long: true });
-
                     interaction.followUp({
                         embeds: [
                             {
                                 title: `${Icons.exclamation}  Sorry dear!`,
-                                description: `You've already claimed your Yen! Come back in ${WeeklyTimeLeft}!`,
+                                description: `You've already claimed your Yen! Come back <t:${Math.floor((WeeklyTimeStamp + WeeklyCooldown) / 1000)}:R>!`,
                                 color: SenkoClient.colors.dark,
                                 thumbnail: {
                                     url: "attachment://image.png"
