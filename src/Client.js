@@ -7,12 +7,13 @@ const { readdirSync } = require("fs");
 
 
 const SenkoClient = new Client({
-    intents: ["GUILDS", "GUILD_MEMBERS"],
+    intents: ["GUILDS", "GUILD_BANS","GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"],
 
     allowedMentions: {
         parse: ["users", "roles"],
         repliedUser: false
-    }
+    },
+    restRequestTimeout: 60000
 });
 
 require("discord-modal")(SenkoClient);

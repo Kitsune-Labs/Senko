@@ -80,7 +80,7 @@ module.exports = {
             ]
         };
 
-        if (note) messageStruct.embeds[0].footer = { text: "Your note has been attached" };
+        if (note !== "No note(s) provided") messageStruct.embeds[0].footer = { text: "Your note has been attached" };
 
         const warnStruct = {
             userTag: user.user.tag,

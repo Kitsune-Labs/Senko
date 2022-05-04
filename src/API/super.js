@@ -9,6 +9,10 @@ const Supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
     detectSessionInUrl: true
 });
 
+function fetchSupabaseApi() {
+    return Supabase;
+}
+
 /**
  * @param {Guild} guild
  */
@@ -89,5 +93,6 @@ module.exports = {
     fetchSuperGuild,
     makeSuperGuild,
     updateSuperGuild,
-    deleteSuperGuild
+    deleteSuperGuild,
+    fetchSupabaseApi
 };

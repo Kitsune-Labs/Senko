@@ -6,7 +6,6 @@ const { print } = require("../API/Master.js");
 const Icons = require("../Data/Icons.json");
 
 
-
 module.exports = {
     /**
      * @param {Client} SenkoClient

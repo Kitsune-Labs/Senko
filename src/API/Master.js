@@ -302,6 +302,9 @@ function randomBummedImageName() {
     return randomArray(Images);
 }
 
+function clean(Content) {
+    return Content.toString().replace(/`/g, `\`${String.fromCharCode(8203)}`).replace(/@/g, `@${String.fromCharCode(8203)}`);
+}
 
 module.exports = {
     print,
@@ -321,5 +324,6 @@ module.exports = {
     addStats,
     randomNumber,
     randomBummedImageName,
-    randomArray
+    randomArray,
+    clean
 };
