@@ -6,11 +6,11 @@ const { stringEndsWithS, fetchData } = require("../../API/Master");
 
 module.exports = {
     name: "profile",
-    desc: "View your profile, or another user's",
+    desc: "Your profile, or someone else's",
     options: [
         {
             name: "user",
-            description: "View someone else's profile",
+            description: "Someone else",
             required: false,
             type: "USER"
         }
@@ -36,7 +36,7 @@ module.exports = {
         const MessageBuilt = {
             embeds: [
                 {
-                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  ${AccountData.Currency.Yen} yen\n${Icons.tofu}  ${AccountData.Currency.Tofu} tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** achievements\n\n`,
+                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  **${AccountData.Currency.Yen}** yen\n${Icons.tofu}  **${AccountData.Currency.Tofu}** tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** achievements\n\n`,
                     image: {
                         url: `attachment://${(AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif")}`
                     },
@@ -52,17 +52,14 @@ module.exports = {
         for (var item of AccountData.Inventory) {
             const sItem = ShopItems[item.codename];
 
-            if (sItem && sItem.badge !== undefined && BAmount < 10) {
+            if (sItem && sItem.badge !== undefined /*&& BAmount < 10*/) {
                 BadgeString += `${sItem.badge || Icons.tick} `;
 
                 BAmount++;
-            } else if (BAmount > 10) BAmount++;
+            }// else if (BAmount > 10) BAmount++;
         }
 
-        if (BAmount > 10) BadgeString += `\n+${BAmount}`;
-
-        if (BadgeString.length === 0) BadgeString = "** **";
-        MessageBuilt.embeds[0].description += BadgeString;
+        if (BAmount != 0) MessageBuilt.embeds[0].description += BadgeString;
 
         interaction.reply(MessageBuilt);
     }

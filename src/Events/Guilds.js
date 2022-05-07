@@ -68,7 +68,7 @@ module.exports = {
                 member.guild.channels.cache.get(guildData.ActionLogs).send({
                     embeds: [
                         {
-                            title: "Action Report - Kitsune Outlawed",
+                            title: "Action Report - Kitsune Banned",
                             description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${banLog.reason || "None"}`,
                             color: "RED",
                             thumbnail: {
@@ -77,6 +77,69 @@ module.exports = {
                             author: {
                                 name: `${`${banLog.executor.username}#${banLog.executor.discriminator}` || "Unknown"}  [${banLog.executor.id || "000000000000000000"}]`,
                                 icon_url: `${banLog.executor.displayAvatarURL({ dynamic: true })}`
+                            }
+                        }
+                    ]
+                });
+            }
+        });
+
+        SenkoClient.on("guildBanRemove", async (member) => {
+            if (member.guild.id === "777251087592718336") {
+                const fetchedLogs = await member.guild.fetchAuditLogs({
+                    limit: 1,
+                    type: "MEMBER_BAN_REMOVE"
+                });
+
+                const banLog = fetchedLogs.entries.first();
+
+                const guildData = await fetchSuperGuild(member.guild);
+
+                if (guildData.ActionLogs) {
+                    member.guild.channels.cache.get(guildData.ActionLogs).send({
+                        embeds: [
+                            {
+                                title: "Action Report - Kitsune Pardoned",
+                                description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${banLog.reason || "None"}`,
+                                color: "GREEN",
+                                thumbnail: {
+                                    url: member.user.displayAvatarURL({ dynamic: true })
+                                },
+                                author: {
+                                    name: `${`${banLog.executor.username}#${banLog.executor.discriminator}` || "Unknown"}  [${banLog.executor.id || "000000000000000000"}]`,
+                                    icon_url: `${banLog.executor.displayAvatarURL({ dynamic: true })}`
+                                }
+                            }
+                        ]
+                    });
+                }
+            }
+        });
+
+        SenkoClient.on("guildMemberRemove", async member => {
+            const fetchedLogs = await member.guild.fetchAuditLogs({
+                limit: 1,
+                type: "MEMBER_KICK",
+            });
+
+            const kickLog = fetchedLogs.entries.first();
+            if (kickLog.createdAt < member.joinedAt || !kickLog || kickLog.executor.id === SenkoClient.user.id || kickLog.target.id !== member.id) return;
+
+            const guildData = await fetchSuperGuild(member.guild);
+
+            if (guildData.ActionLogs) {
+                member.guild.channels.cache.get(guildData.ActionLogs).send({
+                    embeds: [
+                        {
+                            title: "Action Report - Kitsune Kicked",
+                            description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${kickLog.reason || "None"}`,
+                            color: "YELLOW",
+                            thumbnail: {
+                                url: member.user.displayAvatarURL({ dynamic: true })
+                            },
+                            author: {
+                                name: `${`${kickLog.executor.username}#${kickLog.executor.discriminator}` || "Unknown"}  [${kickLog.executor.id || "000000000000000000"}]`,
+                                icon_url: `${kickLog.executor.displayAvatarURL({ dynamic: true })}`
                             }
                         }
                     ]

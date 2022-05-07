@@ -5,22 +5,29 @@ const { wait } = require("../../API/Master.js");
 const { addYen } = require("../../API/Master");
 
 module.exports = {
-    name: "coinflip",
+    name: "coin",
     desc: "Play a game of coinflip with Shiro.",
     options: [
         {
-            name: "choice",
-            description: "You can choose heads or tails.",
-            type: "STRING",
-            required: true,
-            choices: [
+            name: "flip",
+            description: "flip",
+            type: 1,
+            options: [
                 {
-                    name: "heads",
-                    value: "heads"
-                },
-                {
-                    name: "tails",
-                    value: "tails"
+                    name: "choice",
+                    description: "You can choose heads or tails.",
+                    type: "STRING",
+                    required: true,
+                    choices: [
+                        {
+                            name: "heads",
+                            value: "heads"
+                        },
+                        {
+                            name: "tails",
+                            value: "tails"
+                        }
+                    ]
                 }
             ]
         }

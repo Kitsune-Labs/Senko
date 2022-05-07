@@ -131,8 +131,8 @@ SenkoClient.once("ready", async () => {
             const fCmd = await commandsToSet.find(cmd => cmd.name === command.name);
 
             if (fCmd.permissions) {
-                let permissions  = fCmd.permissions;
-                command.permissions.add({ permissions });
+                let permissions  = await fCmd.permissions;
+                await command.permissions.add({ permissions });
                 console.log(`Added permissions to ${command.name}`);
             }
         });

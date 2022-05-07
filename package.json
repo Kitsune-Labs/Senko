@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "start": "node src/Client.js",
-    "dev": "node src/Client.js --trace-warnings",
+    "start": "node src/Client.js --experimental-worker",
     "shop": "node dev/RefShop.js",
     "build": "node dev/BN.js"
   },

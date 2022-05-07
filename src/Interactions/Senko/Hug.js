@@ -2,10 +2,8 @@
 const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-
-const config = require("../../Data/DataConfig.json");
-const randomFile = require("../../API/modules/image");
-const { fetchData, updateUser, randomNumber, addYen, randomBummedImageName, randomArray } = require("../../API/Master");
+const hardLinks = require("../../Data/hardLinks.json");
+const { fetchData, updateUser, randomNumber, addYen, randomArray } = require("../../API/Master");
 
 const Responses = [
     "_USER_ hugs Senko-san"
@@ -42,27 +40,35 @@ module.exports = {
         const OptionalUser = interaction.options.getUser("user");
 
         if (OptionalUser) {
-            randomFile("./src/Data/content/hug", (err, file) => {
-                const Messages = [
-                    `${interaction.user} hugs ${OptionalUser}!`,
-                    `${OptionalUser} has been hugged by ${interaction.user}!`,
-                ];
+            const Messages = [
+                `${interaction.user} hugs ${OptionalUser}!`,
+                `${OptionalUser} has been hugged by ${interaction.user}!`,
+            ];
 
-                interaction.followUp({
-                    embeds: [
-                        {
-                            description: `${randomArray(Messages)}`,
-                            image: {
-                                url: `attachment://${file.endsWith(".png") ? "hug.png" : "hug.gif"}`
-                            },
-                            color: SenkoClient.colors.light
+            if (OptionalUser.id === interaction.user.id) return interaction.followUp({
+                embeds: [
+                    {
+                        description: `${Icons.heart}  It's okay dear, ill hug you...`,
+                        color: SenkoClient.colors.light,
+                        image: {
+                            url: randomArray(hardLinks.media.hugs)
                         }
-                    ],
-                    files: [ { attachment: `./src/Data/content/hug/${file}`, name: file.endsWith(".png") ? "hug.png" : "hug.gif" } ]
-                });
+                    }
+                ]
             });
 
-            return;
+            return interaction.followUp({
+                embeds: [
+                    {
+                        description: `${randomArray(Messages)}`,
+                        image: {
+                            url: randomArray(hardLinks.media.hugs)
+                        },
+                        color: SenkoClient.colors.light
+                    }
+                ],
+                // files: [ { attachment: `./src/Data/content/hug/${file}`, name: file.endsWith(".png") ? "hug.png" : "hug.gif" } ]
+            });
         }
 
         const { RateLimits, Stats } = await fetchData(interaction.user);
