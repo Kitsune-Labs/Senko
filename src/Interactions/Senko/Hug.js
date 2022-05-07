@@ -2,7 +2,7 @@
 const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const hardLinks = require("../../Data/hardLinks.json");
+const hardLinks = require("../../Data/HardLinks.json");
 const { fetchData, updateUser, randomNumber, addYen, randomArray } = require("../../API/Master");
 
 const Responses = [

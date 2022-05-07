@@ -5,7 +5,7 @@ const Icons = require("../../Data/Icons.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 const { updateSuperGuild } = require("../../API/super");
-const { CheckPermission } = require("../../API/master");
+const { CheckPermission } = require("../../API/Master");
 
 module.exports = {
     name: "server",
