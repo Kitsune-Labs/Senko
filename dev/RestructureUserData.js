@@ -210,13 +210,13 @@ Firestore.collection("Users").get().then(async querySnapshot => {
 
         console.log("Done");
 
-        // fs.writeFileSync(`./dev/out/${DataStructure.LocalUser.userID}.json`, JSON.stringify(DataStructure, null, 4));
+        fs.writeFileSync(`./dev/out/${DataStructure.LocalUser.userID}.json`, JSON.stringify(DataStructure, null, 4));
 
         // return;
-        Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
-            console.log(`Finished ${DataStructure.LocalUser.userID}`);
-        }).catch(err => {
-            throw new Error(`USER UPDATE: ${err}`);
-        });
+        // Firestore.collection("Users").doc(DataStructure.LocalUser.userID).update(DataStructure).then(() =>{
+        //     console.log(`Finished ${DataStructure.LocalUser.userID}`);
+        // }).catch(err => {
+        //     throw new Error(`USER UPDATE: ${err}`);
+        // });
     });
 });

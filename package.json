@@ -1,4 +1,5 @@
 {
+  "version": "1.8.0",
   "scripts": {
     "start": "node src/Client.js --experimental-worker",
     "shop": "node dev/RefShop.js",
@@ -9,6 +10,7 @@
     "axios": "0.27.2",
     "bitfields": "1.0.3",
     "chalk": "4.1.2",
+    "charverter": "^0.0.8-dev",
     "discord-modal": "1.0.2",
     "discord.js": "13.6.0",
     "dotenv": "16.0.0",

@@ -1,6 +1,6 @@
 require("dotenv/config");
 
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, Interaction } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
@@ -13,7 +13,8 @@ const SenkoClient = new Client({
         parse: ["users", "roles"],
         repliedUser: false
     },
-    restRequestTimeout: 60000
+    restRequestTimeout: 60000,
+    userAgentSuffix: [`Kitsune-Softworks/Senko (v${require("../package.json").version})`]
 });
 
 require("discord-modal")(SenkoClient);
@@ -53,22 +54,21 @@ const { print } = require("./API/Master");
 SenkoClient.SlashCommands = new Collection();
 SenkoClient.colors = require("./Data/Palettes/Main.js");
 
+Reflect.set(SenkoClient, "tools", {
+    UserAgent: `${require("discord.js/src/util/Constants").UserAgent} (Kitsune-Softworks/Senko, v${require("../package.json").version})`,
+    colors: require("./Data/Palettes/Main.js")
+});
+
+// print("#5865F2", "UserAgent", SenkoClient.tools.UserAgent);
+
 process.SenkoClient = SenkoClient;
 
 process.on("unhandledRejection",async(reason)=>{console.log(reason);});
 
 
-// ButtonInteraction.__custom = {
-//     shop_id: null
-// };
-
-// Reflect.defineProperty(MessageComponentInteraction.prototype, "property", {
-//     shop_id: null
-// });
-
-// Message.prototype.custom_data = {
-//     shop_data: {}
-// };
+Reflect.set(SenkoClient, Interaction, {
+    shop_id: null
+});
 
 SenkoClient.once("ready", async () => {
     print("#FF6633", "Senko", "Started\n");
@@ -138,12 +138,17 @@ SenkoClient.once("ready", async () => {
         });
     });
 
-    console.log("Commands Ready");
+    print("#F39800", "INTERACTIONS", "Ready");
 
     for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
         require(`./Events/${file}`).execute(SenkoClient);
-        // print("#FFFB00", "EVENTS", `Running ${file}`);
     }
 
-    console.log("Events Ready");
+    print("#FFFB00", "EVENTS", "Ready");
+
+    // for (let file of readdirSync("./src/Automod/").filter(file => file.endsWith(".js"))) {
+    //     require(`./Automod/${file}`).execute(SenkoClient);
+    // }
+
+    // print("#B42025", "AUTOMOD", "Ready");
 });

@@ -27,7 +27,7 @@ module.exports = {
         //         url: `https://discord.com/api/v9/users/${member.user.id}`,
         //         method: "GET",
         //         headers: {
-        //             "User-Agent": process.env.AGENT,
+        //             "User-Agent": SenkoClient.tools.UserAgent,
         //             "Authorization": `Bot ${process.env.TOKEN}`
         //         }
         //     }).then(async (response) => {

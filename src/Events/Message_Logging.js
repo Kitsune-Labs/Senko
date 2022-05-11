@@ -43,7 +43,7 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     execute: async (SenkoClient) => {
         SenkoClient.on("messageDelete", async message => {
-            if (!message.guild || message.author.bot ||message.system) return;
+            if (!message.guild || message.author.bot || message.system) return;
 
             const guildData = await fetchSuperGuild(message.guild);
 
@@ -90,7 +90,7 @@ module.exports = {
                     method: "GET",
                     responseType: "stream",
                     headers: {
-                        "User-Agent": process.env.AGENT,
+                        "User-Agent": SenkoClient.tools.UserAgent,
                     }
                 }).then(async (response) => {
                     const fileId = `case-${caseId}_${attachment.name}`;
@@ -120,7 +120,7 @@ module.exports = {
         });
 
         SenkoClient.on("messageUpdate", async (oldMessage, newMessage) => {
-            if (!oldMessage.guild || oldMessage.author.bot || oldMessage.system) return;
+            if (!oldMessage.guild || oldMessage.author.bot || oldMessage.system || oldMessage.content === newMessage.content) return;
 
             const guildData = await fetchSuperGuild(oldMessage.guild);
 

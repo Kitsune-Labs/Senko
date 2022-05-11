@@ -2,19 +2,19 @@
     "NewFloofer": {
         "Name": "New Floofer",
         "Description": "Fluff Senko 10 times!",
-        "YenReward": 200
+        "YenReward": 100
     },
 
     "AdeptFloofer": {
         "Name": "Adept Floofer",
         "Description": "Fluff Senko 50 times!",
-        "YenReward": 500
+        "YenReward": 200
     },
 
     "MasterFloofer": {
         "Name": "Master Floofer",
         "Description": "Fluff Senko 100 times!",
-        "YenReward": 1000
+        "YenReward": 500
     },
 
 
@@ -42,19 +42,19 @@
     "NewPatter": {
         "Name": "New Patter",
         "Description": "Pat Senko 10 times!",
-        "YenReward": 200
+        "YenReward": 100
     },
 
     "AdeptPatter": {
         "Name": "Adept Patter",
         "Description": "Pat Senko 50 times!",
-        "YenReward": 500
+        "YenReward": 200
     },
 
     "MasterPatter": {
         "Name": "Master Patter",
         "Description": "Pat Senko 100 times!",
-        "YenReward": 1000
+        "YenReward": 500
     },
 
 

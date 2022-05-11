@@ -172,6 +172,16 @@ async function fetchData(user, returnType) {
     let UserData = await UD.get();
     if (!UserData.exists) await createUser(User);
 
+    if (Data.Currency) {
+        if (UserData.data().Currency.Yen >= 100000) {
+            Data.Currency.Yen = 100000; // 99998
+        }
+
+        if (UserData.data().Currency.Tofu >= 50) {
+            Data.Currency.Tofu = 50;
+        }
+    }
+
     if (!Merge) {
         UserStore.doc(User.id).set(Data, { merge: true }).catch(err => {
             throw new Error(`USER UPDATE: ${err}`);
@@ -306,6 +316,15 @@ function clean(Content) {
     return Content.toString().replace(/`/g, `\`${String.fromCharCode(8203)}`).replace(/@/g, `@${String.fromCharCode(8203)}`);
 }
 
+const Characters = ["\"","'","\\","/","!","~","`","_","-","|","{","}","[","]",";",":",">","<",",",".","=","+","*","\n"];
+
+function strip(Content) {
+    for (var char of Characters) {
+        Content = Content.replaceAll(char, "");
+    }
+    return Content;
+}
+
 module.exports = {
     print,
     wait,
@@ -325,5 +344,6 @@ module.exports = {
     randomNumber,
     randomBummedImageName,
     randomArray,
-    clean
+    clean,
+    strip
 };

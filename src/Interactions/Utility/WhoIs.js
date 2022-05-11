@@ -4,7 +4,7 @@ const axios = require("axios");
 
 module.exports = {
     name: "whois",
-    desc: "Public account information",
+    desc: "Account information",
     options: [
         {
             name: "user",
@@ -28,7 +28,6 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const guildMember = await interaction.guild.members.fetch(interaction.options.getUser("user") || interaction.user);
-
         if (!guildMember) return interaction.followUp({ content: "I can't find this user", ephemeral: true });
 
         const guildUser = guildMember.user;
@@ -40,25 +39,13 @@ module.exports = {
         const messageStruct = {
             embeds: [
                 {
-                    description: `${typeof guildMember.nickname === "string" ? `(${guildMember.user.tag})` : ""} ${guildUser} [${guildUser.id}]`,
+                    description: `${typeof guildMember.nickname === "string" ? `(${guildMember.user.tag})` : ""} ${guildUser} [${guildUser.id}]\n\nBot: ${guildUser.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember.premiumSinceTimestamp ? `**Yes**, Since <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nCreation Date: <t:${parseInt(guildUser.createdTimestamp / 1000)}>\nJoined Guild: <t:${parseInt(guildMember.joinedTimestamp / 1000)}>`,
                     color: SenkoClient.colors.random(),
                     fields: [
-                        // { name: "Nickname", value: `${guildMember.nickname || "None"}`, inline: true },
-                        // { name: "User", value: `${guildUser}\n${guildUser.tag}`, inline: true },
-                        // { name: "ID", value: `${guildUser.id}`, inline: true },
-
-                        // { name: "Avatar", value: "None", inline: true },
-                        // { name: "Banner", value: "None", inline: true },
-                        { name: "Bot", value: "False", inline: true },
-
-                        { name: "Created", value: `<t:${parseInt(guildUser.createdTimestamp / 1000)}>\n\n(<t:${parseInt(guildUser.createdTimestamp / 1000)}:R>)`, inline: true },
-                        { name: "Joined", value: `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>\n\n(<t:${parseInt(guildMember.joinedTimestamp / 1000)}:R>)`, inline: true },
-                        { name: "Boosted", value: `${guildMember.premiumSinceTimestamp ? `On <t:${parseInt(guildMember.premiumSinceTimestamp / 1000)}>\n\n(<t:${parseInt(guildMember.premiumSinceTimestamp / 1000)}:R>)` : "False"}`, inline: true },
-
-                        { name: "Roles", value: `__${guildMember.roles.cache.size}__ roles` },
+                        { name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}`},
                     ],
                     thumbnail: {
-                        url: null
+                        url: AvatarURL ? AvatarURL : null
                     },
                     image: {
                         url: null
@@ -69,39 +56,27 @@ module.exports = {
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Avatar", style: 5, url: "https://discord.com/404", disabled: true },
+                        { type: 2, label: "Avatar", style: 5, url: AvatarURL ? AvatarURL : "https://discord.com/404", disabled: AvatarURL ? false : true },
+                        { type: 2, label: "Banner", style: 5, url: "https://discord.com/404", disabled: true }
                     ]
                 }
             ]
         };
 
-        if (AvatarURL) {
-            messageStruct.embeds[0].thumbnail.url = AvatarURL;
-
-            messageStruct.components[0].components[0].url = AvatarURL;
-            messageStruct.components[0].components[0].disabled = false;
-        }
-
-        axios.request({
-            url: `https://discord.com/api/v9/users/${guildUser.id}`,
+        axios({
+            url: `https://discord.com/api/users/${guildUser.id}`,
             method: "GET",
             headers: {
-                "User-Agent": process.env.AGENT,
+                "User-Agent": SenkoClient.tools.UserAgent,
                 "Authorization": `Bot ${SenkoClient.token}`
             }
         }).then(async (response) => {
             if (response.data.banner) {
                 const extension = await response.data.banner.startsWith("a_") ? ".gif" : ".png";
-                messageStruct.embeds[0].image.url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
-                messageStruct.components[0].components.push({ type: 2, label: "Banner", style: 5, url: `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048` });
-            }
 
-            if (guildMember.roles.cache.size <= 30 && interaction.options.getBoolean("show-roles")) {
-                if (guildMember.roles.cache.size === 1) {
-                    messageStruct.embeds[0].fields[4].value = "None";
-                } else {
-                    messageStruct.embeds[0].fields[4].value = `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}`;
-                }
+                messageStruct.embeds[0].image.url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
+                messageStruct.components[0].components[1].disabled = false;
+                messageStruct.components[0].components[1].url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
             }
 
             interaction.followUp(messageStruct);

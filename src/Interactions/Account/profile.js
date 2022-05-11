@@ -3,6 +3,7 @@ const ShopItems = require("../../Data/Shop/Items.json");
 const { Bitfield } = require("bitfields");
 const BitData = require("../../API/Bits.json");
 const { stringEndsWithS, fetchData } = require("../../API/Master");
+const Achievements = require("../../Data/Achievements.json");
 
 module.exports = {
     name: "profile",
@@ -36,7 +37,7 @@ module.exports = {
         const MessageBuilt = {
             embeds: [
                 {
-                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  **${AccountData.Currency.Yen}** yen\n${Icons.tofu}  **${AccountData.Currency.Tofu}** tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}** achievements\n\n`,
+                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  **${AccountData.Currency.Yen}** yen\n${Icons.tofu}  **${AccountData.Currency.Tofu}** tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}/${Object.keys(Achievements).length}** achievements\n\n`,
                     image: {
                         url: `attachment://${(AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif")}`
                     },
@@ -49,6 +50,8 @@ module.exports = {
         let BadgeString = "**__Badges__**\n";
         let BAmount = 0;
 
+        // AccountData.Inventory.map(x => ShopItems[x.codename] && ShopItems[x.codename].badge ? ShopItems[x.codename].badge : "").join("")
+
         for (var item of AccountData.Inventory) {
             const sItem = ShopItems[item.codename];
 
@@ -56,7 +59,7 @@ module.exports = {
                 BadgeString += `${sItem.badge || Icons.tick} `;
 
                 BAmount++;
-            }// else if (BAmount > 10) BAmount++;
+            }
         }
 
         if (BAmount != 0) MessageBuilt.embeds[0].description += BadgeString;

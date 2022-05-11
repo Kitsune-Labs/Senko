@@ -1,0 +1,11 @@
+{
+    "filterLogs": null,
+    "excludedChannels": [],
+
+    "allowed_words": [],
+    "banned_words": [],
+    "blocked": [],
+    "blocked_strict": [],
+    "usernames": [],
+    "curse_words": []
+}

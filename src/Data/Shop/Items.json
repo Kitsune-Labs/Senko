@@ -60,7 +60,7 @@
     "desc": "Perfectly spiced.",
     "price": 400,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "pumpkin": {
@@ -114,7 +114,7 @@
     "desc": "What will Yozora think of this?",
     "price": 3000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "tiny_green_hat": {
@@ -123,7 +123,7 @@
     "desc": "It has a beak like a bird.",
     "price": 100,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "badge": "<:Hat:911085376284819547>",
     "autoSale": true
   },
@@ -133,7 +133,7 @@
     "desc": "A freshly baked loaf of bread to brighten your day",
     "price": 100,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "max": 1,
     "badge": "🍞",
     "autoSale": true
@@ -164,7 +164,7 @@
     "desc": "Freshly Picked!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "yokodoll": {
@@ -182,7 +182,7 @@
     "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
     "price": 300,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yakitori": {
@@ -191,7 +191,7 @@
     "desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
     "price": 947,
     "amount": 2,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "omurice": {
@@ -209,7 +209,7 @@
     "desc": "Low in caffeine, delicious, and an alternative to coffee!",
     "price": 1754,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "taiyaki": {
@@ -263,7 +263,7 @@
     "desc": "It isn't new years, yet",
     "price": 1283,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "senkobanner_1": {
@@ -292,7 +292,7 @@
     "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
     "price": 210,
     "amount": 3,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "greentea": {
@@ -310,7 +310,7 @@
     "desc": "Forever ashubiduba mofu-mofu!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "md_2": {
@@ -373,7 +373,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_5",
     "autoSale": true
   },
@@ -395,7 +395,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_7",
     "autoSale": true
   },
@@ -509,7 +509,7 @@
     "desc": "Make your profile card red!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "color": "#CC3333",
     "type": "color",
@@ -726,7 +726,7 @@
     "desc": "For true kitsune's",
     "price": 300,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "title": "🦊 Kitsune",
     "autoSale": true
@@ -738,7 +738,7 @@
     "price": 300,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true,
     "title": "Fluffy"
   },
@@ -773,7 +773,7 @@
     "price": 100,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true,
     "color": "#f8f060",
     "type": "color"
@@ -786,5 +786,17 @@
     "amount": 1,
     "onsale": false,
     "autoSale": true
+  },
+  "lime_green_color": {
+    "class": "profile",
+    "name": "Lime Green card color",
+    "desc": "A greeny lime color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "onsale": false,
+    "autoSale": true,
+    "color": "#17ff00",
+    "type": "color"
   }
 }

@@ -602,6 +602,11 @@ chalk@4.1.2, chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+charverter@^0.0.8-dev:
+  version "0.0.8-dev"
+  resolved "https://registry.yarnpkg.com/charverter/-/charverter-0.0.8-dev.tgz#8398ebcf6add47c8e8edc9866a6512ff95f348e4"
+  integrity sha512-qM0FeNXG+RWAK8V78FeTtS1uNnRABrOX0Yz0ZG5kdda/S5DL6IWjqpwpQLF9jhqgyPzJ6xEk1ukw+solhAhb2w==
+
 cliui@^7.0.2:
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-7.0.4.tgz#a0265ee655476fc807aea9df3df8df7783808b4f"

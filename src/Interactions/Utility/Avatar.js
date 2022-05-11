@@ -33,41 +33,30 @@ module.exports = {
                         name: User.user ? User.user.tag : User.tag,
                     },
                     title: "Avatar",
+                    description: AvatarURL ? null : "This user doesn't have an avatar",
+                    image: {
+                        url: AvatarURL ? AvatarURL : "attachment://image.png"
+                    },
                     color: SenkoClient.colors.light
-                }
+                },
             ],
+            files: AvatarURL ? null : [{ attachment: "./src/Data/content/DiscordAvatar.png", name: "image.png" }],
             components: [
                 {
                     type: "ACTION_ROW",
                     components: [
-                        { type: 2, label: "Avatar", style: 5, url: "https://discord.com/404", disabled: true }
+                        { type: 2, label: "Avatar", style: 5, url: AvatarURL ? AvatarURL : "https://discord.com/404", disabled: AvatarURL ? false : true },
+                        { type: 2, label: "Banner", style: 5, url: "https://discord.com/404", disabled: true }
                     ]
                 }
             ]
         };
 
-        if (AvatarURL) {
-            messageStruct.embeds[0].image = {
-                url: AvatarURL
-            };
-
-            messageStruct.components[0].components[0].url = AvatarURL;
-            messageStruct.components[0].components[0].disabled = false;
-        } else {
-            messageStruct.embeds[0].description = "This user doesn't have an avatar 😔";
-
-            messageStruct.files = [{ attachment: "./src/Data/content/DiscordAvatar.png", name: "image.png" }];
-            messageStruct.embeds[0].image = {
-                url: "attachment://image.png"
-            };
-        }
-
-
-        await axios.request({
+        axios({
             url: `https://discord.com/api/v9/users/${User.id}`,
             method: "GET",
             headers: {
-                "User-Agent": process.env.AGENT,
+                "User-Agent": SenkoClient.tools.UserAgent,
                 "Authorization": `Bot ${SenkoClient.token}`
             },
         }).then(async (response) => {
@@ -82,7 +71,8 @@ module.exports = {
                     }
                 });
 
-                messageStruct.components[0].components.push({ type: 2, label: "Banner", style: 5, url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048` });
+                messageStruct.components[0].components[1].disabled = false;
+                messageStruct.components[0].components[1].url = `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`;
             }
 
             interaction.followUp(messageStruct);
