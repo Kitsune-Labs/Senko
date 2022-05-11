@@ -19,7 +19,7 @@ module.exports = {
         new Promise((resolve) => {
             for (var Item of AccountData.Inventory) {
                 const ShopItem = ShopItems[Item.codename];
-                if (ShopItem.manga) {
+                if (ShopItem && ShopItem.manga) {
                     OwnedChapters.push({ label: `${ShopItem.name}`, value: `read_${ShopItem.manga}`, description: `${ShopItem.desc}`});
                 }
             }
