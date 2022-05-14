@@ -38,6 +38,9 @@ module.exports = {
                     case "Tail_7":
                         MangaDescription = "Vol. 1, Ch. 7";
                         break;
+                    case "Tail_8":
+                        MangaDescription = "Vol. 1, Ch. 8";
+                        break;
                 }
 
                 for (let i = 1; i <= Object.keys(SelectedManga).length; i++) {
