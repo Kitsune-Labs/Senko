@@ -91,7 +91,7 @@ module.exports = {
                                     name: "Index ≻ Economy",
                                 },
                                 title: "📑 Economy Commands",
-                                description: "≻ **Shop** — Buy item's from Senko's Market\n≻ **Preview** — Preview an item from Senko's Market\n≻ **Buy** — Buy an item from Senko's Market\n≻ **Inventory** — View the items you have collected\n≻ **Claim** — Claim rewards from Senko\n≻ **Funds** — View the amount of currency you have saved\n≻ **Stats** — View your account stats\n≻ **Work** — Have Nakano go to work to provide us with income",
+                                description: "≻ **Shop** — Buy item's from Senko's Market\n≻ **Preview** — Preview an item from Senko's Market\n≻ **Inventory** — View the items you have collected\n≻ **Claim** — Claim rewards from Senko\n≻ **Funds** — View the amount of currency you have saved\n≻ **Stats** — View your account stats\n≻ **Work** — Have Nakano go to work to provide us with income",
                                 color: SenkoClient.colors.random(),
                             }
                         ],
