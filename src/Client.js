@@ -86,9 +86,9 @@ SenkoClient.once("ready", async () => {
 
     print("#FFFB00", "EVENTS", "Ready");
 
-    for (let file of readdirSync("./src/Automod/").filter(file => file.endsWith(".js"))) {
-        require(`./Automod/${file}`).execute(SenkoClient);
-    }
+    // for (let file of readdirSync("./src/Automod/").filter(file => file.endsWith(".js"))) {
+    //     require(`./Automod/${file}`).execute(SenkoClient);
+    // }
 
     // print("#B42025", "AUTOMOD", "Ready");
 
