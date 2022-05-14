@@ -21,7 +21,7 @@ function getItem() {
 }
 
 
-const avaliableItems = 16;
+const avaliableItems = 12;
 
 for (var i = 0; i <= avaliableItems; i++) {
     let Item = getItem();

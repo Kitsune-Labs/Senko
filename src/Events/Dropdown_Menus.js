@@ -71,7 +71,7 @@ module.exports = {
             }
 
             if (Interaction.isSelectMenu()) {
-                print("teal", "Select Menu's", "Started new menu");
+                // print("teal", "Select Menu's", "Started new menu");
 
                 const ReplyEmbed = {
                     content: null,

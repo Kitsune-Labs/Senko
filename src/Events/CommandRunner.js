@@ -4,7 +4,7 @@ const { CheckPermission, print, fetchData } = require("../API/Master");
 // const Firebase = require("firebase-admin");
 // const Firestore = Firebase.firestore();
 const LocalOutlaws = require("../Data/LocalOutlawed.json");
-const { fetchSuperGuild } = require("../API/super.js");
+const { fetchSuperGuild, fetchSuperUser } = require("../API/super.js");
 
 module.exports = {
     /**

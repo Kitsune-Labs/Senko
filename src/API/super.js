@@ -2,6 +2,8 @@
 const { Guild } = require("discord.js");
 const { createClient } = require("@supabase/supabase-js");
 const { Bitfield } = require("bitfields");
+const extend = require("extend");
+
 
 const Supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, {
     autoRefreshToken: true,
@@ -70,7 +72,7 @@ async function makeSuperGuild(guild) {
 async function updateSuperGuild(guild, Data) {
     Data = JSON.stringify({ guildId: guild.id, ...Data });
 
-    const { data, error } = await Supabase.from("Guilds").upsert(JSON.parse(Data));
+    const { error } = await Supabase.from("Guilds").upsert(JSON.parse(Data));
 
     if (error) {
         console.log(error);
@@ -89,10 +91,55 @@ async function deleteSuperGuild(guild) {
     console.log("Deleted super guild");
 }
 
+
+async function fetchSuperUser(user, dontMakeData) {
+    const { data, error } = await Supabase.from("Users").select("*").eq("id", user.id);
+
+    if (error || data[0] === undefined) {
+        if (dontMakeData) return;
+        return await makeSuperUser(user);
+    }
+
+    return data[0];
+}
+
+async function makeSuperUser(user) {
+    await Supabase.from("Users").insert([{ id: user.id }]);
+
+    console.log("Created super user");
+
+    const { data } = await Supabase.from("Users").select("*").eq("id", user.id);
+
+    return data[0];
+}
+
+async function updateSuperUser(user, Data) {
+    const currentData = await fetchSuperUser(user);
+
+    extend(true, currentData, Data);
+
+    if (currentData.Currency.Yen >= 100000) currentData.Currency.Yen = 100000; // 99998
+    if (currentData.Currency.Tofu >= 50) currentData.Currency.Tofu = 50;
+
+    const { error } = await Supabase.from("Users").update(currentData).eq("id", user.id);
+
+    if (error) {
+        console.log(error);
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     fetchSuperGuild,
     makeSuperGuild,
     updateSuperGuild,
     deleteSuperGuild,
+
+    fetchSuperUser,
+    makeSuperUser,
+    updateSuperUser,
+
     fetchSupabaseApi
 };

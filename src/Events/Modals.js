@@ -70,21 +70,6 @@ module.exports = {
                         files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
                     });
                 break;
-
-                default:
-                    interaction.editReply({
-                        embeds: [
-                            {
-                                title: `${Icons.tick}  Error`,
-                                description: "I was unable to submit your content",
-                                color: SenkoClient.colors.dark,
-                                thumbnail: {
-                                    url: "attachment://image.png"
-                                }
-                            }
-                        ],
-                        files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
-                    });
             }
         });
     }

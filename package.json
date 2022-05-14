@@ -11,11 +11,14 @@
     "bitfields": "1.0.3",
     "chalk": "4.1.2",
     "charverter": "^0.0.8-dev",
+    "deep-extend": "^0.6.0",
     "discord-modal": "1.0.2",
     "discord.js": "13.6.0",
     "dotenv": "16.0.0",
+    "extend": "^3.0.2",
     "firebase-admin": "10.1.0",
     "firebase-functions": "3.20.1",
+    "lodash": "^4.17.21",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

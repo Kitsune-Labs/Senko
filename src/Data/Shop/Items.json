@@ -39,6 +39,7 @@
     "desc": "Adds \"Divine\" to your profile name",
     "price": 777,
     "amount": 1,
+    "max": 1,
     "onsale": true,
     "title": "✨ Divine",
     "autoSale": true
@@ -49,7 +50,8 @@
     "desc": "Shiro with some sakura on the edges!",
     "price": 777,
     "amount": 1,
-    "onsale": false,
+    "max": 1,
+    "onsale": true,
     "type": "banner",
     "autoSale": true,
     "banner": "SakuraShiro.png"
@@ -60,7 +62,7 @@
     "desc": "Perfectly spiced.",
     "price": 400,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "pumpkin": {
@@ -96,7 +98,7 @@
     "desc": "The softest tail made",
     "price": 3000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "shirokeychain": {
@@ -105,7 +107,7 @@
     "desc": "Shiro won't like this I bet",
     "price": 3000,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "yozorakeychain": {
@@ -123,7 +125,7 @@
     "desc": "It has a beak like a bird.",
     "price": 100,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "badge": "<:Hat:911085376284819547>",
     "autoSale": true
   },
@@ -133,7 +135,7 @@
     "desc": "A freshly baked loaf of bread to brighten your day",
     "price": 100,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "max": 1,
     "badge": "🍞",
     "autoSale": true
@@ -164,7 +166,7 @@
     "desc": "Freshly Picked!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yokodoll": {
@@ -173,7 +175,7 @@
     "desc": "A little yoko doll of Nakano.",
     "price": 750,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "sakurroseawine": {
@@ -191,7 +193,7 @@
     "desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
     "price": 947,
     "amount": 2,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "omurice": {
@@ -200,7 +202,7 @@
     "desc": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
     "price": 712,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "hojicha": {
@@ -209,7 +211,7 @@
     "desc": "Low in caffeine, delicious, and an alternative to coffee!",
     "price": 1754,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "taiyaki": {
@@ -292,7 +294,7 @@
     "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
     "price": 210,
     "amount": 3,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "greentea": {
@@ -329,7 +331,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_1",
     "autoSale": true
   },
@@ -340,7 +342,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_2",
     "autoSale": true
   },
@@ -351,7 +353,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_3",
     "autoSale": true
   },
@@ -362,7 +364,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_4",
     "autoSale": true
   },
@@ -373,7 +375,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_5",
     "autoSale": true
   },
@@ -384,7 +386,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "manga": "Tail_6",
     "autoSale": true
   },
@@ -395,7 +397,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_7",
     "autoSale": true
   },
@@ -414,7 +416,7 @@
     "desc": "The eighth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": false,
+    "onsale": true,
     "autoSale": true
   },
   "kaiseki": {
@@ -423,7 +425,7 @@
     "desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "tsukemono": {
@@ -591,7 +593,7 @@
     "price": 50,
     "amount": 3,
     "max": 1,
-    "onsale": false,
+    "onsale": true,
     "badge": "🍒",
     "autoSale": true
   },
@@ -773,7 +775,7 @@
     "price": 100,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true,
     "color": "#f8f060",
     "type": "color"

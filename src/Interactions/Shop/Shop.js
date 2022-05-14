@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction, MessageAttachment } = require("discord.js");
+const { CommandInteraction, Message } = require("discord.js");
 const ShopItems = require("../../Data/Shop/Items.json");
 const Icons = require("../../Data/Icons.json");
 
@@ -14,9 +14,12 @@ module.exports = {
      */
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
+        /**
+         * @type {Message}
+         */
         const Shop = {
             title: "Senko's Market",
-            description: `Please take your time and review what is available in the market.\n\nYou can use these commands to interact with the market:\n> \`/buy <item>\` to buy an item\n> \`/preview <item>\` preview an item description, price, banner, and color\n\n\n__${Icons.yen}  ${AccountData.Currency.Yen}x in your savings__`,
+            description: `Please take your time and review what is available in the market.\n\nYou can use \`/preview\` to view extended info about an item like it's description, price, banner, and color\n\n${Icons.yen}  **${AccountData.Currency.Yen}** in your savings`,
             color: SenkoClient.colors.light,
             thumbnail: {
                 url: "attachment://image.png"
@@ -27,44 +30,32 @@ module.exports = {
         let FoodItems = "";
         let MaterialItems = "";
         let GeneralItems = "";
-
         let EventItems = "";
+        const MenuItems = [];
 
         for (var Thing in ShopItems) {
             var Item = ShopItems[Thing];
 
             if (Item.onsale) {
-                let ItemString = "";
+                let ItemString = `[${Icons.yen}  ${Item.price}] **${Item.name}**`;
 
-                if (Item.seasonal && Item.seasonal.isSeasonal === true)
-                    EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
+                MenuItems.push({ label: `${Item.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(Thing)}_${interaction.user.id}` });
 
+                if (Item.seasonal && Item.seasonal.isSeasonal === true) EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
 
                 switch(Item.class) {
                     case "food":
-                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
-
                         FoodItems += `${ItemString}\n`;
-                    break;
-
+                        break;
                     case "material":
-                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
-
                         MaterialItems += `${ItemString}\n`;
-                    break;
-
+                        break;
                     case "profile":
-                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
-
                         ProfileItems += `${ItemString}\n`;
-                    break;
-
+                        break;
                     case "general":
-                        ItemString += `— **${Item.name}** [${Icons.yen}  ${Item.price}x]`;
-
                         GeneralItems += `${ItemString}\n`;
-                    break;
-
+                        break;
                     default:
                         console.log(`${Item.name} doesn't have a correct category.`);
                 }
@@ -83,7 +74,20 @@ module.exports = {
 
         interaction.followUp({
             embeds: [ Shop ],
-            files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
+            files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
+            components: [
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 3,
+                            placeholder: "Select an item to purchase",
+                            custom_id: "shop_purchase",
+                            options: MenuItems
+                        },
+                    ]
+                }
+            ]
         });
     }
 };

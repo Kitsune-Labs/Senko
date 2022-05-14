@@ -10,6 +10,7 @@ const UserStore = DataBase.collection("Users");
 
 const DataConfig = config;
 const { Bitfield } = require("bitfields");
+const { updateSuperUser } = require("./super");
 
 
 /**
@@ -56,18 +57,16 @@ function getName(interaction) {
 async function createUser(User) {
     await UserStore.doc(User.id).set({
         LocalUser: {
-            user: null,
-            version: DataConfig.currentVersion,
             userID: User.id,
             Banner: "DefaultBanner.png",
             badges: [],
+            AboutMe: null,
             config: {
                 language: "en-us",
                 color: "#FF9933",
                 flags: new Bitfield(100).toHex(),
                 title: null
-            },
-            AboutMe: null
+            }
         },
 
         Stats: {
@@ -167,6 +166,8 @@ async function fetchData(user, returnType) {
  * @param {Number} merge
  */
  async function updateUser(User, Data, Merge) {
+    // return await updateSuperUser(User, Data);
+
     const UD = UserStore.doc(User.id);
 
     let UserData = await UD.get();
@@ -325,6 +326,16 @@ function strip(Content) {
     return Content;
 }
 
+async function disableComponents(interaction) {
+    for (var component of interaction.message.components[0].components) {
+        component.disabled = true;
+    }
+
+    interaction.channel.messages.cache.get(interaction.message.id).edit({
+        components: interaction.message.components
+    });
+}
+
 module.exports = {
     print,
     wait,
@@ -345,5 +356,6 @@ module.exports = {
     randomBummedImageName,
     randomArray,
     clean,
-    strip
+    strip,
+    disableComponents
 };

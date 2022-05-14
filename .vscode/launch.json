@@ -11,9 +11,6 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "runtimeArgs": [
-                "--experimental-worker"
-            ],
             "program": "${workspaceFolder}\\src\\Client.js"
         }
     ]

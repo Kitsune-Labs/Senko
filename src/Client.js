@@ -79,6 +79,22 @@ SenkoClient.once("ready", async () => {
 
     // return commands.set([]);
 
+
+    for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
+        require(`./Events/${file}`).execute(SenkoClient);
+    }
+
+    print("#FFFB00", "EVENTS", "Ready");
+
+    // for (let file of readdirSync("./src/Automod/").filter(file => file.endsWith(".js"))) {
+    //     require(`./Automod/${file}`).execute(SenkoClient);
+    // }
+
+    // print("#B42025", "AUTOMOD", "Ready");
+
+
+
+
     const commandsToSet = [];
 
     async function setCommands() {
@@ -139,16 +155,4 @@ SenkoClient.once("ready", async () => {
     });
 
     print("#F39800", "INTERACTIONS", "Ready");
-
-    for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
-        require(`./Events/${file}`).execute(SenkoClient);
-    }
-
-    print("#FFFB00", "EVENTS", "Ready");
-
-    // for (let file of readdirSync("./src/Automod/").filter(file => file.endsWith(".js"))) {
-    //     require(`./Automod/${file}`).execute(SenkoClient);
-    // }
-
-    // print("#B42025", "AUTOMOD", "Ready");
 });

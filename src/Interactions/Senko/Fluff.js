@@ -31,17 +31,18 @@ module.exports = {
     name: "fluff",
     desc: "Mofumofu!",
     userData: true,
+    defer: true,
     /**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, { Stats, Currency }) => {
-        Stats.Fluffs++;
+        // Stats.Fluffs++;
 
         await updateUser(interaction.user, {
             Stats: {
-                Fluffs: Stats.Fluffs
+                Fluffs: Stats.Fluffs + 1
             }
         });
 
@@ -75,6 +76,6 @@ module.exports = {
             });
         }
 
-        interaction.reply(MessageStruct);
+        interaction.followUp(MessageStruct);
     }
 };
