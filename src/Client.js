@@ -93,8 +93,6 @@ SenkoClient.once("ready", async () => {
     // print("#B42025", "AUTOMOD", "Ready");
 
 
-
-
     const commandsToSet = [];
 
     async function setCommands() {
