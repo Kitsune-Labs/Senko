@@ -801,5 +801,15 @@
     "autoSale": true,
     "color": "#17ff00",
     "type": "color"
+  },
+  "shiro_wave": {
+    "class": "profile",
+    "name": "Shiro Wave Banner",
+    "desc": "Shiro with wavy hair",
+    "price": 300,
+    "amount": 1,
+    "onsale": false,
+    "type": "banner",
+    "banner": "ShiroWind.png"
   }
 }
