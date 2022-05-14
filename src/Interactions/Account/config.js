@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 const { MessageActionRow, MessageSelectMenu } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 
@@ -52,17 +53,17 @@ module.exports = {
                     { label: "Default Banner", value: "banner_change_default", description: "The banner everyone gets" }
                 ];
 
-                new Promise((resolve) => {
-                    for (var Item of AccountData.Inventory) {
+                // new Promise((resolve) => {
+                    for (let Item of AccountData.Inventory) {
                         const ShopItem = ShopItems[Item.codename];
 
-                        if (ShopItem.type && ShopItem.type === "banner") {
+                        if (ShopItem && ShopItem.banner) {
                             Banners.push({ label: `${ShopItem.name}`, value: `banner_change_${Item.codename}`, description: `${ShopItem.desc}`});
                         }
                     }
 
-                    resolve();
-                }).then(() => {
+                    // resolve();
+                // }).then(() => {
                     if (!Banners[1]) return interaction.followUp({
                         content: "You don't own any banners, you can find them in the shop when they're onsale!",
                         ephemeral: true
@@ -78,7 +79,7 @@ module.exports = {
                         ])],
                         ephemeral: true
                     });
-                });
+                // });
             break;
             case "settings":
                 var AccountFlags = Bitfield.fromHex(await AccountData.LocalUser.config.flags);
@@ -120,17 +121,17 @@ module.exports = {
                     { label: "No Title", value: "title_none", description: "No Title"}
                 ];
 
-                new Promise((resolve) => {
-                    for (var Item of AccountData.Inventory) {
+                // new Promise((resolve) => {
+                    for (let Item of AccountData.Inventory) {
                         const ShopItem = ShopItems[Item.codename];
 
-                        if (ShopItem.title) {
+                        if (ShopItem && ShopItem.title) {
                             TitleColors.push({ label: `${ShopItem.name}`, value: `title_${Item.codename}`, description: `${ShopItem.desc}`});
                         }
                     }
 
-                    resolve();
-                }).then(() => {
+                    // resolve();
+                // }).then(() => {
                     if (!TitleColors[1]) return interaction.followUp({
                         content: "You don't own any titles, you can find them in the shop when they're onsale!",
                         ephemeral: true
@@ -146,7 +147,7 @@ module.exports = {
                         ])],
                         ephemeral: true
                     });
-                });
+                // });
             break;
             case "color":
                 if (!AccountData.Inventory[0]) return interaction.followUp({
@@ -154,41 +155,35 @@ module.exports = {
                     ephemeral: true
                 });
 
-                var ColorColors = [
-                    { label: "Default Color", value: "color_change_default", description: "The color everyone gets"}
-                ];
+                var CurrentColor = "Unknown";
+                var ColorColors = [{ label: "Default Color", value: "color_change_default", description: "The color everyone gets" }];
 
-                new Promise((resolve) => {
-                    let CurrentColor = null;
+                for (let Item of AccountData.Inventory) {
+                    const ShopItem = ShopItems[Item.codename];
 
-                    for (var Item of AccountData.Inventory) {
-                        const ShopItem = ShopItems[Item.codename];
-                        if (ShopItem.color) {
-                            ColorColors.push({ label: `${ShopItem.name}`, value: `color_change_${Item.codename}`, description: `${ShopItem.desc}`});
+                    if (ShopItem && ShopItem.color) {
+                        ColorColors.push({ label: `${ShopItem.name}`, value: `color_change_${Item.codename}`, description: `${ShopItem.desc}`});
 
-                            if (AccountData.LocalUser.config.color === ShopItem.color) {
-                                CurrentColor = ShopItem.name;
-                            }
+                        if (AccountData.LocalUser.config.color === ShopItem.color) {
+                            CurrentColor = ShopItem.name;
                         }
                     }
+                }
 
-                    resolve(CurrentColor);
-                }).then((CurrentColor) => {
-                    if (!ColorColors[1]) return interaction.followUp({
-                        content: "You don't own any colors, you can find them in the shop when they're onsale!",
-                        ephemeral: true
-                    });
+                if (!ColorColors[1]) return interaction.followUp({
+                    content: "You don't own any colors, you can find them in the shop when they're onsale!",
+                    ephemeral: true
+                });
 
-                    interaction.followUp({
-                        content: "Select a color to equip in the dropdown menu! (Will equip on click)",
-                        components: [ new MessageActionRow().addComponents([
-                            new MessageSelectMenu()
-                            .setCustomId("banner_set")
-                            .setPlaceholder(`Currently ${CurrentColor}`)
-                            .setOptions(ColorColors)
-                        ])],
-                        ephemeral: true
-                    });
+                interaction.followUp({
+                    content: "Select a color to equip in the dropdown menu! (Will equip on click)",
+                    components: [ new MessageActionRow().addComponents([
+                        new MessageSelectMenu()
+                        .setCustomId("banner_set")
+                        .setPlaceholder(`Currently ${CurrentColor}`)
+                        .setOptions(ColorColors)
+                    ])],
+                    ephemeral: true
                 });
             break;
         }

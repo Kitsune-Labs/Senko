@@ -87,7 +87,7 @@ module.exports = {
                 if (!command_permission) return listChannels();
                 var channel = interaction.options.getChannel("channel");
 
-                if (channel.chan != "GUILD_TEXT") return interaction.followUp({
+                if (channel.type != "GUILD_TEXT") return interaction.followUp({
                     content: "Invalid channel type, only text channels can be used"
                 });
 
