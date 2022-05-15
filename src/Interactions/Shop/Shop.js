@@ -2,6 +2,9 @@
 const { CommandInteraction, Message } = require("discord.js");
 const ShopItems = require("../../Data/Shop/Items.json");
 const Icons = require("../../Data/Icons.json");
+const { fetchSupabaseApi } = require("../../API/super.js");
+
+const Supabase = fetchSupabaseApi();
 
 module.exports = {
     name: "shop",
@@ -14,12 +17,16 @@ module.exports = {
      */
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
+        const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
+
+        const shopData = rawShopData[0].market;
+
         /**
          * @type {Message}
          */
         const Shop = {
             title: "Senko's Market",
-            description: `Please take your time and review what is available in the market.\n\nYou can use \`/preview\` to view extended info about an item like it's description, price, banner, and color\n\n${Icons.yen}  **${AccountData.Currency.Yen}** in your savings`,
+            description: `Please take your time and review what is available in the market.\n\nYou can use \`/preview\` to view extended info about an item like it's description, price, banner, and color\n\n> ${Icons.package}  Market refresh <t:${shopData.updates}:R>\n> ${Icons.yen}  **${AccountData.Currency.Yen}** in your savings`,
             color: SenkoClient.colors.light,
             thumbnail: {
                 url: "attachment://image.png"
@@ -33,32 +40,30 @@ module.exports = {
         let EventItems = "";
         const MenuItems = [];
 
-        for (var Thing in ShopItems) {
-            var Item = ShopItems[Thing];
+        for (var Thing of shopData.items) {
+            var Item = await ShopItems[Thing];
 
-            if (Item.onsale) {
-                let ItemString = `[${Icons.yen}  ${Item.price}] **${Item.name}**`;
+            let ItemString = `[${Icons.yen}  ${Item.price}] **${Item.name}**`;
 
-                MenuItems.push({ label: `${Item.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(Thing)}_${interaction.user.id}` });
+            MenuItems.push({ label: `${Item.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(Thing)}_${interaction.user.id}` });
 
-                if (Item.seasonal && Item.seasonal.isSeasonal === true) EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
+            if (Item.seasonal && Item.seasonal.isSeasonal === true) EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
 
-                switch(Item.class) {
-                    case "food":
-                        FoodItems += `${ItemString}\n`;
-                        break;
-                    case "material":
-                        MaterialItems += `${ItemString}\n`;
-                        break;
-                    case "profile":
-                        ProfileItems += `${ItemString}\n`;
-                        break;
-                    case "general":
-                        GeneralItems += `${ItemString}\n`;
-                        break;
-                    default:
-                        console.log(`${Item.name} doesn't have a correct category.`);
-                }
+            switch(Item.class) {
+                case "food":
+                    FoodItems += `${ItemString}\n`;
+                    break;
+                case "material":
+                    MaterialItems += `${ItemString}\n`;
+                    break;
+                case "profile":
+                    ProfileItems += `${ItemString}\n`;
+                    break;
+                case "general":
+                    GeneralItems += `${ItemString}\n`;
+                    break;
+                default:
+                    console.log(`${Item.name} doesn't have a correct category.`);
             }
         }
 

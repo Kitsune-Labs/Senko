@@ -40,7 +40,7 @@
     "price": 777,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "title": "✨ Divine",
     "autoSale": true
   },
@@ -51,7 +51,7 @@
     "price": 777,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "type": "banner",
     "autoSale": true,
     "banner": "SakuraShiro.png"
@@ -107,7 +107,7 @@
     "desc": "Shiro won't like this I bet",
     "price": 3000,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "yozorakeychain": {
@@ -175,7 +175,7 @@
     "desc": "A little yoko doll of Nakano.",
     "price": 750,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "sakurroseawine": {
@@ -211,7 +211,7 @@
     "desc": "Low in caffeine, delicious, and an alternative to coffee!",
     "price": 1754,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "taiyaki": {
@@ -265,7 +265,7 @@
     "desc": "It isn't new years, yet",
     "price": 1283,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "senkobanner_1": {
@@ -294,7 +294,7 @@
     "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
     "price": 210,
     "amount": 3,
-    "onsale": true,
+    "onsale": false,
     "autoSale": true
   },
   "greentea": {
@@ -331,7 +331,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_1",
     "autoSale": true
   },
@@ -342,7 +342,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_2",
     "autoSale": true
   },
@@ -386,7 +386,7 @@
     "price": 500,
     "amount": 1,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_6",
     "autoSale": true
   },
@@ -416,7 +416,7 @@
     "desc": "The eighth tail of the Sewayaki Kitsune no Senko-san manga!",
     "price": 500,
     "amount": 1,
-    "onsale": true,
+    "onsale": false,
     "manga": "Tail_8",
     "autoSale": true
   },
@@ -594,7 +594,7 @@
     "price": 50,
     "amount": 3,
     "max": 1,
-    "onsale": true,
+    "onsale": false,
     "badge": "🍒",
     "autoSale": true
   },

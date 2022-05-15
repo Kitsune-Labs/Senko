@@ -149,6 +149,39 @@ module.exports = {
             } else {
                 if (interaction.isButton() && interaction.customId.startsWith("shop_cancel-")) return interaction.reply({ content: "I can't put things back that aren't yours", ephemeral: true });
             }
+
+            if (interaction.isSelectMenu() && interaction.customId == "shop_preview") {
+                const item = interaction.values[0].split("_").splice(1, 3);
+
+                const itemName = Object.keys(shopItems).at(item[0]);
+                const shopItem = await shopItems[itemName];
+
+                const MessageStructure = {
+                    embeds: [
+                        {
+                            title: `${shopItem.name}`,
+                            description: `${shopItem.desc}\n`,
+                            color: shopItem.color || SenkoClient.colors.dark,
+                            fields: [
+                                { name: `${Icons.yen}`, value: `${shopItem.price}x`, inline: true },
+                            ]
+                        }
+                    ],
+
+                    files: [],
+                    ephemeral: true
+                };
+
+                if (shopItem.title) MessageStructure.embeds[0].fields.push({ name: "Title", value: `${shopItem.title || Icons.tick}`, inline: true });
+                if (shopItem.badge) MessageStructure.embeds[0].fields.push({ name: "Badge", value: `${shopItem.badge || Icons.tick}`, inline: true });
+                if (shopItem.color) MessageStructure.embeds[0].fields.push({ name: "Colored", value: "** **", inline: true });
+                if (shopItem.banner) {
+                    MessageStructure.embeds[0].image = { url: `attachment://${shopItem.banner}` };
+                    MessageStructure.files.push({ attachment: `./src/Data/content/banners/${shopItem.banner}`, name: shopItem.banner });
+                }
+
+                interaction.update(MessageStructure);
+            }
         });
     }
 };

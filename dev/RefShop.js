@@ -25,7 +25,7 @@ const avaliableItems = 12;
 
 for (var i = 0; i <= avaliableItems; i++) {
     let Item = getItem();
-    ShopItems[Item].onsale = true;
+    // ShopItems[Item].onsale = true;
     console.log(Item);
 }
 

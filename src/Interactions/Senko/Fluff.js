@@ -4,6 +4,23 @@ const { Client, Interaction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 const { updateUser, randomArray, randomNumber, addYen } = require("../../API/Master.js");
 
+
+const reactions = [
+    {
+        image: "fluffed.png",
+        sounds: ["Uya", "Uya...", "mhMh"],
+        text: ["D-Do you have to be so verbose?", "Please be more gentle with my tail!"],
+    },
+    {
+        image: "fluffed_2.png",
+        sounds: ["Uya!", "HYaa", "mhMh"],
+    }
+];
+
+
+
+
+
 const UserInput = [
     "_USER_ strokes Senko's tail",
     "_USER_ fluffs Senko-san",

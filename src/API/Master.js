@@ -336,6 +336,15 @@ async function disableComponents(interaction) {
     });
 }
 
+function calcTimeLeft(LastDate, Cooldown) {
+    return Date.now() - LastDate > Cooldown;
+}
+
+function insertString(firstString, index, string) {
+    if (index > 0) return firstString.substring(0, index) + string + firstString.substr(index);
+    return string + firstString;
+}
+
 module.exports = {
     print,
     wait,
@@ -357,5 +366,7 @@ module.exports = {
     randomArray,
     clean,
     strip,
-    disableComponents
+    disableComponents,
+    calcTimeLeft,
+    insertString
 };

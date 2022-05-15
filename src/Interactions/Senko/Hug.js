@@ -3,7 +3,8 @@ const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const hardLinks = require("../../Data/HardLinks.json");
-const { fetchData, updateUser, randomNumber, addYen, randomArray } = require("../../API/Master");
+const { fetchData, updateUser, randomNumber, addYen, randomArray, calcTimeLeft } = require("../../API/Master");
+const config = require("../../Data/DataConfig.json");
 
 const Responses = [
     "_USER_ hugs Senko-san"
@@ -86,35 +87,25 @@ module.exports = {
             files: [{ attachment: "./src/Data/content/senko/hug.png", name: "image.png" }]
         };
 
-        // console.log(Math.ceil((Date.now() / 1000) - RateLimits.Hug_Rate.Date));
-        // console.log(RateLimits.Hug_Rate.Amount, RateLimits.Hug_Rate.Amount >= 20);
+        if (calcTimeLeft(RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
+            await updateUser(interaction.user, {
+                RateLimits: {
+                    Hug_Rate: {
+                        Amount: 0,
+                        Date: Date.now()
+                    }
+                }
+            });
 
+            RateLimits.Hug_Rate.Amount = 0;
+        }
 
-        // return interaction.followUp({ content: `<t:${Math.ceil((Date.now() / 1000) - (RateLimits.Hug_Rate.Date / 1000))}:R>` });
+        if (RateLimits.Hug_Rate.Amount >= 20) {
+            MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: "./src/Data/content/senko/bummed.png", name: "image.png" }];
 
-
-        // if (!config.cooldowns.daily - (Date.now() - RateLimits.Hug_Rate.Date) >= 0) {
-        //     await updateUser(interaction.user, {
-        //         RateLimits: {
-        //             Hug_Rate: {
-        //                 Amount: 0,
-        //                 Date: Date.now()
-        //             }
-        //         }
-        //     });
-
-        //     RateLimits.Hug_Rate.Amount = 0;
-        // }
-
-
-
-        // if (RateLimits.Hug_Rate.Amount >= 20) {
-        //     MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Hug_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-        //     MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
-
-        //     return interaction.followUp(MessageStruct);
-        // }
-
+            return interaction.followUp(MessageStruct);
+        }
 
         if (randomNumber(100) > 75) {
             addYen(interaction.user, 50);
@@ -122,24 +113,23 @@ module.exports = {
             MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  50x added for interaction`;
         }
 
-
         MessageStruct.embeds[0].title = randomArray(Sounds);
 
         Stats.Hugs++;
-        // RateLimits.Hug_Rate.Amount++;
+        RateLimits.Hug_Rate.Amount++;
 
         await updateUser(interaction.user, {
             Stats: { Hugs: Stats.Hugs },
 
-            // RateLimits: {
-            //     Hug_Rate: {
-            //         Amount: RateLimits.Hug_Rate.Amount,
-            //         Date: Date.now()
-            //     }
-            // }
+            RateLimits: {
+                Hug_Rate: {
+                    Amount: RateLimits.Hug_Rate.Amount,
+                    Date: Date.now()
+                }
+            }
         });
 
-        // if (RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
+        if (RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
 
         interaction.followUp(MessageStruct);
     }

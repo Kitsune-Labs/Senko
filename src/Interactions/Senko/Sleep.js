@@ -1,10 +1,10 @@
-// eslint-disable-next-line no-unused-vars
+eslint-disable-next-line no-unused-vars
 const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 
 const config = require("../../Data/DataConfig.json");
-const { updateUser, randomArray, randomBummedImageName } = require("../../API/Master");
+const { updateUser, randomArray, randomBummedImageName, calcTimeLeft } = require("../../API/Master");
 
 const UserActions = [
     "_USER_ rest's on Senko's lap",
@@ -50,39 +50,39 @@ module.exports = {
             files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
         };
 
-        // if (!config.cooldowns.daily - (Date.now() - RateLimits.Sleep_Rate.Date) >= 0) {
-        //     await updateUser(interaction.user, {
-        //         RateLimits: {
-        //             Sleep_Rate: {
-        //                 Amount: 0,
-        //                 Date: Date.now()
-        //             }
-        //         }
-        //     });
+        if (calcTimeLeft(RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {
+            await updateUser(interaction.user, {
+                RateLimits: {
+                    Sleep_Rate: {
+                        Amount: 0,
+                        Date: Date.now()
+                    }
+                }
+            });
 
-        //     RateLimits.Sleep_Rate.Amount = 0;
-        // }
+            RateLimits.Sleep_Rate.Amount = 0;
+        }
 
 
-        // if (RateLimits.Sleep_Rate.Amount >= 1) {
-        //     MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-        //     MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+        if (RateLimits.Sleep_Rate.Amount >= 1) {
+            MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
 
-        //     return interaction.followUp(MessageStruct);
-        // }
+            return interaction.followUp(MessageStruct);
+        }
 
-        // RateLimits.Sleep_Rate.Amount++;
+        RateLimits.Sleep_Rate.Amount++;
         Stats.Sleeps++;
 
         await updateUser(interaction.user, {
             Stats: { Sleeps: Stats.Sleeps },
 
-            // RateLimits: {
-            //     Sleep_Rate: {
-            //         Amount: RateLimits.Sleep_Rate.Amount,
-            //         Date: Date.now()
-            //     }
-            // }
+            RateLimits: {
+                Sleep_Rate: {
+                    Amount: RateLimits.Sleep_Rate.Amount,
+                    Date: Date.now()
+                }
+            }
         });
 
         interaction.followUp(MessageStruct);

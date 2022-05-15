@@ -1,7 +1,7 @@
 
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
-const { updateUser, randomArray, randomBummedImageName, randomNumber, addYen } = require("../../API/Master");
+const { updateUser, randomArray, randomBummedImageName, randomNumber, addYen, calcTimeLeft } = require("../../API/Master");
 
 const Responses = [
     "_USER_ pats Senko's head",
@@ -51,30 +51,30 @@ module.exports = {
             files: [{ attachment: "./src/Data/content/senko/pat.png", name: "image.png" }]
         };
 
-        // if (!config.cooldowns.daily - (Date.now() - RateLimits.Pat_Rate.Date) >= 0) {
-        //     await updateUser(interaction.user, {
-        //         RateLimits: {
-        //             Pat_Rate: {
-        //                 Amount: 0,
-        //                 Date: Date.now()
-        //             }
-        //         }
-        //     });
+        if (calcTimeLeft(RateLimits.Pat_Rate.Date, config.cooldowns.daily)) {
+            await updateUser(interaction.user, {
+                RateLimits: {
+                    Pat_Rate: {
+                        Amount: 0,
+                        Date: Date.now()
+                    }
+                }
+            });
 
-        //     RateLimits.Pat_Rate.Amount = 0;
-        // }
+            RateLimits.Pat_Rate.Amount = 0;
+        }
 
 
-        // if (RateLimits.Pat_Rate.Amount >= 20) {
-        //     MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Pat_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-        //     MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+        if (RateLimits.Pat_Rate.Amount >= 20) {
+            MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Pat_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+            MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
 
-        //     return interaction.followUp(MessageStruct);
-        // }
+            return interaction.followUp(MessageStruct);
+        }
 
 
         Stats.Pats++;
-        // RateLimits.Pat_Rate.Amount++;
+        RateLimits.Pat_Rate.Amount++;
 
         if (randomNumber(100) > 75) {
             addYen(interaction.user, 50);
@@ -88,15 +88,15 @@ module.exports = {
         await updateUser(interaction.user, {
             Stats: { Hugs: Stats.Hugs },
 
-            // RateLimits: {
-            //     Pat_Rate: {
-            //         Amount: RateLimits.Pat_Rate.Amount,
-            //         Date: Date.now()
-            //     }
-            // }
+            RateLimits: {
+                Pat_Rate: {
+                    Amount: RateLimits.Pat_Rate.Amount,
+                    Date: Date.now()
+                }
+            }
         });
 
-        // if (RateLimits.Pat_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop patting her for today`;
+        if (RateLimits.Pat_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop patting her for today`;
 
 
         interaction.followUp(MessageStruct);

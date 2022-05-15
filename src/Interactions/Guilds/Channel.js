@@ -199,7 +199,7 @@ module.exports = {
                     embeds: [
                         {
                             title: "I have gathered your channels and reviewed them",
-                            description: `I have found ${removed_channels} that no longer exist and have removed them!`,
+                            description: `I have found ${removed_channels > 1 ? " channel" : "channels"} that no longer exist${removed_channels > 1 ? " s" : ""} and have removed them!`,
                             color: SenkoClient.colors.light,
                             thumbnail: {
                                 url: "attachment://image.png"

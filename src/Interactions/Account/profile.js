@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+const { CommandInteraction, Client } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 const ShopItems = require("../../Data/Shop/Items.json");
 const { Bitfield } = require("bitfields");
@@ -18,7 +20,9 @@ module.exports = {
     ],
     /**
      * @param {CommandInteraction} interaction
+     * @param {Client} SenkoClient
      */
+    // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const User = interaction.options.getUser("user") || interaction.user;
         AccountData = await fetchData(User, 1);
@@ -39,12 +43,12 @@ module.exports = {
                 {
                     description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  **${AccountData.Currency.Yen}** yen\n${Icons.tofu}  **${AccountData.Currency.Tofu}** tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}/${Object.keys(Achievements).length}** achievements\n\n`,
                     image: {
-                        url: `attachment://${(AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif")}`
+                        url: `attachment://${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png"}`
                     },
                     color: AccountData.LocalUser.config.color || SenkoClient.colors.light
                 }
             ],
-            files: [{ attachment: `src/Data/content/banners/${(ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner : ShopItems.DefaultBanner.banner)}`, name: AccountData.LocalUser.Banner.endsWith(".png") ? "banner.png" : "banner.gif" }]
+            files: [{ attachment: `src/Data/content/banners/${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner : ShopItems.DefaultBanner.banner}`, name: ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png" }]
         };
 
         let BadgeString = "**__Badges__**\n";
@@ -63,6 +67,12 @@ module.exports = {
         }
 
         if (BAmount != 0) MessageBuilt.embeds[0].description += BadgeString;
+
+        if (SenkoClient.guilds.cache.get("777251087592718336").members.cache.get(User.id).roles.cache.has("810018023364231179")) {
+            let a = MessageBuilt.embeds[0].description.split("Profile");
+
+            MessageBuilt.embeds[0].description = `${a[0]} Profile  [ <:SD:974835483328794665><:M:974835596214296576><:K:974835596142993428> ] ${a[1]}`;
+        }
 
         interaction.reply(MessageBuilt);
     }
