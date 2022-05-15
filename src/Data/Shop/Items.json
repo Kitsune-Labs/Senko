@@ -809,7 +809,41 @@
     "price": 300,
     "amount": 1,
     "onsale": false,
+    "autosale": true,
     "type": "banner",
     "banner": "ShiroWind.png"
+  },
+  "discord_animated": {
+    "class": "profile",
+    "name": "Discord [Animated]",
+    "desc": "Discord branding",
+    "price": 0,
+    "amount": 1,
+    "onsale": false,
+    "autosale": false,
+    "type": "banner",
+    "banner": "Discord.gif"
+  },
+  "discord_characters": {
+    "class": "profile",
+    "name": "Discord's Characters",
+    "desc": "Discord's Characters",
+    "price": 0,
+    "amount": 1,
+    "onsale": false,
+    "autosale": false,
+    "type": "banner",
+    "banner": "DiscordBanner2.png"
+  },
+  "discord_holy_world": {
+    "class": "profile",
+    "name": "Discord in the Holy World",
+    "desc": "Discord in the Holy World",
+    "price": 0,
+    "amount": 1,
+    "onsale": false,
+    "autosale": false,
+    "type": "banner",
+    "banner": "DiscordBanner.png"
   }
 }
