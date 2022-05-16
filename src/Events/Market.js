@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { print, fetchData, updateUser, getName, disableComponents } = require("../API/Master.js");
+const { print, fetchData, updateUser, getName } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
 const shopItems = require("../Data/Shop/Items.json");
 
+const { fetchMarket } = require("../API/super.js");
 
 module.exports = {
     /**
@@ -17,10 +18,12 @@ module.exports = {
             if (interaction.isSelectMenu() && interaction.customId == "shop_purchase") {
                 const item = interaction.values[0].split("_").splice(1, 3);
 
+                const marketData = await fetchMarket();
+
                 const itemName = Object.keys(shopItems).at(item[0]);
                 const shopItem = await shopItems[itemName];
 
-                if (!shopItem.onsale) return interaction.reply({
+                if (!marketData.items.includes(itemName)) return interaction.reply({
                     embeds: [
                         {
                             title: `${Icons.exclamation}  Sorry!`,
