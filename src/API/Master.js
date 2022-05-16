@@ -2,15 +2,18 @@
 const { User, Guild, Interaction, Permissions } = require("discord.js");
 const chalk = require("chalk");
 const config = require("../Data/DataConfig.json");
+const Icons = require("../Data/Icons.json");
 
 const FirebaseAdmin = require("firebase-admin");
 const DataBase = FirebaseAdmin.firestore();
 
 const UserStore = DataBase.collection("Users");
+const Achievements = require("../Data/Achievements.json");
 
 const DataConfig = config;
 const { Bitfield } = require("bitfields");
 const { updateSuperUser } = require("./super");
+const bits = require("./Bits.json");
 
 
 /**
@@ -345,6 +348,61 @@ function insertString(firstString, index, string) {
     return string + firstString;
 }
 
+
+/**
+ * @param {Interaction} interaction
+ * @param {String} AchievementName
+ * @returns {Boolean}
+ */
+async function awardAchievement(interaction, AchievementName) {
+    await wait(300);
+
+    new Promise(async (resolve, reject) => {
+        const userData = await fetchData(interaction.user);
+
+        if (userData.Achievements.includes(AchievementName) || !Object.keys(Achievements).at(AchievementName)) return reject(false);
+
+        const userFlags = Bitfield.fromHex(userData.LocalUser.config.flags);
+        const Achievement = Achievements[AchievementName];
+
+        const messageStruct = {
+            content: `${interaction.user}`,
+            embeds: [
+                {
+                    title: `${Icons.medal}  Achievement Gained!`,
+                    description: `**${Achievement.name}**\n\n${Achievement.description}`,
+                    color: Achievement.color || "ORANGE"
+                }
+            ]
+        };
+
+        const data = {
+            Achievements: [...userData.Achievements, AchievementName]
+        };
+
+
+        if (Achievement.yenReward) {
+            data.Currency = {
+                Yen: userData.Currency.Yen + Achievement.yenReward
+            };
+
+            messageStruct.embeds[0].description += `\n\n— ${Icons.yen}  ${Achievement.yenReward} rewarded`;
+        }
+
+
+        updateUser(interaction.user, data);
+
+
+        if (userFlags.get(bits.DMAchievements)) {
+            interaction.user.send(messageStruct);
+        } else {
+            interaction.channel.send(messageStruct);
+        }
+
+        return resolve(true);
+    });
+}
+
 module.exports = {
     print,
     wait,
@@ -368,5 +426,6 @@ module.exports = {
     strip,
     disableComponents,
     calcTimeLeft,
-    insertString
+    insertString,
+    awardAchievement
 };

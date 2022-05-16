@@ -26,19 +26,13 @@ module.exports = {
                                 },
                             });
 
-                            Interaction.message.embeds[0].fields[0].value = `${Icons.tick} not private. Everyone can view your profile.`;
+                            Interaction.message.embeds[0].fields[0].value = Icons.tick;
+                            Interaction.message.components[0].components[0].style = "DANGER";
 
                             Interaction.update({
                                 embeds: [ Interaction.message.embeds[0] ],
                                 ephemeral: true,
-                                components: [
-                                    {
-                                        type: 1,
-                                        components: [
-                                            { type: 2, label: "Change Privacy", style: 3, custom_id: "user_privacy" }
-                                        ]
-                                    }
-                                ]
+                                components: Interaction.message.components
                             });
                         } else {
                             AccountFlags.set(BitData.privacy, true);
@@ -50,22 +44,55 @@ module.exports = {
                                 },
                             });
 
-                            Interaction.message.embeds[0].fields[0].value = `${Icons.check} private. Only you can view your profile.`;
+                            Interaction.message.embeds[0].fields[0].value = Icons.check;
+                            Interaction.message.components[0].components[0].style = "SUCCESS";
 
                             Interaction.update({
                                 embeds: [ Interaction.message.embeds[0] ],
                                 ephemeral: true,
-                                components: [
-                                    {
-                                        type: 1,
-                                        components: [
-                                            { type: 2, label: "Change Privacy", style: 4, custom_id: "user_privacy" }
-                                        ]
-                                    }
-                                ]
+                                components: Interaction.message.components
                             });
                         }
 
+                        break;
+                    case "user_dm_achievements":
+                        if (AccountFlags.get(BitData.DMAchievements)) {
+                            AccountFlags.set(BitData.DMAchievements, false);
+                            await updateUser(Interaction.user, {
+                                LocalUser: {
+                                    config: {
+                                        flags: AccountFlags.toHex().toString()
+                                    }
+                                },
+                            });
+
+                            Interaction.message.embeds[0].fields[1].value = Icons.tick;
+                            Interaction.message.components[0].components[1].style = "DANGER";
+
+                            Interaction.update({
+                                embeds: [ Interaction.message.embeds[0] ],
+                                ephemeral: true,
+                                components: Interaction.message.components
+                            });
+                        } else {
+                            AccountFlags.set(BitData.DMAchievements, true);
+                            await updateUser(Interaction.user, {
+                                LocalUser: {
+                                    config: {
+                                        flags: AccountFlags.toHex().toString()
+                                    }
+                                },
+                            });
+
+                            Interaction.message.embeds[0].fields[1].value = Icons.check;
+                            Interaction.message.components[0].components[1].style = "SUCCESS";
+
+                            Interaction.update({
+                                embeds: [ Interaction.message.embeds[0] ],
+                                ephemeral: true,
+                                components: Interaction.message.components
+                            });
+                        }
                         break;
                 }
             }

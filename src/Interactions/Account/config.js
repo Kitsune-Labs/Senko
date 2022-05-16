@@ -94,15 +94,26 @@ module.exports = {
                     {
                         type: 1,
                         components: [
-                            { type: 2, label: "Change Privacy", style: 3, custom_id: "user_privacy" }
+                            { type: 2, label: "Change Privacy", style: 3, custom_id: "user_privacy" },
+                            { type: 2, label: "DM Achievements", style: 3, custom_id: "user_dm_achievements", disabled: true }
                         ]
                     }
                 ];
 
                 if (AccountFlags.get(BitData.privacy)) {
-                    AccountEmbed.fields.push({ name: "Private Profile", value: `${Icons.check} private. Only you can view your profile.` });
+                    AccountEmbed.fields.push({ name: "Private Profile", value: Icons.check, inline: true });
+                    Components[0].components[0].style = 3;
                 } else {
-                    AccountEmbed.fields.push({ name: "Private Profile", value: `${Icons.tick} not private. Everyone can view your profile.`, inline: true });
+                    AccountEmbed.fields.push({ name: "Private Profile", value: Icons.tick, inline: true });
+                    Components[0].components[0].style = 4;
+                }
+
+                if (AccountFlags.get(BitData.DMAchievements)) {
+                    AccountEmbed.fields.push({ name: "DM Achievements", value: Icons.check, inline: true });
+                    Components[0].components[1].style = 3;
+                } else {
+                    AccountEmbed.fields.push({ name: "DM Achievements", value: Icons.tick, inline: true });
+                    Components[0].components[1].style = 4;
                 }
 
                 interaction.followUp({

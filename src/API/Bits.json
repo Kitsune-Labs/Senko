@@ -4,5 +4,6 @@
     "BioBanned": 3,
     "ModCommands": 4,
     "FilterEnabled": 5,
-    "BlockSpecialCharacters": 6
+    "BlockSpecialCharacters": 6,
+    "DMAchievements": 7
 }

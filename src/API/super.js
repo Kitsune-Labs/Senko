@@ -15,6 +15,12 @@ function fetchSupabaseApi() {
     return Supabase;
 }
 
+async function fetchMarket() {
+    const { data } = await Supabase.from("config").select("*").eq("id", "all");
+
+    return data[0].market;
+}
+
 /**
  * @param {Guild} guild
  */
@@ -141,5 +147,6 @@ module.exports = {
     makeSuperUser,
     updateSuperUser,
 
-    fetchSupabaseApi
+    fetchSupabaseApi,
+    fetchMarket
 };

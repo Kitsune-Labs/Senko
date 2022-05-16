@@ -17,6 +17,7 @@
             "error",
             "always"
         ],
-        "no-else-return": 1
+        "no-else-return": 1,
+        "no-async-promise-executor": 0
     }
 }

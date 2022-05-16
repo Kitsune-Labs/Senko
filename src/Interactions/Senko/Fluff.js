@@ -2,7 +2,7 @@
 const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const { updateUser, randomArray, randomNumber, addYen } = require("../../API/Master.js");
+const { updateUser, randomArray, randomNumber, addYen, awardAchievement } = require("../../API/Master.js");
 
 
 const reactions = [
@@ -55,13 +55,15 @@ module.exports = {
      */
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, { Stats, Currency }) => {
-        // Stats.Fluffs++;
-
         await updateUser(interaction.user, {
             Stats: {
                 Fluffs: Stats.Fluffs + 1
             }
         });
+
+        // if (Stats.Fluffs >= 10) await awardAchievement(interaction, "NewFloofer");
+        // if (Stats.Fluffs >= 50) await awardAchievement(interaction, "AdeptFloofer");
+        // if (Stats.Fluffs >= 100) await awardAchievement(interaction, "MasterFloofer");
 
         const MessageStruct = {
             embeds: [
