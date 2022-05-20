@@ -65,6 +65,18 @@ module.exports = {
                                     },
                                     Inventory: Inventory
                                 });
+                            } else {
+                                await Inventory.push({
+                                    codename: givenItem,
+                                    amount: shopItem.amount
+                                });
+
+                                await updateUser(interaction.user, {
+                                    Currency: {
+                                        Yen:  Currency.Yen - shopItem.price
+                                    },
+                                    Inventory: Inventory
+                                });
                             }
                         }
 

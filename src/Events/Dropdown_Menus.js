@@ -98,8 +98,6 @@ module.exports = {
             }
 
             if (Interaction.isSelectMenu()) {
-                // print("teal", "Select Menu's", "Started new menu");
-
                 const ReplyEmbed = {
                     content: null,
                     embeds: [
@@ -174,10 +172,11 @@ module.exports = {
                         Interaction.update(ReplyEmbed);
                         return;
                     }
+
                     await updateUser(Interaction.user, {
                         LocalUser: {
                             config: {
-                                title: ShopItem.title
+                                title: InteractionValue.toString()
                             }
                         }
                     });

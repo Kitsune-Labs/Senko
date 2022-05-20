@@ -15,10 +15,17 @@ function fetchSupabaseApi() {
     return Supabase;
 }
 
-async function fetchMarket() {
+async function fetchConfig() {
     const { data } = await Supabase.from("config").select("*").eq("id", "all");
 
-    return data[0].market;
+    return data[0];
+}
+
+/**
+ * @deprecated
+ */
+async function fetchMarket() {
+    return fetchConfig().MarketItems;
 }
 
 /**
@@ -148,5 +155,6 @@ module.exports = {
     updateSuperUser,
 
     fetchSupabaseApi,
-    fetchMarket
+    fetchConfig,
+    fetchMarket,
 };

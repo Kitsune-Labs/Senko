@@ -1,79 +1,103 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, CommandInteraction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const ShopItems = require("../../Data/Shop/Items.json");
-const { updateUser, randomArray } = require("../../API/Master");
+const Market = require("../../Data/Shop/Items.json");
+const HardLinks = require("../../Data/HardLinks.json");
+const { spliceArray } = require("../../API/Master");
 
 module.exports = {
     name: "eat",
-    desc: "Eat something with Senko",
+    desc: "eat",
     userData: true,
-    defer: true,
     /**
-     * @param {Interaction} interaction
+     * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars
-    start: async (SenkoClient, interaction, GuildData, AccountData) => {
-        const EdibleItems = {};
+    start: async (SenkoClient, interaction, GuildData, { Inventory }) => {
+        const possibleItems = [];
+        const chosenItems = {
+            0: { name: null, id: null },
+            1: { name: null, id: null },
+            2: { name: null, id: null },
+            3: { name: null, id: null }
+        };
 
-        new Promise((Resolve, Reject) => {
-            for (var Item of AccountData.Inventory) {
-                if (ShopItems[Item.codename].class === "food") {
-                    EdibleItems[Item.codename] = {
-                        Item: ShopItems[Item.codename],
-                        Amount: Item.amount
-                    };
-                }
+        for (const item of Inventory) {
+            const mItem = Market[item.codename];
+
+            if (mItem && mItem.class == "food") {
+                possibleItems.push(item);
             }
+        }
 
-            if (Object.keys(EdibleItems).length === 0) return Reject();
-            Resolve();
-        }).then(() => {
-            const RandomFoodItem = Object.keys(EdibleItems)[Math.floor(Math.random() * Object.keys(EdibleItems).length)];
-            const SenkoReactions = ["delicious", "flavorful", "tastefull"];
+        for (var i = 0; i <= 4; i++) {
+            const Item = possibleItems[Math.floor(Math.random() * possibleItems.length)];
 
-            new Promise((resolve) => {
-                for (var index in AccountData.Inventory) {
-                    const Item = AccountData.Inventory[index];
+            console.log(i, Inventory.length);
 
-                    if (Item.codename === RandomFoodItem) {
-                        if (Item.amount > 1) {
-                            Item.amount--;
-                            updateUser(interaction.user, {
-                                Inventory: AccountData.Inventory
-                            });
-                            return resolve(ShopItems[RandomFoodItem]);
-                        }
+            if (Item && chosenItems[i]) {
+                chosenItems[i].name = await Market[Item.codename].name;
+                chosenItems[i].id = Item.codename;
 
-                        AccountData.Inventory.splice(index, 1);
-                        updateUser(interaction.user, {
-                            Inventory: AccountData.Inventory
-                        });
+                spliceArray(possibleItems, Item);
+            }
+        }
 
-                        return resolve(ShopItems[RandomFoodItem]);
+        if (chosenItems[0].id === null) return interaction.reply({
+            embeds: [
+                {
+                    title: `${Icons.exclamation}  We ran out of food!`,
+                    description: "We should probably buy some more soon...",
+                    color: SenkoClient.colors.dark,
+                    thumbnail: {
+                        url: "attachment://image.png"
                     }
                 }
-            }).then((ShopItem) => {
-                interaction.followUp({
-                    embeds: [
-                        {
-                            title: `You ate ${ShopItem.name}!`,
-                            description: `Senko thinks ${ShopItem.name} is ${SenkoReactions[Math.floor(Math.random() * SenkoReactions.length)]}!\n\n— 1x ${ShopItem.name} removed`,
-                            color: SenkoClient.colors.light,
-                            thumbnail: {
-                                url: "attachment://image.png"
-                            }
-                        }
-                    ],
-                    files: [ { attachment: `./src/Data/content/senko/${randomArray(["SenkoEat", "SenkoBless"])}.png`, name: "image.png" } ]
-                });
-            }).catch(() => {
-                interaction.followUp({ content: "You don't own any food Items, Buy some at Senko's Market when they're onsale!", ephemeral: true });
-            });
-        }).catch(() => {
-            interaction.followUp({ content: "You don't own any food Items, Buy some at Senko's Market when they're onsale!", ephemeral: true  });
+            ],
+            files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
+            ephemeral: true
         });
+
+        const messageStruct = {
+            embeds: [
+                {
+                    title: `${Icons.question}  What should we have to eat?`,
+                    description: "",
+                    color: SenkoClient.colors.light,
+                    thumbnail: {
+                        url: HardLinks.senkoThink
+                    }
+                }
+            ],
+            components: [
+                {
+                    type: 1,
+                    components: []
+                }
+            ]
+        };
+
+        console.log(chosenItems);
+
+        if (chosenItems[0].name != null) {
+            messageStruct.components[0].components.push({ type: 2, label: chosenItems[0].name, style: 2, custom_id: `eat-${chosenItems[0].id}-${interaction.user.id}` });
+            messageStruct.embeds[0].description += `\n1. ${chosenItems[0].name}`;
+        }
+        if (chosenItems[1].name != null) {
+            messageStruct.components[0].components.push({ type: 2, label: chosenItems[1].name, style: 2, custom_id: `eat-${chosenItems[1].id}-${interaction.user.id}` });
+            messageStruct.embeds[0].description += `\n2. ${chosenItems[1].name}`;
+        }
+        if (chosenItems[2].name != null) {
+            messageStruct.components[0].components.push({ type: 2, label: chosenItems[2].name, style: 2, custom_id: `eat-${chosenItems[2].id}-${interaction.user.id}` });
+            messageStruct.embeds[0].description += `\n3. ${chosenItems[2].name}`;
+        }
+        if (chosenItems[3].name != null) {
+            messageStruct.components[0].components.push({ type: 2, label: chosenItems[3].name, style: 2, custom_id: `eat-${chosenItems[3].id}-${interaction.user.id}` });
+            messageStruct.embeds[0].description += `\n4. ${chosenItems[3].name}`;
+        }
+
+        interaction.reply(messageStruct);
     }
 };

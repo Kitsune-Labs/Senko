@@ -2,7 +2,7 @@
 const { CommandInteraction, Message } = require("discord.js");
 const ShopItems = require("../../Data/Shop/Items.json");
 const Icons = require("../../Data/Icons.json");
-const { fetchSupabaseApi } = require("../../API/super.js");
+const { fetchSupabaseApi, fetchConfig } = require("../../API/super.js");
 
 const Supabase = fetchSupabaseApi();
 
@@ -19,8 +19,10 @@ module.exports = {
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
 
+        const superConfig = await fetchConfig();
         const shopData = rawShopData[0].market;
 
+        shopData.items.push(...rawShopData[0].SpecialMarket);
         /**
          * @type {Message}
          */
@@ -40,6 +42,16 @@ module.exports = {
         let EventItems = "";
         const MenuItems = [];
 
+        superConfig.EventMarket.map(eventItem => {
+            const eI = ShopItems[eventItem];
+
+            if (eI) {
+                EventItems += `[${Icons.yen}  ${eI.price}] **${eI.name}**`; // ${Icons.package}  —  **${eI.name}** [${Icons.yen}  ${eI.price}]\n`;
+
+                MenuItems.push({ label: `${eI.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(eventItem)}_${interaction.user.id}` });
+            }
+        });
+
         for (var Thing of shopData.items) {
             var Item = await ShopItems[Thing];
 
@@ -47,7 +59,8 @@ module.exports = {
 
             MenuItems.push({ label: `${Item.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(Thing)}_${interaction.user.id}` });
 
-            if (Item.seasonal && Item.seasonal.isSeasonal === true) EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
+
+            // if (superConfig.EventMarket.includes(Thing)) EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
 
             switch(Item.class) {
                 case "food":

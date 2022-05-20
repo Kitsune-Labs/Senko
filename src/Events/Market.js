@@ -6,7 +6,7 @@ const { print, fetchData, updateUser, getName } = require("../API/Master.js");
 const Icons = require("../Data/Icons.json");
 const shopItems = require("../Data/Shop/Items.json");
 
-const { fetchMarket } = require("../API/super.js");
+const { fetchConfig } = require("../API/super.js");
 
 module.exports = {
     /**
@@ -18,12 +18,19 @@ module.exports = {
             if (interaction.isSelectMenu() && interaction.customId == "shop_purchase") {
                 const item = interaction.values[0].split("_").splice(1, 3);
 
-                const marketData = await fetchMarket();
+                const configData = await fetchConfig();
 
                 const itemName = Object.keys(shopItems).at(item[0]);
                 const shopItem = await shopItems[itemName];
 
-                if (!marketData.items.includes(itemName)) return interaction.reply({
+                interaction.channel.messages.cache.get(interaction.message.id).edit({
+                    components: interaction.message.components
+                });
+
+                configData.market.items.push(...configData.SpecialMarket);
+                configData.market.items.push(...configData.EventMarket);
+
+                if (!configData.market.items.includes(itemName)) return interaction.reply({
                     embeds: [
                         {
                             title: `${Icons.exclamation}  Sorry!`,
@@ -112,6 +119,8 @@ module.exports = {
                     if (Item.codename === itemName) {
                         Item.amount++;
 
+                        console.log(Currency.Yen - shopItem.price);
+
                         await updateUser(interaction.user, {
                             Currency: {
                                 Yen:  Currency.Yen - shopItem.price
@@ -127,7 +136,7 @@ module.exports = {
 
                 await updateUser(interaction.user, {
                     Currency: {
-                        Yen: Currency.Yen - shopItem.price
+                        Yen: (Currency.Yen - shopItem.price)
                     },
                     Inventory: Inventory
                 });

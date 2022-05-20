@@ -1,5 +1,6 @@
 /* eslint-disable no-async-promise-executor */
-const { MessageActionRow, MessageSelectMenu } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
+const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 
 const ShopItems = require("../../Data/Shop/Items.json");
@@ -53,33 +54,36 @@ module.exports = {
                     { label: "Default Banner", value: "banner_change_default", description: "The banner everyone gets" }
                 ];
 
-                // new Promise((resolve) => {
-                    for (let Item of AccountData.Inventory) {
-                        const ShopItem = ShopItems[Item.codename];
+                for (let Item of AccountData.Inventory) {
+                    const ShopItem = ShopItems[Item.codename];
 
-                        if (ShopItem && ShopItem.banner) {
-                            Banners.push({ label: `${ShopItem.name}`, value: `banner_change_${Item.codename}`, description: `${ShopItem.desc}`});
-                        }
+                    if (ShopItem && ShopItem.banner) {
+                        Banners.push({ label: `${ShopItem.name}`, value: `banner_change_${Item.codename}`, description: `${ShopItem.desc}`});
                     }
+                }
 
-                    // resolve();
-                // }).then(() => {
-                    if (!Banners[1]) return interaction.followUp({
-                        content: "You don't own any banners, you can find them in the shop when they're onsale!",
-                        ephemeral: true
-                    });
+                if (!Banners[1]) return interaction.followUp({
+                    content: "You don't own any banners, you can find them in the shop when they're onsale!",
+                    ephemeral: true
+                });
 
-                    interaction.followUp({
-                        content: "Select a banner to equip in the dropdown menu! (Will equip on click)",
-                        components: [ new MessageActionRow().addComponents([
-                            new MessageSelectMenu()
-                            .setCustomId("banner_set")
-                            .setPlaceholder(`Currently ${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].name : "Default Banner"}`)
-                            .setOptions(Banners)
-                        ])],
-                        ephemeral: true
-                    });
-                // });
+                interaction.followUp({
+                    content: "Select a banner to equip in the dropdown menu! (Will equip on click)",
+                    components: [
+                        {
+                            type: 1,
+                            components: [
+                                {
+                                    type: 3,
+                                    placeholder: `Currently ${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].name : "Default Banner"}`,
+                                    custom_id: "banner_set",
+                                    options: Banners
+                                },
+                            ]
+                        }
+                    ],
+                    ephemeral: true
+                });
             break;
             case "settings":
                 var AccountFlags = Bitfield.fromHex(await AccountData.LocalUser.config.flags);
@@ -132,33 +136,35 @@ module.exports = {
                     { label: "No Title", value: "title_none", description: "No Title"}
                 ];
 
-                // new Promise((resolve) => {
-                    for (let Item of AccountData.Inventory) {
-                        const ShopItem = ShopItems[Item.codename];
+                for (let Item of AccountData.Inventory) {
+                    const ShopItem = ShopItems[Item.codename];
 
-                        if (ShopItem && ShopItem.title) {
-                            TitleColors.push({ label: `${ShopItem.name}`, value: `title_${Item.codename}`, description: `${ShopItem.desc}`});
-                        }
+                    if (ShopItem && ShopItem.title) {
+                        TitleColors.push({ label: `${ShopItem.name}`, value: `title_${Item.codename}`, description: `${ShopItem.desc}`});
                     }
+                }
+                if (!TitleColors[1]) return interaction.followUp({
+                    content: "You don't own any titles, you can find them in the shop when they're onsale!",
+                    ephemeral: true
+                });
 
-                    // resolve();
-                // }).then(() => {
-                    if (!TitleColors[1]) return interaction.followUp({
-                        content: "You don't own any titles, you can find them in the shop when they're onsale!",
-                        ephemeral: true
-                    });
-
-                    interaction.followUp({
-                        content: "Select a title to equip in the dropdown menu! (Will equip on click)",
-                        components: [ new MessageActionRow().addComponents([
-                            new MessageSelectMenu()
-                            .setCustomId("title_equip")
-                            .setPlaceholder(`Currently ${AccountData.LocalUser.config.title ? AccountData.LocalUser.config.title : "No Title"}`)
-                            .setOptions(TitleColors)
-                        ])],
-                        ephemeral: true
-                    });
-                // });
+                interaction.followUp({
+                    content: "Select a title to equip in the dropdown menu! (Will equip on click)",
+                    components: [
+                        {
+                            type: 1,
+                            components: [
+                                {
+                                    type: 3,
+                                    placeholder: `Currently ${ShopItems[AccountData.LocalUser.config.title] ? ShopItems[AccountData.LocalUser.config.title].name : "No Title"}`,
+                                    custom_id: "title_equip",
+                                    options: TitleColors
+                                },
+                            ]
+                        }
+                    ],
+                    ephemeral: true
+                });
             break;
             case "color":
                 if (!AccountData.Inventory[0]) return interaction.followUp({
@@ -188,12 +194,19 @@ module.exports = {
 
                 interaction.followUp({
                     content: "Select a color to equip in the dropdown menu! (Will equip on click)",
-                    components: [ new MessageActionRow().addComponents([
-                        new MessageSelectMenu()
-                        .setCustomId("banner_set")
-                        .setPlaceholder(`Currently ${CurrentColor}`)
-                        .setOptions(ColorColors)
-                    ])],
+                    components: [
+                        {
+                            type: 1,
+                            components: [
+                                {
+                                    type: 3,
+                                    placeholder: `Currently ${CurrentColor}`,
+                                    custom_id: "banner_set",
+                                    options: ColorColors
+                                },
+                            ]
+                        }
+                    ],
                     ephemeral: true
                 });
             break;

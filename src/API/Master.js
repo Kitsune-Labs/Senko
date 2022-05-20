@@ -177,11 +177,11 @@ async function fetchData(user, returnType) {
     if (!UserData.exists) await createUser(User);
 
     if (Data.Currency) {
-        if (UserData.data().Currency.Yen >= 100000) {
+        if (UserData.data().Currency.Yen > 100000) {
             Data.Currency.Yen = 100000; // 99998
         }
 
-        if (UserData.data().Currency.Tofu >= 50) {
+        if (UserData.data().Currency.Tofu > 50) {
             Data.Currency.Tofu = 50;
         }
     }

@@ -53,7 +53,7 @@ module.exports = {
 
                 } else {
                     await updateUser(interaction.user, {
-                        Currency: { Yen: AccountData.Currency.Yen + 300 },
+                        Currency: { Yen: AccountData.Currency.Yen + 200 },
                         Rewards: { Daily: Date.now() }
                     });
 
@@ -61,7 +61,7 @@ module.exports = {
                         embeds: [
                             {
                                 title: `${Icons.heart}  Here you go dear!`,
-                                description: `I have given you your yen for today. Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 300x added`,
+                                description: `I have given you your yen for today. Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 200x added`,
                                 color: SenkoClient.colors.light,
                                 thumbnail: {
                                     url: "attachment://image.png"
@@ -94,7 +94,7 @@ module.exports = {
 
                 } else {
                     await updateUser(interaction.user, {
-                        Currency: { Yen: AccountData.Currency.Yen + 2000 },
+                        Currency: { Yen: AccountData.Currency.Yen + 1200 },
                         Rewards: { Weekly: Date.now() }
                     });
 
@@ -102,7 +102,7 @@ module.exports = {
                         embeds: [
                             {
                                 title: `${Icons.heart}  Here you go dear!`,
-                                description: `I have given you your yen for this week. Spend it wisely as it can only be used once a week!\n\n— ${Icons.yen} 2000x added`,
+                                description: `I have given you your yen for this week. Spend it wisely as it can only be used once a week!\n\n— ${Icons.yen} 1200x added`,
                                 color: SenkoClient.colors.light,
                                 thumbnail: {
                                     url: "attachment://image.png"
@@ -125,8 +125,7 @@ module.exports = {
                             }
                         }
                     ],
-                    files: [ { attachment: "./src/Data/content/senko/senko_think.png", name: "image.png" } ],
-                    ephemeral: true
+                    files: [{ attachment: "./src/Data/content/senko/senko_think.png", name: "image.png" }]
                 });
                 break;
         }

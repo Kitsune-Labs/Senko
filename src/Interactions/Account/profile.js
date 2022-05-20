@@ -41,7 +41,7 @@ module.exports = {
         const MessageBuilt = {
             embeds: [
                 {
-                    description: `${AccountData.LocalUser.config.title || ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  **${AccountData.Currency.Yen}** yen\n${Icons.tofu}  **${AccountData.Currency.Tofu}** tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}/${Object.keys(Achievements).length}** achievements\n\n`,
+                    description: `${ShopItems[AccountData.LocalUser.config.title] ? ShopItems[AccountData.LocalUser.config.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  **${AccountData.Currency.Yen}** yen\n${Icons.tofu}  **${AccountData.Currency.Tofu}** tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}/${Object.keys(Achievements).length}** achievements\n\n`,
                     image: {
                         url: `attachment://${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png"}`
                     },

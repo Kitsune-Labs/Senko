@@ -50,5 +50,10 @@
             "https://c.tenor.com/O3qIam1dAQQAAAAC/hug-cuddle.gif",
             "https://c.tenor.com/QTbBCR3j-vYAAAAd/hugs-best-friends.gif"
         ]
-    }
+    },
+    "senkoEat": "https://assets.senkosworld.com/media/senko/eat.png",
+    "senkoDrink": "https://assets.senkosworld.com/media/senko/drink.png",
+    "senkoHeh": "https://assets.senkosworld.com/media/senko/heh.png",
+    "senkoThink": "https://assets.senkosworld.com/media/senko/think.png",
+    "senkoBless": "https://assets.senkosworld.com/media/senko/bless.png"
 }
