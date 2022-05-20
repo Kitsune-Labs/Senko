@@ -55,7 +55,7 @@ module.exports = {
         for (var Thing of shopData.items) {
             var Item = await ShopItems[Thing];
 
-            let ItemString = `[${Icons.yen}  ${Item.price}] **${Item.name}**`;
+            let ItemString = `[${Icons.yen}  ${Item.price == 0 ? "FREE" : Item.price}] **${Item.name}**`;
 
             MenuItems.push({ label: `${Item.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(Thing)}_${interaction.user.id}` });
 
