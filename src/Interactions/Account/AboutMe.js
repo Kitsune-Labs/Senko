@@ -29,21 +29,34 @@ module.exports = {
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         const commandType = interaction.options.getSubcommand();
         if (commandType === "change") {
-            const textinput = new DiscordModal.TextInput()
-            .setCustomId("submit_about_me")
-            .setTitle("Change your About Me")
-            .addComponents(
-                new DiscordModal.TextInputField()
-                .setLabel("About Me")
-                .setStyle(2)
-                .setPlaceholder("Enter your new about me")
-                .setCustomId("submit_about_me_1")
-                .setRequired(true)
-                .setMax(100)
-                .setMin(1)
-            );
+            interaction.reply({
+                embeds: [
+                    {
+                        title: `${Icons.tears}  Sorry dear!`,
+                        description: "I had to disable this due to a big issue, check back next time!",
+                        color: SenkoClient.colors.dark_red,
+                        thumbnail: { url: "attachment://image.png" }
+                    }
+                ],
+                ephemeral: true,
+                files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }]
+            });
 
-            await SenkoClient.TextInputs.open(interaction, textinput);
+            // const textinput = new DiscordModal.TextInput()
+            // .setCustomId("submit_about_me")
+            // .setTitle("Change your About Me")
+            // .addComponents(
+            //     new DiscordModal.TextInputField()
+            //     .setLabel("About Me")
+            //     .setStyle(2)
+            //     .setPlaceholder("Enter your new about me")
+            //     .setCustomId("submit_about_me_1")
+            //     .setRequired(true)
+            //     .setMax(100)
+            //     .setMin(1)
+            // );
+
+            // await SenkoClient.TextInputs.open(interaction, textinput);
         }
 
         if (commandType === "remove") {

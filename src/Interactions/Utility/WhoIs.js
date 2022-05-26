@@ -27,7 +27,7 @@ module.exports = {
      */
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
-        const guildMember = await interaction.guild.members.fetch(interaction.options.getUser("user") || interaction.user);
+        const guildMember = await interaction.options.getMember("user") || interaction.member;
         if (!guildMember) return interaction.followUp({ content: "I can't find this user", ephemeral: true });
 
         const guildUser = guildMember.user;
@@ -39,7 +39,7 @@ module.exports = {
         const messageStruct = {
             embeds: [
                 {
-                    description: `${typeof guildMember.nickname === "string" ? `(${guildMember.user.tag})` : ""} ${guildUser} [${guildUser.id}]\n\nBot: ${guildUser.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember.premiumSinceTimestamp ? `**Yes**, Since <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nCreation Date: <t:${parseInt(guildUser.createdTimestamp / 1000)}>\nJoined Guild: <t:${parseInt(guildMember.joinedTimestamp / 1000)}>`,
+                    description: `${guildMember.nickname != null ? `(${guildMember.user.tag})` : ""} ${guildUser} [${guildUser.id}]\n\nBot: ${guildUser.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember.premiumSinceTimestamp ? `**Yes**, Since <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nCreation Date: <t:${parseInt(guildUser.createdTimestamp / 1000)}>\nJoined Guild: <t:${parseInt(guildMember.joinedTimestamp / 1000)}>`,
                     color: SenkoClient.colors.random(),
                     fields: [
                         { name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}`},

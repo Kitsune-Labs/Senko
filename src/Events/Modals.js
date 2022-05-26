@@ -50,25 +50,25 @@ module.exports = {
                 break;
 
                 case "submit_about_me":
-                    await updateUser(interaction.user, {
-                        LocalUser: {
-                            AboutMe: `${interaction.fields[0].value.replaceAll(/[\r\n]+/gm, "\n")}`
-                        }
-                    });
+                    // await updateUser(interaction.user, {
+                    //     LocalUser: {
+                    //         AboutMe: `${interaction.fields[0].value.replaceAll(/[\r\n]+/gm, "\n")}`
+                    //     }
+                    // });
 
-                    await interaction.editReply({
-                        embeds: [
-                            {
-                                title: `${Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
-                                description: "Check it out with **/profile**",
-                                color: SenkoClient.colors.light,
-                                thumbnail: {
-                                    url: "attachment://image.png"
-                                }
-                            }
-                        ],
-                        files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
-                    });
+                    // await interaction.editReply({
+                    //     embeds: [
+                    //         {
+                    //             title: `${Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
+                    //             description: "Check it out with **/profile**",
+                    //             color: SenkoClient.colors.light,
+                    //             thumbnail: {
+                    //                 url: "attachment://image.png"
+                    //             }
+                    //         }
+                    //     ],
+                    //     files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
+                    // });
                 break;
             }
         });

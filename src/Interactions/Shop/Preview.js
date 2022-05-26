@@ -18,6 +18,9 @@ module.exports = {
 
         const shopData = rawShopData[0].market;
 
+        shopData.items.push(...rawShopData[0].SpecialMarket);
+        shopData.items.push(...rawShopData[0].EventMarket);
+
         const messageStruct = {
             ephemeral: true,
             components: [

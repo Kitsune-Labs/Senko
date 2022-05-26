@@ -19,7 +19,7 @@ module.exports = {
                     description: `${Icons.heart}  I'm here to pamper you to your heart's content!`,
                     color: SenkoClient.colors.random(),
                     fields: [
-                        { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒\nsakuya izayoi\nSilkthorne\nKaori Aiko\nTheReal_Enderboy", inline: true },
+                        { name: "Contributors", value: "𝕃𝕒𝕫𝕣𝕖𝕒\nsakuya izayoi\nSilkthorne\nKaori Aiko\nTheReal_Enderboy\n[Wikipedia](https://wikipedia.org/)", inline: true },
                         { name: "Started", value: `<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>`, inline: true },
                         { name: "Ping", value: `${Math.floor(SenkoClient.ws.ping)}`, inline: true },
                     ],

@@ -6,12 +6,21 @@ const { print } = require("../API/Master.js");
 const Icons = require("../Data/Icons.json");
 
 
+
 module.exports = {
     /**
      * @param {Client} SenkoClient
      */
     // eslint-disable-next-line no-unused-vars
     execute: async (SenkoClient) => {
+        const bottomButtons = {
+            type: 1,
+            components: [
+                { type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${SenkoClient.user.id}&permissions=137439266880` },
+                { type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
+            ]
+        };
+
         /**
          * @param {CommandInteraction} interaction
          */
@@ -27,7 +36,7 @@ module.exports = {
                                     name: "Index",
                                 },
                                 title: "📄 Messenger Index (Help)",
-                                description: "If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Blank**",
+                                description: "If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**",
                                 color: SenkoClient.colors.random(),
                             }
                         ],
@@ -36,18 +45,19 @@ module.exports = {
                                 type: 1,
                                 components: [
                                     { type: 2, label: "Home", style: 1, custom_id: "help_home", disabled: true },
-                                    { type: 2, label: "Fun", style: 2, custom_id: "help_fun" },
-                                    { type: 2, label: "Economy", style: 2, custom_id: "help_economy" },
-                                    { type: 2, label: "Social", style: 2, custom_id: "help_social" },
-                                    { type: 2, label: "Administration", style: 2, custom_id: "help_admin" }
+                                    { type: 2, label: "Fun", style: 3, custom_id: "help_fun" },
+                                    { type: 2, label: "Economy", style: 3, custom_id: "help_economy" },
+                                    { type: 2, label: "Social", style: 3, custom_id: "help_social" },
+                                    { type: 2, label: "Administration", style: 3, custom_id: "help_admin" }
                                 ]
                             },
                             {
                                 type: 1,
                                 components: [
-                                    { type: 2, label: "Account", style: 2, custom_id: "help_account" }
+                                    { type: 2, label: "Account", style: 3, custom_id: "help_account" }
                                 ]
-                            }
+                            },
+                            bottomButtons
                         ]
                     });
                     break;
@@ -69,17 +79,18 @@ module.exports = {
                                 components: [
                                     { type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
                                     { type: 2, label: "Fun", style: 1, custom_id: "help_fun", disabled: true  },
-                                    { type: 2, label: "Economy", style: 2, custom_id: "help_economy", disabled: false  },
-                                    { type: 2, label: "Social", style: 2, custom_id: "help_social", disabled: false  },
-                                    { type: 2, label: "Administration", style: 2, custom_id: "help_admin", disabled: false  }
+                                    { type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false  },
+                                    { type: 2, label: "Social", style: 3, custom_id: "help_social", disabled: false  },
+                                    { type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false  }
                                 ]
                             },
                             {
                                 type: 1,
                                 components: [
-                                    { type: 2, label: "Account", style: 2, custom_id: "help_account" }
+                                    { type: 2, label: "Account", style: 3, custom_id: "help_account" }
                                 ]
-                            }
+                            },
+                            bottomButtons
                         ]
                     });
                     break;
@@ -100,18 +111,19 @@ module.exports = {
                                 type: 1,
                                 components: [
                                     { type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-                                    { type: 2, label: "Fun", style: 2, custom_id: "help_fun", disabled: false  },
+                                    { type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false  },
                                     { type: 2, label: "Economy", style: 1, custom_id: "help_economy", disabled: true  },
-                                    { type: 2, label: "Social", style: 2, custom_id: "help_social", disabled: false  },
-                                    { type: 2, label: "Administration", style: 2, custom_id: "help_admin", disabled: false  }
+                                    { type: 2, label: "Social", style: 3, custom_id: "help_social", disabled: false  },
+                                    { type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false  }
                                 ]
                             },
                             {
                                 type: 1,
                                 components: [
-                                    { type: 2, label: "Account", style: 2, custom_id: "help_account" }
+                                    { type: 2, label: "Account", style: 3, custom_id: "help_account" }
                                 ]
-                            }
+                            },
+                            bottomButtons
                         ]
                     });
                     break;
@@ -132,18 +144,19 @@ module.exports = {
                                 type: 1,
                                 components: [
                                     { type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-                                    { type: 2, label: "Fun", style: 2, custom_id: "help_fun", disabled: false  },
-                                    { type: 2, label: "Economy", style: 2, custom_id: "help_economy", disabled: false  },
+                                    { type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false  },
+                                    { type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false  },
                                     { type: 2, label: "Social", style: 1, custom_id: "help_social", disabled: true  },
-                                    { type: 2, label: "Administration", style: 2, custom_id: "help_admin", disabled: false  }
+                                    { type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false  }
                                 ]
                             },
                             {
                                 type: 1,
                                 components: [
-                                    { type: 2, label: "Account", style: 2, custom_id: "help_account" }
+                                    { type: 2, label: "Account", style: 3, custom_id: "help_account" }
                                 ]
-                            }
+                            },
+                            bottomButtons
                         ]
                     });
                     break;
@@ -155,7 +168,7 @@ module.exports = {
                                     name: "Index ≻ Administration",
                                 },
                                 title: "📑 Administration Commands",
-                                description: "≻ **channel** — Add/Remove channels where Senko can be used in; Member must be able to Manage Channels for use\n≻ **avatar** — View someone's avatar, and banner if they have one\n≻ **whois** — Public account information\n≻ **server** — Server configuration; Member must be an Administrator to edit\n≻ **warn** — Warn a user; Member must be able to Moderate Members\n≻ **clean** — Clean a channel of it's messages; Member must be able to Manage Messages",
+                                description: "≻ **channel** — Add/Remove channels where Senko can be used in; **Member must be able to Manage Channels for use**\n≻ **avatar** — View someone's avatar, and banner if they have one\n≻ **whois** — Public account information\n≻ **server** — Server configuration; **Member must be an Administrator to edit**\n≻ **warn** — Warn a user; **Member must be able to Moderate Members**\n≻ **clean** — Clean a channel of it's messages; **Member must be able to Manage Messages**",
                                 color: SenkoClient.colors.random(),
                             }
                         ],
@@ -164,18 +177,19 @@ module.exports = {
                                 type: 1,
                                 components: [
                                     { type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-                                    { type: 2, label: "Fun", style: 2, custom_id: "help_fun", disabled: false  },
-                                    { type: 2, label: "Economy", style: 2, custom_id: "help_economy", disabled: false  },
-                                    { type: 2, label: "Social", style: 2, custom_id: "help_social", disabled: false  },
+                                    { type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false  },
+                                    { type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false  },
+                                    { type: 2, label: "Social", style: 3, custom_id: "help_social", disabled: false  },
                                     { type: 2, label: "Administration", style: 1, custom_id: "help_admin", disabled: true  }
                                 ]
                             },
                             {
                                 type: 1,
                                 components: [
-                                    { type: 2, label: "Account", style: 2, custom_id: "help_account" }
+                                    { type: 2, label: "Account", style: 3, custom_id: "help_account" }
                                 ]
-                            }
+                            },
+                            bottomButtons
                         ]
                     });
                     break;
@@ -196,10 +210,10 @@ module.exports = {
                                 type: 1,
                                 components: [
                                     { type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-                                    { type: 2, label: "Fun", style: 2, custom_id: "help_fun", disabled: false  },
-                                    { type: 2, label: "Economy", style: 2, custom_id: "help_economy", disabled: false  },
-                                    { type: 2, label: "Social", style: 2, custom_id: "help_social", disabled: false  },
-                                    { type: 2, label: "Administration", style: 2, custom_id: "help_admin", disabled: false  }
+                                    { type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false  },
+                                    { type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false  },
+                                    { type: 2, label: "Social", style: 3, custom_id: "help_social", disabled: false  },
+                                    { type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false  }
                                 ]
                             },
                             {
@@ -207,7 +221,8 @@ module.exports = {
                                 components: [
                                     { type: 2, label: "Account", style: 1, custom_id: "help_account", disabled: true  }
                                 ]
-                            }
+                            },
+                            bottomButtons
                         ]
                     });
                     break;

@@ -17,31 +17,35 @@ const reactions = [
     }
 ];
 
-
-
-
-
 const UserInput = [
     "_USER_ strokes Senko's tail",
     "_USER_ fluffs Senko-san",
     "_USER_ caresses Senko's tail",
     "_USER_ ingulfs in Senko's fluffy tail",
-    "_USER_ hugs Senko's silky tail"
+    "_USER_ hugs Senko's silky tail",
+    "_USER_ cuddles Senko's tail"
 ];
 
 const Responses = [
     `${Icons.flushed}  Please be more gentle with my tail!`,
     `${Icons.exclamation}  Do you have to be so verbose?`,
-    `${Icons.question}  You can't stay like that forever, can you?`
+    `${Icons.question}  You can't stay like that forever, can you?`,
+    "Be more careful! It's very delicate...",
+    "I'm not sure how much I can handle...",
+    Icons.flushed,
+    "...",
+    "How dare you!",
+    `${Icons.exclamation}  EHYAAAAA!!`,
 ];
 
 const Sounds = [
-    "euH",
-    "mhMh",
+    "euHa",
+    "Mhmh",
     "Uya!",
     "HYaa",
     "Umu~",
-    "Uya..."
+    "Uya...",
+    "EHYAAAAA!!"
 ];
 
 module.exports = {
@@ -76,7 +80,7 @@ module.exports = {
                     }
                 }
             ],
-            files: [{ attachment: `./src/Data/content/senko/${randomArray(["fluffed", "fluffed_2"])}.png`, name: "image.png" }]
+            files: [{ attachment: `./src/Data/content/senko/${randomArray(["fluffed", "fluffed_2", "pout"])}.png`, name: "image.png" }]
         };
 
         if (randomNumber(100) > 75) {

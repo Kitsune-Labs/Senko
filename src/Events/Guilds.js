@@ -1,12 +1,28 @@
 const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild, updateSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
+const { print } = require("../API/Master.js");
 
 module.exports = {
     /**
      * @param {Client} SenkoClient
      */
     execute: async (SenkoClient) => {
+        // SenkoClient.on("messageCreate", async message => {
+        //     const guildData = await fetchSuperGuild(message.guild);
+        //     const guildFlags = Bitfield.fromHex(guildData.flags);
+
+        //     if (guildData.Counting.channel && guildData.Counting.channel === message.channelId) {
+        //         guildData.Counting.number++;
+
+        //         if (message.content !== guildData.Counting.number) return message.delete();
+
+        //         await updateSuperGuild(message.guild, {
+        //             Counting: guildData.Counting
+        //         });
+        //     }
+        // });
+
         SenkoClient.on("guildDelete", async guild => {
             await deleteSuperGuild(guild);
         });
@@ -62,9 +78,10 @@ module.exports = {
             const banLog = fetchedLogs.entries.first();
             if (banLog.executor.id === SenkoClient.user.id) return;
 
-            const guildData = await fetchSuperGuild(member.guild);
+            var guildData = await fetchSuperGuild(member.guild);
+            var guildFlags = Bitfield.fromHex(guildData.flags);
 
-            if (guildData.ActionLogs) {
+            if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
                 member.guild.channels.cache.get(guildData.ActionLogs).send({
                     embeds: [
                         {
@@ -94,8 +111,9 @@ module.exports = {
                 const banLog = fetchedLogs.entries.first();
 
                 const guildData = await fetchSuperGuild(member.guild);
+                var guildFlags = Bitfield.fromHex(guildData.flags);
 
-                if (guildData.ActionLogs) {
+                if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
                     member.guild.channels.cache.get(guildData.ActionLogs).send({
                         embeds: [
                             {
@@ -116,7 +134,42 @@ module.exports = {
             }
         });
 
+        SenkoClient.on("guildMemberAdd", async (member) => {
+            var guildData = await fetchSuperGuild(member.guild);
+            var guildFlags = Bitfield.fromHex(guildData.flags);
+
+            if (guildData.MemberLogs /*&& guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)*/) {
+                member.guild.channels.cache.get(guildData.MemberLogs).send({
+                    embeds: [
+                        {
+                            title: "New Kitsune",
+                            description: `${member} [${member.id}]\n${member.user.bot ? "IS a bot" : "Not a bot"}\nCreated on <t:${parseInt(member.user.createdTimestamp / 1000)}>`,
+                            color: SenkoClient.colors.light,
+                            thumbnail: { url: member.user.displayAvatarURL({ dynamic: true, size: 4096 }) }
+                        }
+                    ]
+                });
+            }
+        });
+
         SenkoClient.on("guildMemberRemove", async member => {
+            var guildData = await fetchSuperGuild(member.guild);
+            var guildFlags = Bitfield.fromHex(guildData.flags);
+
+            if (guildData.MemberLogs /* && guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)*/) {
+                member.guild.channels.cache.get(guildData.MemberLogs).send({
+                    embeds: [
+                        {
+                            title: "Kitsune Left",
+                            description: `${member.user.tag} [${member.user.id}]`,
+                            color: "YELLOW"
+                        }
+                    ]
+                });
+            }
+
+            //! Kicks
+
             const fetchedLogs = await member.guild.fetchAuditLogs({
                 limit: 1,
                 type: "MEMBER_KICK",
@@ -125,9 +178,7 @@ module.exports = {
             const kickLog = fetchedLogs.entries.first();
             if (kickLog.createdAt < member.joinedAt || !kickLog || kickLog.executor.id === SenkoClient.user.id || kickLog.target.id !== member.id) return;
 
-            const guildData = await fetchSuperGuild(member.guild);
-
-            if (guildData.ActionLogs) {
+            if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.KickActionDisabled)) {
                 member.guild.channels.cache.get(guildData.ActionLogs).send({
                     embeds: [
                         {
@@ -140,6 +191,59 @@ module.exports = {
                             author: {
                                 name: `${`${kickLog.executor.username}#${kickLog.executor.discriminator}` || "Unknown"}  [${kickLog.executor.id || "000000000000000000"}]`,
                                 icon_url: `${kickLog.executor.displayAvatarURL({ dynamic: true })}`
+                            }
+                        }
+                    ]
+                });
+            }
+        });
+
+        SenkoClient.on("guildMemberUpdate", async member => {
+            const guildData = await fetchSuperGuild(member.guild);
+            const guildFlags = await Bitfield.fromHex(guildData.flags);
+            member = await member.guild.members.fetch(member.id);
+
+            if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return print("#ffff6", "GUILD", "Member timeout's are disabled for this guild");
+
+            const rawAudit = await member.guild.fetchAuditLogs({
+                limit: 1,
+                type: "MEMBER_UPDATE"
+            });
+
+            const audit = rawAudit.entries.first();
+
+            console.log(audit.target.id !== member.id);
+
+            if (audit.changes[0].key !== "communication_disabled_until" && audit.target.id !== member.id) return;
+
+            if (member.communicationDisabledUntilTimestamp === null && guildData.ActionLogs) {
+                console.log("Timeout Removed", audit.changes[0].key);
+
+                member.guild.channels.cache.get("939246130213044234").send({
+                    embeds: [
+                        {
+                            title: "Action Report - Timeout Removed",
+                            description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]`,
+                            color: "GREEN",
+                            thumbnail: {
+                                url: member.user.displayAvatarURL({ dynamic: true })
+                            }
+                        }
+                    ]
+                });
+            }
+
+            if (member.communicationDisabledUntilTimestamp != null && guildData.ActionLogs) {
+                console.log("Timeout Added", audit.changes[0].key);
+
+                member.guild.channels.cache.get("939246130213044234").send({
+                    embeds: [
+                        {
+                            title: "Action Report - Kitsune Timed Out",
+                            description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${audit.reason || "None"}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
+                            color: "YELLOW",
+                            thumbnail: {
+                                url: member.user.displayAvatarURL({ dynamic: true })
                             }
                         }
                     ]

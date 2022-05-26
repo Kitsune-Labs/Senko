@@ -28,16 +28,23 @@ module.exports = {
                     type: 1,
                     components: [
                         { type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: true },
-                        { type: 2, label: "Fun", style: 2, custom_id: "help_fun" },
-                        { type: 2, label: "Economy", style: 2, custom_id: "help_economy" },
-                        { type: 2, label: "Social", style: 2, custom_id: "help_social" },
-                        { type: 2, label: "Administration", style: 2, custom_id: "help_admin" }
+                        { type: 2, label: "Fun", style: 3, custom_id: "help_fun" },
+                        { type: 2, label: "Economy", style: 3, custom_id: "help_economy" },
+                        { type: 2, label: "Social", style: 3, custom_id: "help_social" },
+                        { type: 2, label: "Administration", style: 3, custom_id: "help_admin" }
                     ]
                 },
                 {
                     type: 1,
                     components: [
                         { type: 2, label: "Account", style: 2, custom_id: "help_account" }
+                    ]
+                },
+                {
+                    type: 1,
+                    components: [
+                        { type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${SenkoClient.user.id}&permissions=137439266880` },
+                        { type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
                     ]
                 }
             ]

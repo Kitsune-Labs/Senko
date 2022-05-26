@@ -154,6 +154,14 @@ module.exports = {
                             text: `Case ${caseId}`
                         }
                     }
+                ],
+                components: [
+                    {
+                        type: 1,
+                        components: [
+                            { type: 2, label: "Go to Message", style: 5, url: newMessage.url }
+                        ]
+                    }
                 ]
             };
 

@@ -1,13 +1,13 @@
 require("dotenv/config");
 
-const { Client, Collection, Interaction } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
 
 
 const SenkoClient = new Client({
-    intents: ["GUILDS", "GUILD_BANS","GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"],
+    intents: ["GUILDS", "GUILD_BANS","GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_PRESENCES"],
 
     allowedMentions: {
         parse: ["users", "roles"],
@@ -49,8 +49,6 @@ if (process.env.NIGHTLY === "true") {
 
 const { print } = require("./API/Master");
 
-// SenkoClient.Commands = new Collection();
-// SenkoClient.Aliases = new Collection();
 SenkoClient.SlashCommands = new Collection();
 SenkoClient.colors = require("./Data/Palettes/Main.js");
 
@@ -64,11 +62,6 @@ Reflect.set(SenkoClient, "tools", {
 process.SenkoClient = SenkoClient;
 
 process.on("unhandledRejection",async(reason)=>{console.log(reason);});
-
-
-Reflect.set(SenkoClient, Interaction, {
-    shop_id: null
-});
 
 SenkoClient.once("ready", async () => {
     print("#FF6633", "Senko", "Started\n");
@@ -93,6 +86,25 @@ SenkoClient.once("ready", async () => {
     // print("#B42025", "AUTOMOD", "Ready");
 
 
+    const SenkosWorld = SenkoClient.guilds.cache.get("777251087592718336").commands;
+
+    for (let file of readdirSync("./src/SenkosWorld/")) {
+        const pull = require(`./SenkosWorld/${file}`);
+
+        const commandData = {
+            name: pull.name,
+            description: pull.desc
+        };
+
+        if (pull.options) commandData.options = pull.options;
+
+        SenkoClient.SlashCommands.set(pull.name, pull);
+        SenkosWorld.set([ commandData ]);
+    }
+
+    print("#FFFB00", "SW", "Ready");
+
+
     const commandsToSet = [];
 
     async function setCommands() {
@@ -103,9 +115,7 @@ SenkoClient.once("ready", async () => {
                 for (let interact of Interactions) {
                     let pull = require(`./Interactions/${Folder}/${interact}`);
 
-                    // if (pull.name !== "buy") {
-                        SenkoClient.SlashCommands.set(`${pull.name}`, pull);
-                    // }
+                    SenkoClient.SlashCommands.set(`${pull.name}`, pull);
                 }
             });
         }
@@ -132,7 +142,7 @@ SenkoClient.once("ready", async () => {
             };
 
             if (cmd[1].options) CommandData.options = cmd[1].options;
-            if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
+            // if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
 
             if (!commandsToSet.includes(cmd[0])) commandsToSet.push(CommandData);
         }

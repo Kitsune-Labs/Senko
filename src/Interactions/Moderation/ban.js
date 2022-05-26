@@ -4,7 +4,6 @@ const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
 
-
 module.exports = {
     name: "ban",
     desc: "Ban's a user",
@@ -19,6 +18,11 @@ module.exports = {
             name: "reason",
             description: "The reason for the ban",
             type: "STRING"
+        },
+        {
+            name: "dm",
+            description: "Send a DM to the user (Default True)",
+            type: "BOOLEAN"
         },
         {
             name: "user2",
@@ -89,7 +93,7 @@ module.exports = {
 
         const users = [];
         for (var Option1 of interaction.options._hoistedOptions) {
-            if (Option1.name !== "reason") {
+            if (Option1.name !== "reason" || Option1.name !== "dm") {
                 users.push(Option1.value);
             }
         }
@@ -100,6 +104,7 @@ module.exports = {
             if (Option.name !== "reason") {
                 let userToOutlaw = Option.value;
                 const reason = interaction.options.getString("reason") || "No reason provided";
+                const shouldDM = interaction.options.getBoolean("dm") || true;
 
                 if (Option.member) userToOutlaw = Option.member;
 
@@ -130,7 +135,7 @@ module.exports = {
                 if (reason === "No reason provided") responseStruct.embeds[0].description = `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned!`;
 
                 if (typeof userToOutlaw != "string") {
-                    await userToOutlaw.send({
+                    if (shouldDM === true) await userToOutlaw.send({
                         embeds: [
                             {
                                 title: `You have been banned from ${interaction.guild.name}`,
@@ -142,11 +147,9 @@ module.exports = {
                         responseStruct.embeds[0].description += `\n\n${err}`;
                     });
 
-                    // SenkoClient.guilds.cache.get("777251087592718336").members.ban(ID, { reason: `${reason}`, days: 1 });
+                    responseStruct.embeds[0].description += "\n\nDM Unsent";
 
                     interaction.guild.members.ban(userToOutlaw.user.id, { reason: `${interaction.user.tag} : ${reason}`, days: 1 });
-
-                    // banID(YozoraClient, userToOutlaw.user.id, reason);
                 } else
                     interaction.guild.members.ban(userToOutlaw, { reason: `${interaction.user.tag} : ${reason}`, days: 1 });{
                     // banID(YozoraClient, userToOutlaw, reason);

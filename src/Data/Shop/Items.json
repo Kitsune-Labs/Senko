@@ -940,5 +940,215 @@
         "max": 1,
         "title": "🏴‍☠️ Pirate",
         "autoSale": true
+    },
+    "carrot_cake": {
+        "class": "food",
+        "name": "Carrot Cake",
+        "desc": "Carrot cake",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "chicken_nuggies": {
+        "class": "food",
+        "name": "Chicken Nuggets",
+        "desc": "Chicken nuggets",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "corn_badge": {
+        "class": "profile",
+        "name": "Corn badge",
+        "desc": "Corn badge",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🌽",
+        "autoSale": true
+    },
+    "pancakes": {
+        "class": "food",
+        "name": "Pancakes",
+        "desc": "Pancakes",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "fried_rice": {
+        "class": "food",
+        "name": "Fried Rice",
+        "desc": "Fried rice",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "shrimp_badge": {
+        "class": "profile",
+        "name": "Shrimp badge",
+        "desc": "Shrimp badge",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🦐",
+        "autoSale": true
+    },
+    "apple_pie": {
+        "class": "food",
+        "name": "Apple Pie",
+        "desc": "Apple pie",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "pudding": {
+        "class": "food",
+        "name": "Pudding",
+        "desc": "Pudding",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "zosui": {
+        "class": "food",
+        "name": "Zosui",
+        "desc": "A soup containing rice stewed in stock, often with egg, meat, seafood, vegetables or mushroom, and flavored with miso or soy",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "gyudon": {
+        "class": "food",
+        "name": "Gyūdon",
+        "desc": "Donburi topped with seasoned beef and onion",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Katsudon": {
+        "class": "food",
+        "name": "Katsudon",
+        "desc": "A bowl of rice topped with a deep-fried breaded pork cutlet, egg, vegetables, and condiments.",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Somen_Noodles_chilled": {
+        "class": "food",
+        "name": "Sōmen Noodles (Chilled)",
+        "desc": "Thin white wheat noodles served chilled with a dipping sauce",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Somen_Noodles_hot": {
+        "class": "food",
+        "name": "Nyumen Noodles (Hot Sōmen Noodles)",
+        "desc": "Hot in temperature Sōmen Noodles",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Champon_noodles": {
+        "class": "food",
+        "name": "Champon Noodles",
+        "desc": "Yellow noodles of medium thickness served with a great variety of seafood and vegetable toppings in a hot chicken broth",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Hiyashi_chuka": {
+        "class": "food",
+        "name": "Hiyashi chūka",
+        "desc": "Thin, yellow noodles served cold with a variety of toppings, such as cucumber, tomato, ham or chicken, bean sprouts, thin-sliced omelet, and a cold sauce",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Mazesoba": {
+        "class": "food",
+        "name": "Mazesoba",
+        "desc": "Wheat noodles served with a number of savory toppings, including raw egg, ginger, and meat",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Curry_bread": {
+        "class": "food",
+        "name": "Curry Bread",
+        "desc": "Deep fried bread filled with Japanese curry sauce",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Anpan": {
+        "class": "food",
+        "name": "Anpan (Sweet Roll)",
+        "desc": "A sweet roll filled with red bean paste",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Yakisoba_pan": {
+        "class": "food",
+        "name": "Yakisoba-pan",
+        "desc": "A bread roll sandwich with a yakisoba filling",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "miso_soup": {
+        "class": "food",
+        "name": "Miso Soup",
+        "desc": "A soup made with miso suspended in dashi",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Kukicha_tea": {
+        "class": "food",
+        "name": "Kukicha tea",
+        "desc": "A blend of green tea made of stems, stalks, and twigs",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
     }
 }

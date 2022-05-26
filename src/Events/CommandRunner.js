@@ -4,22 +4,29 @@ const { CheckPermission, print, fetchData } = require("../API/Master");
 // const Firebase = require("firebase-admin");
 // const Firestore = Firebase.firestore();
 const LocalOutlaws = require("../Data/LocalOutlawed.json");
-const { fetchSuperGuild, fetchSuperUser } = require("../API/super.js");
+const { fetchSuperGuild, fetchConfig } = require("../API/super.js");
+const Icons = require("../Data/Icons.json");
 
 module.exports = {
     /**
      * @param {Client} SenkoClient
      */
     execute: async (SenkoClient) => {
+        /**
+         * @type {import("discord.js").InteractionCollector}
+         */
         SenkoClient.on("interactionCreate", async (interaction) => {
-            if (!interaction.isCommand() || interaction.user.bot) return;
-            if (!interaction.guild) return interaction.reply({ content: "I cannot be used outside of guild channels!" });
-            if (LocalOutlaws.includes(interaction.user.id)) return interaction.reply({
+            if (!interaction.isCommand() || interaction.user.bot || interaction.replied || !interaction.guild) return;
+            const dataConfig = await fetchConfig();
+
+            dataConfig.OutlawedUsers = JSON.parse(dataConfig.OutlawedUsers);
+
+            if (dataConfig.OutlawedUsers[interaction.member.id]) return interaction.reply({
                 embeds: [
                     {
-                        title: "You are outlawed!",
-                        description: "You have broken our divine user agreement and the gods have outlawed you from our care!",
-                        color: "DARK_RED",
+                        title: `${Icons.exclamation} You are outlawed!`,
+                        description: `${dataConfig.OutlawedUsers[interaction.member.id]}\n\nThere is no mistake.`,
+                        color: SenkoClient.colors.dark_red,
                         thumbnail: {
                             url: "attachment://image.png"
                         }
@@ -90,9 +97,7 @@ module.exports = {
 
             print("teal", "CS", interaction.commandName);
 
-            try {
-                InteractionCommand.start(SenkoClient, interaction, superGuildData, AccountData);
-            } catch (e) {
+            InteractionCommand.start(SenkoClient, interaction, superGuildData, AccountData).catch(e => {
                 interaction.reply({
                     embeds: [
                         {
@@ -111,7 +116,7 @@ module.exports = {
                 print("red", "ERROR", `${interaction.commandName} failed!`);
 
                 console.log(e);
-            }
+            });
         });
     }
 };
