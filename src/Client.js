@@ -134,17 +134,19 @@ SenkoClient.once("ready", async () => {
 
     async function setTheCommands() {
         for (var cmd of SenkoClient.SlashCommands) {
+            if (cmd[0] !== "display") {
+                const CommandData = {
+                    name: `${cmd[0]}`,
+                    description: `${cmd[1].desc}`,
+                    defaultPermission: typeof cmd[1].defaultPermission === "boolean" ? cmd[1].defaultPermission : true,
+                };
 
-            const CommandData = {
-                name: `${cmd[0]}`,
-                description: `${cmd[1].desc}`,
-                defaultPermission: typeof cmd[1].defaultPermission === "boolean" ? cmd[1].defaultPermission : true,
-            };
+                if (cmd[1].options) CommandData.options = cmd[1].options;
+                // if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
 
-            if (cmd[1].options) CommandData.options = cmd[1].options;
-            // if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
+                if (!commandsToSet.includes(cmd[0])) commandsToSet.push(CommandData);
+            }
 
-            if (!commandsToSet.includes(cmd[0])) commandsToSet.push(CommandData);
         }
     }
 
