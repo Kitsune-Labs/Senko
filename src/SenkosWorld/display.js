@@ -270,7 +270,7 @@ module.exports = {
                         },
                         {
                             title: "Server Boosting",
-                            description: "We highly suggest boosing servers that are under level 3, but if you do boost you'll get some exclusive things like:\n\nBecoming exempt from the level lock\nAccess to a special channel\nDouble chat XP",
+                            description: "We highly suggest boosting servers that are under level 3, but if you do boost you'll get some exclusive things like:\n\nBecoming exempt from the level lock\nAccess to a special channel\nDouble chat XP",
                             color: SenkoClient.colors.light_red
                         },
                         {
