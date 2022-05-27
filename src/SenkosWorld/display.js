@@ -6,6 +6,7 @@ const Icons = require("../Data/Icons.json");
 module.exports = {
     name: "display",
     desc: "display",
+    SenkosWorld: true,
     options: [
         {
             name: "rules",
