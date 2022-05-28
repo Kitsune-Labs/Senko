@@ -52,7 +52,8 @@ module.exports = {
                                 {
                                     title: `Thank you dear!`,
                                     description: `I hope you have fun in ${interaction.guild.name}! <a:SenkoBreadPat:817481734407847986> <a:ShiroBreadPat:817481734437994526> <a:SoraBreadPat:817481734165364787> <a:SuzuBreadPat:971282424036220929>`,
-                                    color: "GREEN"
+                                    color: "GREEN",
+                                    thumbnail: { url: "attachment://image.png" }
                                 }
                             ],
                             components: [
@@ -66,6 +67,7 @@ module.exports = {
                                     ]
                                 }
                             ],
+                            files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }],
                             ephemeral: true
                         });
 
