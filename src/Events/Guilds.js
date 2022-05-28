@@ -212,8 +212,6 @@ module.exports = {
 
             const audit = rawAudit.entries.first();
 
-            console.log(audit.target.id !== member.id);
-
             if (audit.changes[0].key !== "communication_disabled_until" && audit.target.id !== member.id) return;
 
             if (member.communicationDisabledUntilTimestamp === null && guildData.ActionLogs) {

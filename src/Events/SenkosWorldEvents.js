@@ -19,18 +19,18 @@ module.exports = {
             if (interaction.isButton()) {
                 switch (interaction.customId) {
                     case "4D35DE24-2FE2-41A7-B86F-966284E6B10C":
-                        if (config.automod.allowVerification === false) return interaction.reply({
-                            embeds: [
-                                {
-                                    title: `${Icons.exclamation}  Sorry dear`,
-                                    description: "Verification is disabled on this server.\n\nThis could be a multitude of reasons, it should be enabled shortly",
-                                    color: SenkoClient.colors.dark,
-                                    thumbnail: { url: "attachment://image.png" }
-                                }
-                            ],
-                            files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
-                            ephemeral: true
-                        });
+                        // if (config.automod.allowVerification === false) return interaction.reply({
+                        //     embeds: [
+                        //         {
+                        //             title: `${Icons.exclamation}  Sorry dear`,
+                        //             description: "Verification is disabled on this server.\n\nThis could be a multitude of reasons, it should be enabled shortly",
+                        //             color: SenkoClient.colors.dark,
+                        //             thumbnail: { url: "attachment://image.png" }
+                        //         }
+                        //     ],
+                        //     files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
+                        //     ephemeral: true
+                        // });
 
                         if (interaction.member.roles.cache.has("816098234766196746")) return interaction.reply({
                             embeds: [
