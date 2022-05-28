@@ -35,7 +35,7 @@ module.exports = {
                         if (interaction.member.roles.cache.has("816098234766196746")) return interaction.reply({
                             embeds: [
                                 {
-                                    title: `${Icons.question}  What?`,
+                                    title: `What?`,
                                     description: "You're already verified!",
                                     color: SenkoClient.colors.dark,
                                     thumbnail: { url: "attachment://image.png" }
@@ -50,8 +50,8 @@ module.exports = {
                         interaction.reply({
                             embeds: [
                                 {
-                                    // title: `${Icons.exclamation}  Thank you dear!`,
-                                    description: `**${Icons.exclamation}  Thank you dear!**\n\nI hope you have fun in ${interaction.guild.name}! <a:SenkoBreadPat:817481734407847986> <a:ShiroBreadPat:817481734437994526> <a:SoraBreadPat:817481734165364787> <a:SuzuBreadPat:971282424036220929>`,
+                                    title: `Thank you dear!`,
+                                    description: `I hope you have fun in ${interaction.guild.name}! <a:SenkoBreadPat:817481734407847986> <a:ShiroBreadPat:817481734437994526> <a:SoraBreadPat:817481734165364787> <a:SuzuBreadPat:971282424036220929>`,
                                     color: "GREEN"
                                 }
                             ],
