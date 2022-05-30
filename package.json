@@ -6,6 +6,8 @@
     "build": "node dev/BN.js"
   },
   "dependencies": {
+    "@kitsune-softworks/chalk-node": "^4.1.2",
+    "@kitsune-softworks/utilities": "^1.0.0",
     "@supabase/supabase-js": "1.35.3",
     "axios": "0.27.2",
     "bitfields": "1.0.3",

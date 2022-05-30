@@ -39,14 +39,17 @@ module.exports = {
                         MangaDescription = "Vol. 1, Ch. 7";
                         break;
                     case "Tail_8":
-                        MangaDescription = "Vol. 1, Ch. 8";
+                        MangaDescription = "Vol. 2, Ch. 8";
+                        break;
+                    case "Tail_10":
+                        MangaDescription = "Vol. 2, Ch. 10";
                         break;
                 }
 
                 for (let i = 1; i <= Object.keys(SelectedManga).length; i++) {
                     Embeds.push({
                         title: "Sewayaki Kitsune no Senko-san",
-                        description: MangaDescription,
+                        description: `[${MangaDescription}]()`,
                         image: {
                             url: SelectedManga[Page]
                         },

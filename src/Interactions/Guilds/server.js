@@ -131,7 +131,7 @@ module.exports = {
                         {
                             type: 1,
                             components: [
-                                { type: 2, label: guildFlags.get(bits.ModCommands) ? "Disabled Moderation Commands" :"Enable Moderation Commands", style: guildFlags.get(bits.ModCommands) ? 4 : 3, custom_id: "guild_moderation" }
+                                { type: 2, label: guildFlags.get(bits.ModCommands) ? "Disable Moderation Commands" :"Enable Moderation Commands", style: guildFlags.get(bits.ModCommands) ? 4 : 3, custom_id: "guild_moderation" }
                             ]
                         }
                     ],
@@ -282,7 +282,7 @@ module.exports = {
                         components: [
                             { type: 2, label: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? "Enable Ban Logs" : "Disable Ban Logs", style: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? 3 : 4, custom_id: "g_disable_bans" },
                             { type: 2, label: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? "Enable Kick Logs": "Disable Kick Logs", style: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? 3 : 4, custom_id: "g_disable_kicks" },
-                            { type: 2, label: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "Enable Timeout Logs" : "Disable Timeout Logs", style: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? 3 : 4, custom_id: "g_disable_timeouts", disabled: true }
+                            { type: 2, label: !guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "Enable Timeout Logs" : "Disable Timeout Logs", style: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? 3 : 4, custom_id: "g_disable_timeouts", disabled: true }
                         ]
                     }
                 ];

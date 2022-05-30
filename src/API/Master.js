@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { User, Guild, Interaction, Permissions } = require("discord.js");
-const chalk = require("chalk");
+// const chalk = require("chalk");
 const config = require("../Data/DataConfig.json");
 const Icons = require("../Data/Icons.json");
 
@@ -10,11 +10,12 @@ const DataBase = FirebaseAdmin.firestore();
 const UserStore = DataBase.collection("Users");
 const Achievements = require("../Data/Achievements.json");
 
-const DataConfig = config;
+// const DataConfig = config;
 const { Bitfield } = require("bitfields");
-const { updateSuperUser } = require("./super");
+// const { updateSuperUser } = require("./super");
 const bits = require("./Bits.json");
-
+const { randomArrayItem: randomArray, randomNumber, wait, spliceArray } = require("@kitsune-softworks/utilities");
+const chalk = require("@kitsune-softworks/chalk-node");
 
 /**
  * @param {String} Color
@@ -25,20 +26,6 @@ function print(Color, Type, content) {
     console.log(`[${chalk.hex(Color || "#252525").underline(Type)}]: ${content}`);
 }
 
-/**
- * @param {Number} time
- */
-function wait(time) {
-    return new Promise(resolve => setTimeout(resolve, time));
-}
-
-/**
- * @param {Array} Array
- * @param {String} item
- */
-function spliceArray(Array, item) {
-    return Array.splice(Array.indexOf(item), 1);
-}
 
 /**
  * @param {String} string
@@ -297,14 +284,6 @@ async function addStats(interaction, CurrentStats, Stat) {
             }
         }
     });
-}
-
-function randomArray(array) {
-    return array[Math.floor(Math.random() * array.length)];
-}
-
-function randomNumber(num) {
-    return Math.floor(Math.random() * num);
 }
 
 function randomBummedImageName() {

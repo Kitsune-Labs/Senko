@@ -226,6 +226,19 @@
   resolved "https://registry.yarnpkg.com/@juanelas/base64/-/base64-1.0.4.tgz#e457b9e8e10170f3d2ad685b7a82655bc4397c8b"
   integrity sha512-KUidDSb+K7Rkoy2uJ/HdCnt4soNRlhNXONU8r8Cgic6Qq3E9BPg4kMSYXchM37WpYvGEGq2NUq/kCegMSLhtIg==
 
+"@kitsune-softworks/chalk-node@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@kitsune-softworks/chalk-node/-/chalk-node-4.1.2.tgz#ae1b4fc42284ce3e300ca9f78dba3aa25c4d4798"
+  integrity sha512-AV8vGdV4P0rIIAvVjZeAgq5nKMlazoFTHuusDI+R2b5ZiDSmeld7hTQ6jDsB7WF1v33U8PokQfnnyuvUQeXijw==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
+"@kitsune-softworks/utilities@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@kitsune-softworks/utilities/-/utilities-1.0.0.tgz#05b888967d66bed559cda12c4e9d9603e9301e39"
+  integrity sha512-tgTv28vluiWlZe54jM2hm08NbF1YjjYIY9H8cZlRwP06LrjyFOBQjlPyTlxajn/84LvkrL9d0LbLPSyTLD9bPg==
+
 "@panva/asn1.js@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
