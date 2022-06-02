@@ -32,14 +32,17 @@ module.exports = {
             interaction.reply({
                 embeds: [
                     {
-                        title: `${Icons.tears}  Sorry dear!`,
-                        description: "I had to disable this due to a big issue, check back next time!",
+                        title: `${Icons.exclamation}  No!!`,
+                        description: "Do not use this dear!",
                         color: SenkoClient.colors.dark_red,
-                        thumbnail: { url: "attachment://image.png" }
+                        thumbnail: { url: "attachment://image.png" },
+                        footer: {
+                            text: "(Disabled due to an issue)"
+                        }
                     }
                 ],
                 ephemeral: true,
-                files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }]
+                files: [{ attachment: "./src/Data/content/senko/angry2.png", name: "image.png" }]
             });
 
             // const textinput = new DiscordModal.TextInput()
@@ -77,7 +80,7 @@ module.exports = {
                         }
                     }
                 ],
-                files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
+                files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }],
             });
         }
     }

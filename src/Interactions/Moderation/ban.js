@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, Interaction } = require("discord.js");
 const { Bitfield } = require("bitfields");
-const { CheckPermission } = require("../../API/Master.js");
-const bits = require("../../API/Bits.json");
+const { CheckPermission } = require("../API/Master.js.js.js");
+const bits = require("../API/Bits.json");
+
 
 module.exports = {
     name: "ban",
@@ -53,7 +54,7 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         if (!Bitfield.fromHex(GuildData.flags).get(bits.ModCommands)) return interaction.reply({
-            content: "Your guild has not enabled Mod Commands, ask your guild Administrator to enable them with `/server configuration`",
+            content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
             ephemeral: true
         });
 
@@ -93,7 +94,7 @@ module.exports = {
 
         const users = [];
         for (var Option1 of interaction.options._hoistedOptions) {
-            if (Option1.name !== "reason" || Option1.name !== "dm") {
+            if (Option1.name !== "reason" && Option1.name !== "dm") {
                 users.push(Option1.value);
             }
         }
@@ -108,69 +109,109 @@ module.exports = {
 
                 if (Option.member) userToOutlaw = Option.member;
 
-                const banStruct = {
-                    embeds: [
-                        {
-                            title: "Action Report - Kitsune Banned",
-                            description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} [${typeof userToOutlaw != "string" ? userToOutlaw.user.id : userToOutlaw}]\nReason: __${reason}__`,
-                            color: "RED",
-                            author: {
-                                name: `${interaction.user.tag}  [${interaction.user.id}]`,
-                                icon_url: `${interaction.user.displayAvatarURL({ dynamic: true })}`
-                            }
-                        }
-                    ]
-                };
 
-                const responseStruct = {
-                    embeds: [
-                        {
-                            title: "Banned Kitsune",
-                            description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned for __${reason}__`,
-                            color: "RED"
-                        }
-                    ]
-                };
-
-                if (reason === "No reason provided") responseStruct.embeds[0].description = `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned!`;
-
-                if (typeof userToOutlaw != "string") {
-                    if (shouldDM === true) await userToOutlaw.send({
+                if (Option.member && userToOutlaw.id === interaction.user.id) {
+                    interaction.channel.send({
                         embeds: [
                             {
-                                title: `You have been banned from ${interaction.guild.name}`,
-                                description: `Your ban reason: ${reason}`, //\n\nOutlaw appeal: ${config.OutlawAppealForm}`,
+                                title: "Ban error",
+                                description: "You cannot ban yourself",
+                                color: "YELLOW"
+                            }
+                        ]
+                    });
+                } else if (Option.member && userToOutlaw.roles.highest.rawPosition >= interaction.member.roles.highest.rawPosition) {
+                    interaction.channel.send({
+                        embeds: [
+                            {
+                                title: "Ban error",
+                                description: `You cannot ban ${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw}, they either have a higher or equal role to yours.`,
+                                color: "YELLOW"
+                            }
+                        ]
+                    });
+                } else if (Option.member && userToOutlaw.id === interaction.guild.ownerId) {
+                    interaction.channel.send({
+                        embeds: [
+                            {
+                                title: "Ban error",
+                                description: `You cannot ban ${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw}, they are the server owner.`,
+                                color: "YELLOW"
+                            }
+                        ]
+                    });
+                } else if (Option.member && userToOutlaw.user.id === SenkoClient.user.id) {
+                    interaction.channel.send({
+                        embeds: [
+                            {
+                                title: "Ban error",
+                                description: "You cannot ban me.",
+                                color: "YELLOW"
+                            }
+                        ]
+                    });
+                } else {
+                    const banStruct = {
+                        embeds: [
+                            {
+                                title: "Action Report - Kitsune Banned",
+                                description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} [${typeof userToOutlaw != "string" ? userToOutlaw.user.id : userToOutlaw}]\nReason: __${reason}__`,
+                                color: "RED",
+                                author: {
+                                    name: `${interaction.user.tag}  [${interaction.user.id}]`,
+                                    icon_url: `${interaction.user.displayAvatarURL({ dynamic: true })}`
+                                }
+                            }
+                        ]
+                    };
+
+                    const responseStruct = {
+                        embeds: [
+                            {
+                                title: "Banned Kitsune",
+                                description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned for __${reason}__`,
                                 color: "RED"
                             }
                         ]
-                    }).catch(err => {
-                        responseStruct.embeds[0].description += `\n\n${err}`;
-                    });
-
-                    responseStruct.embeds[0].description += "\n\nDM Unsent";
-
-                    interaction.guild.members.ban(userToOutlaw.user.id, { reason: `${interaction.user.tag} : ${reason}`, days: 1 });
-                } else
-                    interaction.guild.members.ban(userToOutlaw, { reason: `${interaction.user.tag} : ${reason}`, days: 1 });{
-                    // banID(YozoraClient, userToOutlaw, reason);
-                }
-
-                if (typeof userToOutlaw != "string") {
-                    banStruct.embeds[0].thumbnail = {
-                        url: userToOutlaw.user.displayAvatarURL({ dynamic: true })
                     };
-                }
 
-                if (GuildData.ActionLogs) {
-                    interaction.guild.channels.cache.get(GuildData.ActionLogs).send(banStruct).catch(err => {
-                        responseStruct.embeds[0].description += `Cannot send action log: \n\n${err}`;
-                    });
-                }
+                    if (reason === "No reason provided") responseStruct.embeds[0].description = `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned!`;
 
-                interaction.channel.send(responseStruct);
+                    if (typeof userToOutlaw != "string") {
+                        if (shouldDM === true) await userToOutlaw.send({
+                            embeds: [
+                                {
+                                    title: `You have been banned from ${interaction.guild.name}`,
+                                    description: `Your ban reason: ${reason}`, //\n\nAppeal: ${config.OutlawAppealForm.replaceAll("[", "\[").replaceAll("]", "\]")}`,
+                                    color: "RED"
+                                }
+                            ]
+                        }).catch(err => {
+                            responseStruct.embeds[0].description += `\n\nDM Unsent\n${err}`;
+                        });
+
+                        interaction.guild.members.ban(userToOutlaw.user.id, { reason: `${interaction.user.tag} : ${reason}`, days: 1 });
+                    } else {
+                        interaction.guild.members.ban(userToOutlaw, { reason: `${interaction.user.tag} : ${reason}`, days: 1 });
+
+                        if (typeof userToOutlaw != "string") {
+                            banStruct.embeds[0].thumbnail = {
+                                url: userToOutlaw.user.displayAvatarURL({ dynamic: true })
+                            };
+                        }
+
+                        if (GuildData.ActionLogs) {
+                            interaction.guild.channels.cache.get(GuildData.ActionLogs).send(banStruct).catch(err => {
+                                responseStruct.embeds[0].description += `Cannot send action log: \n\n${err}`;
+                            });
+                        }
+
+                        interaction.channel.send(responseStruct);
+                    }
+                }
             }
         }
 
-        interaction.editReply({ content: "Done", ephemeral: true });
+        interaction.editReply({ content: "Done" });
     }
 };

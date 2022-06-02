@@ -5,7 +5,7 @@ const Icons = require("../Data/Icons.json");
 
 module.exports = {
     name: "display",
-    desc: "display",
+    desc: "for use by developers",
     SenkosWorld: true,
     options: [
         {
@@ -44,6 +44,7 @@ module.exports = {
             type: 1
         }
     ],
+    permissions: "0",
     /**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
@@ -84,17 +85,17 @@ module.exports = {
                         {
                             color: SenkoClient.colors.light_red,
                             title: "🔞  18+/Suggestive Content",
-                            description: "__**You will not :**__\n\nSend any type of pornographic content\nSend any type of *real* Gore or anything related"
+                            description: "__**You will not :**__\n\nSend any type of pornographic content\nSend any type of *real* Gore or anything related\nIt should be obvious that any character lewd counts and is instant outlaw from the server and from <@777676015887319050>, forever, no appeals"
                         },
                         {
                             color: SenkoClient.colors.dark_red,
                             title: "⛔  Problematic content or media",
-                            description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures, any type of war group related content, or social credit \"memes\"\n\nTalk about any non-fictional politics"
+                            description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures, any type of war group related content, or social credit \"memes\"\n\nTalk about any non-fictional politics\nDisplay affection twoards Drug & Alcohol related things"
                         },
                         {
                             color: SenkoClient.colors.light_red,
                             title: "ℹ️  Misc",
-                            description: "Do not bypass the filter for malicious reasons, if you really wish to send that message use `/filter`"
+                            description: "Do not bypass the filter for malicious reasons, if you really wish to send that message use `/filter`\n\nOutlaw (Ban) Appeals can be found here:\nhttps://senkosworld.com/appeal"
                         }
                     ],
                     components: [

@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const { fetchSuperGuild } = require("./super");
 const fs = require("fs");
 const axios = require("axios");
-const chalk = require("chalk");
+const chalk = require("@kitsune-softworks/chalk-node");
 const { parentPort } = require("worker_threads");
 
 function clean(Content) {

@@ -28,7 +28,7 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     start: async (SenkoClient, interaction, GuildData, AccountData) => {
         if (!Bitfield.fromHex(GuildData.flags).get(bits.ModCommands)) return interaction.reply({
-            content: "Your guild has not enabled Mod Commands, ask your guild Administrator to enable them with `/server configuration`",
+            content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
             ephemeral: true
         });
 
@@ -62,10 +62,44 @@ module.exports = {
             ephemeral: true
         });
 
-        await interaction.deferReply({ fetchReply: true });
-
         const userToKick = interaction.options.getUser("user");
+        const guildUser = interaction.options.getMember("user");
         const reason = interaction.options.getString("reason") || "No reason provided";
+
+        if (userToKick.id === interaction.user.id) return interaction.reply({
+            embeds: [
+                {
+                    title: "Kick error",
+                    description: "You cannot kick yourself",
+                    color: "YELLOW"
+                }
+            ],
+            ephemeral: true
+        });
+
+        if (guildUser.roles.highest.rawPosition >= interaction.member.roles.highest.rawPosition) return interaction.reply({
+            embeds: [
+                {
+                    title: "Kick error",
+                    description: `You cannot kick ${guildUser.user.tag}, they either have a higher or equal role to yours.`,
+                    color: "YELLOW"
+                }
+            ],
+            ephemeral: true
+        });
+
+        if (userToKick.id === interaction.guild.ownerId) return interaction.reply({
+            embeds: [
+                {
+                    title: "Kick error",
+                    description: "You cannot kick the server owner",
+                    color: "YELLOW"
+                }
+            ],
+            ephemeral: true
+        });
+
+        await interaction.deferReply({ fetchReply: true });
 
         const kickStruct = {
             embeds: [

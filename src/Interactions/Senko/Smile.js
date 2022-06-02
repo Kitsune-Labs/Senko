@@ -45,7 +45,7 @@ module.exports = {
                     }
                 }
             ],
-            files: [{ attachment: `./src/Data/content/senko/${randomArray(["smile", "happy"])}.png`, name: "image.png" }]
+            files: [{ attachment: `./src/Data/content/senko/${randomArray(["smile", "happy", "smile2", "smile3"])}.png`, name: "image.png" }]
         };
 
         if (randomNumber(100) > 75) {

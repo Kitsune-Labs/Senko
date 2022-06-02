@@ -94,7 +94,7 @@ module.exports = {
                     }
                 }
             ],
-            files: [ new MessageAttachment("./src/Data/content/senko/senko_think.png", "image.png") ],
+            files: [ new MessageAttachment("./src/Data/content/senko/hat_think.png", "image.png") ],
             fetchReply: true
         });
 

@@ -7,6 +7,7 @@ const Market = require("../Data/Shop/Items.json");
 const HardLinks = require("../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../API/Bits.json");
+const { randomArrayItem } = require("@kitsune-softworks/utilities");
 
 module.exports = {
     /**
@@ -154,13 +155,13 @@ module.exports = {
                             }
                         }
                     }).then(() => {
-                        const reactions = ["good"];
+                        const reactions = ["good", "delicious"];
 
                         interaction.update({
                             embeds: [
                                 {
-                                    title: `You and Senko ate ${item.name}!`,
-                                    description: `Senko says it was ${reactions[Math.floor(Math.random() * reactions.length)]}\n\n— 1x ${item.name} removed`,
+                                    title: `You and Senko had ${item.name}!`,
+                                    description: `Senko says it was ${randomArrayItem(reactions)}\n\n— 1x ${item.name} removed`,
                                     color: SenkoClient.colors.light,
                                     thumbnail: {
                                         url: randomArray([HardLinks.senkoBless, HardLinks.senkoEat, HardLinks.senkoDrink])

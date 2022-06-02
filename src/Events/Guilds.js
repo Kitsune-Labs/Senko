@@ -205,17 +205,14 @@ module.exports = {
 
             if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return print("#ffff6", "GUILD", "Member timeout's are disabled for this guild");
 
-            const rawAudit = await member.guild.fetchAuditLogs({
-                limit: 1,
-                type: "MEMBER_UPDATE"
-            });
+            const rawAudit = await member.guild.fetchAuditLogs({ limit: 1 });
 
             const audit = rawAudit.entries.first();
-
-            if (audit.changes[0].key !== "communication_disabled_until" && audit.target.id !== member.id) return;
+            if (audit.changes[0].key !== "communication_disabled_until") return;
+            if (audit.target.id !== member.id) return;
 
             if (member.communicationDisabledUntilTimestamp === null && guildData.ActionLogs) {
-                console.log("Timeout Removed", audit.changes[0].key);
+                console.log("Timeout Removed", audit.action);
 
                 member.guild.channels.cache.get("939246130213044234").send({
                     embeds: [
@@ -232,7 +229,7 @@ module.exports = {
             }
 
             if (member.communicationDisabledUntilTimestamp != null && guildData.ActionLogs) {
-                console.log("Timeout Added", audit.changes[0].key);
+                console.log("Timeout Added", audit.action);
 
                 member.guild.channels.cache.get("939246130213044234").send({
                     embeds: [

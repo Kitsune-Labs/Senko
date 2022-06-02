@@ -5,6 +5,7 @@ const Icons = require("../../Data/Icons.json");
 
 const config = require("../../Data/DataConfig.json");
 const { updateUser, randomArray, randomBummedImageName, calcTimeLeft } = require("../../API/Master");
+const { randomArrayItem } = require("@kitsune-softworks/utilities");
 
 const UserActions = [
     "_USER_ rest's on Senko's lap",
@@ -40,14 +41,14 @@ module.exports = {
         const MessageStruct = {
             embeds: [
                 {
-                    description: `**${randomArray(Responses)}**\n\n*${randomArray(UserActions).replace("_USER_", interaction.user.username)}*`,
+                    description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", interaction.user.username)}*`,
                     color: SenkoClient.colors.light,
                     thumbnail: {
                         url: "attachment://image.png"
                     }
                 }
             ],
-            files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
+            files: [{ attachment: `./src/Data/content/senko/${randomArrayItem(["cuddle", "sleep"])}.png`, name: "image.png" }]
         };
 
         if (calcTimeLeft(RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {

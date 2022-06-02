@@ -1,4 +1,3 @@
-const { MessageAttachment } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 
 module.exports = {
@@ -34,7 +33,7 @@ module.exports = {
                     }
                 }
             ],
-            files: [ new MessageAttachment("./src/Data/content/senko/happy.png", "image.png", { size: 2048 }) ],
+            files: [{ attachment: "./src/Data/content/senko/idle.png", name: "image.png" }],
             ephemeral: true
         });
     }

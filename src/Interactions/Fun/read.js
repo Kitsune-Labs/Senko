@@ -26,8 +26,16 @@ module.exports = {
 
             resolve();
         }).then(() => {
-            if (!OwnedChapters[0]) return interaction.reply({
-                content: "You don't own any Tails of the Senko Manga, you can find them in the shop when they're onsale!",
+            if (!OwnedChapters[0]) return interaction.followUp({
+                embeds: [
+                    {
+                        title: "You don't own any chapters!",
+                        description: "You can buy them when they're avaliable in the shop!",
+                        color: SenkoClient.colors.light,
+                        thumbnail: { url: "attachment://image.png" },
+                    }
+                ],
+                files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
                 ephemeral: true
             });
 

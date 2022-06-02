@@ -234,10 +234,10 @@
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-"@kitsune-softworks/utilities@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@kitsune-softworks/utilities/-/utilities-1.0.0.tgz#05b888967d66bed559cda12c4e9d9603e9301e39"
-  integrity sha512-tgTv28vluiWlZe54jM2hm08NbF1YjjYIY9H8cZlRwP06LrjyFOBQjlPyTlxajn/84LvkrL9d0LbLPSyTLD9bPg==
+"@kitsune-softworks/utilities@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@kitsune-softworks/utilities/-/utilities-1.1.0.tgz#e01b7dcc26c1ea3c690beca0c19840b60e1efc7d"
+  integrity sha512-iZSWlJFII7hzLGwcdV7pAstghVj7jqHbNGebLA26fRrt/bN9yKYoYJs44fSqBH1L9oh6s6bceRzjzqzhCXouzA==
 
 "@panva/asn1.js@^1.0.0":
   version "1.0.0"
@@ -659,6 +659,13 @@ bufferutil@^4.0.1:
   dependencies:
     node-gyp-build "^4.3.0"
 
+build-number-generator@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/build-number-generator/-/build-number-generator-1.0.0.tgz#249e2cd8c09634f3a2b925193d06f7064cb92b7b"
+  integrity sha512-6xhLaQm6vStqlByo7S7WlO0aohuKCsPU+3bBUmnWDow5nbuiMoeM3fd6ZKfMxwkvGK8xRFYM4oCVJYreRI1DUg==
+  dependencies:
+    commander "6.2.0"
+
 bytes@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.1.tgz#3f018291cb4cbad9accb6e6970bca9c8889e879a"
@@ -669,7 +676,7 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
-chalk@4.1.2, chalk@^4.0.0:
+chalk@^4.0.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -709,6 +716,11 @@ combined-stream@^1.0.8:
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
   dependencies:
     delayed-stream "~1.0.0"
+
+commander@6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.0.tgz#b990bfb8ac030aedc6d11bc04d1488ffef56db75"
+  integrity sha512-zP4jEKbe8SHzKJYQmq8Y9gYjtO/POJLgIdKgV7B9qNmABVFVc+ctqSX6iXh4mCpJfRBOabiZ2YKPg8ciDw6C+Q==
 
 compressible@^2.0.12:
   version "2.0.18"
@@ -1697,7 +1709,7 @@ lodash.once@^4.0.0:
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
 
-lodash@^4.17.14, lodash@^4.17.21:
+lodash@^4.17.14:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==

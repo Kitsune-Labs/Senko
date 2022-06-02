@@ -1,45 +1,39 @@
-const Icons = require("../src/Data/Icons.json");
-const ShopItems = require("../src/Data/Shop/Items.json");
-const { updateUser } = require("../src/API/Master");
+const Icons = require("../Data/Icons.json");
+const ShopItems = require("../Data/Shop/Items.json");
+const { updateUser } = require("../API/Master");
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { fetchData } = require("../src/API/Master");
+const { fetchData } = require("../API/Master");
 
 module.exports = {
-    name: "award-dev",
-    desc: "dev",
+    name: "award",
+    desc: "for use by developers",
     options: [
         {
-            name: "user",
-            description: "User",
+            name: "user-id",
+            description: "User Id",
             type: 3,
             required: true
         },
         {
-            name: "dev-item",
+            name: "item",
             description: "Item ID from the shop",
             type: 3,
             required: true
         }
     ],
-    permissions: [
-        {
-            id: "609097445825052701",
-            type: "USER",
-            permission: true
-        }
-    ],
-    defaultPermission: false,
+    defer: true,
+    ephemeral: true,
+    permissions: "0",
     /**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
      */
     start: async (SenkoClient, interaction) => {
-        if (interaction.user.id !== "609097445825052701") return interaction.reply({ content: "🗿", ephemeral: true });
-        interaction.deferReply({ ephemeral: true });
+        if (interaction.user.id !== "609097445825052701") return interaction.followUp({ content: "🗿" });
 
         const User = interaction.options.getString("user");
-        const DevItem = ShopItems[interaction.options.getString("dev-item")];
+        const DevItem = ShopItems[interaction.options.getString("item")];
 
         if (!DevItem) return interaction.followUp({ content: "item null", ephemeral: true });
 
@@ -48,6 +42,10 @@ module.exports = {
         if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
 
         const { Inventory } = await fetchData(FetchedUser);
+        const devResponse = {
+            content: `Added ${DevItem.name} to inventory`,
+            ephemeral: true
+        };
 
         for (var Item of Inventory) {
             if (Item.codename === DevItem) {
@@ -57,6 +55,8 @@ module.exports = {
                     Inventory: Inventory
                 });
 
+
+
                 FetchedUser.send({
                     embeds: [
                         {
@@ -65,12 +65,9 @@ module.exports = {
                             color: SenkoClient.colors.light,
                         }
                     ]
-                }).catch();
+                }).catch(e=>devResponse.footer.text = e);
 
-                return interaction.followUp({
-                    content: `Added ${DevItem.name} to inventory`,
-                    ephemeral: true
-                });
+                return interaction.followUp(devResponse);
             }
         }
 
@@ -95,9 +92,8 @@ module.exports = {
             ]
         }).catch();
 
-        interaction.followUp({
-            content: `Added ${DevItem.name} to inventory (Created new)`,
-            ephemeral: true
-        });
+        devResponse.description += "(Created new item)";
+
+        interaction.followUp(devResponse);
     }
 };

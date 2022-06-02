@@ -46,7 +46,15 @@ module.exports = {
         switch (Command) {
             case "banner":
                 if (!AccountData.Inventory[0]) return interaction.followUp({
-                    content: "You don't have anything, you can find items to buy with /shop!",
+                    embeds: [
+                        {
+                            title: "You don't own anything!",
+                            description: "You can buy banners when they're avaliable in the shop!",
+                            color: SenkoClient.colors.light,
+                            thumbnail: { url: "attachment://image.png" },
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
                     ephemeral: true
                 });
 
@@ -63,7 +71,15 @@ module.exports = {
                 }
 
                 if (!Banners[1]) return interaction.followUp({
-                    content: "You don't own any banners, you can find them in the shop when they're onsale!",
+                    embeds: [
+                        {
+                            title: "You don't own any banners!",
+                            description: "You can buy them when they're avaliable in the shop!",
+                            color: SenkoClient.colors.light,
+                            thumbnail: { url: "attachment://image.png" },
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
                     ephemeral: true
                 });
 
@@ -128,7 +144,15 @@ module.exports = {
             break;
             case "title":
                 if (!AccountData.Inventory[0]) return interaction.followUp({
-                    content: "You don't have anything, you can find items to buy with /shop!",
+                    embeds: [
+                        {
+                            title: "You don't own anything!",
+                            description: "You can buy banners when they're avaliable in the shop!",
+                            color: SenkoClient.colors.light,
+                            thumbnail: { url: "attachment://image.png" },
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
                     ephemeral: true
                 });
 
@@ -144,7 +168,15 @@ module.exports = {
                     }
                 }
                 if (!TitleColors[1]) return interaction.followUp({
-                    content: "You don't own any titles, you can find them in the shop when they're onsale!",
+                    embeds: [
+                        {
+                            title: "You don't own any titles!",
+                            description: "You can buy them when they're avaliable in the shop!",
+                            color: SenkoClient.colors.light,
+                            thumbnail: { url: "attachment://image.png" },
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
                     ephemeral: true
                 });
 
@@ -168,7 +200,15 @@ module.exports = {
             break;
             case "color":
                 if (!AccountData.Inventory[0]) return interaction.followUp({
-                    content: "You don't have anything, you can find items to buy with /shop!",
+                    embeds: [
+                        {
+                            title: "You don't own anything!",
+                            description: "You can buy banners when they're avaliable in the shop!",
+                            color: SenkoClient.colors.light,
+                            thumbnail: { url: "attachment://image.png" },
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
                     ephemeral: true
                 });
 
@@ -188,7 +228,15 @@ module.exports = {
                 }
 
                 if (!ColorColors[1]) return interaction.followUp({
-                    content: "You don't own any colors, you can find them in the shop when they're onsale!",
+                    embeds: [
+                        {
+                            title: "You don't own any card colors!",
+                            description: "You can buy them when they're avaliable in the shop!",
+                            color: SenkoClient.colors.light,
+                            thumbnail: { url: "attachment://image.png" },
+                        }
+                    ],
+                    files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
                     ephemeral: true
                 });
 

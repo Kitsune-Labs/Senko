@@ -2,10 +2,11 @@ const { MessageAttachment } = require("discord.js");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const { updateUser } = require("../../API/Master");
+const { randomArrayItem } = require("@kitsune-softworks/utilities");
 
 module.exports = {
     name: "work",
-    desc: "Have Nakano go to work to provide us with income",
+    desc: "Have Nakano go to work to provide income",
     userData: true,
     /**
      * @param {CommandInteraction} interaction
@@ -61,7 +62,7 @@ module.exports = {
                 ephemeral: true
             });
         } else {
-            if (RNG <= 25) {
+            if (RNG <= 30) {
                 await updateUser(interaction.user, {
                     Currency: { Yen: (700 - Item.price) + Currency.Yen },
                     Rewards: { Work: Date.now() }
@@ -78,7 +79,7 @@ module.exports = {
                             }
                         }
                     ],
-                    files: [ { attachment: "./src/Data/content/senko/heh.png", name: "image.png" } ]
+                    files: [{ attachment: `./src/Data/content/senko/${randomArrayItem(["heh", "heh2", "judgement", "upset"])}.png`, name: "image.png" }]
                 });
             } else {
                 await updateUser(interaction.user, {

@@ -16,7 +16,8 @@ module.exports = {
         const AccountEmbed = {
             title: "Data Removal",
             description: "Please confirm that you want to delete all your data.\n\n**⚠️ This is irreversible! ⚠️**",
-            color: SenkoClient.colors.dark
+            color: SenkoClient.colors.dark,
+            thumbnail: { url: "attachment://image.png" },
         };
 
         interaction.reply({
@@ -30,6 +31,7 @@ module.exports = {
                     ]
                 }
             ],
+            files: [{ attachment: "./src/Data/content/senko/upset2.png", name: "image.png" }],
             fetchReply: true
         });
     }

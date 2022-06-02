@@ -7,29 +7,32 @@ const { v4: uuidv4 } = require("uuid");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 
-const options = [
-    {
-        name: "user",
-        description: "The user to warn",
-        required: true,
-        type: "USER"
-    },
-    {
-        name: "reason",
-        description: "Reason",
-        type: "STRING"
-    },
-    {
-        name: "note",
-        description: "If you want to provide a note outside of the reason type it here",
-        type: "STRING"
-    }
-];
-
 module.exports = {
     name: "warn",
     desc: "warn",
-    options: options,
+    options: [
+        {
+            name: "user",
+            description: "The user to warn",
+            required: true,
+            type: "USER"
+        },
+        {
+            name: "reason",
+            description: "Reason",
+            type: "STRING"
+        },
+        {
+            name: "note",
+            description: "If you want to provide a note outside of the reason type it here",
+            type: "STRING"
+        }
+    ],
+    user_ui: {
+        name: "warn",
+        desc: "Warn this user",
+        type: 2
+    },
     /**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
@@ -41,7 +44,7 @@ module.exports = {
         const note = interaction.options.getString("note") || "No note(s) provided";
 
         if (!Bitfield.fromHex(flags).get(bits.ModCommands)) return interaction.reply({
-            content: "Your guild has not enabled Mod Commands, ask your guild Administrator to enable them with `/server configuration`",
+            content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
             ephemeral: true
         });
 

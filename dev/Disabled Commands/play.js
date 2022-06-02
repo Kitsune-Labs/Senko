@@ -1,13 +1,14 @@
+//! Disabled because it doesn't properly work
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, Client } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
-    name: "play-dev",
+    name: "play",
     desc: "Discord intergrated Games",
     options: [
         {
-            name: "sketch_heads",
+            name: "sketch-heads",
             description: "Discord Intergrated Feature",
             type: 1
         },
@@ -30,6 +31,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
     start: async (SenkoClient, interaction) => {
+        console.log(interaction.member.voice);
         // if (!interaction.member.voice.channel) return interaction.reply({
         //     content: "You must be in a voice channel to use this command",
         //     ephemeral: true

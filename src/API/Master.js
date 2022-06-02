@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 const { User, Guild, Interaction, Permissions } = require("discord.js");
-// const chalk = require("chalk");
 const config = require("../Data/DataConfig.json");
 const Icons = require("../Data/Icons.json");
 

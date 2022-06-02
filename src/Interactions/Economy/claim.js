@@ -40,17 +40,16 @@ module.exports = {
                         embeds: [
                             {
                                 title: `${Icons.exclamation}  Sorry dear!`,
-                                description: `You've already claimed your Yen! Come back <t:${Math.floor((DailyTimeStamp + DailyCooldown) / 1000)}:R>!`,
+                                description: `I've already given you your daily yen, come back to me <t:${Math.floor((DailyTimeStamp + DailyCooldown) / 1000)}:R>!`,
                                 color: SenkoClient.colors.dark,
                                 thumbnail: {
                                     url: "attachment://image.png"
                                 }
                             }
                         ],
-                        files: [ { attachment: "./src/Data/content/senko/huh.png", name: "image.png" } ],
+                        files: [ { attachment: "./src/Data/content/senko/heh.png", name: "image.png" } ],
                         ephemeral: true
                     });
-
                 } else {
                     await updateUser(interaction.user, {
                         Currency: { Yen: AccountData.Currency.Yen + 200 },
@@ -81,14 +80,14 @@ module.exports = {
                         embeds: [
                             {
                                 title: `${Icons.exclamation}  Sorry dear!`,
-                                description: `You've already claimed your Yen! Come back <t:${Math.floor((WeeklyTimeStamp + WeeklyCooldown) / 1000)}:R>!`,
+                                description: `From what I can remember i've given you your weekly yen, come back <t:${Math.floor((WeeklyTimeStamp + WeeklyCooldown) / 1000)}:R>!`,
                                 color: SenkoClient.colors.dark,
                                 thumbnail: {
                                     url: "attachment://image.png"
                                 }
                             }
                         ],
-                        files: [ { attachment: "./src/Data/content/senko/huh.png", name: "image.png" } ],
+                        files: [ { attachment: "./src/Data/content/senko/hat_think.png", name: "image.png" } ],
                         ephemeral: true
                     });
 
@@ -101,8 +100,8 @@ module.exports = {
                     interaction.followUp({
                         embeds: [
                             {
-                                title: `${Icons.heart}  Here you go dear!`,
-                                description: `I have given you your yen for this week. Spend it wisely as it can only be used once a week!\n\n— ${Icons.yen} 1400x added`,
+                                title: `${Icons.heart}  It's that time again!`,
+                                description: `Here is your Yen for this week; Now spend it wisely!\n\n— ${Icons.yen} 1400x added`,
                                 color: SenkoClient.colors.light,
                                 thumbnail: {
                                     url: "attachment://image.png"
@@ -118,14 +117,14 @@ module.exports = {
                     embeds: [
                         {
                             title: "Hmmm.....",
-                            description: "You have no items to claim!",
+                            description: "I've scourged around and couldn't find anything!",
                             color: SenkoClient.colors.light,
                             thumbnail: {
                                 url: "attachment://image.png",
                             }
                         }
                     ],
-                    files: [{ attachment: "./src/Data/content/senko/senko_think.png", name: "image.png" }]
+                    files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
                 });
                 break;
         }

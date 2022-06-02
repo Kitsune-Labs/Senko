@@ -5,7 +5,6 @@ const { Client, Collection } = require("discord.js");
 const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
 
-
 const SenkoClient = new Client({
     intents: ["GUILDS", "GUILD_BANS","GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_PRESENCES"],
 
@@ -86,8 +85,6 @@ SenkoClient.once("ready", async () => {
     // print("#B42025", "AUTOMOD", "Ready");
 
 
-    const SenkosWorld = SenkoClient.guilds.cache.get("777251087592718336").commands;
-
     for (let file of readdirSync("./src/SenkosWorld/")) {
         const pull = require(`./SenkosWorld/${file}`);
 
@@ -99,70 +96,46 @@ SenkoClient.once("ready", async () => {
         if (pull.options) commandData.options = pull.options;
 
         SenkoClient.SlashCommands.set(pull.name, pull);
-        SenkosWorld.set([ commandData ]);
+        // await SenkoClient.guilds.cache.get("777251087592718336").commands.set([ commandData ]);
     }
 
-    print("#FFFB00", "SW", "Ready");
-
+    print("#FFFB00", "Senko's_World!", "Ready");
 
     const commandsToSet = [];
 
-    async function setCommands() {
-        if (process.env.NIGHTLY !== "true") {
-            readdirSync("./src/Interactions/").forEach(async Folder => {
-                const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
+    if (process.env.NIGHTLY == "true") {
+        readdirSync("./src/Interactions/").forEach(async Folder => {
+            const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
 
-                for (let interact of Interactions) {
-                    let pull = require(`./Interactions/${Folder}/${interact}`);
-
-                    SenkoClient.SlashCommands.set(`${pull.name}`, pull);
-                }
-            });
-        }
-
-        if (process.env.NIGHTLY === "true") {
-            for (var file of readdirSync("./src/DevInteractions/")) {
-                const pull = require(`./DevInteractions/${file}`);
+            for (let interact of Interactions) {
+                let pull = require(`./Interactions/${Folder}/${interact}`);
 
                 SenkoClient.SlashCommands.set(`${pull.name}`, pull);
             }
-        }
-
-    }
-
-    await setCommands();
-
-    async function setTheCommands() {
-        for (var cmd of SenkoClient.SlashCommands) {
-            if (cmd[0] !== "display") {
-                const CommandData = {
-                    name: `${cmd[0]}`,
-                    description: `${cmd[1].desc}`,
-                    defaultPermission: typeof cmd[1].defaultPermission === "boolean" ? cmd[1].defaultPermission : true,
-                };
-
-                if (cmd[1].options) CommandData.options = cmd[1].options;
-                // if (cmd[1].permissions) CommandData.permissions = cmd[1].permissions;
-
-                if (!commandsToSet.includes(cmd[0])) commandsToSet.push(CommandData);
-            }
-
-        }
-    }
-
-    await setTheCommands();
-
-    await commands.set(commandsToSet).then(async commandList => {
-        commandList.forEach(async command => {
-            const fCmd = await commandsToSet.find(cmd => cmd.name === command.name);
-
-            if (fCmd.permissions) {
-                let permissions  = await fCmd.permissions;
-                await command.permissions.add({ permissions });
-                console.log(`Added permissions to ${command.name}`);
-            }
         });
-    });
+    } else {
+        print("#FF6633", "SENKO", "Development mode is enabled, no regular interactions will be loaded.");
+
+        for (var file of readdirSync("./src/DevInteractions/")) {
+            const pull = require(`./DevInteractions/${file}`);
+            SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+        }
+    }
+
+    for (var cmd of SenkoClient.SlashCommands) {
+        if (cmd[0] !== "display") {
+            const commandStruct = {
+                name: `${cmd[0]}`,
+                description: `${cmd[1].desc}`,
+                dm_permission: false
+            };
+
+            if (cmd[1].options) commandStruct.options = cmd[1].options;
+            if (!commandsToSet.includes(cmd[0])) commandsToSet.push(commandStruct);
+        }
+    }
+
+    await commands.set(commandsToSet);
 
     print("#F39800", "INTERACTIONS", "Ready");
 });

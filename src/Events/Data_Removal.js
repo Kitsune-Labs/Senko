@@ -18,7 +18,8 @@ module.exports = {
                                     {
                                         title: "Data Removal",
                                         description: "🗑️  Your data has been removed",
-                                        color: SenkoClient.colors.dark
+                                        color: SenkoClient.colors.dark,
+                                        thumbnail: { url: "attachment://image.png" },
                                     }
                                 ],
                                 components: [],
@@ -32,7 +33,8 @@ module.exports = {
                                     {
                                         title: "Data Removal",
                                         description: "⚠️  There was an issue removing your data",
-                                        color: SenkoClient.colors.dark
+                                        color: SenkoClient.colors.dark,
+                                        thumbnail: { url: "attachment://image.png" },
                                     }
                                 ],
                                 components: [],
