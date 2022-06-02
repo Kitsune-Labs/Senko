@@ -96,7 +96,7 @@ SenkoClient.once("ready", async () => {
         if (pull.options) commandData.options = pull.options;
 
         SenkoClient.SlashCommands.set(pull.name, pull);
-        // await SenkoClient.guilds.cache.get("777251087592718336").commands.set([ commandData ]);
+        await SenkoClient.guilds.cache.get("777251087592718336").commands.set([ commandData ]);
     }
 
     print("#FFFB00", "Senko's_World!", "Ready");
