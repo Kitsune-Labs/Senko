@@ -109,7 +109,6 @@ module.exports = {
 
                 if (Option.member) userToOutlaw = Option.member;
 
-
                 if (Option.member && userToOutlaw.id === interaction.user.id) {
                     interaction.channel.send({
                         embeds: [
@@ -205,9 +204,9 @@ module.exports = {
                                 responseStruct.embeds[0].description += `Cannot send action log: \n\n${err}`;
                             });
                         }
-
-                        interaction.channel.send(responseStruct);
                     }
+
+                    interaction.channel.send(responseStruct);
                 }
             }
         }
