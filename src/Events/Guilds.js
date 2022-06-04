@@ -138,12 +138,12 @@ module.exports = {
             var guildData = await fetchSuperGuild(member.guild);
             var guildFlags = Bitfield.fromHex(guildData.flags);
 
-            if (guildData.MemberLogs /*&& guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)*/) {
+            if (guildData.MemberLogs) {
                 member.guild.channels.cache.get(guildData.MemberLogs).send({
                     embeds: [
                         {
                             title: "New Kitsune",
-                            description: `${member} [${member.id}]\n${member.user.bot ? "IS a bot" : "Not a bot"}\nCreated on <t:${parseInt(member.user.createdTimestamp / 1000)}>`,
+                            description: `${member} [${member.id} | ${member.user.tag}]\n${member.user.bot ? "IS a bot" : "Not a bot"}\nCreated on <t:${parseInt(member.user.createdTimestamp / 1000)}>`,
                             color: SenkoClient.colors.light,
                             thumbnail: { url: member.user.displayAvatarURL({ dynamic: true, size: 4096 }) }
                         }

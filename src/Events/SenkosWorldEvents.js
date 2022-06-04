@@ -19,23 +19,10 @@ module.exports = {
             if (interaction.isButton()) {
                 switch (interaction.customId) {
                     case "4D35DE24-2FE2-41A7-B86F-966284E6B10C":
-                        // if (config.automod.allowVerification === false) return interaction.reply({
-                        //     embeds: [
-                        //         {
-                        //             title: `${Icons.exclamation}  Sorry dear`,
-                        //             description: "Verification is disabled on this server.\n\nThis could be a multitude of reasons, it should be enabled shortly",
-                        //             color: SenkoClient.colors.dark,
-                        //             thumbnail: { url: "attachment://image.png" }
-                        //         }
-                        //     ],
-                        //     files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
-                        //     ephemeral: true
-                        // });
-
                         if (interaction.member.roles.cache.has("816098234766196746")) return interaction.reply({
                             embeds: [
                                 {
-                                    title: `What?`,
+                                    title: "What?",
                                     description: "You're already verified!",
                                     color: SenkoClient.colors.dark,
                                     thumbnail: { url: "attachment://image.png" }
@@ -50,7 +37,7 @@ module.exports = {
                         interaction.reply({
                             embeds: [
                                 {
-                                    title: `Thank you dear!`,
+                                    title: "Thank you dear!",
                                     description: `I hope you have fun in ${interaction.guild.name}! <a:SenkoBreadPat:817481734407847986> <a:ShiroBreadPat:817481734437994526> <a:SoraBreadPat:817481734165364787> <a:SuzuBreadPat:971282424036220929>`,
                                     color: "GREEN",
                                     thumbnail: { url: "attachment://image.png" }
@@ -195,7 +182,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777257201219403816> from your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -210,7 +197,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777257201219403816> to your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -229,7 +216,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777257276033597441> from your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -244,7 +231,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777257276033597441> to your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -263,7 +250,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777259097632407552> from your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -278,7 +265,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777259097632407552> to your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -297,7 +284,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777259001548111923> from your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -312,7 +299,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777259001548111923> to your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -331,7 +318,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777645674492854322> from your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -346,7 +333,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777645674492854322> to your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -365,7 +352,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777645607585185793> from your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -380,7 +367,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777645607585185793> to your roles",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -400,7 +387,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777656121430376448> from your roles\n\nYou will no longer receive pings for announcements",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -415,7 +402,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777656121430376448> to your roles\n\nYou will now receive pings for announcements",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -434,7 +421,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777656183703076885> from your roles\n\nYou will no longer receive pings for community news",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -449,7 +436,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777656183703076885> to your roles\n\nYou will now receive pings for community news",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -468,7 +455,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&777656896852328450> from your roles\n\nYou will no longer receive pings for community events",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -483,7 +470,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&777656896852328450> to your roles\n\nYou will now receive pings for community events",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -502,7 +489,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&885714280073297931> from your roles\n\nYou will no longer receive pings for new Senko manga releases",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -517,7 +504,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&885714280073297931> to your roles\n\nYou will now receive pings for new Senko manga releases",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -537,7 +524,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&939235387681947728> from your roles\n\nI wish you didn't have to leave",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -552,7 +539,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&939235387681947728> to your roles\n\nYou can now view my lab",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -571,7 +558,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&962822738349813831> from your roles\n\nYou will no longer receive pings when I get updated",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -586,7 +573,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&962822738349813831> to your roles\n\nYou will now receive pings when I get updated",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -604,7 +591,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role removed`,
+                                        title: `${Icons.exclamation}  Role removed`,
                                         description: "I've removed <@&972564820589162557> from your roles\n\nYou will no longer receive MC Server pings",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }
@@ -619,7 +606,7 @@ module.exports = {
                             interaction.reply({
                                 embeds: [
                                     {
-                                        title: `${Icons.check}  Role added`,
+                                        title: `${Icons.exclamation}  Role added`,
                                         description: "I've added <@&972564820589162557> to your roles\n\nYou will now receive MC Server pings",
                                         color: SenkoClient.colors.light,
                                         thumbnail: { url: "attachment://image.png" }

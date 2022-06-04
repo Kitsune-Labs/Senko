@@ -6,7 +6,7 @@ const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
-    intents: ["GUILDS", "GUILD_BANS","GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_PRESENCES"],
+    intents: ["GUILDS", "GUILD_BANS","GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"],
 
     allowedMentions: {
         parse: ["users", "roles"],

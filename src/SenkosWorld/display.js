@@ -98,14 +98,14 @@ module.exports = {
                             description: "Do not bypass the filter for malicious reasons, if you really wish to send that message use `/filter`\n\nOutlaw (Ban) Appeals can be found here:\nhttps://senkosworld.com/appeal"
                         }
                     ],
-                    components: [
-                        {
-                            type: 1,
-                            components: [
-                                { type: 2, label: "I agree to these rules", style: 3, custom_id: "4D35DE24-2FE2-41A7-B86F-966284E6B10C" }
-                            ]
-                        }
-                    ]
+                    // components: [
+                    //     {
+                    //         type: 1,
+                    //         components: [
+                    //             { type: 2, label: "I agree to these rules", style: 3, custom_id: "4D35DE24-2FE2-41A7-B86F-966284E6B10C" }
+                    //         ]
+                    //     }
+                    // ]
                 });
             break;
             case "pds":
@@ -136,19 +136,6 @@ module.exports = {
                             color: 196415
                         }
                     ]
-                });
-
-                interaction.followUp({ content: "Finished", ephemeral: true });
-            break;
-            case "verify":
-                interaction.channel.send({
-                    embeds: [
-                        {
-                            title: "Click the button to verify!",
-                            color: "GREEN"
-                        }
-                    ],
-                    components: [ new MessageActionRow().addComponents([ new MessageButton().setCustomId("4D35DE24-2FE2-41A7-B86F-966284E6B10C").setLabel("Verify").setStyle(3) ]) ]
                 });
 
                 interaction.followUp({ content: "Finished", ephemeral: true });
