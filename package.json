@@ -1,6 +1,6 @@
 {
-    "version": "1.11.0",
-    "build": "1.11.0.220531651",
+    "version": "1.11.7",
+    "build": "1.11.7.220604631",
     "scripts": {
         "start": "node src/Client.js",
         "shop": "node dev/RefShop.js",

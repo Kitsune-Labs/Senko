@@ -84,22 +84,23 @@ SenkoClient.once("ready", async () => {
 
     // print("#B42025", "AUTOMOD", "Ready");
 
+    if (process.env.NIGHTLY !== "true") {
+        for (let file of readdirSync("./src/SenkosWorld/")) {
+            const pull = require(`./SenkosWorld/${file}`);
 
-    for (let file of readdirSync("./src/SenkosWorld/")) {
-        const pull = require(`./SenkosWorld/${file}`);
+            const commandData = {
+                name: pull.name,
+                description: pull.desc
+            };
 
-        const commandData = {
-            name: pull.name,
-            description: pull.desc
-        };
+            if (pull.options) commandData.options = pull.options;
 
-        if (pull.options) commandData.options = pull.options;
+            SenkoClient.SlashCommands.set(pull.name, pull);
+            await SenkoClient.guilds.cache.get("777251087592718336").commands.set([ commandData ]);
+        }
 
-        SenkoClient.SlashCommands.set(pull.name, pull);
-        await SenkoClient.guilds.cache.get("777251087592718336").commands.set([ commandData ]);
+        print("#FFFB00", "Senko's_World!", "Ready");
     }
-
-    print("#FFFB00", "Senko's_World!", "Ready");
 
     const commandsToSet = [];
 

@@ -98,7 +98,7 @@ module.exports = {
             print("teal", "CS", interaction.commandName);
 
             InteractionCommand.start(SenkoClient, interaction, superGuildData, AccountData).catch(e => {
-                interaction.reply({
+                const messageStruct = {
                     embeds: [
                         {
                             title: "Woops!",
@@ -110,8 +110,14 @@ module.exports = {
                         }
                     ],
                     ephemeral: true,
-                    files: [ { attachment: "../Data/content/senko/SenkoHeh.png", name: "image.png" } ],
-                });
+                    files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
+                };
+
+                if (interaction.deferred) {
+                    interaction.followUp(messageStruct);
+                } else {
+                    interaction.reply(messageStruct);
+                }
 
                 print("red", "ERROR", `${interaction.commandName} failed!`);
 

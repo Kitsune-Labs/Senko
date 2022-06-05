@@ -7,7 +7,7 @@ const { Interaction, MessageEmbed } = require("discord.js");
  * @param {Number} timeout
  * @returns
  */
-module.exports = async (interaction, pages, timeout = 120000) => {
+module.exports = async (interaction, pages, timeout = 120000, isEphemeral) => {
     let page = 0;
 
     const MessageStructure = {
@@ -31,11 +31,11 @@ module.exports = async (interaction, pages, timeout = 120000) => {
                     }
                 ]
             }
-        ],
-        ephemeral: true
+        ]
     };
 
-    if (!interaction.deferred) await interaction.deferReply({ ephemeral: true });
+    // console.log(interaction.deferred);
+    if (!interaction.deferred) await interaction.deferReply({ ephemeral: isEphemeral });
 
     MessageStructure.embeds[0] = pages[page];
     pages[page].footer = { text: `Page ${page + 1} of ${pages.length}` };
@@ -63,12 +63,11 @@ module.exports = async (interaction, pages, timeout = 120000) => {
         collector.resetTimer();
     });
 
-    function disable(type) {
+    function disable() {
         MessageStructure.components[0].components[0].disabled = true;
         MessageStructure.components[0].components[1].disabled = true;
 
         interaction.editReply(MessageStructure);
-        console.log(type);
     }
 
     collector.on("end", (_, reason) => {
@@ -81,7 +80,6 @@ module.exports = async (interaction, pages, timeout = 120000) => {
     // process.on("beforeExit", ()=>{disable("before");});
     // process.on("exit", ()=>{disable("exit");});
     // process.on("SIGINT", ()=>{disable("int");});
-
 
     return curPage;
 };

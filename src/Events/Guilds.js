@@ -88,9 +88,9 @@ module.exports = {
                             title: "Action Report - Kitsune Banned",
                             description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${banLog.reason || "None"}`,
                             color: "RED",
-                            thumbnail: {
-                                url: member.user.displayAvatarURL({ dynamic: true })
-                            },
+                            // thumbnail: {
+                            //     url: member.user.displayAvatarURL({ dynamic: true })
+                            // },
                             author: {
                                 name: `${`${banLog.executor.username}#${banLog.executor.discriminator}` || "Unknown"}  [${banLog.executor.id || "000000000000000000"}]`,
                                 icon_url: `${banLog.executor.displayAvatarURL({ dynamic: true })}`

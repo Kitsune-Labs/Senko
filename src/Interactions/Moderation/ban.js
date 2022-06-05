@@ -181,7 +181,7 @@ module.exports = {
                             embeds: [
                                 {
                                     title: `You have been banned from ${interaction.guild.name}`,
-                                    description: `Your ban reason: ${reason}`, //\n\nAppeal: ${config.OutlawAppealForm.replaceAll("[", "\[").replaceAll("]", "\]")}`,
+                                    description: `Reason: ${reason}`, //\n\nAppeal: ${GuildData.OutlawAppealForm.replaceAll("[", "\\[").replaceAll("]", "\\]")}`,
                                     color: "RED"
                                 }
                             ]

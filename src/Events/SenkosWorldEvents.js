@@ -18,59 +18,59 @@ module.exports = {
         SenkoClient.on("interactionCreate", async interaction => {
             if (interaction.isButton()) {
                 switch (interaction.customId) {
-                    case "4D35DE24-2FE2-41A7-B86F-966284E6B10C":
-                        if (interaction.member.roles.cache.has("816098234766196746")) return interaction.reply({
-                            embeds: [
-                                {
-                                    title: "What?",
-                                    description: "You're already verified!",
-                                    color: SenkoClient.colors.dark,
-                                    thumbnail: { url: "attachment://image.png" }
-                                }
-                            ],
-                            files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
-                            ephemeral: true
-                        });
+                    // case "4D35DE24-2FE2-41A7-B86F-966284E6B10C":
+                    //     if (interaction.member.roles.cache.has("816098234766196746")) return interaction.reply({
+                    //         embeds: [
+                    //             {
+                    //                 title: "What?",
+                    //                 description: "You're already verified!",
+                    //                 color: SenkoClient.colors.dark,
+                    //                 thumbnail: { url: "attachment://image.png" }
+                    //             }
+                    //         ],
+                    //         files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
+                    //         ephemeral: true
+                    //     });
 
-                        await interaction.member.roles.add("816098234766196746");
+                    //     await interaction.member.roles.add("816098234766196746");
 
-                        interaction.reply({
-                            embeds: [
-                                {
-                                    title: "Thank you dear!",
-                                    description: `I hope you have fun in ${interaction.guild.name}! <a:SenkoBreadPat:817481734407847986> <a:ShiroBreadPat:817481734437994526> <a:SoraBreadPat:817481734165364787> <a:SuzuBreadPat:971282424036220929>`,
-                                    color: "GREEN",
-                                    thumbnail: { url: "attachment://image.png" }
-                                }
-                            ],
-                            components: [
-                                {
-                                    type: 1,
-                                    components: [
-                                        { type: 2, label: "Find some roles", style: 5, url: "https://canary.discord.com/channels/777251087592718336/832387166737924097" },
-                                        { type: 2, label: "Say hello to everyone", style: 5, url: "https://canary.discord.com/channels/777251087592718336/792999444341719049" },
-                                        // { type: 2, label: "Make an offer (Server Suggestion)", style: 5, url: "https://canary.discord.com/channels/777251087592718336/792999444341719049" },
-                                        { type: 2, label: "Introduce yourself", style: 5, url: "https://canary.discord.com/channels/777251087592718336/920221696303169537" },
-                                    ]
-                                }
-                            ],
-                            files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }],
-                            ephemeral: true
-                        });
+                    //     interaction.reply({
+                    //         embeds: [
+                    //             {
+                    //                 title: "Thank you dear!",
+                    //                 description: `I hope you have fun in ${interaction.guild.name}! <a:SenkoBreadPat:817481734407847986> <a:ShiroBreadPat:817481734437994526> <a:SoraBreadPat:817481734165364787> <a:SuzuBreadPat:971282424036220929>`,
+                    //                 color: "GREEN",
+                    //                 thumbnail: { url: "attachment://image.png" }
+                    //             }
+                    //         ],
+                    //         components: [
+                    //             {
+                    //                 type: 1,
+                    //                 components: [
+                    //                     { type: 2, label: "Find some roles", style: 5, url: "https://canary.discord.com/channels/777251087592718336/832387166737924097" },
+                    //                     { type: 2, label: "Say hello to everyone", style: 5, url: "https://canary.discord.com/channels/777251087592718336/792999444341719049" },
+                    //                     // { type: 2, label: "Make an offer (Server Suggestion)", style: 5, url: "https://canary.discord.com/channels/777251087592718336/792999444341719049" },
+                    //                     { type: 2, label: "Introduce yourself", style: 5, url: "https://canary.discord.com/channels/777251087592718336/920221696303169537" },
+                    //                 ]
+                    //             }
+                    //         ],
+                    //         files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }],
+                    //         ephemeral: true
+                    //     });
 
-                        SenkoClient.channels.cache.get("905898207396106270").send({
-                            embeds: [
-                                {
-                                    title: "A kitsune has agreed to the laws of the world!",
-                                    description: `${interaction.user}\n${interaction.user.tag}\n${interaction.user.id}`,
-                                    thumbnail: {
-                                        url: interaction.user.displayAvatarURL({ dynamic: true })
-                                    },
-                                    color: "ORANGE",
-                                }
-                            ],
-                        });
-                    break;
+                    //     SenkoClient.channels.cache.get("905898207396106270").send({
+                    //         embeds: [
+                    //             {
+                    //                 title: "A kitsune has agreed to the laws of the world!",
+                    //                 description: `${interaction.user}\n${interaction.user.tag}\n${interaction.user.id}`,
+                    //                 thumbnail: {
+                    //                     url: interaction.user.displayAvatarURL({ dynamic: true })
+                    //                 },
+                    //                 color: "ORANGE",
+                    //             }
+                    //         ],
+                    //     });
+                    // break;
 
                     case "ascii_block":
                         config.automod.blockAscii = !config.automod.blockAscii;
@@ -84,20 +84,6 @@ module.exports = {
                             ephemeral: true
                         });
                     break;
-
-                    case "verify_change":
-                        config.automod.allowVerification = !config.automod.allowVerification;
-
-                        interaction.message.embeds[0].fields[0].value = `\`\`\`diff\n${config.automod.allowVerification === true ? `+ ${config.automod.allowVerification}` : `- ${config.automod.allowVerification}` }\`\`\``;
-                        interaction.message.components[0].components[0].style = config.automod.allowVerification === true ? "SUCCESS" : "DANGER";
-
-                        interaction.update({
-                            embeds: [interaction.message.embeds[0]],
-                            components: interaction.message.components,
-                            ephemeral: true
-                        });
-                    break;
-
                     case "mass_joins_change":
                         config.automod.kickOnMaxUsers = !config.automod.kickOnMaxUsers;
 
@@ -110,7 +96,6 @@ module.exports = {
                             ephemeral: true
                         });
                     break;
-
                     case "age_check_change":
                         config.automod.ageCheck = !config.automod.ageCheck;
 
@@ -123,7 +108,6 @@ module.exports = {
                             ephemeral: true
                         });
                     break;
-
                     case "upvote_suggestion":
                         if (VoteList.has(interaction.message.id) && await VoteList.get(interaction.message.id).users.includes(interaction.user.id)) return interaction.reply({ content: "🗿", ephemeral: true });
 
@@ -142,7 +126,6 @@ module.exports = {
                             embeds: [interaction.message.embeds[0]],
                         });
                     break;
-
                     case "downvote_suggestion":
                         if (VoteList.has(interaction.message.id) && await VoteList.get(interaction.message.id).users.includes(interaction.user.id)) return interaction.reply({ content: "🗿", ephemeral: true });
                         interaction.message.embeds[0].fields[1].value = `${interaction.message.embeds[0].fields[1].value.split("\n")[0]}\n${parseInt(interaction.message.embeds[0].fields[1].value.split("\n")[1]) + 1}\`\`\``;
@@ -160,7 +143,6 @@ module.exports = {
                             embeds: [interaction.message.embeds[0]],
                         });
                     break;
-
                     case "suggestion_voters":
                         interaction.reply({
                             embeds: [
@@ -172,9 +154,6 @@ module.exports = {
                             ephemeral: true
                         });
                     break;
-
-
-
                     case "senko_color":
                         if (interaction.member.roles.cache.has("777257201219403816")) {
                             await interaction.member.roles.remove("777257201219403816");

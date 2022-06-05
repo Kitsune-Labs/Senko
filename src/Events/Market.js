@@ -78,7 +78,7 @@ module.exports = {
                             }
                         }
                     ],
-                    files: [{ attachment: "./src/Data/content/senko/tofu.png", name: "image.png" }],
+                    files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
                     components: [
                         {
                             type: 1,
@@ -111,7 +111,7 @@ module.exports = {
                             }
                         }
                     ],
-                    files: [ { attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" } ],
+                    files: [ { attachment: "./src/Data/content/senko/tofu.png", name: "image.png" } ],
                     components: []
                 };
 
