@@ -96,7 +96,7 @@ SenkoClient.once("ready", async () => {
             if (pull.options) commandData.options = pull.options;
 
             SenkoClient.SlashCommands.set(pull.name, pull);
-            await SenkoClient.guilds.cache.get("777251087592718336").commands.set([]);
+            // await SenkoClient.guilds.cache.get("777251087592718336").commands.set([]);
             await SenkoClient.guilds.cache.get("777251087592718336").commands.set([ commandData ]);
         }
 
@@ -137,7 +137,7 @@ SenkoClient.once("ready", async () => {
         }
     }
 
-    await commands.set([]);
+    // await commands.set([]);
     await commands.set(commandsToSet);
 
     print("#F39800", "INTERACTIONS", "Ready");

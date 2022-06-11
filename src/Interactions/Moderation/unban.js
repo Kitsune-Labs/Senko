@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { CheckPermission } = require("../API/Master");
+const { CheckPermission } = require("../../API/Master");
 const { Bitfield } = require("bitfields");
-const bits = require("../API/Bits.json");
+const bits = require("../../API/Bits.json");
 
 module.exports = {
     name: "unban",
