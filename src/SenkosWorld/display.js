@@ -90,22 +90,14 @@ module.exports = {
                         {
                             color: SenkoClient.colors.dark_red,
                             title: "⛔  Problematic content or media",
-                            description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures, any type of war group related content, or social credit \"memes\"\n\nTalk about any non-fictional politics\nDisplay affection twoards Drug & Alcohol related things"
+                            description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures, any type of war group related content, or social credit \"memes\"\n\nTalk about any non-fictional politics\nDisplay affection twoards Drug & Alcohol related things\nMake/post dark humor jokes or other dark humor content"
                         },
                         {
                             color: SenkoClient.colors.light_red,
                             title: "ℹ️  Misc",
                             description: "Do not bypass the filter for malicious reasons, if you really wish to send that message use `/filter`\n\nOutlaw (Ban) Appeals can be found here:\nhttps://senkosworld.com/appeal"
                         }
-                    ],
-                    // components: [
-                    //     {
-                    //         type: 1,
-                    //         components: [
-                    //             { type: 2, label: "I agree to these rules", style: 3, custom_id: "4D35DE24-2FE2-41A7-B86F-966284E6B10C" }
-                    //         ]
-                    //     }
-                    // ]
+                    ]
                 });
             break;
             case "pds":

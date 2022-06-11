@@ -1,4 +1,4 @@
-const { spliceArray } = require("../../API/Master.js");
+const { spliceArray, cleanUserString } = require("../../API/Master.js");
 
 module.exports = {
     name: "rate",
@@ -16,7 +16,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
     start: async (SenkoClient, interaction) => {
-        const Item = interaction.options.getString("thing");
+        const Item = cleanUserString(interaction.options.getString("thing"));
 
         const MessageBuild = {
             embeds: [

@@ -2,7 +2,7 @@ const { MessageAttachment } = require("discord.js");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const { updateUser } = require("../../API/Master");
-const { randomArrayItem } = require("@kitsune-softworks/utilities");
+const { randomArrayItem } = require("@kitsune-laboratories/utilities");
 
 module.exports = {
     name: "work",

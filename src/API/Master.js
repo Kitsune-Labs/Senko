@@ -13,8 +13,8 @@ const Achievements = require("../Data/Achievements.json");
 const { Bitfield } = require("bitfields");
 // const { updateSuperUser } = require("./super");
 const bits = require("./Bits.json");
-const { randomArrayItem: randomArray, randomNumber, wait, spliceArray } = require("@kitsune-softworks/utilities");
-const chalk = require("@kitsune-softworks/chalk-node");
+const { randomArrayItem: randomArray, randomNumber, wait, spliceArray } = require("@kitsune-laboratories/utilities");
+const chalk = require("@kitsune-laboratories/chalk-node");
 
 /**
  * @param {String} Color
@@ -381,6 +381,10 @@ async function awardAchievement(interaction, AchievementName) {
     });
 }
 
+function cleanUserString(string) {
+    return string.replaceAll("s/eese popc/ild p", "[blocked]").replaceAll("s eese popc ild p", "[blocked]").replaceAll("seese popc ild p", "[blocked]");
+}
+
 module.exports = {
     print,
     wait,
@@ -405,5 +409,6 @@ module.exports = {
     disableComponents,
     calcTimeLeft,
     insertString,
-    awardAchievement
+    awardAchievement,
+    cleanUserString
 };

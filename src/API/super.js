@@ -2,7 +2,7 @@
 const { Guild } = require("discord.js");
 const { createClient } = require("@supabase/supabase-js");
 const { Bitfield } = require("bitfields");
-const extend = require("extend");
+// const extend = require("extend");
 
 
 const Supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, {
@@ -126,15 +126,16 @@ async function makeSuperUser(user) {
     return data[0];
 }
 
+/**
+ * @deprecated
+ */
 async function updateSuperUser(user, Data) {
-    const currentData = await fetchSuperUser(user);
+    // extend(true, currentData, Data);
 
-    extend(true, currentData, Data);
+    if (Data.Currency.Yen >= 100000) Data.Currency.Yen = 100000; // 99998
+    if (Data.Currency.Tofu >= 50) Data.Currency.Tofu = 50;
 
-    if (currentData.Currency.Yen >= 100000) currentData.Currency.Yen = 100000; // 99998
-    if (currentData.Currency.Tofu >= 50) currentData.Currency.Tofu = 50;
-
-    const { error } = await Supabase.from("Users").update(currentData).eq("id", user.id);
+    const { error } = await Supabase.from("Users").update(Data).eq("id", user.id);
 
     if (error) {
         console.log(error);

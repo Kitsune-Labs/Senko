@@ -3,7 +3,8 @@ const { Client, Interaction } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
-
+const Icons = require("../../Data/Icons.json");
+const { randomArrayItem } = require("@kitsune-laboratories/utilities");
 
 module.exports = {
     name: "ban",
@@ -11,7 +12,7 @@ module.exports = {
     options: [
         {
             name: "user",
-            description: "The user to outlaw",
+            description: "The user to ban",
             required: true,
             type: "USER"
         },
@@ -27,22 +28,22 @@ module.exports = {
         },
         {
             name: "user2",
-            description: "The user to outlaw",
+            description: "The 2nd user to ban",
             type: "USER"
         },
         {
             name: "user3",
-            description: "The user to outlaw",
+            description: "The 3rd user to ban",
             type: "USER"
         },
         {
             name: "user4",
-            description: "The user to outlaw",
+            description: "The 4th user to ban",
             type: "USER"
         },
         {
             name: "user5",
-            description: "The user to outlaw",
+            description: "The 5th user to ban",
             type: "USER"
         }
     ],
@@ -77,7 +78,7 @@ module.exports = {
             embeds: [
                 {
                     title: "Oh dear...",
-                    description: "It looks like I can't ban members!",
+                    description: "It looks like I can't ban members! (Make sure I have the \"Ban Members\" permission)",
                     color: SenkoClient.colors.dark,
                     thumbnail: {
                         url: "attachment://image.png"
@@ -93,6 +94,26 @@ module.exports = {
         interaction.editReply({ content: "Starting" });
 
         const users = [];
+        const reactions = [
+            {
+                text: `I'll use my Kitsune Fire to scare them away if they come back ${Icons.KitsuneBi_Blue}`,
+                image: "kitsune_fire"
+            },
+            {
+                text: "Don't ever come back!!!",
+                image: "angry2"
+            },
+            {
+                text: "You broke the rules?",
+                image: "judgement"
+            },
+            {
+                text: "Y-You did what?",
+                image: "thinking_nervous"
+            }
+        ];
+
+
         for (var Option1 of interaction.options._hoistedOptions) {
             if (Option1.name !== "reason" && Option1.name !== "dm") {
                 users.push(Option1.value);
@@ -106,6 +127,7 @@ module.exports = {
                 let userToOutlaw = Option.value;
                 const reason = interaction.options.getString("reason") || "No reason provided";
                 const shouldDM = interaction.options.getBoolean("dm") || true;
+                const randomResponse = randomArrayItem(reactions);
 
                 if (Option.member) userToOutlaw = Option.member;
 
@@ -168,10 +190,12 @@ module.exports = {
                         embeds: [
                             {
                                 title: "Banned Kitsune",
-                                description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned for __${reason}__`,
-                                color: "RED"
+                                description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned for __${reason}__\n\n${randomResponse.text}`,
+                                color: "RED",
+                                thumbnail: { url: "attachment://image.png" }
                             }
-                        ]
+                        ],
+                        files: [{ attachment: `./src/Data/content/senko/${randomResponse.image}.png`, name: "image.png" }]
                     };
 
                     if (reason === "No reason provided") responseStruct.embeds[0].description = `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned!`;

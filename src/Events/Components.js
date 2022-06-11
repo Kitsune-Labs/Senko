@@ -7,7 +7,7 @@ const Market = require("../Data/Shop/Items.json");
 const HardLinks = require("../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../API/Bits.json");
-const { randomArrayItem } = require("@kitsune-softworks/utilities");
+const { randomArrayItem } = require("@kitsune-laboratories/utilities");
 
 module.exports = {
     /**

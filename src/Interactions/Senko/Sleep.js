@@ -5,7 +5,7 @@ const Icons = require("../../Data/Icons.json");
 
 const config = require("../../Data/DataConfig.json");
 const { updateUser, randomArray, randomBummedImageName, calcTimeLeft } = require("../../API/Master");
-const { randomArrayItem } = require("@kitsune-softworks/utilities");
+const { randomArrayItem } = require("@kitsune-laboratories/utilities");
 
 const UserActions = [
     "_USER_ rest's on Senko's lap",

@@ -34,7 +34,7 @@ module.exports = {
             embeds: [
                 {
                     title: "Oh dear...",
-                    description: "It looks like I can't manage messsages!",
+                    description: "It looks like I can't manage messsages! (Make sure I have the \"Manage Messages\" permission)",
                     color: SenkoClient.colors.dark,
                     thumbnail: {
                         url: "attachment://image.png"

@@ -51,7 +51,7 @@ module.exports = {
             embeds: [
                 {
                     title: "Oh dear...",
-                    description: "It looks like I can't kick members!",
+                    description: "It looks like I can't kick members! (Make sure I have the \"Kick Members\" permission)",
                     color: SenkoClient.colors.dark,
                     thumbnail: {
                         url: "attachment://image.png"

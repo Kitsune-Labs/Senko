@@ -60,7 +60,7 @@ module.exports = {
                         embeds: [
                             {
                                 title: `${Icons.heart}  Here you go dear!`,
-                                description: `I have given you your yen for today. Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 200x added`,
+                                description: `Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 200x added`,
                                 color: SenkoClient.colors.light,
                                 thumbnail: {
                                     url: "attachment://image.png"

@@ -1,7 +1,7 @@
 const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild, updateSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
-const { print } = require("../API/Master.js");
+const { print, cleanUserString } = require("../API/Master.js");
 
 module.exports = {
     /**
@@ -118,7 +118,7 @@ module.exports = {
                         embeds: [
                             {
                                 title: "Action Report - Kitsune Pardoned",
-                                description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${banLog.reason || "None"}`,
+                                description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(banLog.reason) || "None"}`,
                                 color: "GREEN",
                                 thumbnail: {
                                     url: member.user.displayAvatarURL({ dynamic: true })
@@ -183,7 +183,7 @@ module.exports = {
                     embeds: [
                         {
                             title: "Action Report - Kitsune Kicked",
-                            description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${kickLog.reason || "None"}`,
+                            description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(kickLog.reason) || "None"}`,
                             color: "YELLOW",
                             thumbnail: {
                                 url: member.user.displayAvatarURL({ dynamic: true })
@@ -235,7 +235,7 @@ module.exports = {
                     embeds: [
                         {
                             title: "Action Report - Kitsune Timed Out",
-                            description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${audit.reason || "None"}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
+                            description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(audit.reason) || "None"}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
                             color: "YELLOW",
                             thumbnail: {
                                 url: member.user.displayAvatarURL({ dynamic: true })

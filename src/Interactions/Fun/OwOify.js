@@ -1,4 +1,6 @@
-const { owoify } = require("../../API/modules/owoify");
+// const { owoify } = require("../../API/modules/owoify");
+const { cleanUserString } = require("../../API/Master");
+const { owoify } = require("@kitsune-laboratories/utilities");
 
 module.exports = {
     name: "owoify",
@@ -17,7 +19,7 @@ module.exports = {
      */
     start: async (SenkoClient, interaction) => {
         interaction.reply({
-            content: owoify(interaction.options.getString("text"))
+            content: owoify(cleanUserString(interaction.options.getString("text")))
         });
     }
 };

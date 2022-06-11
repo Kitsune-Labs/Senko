@@ -17,6 +17,20 @@ module.exports = {
                 if (interaction.message.embeds[0].footer.text !== interaction.user.tag) return;
 
 
+                const fluffReactions = [
+                    {
+                        image: "fluffed.png",
+                        sounds: ["Uya", "Uya...", "mhMh"],
+                        text: ["D-Do you have to be so verbose?", "Please be more gentle with my tail!"],
+                    },
+                    {
+                        image: "fluffed_2.png",
+                        sounds: ["Uya!", "HYaa", "mhMh"],
+                        text: ["Be more careful!"]
+                    }
+                ];
+
+                const randomReaction = randomArray(fluffReactions);
                 // Styles
                     // 1 = Primary
                     // 2 = Secondary
@@ -61,6 +75,36 @@ module.exports = {
                                 }
                             ],
                             files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }],
+                        }
+                    ],
+                    senko_talk_fluff_tail: [
+                        {
+                            embeds: [
+                                {
+                                    description: "S-sure dear...",
+                                    footer: { text: interaction.user.tag }
+                                }
+                            ],
+                            components: [
+                                {
+                                    type: 1,
+                                    components: [
+                                        { type: 2, label: "Consume the fluffy", style: 1, custom_id: "senko_talk_consume_the_fluff", emoji: Icons.tail1 }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    senko_talk_consume_the_fluff: [
+                        {
+                            embeds: [
+                                {
+                                    description: randomArray(randomReaction.text),
+                                    thumbnail: { url: `attachment://image.png` },
+                                    footer: { text: interaction.user.tag }
+                                }
+                            ],
+                            files: [{ attachment: `./src/Data/content/senko/${randomReaction.image}`, name: "image.png" }]
                         }
                     ],
                     senko_talk_1_hello: [
@@ -146,14 +190,53 @@ module.exports = {
                                     footer: { text: interaction.user.tag }
                                 }
                             ],
-                            files: [{ attachment: `./src/Data/content/senko/bummed.png`, name: "image.png" }]
+                            files: [{ attachment: `./src/Data/content/senko/heh2.png`, name: "image.png" }]
                         }
                     ],
+                    senko_talk_2_fine: [
+                        {
+                            embeds: [
+                                {
+                                    description: "Thats good to hear!",
+                                    footer: { text: interaction.user.tag }
+                                }
+                            ]
+                        }
+                    ],
+                    senko_talk_2_doingwell: [
+                        {
+                            embeds: [
+                                {
+                                    description: "That doesnt sound good...",
+                                    footer: { text: interaction.user.tag }
+                                }
+                            ]
+                        }
+                    ],
+                    senko_talk_2_notdoinggreat: [
+                        {
+                            embeds: [
+                                {
+                                    description: "Is there anyway I could make it better?",
+                                    footer: { text: interaction.user.tag }
+                                }
+                            ],
+                            components: [
+                                {
+                                    type: 1,
+                                    components: [
+                                        { type: 2, label: "Can I fluff your tail?", style: 3, custom_id: "senko_talk_fluff_tail", emoji: Icons.tail1 },
+                                        { type: 2, label: "There isn't", style: 4, custom_id: "senko_talk_leave" },
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 };
 
                 if (Object.keys(possibleResponses).includes(interaction.customId)) {
+                    // disableComponents(interaction);
                     await interaction.reply(randomArray(possibleResponses[interaction.customId]));
-                    // disableComponents();
                 }
             }
         });

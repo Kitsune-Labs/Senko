@@ -62,7 +62,7 @@ module.exports = {
             embeds: [
                 {
                     title: "Oh dear...",
-                    description: "It looks like I can't manage channels!",
+                    description: "It looks like I can't manage channels! (Make sure I have the \"Manage Channels\" permission)",
                     color: SenkoClient.colors.dark,
                     thumbnail: {
                         url: "attachment://image.png"
