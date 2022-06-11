@@ -90,7 +90,7 @@ module.exports = {
                         {
                             color: SenkoClient.colors.dark_red,
                             title: "⛔  Problematic content or media",
-                            description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures, any type of war group related content, or social credit \"memes\"\n\nTalk about any non-fictional politics\nDisplay affection twoards Drug & Alcohol related things\nMake/post dark humor jokes or other dark humor content"
+                            description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures\nSend any type of War content\nSend any social credit memes\n\nTalk about any non-fictional politics\nDisplay affection twoards Drug & Alcohol related content\nSend dark humor jokes or other dark humor content"
                         },
                         {
                             color: SenkoClient.colors.light_red,
