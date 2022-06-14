@@ -5,41 +5,41 @@ const Icons = require("../../Data/Icons.json");
 const { addYen, randomNumber, randomArray } = require("../../API/Master");
 
 const Responses = [
-    "There there _USER_, everything will be okay...",
-    "Oh dear you're so spoiled!",
-    "*Senko-san starts to hum*",
-    `${Icons.heart}  Everything is fine, I'm sure.`
+	"There there _USER_, everything will be okay...",
+	"Oh dear you're so spoiled!",
+	"*Senko-san starts to hum*",
+	`${Icons.heart}  Everything is fine, I'm sure.`
 ];
 
 module.exports = {
-    name: "cuddle",
-    desc: "Cuddle with Senko-san!",
-    /**
+	name: "cuddle",
+	desc: "Cuddle with Senko-san!",
+	/**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
      */
-    // eslint-disable-next-line no-unused-vars
-    start: async (SenkoClient, interaction) => {
-        const MessageStruct = {
-            embeds: [
-                {
-                    description: `**${randomArray(Responses).replace("_USER_", interaction.user.username)}**`,
-                    color: SenkoClient.colors.light,
-                    thumbnail: {
-                        url: "attachment://image.png"
-                    }
-                }
-            ],
-            files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
-        };
+	// eslint-disable-next-line no-unused-vars
+	start: async (SenkoClient, interaction) => {
+		const MessageStruct = {
+			embeds: [
+				{
+					description: `**${randomArray(Responses).replace("_USER_", interaction.user.username)}**`,
+					color: SenkoClient.colors.light,
+					thumbnail: {
+						url: "attachment://image.png"
+					}
+				}
+			],
+			files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
+		};
 
-        if (randomNumber(100) > 75) {
-            addYen(interaction.user, 10);
+		if (randomNumber(100) > 75) {
+			addYen(interaction.user, 10);
 
-            MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  10x added for interaction`;
-        }
+			MessageStruct.embeds[0].description += `\n\n— ${Icons.yen}  10x added for interaction`;
+		}
 
 
-        interaction.reply(MessageStruct);
-    }
+		interaction.reply(MessageStruct);
+	}
 };

@@ -56,7 +56,7 @@ Reflect.set(SenkoClient, "tools", {
 	colors: require("./Data/Palettes/Main.js")
 });
 
-// print("#5865F2", "UserAgent", SenkoClient.tools.UserAgent);
+print("#5865F2", "UserAgent", SenkoClient.tools.UserAgent);
 
 process.SenkoClient = SenkoClient;
 

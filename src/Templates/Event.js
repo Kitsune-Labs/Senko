@@ -7,11 +7,11 @@ const Icons = require("../Data/Icons.json");
 
 
 module.exports = {
-    /**
+	/**
      * @param {Client} SenkoClient
      */
-    // eslint-disable-next-line no-unused-vars
-    execute: async (SenkoClient) => {
+	// eslint-disable-next-line no-unused-vars
+	execute: async (SenkoClient) => {
 
-    }
+	}
 };

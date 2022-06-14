@@ -6,82 +6,66 @@ const Icons = require("../../Data/Icons.json");
 const DiscordModal = require("discord-modal");
 
 module.exports = {
-    name: "about-me",
-    desc: "Modify your about me message!",
-    options: [
-        {
-            name: "change",
-            description: "Update your about me message",
-            type: 1
-        },
-        {
-            name: "remove",
-            description: "Remove your about me",
-            type: 1
-        }
-    ],
-    usableAnywhere: true,
-    /**
+	name: "about-me",
+	desc: "Modify your about me message!",
+	options: [
+		{
+			name: "change",
+			description: "Update your about me message",
+			type: 1
+		},
+		{
+			name: "remove",
+			description: "Remove your about me",
+			type: 1
+		}
+	],
+	usableAnywhere: true,
+	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
      */
-    // eslint-disable-next-line no-unused-vars
-    start: async (SenkoClient, interaction, GuildData, AccountData) => {
-        const commandType = interaction.options.getSubcommand();
-        if (commandType === "change") {
-            interaction.reply({
-                embeds: [
-                    {
-                        title: `${Icons.exclamation}  No!!`,
-                        description: "Do not use this dear!",
-                        color: SenkoClient.colors.dark_red,
-                        thumbnail: { url: "attachment://image.png" },
-                        footer: {
-                            text: "(Disabled due to an issue)"
-                        }
-                    }
-                ],
-                ephemeral: true,
-                files: [{ attachment: "./src/Data/content/senko/angry2.png", name: "image.png" }]
-            });
+	// eslint-disable-next-line no-unused-vars
+	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+		const commandType = interaction.options.getSubcommand();
+		if (commandType === "change") {
+			const textinput = new DiscordModal.TextInput()
+				.setCustomId("submit_about_me")
+				.setTitle("Change your About Me")
+				.addComponents(
+					new DiscordModal.TextInputField()
+						.setLabel("About Me")
+						.setStyle(2)
+						.setPlaceholder("Enter your new about me")
+						.setCustomId("submit_about_me_1")
+						.setRequired(true)
+						.setMax(100)
+						.setMin(1)
+				);
 
-            // const textinput = new DiscordModal.TextInput()
-            // .setCustomId("submit_about_me")
-            // .setTitle("Change your About Me")
-            // .addComponents(
-            //     new DiscordModal.TextInputField()
-            //     .setLabel("About Me")
-            //     .setStyle(2)
-            //     .setPlaceholder("Enter your new about me")
-            //     .setCustomId("submit_about_me_1")
-            //     .setRequired(true)
-            //     .setMax(100)
-            //     .setMin(1)
-            // );
+			await SenkoClient.TextInputs.open(interaction, textinput);
+		}
 
-            // await SenkoClient.TextInputs.open(interaction, textinput);
-        }
+		if (commandType === "remove") {
+			await updateUser(interaction.user, {
+				LocalUser: {
+					AboutMe: null
+				}
+			});
 
-        if (commandType === "remove") {
-            await updateUser(interaction.user, {
-                LocalUser: {
-                    AboutMe: null
-                }
-            });
-
-            interaction.followUp({
-                embeds: [
-                    {
-                        title: `${Icons.question}  I have removed your About Me ${interaction.user.username}`,
-                        description: "But I am confused on why you would remove it!",
-                        color: SenkoClient.colors.light,
-                        thumbnail: {
-                            url: "attachment://image.png"
-                        }
-                    }
-                ],
-                files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }],
-            });
-        }
-    }
+			interaction.followUp({
+				embeds: [
+					{
+						title: `${Icons.question}  I have removed your About Me ${interaction.user.username}`,
+						description: "But I am confused on why you would remove it!",
+						color: SenkoClient.colors.light,
+						thumbnail: {
+							url: "attachment://image.png"
+						}
+					}
+				],
+				files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }]
+			});
+		}
+	}
 };

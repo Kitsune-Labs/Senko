@@ -194,7 +194,7 @@ async function addYen(user, amount) {
 
 	updateUser(user, {
 		Currency: {
-			Yen: Data.Currency.Yen + (amount * config.multiplier)
+			Yen: Data.Currency.Yen + amount * config.multiplier
 		}
 	});
 }
@@ -228,7 +228,7 @@ function hasPerm(interaction, Permission) {
  * @param {Number} ClientID
  */
 function selfPerm(interaction, Permission, ClientID) {
-	if (interaction.guild.members.cache.get((ClientID ? ClientID : process.SenkoClient.user.id)).permissions.has(Permission)) return true;
+	if (interaction.guild.members.cache.get(ClientID ? ClientID : process.SenkoClient.user.id).permissions.has(Permission)) return true;
 	return false;
 }
 
