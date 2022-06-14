@@ -9,15 +9,17 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "no-else-return": 1,
-        "no-async-promise-executor": 0
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+        "indent": ["error", "tab"],
+        "comma-style": ["error", "last"],
+        "comma-spacing": "error",
+        "comma-dangle": "error",
+        "semi-spacing": "error",
+        "no-trailing-spaces": "error",
+        "no-else-return": "error",
+        "no-multi-spaces": "error",
+        "no-extra-parens": "error",
+        "brace-style": "error"
     }
 }
