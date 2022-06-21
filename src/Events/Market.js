@@ -22,6 +22,7 @@ module.exports = {
 
 				const itemName = Object.keys(shopItems).at(item[0]);
 				const shopItem = await shopItems[itemName];
+				const userData = await fetchData(interaction.user);
 
 				interaction.channel.messages.cache.get(interaction.message.id).edit({
 					components: interaction.message.components
@@ -65,6 +66,21 @@ module.exports = {
 						});
 					}
 				}
+
+				if (userData.Currency.Yen < shopItem.price) return interaction.reply({
+					embeds: [
+						{
+							title: `${Icons.exclamation}  Sorry ${getName(interaction)}`,
+							description: "You don't have enough Yen!",
+							color: SenkoClient.colors.dark,
+							thumbnail: {
+								url: "attachment://image.png"
+							}
+						}
+					],
+					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
+					ephemeral: true
+				});
 
 				interaction.reply({
 					content: `${interaction.user}`,

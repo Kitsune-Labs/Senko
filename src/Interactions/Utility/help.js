@@ -18,8 +18,8 @@ module.exports = {
 					author: {
 						name: "Index"
 					},
-					title: "📑 Messenger Index (Help)",
-					description: "If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**",
+					title: "📑 Messenger Index",
+					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\nPing: ${Math.floor(SenkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**`,
 					color: SenkoClient.colors.random()
 				}
 			],
@@ -37,13 +37,15 @@ module.exports = {
 				{
 					type: 1,
 					components: [
-						{ type: 2, label: "Account", style: 2, custom_id: "help_account" }
+						{ type: 2, label: "Account", style: 3, custom_id: "help_account" }
 					]
 				},
 				{
 					type: 1,
 					components: [
+						{ type: 2, label: "Honorable Mentions", style: 2, custom_id: "honorable_mentions" },
 						{ type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${SenkoClient.user.id}&permissions=137439266880` },
+						{ type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" },
 						{ type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
 					]
 				}

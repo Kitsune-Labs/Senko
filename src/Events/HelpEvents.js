@@ -1,9 +1,11 @@
 // eslint-disable-next-line no-unused-vars
+const { default: axios } = require("axios");
 const { Client, CommandInteraction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { print } = require("../API/Master.js");
+const { print, wait } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
+
 
 
 
@@ -16,10 +18,36 @@ module.exports = {
 		const bottomButtons = {
 			type: 1,
 			components: [
+				{ type: 2, label: "Honorable Mentions", style: 2, custom_id: "honorable_mentions" },
 				{ type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${SenkoClient.user.id}&permissions=137439266880` },
+				{ type: 2, label: "Support & Community", style: 5, url: "https://senkosworld.com/discord" },
 				{ type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
 			]
 		};
+
+		const contributorIds = [
+			"806732697652822028", // 𝕃𝕒𝕫𝕣𝕖𝕒
+			"899381978791559218", // sakuya izayoi
+			"683181180371468364", // Eve
+			"782075669165113355", // Kaori Aiko
+			"776844036530241537", // TheReal_Enderboy
+			"643530439239401472" // Tat2feuille
+		];
+
+		const contributors = [];
+
+		for (var id of contributorIds) {
+			axios({
+				method: "GET",
+				url: `https://discord.com/api/users/${id}`,
+				headers: {
+					"User-Agent": SenkoClient.tools.UserAgent,
+					"Authorization": `Bot ${SenkoClient.token}`
+				}
+			}).then(response => {
+				contributors.push(response.data.username);
+			});
+		}
 
 		/**
          * @param {CommandInteraction} interaction
@@ -35,8 +63,8 @@ module.exports = {
 							author: {
 								name: "Index"
 							},
-							title: "📄 Messenger Index (Help)",
-							description: "If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**",
+							title: "📄 Messenger Index",
+							description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\nPing: ${Math.floor(SenkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**`,
 							color: SenkoClient.colors.random()
 						}
 					],
@@ -224,6 +252,29 @@ module.exports = {
 						},
 						bottomButtons
 					]
+				});
+				break;
+			case "honorable_mentions":
+				if (interaction.message.components[0].components[0].disabled === true) interaction.message.components[0].components[0].disabled = false;
+
+				interaction.update({
+					embeds: [
+						{
+							author: {
+								name: "Index ≻ Honorable Mentions"
+							},
+							title: "🏅 Honorable Mentions",
+							description: "[Wikipedia](https://wikipedia.org/) for some shop item ideas\n[Rimukoro](https://twitter.com/Rimukoro) for creating the Sewayaki Kitsune no Senko-san series!",
+							fields: [
+								{
+									name: "Contributors",
+									value: contributors.map(n=>`${Icons.RightArrow} ${n}`).join("\n")
+								}
+							],
+							color: "#fc844c"
+						}
+					],
+					components: interaction.message.components
 				});
 				break;
 			}
