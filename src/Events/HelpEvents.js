@@ -97,7 +97,7 @@ module.exports = {
 								name: "Index ≻ Fun"
 							},
 							title: "📑 Fun Commands",
-							description: "≻ **Fluff** — Mofumofu!\n≻ **Pat** — Pat Senko's Head (Don't touch her ears!)\n≻ **Hug** — Hug Senko-san or another kitsune in your guild!\n≻ **Cuddle** — Cuddle with Senko-san!\n≻ **Drink** — Have Senko-san prepare you a drink\n≻ **Eat** — Eat something with Senko\n≻ **Rest** — Rest on Senkos lap\n≻ **Sleep** — Sleep on Senko's lap\n≻ **Smile** — :>",
+							description: "≻ **Fluff** — Mofumofu!\n≻ **Pat** — Pat Senko's Head (Don't touch her ears!)\n≻ **Hug** — Hug Senko-san or another kitsune in your guild!\n≻ **Cuddle** — Cuddle with Senko-san!\n≻ **Drink** — Have Senko-san prepare you a drink\n≻ **Eat** — Eat something with Senko\n≻ **Rest** — Rest on Senkos lap\n≻ **Sleep** — Sleep on Senko's lap",
 							color: SenkoClient.colors.random()
 						}
 					],
@@ -130,7 +130,7 @@ module.exports = {
 								name: "Index ≻ Economy"
 							},
 							title: "📑 Economy Commands",
-							description: "≻ **Shop** — Buy item's from Senko's Market\n≻ **Preview** — Preview an item from Senko's Market\n≻ **Inventory** — View the items you have collected\n≻ **Claim** — Claim rewards from Senko\n≻ **Funds** — View the amount of currency you have saved\n≻ **Stats** — View your account stats\n≻ **Work** — Have Nakano go to work to provide us with income",
+							description: "≻ **Shop** — Buy item's from Senko's Market\n≻ **Preview** — Preview an item from Senko's Market\n≻ **Inventory** — View the items you have collected\n≻ **Claim** — Claim rewards from Senko\n≻ **Stats** — View your account stats\n≻ **Work** — Have Nakano go to work to provide us with income",
 							color: SenkoClient.colors.random()
 						}
 					],
@@ -196,7 +196,7 @@ module.exports = {
 								name: "Index ≻ Administration"
 							},
 							title: "📑 Administration Commands",
-							description: "≻ **channel** — Add/Remove channels where Senko can be used in; **Member must be able to Manage Channels for use**\n≻ **avatar** — View someone's avatar, and banner if they have one\n≻ **whois** — Public account information\n≻ **server** — Server configuration; **Member must be an Administrator to edit**\n≻ **warn** — Warn a user; **Member must be able to Moderate Members**\n≻ **clean** — Clean a channel of it's messages; **Member must be able to Manage Messages**",
+							description: "≻ **channel** — Add/Remove channels where Senko can be used in; **Member must be able to Manage Channels for use**\n≻ **avatar** — View someone's avatar, and banner if they have one\n≻ **whois** — Public account information\n≻ **server** — Server configuration; **Member must be an Administrator to edit (Not needed for server info)**\n≻ **warn** — Warn a user; **Member must be able to Moderate Members**\n**warns** — View warns that a user has\n≻ **clean** — Clean a channel of it's messages; **Member must be able to Manage Messages**\n**ban** — Ban members from your guild **Member must be able to Ban Members**\n**unban** — Unban members from your guild **Member must be able to Ban Members**\n**slowmode** — Change the channel slowmode (In seconds) **Member must be able to Manage Channels**",
 							color: SenkoClient.colors.random()
 						}
 					],
