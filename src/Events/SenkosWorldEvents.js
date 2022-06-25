@@ -599,35 +599,15 @@ module.exports = {
 				case "sw_expanded_rules":
 					interaction.reply({
 						embeds: [
-							// {
-							// 	title: "🎉   Thanks for joining!",
-							// 	description: "Listed below are rules that are a **baseline** (aka everything does **not** have to be listed)\n\nLets get started!",
-							// 	color: SenkoClient.colors.light
-							// },
-							{
-								color: "BLURPLE",
-								title: "Follow Discord's Community Guidelines",
-								description: "[discord.com/guidelines](https://discord.com/guidelines)\n\nBreaking these will result in a permanent ban"
-							},
-							{
-								color: SenkoClient.colors.dark_red,
-								title: "⚠️   Sensitive Topics & Respecting others",
-								description: "__**You will not :**__\n\nHarass members\nExpress your hatred to a particular group of people\nExpress the belief that certain races of people are superior to others\nExpress the belief that certain genders are superior to others"
-							},
 							{
 								color: SenkoClient.colors.light_red,
-								title: "🔞  18+/Suggestive Content",
-								description: "__**You will not :**__\n\nSend any type of pornographic content\nSend any type of *real* Gore or anything related\nIt should be obvious that any character lewd counts and is instant outlaw from the server and from <@777676015887319050>, no appeals"
+								title: "🔞  18+ Content",
+								description: "Do not send any type of pornographic content\nIt should be obvious that any character lewd counts and is instant outlaw from the server and from <@777676015887319050>, no appeals"
 							},
 							{
 								color: SenkoClient.colors.dark_red,
 								title: "⛔  Problematic content or media",
-								description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures\nSend any type of War content\nSend any social credit memes\n\nTalk about any non-fictional politics\nDisplay affection towards Drug & Alcohol related content\nSend dark humor jokes or other dark humor content"
-							},
-							{
-								color: SenkoClient.colors.light_red,
-								title: "ℹ️  Misc",
-								description: "Do not bypass the filter for malicious reasons, if you really wish to send that message use `/filter`"
+								description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures\nSend any type of War content\nSend any social credit memes\n\nTalk about any non-fictional politics\nTalk about drug related content"
 							}
 						],
 						ephemeral: true

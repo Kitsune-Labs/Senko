@@ -1,6 +1,6 @@
 // const { owoify } = require("../../API/modules/owoify");
 const { cleanUserString } = require("../../API/Master");
-const { owoify } = require("@kitsune-laboratories/utilities");
+const { owoify } = require("@kitsune-labs/utilities");
 
 module.exports = {
 	name: "owoify",

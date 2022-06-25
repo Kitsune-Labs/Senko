@@ -29,11 +29,6 @@ module.exports = {
 			type: 1
 		},
 		{
-			name: "action-configuration",
-			description: "Edit what actions are logged for your Action Logs channel",
-			type: 1
-		},
-		{
 			name: "action-reports",
 			description: "set",
 			type: 2,
@@ -120,11 +115,16 @@ module.exports = {
 				embeds: [
 					{
 						title: "Server Configuration",
-						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${SenkoClient.user.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${GuildData.ActionLogs !== null ? `<#${GuildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${GuildData.MessageLogs !== null ? `<#${GuildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nWelcome Channel: ${GuildData.WelcomeChannel.config.channel !== null ? `<#${GuildData.WelcomeChannel.config.channel}>` : `${Icons.tick}  Not set`}\nMember Logging: ${GuildData.MemberLogging ? `<#${GuildData.MemberLogging}>` : `${Icons.tick}  Not set`}`,
+						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${SenkoClient.user.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${GuildData.ActionLogs !== null ? `<#${GuildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${GuildData.MessageLogs !== null ? `<#${GuildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${GuildData.MemberLogging ? `<#${GuildData.MemberLogging}>` : `${Icons.tick}  Not set`}`,
 						color: SenkoClient.colors.dark,
 						fields: [
 							{ name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
 						]
+					},
+					{
+						title: "Action log configuration",
+						description: "Disabling an action will not log it in your Action Logging channel",
+						color: SenkoClient.colors.light
 					}
 				],
 				components: [
@@ -132,6 +132,14 @@ module.exports = {
 						type: 1,
 						components: [
 							{ type: 2, label: guildFlags.get(bits.ModCommands) ? "Disable Moderation Commands" :"Enable Moderation Commands", style: guildFlags.get(bits.ModCommands) ? 4 : 3, custom_id: "guild_moderation" }
+						]
+					},
+					{
+						type: 1,
+						components: [
+							{ type: 2, label: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? "Enable Ban Logs" : "Disable Ban Logs", style: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? 3 : 4, custom_id: "g_disable_bans" },
+							{ type: 2, label: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? "Enable Kick Logs": "Disable Kick Logs", style: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? 3 : 4, custom_id: "g_disable_kicks" },
+							{ type: 2, label: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "Enable Timeout Logs" : "Disable Timeout Logs", style: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? 3 : 4, custom_id: "g_disable_timeouts" }
 						]
 					}
 				],
@@ -262,35 +270,6 @@ module.exports = {
 						color: SenkoClient.colors.light
 					}
 				]
-			});
-			break;
-		case "action-configuration":
-			if (!checkAdmin()) return;
-
-			var ActionEmbed = {
-				title: "Action log configuration",
-				description: "Disabling an action will not log it in your Action Logging channel\n\nℹ️ Timeout logs are disabled due to a bug",
-				fields: [],
-				color: SenkoClient.colors.light
-			};
-			guildFlags.set(bits.ActionLogs.TimeoutActionDisabled, false);
-			console.log(guildFlags.toHex());
-
-			var Components = [
-				{
-					type: 1,
-					components: [
-						{ type: 2, label: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? "Enable Ban Logs" : "Disable Ban Logs", style: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? 3 : 4, custom_id: "g_disable_bans" },
-						{ type: 2, label: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? "Enable Kick Logs": "Disable Kick Logs", style: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? 3 : 4, custom_id: "g_disable_kicks" },
-						{ type: 2, label: !guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "Enable Timeout Logs" : "Disable Timeout Logs", style: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? 4 : 3, custom_id: "g_disable_timeouts", disabled: true }
-					]
-				}
-			];
-
-			interaction.reply({
-				embeds: [ActionEmbed],
-				components: Components,
-				ephemeral: true
 			});
 			break;
 		case "info":

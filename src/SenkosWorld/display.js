@@ -14,16 +14,6 @@ module.exports = {
 			type: 1
 		},
 		{
-			name: "pds",
-			description: "pds",
-			type: 1
-		},
-		{
-			name: "verify",
-			description: "verify",
-			type: 1
-		},
-		{
 			name: "k_index",
 			description: "k_index",
 			type: 1
@@ -74,7 +64,7 @@ module.exports = {
 						color: "#fc844c"
 					},
 					{
-						description: "Outlaw (Ban) Appeals can be found at [senkosworld.com/appeal](https://senkosworld.com/appeal)",
+						description: "Ban Appeals can be found at [senkosworld.com/appeal](https://senkosworld.com/appeal)",
 						color: "#fc844c"
 					}
 				],
@@ -90,67 +80,9 @@ module.exports = {
 				]
 			});
 			break;
-		case "pds":
-			interaction.channel.send({
-				embeds: [
-					{
-						title: "The Progressive Discipline System",
-						description: "Certain rules don't make it an instant blacklist.\nWe will provide examples and how to moderate in Senko's World! properly.\n\n\n\"Blacklist\" is another way of saying \"Ban\" or \"Banned\"\n\n\"Timeout\" is using Discord's built-in Timeout feature (/timeout on Yozora) or the \"mute\" command\n\nThere is a banlink with the __Kitsune Softworks__ Discord server, banning a member from either server will affect the other server.\n\n\"PTS\" is the \"Progressive Discipline System\"\n\nSome things may be repeated purposefully in this",
-						color: 55039
-					},
-					{
-						title: "☠️ Blacklist's",
-						description: "__Things that should be an instant permanent blacklist include__\n\n— Racial slurs\n— NSFW Media\n— Malevolent URL's\n— Breaking Discord's TOS\n— Nazism\n— Sensitive Information\n— Spreading harmful/false information\n— Harassment, hate speech, racism, sexism\n— Threats to another user\nExamples: \"I will execute you\", \"I will burn every furry alive with a flamethrower\", etc\n— Piracy and/or illegal content (Drugs and alcohol included)\n— Joined just to troll\n— __Passed PTS limit on 1 kick__\n\n\n__Things that don't count as an instant blacklist__\n\n— Ecchi content should be a warn or mute depending on the severity\n— References to Inappropriate content which can include: Messages, Media, and Nicknames",
-						color: 13960453
-					},
-					{
-						title: "👢 Kicks",
-						description: "__Things that can have the member be kicked can include__\n\n— N-word baiting\n— Spreading harmful/false information\n— Harassment, hate speech, racism, sexism\n— Threats to another user\nExamples: \"I will execute you\", \"I will burn every furry alive with a flamethrower\", etc\n— illegal content related to Drugs and Alcohol included\n— Anything that can crash, restart or exploit the Discord client\n— __Passed PTS limit on warns or mutes__",
-						color: 16087044
-					},
-					{
-						title: "🪑 Timeouts & Warns",
-						description: "__Valid things you can Timeout and/or Warn members for__\n\n— Spamming channels\n— Joined just to \n— Bypassing Yozora's filter (if it is not a false flag)\n— Anything that could induce epilepsy (Without a warning)\n— Earrapes\n— Anything that can crash, restart or exploit the Discord client\n— Politics\n— Social Credit things",
-						color: 15397639
-					},
-					{
-						description: "I'm always wanting to improve the Rules, the PTS, and Community Interaction, if you have a suggestion please let me know!",
-						color: 196415
-					}
-				]
-			});
-
-			interaction.followUp({ content: "Finished", ephemeral: true });
-			break;
 		case "k_index":
 			interaction.channel.send({
-				embeds: [
-					{
-						title: "Kitsune Index (Deprecated)",
-						description: "This index is deprecated and will soon be replaced with\nhttps://index.senkosworld.com/",
-						color: "#FF6633"
-					}
-				],
-				components: [
-					new MessageActionRow().addComponents([
-						new MessageButton()
-							.setURL("https://discord.com/channels/777251087592718336/777255864682676224/928166670076346378")
-							.setStyle(5)
-							.setLabel("Server Rules"),
-						new MessageButton()
-							.setURL("https://discord.com/channels/777251087592718336/929569967265947648/929569977273569321")
-							.setStyle(5)
-							.setLabel("PDS (Progressive Discipline System)"),
-						new MessageButton()
-							.setURL("https://discord.com/channels/777251087592718336/900045922581495828/900083498881286144")
-							.setStyle(5)
-							.setLabel("Role Information"),
-						new MessageButton()
-							.setURL("https://discord.com/channels/777251087592718336/897196483852525609/897197266929082458")
-							.setStyle(5)
-							.setLabel("get Roles")
-					])
-				]
+				content: "https://index.senkosworld.com"
 			});
 
 			interaction.followUp({ content: "Finished", ephemeral: true });
@@ -230,11 +162,11 @@ module.exports = {
 			interaction.channel.send({
 				embeds: [
 					{
-						title: "🌸 Frequently asked Questions (That nobody asks) 🌸",
+						title: "🌸 Frequently asked Questions 🌸",
 						color: "DARK_BUT_NOT_BLACK"
 					},
 					{
-						title: "Level permissions",
+						title: "Level Permissions",
 						description: "**Level 5** – The ability to use External stickers, Embedded links, and speak in Voice Channels\n\n**Level 10** – The ability to upload files in basically every channel, Stream in Voice Channels, change your Nickname, and create Public Threads\n\n**Level 20** – The ability to promote your social media and Discord servers in <#966396091165736990>\n\n**Level 30** - The ability to create Private Threads\n\nBoosting will grant you \"Honorary Kitsune\" which will exempt you from level locks",
 						color: SenkoClient.colors.dark_red
 					},
@@ -244,9 +176,14 @@ module.exports = {
 						color: SenkoClient.colors.light_red
 					},
 					{
+						title: "Partnering",
+						description: "We open for partners! Message <@609097445825052701> to get started",
+						color: SenkoClient.colors.dark_red
+					},
+					{
 						title: "Roles",
 						description: "Roles can be found in <#832387166737924097>",
-						color: SenkoClient.colors.dark_red
+						color: SenkoClient.colors.light_red
 					}
 				]
 			});
@@ -257,7 +194,7 @@ module.exports = {
 			interaction.channel.send({
 				embeds: [
 					{
-						title: "Notification Roles",
+						title: "MC Server Roles",
 						description: "**Minecraft Server News/Announcements**",
 						color: SenkoClient.colors.light
 					}

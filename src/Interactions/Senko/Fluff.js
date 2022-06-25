@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../Data/Icons.json");
-const { updateUser, randomArray, randomNumber, addYen, awardAchievement } = require("../API/Master.js");
-
+const Icons = require("../../Data/Icons.json");
+const { updateUser, randomArray, randomNumber, addYen, awardAchievement, calcTimeLeft } = require("../../API/Master.js");
+const config = require("../../Data/DataConfig.json");
 
 const reactions = [
 	{
@@ -48,6 +48,7 @@ const Sounds = [
 	"EHYAAAAA!!"
 ];
 
+
 module.exports = {
 	name: "fluff",
 	desc: "Mofumofu!",
@@ -58,16 +59,57 @@ module.exports = {
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, { Stats, Currency }) => {
-		await updateUser(interaction.user, {
-			Stats: {
-				Fluffs: Stats.Fluffs + 1
-			}
+	start: async (SenkoClient, interaction, GuildData, { Stats, Currency, RateLimits }) => {
+		if (!RateLimits.Fluff_Rate) {
+			RateLimits.Fluff_Rate = {
+				Amount: 0,
+				Date: Date.now()
+			};
+
+			await updateUser(interaction.user, {
+				RateLimits: RateLimits
+			});
+		}
+
+		if (calcTimeLeft(RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
+			await updateUser(interaction.user, {
+				RateLimits: {
+					Fluff_Rate: {
+						Amount: 0,
+						Date: Date.now()
+					}
+				}
+			});
+
+			RateLimits.Fluff_Rate.Amount = 0;
+		}
+
+		if (RateLimits.Fluff_Rate.Amount >= 50) return interaction.followUp({
+			embeds: [
+				{
+					description: `I don't want to right now! W-We can <t:${Math.floor((RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
+					thumbnail: { url: "attachment://image.png" },
+					color: SenkoClient.colors.light
+				}
+			],
+			files: [{ attachment: "./src/Data/content/senko/upset2.png", name: "image.png" }]
 		});
 
 		// if (Stats.Fluffs >= 10) await awardAchievement(interaction, "NewFloofer");
 		// if (Stats.Fluffs >= 50) await awardAchievement(interaction, "AdeptFloofer");
 		// if (Stats.Fluffs >= 100) await awardAchievement(interaction, "MasterFloofer");
+
+		await updateUser(interaction.user, {
+			Stats: {
+				Fluffs: Stats.Fluffs + 1
+			},
+			RateLimits: {
+				Fluff_Rate: {
+					Amount: RateLimits.Fluff_Rate.Amount + 1,
+					Date: Date.now()
+				}
+			}
+		});
 
 		const MessageStruct = {
 			embeds: [

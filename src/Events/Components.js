@@ -7,7 +7,7 @@ const Market = require("../Data/Shop/Items.json");
 const HardLinks = require("../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../API/Bits.json");
-const { randomArrayItem } = require("@kitsune-laboratories/utilities");
+const { randomArrayItem } = require("@kitsune-labs/utilities");
 
 module.exports = {
 	/**
@@ -43,8 +43,8 @@ module.exports = {
 					if (guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
 						guildFlags.set(bits.ActionLogs.BanActionDisabled, false);
 
-						interaction.message.components[0].components[0].style = "DANGER";
-						interaction.message.components[0].components[0].label = "Disable Ban Logs";
+						interaction.message.components[1].components[0].style = "DANGER";
+						interaction.message.components[1].components[0].label = "Disable Ban Logs";
 						interaction.update({ components: interaction.message.components });
 
 						return updateSuperGuild(interaction.guild, {
@@ -57,16 +57,16 @@ module.exports = {
 						flags: guildFlags.toHex()
 					});
 
-					interaction.message.components[0].components[0].style = "SUCCESS";
-					interaction.message.components[0].components[0].label = "Enable Ban Logs";
+					interaction.message.components[1].components[0].style = "SUCCESS";
+					interaction.message.components[1].components[0].label = "Enable Ban Logs";
 					interaction.update({ components: interaction.message.components });
 					break;
 				case "g_disable_kicks":
 					if (guildFlags.get(bits.ActionLogs.KickActionDisabled)) {
 						guildFlags.set(bits.ActionLogs.KickActionDisabled, false);
 
-						interaction.message.components[0].components[1].style = "DANGER";
-						interaction.message.components[0].components[1].label = "Disable Kick Logs";
+						interaction.message.components[1].components[1].style = "DANGER";
+						interaction.message.components[1].components[1].label = "Disable Kick Logs";
 						interaction.update({ components: interaction.message.components });
 
 						return updateSuperGuild(interaction.guild, {
@@ -79,16 +79,16 @@ module.exports = {
 						flags: guildFlags.toHex()
 					});
 
-					interaction.message.components[0].components[1].style = "SUCCESS";
-					interaction.message.components[0].components[1].label = "Enable Kick Logs";
+					interaction.message.components[1].components[1].style = "SUCCESS";
+					interaction.message.components[1].components[1].label = "Enable Kick Logs";
 					interaction.update({ components: interaction.message.components });
 					break;
 				case "g_disable_timeouts":
 					if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) {
 						guildFlags.set(bits.ActionLogs.TimeoutActionDisabled, false);
 
-						interaction.message.components[0].components[2].style = "DANGER";
-						interaction.message.components[0].components[2].label = "Disable Timeout Logs";
+						interaction.message.components[1].components[2].style = "DANGER";
+						interaction.message.components[1].components[2].label = "Disable Timeout Logs";
 						interaction.update({ components: interaction.message.components });
 
 						return updateSuperGuild(interaction.guild, {
@@ -101,8 +101,8 @@ module.exports = {
 						flags: guildFlags.toHex()
 					});
 
-					interaction.message.components[0].components[2].style = "SUCCESS";
-					interaction.message.components[0].components[2].label = "Enable Timeout Logs";
+					interaction.message.components[1].components[2].style = "SUCCESS";
+					interaction.message.components[1].components[2].label = "Enable Timeout Logs";
 					interaction.update({ components: interaction.message.components });
 					break;
 				}

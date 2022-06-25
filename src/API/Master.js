@@ -13,8 +13,8 @@ const Achievements = require("../Data/Achievements.json");
 const { Bitfield } = require("bitfields");
 // const { updateSuperUser } = require("./super");
 const bits = require("./Bits.json");
-const { randomArrayItem: randomArray, randomNumber, wait, spliceArray } = require("@kitsune-laboratories/utilities");
-const chalk = require("@kitsune-laboratories/chalk-node");
+const { randomArrayItem: randomArray, randomNumber, wait, spliceArray } = require("@kitsune-labs/utilities");
+const chalk = require("@kitsune-labs/chalk-node");
 
 /**
  * @param {String} Color

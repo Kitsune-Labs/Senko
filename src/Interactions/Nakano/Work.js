@@ -2,7 +2,7 @@ const { MessageAttachment } = require("discord.js");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const { updateUser } = require("../../API/Master");
-const { randomArrayItem } = require("@kitsune-laboratories/utilities");
+const { randomArrayItem } = require("@kitsune-labs/utilities");
 
 module.exports = {
 	name: "work",
@@ -64,7 +64,7 @@ module.exports = {
 		} else {
 			if (RNG <= 30) {
 				await updateUser(interaction.user, {
-					Currency: { Yen: 700 - Item.price + Currency.Yen },
+					Currency: { Yen: 600 - Item.price + Currency.Yen },
 					Rewards: { Work: Date.now() }
 				});
 
@@ -72,7 +72,7 @@ module.exports = {
 					embeds: [
 						{
 							title: `${Icons.exclamation}  You arrived at your home and something happened.`,
-							description: `Senko told you ${Item.name} had broken. It cost you ${Icons.yen}  ${Item.price}x to ${Item.type}.\n\n— ${Icons.yen}  ${700 - Item.price}x added`,
+							description: `Senko told you ${Item.name} had broken. It cost you ${Icons.yen}  ${Item.price}x to ${Item.type}.\n\n— ${Icons.yen}  ${600 - Item.price}x added`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
 								url: "attachment://image.png"

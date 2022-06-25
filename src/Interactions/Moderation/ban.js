@@ -4,7 +4,7 @@ const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
 const Icons = require("../../Data/Icons.json");
-const { randomArrayItem } = require("@kitsune-laboratories/utilities");
+const { randomArrayItem } = require("@kitsune-labs/utilities");
 
 module.exports = {
 	name: "ban",

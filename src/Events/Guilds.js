@@ -70,6 +70,8 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanAdd", async (member) => {
+			if (process.env.NIGHTLY === "true") return;
+
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
 				type: "MEMBER_BAN_ADD"
@@ -80,6 +82,7 @@ module.exports = {
 
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
+
 
 			if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
 				member.guild.channels.cache.get(guildData.ActionLogs).send({
@@ -102,6 +105,8 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanRemove", async (member) => {
+			if (process.env.NIGHTLY === "true") return;
+
 			if (member.guild.id === "777251087592718336") {
 				const fetchedLogs = await member.guild.fetchAuditLogs({
 					limit: 1,
@@ -135,8 +140,9 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberAdd", async (member) => {
+			if (process.env.NIGHTLY === "true") return;
+
 			var guildData = await fetchSuperGuild(member.guild);
-			var guildFlags = Bitfield.fromHex(guildData.flags);
 
 			if (guildData.MemberLogs) {
 				member.guild.channels.cache.get(guildData.MemberLogs).send({
@@ -168,6 +174,7 @@ module.exports = {
 				});
 			}
 
+			if (process.env.NIGHTLY === "true") return;
 			//! Kicks
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -199,11 +206,13 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async member => {
+			if (process.env.NIGHTLY === "true") return;
+
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = await Bitfield.fromHex(guildData.flags);
 			member = await member.guild.members.fetch(member.id);
 
-			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return print("#ffff6", "GUILD", "Member timeout's are disabled for this guild");
+			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return print("#FFFF66", "GUILD", "Member timeout's are disabled for this guild");
 
 			const rawAudit = await member.guild.fetchAuditLogs({ limit: 1 });
 
@@ -212,8 +221,6 @@ module.exports = {
 			if (audit.target.id !== member.id) return;
 
 			if (member.communicationDisabledUntilTimestamp === null && guildData.ActionLogs) {
-				console.log("Timeout Removed", audit.action);
-
 				member.guild.channels.cache.get(guildData.ActionLogs).send({
 					embeds: [
 						{
@@ -229,8 +236,6 @@ module.exports = {
 			}
 
 			if (member.communicationDisabledUntilTimestamp != null && guildData.ActionLogs) {
-				console.log("Timeout Added", audit.action);
-
 				member.guild.channels.cache.get(guildData.ActionLogs).send({
 					embeds: [
 						{

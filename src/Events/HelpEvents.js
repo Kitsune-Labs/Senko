@@ -1,13 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-const { default: axios } = require("axios");
 const { Client, CommandInteraction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const { print, wait } = require("../API/Master.js");
-// eslint-disable-next-line no-unused-vars
+const { default: axios } = require("axios");
 const Icons = require("../Data/Icons.json");
 
-
-
+//! Yeah yeah, the commands are not automated
 
 module.exports = {
 	/**
