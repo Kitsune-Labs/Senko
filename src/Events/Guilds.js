@@ -70,8 +70,6 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanAdd", async (member) => {
-			if (process.env.NIGHTLY === "true") return;
-
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
 				type: "MEMBER_BAN_ADD"
@@ -105,8 +103,6 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanRemove", async (member) => {
-			if (process.env.NIGHTLY === "true") return;
-
 			if (member.guild.id === "777251087592718336") {
 				const fetchedLogs = await member.guild.fetchAuditLogs({
 					limit: 1,
@@ -140,8 +136,6 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberAdd", async (member) => {
-			if (process.env.NIGHTLY === "true") return;
-
 			var guildData = await fetchSuperGuild(member.guild);
 
 			if (guildData.MemberLogs) {
@@ -174,7 +168,6 @@ module.exports = {
 				});
 			}
 
-			if (process.env.NIGHTLY === "true") return;
 			//! Kicks
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -206,8 +199,6 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async member => {
-			if (process.env.NIGHTLY === "true") return;
-
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = await Bitfield.fromHex(guildData.flags);
 			member = await member.guild.members.fetch(member.id);

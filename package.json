@@ -1,5 +1,5 @@
 {
-    "version": "1.14.0",
+    "version": "1.12.5",
     "build": "1.13.0.220618360",
     "scripts": {
         "start": "node src/Client.js",
@@ -12,11 +12,11 @@
         "@supabase/supabase-js": "1.35.3",
         "axios": "0.27.2",
         "bitfields": "1.0.3",
-        "charverter": "1.1.0-dev",
+        "charverter": "^1.1.0-dev",
         "discord-modal": "1.0.2",
-        "discord.js": "13.8.0",
+        "discord.js": "13.8.1",
         "dotenv": "16.0.1",
-        "firebase-admin": "10.2.0",
+        "firebase-admin": "11.0.0",
         "firebase-functions": "3.21.2",
         "uuid": "8.3.2"
     },
