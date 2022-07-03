@@ -57,7 +57,7 @@ module.exports = {
 						embeds: [
 							{
 								title: `One of your warns has been deleted in ${interaction.guild.name}!`,
-								description: `Warn info:\nWarn id: **${warnId}**\nWarn reason: ${warn.reason}\nWarn note: ${warn.note}`,
+								description: `Here is some info about what warn was deleted\nWarn id: **${warnId}**\nWarn reason: ${warn.reason}\nWarn note: ${warn.note}`,
 								color: SenkoClient.colors.light,
 								thumbnail: { url: "attachment://image.png" }
 							}
