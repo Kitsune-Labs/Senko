@@ -44,7 +44,6 @@ parentPort.on("message", async ({ message, guild }) => {
 					emojis.push(`https://cdn.discordapp.com/emojis/${emojiID}.png`);
 				}
 			}
-
 		}
 	}
 
