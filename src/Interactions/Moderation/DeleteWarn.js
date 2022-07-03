@@ -53,6 +53,18 @@ module.exports = {
 						warns: GuildData.warns
 					});
 
+					(await interaction.guild.members.fetch(key)).send({
+						embeds: [
+							{
+								title: `One of your warns has been deleted in ${interaction.guild.name}!`,
+								description: `Warn info:\nWarn id: **${warnId}**\nWarn reason: ${warn.reason}\nWarn note: ${warn.note}`,
+								color: SenkoClient.colors.light,
+								thumbnail: { url: "attachment://image.png" }
+							}
+						],
+						files: [{ attachment: "./src/Data/content/senko/book.png", name: "image.png" }]
+					}).catch(()=>{});
+
 					return interaction.followUp({
 						embeds: [
 							{
