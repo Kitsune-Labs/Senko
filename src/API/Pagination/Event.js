@@ -35,6 +35,11 @@ module.exports = async (interaction, pages, timeout = 120000, IsEphemeral) => {
 		ephemeral: IsEphemeral || true
 	};
 
+	if (pages.length == 1) {
+		MessageStructure.components[0].components[0].disabled = true;
+		MessageStructure.components[0].components[1].disabled = true;
+	}
+
 	MessageStructure.embeds[0] = pages[page];
 	pages[page].footer = { text: `Page ${page + 1} of ${pages.length}` };
 

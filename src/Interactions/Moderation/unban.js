@@ -64,8 +64,9 @@ module.exports = {
 
 		const userId = interaction.options.getString("user-id");
 		const unbanReason = interaction.options.getString("reason");
+		const bannedUser = await interaction.guild.bans.fetch(userId).catch(()=>{});
 
-		if (!interaction.guild.bans.cache.get(userId)) return interaction.reply({
+		if (!bannedUser) return interaction.reply({
 			embeds: [
 				{
 					title: "I don't see anything",

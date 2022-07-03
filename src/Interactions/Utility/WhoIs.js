@@ -9,7 +9,7 @@ module.exports = {
 		{
 			name: "user",
 			description: "User",
-			type: 6,
+			type: "USER",
 			required: false
 		},
 		{
@@ -27,59 +27,61 @@ module.exports = {
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		const guildMember = await interaction.options.getMember("user") || interaction.member;
-		if (!guildMember) return interaction.followUp({ content: "I can't find this user", ephemeral: true });
-
-		const guildUser = guildMember.user;
-		const AvatarURL = guildUser.avatarURL({ dynamic: true, size: 2048 });
-
-		/**
-         * @type {Message}
-         */
-		const messageStruct = {
-			embeds: [
-				{
-					description: `${guildMember.nickname != null ? `(${guildMember.user.tag})` : ""} ${guildUser} [${guildUser.id}]\n\nBot: ${guildUser.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember.premiumSinceTimestamp ? `**Yes**, Since <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nCreation Date: <t:${parseInt(guildUser.createdTimestamp / 1000)}>\nJoined Guild: <t:${parseInt(guildMember.joinedTimestamp / 1000)}>`,
-					color: SenkoClient.colors.random(),
-					fields: [
-						{ name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}`}
-					],
-					thumbnail: {
-						url: AvatarURL ? AvatarURL : null
-					},
-					image: {
-						url: null
-					}
-				}
-			],
-			components: [
-				{
-					type: "ACTION_ROW",
-					components: [
-						{ type: 2, label: "Avatar", style: 5, url: AvatarURL ? AvatarURL : "https://discord.com/404", disabled: AvatarURL ? false : true },
-						{ type: 2, label: "Banner", style: 5, url: "https://discord.com/404", disabled: true }
-					]
-				}
-			]
-		};
+		const whoUser = await interaction.options.getUser("user") || interaction.user;
+		const guildMember = interaction.guild.members.cache.get(whoUser.id || whoUser);
+		const AvatarURL = guildMember && guildMember.user ? guildMember.user.avatarURL({ dynamic: true, size: 2048 }) : null;
 
 		axios({
-			url: `https://discord.com/api/users/${guildUser.id}`,
+			url: `https://discord.com/api/users/${whoUser.id || whoUser}`,
 			method: "GET",
 			headers: {
 				"User-Agent": SenkoClient.tools.UserAgent,
 				"Authorization": `Bot ${SenkoClient.token}`
 			}
-		}).then(async (response) => {
-			if (response.data.banner) {
-				const extension = await response.data.banner.startsWith("a_") ? ".gif" : ".png";
+		}).then(async ({ data: userData }) => {
+			const banStatus = await interaction.guild.bans.fetch(userData.id).catch(()=>{});
 
-				messageStruct.embeds[0].image.url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
+			/**
+			 * @type {Message}
+			 */
+			const messageStruct = {
+				embeds: [
+					{
+						description: `${guildMember && guildMember.nickname ? guildMember.nickname : `<@${userData.id}> ${userData.username}#${userData.discriminator} [${userData.id}]`}\n\nBot: ${userData.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember && guildMember.premiumSinceTimestamp ? `**Yes**\n> **Booster since** <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nRegistered on ${whoUser.createdTimestamp ? `<t:${parseInt(whoUser.createdTimestamp / 1000)}>` : "unknown (Most likely not in Guild)" }\nJoined Guild: ${guildMember ? `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>` : "**Never**"}\nBanned from Guild: ${banStatus ? `**Yes**\n> **Ban Reason:** ${banStatus.reason}` : "**No**"}`,
+						color: "#fc844c",
+						thumbnail: {
+							url: AvatarURL ? AvatarURL : null
+						},
+						fields: [],
+						image: {
+							url: null
+						}
+					}
+				],
+				components: [
+					{
+						type: "ACTION_ROW",
+						components: [
+							{ type: 2, label: "Avatar", style: 5, url: AvatarURL ? AvatarURL : "https://discord.com/404", disabled: AvatarURL ? false : true },
+							{ type: 2, label: "Banner", style: 5, url: "https://discord.com/404", disabled: true }
+						]
+					}
+				]
+			};
+
+			if (interaction.options.getBoolean("show-roles") === true && guildMember) messageStruct.embeds[0].fields.push([
+				{ name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}`}
+			]);
+
+			if (userData.banner) {
+				const extension = await userData.banner.startsWith("a_") ? ".gif" : ".png";
+
+				messageStruct.embeds[0].image.url = `https://cdn.discordapp.com/banners/${userData.id}/${userData.banner}${extension}?size=2048`;
 				messageStruct.components[0].components[1].disabled = false;
-				messageStruct.components[0].components[1].url = `https://cdn.discordapp.com/banners/${guildUser.id}/${response.data.banner}${extension}?size=2048`;
+				messageStruct.components[0].components[1].url = `https://cdn.discordapp.com/banners/${userData.id}/${userData.banner}${extension}?size=2048`;
 			}
 
-			interaction.followUp(messageStruct);
+			return interaction.followUp(messageStruct);
 		});
 	}
 };
