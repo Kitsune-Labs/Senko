@@ -230,11 +230,12 @@ module.exports = {
 						}
 					}
 
+					if (users.length === 1) return interaction.editReply(responseStruct);
 					interaction.channel.send(responseStruct);
 				}
 			}
 		}
 
-		interaction.editReply({ content: "Done" });
+		if (users.length > 1) interaction.editReply({ content: "Done" });
 	}
 };
