@@ -83,7 +83,7 @@ module.exports = {
 
 
 			if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
-				member.guild.channels.cache.get(guildData.ActionLogs).send({
+				(await member.guild.channels.fetch(guildData.ActionLogs)).send({
 					embeds: [
 						{
 							title: "Action Report - Kitsune Banned",
@@ -115,7 +115,7 @@ module.exports = {
 				var guildFlags = Bitfield.fromHex(guildData.flags);
 
 				if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
-					member.guild.channels.cache.get(guildData.ActionLogs).send({
+					(await member.guild.channels.fetch(guildData.ActionLogs)).send({
 						embeds: [
 							{
 								title: "Action Report - Kitsune Pardoned",
@@ -139,7 +139,7 @@ module.exports = {
 			var guildData = await fetchSuperGuild(member.guild);
 
 			if (guildData.MemberLogs) {
-				member.guild.channels.cache.get(guildData.MemberLogs).send({
+				(await member.guild.channels.fetch(guildData.MemberLogs)).send({
 					embeds: [
 						{
 							title: "New Kitsune",
@@ -157,7 +157,7 @@ module.exports = {
 			var guildFlags = Bitfield.fromHex(guildData.flags);
 
 			if (guildData.MemberLogs /* && guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)*/) {
-				member.guild.channels.cache.get(guildData.MemberLogs).send({
+				(await member.guild.channels.fetch(guildData.MemberLogs)).send({
 					embeds: [
 						{
 							title: "Kitsune Left",
@@ -179,7 +179,7 @@ module.exports = {
 			if (kickLog.createdAt < member.joinedAt || !kickLog || kickLog.executor.id === SenkoClient.user.id || kickLog.target.id !== member.id) return;
 
 			if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.KickActionDisabled)) {
-				member.guild.channels.cache.get(guildData.ActionLogs).send({
+				(await member.guild.channels.fetch(guildData.ActionLogs)).send({
 					embeds: [
 						{
 							title: "Action Report - Kitsune Kicked",
@@ -212,7 +212,7 @@ module.exports = {
 			if (audit.target.id !== member.id) return;
 
 			if (member.communicationDisabledUntilTimestamp === null && guildData.ActionLogs) {
-				member.guild.channels.cache.get(guildData.ActionLogs).send({
+				(await member.guild.channels.fetch(guildData.ActionLogs)).send({
 					embeds: [
 						{
 							title: "Action Report - Timeout Removed",
@@ -227,7 +227,7 @@ module.exports = {
 			}
 
 			if (member.communicationDisabledUntilTimestamp != null && guildData.ActionLogs) {
-				member.guild.channels.cache.get(guildData.ActionLogs).send({
+				(await member.guild.channels.fetch(guildData.ActionLogs)).send({
 					embeds: [
 						{
 							title: "Action Report - Kitsune Timed Out",

@@ -111,7 +111,7 @@ module.exports = {
 		await updateSuperGuild(interaction.guild, { warns: warns });
 
 		if (ActionLogs) {
-			interaction.guild.channels.cache.get(ActionLogs).send({
+			(await interaction.guild.channels.fetch(ActionLogs)).send({
 				embeds: [
 					{
 						title: "Action Report - Kitsune Warned",

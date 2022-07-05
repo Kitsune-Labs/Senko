@@ -224,7 +224,7 @@ module.exports = {
 						}
 
 						if (GuildData.ActionLogs) {
-							interaction.guild.channels.cache.get(GuildData.ActionLogs).send(banStruct).catch(err => {
+							(await interaction.guild.channels.fetch(GuildData.ActionLogs)).send(banStruct).catch(err => {
 								responseStruct.embeds[0].description += `Cannot send action log: \n\n${err}`;
 							});
 						}

@@ -83,6 +83,22 @@ module.exports = {
 
 		await interaction.guild.members.unban(userId, unbanReason || "No reason given");
 
+		if (GuildData.ActionLogs) {
+			(await interaction.guild.channels.fetch(GuildData.ActionLogs)).send({
+				embeds: [
+					{
+						title: "Action Report - Kitsune Pardoned",
+						description: `${userId} [${userId || "000000000000000000"}]\nReason: ${unbanReason || "No reason given"}`,
+						color: "GREEN",
+						author: {
+							name: `${interaction.user.tag}  [${interaction.user.id}]`,
+							icon_url: `${interaction.user.displayAvatarURL({ dynamic: true })}`
+						}
+					}
+				]
+			});
+		}
+
 		interaction.followUp({
 			embeds: [
 				{
