@@ -230,7 +230,10 @@ module.exports = {
 						}
 					}
 
-					if (users.length === 1) return interaction.editReply(responseStruct);
+					if (users.length === 1) {
+						responseStruct.content = null;
+						return interaction.editReply(responseStruct);
+					}
 					interaction.channel.send(responseStruct);
 				}
 			}
