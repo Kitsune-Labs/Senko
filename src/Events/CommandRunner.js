@@ -46,10 +46,13 @@ module.exports = {
 					{
 						title: `${Icons.exclamation}  Sorry dear`,
 						description: "I'm afraid I have to ask you to not use this command for a while!",
-						color: SenkoClient.colors.dark,
-						ephemeral: true
+						thumbnail: {
+							url: "https://assets.senkosworld.com/media/senko/heh.png"
+						},
+						color: SenkoClient.colors.dark
 					}
-				]
+				],
+				ephemeral: true
 			}); // AccountData = await fetchData(interaction.user);
 
 			if (InteractionCommand.defer){
