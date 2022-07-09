@@ -54,7 +54,7 @@ module.exports = {
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/hat_talk.png", name: "image.png" }],
+			files: [{ attachment: "./src/Data/content/senko/huh.png", name: "image.png" }],
 			ephemeral: true
 		});
 
@@ -89,7 +89,7 @@ module.exports = {
 							thumbnail: { url: "attachment://image.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/hat_talk.png", name: "image.png" }],
+					files: [{ attachment: "./src/Data/content/senko/senko_hat_tip.png", name: "image.png" }],
 					ephemeral: true
 				});
 			});
