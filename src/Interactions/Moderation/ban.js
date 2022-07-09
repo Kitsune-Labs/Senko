@@ -54,7 +54,7 @@ module.exports = {
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (!Bitfield.fromHex(GuildData.flags).get(bits.ModCommands)) return interaction.reply({
+		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});
@@ -91,8 +91,7 @@ module.exports = {
 
 		await interaction.deferReply({ fetchReply: true });
 
-		interaction.editReply({ content: "Starting" });
-
+		
 		const users = [];
 		const reactions = [
 			{
@@ -113,14 +112,13 @@ module.exports = {
 			}
 		];
 
-
 		for (var Option1 of interaction.options._hoistedOptions) {
 			if (Option1.name !== "reason" && Option1.name !== "dm") {
 				users.push(Option1.value);
 			}
 		}
 
-		interaction.editReply({ content: `Banning ${users.length} ${users.length == 1 ? "user" : "users"}` });
+		if (users.length > 1) interaction.editReply({ content: `Banning ${users.length} ${users.length == 1 ? "user" : "users"}` });
 
 		for (var Option of interaction.options._hoistedOptions) {
 			if (Option.name !== "reason") {
@@ -230,10 +228,7 @@ module.exports = {
 						}
 					}
 
-					if (users.length === 1) {
-						responseStruct.content = null;
-						return interaction.editReply(responseStruct);
-					}
+					if (users.length === 1) return interaction.editReply(responseStruct);
 					interaction.channel.send(responseStruct);
 				}
 			}

@@ -118,7 +118,7 @@ module.exports = {
 						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${SenkoClient.user.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${GuildData.ActionLogs !== null ? `<#${GuildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${GuildData.MessageLogs !== null ? `<#${GuildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${GuildData.MemberLogging ? `<#${GuildData.MemberLogging}>` : `${Icons.tick}  Not set`}`,
 						color: SenkoClient.colors.dark,
 						fields: [
-							{ name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
+							{ name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
 						]
 					},
 					{
@@ -131,7 +131,7 @@ module.exports = {
 					{
 						type: 1,
 						components: [
-							{ type: 2, label: guildFlags.get(bits.ModCommands) ? "Disable Moderation Commands" :"Enable Moderation Commands", style: guildFlags.get(bits.ModCommands) ? 4 : 3, custom_id: "guild_moderation" }
+							{ type: 2, label: guildFlags.get(bits.BETAs.ModCommands) ? "Disable Moderation Commands" :"Enable Moderation Commands", style: guildFlags.get(bits.BETAs.ModCommands) ? 4 : 3, custom_id: "guild_moderation" }
 						]
 					},
 					{

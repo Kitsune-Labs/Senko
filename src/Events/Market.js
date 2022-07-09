@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { print, fetchData, updateUser, getName } = require("../API/Master.js");
+const { getName } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
 const shopItems = require("../Data/Shop/Items.json");
 
-const { fetchConfig } = require("../API/super.js");
+const { fetchConfig, updateSuperUser, fetchSuperUser } = require("../API/super.js");
 
 module.exports = {
 	/**
@@ -22,7 +22,6 @@ module.exports = {
 
 				const itemName = Object.keys(shopItems).at(item[0]);
 				const shopItem = await shopItems[itemName];
-				const userData = await fetchData(interaction.user);
 
 				interaction.channel.messages.cache.get(interaction.message.id).edit({
 					components: interaction.message.components
@@ -46,28 +45,24 @@ module.exports = {
 					ephemeral: true
 				});
 
-				const { Inventory } = await fetchData(interaction.user);
+				const accountData = await fetchSuperUser(interaction.user);
 
-				for (let Item of Inventory) {
-					if (Item.codename === itemName && Item.amount >= shopItem.max) {
-						return interaction.reply({
-							embeds: [
-								{
-									title: `${Icons.exclamation}  Sorry ${getName(interaction)}`,
-									description: `You may only have **${shopItem.max}** total!`,
-									color: SenkoClient.colors.dark,
-									thumbnail: {
-										url: "attachment://image.png"
-									}
-								}
-							],
-							files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
-							ephemeral: true
-						});
-					}
-				}
+				if (accountData.LocalUser.profileConfig.Inventory[itemName] && accountData.LocalUser.profileConfig.Inventory[itemName] >= shopItem.max) return interaction.reply({
+					embeds: [
+						{
+							title: `${Icons.exclamation}  Sorry ${getName(interaction)}`,
+							description: `You may only have **${shopItem.max}** total!`,
+							color: SenkoClient.colors.dark,
+							thumbnail: {
+								url: "attachment://image.png"
+							}
+						}
+					],
+					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
+					ephemeral: true
+				});
 
-				if (userData.Currency.Yen < shopItem.price) return interaction.reply({
+				if (accountData.LocalUser.profileConfig.Currency.Yen < shopItem.price) return interaction.reply({
 					embeds: [
 						{
 							title: `${Icons.exclamation}  Sorry ${getName(interaction)}`,
@@ -114,7 +109,7 @@ module.exports = {
 
 				if (item[2] != interaction.user.id) return interaction.reply({ content: "You cannot steal items, that's illegal!", ephemeral: true });
 
-				const { Inventory, Currency } = await fetchData(interaction.user);
+				const accountData = await fetchSuperUser(interaction.user);
 
 				const MessageStructure = {
 					embeds: [
@@ -131,31 +126,21 @@ module.exports = {
 					components: []
 				};
 
-				for (let Item of Inventory) {
-					if (Item.codename === itemName) {
-						Item.amount++;
+				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen - shopItem.price;
 
-						console.log(Currency.Yen - shopItem.price);
+				if (accountData.LocalUser.profileConfig.Inventory[itemName]) {
+					accountData.LocalUser.profileConfig.Inventory[itemName] + shopItem.amount || 1;
 
-						await updateUser(interaction.user, {
-							Currency: {
-								Yen:  Currency.Yen - shopItem.price
-							},
-							Inventory: Inventory
-						});
+					await updateSuperUser(interaction.user, {
+						LocalUser: accountData.LocalUser
+					});
+				} else {
+					accountData.LocalUser.profileConfig.Inventory[itemName] = shopItem.amount;
 
-						return interaction.update(MessageStructure);
-					}
+					await updateSuperUser(interaction.user, {
+						LocalUser: accountData.LocalUser
+					});
 				}
-
-				Inventory.push({ codename: itemName, amount: shopItem.amount });
-
-				await updateUser(interaction.user, {
-					Currency: {
-						Yen: Currency.Yen - shopItem.price
-					},
-					Inventory: Inventory
-				});
 
 				interaction.update(MessageStructure);
 			}

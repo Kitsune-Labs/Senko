@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
-const { updateUser } = require("../../API/Master");
+const { Client, CommandInteraction, Modal } = require("discord.js");
+const { updateSuperUser } = require("../../API/super");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const DiscordModal = require("discord-modal");
 
 module.exports = {
 	name: "about-me",
@@ -26,34 +25,40 @@ module.exports = {
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async (SenkoClient, interaction, guildData, accountData) => {
 		const commandType = interaction.options.getSubcommand();
-		if (commandType === "change") {
-			const textinput = new DiscordModal.TextInput()
-				.setCustomId("submit_about_me")
-				.setTitle("Change your About Me")
-				.addComponents(
-					new DiscordModal.TextInputField()
-						.setLabel("About Me")
-						.setStyle(2)
-						.setPlaceholder("Enter your new about me")
-						.setCustomId("submit_about_me_1")
-						.setRequired(true)
-						.setMax(100)
-						.setMin(1)
-				);
 
-			await SenkoClient.TextInputs.open(interaction, textinput);
+		if (commandType === "change") {
+			interaction.showModal(new Modal({
+				title: "About Me",
+				customId: "submit_about_me",
+				components: [
+					{
+						type: 1,
+						components: [
+							{
+								type: 4,
+								style: 2,
+								label: "Enter your new about me",
+								custom_id: "submit_about_me_1",
+								required: true,
+								maxLength: 100,
+								minLength: 1
+							}
+						]
+					}
+				]
+			}));
 		}
 
 		if (commandType === "remove") {
-			await updateUser(interaction.user, {
-				LocalUser: {
-					AboutMe: null
-				}
+			accountData.LocalUser.profileConfig.aboutMe = null;
+
+			await updateSuperUser(interaction.user, {
+				LocalUser: accountData.LocalUser
 			});
 
-			interaction.followUp({
+			interaction.reply({
 				embeds: [
 					{
 						title: `${Icons.question}  I have removed your About Me ${interaction.user.username}`,

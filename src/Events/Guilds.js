@@ -34,8 +34,8 @@ module.exports = {
 
 				switch (interaction.customId) {
 				case "guild_moderation":
-					if (guildFlags.get(bits.ModCommands)) {
-						guildFlags.set(bits.ModCommands, false);
+					if (guildFlags.get(bits.BETAs.ModCommands)) {
+						guildFlags.set(bits.BETAs.ModCommands, false);
 
 						interaction.message.embeds[0].fields[0].value = "```diff\n- Disabled```";
 						interaction.message.components[0].components[0].style = "SUCCESS";
@@ -51,7 +51,7 @@ module.exports = {
 						});
 					}
 
-					guildFlags.set(bits.ModCommands, true);
+					guildFlags.set(bits.BETAs.ModCommands, true);
 					interaction.message.embeds[0].fields[0].value = "```diff\n+ Enabled```";
 					interaction.message.components[0].components[0].style = "DANGER";
 					interaction.message.components[0].components[0].label = "Disable Moderation Commands";

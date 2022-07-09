@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { print } = require("../API/Master.js");
+const { print } = require("../../src/API/Master.jsster.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../Data/Icons.json");
+const Icons = require("../../src/Data/Icons.jsonns.json");
 const axios = require("axios");
-const { fetchSuperGuild } = require("../API/super.js");
+const { fetchSuperGuild } = require("../../src/API/super.jsuper.js");
 
 // Constants
 // _GUILD_ = Guild Name

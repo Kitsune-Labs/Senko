@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
-const { fetchData, updateUser, randomArray } = require("../API/Master");
-const { updateSuperGuild, fetchSuperGuild } = require("../API/super");
+const { randomArray } = require("../API/Master");
+const { updateSuperGuild, fetchSuperGuild, updateSuperUser, fetchSuperUser } = require("../API/super");
 const Icons = require("../Data/Icons.json");
 const Market = require("../Data/Shop/Items.json");
 const HardLinks = require("../Data/HardLinks.json");
@@ -109,8 +109,6 @@ module.exports = {
 
 
 				if (interaction.customId.startsWith("eat-")) {
-					console.log(interaction.customId);
-
 					const foodItem = interaction.customId.split("-")[1];
 
 					if (interaction.user.id !== interaction.customId.split("-")[2]) return interaction.reply({
@@ -129,30 +127,26 @@ module.exports = {
 					});
 
 					const item = Market[foodItem];
-					const AccountData = await fetchData(interaction.user);
+					const AccountData = await fetchSuperUser(interaction.user);
 
 					new Promise((resolve) => {
-						for (var index in AccountData.Inventory) {
-							const Item = AccountData.Inventory[index];
+						if (AccountData.LocalUser.profileConfig.Inventory[foodItem]) {
+							if (AccountData.LocalUser.profileConfig.Inventory[foodItem] > 1) {
+								AccountData.LocalUser.profileConfig.Inventory[foodItem]--;
 
-							if (Item.codename === foodItem) {
-								if (Item.amount > 1) {
-									Item.amount--;
-
-									updateUser(interaction.user, {
-										Inventory: AccountData.Inventory
-									});
-
-									return resolve();
-								}
-
-								AccountData.Inventory.splice(index, 1);
-								updateUser(interaction.user, {
-									Inventory: AccountData.Inventory
+								updateSuperUser(interaction.user, {
+									LocalUser: AccountData.LocalUser
 								});
 
 								return resolve();
 							}
+
+							delete AccountData.LocalUser.profileConfig.Inventory[foodItem];
+							updateSuperUser(interaction.user, {
+								LocalUser: AccountData.LocalUser
+							});
+
+							return resolve();
 						}
 					}).then(() => {
 						const reactions = ["good", "delicious"];

@@ -1,10 +1,6 @@
-// const IDB = require("../Data/IDB.json");
 const DataConfig = require("../Data/DataConfig.json");
-const { CheckPermission, print, fetchData } = require("../API/Master");
-// const Firebase = require("firebase-admin");
-// const Firestore = Firebase.firestore();
-const LocalOutlaws = require("../Data/LocalOutlawed.json");
-const { fetchSuperGuild, fetchConfig } = require("../API/super.js");
+const { CheckPermission, print } = require("../API/Master");
+const { fetchSuperGuild, fetchConfig, fetchSuperUser } = require("../API/super.js");
 const Icons = require("../Data/Icons.json");
 
 module.exports = {
@@ -38,10 +34,9 @@ module.exports = {
 
 			const InteractionCommand = SenkoClient.SlashCommands.get(interaction.commandName);
 			const superGuildData = await fetchSuperGuild(interaction.guild);
-			let AccountData = null;
+			const AccountData = await fetchSuperUser(interaction.user);
 
 			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.colors.dark, thumbnail:{url:"attachment://image.png"}}], ephemeral:true, files:[{attachment:"./src/Data/content/senko/heh.png", name:"image.png"}]});
-			if (InteractionCommand.userData === true) AccountData = await fetchData(interaction.user);
 
 			if (InteractionCommand.defer){
 				if(InteractionCommand.ephemeral&&InteractionCommand.ephemeral===true){
@@ -50,7 +45,6 @@ module.exports = {
 					await interaction.deferReply();
 				}
 			}
-
 
 			const permissionEmbed = {
 				embeds: [
@@ -79,7 +73,6 @@ module.exports = {
 				if (CheckPermission(interaction, "EMBED_LINKS")) return interaction.reply(permissionEmbed);
 				return interaction.reply(permissionMessage);
 			}
-
 
 			if (superGuildData.Channels.length > 0 && !superGuildData.Channels.includes(interaction.channelId) && !InteractionCommand.usableAnywhere) {
 				var messageStruct1 = {

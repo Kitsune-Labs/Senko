@@ -78,11 +78,5 @@ module.exports = async (interaction, pages, timeout = 120000, IsEphemeral) => {
 		}
 	});
 
-	// process.on("SIGTERM", ()=>{disable("sigterm");});
-	// process.on("beforeExit", ()=>{disable("before");});
-	// process.on("exit", ()=>{disable("exit");});
-	// process.on("SIGINT", ()=>{disable("int");});
-	// SenkoClient.on("exit", ()=>{disable("exit");});
-
 	return curPage;
 };

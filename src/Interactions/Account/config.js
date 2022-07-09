@@ -38,14 +38,16 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const Command = interaction.options.getSubcommand();
 
 		await interaction.deferReply({ ephemeral: true, fetchReply: true });
 
+		const userInventory = accountData.LocalUser.profileConfig.Inventory;
+
 		switch (Command) {
 		case "banner":
-			if (!AccountData.Inventory[0]) return interaction.followUp({
+			if (Object.keys(userInventory).length === 0) return interaction.followUp({
 				embeds: [
 					{
 						title: "You don't own anything!",
@@ -62,11 +64,11 @@ module.exports = {
 				{ label: "Default Banner", value: "banner_change_default", description: "The banner everyone gets" }
 			];
 
-			for (let Item of AccountData.Inventory) {
-				const ShopItem = ShopItems[Item.codename];
+			for (var item of Object.keys(userInventory)) {
+				const ShopItem = ShopItems[item];
 
 				if (ShopItem && ShopItem.banner) {
-					Banners.push({ label: `${ShopItem.name}`, value: `banner_change_${Item.codename}`, description: `${ShopItem.desc}`});
+					Banners.push({ label: `${ShopItem.name}`, value: `banner_change_${item}`, description: `${ShopItem.desc}`});
 				}
 			}
 
@@ -91,7 +93,7 @@ module.exports = {
 						components: [
 							{
 								type: 3,
-								placeholder: `Currently ${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].name : "Default Banner"}`,
+								placeholder: `Currently ${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].name : "Default Banner"}`,
 								custom_id: "banner_set",
 								options: Banners
 							}
@@ -102,10 +104,11 @@ module.exports = {
 			});
 			break;
 		case "settings":
-			var AccountFlags = Bitfield.fromHex(await AccountData.LocalUser.config.flags);
+			var AccountFlags = Bitfield.fromHex(accountData.LocalUser.accountConfig.flags);
 
 			var AccountEmbed = {
 				title: "Account Settings",
+				description: `${Icons.tick} = Disabled\n${Icons.check} = Enabled`,
 				fields: [],
 				color: SenkoClient.colors.light
 			};
@@ -143,7 +146,7 @@ module.exports = {
 			});
 			break;
 		case "title":
-			if (!AccountData.Inventory[0]) return interaction.followUp({
+			if (Object.keys(userInventory).length === 0) return interaction.followUp({
 				embeds: [
 					{
 						title: "You don't own anything!",
@@ -160,13 +163,14 @@ module.exports = {
 				{ label: "No Title", value: "title_none", description: "No Title"}
 			];
 
-			for (let Item of AccountData.Inventory) {
-				const ShopItem = ShopItems[Item.codename];
+			for (let item of Object.keys(userInventory)) {
+				const ShopItem = ShopItems[item];
 
 				if (ShopItem && ShopItem.title) {
-					TitleColors.push({ label: `${ShopItem.name}`, value: `title_${Item.codename}`, description: `${ShopItem.desc}`});
+					TitleColors.push({ label: `${ShopItem.name}`, value: `title_${item}`, description: `${ShopItem.desc}`});
 				}
 			}
+
 			if (!TitleColors[1]) return interaction.followUp({
 				embeds: [
 					{
@@ -188,7 +192,7 @@ module.exports = {
 						components: [
 							{
 								type: 3,
-								placeholder: `Currently ${ShopItems[AccountData.LocalUser.config.title] ? ShopItems[AccountData.LocalUser.config.title].name : "No Title"}`,
+								placeholder: `Currently ${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].name : "No Title"}`,
 								custom_id: "title_equip",
 								options: TitleColors
 							}
@@ -199,7 +203,7 @@ module.exports = {
 			});
 			break;
 		case "color":
-			if (!AccountData.Inventory[0]) return interaction.followUp({
+			if (Object.keys(userInventory).length === 0) return interaction.followUp({
 				embeds: [
 					{
 						title: "You don't own anything!",
@@ -212,16 +216,16 @@ module.exports = {
 				ephemeral: true
 			});
 
-			var CurrentColor = "Unknown";
+			var CurrentColor = "Default Card Color";
 			var ColorColors = [{ label: "Default Color", value: "color_change_default", description: "The color everyone gets" }];
 
-			for (let Item of AccountData.Inventory) {
-				const ShopItem = ShopItems[Item.codename];
+			for (let item of Object.keys(userInventory)) {
+				const ShopItem = ShopItems[item];
 
 				if (ShopItem && ShopItem.color) {
-					ColorColors.push({ label: `${ShopItem.name}`, value: `color_change_${Item.codename}`, description: `${ShopItem.desc}`});
+					ColorColors.push({ label: `${ShopItem.name}`, value: `color_change_${item}`, description: `${ShopItem.desc}`});
 
-					if (AccountData.LocalUser.config.color === ShopItem.color) {
+					if (accountData.LocalUser.profileConfig.cardColor === ShopItem.color) {
 						CurrentColor = ShopItem.name;
 					}
 				}

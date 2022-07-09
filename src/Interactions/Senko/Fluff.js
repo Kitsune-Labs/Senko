@@ -2,8 +2,9 @@
 const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const { updateUser, randomArray, randomNumber, addYen, awardAchievement, calcTimeLeft } = require("../../API/Master.js");
+const { randomArray, randomNumber, addYen, awardAchievement, calcTimeLeft } = require("../../API/Master.js");
 const config = require("../../Data/DataConfig.json");
+const { updateSuperUser } = require("../../API/super");
 
 const reactions = [
 	{
@@ -59,35 +60,22 @@ module.exports = {
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, { Stats, Currency, RateLimits }) => {
-		if (!RateLimits.Fluff_Rate) {
-			RateLimits.Fluff_Rate = {
-				Amount: 0,
-				Date: Date.now()
-			};
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
+		if (calcTimeLeft(accountData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
+			accountData.RateLimits.Fluff_Rate.Amount = 0;
+			accountData.RateLimits.Fluff_Rate.Date = Date.now();
 
-			await updateUser(interaction.user, {
-				RateLimits: RateLimits
-			});
-		}
-
-		if (calcTimeLeft(RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
-			await updateUser(interaction.user, {
-				RateLimits: {
-					Fluff_Rate: {
-						Amount: 0,
-						Date: Date.now()
-					}
-				}
+			await updateSuperUser(interaction.user, {
+				RateLimits: accountData.RateLimits
 			});
 
-			RateLimits.Fluff_Rate.Amount = 0;
+			accountData.RateLimits.Fluff_Rate.Amount = 0;
 		}
 
-		if (RateLimits.Fluff_Rate.Amount >= 50) return interaction.followUp({
+		if (accountData.RateLimits.Fluff_Rate.Amount >= 50) return interaction.followUp({
 			embeds: [
 				{
-					description: `I don't want to right now! W-We can <t:${Math.floor((RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
+					description: `I don't want to right now! W-We can <t:${Math.floor((accountData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
 					thumbnail: { url: "attachment://image.png" },
 					color: SenkoClient.colors.light
 				}
@@ -99,16 +87,13 @@ module.exports = {
 		// if (Stats.Fluffs >= 50) await awardAchievement(interaction, "AdeptFloofer");
 		// if (Stats.Fluffs >= 100) await awardAchievement(interaction, "MasterFloofer");
 
-		await updateUser(interaction.user, {
-			Stats: {
-				Fluffs: Stats.Fluffs + 1
-			},
-			RateLimits: {
-				Fluff_Rate: {
-					Amount: RateLimits.Fluff_Rate.Amount + 1,
-					Date: Date.now()
-				}
-			}
+		accountData.Stats.Fluffs++;
+		accountData.RateLimits.Fluff_Rate.Amount++;
+		accountData.RateLimits.Fluff_Rate.Date = Date.now();
+
+		await updateSuperUser(interaction.user, {
+			Stats: accountData.Stats,
+			RateLimits: accountData.RateLimits
 		});
 
 		const MessageStruct = {
@@ -133,11 +118,9 @@ module.exports = {
 
 		if (randomNumber(500) < 5) {
 			MessageStruct.embeds[0].description += `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
-
-			await updateUser(interaction.user, {
-				Currency: {
-					Tofu: Currency.Tofu + 1
-				}
+			accountData.LocalUser.profileConfig.Currency.Tofu++;
+			await updateSuperUser(interaction.user, {
+				LocalUser: accountData.LocalUser
 			});
 		}
 

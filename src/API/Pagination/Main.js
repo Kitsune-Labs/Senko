@@ -39,7 +39,6 @@ module.exports = async (interaction, pages, timeout = 120000, isEphemeral) => {
 		MessageStructure.components[0].components[1].disabled = true;
 	}
 
-	// console.log(interaction.deferred);
 	if (!interaction.deferred) await interaction.deferReply({ ephemeral: isEphemeral });
 
 	MessageStructure.embeds[0] = pages[page];
@@ -80,11 +79,6 @@ module.exports = async (interaction, pages, timeout = 120000, isEphemeral) => {
 			disable();
 		}
 	});
-
-	// process.on("SIGTERM", ()=>{disable("sigterm");});
-	// process.on("beforeExit", ()=>{disable("before");});
-	// process.on("exit", ()=>{disable("exit");});
-	// process.on("SIGINT", ()=>{disable("int");});
 
 	return curPage;
 };

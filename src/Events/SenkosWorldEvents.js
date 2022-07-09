@@ -4,9 +4,7 @@ const { Client } = require("discord.js");
 const { print } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
-
 const config = require("../Data/DataConfig.json");
-
 const VoteList = new Map();
 
 module.exports = {
@@ -18,96 +16,6 @@ module.exports = {
 		SenkoClient.on("interactionCreate", async interaction => {
 			if (interaction.isButton()) {
 				switch (interaction.customId) {
-				// case "4D35DE24-2FE2-41A7-B86F-966284E6B10C":
-				//     if (interaction.member.roles.cache.has("816098234766196746")) return interaction.reply({
-				//         embeds: [
-				//             {
-				//                 title: "What?",
-				//                 description: "You're already verified!",
-				//                 color: SenkoClient.colors.dark,
-				//                 thumbnail: { url: "attachment://image.png" }
-				//             }
-				//         ],
-				//         files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
-				//         ephemeral: true
-				//     });
-
-				//     await interaction.member.roles.add("816098234766196746");
-
-				//     interaction.reply({
-				//         embeds: [
-				//             {
-				//                 title: "Thank you dear!",
-				//                 description: `I hope you have fun in ${interaction.guild.name}! <a:SenkoBreadPat:817481734407847986> <a:ShiroBreadPat:817481734437994526> <a:SoraBreadPat:817481734165364787> <a:SuzuBreadPat:971282424036220929>`,
-				//                 color: "GREEN",
-				//                 thumbnail: { url: "attachment://image.png" }
-				//             }
-				//         ],
-				//         components: [
-				//             {
-				//                 type: 1,
-				//                 components: [
-				//                     { type: 2, label: "Find some roles", style: 5, url: "https://canary.discord.com/channels/777251087592718336/832387166737924097" },
-				//                     { type: 2, label: "Say hello to everyone", style: 5, url: "https://canary.discord.com/channels/777251087592718336/792999444341719049" },
-				//                     // { type: 2, label: "Make an offer (Server Suggestion)", style: 5, url: "https://canary.discord.com/channels/777251087592718336/792999444341719049" },
-				//                     { type: 2, label: "Introduce yourself", style: 5, url: "https://canary.discord.com/channels/777251087592718336/920221696303169537" },
-				//                 ]
-				//             }
-				//         ],
-				//         files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }],
-				//         ephemeral: true
-				//     });
-
-				//     SenkoClient.channels.cache.get("905898207396106270").send({
-				//         embeds: [
-				//             {
-				//                 title: "A kitsune has agreed to the laws of the world!",
-				//                 description: `${interaction.user}\n${interaction.user.tag}\n${interaction.user.id}`,
-				//                 thumbnail: {
-				//                     url: interaction.user.displayAvatarURL({ dynamic: true })
-				//                 },
-				//                 color: "ORANGE",
-				//             }
-				//         ],
-				//     });
-				// break;
-
-				case "ascii_block":
-					config.automod.blockAscii = !config.automod.blockAscii;
-
-					interaction.message.embeds[0].fields[0].value = `\`\`\`diff\n${config.automod.blockAscii === true ? `+ ${config.automod.blockAscii}` : `- ${config.automod.blockAscii}` }\`\`\``;
-					interaction.message.components[0].components[0].style = config.automod.blockAscii === true ? "SUCCESS" : "DANGER";
-
-					interaction.update({
-						embeds: [interaction.message.embeds[0]],
-						components: interaction.message.components,
-						ephemeral: true
-					});
-					break;
-				case "mass_joins_change":
-					config.automod.kickOnMaxUsers = !config.automod.kickOnMaxUsers;
-
-					interaction.message.embeds[0].fields[2].value = `\`\`\`diff\n${config.automod.kickOnMaxUsers === true ? `+ ${config.automod.kickOnMaxUsers}` : `- ${config.automod.kickOnMaxUsers}` }\`\`\``;
-					interaction.message.components[0].components[2].style = config.automod.kickOnMaxUsers === true ? "SUCCESS" : "DANGER";
-
-					interaction.update({
-						embeds: [interaction.message.embeds[0]],
-						components: interaction.message.components,
-						ephemeral: true
-					});
-					break;
-				case "age_check_change":
-					config.automod.ageCheck = !config.automod.ageCheck;
-
-					interaction.message.embeds[0].fields[3].value = `\`\`\`diff\n${config.automod.ageCheck === true ? `+ ${config.automod.ageCheck}` : `- ${config.automod.ageCheck}` }\`\`\``;
-					interaction.message.components[0].components[3].style = config.automod.ageCheck === true ? "SUCCESS" : "DANGER";
-
-					interaction.update({
-						embeds: [interaction.message.embeds[0]],
-						components: interaction.message.components,
-						ephemeral: true
-					});
-					break;
 				case "upvote_suggestion":
 					if (VoteList.has(interaction.message.id) && await VoteList.get(interaction.message.id).users.includes(interaction.user.id)) return interaction.reply({ content: "🗿", ephemeral: true });
 
@@ -599,11 +507,6 @@ module.exports = {
 				case "sw_expanded_rules":
 					interaction.reply({
 						embeds: [
-							{
-								color: SenkoClient.colors.light_red,
-								title: "🔞  18+ Content",
-								description: "Do not send any type of pornographic content\nIt should be obvious that any character lewd counts and is instant outlaw from the server and from <@777676015887319050>, no appeals"
-							},
 							{
 								color: SenkoClient.colors.dark_red,
 								title: "⛔  Problematic content or media",

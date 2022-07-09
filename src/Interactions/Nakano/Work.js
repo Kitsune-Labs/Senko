@@ -1,8 +1,8 @@
 const { MessageAttachment } = require("discord.js");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
-const { updateUser } = require("../../API/Master");
 const { randomArrayItem } = require("@kitsune-labs/utilities");
+const { updateSuperUser } = require("../../API/super");
 
 module.exports = {
 	name: "work",
@@ -11,7 +11,7 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, { Currency, Rewards}) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const DestructibleItems = [
 			{
 				name: "air conditioner",
@@ -46,12 +46,12 @@ module.exports = {
 
 		const Cooldown = config.cooldowns.daily;
 
-		if (Cooldown - (Date.now() - Rewards.Work) >= 0) {
+		if (Cooldown - (Date.now() - accountData.Rewards.Work) >= 0) {
 			interaction.reply({
 				embeds: [
 					{
 						title: `${Icons.exclamation}  Not going to happen.`,
-						description: `Come back <t:${Math.floor((Rewards.Work + Cooldown) / 1000)}:R> if you want your next paycheck.`,
+						description: `Come back <t:${Math.floor((accountData.Rewards.Work + Cooldown) / 1000)}:R> if you want your next paycheck.`,
 						color: SenkoClient.colors.dark,
 						thumbnail: {
 							url: "attachment://image.png"
@@ -63,9 +63,12 @@ module.exports = {
 			});
 		} else {
 			if (RNG <= 30) {
-				await updateUser(interaction.user, {
-					Currency: { Yen: 600 - Item.price + Currency.Yen },
-					Rewards: { Work: Date.now() }
+				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 600 - Item.price;
+				accountData.Rewards.Work = Date.now();
+
+				await updateSuperUser(interaction.user, {
+					LocalUser: accountData.LocalUser,
+					Rewards: accountData.Rewards
 				});
 
 				interaction.reply({
@@ -82,16 +85,19 @@ module.exports = {
 					files: [{ attachment: `./src/Data/content/senko/${randomArrayItem(["heh", "heh2", "judgement", "upset"])}.png`, name: "image.png" }]
 				});
 			} else {
-				await updateUser(interaction.user, {
-					Currency: { Yen: Currency.Yen + 500 },
-					Rewards: { Work: Date.now() }
+				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 600;
+				accountData.Rewards.Work = Date.now();
+
+				await updateSuperUser(interaction.user, {
+					LocalUser: accountData.LocalUser,
+					Rewards: accountData.Rewards
 				});
 
 				interaction.reply({
 					embeds: [
 						{
 							title: `${Icons.yen}  Here is your check.`,
-							description: `I'll make sure to pay you again tomorrow.\n\n— ${Icons.yen} 500x added`,
+							description: `I'll make sure to pay you again tomorrow.\n\n— ${Icons.yen} 600x added`,
 							color: SenkoClient.colors.light,
 							thumbnail: {
 								url: "attachment://image.png"

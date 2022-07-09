@@ -4,8 +4,9 @@ const { Client, Interaction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 
 const config = require("../../Data/DataConfig.json");
-const { updateUser, randomArray, randomBummedImageName, calcTimeLeft } = require("../../API/Master");
+const { randomArray, randomBummedImageName, calcTimeLeft } = require("../../API/Master");
 const { randomArrayItem } = require("@kitsune-labs/utilities");
+const { updateSuperUser } = require("../../API/super");
 
 const UserActions = [
 	"_USER_ rest's on Senko's lap",
@@ -37,7 +38,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const MessageStruct = {
 			embeds: [
 				{
@@ -51,39 +52,33 @@ module.exports = {
 			files: [{ attachment: `./src/Data/content/senko/${randomArrayItem(["cuddle", "sleep"])}.png`, name: "image.png" }]
 		};
 
-		if (calcTimeLeft(RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {
-			await updateUser(interaction.user, {
-				RateLimits: {
-					Sleep_Rate: {
-						Amount: 0,
-						Date: Date.now()
-					}
-				}
+		if (calcTimeLeft(accountData.RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {
+			accountData.RateLimits.Sleep_Rate.Amount = 0;
+			accountData.RateLimits.Sleep_Rate.Date = Date.now();
+
+			await updateSuperUser(interaction.user, {
+				RateLimits: accountData.RateLimits
 			});
 
-			RateLimits.Sleep_Rate.Amount = 0;
+			accountData.RateLimits.Sleep_Rate.Amount = 0;
 		}
 
 
-		if (RateLimits.Sleep_Rate.Amount >= 1) {
-			MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+		if (accountData.RateLimits.Sleep_Rate.Amount >= 1) {
+			MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
 			MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
 
 			return interaction.followUp(MessageStruct);
 		}
 
-		RateLimits.Sleep_Rate.Amount++;
-		Stats.Sleeps++;
+		accountData.Stats.Sleeps++;
+		accountData.RateLimits.Sleep_Rate.Amount++;
+		accountData.RateLimits.Sleep_Rate.Date = Date.now();
 
-		await updateUser(interaction.user, {
-			Stats: { Sleeps: Stats.Sleeps },
+		await updateSuperUser(interaction.user, {
+			Stats: accountData.Stats,
 
-			RateLimits: {
-				Sleep_Rate: {
-					Amount: RateLimits.Sleep_Rate.Amount,
-					Date: Date.now()
-				}
-			}
+			RateLimits: accountData.RateLimits
 		});
 
 		interaction.followUp(MessageStruct);

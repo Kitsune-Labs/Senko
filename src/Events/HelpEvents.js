@@ -6,6 +6,7 @@ const { default: axios } = require("axios");
 const Icons = require("../Data/Icons.json");
 
 //! Yeah yeah, the commands are not automated
+// TODO: Automate command stuff
 
 module.exports = {
 	/**

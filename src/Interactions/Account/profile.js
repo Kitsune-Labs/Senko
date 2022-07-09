@@ -4,9 +4,9 @@ const Icons = require("../../Data/Icons.json");
 const ShopItems = require("../../Data/Shop/Items.json");
 const { Bitfield } = require("bitfields");
 const BitData = require("../../API/Bits.json");
-const { stringEndsWithS, fetchData } = require("../../API/Master");
+const { stringEndsWithS } = require("../../API/Master");
 const Achievements = require("../../Data/Achievements.json");
-const { fetchConfig } = require("../../API/super");
+const { fetchConfig, fetchSuperUser } = require("../../API/super");
 
 module.exports = {
 	name: "profile",
@@ -19,40 +19,38 @@ module.exports = {
 			type: "USER"
 		}
 	],
+	defer: true,
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const User = interaction.options.getUser("user") || interaction.user;
-		AccountData = await fetchData(User, 1);
+		accountData = await fetchSuperUser(User, true);
 
-		if (User.id === interaction.user.id) AccountData = await fetchData(User);
+		if (!accountData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
 
-		if (!AccountData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
-
-		const AccountFlags = Bitfield.fromHex(AccountData.LocalUser.config.flags);
+		const AccountFlags = Bitfield.fromHex(accountData.LocalUser.accountConfig.flags);
 
 		if (User.id !== interaction.user.id && AccountFlags.get(BitData.privacy)) return interaction.reply({
 			content: "Sorry! This user has set their profile to private.",
 			ephemeral: true
 		});
-		await interaction.deferReply();
 
 		const { OutlawedUsers } = await fetchConfig();
 
 		const MessageBuilt = {
 			embeds: [
 				{
-					description: `${ShopItems[AccountData.LocalUser.config.title] ? ShopItems[AccountData.LocalUser.config.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${AccountData.LocalUser.AboutMe !== null ? `**__About Me__**\n${AccountData.LocalUser.AboutMe}\n\n` : ""}${Icons.yen}  **${AccountData.Currency.Yen}** yen\n${Icons.tofu}  **${AccountData.Currency.Tofu}** tofu\n${Icons.tail1}  **${AccountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${AccountData.Achievements.length}/${Object.keys(Achievements).length}** achievements\n\n`,
+					description: `${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${accountData.LocalUser.profileConfig.aboutMe !== null ? `**__About Me__**\n${accountData.LocalUser.profileConfig.aboutMe}\n\n` : ""}${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${accountData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${accountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${accountData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n`,
 					image: {
-						url: `attachment://${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png"}`
+						url: `attachment://${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png"}`
 					},
-					color: AccountData.LocalUser.config.color || SenkoClient.colors.light
+					color: accountData.LocalUser.profileConfig.cardColor || SenkoClient.colors.light
 				}
 			],
-			files: [{ attachment: `src/Data/content/banners/${ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner : ShopItems.DefaultBanner.banner}`, name: ShopItems[AccountData.LocalUser.Banner] ? ShopItems[AccountData.LocalUser.Banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png" }]
+			files: [{ attachment: `src/Data/content/banners/${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner : ShopItems.DefaultBanner.banner}`, name: ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png" }]
 		};
 
 		let BadgeString = "**__Badges__**\n";
@@ -60,8 +58,8 @@ module.exports = {
 
 		// AccountData.Inventory.map(x => ShopItems[x.codename] && ShopItems[x.codename].badge ? ShopItems[x.codename].badge : "").join("")
 
-		for (var item of AccountData.Inventory) {
-			const sItem = ShopItems[item.codename];
+		for (var index in accountData.LocalUser.profileConfig.Inventory) {
+			const sItem = ShopItems[index];
 
 			if (sItem && sItem.badge !== undefined /*&& BAmount < 10*/) {
 				BadgeString += `${sItem.badge || Icons.tick} `;

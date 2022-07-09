@@ -3,7 +3,8 @@ const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const config = require("../../Data/DataConfig.json");
-const { updateUser, randomNumber, addYen, randomBummedImageName, randomArray, calcTimeLeft } = require("../../API/Master");
+const { randomNumber, addYen, randomBummedImageName, randomArray, calcTimeLeft } = require("../../API/Master");
+const { updateSuperUser } = require("../../API/super");
 
 const Responses = [
 	"Senko-san takes a drink of her Hojicha",
@@ -37,7 +38,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, { RateLimits, Stats }) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const MessageStruct = {
 			embeds: [
 				{
@@ -51,41 +52,33 @@ module.exports = {
 			files: [{ attachment: "./src/Data/content/senko/drink.png", name: "image.png" }]
 		};
 
-		if (calcTimeLeft(RateLimits.Drink_Rate.Date, config.cooldowns.daily)) {
-			await updateUser(interaction.user, {
-				RateLimits: {
-					Drink_Rate: {
-						Amount: 0,
-						Date: Date.now()
-					}
-				}
+		if (calcTimeLeft(accountData.RateLimits.Drink_Rate.Date, config.cooldowns.daily)) {
+			accountData.RateLimits.Drink_Rate.Amount = 0;
+			accountData.RateLimits.Drink_Rate.Date = Date.now();
+
+			await updateSuperUser(interaction.user, {
+				RateLimits: accountData.RateLimits
 			});
 
-			RateLimits.Drink_Rate.Amount = 0;
+			accountData.RateLimits.Drink_Rate.Amount = 0;
 		}
 
-		if (RateLimits.Drink_Rate.Amount >= 5) {
-			MessageStruct.embeds[0].description = `**${randomArray(NoMore).replace("_USER_", interaction.user.username)}**\n\n${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+		if (accountData.RateLimits.Drink_Rate.Amount >= 5) {
+			MessageStruct.embeds[0].description = `**${randomArray(NoMore).replace("_USER_", interaction.user.username)}**\n\n${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
 			MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
 
 			return interaction.followUp(MessageStruct);
 		}
 
-		RateLimits.Drink_Rate.Amount++;
-		Stats.Drinks++;
+		accountData.RateLimits.Drink_Rate.Amount++;
+		accountData.Stats.Drinks++;
 
-		await updateUser(interaction.user, {
-			Stats: { Drinks: Stats.Drinks },
-
-			RateLimits: {
-				Drink_Rate: {
-					Amount: RateLimits.Drink_Rate.Amount,
-					Date: Date.now()
-				}
-			}
+		await updateSuperUser(interaction.user, {
+			Stats: accountData.Stats,
+			RateLimits: accountData.RateLimits
 		});
 
-		if (RateLimits.Drink_Rate.Amount >= 5) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last drink for today`;
+		if (accountData.RateLimits.Drink_Rate.Amount >= 5) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last drink for today`;
 
 		if (randomNumber(100) > 75) {
 			addYen(interaction.user, 50);

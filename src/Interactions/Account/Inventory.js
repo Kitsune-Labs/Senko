@@ -11,8 +11,8 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, { Inventory }) => {
-		const PageEstimate = Math.ceil(Inventory.length / 8) < 1 ? 1 : Math.ceil(Inventory.length / 8);
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
+		const PageEstimate = Math.ceil(Object.keys(accountData.LocalUser.profileConfig.Inventory).length / 8) < 1 ? 1 : Math.ceil(Object.keys(accountData.LocalUser.profileConfig.Inventory).length / 8);
 		const Pages = [];
 
 		for (let i = 0; i < PageEstimate; i++) {
@@ -22,11 +22,11 @@ module.exports = {
 			};
 
 			for (let j = 0; j < 8; j++) {
-				const Item = Inventory[i * 8 + j];
+				const Item = Object.keys(accountData.LocalUser.profileConfig.Inventory)[i * 8 + j];
 				if (Item) {
-					const shopItem = ShopItems[Item.codename];
+					const shopItem = ShopItems[Item];
 
-					Page.description += `**${shopItem ? shopItem.name : `Data missing: ${Item.codename}`}**\n${shopItem ? `> "${shopItem.desc}"` : ""}\n> You own **${Item.amount}**\n\n`;
+					Page.description += `**${shopItem ? shopItem.name : `Data missing: ${Item}`}**\n${shopItem ? `> ${shopItem.desc}` : ""}\n> You own **${accountData.LocalUser.profileConfig.Inventory[Item]}**\n\n`;
 				}
 			}
 

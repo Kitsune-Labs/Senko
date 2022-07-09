@@ -43,7 +43,7 @@ module.exports = {
 		const reason = interaction.options.getString("reason") || "No Reason Provided";
 		const note = interaction.options.getString("note") || "No note(s) provided";
 
-		if (!Bitfield.fromHex(flags).get(bits.ModCommands)) return interaction.reply({
+		if (!Bitfield.fromHex(flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});

@@ -126,14 +126,9 @@ async function makeSuperUser(user) {
 	return data[0];
 }
 
-/**
- * @deprecated
- */
 async function updateSuperUser(user, Data) {
-	// extend(true, currentData, Data);
-
-	if (Data.Currency.Yen >= 100000) Data.Currency.Yen = 100000; // 99998
-	if (Data.Currency.Tofu >= 50) Data.Currency.Tofu = 50;
+	if (Data.LocalUser && Data.LocalUser.profileConfig.Currency.Yen >= 100000) Data.LocalUser.profileConfig.Currency.Yen = 100000;
+	if (Data.LocalUser && Data.LocalUser.profileConfig.Currency.Tofu >= 50) Data.LocalUser.profileConfig.Currency.Tofu = 50;
 
 	const { error } = await Supabase.from("Users").update(Data).eq("id", user.id);
 

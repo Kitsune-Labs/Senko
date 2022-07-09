@@ -47,7 +47,7 @@ module.exports = {
 			const messageStruct = {
 				embeds: [
 					{
-						description: `${guildMember && guildMember.nickname ? guildMember.nickname : `<@${userData.id}> ${userData.username}#${userData.discriminator} [${userData.id}]`}\n\nBot: ${userData.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember && guildMember.premiumSinceTimestamp ? `**Yes**\n> **Booster since** <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nRegistered on ${whoUser.createdTimestamp ? `<t:${parseInt(whoUser.createdTimestamp / 1000)}>` : "unknown (Most likely not in Guild)" }\nJoined Guild: ${guildMember ? `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>` : "**Never**"}\nBanned from Guild: ${banStatus ? `**Yes**\n> **Ban Reason:** ${banStatus.reason}` : "**No**"}`,
+						description: `${guildMember && guildMember.nickname ? guildMember.nickname : `<@${userData.id}> ${userData.username}#${userData.discriminator} [${userData.id}]`}\n\nBot: ${userData.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember && guildMember.premiumSinceTimestamp ? `**Yes**\n> **Booster since** <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nRegistered on ${whoUser.createdTimestamp ? `<t:${parseInt(whoUser.createdTimestamp / 1000)}>` : "unknown (Most likely not in Guild)" }\nJoined: ${guildMember ? `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>` : "**unknown (Most likely not in Guild)**"}\nBanned: ${banStatus ? `**Yes**\n> **Ban Reason:** ${banStatus.reason}` : "**No**"}`,
 						color: "#fc844c",
 						thumbnail: {
 							url: AvatarURL ? AvatarURL : null

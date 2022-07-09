@@ -1,8 +1,8 @@
 const { Bitfield } = require("bitfields");
 const BitData = require("../API/Bits.json");
 const Icons = require("../Data/Icons.json");
-const { fetchData, updateUser } = require("../API/Master.js");
 const ShopItems = require("../Data/Shop/Items.json");
+const { updateSuperUser, fetchSuperUser } = require("../API/super");
 
 module.exports = {
 	/**
@@ -10,20 +10,23 @@ module.exports = {
      */
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async Interaction => {
-			const AccountData = await fetchData(Interaction.user);
-			const AccountFlags = Bitfield.fromHex(await AccountData.LocalUser.config.flags);
+			const AccountData = await fetchSuperUser(Interaction.user);
+			const accountFlags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
+
+			function setFlag(item, value) {
+				const flags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
+				flags.set(item, value);
+				AccountData.LocalUser.accountConfig.flags = flags.toHex();
+			}
 
 			if (Interaction.isButton()) {
 				switch (Interaction.customId) {
 				case "user_privacy":
-					if (AccountFlags.get(BitData.privacy)) {
-						AccountFlags.set(BitData.privacy, false);
-						await updateUser(Interaction.user, {
-							LocalUser: {
-								config: {
-									flags: AccountFlags.toHex().toString()
-								}
-							}
+					if (accountFlags.get(BitData.privacy)) {
+						setFlag(BitData.privacy, false);
+
+						await updateSuperUser(Interaction.user, {
+							LocalUser: AccountData.LocalUser
 						});
 
 						Interaction.message.embeds[0].fields[0].value = Icons.tick;
@@ -35,13 +38,10 @@ module.exports = {
 							components: Interaction.message.components
 						});
 					} else {
-						AccountFlags.set(BitData.privacy, true);
-						await updateUser(Interaction.user, {
-							LocalUser: {
-								config: {
-									flags: AccountFlags.toHex().toString()
-								}
-							}
+						setFlag(BitData.privacy, true);
+
+						await updateSuperUser(Interaction.user, {
+							LocalUser: AccountData.LocalUser
 						});
 
 						Interaction.message.embeds[0].fields[0].value = Icons.check;
@@ -56,14 +56,11 @@ module.exports = {
 
 					break;
 				case "user_dm_achievements":
-					if (AccountFlags.get(BitData.DMAchievements)) {
-						AccountFlags.set(BitData.DMAchievements, false);
-						await updateUser(Interaction.user, {
-							LocalUser: {
-								config: {
-									flags: AccountFlags.toHex().toString()
-								}
-							}
+					if (accountFlags.get(BitData.DMAchievements)) {
+						setFlag(BitData.DMAchievements, false);
+
+						await updateSuperUser(Interaction.user, {
+							LocalUser: AccountData.LocalUser
 						});
 
 						Interaction.message.embeds[0].fields[1].value = Icons.tick;
@@ -75,13 +72,10 @@ module.exports = {
 							components: Interaction.message.components
 						});
 					} else {
-						AccountFlags.set(BitData.DMAchievements, true);
-						await updateUser(Interaction.user, {
-							LocalUser: {
-								config: {
-									flags: AccountFlags.toHex().toString()
-								}
-							}
+						setFlag(BitData.DMAchievements, true);
+
+						await updateSuperUser(Interaction.user, {
+							LocalUser: AccountData.LocalUser
 						});
 
 						Interaction.message.embeds[0].fields[1].value = Icons.check;
@@ -114,10 +108,10 @@ module.exports = {
 
 				if (Interaction.values[0].startsWith("banner_")) {
 					if (InteractionValue === "default") {
-						await updateUser(Interaction.user, {
-							LocalUser: {
-								Banner: "DefaultBanner"
-							}
+						AccountData.LocalUser.profileConfig.banner = "DefaultBanner.png";
+
+						await updateSuperUser(Interaction.user, {
+							LocalUser: AccountData.LocalUser
 						});
 
 						ReplyEmbed.embeds[0].description = "Your banner has been reset";
@@ -125,60 +119,49 @@ module.exports = {
 						return;
 					}
 
-					await updateUser(Interaction.user, {
-						LocalUser: {
-							Banner: InteractionValue
-						}
+					AccountData.LocalUser.profileConfig.banner = InteractionValue;
+
+					await updateSuperUser(Interaction.user, {
+						LocalUser: AccountData.LocalUser
 					});
 
 					ReplyEmbed.embeds[0].description = `Your banner is now set to __${ShopItem.name}__!`;
 					Interaction.update(ReplyEmbed);
 				} else if (Interaction.values[0].startsWith("color_")) {
 					if (InteractionValue === "default") {
-						await updateUser(Interaction.user, {
-							LocalUser: {
-								config: {
-									color: "#FF9933"
-								}
-							}
+						AccountData.LocalUser.profileConfig.cardColor = "#FF9933";
+
+						await updateSuperUser(Interaction.user, {
+							LocalUser: AccountData.LocalUser
 						});
 
 						ReplyEmbed.embeds[0].description = "Your color has been reset";
 						Interaction.update(ReplyEmbed);
 						return;
 					}
+					AccountData.LocalUser.profileConfig.cardColor = ShopItem.color;
 
-					await updateUser(Interaction.user, {
-						LocalUser: {
-							config: {
-								color: ShopItem.color
-							}
-						}
+					await updateSuperUser(Interaction.user, {
+						LocalUser: AccountData.LocalUser
 					});
 
 					ReplyEmbed.embeds[0].description = `Your color is now set to __${ShopItem.name}__`;
 					Interaction.update(ReplyEmbed);
 				} else if (Interaction.values[0].startsWith("title_")) {
 					if (InteractionValue === "none") {
-						await updateUser(Interaction.user, {
-							LocalUser: {
-								config: {
-									title: null
-								}
-							}
+						AccountData.LocalUser.profileConfig.title = null;
+						await updateSuperUser(Interaction.user, {
+							LocalUser: AccountData.LocalUser
 						});
 
 						ReplyEmbed.embeds[0].description = "Your title has been removed";
 						Interaction.update(ReplyEmbed);
 						return;
 					}
+					AccountData.LocalUser.profileConfig.title = InteractionValue.toString();
 
-					await updateUser(Interaction.user, {
-						LocalUser: {
-							config: {
-								title: InteractionValue.toString()
-							}
-						}
+					await updateSuperUser(Interaction.user, {
+						LocalUser: AccountData.LocalUser
 					});
 
 					ReplyEmbed.embeds[0].description = `Your title is now set to __${ShopItem.name}__!`;

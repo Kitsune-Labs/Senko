@@ -3,8 +3,9 @@ const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const hardLinks = require("../../Data/HardLinks.json");
-const { fetchData, updateUser, randomNumber, addYen, randomArray, calcTimeLeft } = require("../../API/Master");
+const { randomNumber, addYen, randomArray, calcTimeLeft } = require("../../API/Master");
 const config = require("../../Data/DataConfig.json");
+const { updateSuperUser } = require("../../API/super");
 
 const Responses = [
 	"_USER_ hugs Senko-san"
@@ -37,7 +38,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction) => {
+	start: async (SenkoClient, interaction, guildData, accountData) => {
 		const OptionalUser = interaction.options.getUser("user");
 
 		if (OptionalUser) {
@@ -72,8 +73,6 @@ module.exports = {
 			});
 		}
 
-		const { RateLimits, Stats } = await fetchData(interaction.user);
-
 		const MessageStruct = {
 			embeds: [
 				{
@@ -87,8 +86,11 @@ module.exports = {
 			files: [{ attachment: "./src/Data/content/senko/hug.png", name: "image.png" }]
 		};
 
-		if (calcTimeLeft(RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
-			await updateUser(interaction.user, {
+		if (calcTimeLeft(accountData.RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
+			accountData.RateLimits.Hug_Rate.Amount = 0;
+			accountData.RateLimits.Hug_Rate.Date = Date.now();
+
+			await updateSuperUser(interaction.user, {
 				RateLimits: {
 					Hug_Rate: {
 						Amount: 0,
@@ -97,11 +99,11 @@ module.exports = {
 				}
 			});
 
-			RateLimits.Hug_Rate.Amount = 0;
+			accountData.RateLimits.Hug_Rate.Amount = 0;
 		}
 
-		if (RateLimits.Hug_Rate.Amount >= 20) {
-			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
+		if (accountData.RateLimits.Hug_Rate.Amount >= 20) {
+			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((accountData.RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
 			MessageStruct.files = [{ attachment: "./src/Data/content/senko/bummed.png", name: "image.png" }];
 
 			return interaction.followUp(MessageStruct);
@@ -115,21 +117,17 @@ module.exports = {
 
 		MessageStruct.embeds[0].title = randomArray(Sounds);
 
-		Stats.Hugs++;
-		RateLimits.Hug_Rate.Amount++;
+		accountData.Stats.Hugs++;
+		accountData.RateLimits.Hug_Rate.Amount++;
+		accountData.RateLimits.Hug_Rate.Date = Date.now();
 
-		await updateUser(interaction.user, {
-			Stats: { Hugs: Stats.Hugs },
+		await updateSuperUser(interaction.user, {
+			Stats: accountData.Stats,
 
-			RateLimits: {
-				Hug_Rate: {
-					Amount: RateLimits.Hug_Rate.Amount,
-					Date: Date.now()
-				}
-			}
+			RateLimits: accountData.RateLimits
 		});
 
-		if (RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
+		if (accountData.RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
 
 		interaction.followUp(MessageStruct);
 	}

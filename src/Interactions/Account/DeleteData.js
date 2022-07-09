@@ -13,16 +13,15 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
 	start: async (SenkoClient, interaction) => {
-		const AccountEmbed = {
-			title: "Data Removal",
-			description: "Please confirm that you want to delete all your data.\n\n**⚠️ This is irreversible! ⚠️**",
-			color: SenkoClient.colors.dark,
-			thumbnail: { url: "attachment://image.png" }
-		};
-
 		interaction.reply({
-			embeds: [AccountEmbed],
-			ephemeral: true,
+			embeds: [
+				{
+					title: "Data Removal",
+					description: "Please confirm that you want to delete all your data.\n\n**⚠️ This is irreversible! ⚠️**",
+					color: SenkoClient.colors.dark,
+					thumbnail: { url: "attachment://image.png" }
+				}
+			],
 			components: [
 				{
 					type: 1,
@@ -32,6 +31,7 @@ module.exports = {
 				}
 			],
 			files: [{ attachment: "./src/Data/content/senko/upset2.png", name: "image.png" }],
+			ephemeral: true,
 			fetchReply: true
 		});
 	}

@@ -1,4 +1,4 @@
-const ShopItems = require("../src/Data/Shop/Items.json");
+const ShopItems = require("../../src/Data/Shop/Items.jsonson");
 
 require("dotenv/config");
 

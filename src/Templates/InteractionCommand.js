@@ -7,18 +7,15 @@ module.exports = {
 	name: "",
 	desc: "",
 	options: [],
-	userData: false,
 	defer: false,
 	ephemeral: false,
 	usableAnywhere: false,
-	defaultPermission: true,
-	permissions: [],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async (senkoClient, interaction, guildData, accountData) => {
 
 	}
 };

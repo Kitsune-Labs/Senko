@@ -15,7 +15,7 @@ module.exports = {
      * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, { Inventory }) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const possibleItems = [];
 		const chosenItems = {
 			0: { name: null, id: null },
@@ -24,8 +24,8 @@ module.exports = {
 			3: { name: null, id: null }
 		};
 
-		for (const item of Inventory) {
-			const mItem = Market[item.codename];
+		for (const item of Object.keys(accountData.LocalUser.profileConfig.Inventory)) {
+			const mItem = Market[item];
 
 			if (mItem && mItem.class == "food") {
 				possibleItems.push(item);
@@ -35,11 +35,9 @@ module.exports = {
 		for (var i = 0; i <= 4; i++) {
 			const Item = possibleItems[Math.floor(Math.random() * possibleItems.length)];
 
-			console.log(i, Inventory.length);
-
 			if (Item && chosenItems[i]) {
-				chosenItems[i].name = await Market[Item.codename].name;
-				chosenItems[i].id = Item.codename;
+				chosenItems[i].name = await Market[Item].name;
+				chosenItems[i].id = Item;
 
 				spliceArray(possibleItems, Item);
 			}

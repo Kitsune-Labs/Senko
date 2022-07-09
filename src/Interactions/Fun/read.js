@@ -1,7 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction, Client, MessageActionRow, MessageSelectMenu } = require("discord.js");
-// eslint-disable-next-line no-unused-vars
-const Icons = require("../../Data/Icons.json");
+const { CommandInteraction, Client } = require("discord.js");
 const ShopItems = require("../../Data/Shop/Items.json");
 
 module.exports = {
@@ -12,13 +10,12 @@ module.exports = {
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
      */
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const OwnedChapters = [];
-		// await interaction.deferReply();
 
 		new Promise((resolve) => {
-			for (var Item of AccountData.Inventory) {
-				const ShopItem = ShopItems[Item.codename];
+			for (var item of Object.keys(accountData.LocalUser.profileConfig.Inventory)) {
+				const ShopItem = ShopItems[item];
 				if (ShopItem && ShopItem.manga) {
 					OwnedChapters.push({ label: `${ShopItem.name}`, value: `read_${ShopItem.manga}`, description: `${ShopItem.desc}`});
 				}
@@ -26,7 +23,7 @@ module.exports = {
 
 			resolve();
 		}).then(() => {
-			if (!OwnedChapters[0]) return interaction.followUp({
+			if (OwnedChapters.length === 0) return interaction.followUp({
 				embeds: [
 					{
 						title: "You don't own any chapters!",
@@ -42,12 +39,18 @@ module.exports = {
 			interaction.reply({
 				content: "** **",
 				components: [
-					new MessageActionRow().addComponents([
-						new MessageSelectMenu()
-							.setCustomId("read_manga")
-							.setPlaceholder("What should I read?")
-							.setOptions(OwnedChapters)
-					])]
+					{
+						type: 1,
+						components: [
+							{
+								type: 3,
+								placeholder: "What should I read?",
+								custom_id: "read_manga",
+								options: OwnedChapters
+							}
+						]
+					}
+				]
 			});
 		});
 	}

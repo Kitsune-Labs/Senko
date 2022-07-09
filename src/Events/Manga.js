@@ -49,7 +49,7 @@ module.exports = {
 				for (let i = 1; i <= Object.keys(SelectedManga).length; i++) {
 					Embeds.push({
 						title: "Sewayaki Kitsune no Senko-san",
-						description: `[${MangaDescription}]()`,
+						description: `[${MangaDescription}](${SelectedManga[Page]})`,
 						image: {
 							url: SelectedManga[Page]
 						},

@@ -1,9 +1,8 @@
 const Icons = require("../Data/Icons.json");
 const ShopItems = require("../Data/Shop/Items.json");
-const { updateUser } = require("../API/Master");
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { fetchData } = require("../API/Master");
+const { updateSuperUser, fetchSuperUser } = require("../API/super");
 
 module.exports = {
 	name: "award",
@@ -41,45 +40,36 @@ module.exports = {
 
 		if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
 
-		const { Inventory } = await fetchData(FetchedUser);
+		const accountData = await fetchSuperUser(FetchedUser);
 		const devResponse = {
 			content: `Added ${DevItem.name} to inventory`,
 			ephemeral: true
 		};
 
-		for (var Item of Inventory) {
-			if (Item.codename === DevItem) {
-				Item.amount++;
+		if (accountData.LocalUser.profileConfig.Inventory[DevItem]) {
+			accountData.LocalUser.profileConfig.Inventory[DevItem]++;
 
-				await updateUser(FetchedUser, {
-					Inventory: Inventory
-				});
+			await updateSuperUser(FetchedUser, {
+				LocalUser: accountData.LocalUser
+			});
 
+			FetchedUser.send({
+				embeds: [
+					{
+						title: `${Icons.package}  You received an item from Senko-san!`,
+						description: `__${DevItem.name}__ has been added to your inventory!`,
+						color: SenkoClient.colors.light
+					}
+				]
+			}).catch(e=>devResponse.footer.text = e);
 
-
-				FetchedUser.send({
-					embeds: [
-						{
-							title: `${Icons.package}  You received an item from Senko-san!`,
-							description: `__${DevItem.name}__ has been added to your inventory!`,
-							color: SenkoClient.colors.light
-						}
-					]
-				}).catch(e=>devResponse.footer.text = e);
-
-				return interaction.followUp(devResponse);
-			}
+			return interaction.followUp(devResponse);
 		}
 
-		var InvItem = {
-			codename: DevItem,
-			amount: DevItem.amount
-		};
+		accountData.LocalUser.profileConfig.Inventory[DevItem] = DevItem.amount;
 
-		Inventory.push(InvItem);
-
-		await updateUser(FetchedUser, {
-			Inventory: Inventory
+		await updateSuperUser(FetchedUser, {
+			LocalUser: accountData.LocalUser
 		});
 
 		FetchedUser.send({

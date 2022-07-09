@@ -44,12 +44,11 @@ module.exports = {
 					description: "Shiro seems determined to win",
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/shiro/sneak1.png"
 					}
 				}
 			],
-			fetchReply: true,
-			files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+			fetchReply: true
 		});
 
 		const things = {
@@ -68,11 +67,10 @@ module.exports = {
 						description: "It's a tie!\n\nShiro looks confused",
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/shiro/surprised1.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+				]
 			});
 		}
 
@@ -86,11 +84,10 @@ module.exports = {
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+				]
 			});
 		}
 
@@ -103,11 +100,10 @@ module.exports = {
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+				]
 			});
 		}
 
@@ -120,11 +116,10 @@ module.exports = {
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+				]
 			});
 		}
 
@@ -136,11 +131,10 @@ module.exports = {
 						description: "Shiro won!\n\nShiro looks happy!",
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+				]
 			});
 		}
 
@@ -152,11 +146,10 @@ module.exports = {
 						description: "Shiro won!\n\nShiro looks happy!",
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+				]
 			});
 		}
 
@@ -168,11 +161,10 @@ module.exports = {
 						description: "Shiro won!\n\nShiro looks happy!",
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/shiro/ShiroSmug.png", name: "image.png" } ]
+				]
 			});
 		}
 	}

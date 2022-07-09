@@ -2,10 +2,10 @@ const Icons = require("../../../src/Data/Icons.json");
 const Achievements = require("../../../src/Data/Achievements.json");
 const Colors = require("../../../src/Data/Palettes/Main.js");
 const { addYen } = require("../../../src/API/Master");
-const FirebaseAdmin = require("firebase-admin");
-const Firestore = FirebaseAdmin.firestore();
+// const FirebaseAdmin = require("firebase-admin");
+// const Firestore = FirebaseAdmin.firestore();
 
-const FirebaseFunctions = require("firebase-functions");
+// const FirebaseFunctions = require("firebase-functions");
 
 
 /**

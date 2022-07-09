@@ -6,36 +6,6 @@ const { fetchSuperGuild } = require("../API/super");
 const fs = require("fs");
 const axios = require("axios");
 
-// if(isMainThread) {
-//     if (guildWorkers[message.guild.id]) {
-//         guildWorkers[message.guild.id].postMessage({ message: message, guild: message.guild });
-
-//         guildWorkers[message.guild.id].on("error", async (error) => {
-//             console.log(error);
-
-//             delete guildWorkers[message.guild.id];
-//         });
-
-//         guildWorkers[message.guild.id].on("exit", async (code) => {
-//             console.log(`worker ${message.guild.id} exited with code ${code}`);
-//         });
-//     } else {
-//         guildWorkers[message.guild.id] = new Worker("./src/API/Guild_Worker.js");
-
-//         guildWorkers[message.guild.id].postMessage({message: message, guild: message.guild});
-
-//         guildWorkers[message.guild.id].on("error", async (error) => {
-//             console.log(error);
-
-//             delete guildWorkers[message.guild.id];
-//         });
-
-//         guildWorkers[message.guild.id].on("exit", async (code) => {
-//             console.log(`worker ${message.guild.id} exited with code ${code}`);
-//         });
-//     }
-// }
-
 module.exports = {
 	/**
      * @param {Client} SenkoClient
@@ -65,7 +35,6 @@ module.exports = {
 							emojis.push(`https://cdn.discordapp.com/emojis/${emojiID}.png`);
 						}
 					}
-
 				}
 			}
 
@@ -140,7 +109,6 @@ module.exports = {
 							emojis.push(`https://cdn.discordapp.com/emojis/${emojiID}.png`);
 						}
 					}
-
 				}
 			}
 

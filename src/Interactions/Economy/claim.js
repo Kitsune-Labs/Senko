@@ -1,5 +1,5 @@
 const Icons = require("../../Data/Icons.json");
-const { updateUser } = require("../../API/Master");
+const { updateSuperUser } = require("../../API/super");
 
 
 module.exports = {
@@ -51,9 +51,12 @@ module.exports = {
 					ephemeral: true
 				});
 			} else {
-				await updateUser(interaction.user, {
-					Currency: { Yen: AccountData.Currency.Yen + 200 },
-					Rewards: { Daily: Date.now() }
+				AccountData.LocalUser.profileConfig.Currency.Yen = AccountData.LocalUser.profileConfig.Currency.Yen + 200;
+				AccountData.Rewards.Daily = Date.now();
+
+				await updateSuperUser(interaction.user, {
+					LocalUser: AccountData.LocalUser,
+					Rewards: AccountData.Rewards
 				});
 
 				interaction.followUp({
@@ -92,9 +95,12 @@ module.exports = {
 				});
 
 			} else {
-				await updateUser(interaction.user, {
-					Currency: { Yen: AccountData.Currency.Yen + 1300 },
-					Rewards: { Weekly: Date.now() }
+				AccountData.LocalUser.profileConfig.Currency.Yen = AccountData.LocalUser.profileConfig.Currency.Yen + 130;
+				AccountData.Rewards.Weekly = Date.now();
+
+				await updateSuperUser(interaction.user, {
+					LocalUser: AccountData.LocalUser,
+					Rewards: AccountData.Rewards
 				});
 
 				interaction.followUp({

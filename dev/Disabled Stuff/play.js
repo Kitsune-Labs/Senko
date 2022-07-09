@@ -32,7 +32,7 @@ module.exports = {
      */
 	start: async (SenkoClient, interaction) => {
 		console.log(interaction.member.voice);
-		// if (!interaction.member.voice.channel) return interaction.reply({
+		// if (!interaction.member.voice.channel) return interaction.followUp({
 		//     content: "You must be in a voice channel to use this command",
 		//     ephemeral: true
 		// });

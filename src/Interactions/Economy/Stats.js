@@ -5,13 +5,18 @@ module.exports = {
 	desc: "View your account stats",
 	userData: true,
 	usableAnywhere: true,
+	defer: true,
+	ephemeral: true,
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, { Stats, Currency }) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const StatsTitle = ["Here are your stats dear!", "Here you go!"];
 
-		interaction.reply({
+		const Currency = accountData.LocalUser.profileConfig.Currency;
+		const Stats = accountData.Stats;
+
+		interaction.followUp({
 			embeds: [
 				{
 					title: `${StatsTitle[Math.floor(Math.random() * StatsTitle.length)]}`,

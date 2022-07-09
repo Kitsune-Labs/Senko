@@ -16,7 +16,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
 
 		const superConfig = await fetchConfig();
@@ -28,7 +28,7 @@ module.exports = {
          */
 		const Shop = {
 			title: "Senko's Market",
-			description: `Please take your time and review what is available in the market.\n\nYou can use \`/preview\` to view extended info about an item like it's description, price, banner, and color\n\n> ${Icons.package}  Market refresh <t:${shopData.updates}:R>\n> ${Icons.yen}  **${AccountData.Currency.Yen}** in your savings`,
+			description: `Please take your time and review what is available in the market.\n\nYou can use \`/preview\` to view extended info about an item like it's description, price, banner, and color\n\n> ${Icons.package}  Market refresh <t:${shopData.updates}:R>\n> ${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
 			color: SenkoClient.colors.light,
 			thumbnail: {
 				url: "attachment://image.png"
@@ -58,7 +58,6 @@ module.exports = {
 			let ItemString = `[${Icons.yen}  ${Item.price == 0 ? "FREE" : Item.price}] **${Item.name}**`;
 
 			MenuItems.push({ label: `${Item.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(Thing)}_${interaction.user.id}` });
-
 
 			// if (superConfig.EventMarket.includes(Thing)) EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
 

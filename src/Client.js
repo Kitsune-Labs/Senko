@@ -1,8 +1,6 @@
 require("dotenv/config");
 
 const { Client, Collection } = require("discord.js");
-
-const Firebase = require("firebase-admin");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
@@ -13,37 +11,19 @@ const SenkoClient = new Client({
 		repliedUser: false
 	},
 	restRequestTimeout: 60000,
-	userAgentSuffix: [`Kitsune-Softworks/Senko (v${require("../package.json").version})`]
+	userAgentSuffix: [`Kitsune-Labs/Senko (v${require("../package.json").version})`]
 });
 
-require("discord-modal")(SenkoClient);
+SenkoClient.setMaxListeners(20);
 
 if (process.env.NIGHTLY === "true") {
-	Firebase.initializeApp({
-		credential: Firebase.credential.cert({
-			"projectId": process.env.NIGHTLY_FIREBASE_PROJECT_ID,
-			"private_key": process.env.NIGHTLY_FIREBASE_PRIVATE_KEY,
-			"client_email": process.env.NIGHTLY_FIREBASE_CLIENT_EMAIL
-		})
-	});
-	let { print } = require("./API/Master");
-
 	SenkoClient.login(process.env.NIGHTLY_TOKEN);
 
-	print("#FF6633", "Senko", "NIGHTLY Mode");
+	require("./API/Master").print("#FF6633", "SENKO", "NIGHTLY Mode");
 } else {
-	Firebase.initializeApp({
-		credential: Firebase.credential.cert({
-			"projectId": process.env.FIREBASE_PROJECT_ID,
-			"private_key": process.env.FIREBASE_PRIVATE_KEY,
-			"client_email": process.env.FIREBASE_CLIENT_EMAIL
-		})
-	});
-	let { print } = require("./API/Master");
-
 	SenkoClient.login(process.env.TOKEN);
 
-	print("#5865F2", "Senko", "PRODUCTION Mode");
+	require("./API/Master").print("#5865F2", "SENKO", "PRODUCTION Mode");
 }
 
 const { print } = require("./API/Master");
@@ -52,11 +32,11 @@ SenkoClient.SlashCommands = new Collection();
 SenkoClient.colors = require("./Data/Palettes/Main.js");
 
 Reflect.set(SenkoClient, "tools", {
-	UserAgent: `${require("discord.js/src/util/Constants").UserAgent} (Kitsune-Softworks/Senko, v${require("../package.json").version})`,
+	UserAgent: `${require("discord.js/src/util/Constants").UserAgent} (Kitsune-Labs/Senko, v${require("../package.json").version})`,
 	colors: require("./Data/Palettes/Main.js")
 });
 
-print("#5865F2", "UserAgent", SenkoClient.tools.UserAgent);
+// print("#5865F2", "UserAgent", SenkoClient.tools.UserAgent);
 
 process.SenkoClient = SenkoClient;
 
@@ -79,12 +59,6 @@ SenkoClient.once("ready", async () => {
 	}
 
 	print("#FFFB00", "EVENTS", "Ready");
-
-	// for (let file of readdirSync("./src/Automod/").filter(file => file.endsWith(".js"))) {
-	//     require(`./Automod/${file}`).execute(SenkoClient);
-	// }
-
-	// print("#B42025", "AUTOMOD", "Ready");
 
 	if (process.env.NIGHTLY !== "true") {
 		for (let file of readdirSync("./src/SenkosWorld/")) {

@@ -43,7 +43,7 @@ module.exports = {
 					description: "Shiro flipped the coin and we're now anticipating the outcome.",
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "https://media.discordapp.net/attachments/889284097841717258/928522212980453396/ShiroSmug.png"
+						url: "https://assets.senkosworld.com/media/shiro/sneak1.png"
 					}
 				}
 			],
@@ -70,7 +70,7 @@ module.exports = {
 						description: "The coin flipped and the outcome is...\n\nA tie!?!?",
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "https://media.discordapp.net/attachments/889284097841717258/928522212745556018/hamster.png"
+							url: "https://assets.senkosworld.com/media/shiro/surprised1.png"
 						}
 					}
 				]
@@ -85,7 +85,7 @@ module.exports = {
 						description: "The coin flipped and the outcome is...\n\nShiro won...",
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "https://media.discordapp.net/attachments/889284097841717258/928522213198532648/superior.png"
+							url: "https://assets.senkosworld.com/media/shiro/superior.png"
 						}
 					}
 				]
@@ -101,7 +101,7 @@ module.exports = {
 						description: `The coin flipped and the outcome is...\n\nYou won!\n\n— ${Icons.yen}  30x added`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "https://media.discordapp.net/attachments/889284097841717258/928522212745556018/hamster.png"
+							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}
 					}
 				]
