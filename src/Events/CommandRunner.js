@@ -41,7 +41,16 @@ module.exports = {
 			let AccountData = null;
 
 			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.colors.dark, thumbnail:{url:"attachment://image.png"}}], ephemeral:true, files:[{attachment:"./src/Data/content/senko/heh.png", name:"image.png"}]});
-			if (InteractionCommand.userData === true) AccountData = await fetchData(interaction.user);
+			if (InteractionCommand.userData === true) return interaction.reply({
+				embeds: [
+					{
+						title: `${Icons.exclamation}  Sorry dear`,
+						description: "I'm afraid I have to ask you to not use this command for a while!",
+						color: SenkoClient.colors.dark,
+						ephemeral: true
+					}
+				]
+			}); // AccountData = await fetchData(interaction.user);
 
 			if (InteractionCommand.defer){
 				if(InteractionCommand.ephemeral&&InteractionCommand.ephemeral===true){

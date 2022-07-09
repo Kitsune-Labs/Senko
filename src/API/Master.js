@@ -157,32 +157,34 @@ async function fetchData(user, returnType) {
 async function updateUser(User, Data, Merge) {
 	// return await updateSuperUser(User, Data);
 
-	const UD = UserStore.doc(User.id);
+	return false;
 
-	let UserData = await UD.get();
-	if (!UserData.exists) await createUser(User);
+	// const UD = UserStore.doc(User.id);
 
-	if (Data.Currency) {
-		if (UserData.data().Currency.Yen > 100000) {
-			Data.Currency.Yen = 100000; // 99998
-		}
+	// let UserData = await UD.get();
+	// if (!UserData.exists) await createUser(User);
 
-		if (UserData.data().Currency.Tofu > 50) {
-			Data.Currency.Tofu = 50;
-		}
-	}
+	// if (Data.Currency) {
+	// 	if (UserData.data().Currency.Yen > 100000) {
+	// 		Data.Currency.Yen = 100000; // 99998
+	// 	}
 
-	if (!Merge) {
-		UserStore.doc(User.id).set(Data, { merge: true }).catch(err => {
-			throw new Error(`USER UPDATE: ${err}`);
-		});
-	} else {
-		UserStore.doc(User.id).update(Data).catch(err => {
-			throw new Error(`USER UPDATE: ${err}`);
-		});
-	}
+	// 	if (UserData.data().Currency.Tofu > 50) {
+	// 		Data.Currency.Tofu = 50;
+	// 	}
+	// }
 
-	return true;
+	// if (!Merge) {
+	// 	UserStore.doc(User.id).set(Data, { merge: true }).catch(err => {
+	// 		throw new Error(`USER UPDATE: ${err}`);
+	// 	});
+	// } else {
+	// 	UserStore.doc(User.id).update(Data).catch(err => {
+	// 		throw new Error(`USER UPDATE: ${err}`);
+	// 	});
+	// }
+
+	// return true;
 }
 
 /**
@@ -190,13 +192,13 @@ async function updateUser(User, Data, Merge) {
  * @param {Number} amount
  */
 async function addYen(user, amount) {
-	let Data = await fetchData(user);
+	// let Data = await fetchData(user);
 
-	updateUser(user, {
-		Currency: {
-			Yen: Data.Currency.Yen + amount * config.multiplier
-		}
-	});
+	// updateUser(user, {
+	// 	Currency: {
+	// 		Yen: Data.Currency.Yen + amount * config.multiplier
+	// 	}
+	// });
 }
 
 /**
@@ -204,13 +206,13 @@ async function addYen(user, amount) {
  * @param {Number} amount
  */
 async function removeYen(user, amount) {
-	let Data = await fetchData(user);
+	// let Data = await fetchData(user);
 
-	updateUser(user, {
-		Currency: {
-			Yen: Data.Currency.Yen - amount
-		}
-	});
+	// updateUser(user, {
+	// 	Currency: {
+	// 		Yen: Data.Currency.Yen - amount
+	// 	}
+	// });
 }
 
 /**
@@ -250,14 +252,14 @@ async function rateLimitCoolDown(interaction, RateLimits, Stat) {
 	const TimeStamp = Date.now();
 
 	if (!config.cooldowns.daily - (TimeStamp - RateLimits[Stat].Date) >= 0) {
-		await updateUser(interaction.user, {
-			RateLimits: {
-				[Stat]: {
-					Amount: 0,
-					Date: TimeStamp
-				}
-			}
-		});
+		// await updateUser(interaction.user, {
+		// 	RateLimits: {
+		// 		[Stat]: {
+		// 			Amount: 0,
+		// 			Date: TimeStamp
+		// 		}
+		// 	}
+		// });
 
 		RateLimits[Stat].Amount = 0;
 		return {
@@ -275,14 +277,14 @@ async function rateLimitCoolDown(interaction, RateLimits, Stat) {
 }
 
 async function addStats(interaction, CurrentStats, Stat) {
-	await updateUser(interaction.user, {
-		RateLimits: {
-			[Stat]: {
-				Amount: CurrentStats.Amount++,
-				Date: Date.now()
-			}
-		}
-	});
+	// await updateUser(interaction.user, {
+	// 	RateLimits: {
+	// 		[Stat]: {
+	// 			Amount: CurrentStats.Amount++,
+	// 			Date: Date.now()
+	// 		}
+	// 	}
+	// });
 }
 
 function randomBummedImageName() {
