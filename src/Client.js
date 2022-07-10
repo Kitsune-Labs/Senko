@@ -101,7 +101,7 @@ SenkoClient.once("ready", async () => {
 	}
 
 	for (var cmd of SenkoClient.SlashCommands) {
-		if (cmd[0] !== "display") {
+		if (cmd[0] !== "display" || cmd[0] !== "award" || cmd[0] !== "faux") {
 			const commandStruct = {
 				name: `${cmd[0]}`,
 				description: `${cmd[1].desc}`,
