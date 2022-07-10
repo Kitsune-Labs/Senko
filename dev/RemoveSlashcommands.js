@@ -14,5 +14,5 @@ SenkoClient.once("ready", async () => {
 
 	commands.set([]);
 
-	process.exit();
+	// process.exit();
 });
