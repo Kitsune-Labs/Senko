@@ -6,7 +6,7 @@ const SenkoClient = new Client({
 	intents: ["GUILDS", "GUILD_BANS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"]
 });
 
-SenkoClient.login(process.env.NIGHTLY_TOKEN);
+SenkoClient.login(process.env.TOKEN);
 
 SenkoClient.once("ready", async () => {
 	let commands = SenkoClient.application.commands;
