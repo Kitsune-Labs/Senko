@@ -12,7 +12,7 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
      */
 	start: async (SenkoClient, interaction) => {
-		const ShopItems = fetchMarket();
+		const ShopItems = await fetchMarket();
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
 
 		const shopData = rawShopData[0].market;

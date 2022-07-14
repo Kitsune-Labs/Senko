@@ -12,5 +12,5 @@ SenkoClient.once("ready", async () => {
 	let commands = SenkoClient.application.commands;
 	if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
-	commands.set([]).then(process.exit());
+	commands.set([])//.then(process.exit());
 });

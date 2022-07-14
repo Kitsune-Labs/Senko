@@ -9,7 +9,7 @@ module.exports = {
      */
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async Interaction => {
-			const ShopItems = fetchMarket();
+			const ShopItems = await fetchMarket();
 			const AccountData = await fetchSuperUser(Interaction.user);
 			const accountFlags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
 

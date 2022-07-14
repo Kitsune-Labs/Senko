@@ -16,7 +16,7 @@ module.exports = {
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
-		const Market = fetchMarket();
+		const Market = await fetchMarket();
 		const possibleItems = [];
 		const chosenItems = {
 			0: { name: null, id: null },

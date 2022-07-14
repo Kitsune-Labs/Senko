@@ -11,7 +11,7 @@ module.exports = {
 	 * @param {Client} SenkoClient
      */
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
-		const ShopItems = fetchMarket();
+		const ShopItems = await fetchMarket();
 		const OwnedChapters = [];
 
 		new Promise((resolve) => {

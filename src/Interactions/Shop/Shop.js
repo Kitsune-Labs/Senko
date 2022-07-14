@@ -15,7 +15,7 @@ module.exports = {
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
-		const ShopItems = fetchMarket();
+		const ShopItems = await fetchMarket();
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
 
 		const superConfig = await fetchConfig();

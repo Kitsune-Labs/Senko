@@ -41,7 +41,7 @@ module.exports = {
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const userInventory = accountData.LocalUser.profileConfig.Inventory;
 		const Command = interaction.options.getSubcommand();
-		const ShopItems = fetchMarket();
+		const ShopItems = await fetchMarket();
 
 		await interaction.deferReply({ ephemeral: true, fetchReply: true });
 

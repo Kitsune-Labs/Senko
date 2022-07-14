@@ -30,7 +30,7 @@ module.exports = {
 
 		if (!accountData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
 
-		const ShopItems = fetchMarket();
+		const ShopItems = await fetchMarket();
 		const AccountFlags = Bitfield.fromHex(accountData.LocalUser.accountConfig.flags);
 
 		if (User.id !== interaction.user.id && AccountFlags.get(BitData.privacy)) return interaction.reply({

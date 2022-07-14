@@ -14,7 +14,7 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async interaction => {
-			const shopItems = fetchMarket();
+			const shopItems = await fetchMarket();
 
 			if (interaction.isSelectMenu() && interaction.customId == "shop_purchase") {
 				const item = interaction.values[0].split("_").splice(1, 3);

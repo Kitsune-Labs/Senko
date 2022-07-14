@@ -15,7 +15,7 @@ module.exports = {
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async (interaction) => {
 			if (interaction.isButton()) {
-				const Market = fetchMarket();
+				const Market = await fetchMarket();
 				var guildData = await fetchSuperGuild(interaction.guild);
 				var guildFlags = Bitfield.fromHex(guildData.flags);
 
