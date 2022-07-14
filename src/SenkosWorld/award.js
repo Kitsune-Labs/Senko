@@ -1,8 +1,8 @@
 const Icons = require("../Data/Icons.json");
-const ShopItems = require("../Data/Shop/Items.json");
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { updateSuperUser, fetchSuperUser } = require("../API/super");
+const { updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super");
+
 
 module.exports = {
 	name: "award",
@@ -30,43 +30,17 @@ module.exports = {
      */
 	start: async (SenkoClient, interaction) => {
 		if (interaction.user.id !== "609097445825052701") return interaction.followUp({ content: "🗿" });
-
-		const User = interaction.options.getString("user");
+		const ShopItems = await fetchMarket();
+		const User = interaction.options.getString("user-id");
 		const DevItem = ShopItems[interaction.options.getString("item")];
-
-		if (!DevItem) return interaction.followUp({ content: "item null", ephemeral: true });
-
 		const FetchedUser = await SenkoClient.users.fetch(User);
 
+		if (!DevItem) return interaction.followUp({ content: "item null", ephemeral: true });
 		if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
 
 		const accountData = await fetchSuperUser(FetchedUser);
-		const devResponse = {
-			content: `Added ${DevItem.name} to inventory`,
-			ephemeral: true
-		};
 
-		if (accountData.LocalUser.profileConfig.Inventory[DevItem]) {
-			accountData.LocalUser.profileConfig.Inventory[DevItem]++;
-
-			await updateSuperUser(FetchedUser, {
-				LocalUser: accountData.LocalUser
-			});
-
-			FetchedUser.send({
-				embeds: [
-					{
-						title: `${Icons.package}  You received an item from Senko-san!`,
-						description: `__${DevItem.name}__ has been added to your inventory!`,
-						color: SenkoClient.colors.light
-					}
-				]
-			}).catch(e=>devResponse.footer.text = e);
-
-			return interaction.followUp(devResponse);
-		}
-
-		accountData.LocalUser.profileConfig.Inventory[DevItem] = DevItem.amount;
+		accountData.LocalUser.profileConfig.claimableItems.push(interaction.options.getString("item"));
 
 		await updateSuperUser(FetchedUser, {
 			LocalUser: accountData.LocalUser
@@ -76,14 +50,16 @@ module.exports = {
 			embeds: [
 				{
 					title: `${Icons.package}  You received an item from Senko-san!`,
-					description: `__${DevItem.name}__ has been added to your inventory!`,
-					color: SenkoClient.colors.light
+					description: `**I-I FOUND THIS FOR YOU!**\n\n__${DevItem.name}__ is now claimable with **/claim items**!`,
+					color: SenkoClient.colors.light,
+					thumbnail: { url: "https://assets.senkosworld.com/media/senko/excited.png" }
 				}
 			]
 		}).catch();
 
-		devResponse.description += "(Created new item)";
-
-		interaction.followUp(devResponse);
+		interaction.followUp({
+			content: `Added ${DevItem.name} to Claimable Items`,
+			ephemeral: true
+		});
 	}
 };

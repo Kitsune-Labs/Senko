@@ -1,4 +1,4 @@
-const ShopItems = require("../../Data/Shop/Items.json");
+const { fetchMarket } = require("../../API/super");
 const Paginate = require("../../API/Pagination/Main");
 const Icons = require("../../Data/Icons.json");
 
@@ -9,9 +9,10 @@ module.exports = {
 	defer: true,
 	ephemeral: true,
 	/**
-     * @param {CommandInteraction} interaction
+	 * @param {CommandInteraction} interaction
      */
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
+		const ShopItems = fetchMarket();
 		const PageEstimate = Math.ceil(Object.keys(accountData.LocalUser.profileConfig.Inventory).length / 8) < 1 ? 1 : Math.ceil(Object.keys(accountData.LocalUser.profileConfig.Inventory).length / 8);
 		const Pages = [];
 

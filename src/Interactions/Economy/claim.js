@@ -1,6 +1,6 @@
 const Icons = require("../../Data/Icons.json");
-const { updateSuperUser } = require("../../API/super");
-
+const { updateSuperUser, fetchMarket } = require("../../API/super");
+const { spliceArray } = require("@kitsune-labs/utilities");
 
 module.exports = {
 	name: "claim",
@@ -26,13 +26,13 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const Command = interaction.options.getSubcommand();
 		await interaction.deferReply();
 
 		switch (Command) {
 		case "daily":
-			var DailyTimeStamp = AccountData.Rewards.Daily;
+			var DailyTimeStamp = accountData.Rewards.Daily;
 			var DailyCooldown = 86400000;
 
 			if (DailyCooldown - (Date.now() - DailyTimeStamp) >= 0) {
@@ -51,12 +51,12 @@ module.exports = {
 					ephemeral: true
 				});
 			} else {
-				AccountData.LocalUser.profileConfig.Currency.Yen = AccountData.LocalUser.profileConfig.Currency.Yen + 200;
-				AccountData.Rewards.Daily = Date.now();
+				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 200;
+				accountData.Rewards.Daily = Date.now();
 
 				await updateSuperUser(interaction.user, {
-					LocalUser: AccountData.LocalUser,
-					Rewards: AccountData.Rewards
+					LocalUser: accountData.LocalUser,
+					Rewards: accountData.Rewards
 				});
 
 				interaction.followUp({
@@ -75,7 +75,7 @@ module.exports = {
 			}
 			break;
 		case "weekly":
-			var WeeklyTimeStamp = AccountData.Rewards.Weekly;
+			var WeeklyTimeStamp = accountData.Rewards.Weekly;
 			var WeeklyCooldown = 604800000;
 
 			if (WeeklyCooldown - (Date.now() - WeeklyTimeStamp) >= 0) {
@@ -95,12 +95,12 @@ module.exports = {
 				});
 
 			} else {
-				AccountData.LocalUser.profileConfig.Currency.Yen = AccountData.LocalUser.profileConfig.Currency.Yen + 130;
-				AccountData.Rewards.Weekly = Date.now();
+				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 130;
+				accountData.Rewards.Weekly = Date.now();
 
 				await updateSuperUser(interaction.user, {
-					LocalUser: AccountData.LocalUser,
-					Rewards: AccountData.Rewards
+					LocalUser: accountData.LocalUser,
+					Rewards: accountData.Rewards
 				});
 
 				interaction.followUp({
@@ -119,18 +119,50 @@ module.exports = {
 			}
 			break;
 		case "items":
+			var CI = accountData.LocalUser.profileConfig.claimableItems;
+			var inventory = accountData.LocalUser.profileConfig.Inventory;
+			var market = await fetchMarket();
+
+			if (CI.length > 0) {
+				const claimMessage = {
+					embeds: [
+						{
+							title: "Here we are!",
+							description: "I have these items for you to have!\n",
+							color: SenkoClient.colors.light,
+							thumbnail: {
+								url: "https://assets.senkosworld.com/media/senko/package.png"
+							}
+						}
+					]
+				};
+
+				do {
+					for (var item of CI) {
+						inventory[item] ? inventory[item]++ : inventory[item] = 1;
+						claimMessage.embeds[0].description += `\n- ${market[item].name}`;
+						spliceArray(CI, item);
+					}
+				} while (CI.length > 0);
+
+				await updateSuperUser(interaction.user, {
+					LocalUser: accountData.LocalUser
+				});
+
+				return interaction.followUp(claimMessage);
+			}
+
 			interaction.followUp({
 				embeds: [
 					{
 						title: "Hmmm.....",
-						description: "I've scourged around and couldn't find anything!",
+						description: "I've scourged around and couldn't find anything",
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/smile2.png"
 						}
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
+				]
 			});
 			break;
 		}

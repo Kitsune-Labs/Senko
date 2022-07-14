@@ -143,10 +143,11 @@
     "segg": {
         "class": "profile",
         "name": "segg",
-        "desc": "This is the segg. The Senko egg is a limited time item sold for 5 hours on easter 2021.",
+        "desc": "The Senko egg.",
         "price": 1111,
         "amount": 1,
-        "onsale": false
+        "onsale": false,
+        "source": "Limited time item that was sold for 5 hours for Easter 2021"
     },
     "raspberrybox": {
         "class": "food",
@@ -280,15 +281,95 @@
     },
     "md_1": {
         "class": "general",
-        "name": "Music Disk 1",
+        "name": "Music Disk 1 - Holy World",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
         "autoSale": true
     },
-    "md_2": {
+    "md_3": {
         "class": "general",
-        "name": "Music Disk 2",
+        "name": "Music Disk 3 - In a fluster",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_4": {
+        "class": "general",
+        "name": "Music Disk 4 - Happy Circle",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_5": {
+        "class": "general",
+        "name": "Music Disk 5 - Chill out",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_6": {
+        "class": "general",
+        "name": "Music Disk 6 - Mofumofu Time",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_7": {
+        "class": "general",
+        "name": "Music Disk 7 - Restless",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_8": {
+        "class": "general",
+        "name": "Music Disk 8 - Exhausted Nakano",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_9": {
+        "class": "general",
+        "name": "Music Disk 9 - Sleeping on her lap",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_10": {
+        "class": "general",
+        "name": "Music Disk 10 - Refresh",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_11": {
+        "class": "general",
+        "name": "Music Disk 11 - Senko's tear",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_12": {
+        "class": "general",
+        "name": "Music Disk 12 - Reminiscences of childhood",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "md_13": {
+        "class": "general",
+        "name": "Music Disk 13 - Emergency",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
@@ -505,7 +586,8 @@
         "desc": "For a \"June Bee\"",
         "price": 99999999999999,
         "amount": 1,
-        "title": "🐝 Special Bee"
+        "title": "🐝 Special Bee",
+        "source": "Special person"
     },
     "developer_kitsune_title": {
         "class": "profile",
@@ -513,7 +595,8 @@
         "desc": "For the developers",
         "price": 99999999999999,
         "amount": 1,
-        "title": "🛠️ Developer Kitsune"
+        "title": "🛠️ Developer Kitsune",
+        "source": "For the developers @ Kitsune Labs"
     },
     "contributing_title": {
         "class": "profile",
@@ -521,7 +604,8 @@
         "desc": "For the Contributors",
         "price": 99999999999999,
         "amount": 1,
-        "title": "🏗️ Contributor Kitsune"
+        "title": "🏗️ Contributor Kitsune",
+        "source": "Contribute to the development of Senko"
     },
     "Transgender_Pride_Flag": {
         "class": "profile",
@@ -539,7 +623,8 @@
         "price": 99999999999999,
         "amount": 1,
         "type": "banner",
-        "banner": "MooseKai.png"
+        "banner": "MooseKai.png",
+        "source": "Won the Discord Snowsgiving 2021 event"
     },
     "cherry": {
         "class": "profile",
@@ -1170,5 +1255,41 @@
         "autoSale": false,
         "type": "banner",
         "banner": "SenkoTailBanner.png"
+    },
+    "theCutie": {
+        "class": "profile",
+        "name": "The Cute Person",
+        "desc": "Thou whomst haveth this is a cutie",
+        "price": 7777777,
+        "autoSale": false,
+        "title": "The Cutie",
+        "source": "Won in a giveaway"
+    },
+    "VROOOM": {
+        "class": "profile",
+        "name": "VROOOOOOOOOM",
+        "desc": "VROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM!",
+        "price": 7777777,
+        "autoSale": false,
+        "title": "VROOOM",
+        "source": "Won in a giveaway"
+    },
+    "Sagiri": {
+        "class": "profile",
+        "name": "Sagiri",
+        "desc": "Not to be confused with the anime",
+        "price": 7777777,
+        "autoSale": false,
+        "title": "Sagiri Izumi",
+        "source": "Won in a giveaway"
+    },
+    "divine_messenger": {
+        "class": "profile",
+        "name": "Divine Messenger title",
+        "desc": "For Divine Messengers",
+        "price": 7777777,
+        "autoSale": false,
+        "title": "<:toriigate:815386514636537857>  Divine Messenger",
+        "source": "Be a Staff member in Senko's World!"
     }
 }

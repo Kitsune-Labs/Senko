@@ -2,8 +2,8 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
+const { fetchMarket } = require("../../API/super");
 
-const ShopItems = require("../../Data/Shop/Items.json");
 const { Bitfield } = require("bitfields");
 const BitData = require("../../API/Bits.json");
 
@@ -36,14 +36,14 @@ module.exports = {
 	],
 	usableAnywhere: true,
 	/**
-     * @param {CommandInteraction} interaction
+	 * @param {CommandInteraction} interaction
      */
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
+		const userInventory = accountData.LocalUser.profileConfig.Inventory;
 		const Command = interaction.options.getSubcommand();
+		const ShopItems = fetchMarket();
 
 		await interaction.deferReply({ ephemeral: true, fetchReply: true });
-
-		const userInventory = accountData.LocalUser.profileConfig.Inventory;
 
 		switch (Command) {
 		case "banner":

@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction } = require("discord.js");
-const ShopItems = require("../../Data/Shop/Items.json");
-const { fetchSupabaseApi } = require("../../API/super.js");
+const { fetchSupabaseApi, fetchMarket } = require("../../API/super.js");
 
 const Supabase = fetchSupabaseApi();
 
@@ -10,9 +9,10 @@ module.exports = {
 	desc: "Preview an item from Senko's Market",
 	usableAnywhere: true,
 	/**
-     * @param {CommandInteraction} interaction
+	 * @param {CommandInteraction} interaction
      */
 	start: async (SenkoClient, interaction) => {
+		const ShopItems = fetchMarket();
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
 
 		const shopData = rawShopData[0].market;

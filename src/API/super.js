@@ -21,11 +21,8 @@ async function fetchConfig() {
 	return data[0];
 }
 
-/**
- * @deprecated
- */
 async function fetchMarket() {
-	return fetchConfig().MarketItems;
+	return (await fetchConfig()).MarketItems;
 }
 
 /**
@@ -130,7 +127,7 @@ async function updateSuperUser(user, Data) {
 	if (Data.LocalUser && Data.LocalUser.profileConfig.Currency.Yen >= 100000) Data.LocalUser.profileConfig.Currency.Yen = 100000;
 	if (Data.LocalUser && Data.LocalUser.profileConfig.Currency.Tofu >= 50) Data.LocalUser.profileConfig.Currency.Tofu = 50;
 
-	const { error } = await Supabase.from("Users").update(Data).eq("id", user.id);
+	const { error } = await Supabase.from("Users").update(Data).eq("id", typeof user !== "string" ? user.id : user);
 
 	if (error) {
 		console.log(error);

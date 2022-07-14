@@ -4,17 +4,18 @@ const { Client } = require("discord.js");
 const { getName } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
-const shopItems = require("../Data/Shop/Items.json");
 
-const { fetchConfig, updateSuperUser, fetchSuperUser } = require("../API/super.js");
+const { fetchConfig, updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super.js");
 
 module.exports = {
 	/**
-     * @param {Client} SenkoClient
+	 * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async interaction => {
+			const shopItems = fetchMarket();
+
 			if (interaction.isSelectMenu() && interaction.customId == "shop_purchase") {
 				const item = interaction.values[0].split("_").splice(1, 3);
 

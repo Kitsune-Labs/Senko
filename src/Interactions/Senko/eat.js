@@ -2,20 +2,21 @@
 const { Client, CommandInteraction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const Market = require("../../Data/Shop/Items.json");
 const HardLinks = require("../../Data/HardLinks.json");
 const { spliceArray } = require("../../API/Master");
+const { fetchMarket } = require("../../API/super");
 
 module.exports = {
 	name: "eat",
 	desc: "eat",
 	userData: true,
 	/**
-     * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+	 * @param {CommandInteraction} interaction
+	 * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
+		const Market = fetchMarket();
 		const possibleItems = [];
 		const chosenItems = {
 			0: { name: null, id: null },

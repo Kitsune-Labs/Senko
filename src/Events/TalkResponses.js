@@ -82,6 +82,9 @@ module.exports = {
 							embeds: [
 								{
 									description: "S-sure dear...",
+									thumbnail: {
+										url: "https://assets.senkosworld.com/media/labs/placeholder.png"
+									},
 									footer: { text: interaction.user.tag }
 								}
 							],
@@ -198,6 +201,9 @@ module.exports = {
 							embeds: [
 								{
 									description: "Thats good to hear!",
+									thumbnail: {
+										url: "https://assets.senkosworld.com/media/labs/placeholder.png"
+									},
 									footer: { text: interaction.user.tag }
 								}
 							]
@@ -208,6 +214,9 @@ module.exports = {
 							embeds: [
 								{
 									description: "That doesnt sound good...",
+									thumbnail: {
+										url: "https://assets.senkosworld.com/media/labs/placeholder.png"
+									},
 									footer: { text: interaction.user.tag }
 								}
 							]
@@ -218,6 +227,9 @@ module.exports = {
 							embeds: [
 								{
 									description: "Is there anyway I could make it better?",
+									thumbnail: {
+										url: "https://assets.senkosworld.com/media/labs/placeholder.png"
+									},
 									footer: { text: interaction.user.tag }
 								}
 							],

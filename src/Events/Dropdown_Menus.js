@@ -1,15 +1,15 @@
 const { Bitfield } = require("bitfields");
 const BitData = require("../API/Bits.json");
 const Icons = require("../Data/Icons.json");
-const ShopItems = require("../Data/Shop/Items.json");
-const { updateSuperUser, fetchSuperUser } = require("../API/super");
+const { updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super");
 
 module.exports = {
 	/**
-     * @param {Client} SenkoClient
+	 * @param {Client} SenkoClient
      */
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async Interaction => {
+			const ShopItems = fetchMarket();
 			const AccountData = await fetchSuperUser(Interaction.user);
 			const accountFlags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
 

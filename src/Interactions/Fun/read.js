@@ -1,16 +1,17 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, Client } = require("discord.js");
-const ShopItems = require("../../Data/Shop/Items.json");
+const { fetchMarket } = require("../../API/super");
 
 module.exports = {
 	name: "read",
 	desc: "Read the manga chapters you get from the market!",
 	userData: true,
 	/**
-     * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+	 * @param {CommandInteraction} interaction
+	 * @param {Client} SenkoClient
      */
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
+		const ShopItems = fetchMarket();
 		const OwnedChapters = [];
 
 		new Promise((resolve) => {

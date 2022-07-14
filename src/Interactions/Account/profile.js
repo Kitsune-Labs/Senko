@@ -1,12 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction, Client } = require("discord.js");
+const { fetchConfig, fetchSuperUser, fetchMarket } = require("../../API/super");
 const Icons = require("../../Data/Icons.json");
-const ShopItems = require("../../Data/Shop/Items.json");
 const { Bitfield } = require("bitfields");
 const BitData = require("../../API/Bits.json");
 const { stringEndsWithS } = require("../../API/Master");
 const Achievements = require("../../Data/Achievements.json");
-const { fetchConfig, fetchSuperUser } = require("../../API/super");
 
 module.exports = {
 	name: "profile",
@@ -21,8 +20,8 @@ module.exports = {
 	],
 	defer: true,
 	/**
-     * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+	 * @param {CommandInteraction} interaction
+	 * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
@@ -31,6 +30,7 @@ module.exports = {
 
 		if (!accountData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
 
+		const ShopItems = fetchMarket();
 		const AccountFlags = Bitfield.fromHex(accountData.LocalUser.accountConfig.flags);
 
 		if (User.id !== interaction.user.id && AccountFlags.get(BitData.privacy)) return interaction.reply({

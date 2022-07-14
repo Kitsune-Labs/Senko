@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
 const { randomArray } = require("../API/Master");
-const { updateSuperGuild, fetchSuperGuild, updateSuperUser, fetchSuperUser } = require("../API/super");
+const { updateSuperGuild, fetchSuperGuild, updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super");
 const Icons = require("../Data/Icons.json");
-const Market = require("../Data/Shop/Items.json");
 const HardLinks = require("../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../API/Bits.json");
@@ -16,6 +15,7 @@ module.exports = {
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async (interaction) => {
 			if (interaction.isButton()) {
+				const Market = fetchMarket();
 				var guildData = await fetchSuperGuild(interaction.guild);
 				var guildFlags = Bitfield.fromHex(guildData.flags);
 
