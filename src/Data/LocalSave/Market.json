@@ -287,6 +287,14 @@
         "amount": 1,
         "autoSale": true
     },
+    "md_2": {
+        "class": "general",
+        "name": "Music Disk 2 - Theme of Senko",
+        "desc": "Forever ashubiduba mofu-mofu!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
     "md_3": {
         "class": "general",
         "name": "Music Disk 3 - In a fluster",
@@ -374,6 +382,14 @@
         "price": 500,
         "amount": 1,
         "autoSale": true
+    },
+    "md_14": {
+        "class": "general",
+        "name": "Special Music Disk 1 - I got you",
+        "desc": "eng",
+        "price": 7777777,
+        "amount": 1,
+        "autoSale": false
     },
     "sknss_v1": {
         "class": "general",
@@ -1264,6 +1280,22 @@
         "autoSale": false,
         "title": "The Cutie",
         "source": "Won in a giveaway"
+    },
+    "theGH": {
+        "class": "profile",
+        "name": "The Great Hugger Title",
+        "desc": "Thou whomst haveth this is a big hugger",
+        "price": 360,
+        "title": "The Great Hugger",
+        "autoSale": true
+    },
+    "theAdorable": {
+        "class": "profile",
+        "name": "The Adorable Title",
+        "desc": "Thou whomst haveth this is a very Adorable person",
+        "price": 200,
+        "title": "The Adorable",
+        "autoSale": true
     },
     "VROOOM": {
         "class": "profile",
