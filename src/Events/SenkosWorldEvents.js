@@ -509,8 +509,8 @@ module.exports = {
 						embeds: [
 							{
 								color: SenkoClient.colors.dark_red,
-								title: "⛔  Problematic content or media",
-								description: "__**You will not :**__\n\nSend any type of media that could induce epilepsy or seizures\nSend any type of War content\nSend any social credit memes\n\nTalk about any non-fictional politics\nTalk about drug related content"
+								title: "Expanded Guidelines",
+								description: "**Politics**\nDo not talk about any non-fictional politics.\nYou may talk about politics in <#992340185259978834> as long as it is civil.\n\n**Drug Content**\nDo not post or talk about illegal drug related content"
 							}
 						],
 						ephemeral: true

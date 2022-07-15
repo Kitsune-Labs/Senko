@@ -1,7 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { MessageActionRow, MessageButton } = require("discord.js");
-const Icons = require("../Data/Icons.json");
 
 module.exports = {
 	name: "display",
@@ -49,7 +47,6 @@ module.exports = {
 		case "rules":
 			interaction.followUp({ content: "Finished", ephemeral: true });
 
-
 			interaction.channel.send({
 				embeds: [
 					{
@@ -59,12 +56,11 @@ module.exports = {
 						color: "#fc844c"
 					},
 					{
-						title: "Welcome! We have a few Guidelines for you to follow",
-						description: "**Follow Discord's Community Guidelines**\n> [discord.com/guidelines](https://discord.com/guidelines)\n\n**Respect Everyone**\n> Yes, even if you don't like them\n\n**No age-gated content (aka 18+/NSFW content)**\n> Don't ask for it\n\n**No dark humor**\n> Please do not send dark humor jokes or other dark humor content",
+						description: "**Follow Discord's Community Guidelines & Terms of Service**\n> [discord.com/guidelines](https://discord.com/guidelines) - [discord.com/terms](https://discord.com/terms)\n\n**Respect Everyone**\n> Yes, even if you don't like them!\n> Do not post media that could induce epilepsy or seizures without a **visible** warning\n\n**No age-gated content (aka 18+/NSFW content)**\n> Do not ask for it.\n\n**No dark humor**\n> Please do not send dark humor jokes or other dark humor content.\n\n**No War Content**\n> This is not the server for it, find another server that has that topic.",
 						color: "#fc844c"
 					},
 					{
-						description: "Ban Appeals can be found at [senkosworld.com/appeal](https://senkosworld.com/appeal)",
+						description: "Ban Appeals can be found at [senkosworld.com/appeal](https://senkosworld.com/appeal)\n\nStaff applications can be found at [senkosworld.com/apply](https://senkosworld.com/apply)",
 						color: "#fc844c"
 					}
 				],
