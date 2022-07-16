@@ -61,11 +61,10 @@ module.exports = {
 							description: "Check it out with **/profile**",
 							color: SenkoClient.colors.light,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/package.png"
 							}
 						}
-					],
-					files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
+					]
 				});
 				break;
 			}

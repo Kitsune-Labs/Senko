@@ -43,11 +43,10 @@ module.exports = {
 							description: `I've already given you your daily yen, come back to me <t:${Math.floor((DailyTimeStamp + DailyCooldown) / 1000)}:R>!`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
 						}
 					],
-					files: [ { attachment: "./src/Data/content/senko/heh.png", name: "image.png" } ],
 					ephemeral: true
 				});
 			} else {
@@ -66,11 +65,10 @@ module.exports = {
 							description: `Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 200x added`,
 							color: SenkoClient.colors.light,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/happy.png"
 							}
 						}
-					],
-					files: [ { attachment: "./src/Data/content/senko/happy.png", name: "image.png" } ]
+					]
 				});
 			}
 			break;
@@ -86,11 +84,10 @@ module.exports = {
 							description: `From what I can remember i've given you your weekly yen, come back <t:${Math.floor((WeeklyTimeStamp + WeeklyCooldown) / 1000)}:R>!`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/hat_think.png"
 							}
 						}
 					],
-					files: [ { attachment: "./src/Data/content/senko/hat_think.png", name: "image.png" } ],
 					ephemeral: true
 				});
 
@@ -110,11 +107,10 @@ module.exports = {
 							description: `Here is your Yen for this week; Now spend it wisely!\n\n— ${Icons.yen} 1300x added`,
 							color: SenkoClient.colors.light,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/happy.png"
 							}
 						}
-					],
-					files: [ { attachment: "./src/Data/content/senko/happy.png", name: "image.png" } ]
+					]
 				});
 			}
 			break;

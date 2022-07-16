@@ -40,10 +40,9 @@ module.exports = {
 					title: `${Icons.exclamation} It's empty!`,
 					description: "We should probably buy some stuff to fill it up",
 					color: SenkoClient.colors.dark,
-					thumbnail: { url: "attachment://image.png" }
+					thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/hat_think.png", name: "image.png" }],
 			ephemeral: true
 		});
 

@@ -91,11 +91,10 @@ module.exports = {
 					description: `**${Topic}**\n\n${OptionString}\n\nWhat will you pick?`,
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/hat_think.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/hat_think.png", name: "image.png" }],
 			fetchReply: true
 		});
 

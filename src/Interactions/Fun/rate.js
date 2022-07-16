@@ -25,11 +25,10 @@ module.exports = {
 					description: "",
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/think.png"
 					}
 				}
-			],
-			files: [ { attachment: "./src/Data/content/senko/senko_think.png", name: "image.png" } ]
+			]
 		};
 
 		if (Item.toLowerCase() === "senko" || Item.toLowerCase() === "senko-san") {
@@ -37,7 +36,7 @@ module.exports = {
 			MessageBuild.embeds[0].description = "I'm obviously a 10/10!";
 			spliceArray(MessageBuild.files, 0);
 
-			MessageBuild.files.push({ attachment: "./src/Data/content/senko/senko_bless.png", name: "image.png" });
+			MessageBuild.thumbnail.url = "https://assets.senkosworld.com/media/senko/bless.png";
 		} else {
 			MessageBuild.embeds[0].description = `I rate **${Item}** a ${Math.floor(Math.random() * 10)}/10!`;
 		}

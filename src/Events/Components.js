@@ -118,11 +118,10 @@ module.exports = {
 								description: "That is not your food",
 								color: SenkoClient.colors.dark,
 								thumbnail: {
-									url: "attachment://image.png"
+									url: "https://assets.senkosworld.com/media/senko/pout.png"
 								}
 							}
 						],
-						files: [{ attachment: "./src/Data/content/senko/pout.png", name: "image.png" }],
 						ephemeral: true
 					});
 

@@ -58,10 +58,9 @@ module.exports = {
 						title: `${Icons.exclamation}  All clean`,
 						description: `${user.tag} doesn't have any warns!`,
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/book.png", name: "image.png" }]
+				]
 			});
 		}
 	}

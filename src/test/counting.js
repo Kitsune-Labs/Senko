@@ -62,10 +62,9 @@ module.exports = {
 						title: "Counting Information",
 						description: `The next number is ${Number}`,
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
+				]
 			});
 			break;
 		case "edit":
@@ -84,10 +83,9 @@ module.exports = {
 							title: "Counting Information",
 							description: `Channel set to ${channel}`,
 							color: SenkoClient.colors.dark,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
 					ephemeral: true
 				});
 				break;
@@ -105,10 +103,9 @@ module.exports = {
 							title: "Counting Information",
 							description: `Number set to ${number}`,
 							color: SenkoClient.colors.dark,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
 					ephemeral: true
 				});
 				break;

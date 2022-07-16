@@ -24,19 +24,18 @@ module.exports = {
 						description: `${dataConfig.OutlawedUsers[interaction.member.id]}\n\nThere is no mistake.`,
 						color: SenkoClient.colors.dark_red,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/pout.png"
 						}
 					}
 				],
-				ephemeral: true,
-				files: [{ attachment: "./src/Data/content/senko/pout.png", name: "image.png" }]
+				ephemeral: true
 			});
 
 			const InteractionCommand = SenkoClient.SlashCommands.get(interaction.commandName);
 			const superGuildData = await fetchSuperGuild(interaction.guild);
 			const AccountData = await fetchSuperUser(interaction.user);
 
-			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.colors.dark, thumbnail:{url:"attachment://image.png"}}], ephemeral:true, files:[{attachment:"./src/Data/content/senko/heh.png", name:"image.png"}]});
+			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.colors.dark, thumbnail:{url:"https://assets.senkosworld.com/media/senko/heh.png"}}], ephemeral:true});
 
 			if (InteractionCommand.defer){
 				if(InteractionCommand.ephemeral&&InteractionCommand.ephemeral===true){
@@ -82,12 +81,11 @@ module.exports = {
 							description: `${interaction.guild.name} has requested you use ${superGuildData.Channels.map(i=>`<#${i}>`)}!`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
 						}
 					],
-					ephemeral: true,
-					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }]
+					ephemeral: true
 				};
 
 				await interaction.deferReply({ ephemeral: true });
@@ -104,12 +102,11 @@ module.exports = {
 							description: `I seem to have dropped ${InteractionCommand.name}, I will attempt to fix it please come back soon!`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
 						}
 					],
-					ephemeral: true,
-					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }]
+					ephemeral: true
 				};
 
 				if (interaction.deferred) {

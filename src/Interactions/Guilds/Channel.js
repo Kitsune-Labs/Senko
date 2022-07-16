@@ -74,11 +74,10 @@ module.exports = {
 						description: `${Channels[0] ? Channels.map(i => ` <#${i}>`) : "every channel"}`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/package.png"
 						}
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }]
+				]
 			});
 		}
 
@@ -93,10 +92,9 @@ module.exports = {
 						title: "Oh dear...",
 						description: "It appears that this channel is not a text channel!",
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }]
+				]
 			});
 
 			if (Channels.includes(channel.id)) return interaction.followUp({
@@ -105,10 +103,9 @@ module.exports = {
 						title: "Silly!",
 						description: "This channel has already been added!",
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/talk.png", name: "image.png" }]
+				]
 			});
 
 			Channels.push(channel.id);
@@ -124,11 +121,10 @@ module.exports = {
 						description: `People can now use my commands in <#${channel.id}>!`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/talk.png"
 						}
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/talk.png", name: "image.png" }]
+				]
 			});
 			break;
 		case "remove":
@@ -142,10 +138,9 @@ module.exports = {
 						title: "Lets see...",
 						description: "I can't seem to find this channel in my list!",
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/talk.png", name: "image.png" }]
+				]
 			});
 
 			spliceArray(Channels, channel.id);
@@ -161,11 +156,10 @@ module.exports = {
 						description: `I have removed ${channel} as per your request`,
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/smile2.png"
 						}
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }]
+				]
 			});
 			break;
 		case "list":
@@ -179,10 +173,9 @@ module.exports = {
 						title: "Lets see...",
 						description: "I can't find any channels to remove!",
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }]
+				]
 			});
 
 			interaction.followUp({
@@ -192,11 +185,10 @@ module.exports = {
 						description: `${Channels.map(i => `<#${i}>`)}\n\nThis **cannot** be undone`,
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/nervous.png"
 						}
 					}
 				],
-				files: [ { attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" } ],
 				components: [
 					{
 						type: 1,
@@ -216,10 +208,9 @@ module.exports = {
 						title: "Lets see...",
 						description: "I can't find any channels to remove!",
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }]
+				]
 			});
 
 			var removed_channels = 0;
@@ -239,10 +230,9 @@ module.exports = {
 						title: "Lets see...",
 						description: "I can't find any deleted channels to remove!",
 						color: SenkoClient.colors.dark,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }]
+				]
 			});
 
 			await updateSuperGuild(interaction.guild, {
@@ -256,11 +246,10 @@ module.exports = {
 						description: `I have found ${removed_channels > 1 ? " channel" : "channels"} that no longer exist${removed_channels > 1 ? " s" : ""} and have removed them!`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/talk.png"
 						}
 					}
-				],
-				files: [ { attachment: "./src/Data/content/senko/talk.png", name: "image.png" } ]
+				]
 			});
 			break;
 		}

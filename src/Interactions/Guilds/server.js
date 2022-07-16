@@ -94,10 +94,9 @@ module.exports = {
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: "I have to restrict this to Administrator's only",
 							color: SenkoClient.colors.dark,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 					ephemeral: true
 				});
 				return false;
@@ -159,10 +158,9 @@ module.exports = {
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
 							description: "You need to specify a text channel!",
 							color: SenkoClient.colors.dark,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/hat_think.png", name: "image.png" }],
 					ephemeral: true
 				});
 
@@ -176,10 +174,9 @@ module.exports = {
 							title: `${Icons.exclamation}  okay dear`,
 							description: `I've set your Action Reports to ${actionChannel}`,
 							color: SenkoClient.colors.light,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/talk.png", name: "image.png" }],
 					content: "Action Reports channel set!",
 					ephemeral: true
 				});
@@ -193,10 +190,9 @@ module.exports = {
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
 							description: "You need to specify a text channel!",
 							color: SenkoClient.colors.dark,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/hat_think.png", name: "image.png" }],
 					ephemeral: true
 				});
 
@@ -210,10 +206,9 @@ module.exports = {
 							title: `${Icons.exclamation}  okay dear`,
 							description: `I will send Edited & Deleted messages in ${messageChannel}`,
 							color: SenkoClient.colors.light,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/talk.png", name: "image.png" }],
 					ephemeral: true
 				});
 				break;
@@ -234,10 +229,9 @@ module.exports = {
 							title: `${Icons.question}  okay dear`,
 							description: "I don't know your reasoning, but I've done what you said and removed your Action Reports channel!",
 							color: SenkoClient.colors.dark,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/talk.png", name: "image.png" }],
 					ephemeral: true
 				});
 				break;
@@ -252,10 +246,9 @@ module.exports = {
 							title: `${Icons.question}  okay dear`,
 							description: "If that's what you want I shall no longer look for edited or deleted messages",
 							color: SenkoClient.colors.dark,
-							thumbnail: { url: "attachment://image.png" }
+							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/talk.png", name: "image.png" }],
 					ephemeral: true
 				});
 				break;

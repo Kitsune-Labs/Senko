@@ -65,11 +65,10 @@ module.exports = {
 						description: "But I am confused on why you would remove it!",
 						color: SenkoClient.colors.light,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/senko/smile2.png"
 						}
 					}
-				],
-				files: [{ attachment: "./src/Data/content/senko/smile2.png", name: "image.png" }]
+				]
 			});
 		}
 	}

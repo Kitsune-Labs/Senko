@@ -39,11 +39,10 @@ module.exports = {
 					description: "You must be able to kick members to use this!",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 
@@ -54,11 +53,10 @@ module.exports = {
 					description: "It looks like I can't kick members! (Make sure I have the \"Kick Members\" permission)",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 

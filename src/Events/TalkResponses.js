@@ -24,7 +24,7 @@ module.exports = {
 						text: ["D-Do you have to be so verbose?", "Please be more gentle with my tail!"]
 					},
 					{
-						image: "fluffed_2.png",
+						image: "fluffed2.png",
 						sounds: ["Uya!", "HYaa", "mhMh"],
 						text: ["Be more careful!"]
 					}
@@ -46,11 +46,10 @@ module.exports = {
 									title: "Senko-san",
 									description: `See you later!\n\nI wish we could talk together more ${interaction.user.username}...`,
 									color: SenkoClient.colors.dark,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/bummed.png" },
 									footer: { text: interaction.user.tag }
 								}
-							],
-							files: [{ attachment: "./src/Data/content/senko/bummed.png", name: "image.png" }]
+							]
 						},
 						{
 							embeds: [
@@ -58,11 +57,10 @@ module.exports = {
 									title: "Senko-san",
 									description: `Have a good day ${interaction.user.username}!`,
 									color: SenkoClient.colors.dark,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy1.png" },
 									footer: { text: interaction.user.tag }
 								}
-							],
-							files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }]
+							]
 						},
 						{
 							embeds: [
@@ -70,11 +68,10 @@ module.exports = {
 									title: "Senko-san",
 									description: `Sayōnara ${interaction.user.username}!`,
 									color: SenkoClient.colors.dark,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy1.png" },
 									footer: { text: interaction.user.tag }
 								}
-							],
-							files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }]
+							]
 						}
 					],
 					senko_talk_fluff_tail: [
@@ -103,11 +100,10 @@ module.exports = {
 							embeds: [
 								{
 									description: randomArray(randomReaction.text),
-									thumbnail: { url: `attachment://image.png` },
+									thumbnail: { url: `https://assets.senkosworld.com/media/senko/${randomReaction.image}` },
 									footer: { text: interaction.user.tag }
 								}
-							],
-							files: [{ attachment: `./src/Data/content/senko/${randomReaction.image}`, name: "image.png" }]
+							]
 						}
 					],
 					senko_talk_1_hello: [
@@ -117,11 +113,10 @@ module.exports = {
 									title: `${Icons.heart} Senko-san`,
 									description: "Well hello then!\n\nI hope you're having a great day!",
 									color: SenkoClient.colors.dark,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy.png" },
 									footer: { text: interaction.user.tag }
 								}
-							],
-							files: [{ attachment: "./src/Data/content/senko/happy.png", name: "image.png" }]
+							]
 						}
 					],
 					senko_talk_1_hru: [
@@ -131,11 +126,10 @@ module.exports = {
 									title: `Senko-san`,
 									description: "Im doing great; Thanks for asking!",
 									color: SenkoClient.colors.light,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy.png" },
 									footer: { text: interaction.user.tag }
 								}
 							],
-							files: [{ attachment: `./src/Data/content/senko/happy.png`, name: "image.png" }],
 							components: [
 								{
 									type: 1,
@@ -152,11 +146,10 @@ module.exports = {
 									title: `${Icons.tears} Senko-san`,
 									description: "Not so great, my favorite spoon broke...",
 									color: SenkoClient.colors.light,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/nervous.png" },
 									footer: { text: interaction.user.tag }
 								}
 							],
-							files: [{ attachment: `./src/Data/content/senko/SenkoNervousSpeak.png`, name: "image.png" }],
 							components: [
 								{
 									type: 1,
@@ -175,11 +168,10 @@ module.exports = {
 									title: `Senko-san`,
 									description: "Sadly there isn't, unless you can somehow travel back to the past...",
 									color: SenkoClient.colors.dark,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/think.png" },
 									footer: { text: interaction.user.tag }
 								}
-							],
-							files: [{ attachment: `./src/Data/content/senko/senko_think.png`, name: "image.png" }]
+							]
 						}
 					],
 					senko_talk_1_ch: [
@@ -189,11 +181,10 @@ module.exports = {
 									title: `Senko-san`,
 									description: "It's okay dear\n\nthere isn't a way to get another one like this anyways...",
 									color: SenkoClient.colors.dark,
-									thumbnail: { url: "attachment://image.png" },
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh2.png" },
 									footer: { text: interaction.user.tag }
 								}
-							],
-							files: [{ attachment: `./src/Data/content/senko/heh2.png`, name: "image.png" }]
+							]
 						}
 					],
 					senko_talk_2_fine: [

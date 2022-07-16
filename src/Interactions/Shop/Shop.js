@@ -30,7 +30,7 @@ module.exports = {
 			description: `Please take your time and review what is available in the market.\n\nYou can use \`/preview\` to view extended info about an item like it's description, price, banner, and color\n\n> ${Icons.package}  Market refresh <t:${shopData.updates}:R>\n> ${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
 			color: SenkoClient.colors.light,
 			thumbnail: {
-				url: "attachment://image.png"
+				url: "https://assets.senkosworld.com/media/senko/package.png"
 			}
 		};
 
@@ -90,7 +90,6 @@ module.exports = {
 
 		interaction.followUp({
 			embeds: [ Shop ],
-			files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
 			components: [
 				{
 					type: 1,

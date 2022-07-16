@@ -45,11 +45,10 @@ module.exports = {
 					description: `${Icons.hojicha}  ${randomArray(Responses)}`,
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/drink.png"
 					}
 				}
-			],
-			files: [{ attachment: "./src/Data/content/senko/drink.png", name: "image.png" }]
+			]
 		};
 
 		if (calcTimeLeft(accountData.RateLimits.Drink_Rate.Date, config.cooldowns.daily)) {
@@ -65,7 +64,7 @@ module.exports = {
 
 		if (accountData.RateLimits.Drink_Rate.Amount >= 5) {
 			MessageStruct.embeds[0].description = `**${randomArray(NoMore).replace("_USER_", interaction.user.username)}**\n\n${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-			MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomBummedImageName()}`;
 
 			return interaction.followUp(MessageStruct);
 		}

@@ -26,11 +26,10 @@ module.exports = {
 					description: `**${randomArray(Responses).replace("_USER_", interaction.user.username)}**`,
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/cuddle.png"
 					}
 				}
-			],
-			files: [{ attachment: "./src/Data/content/senko/cuddle.png", name: "image.png" }]
+			]
 		};
 
 		if (randomNumber(100) > 75) {

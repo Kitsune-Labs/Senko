@@ -34,11 +34,10 @@ module.exports = {
 					],
 					color: SenkoClient.colors.random(),
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/idle.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/idle.png", name: "image.png" }],
 			ephemeral: true
 		});
 	}

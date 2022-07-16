@@ -54,11 +54,10 @@ module.exports = {
 						description: `Come back <t:${Math.floor((accountData.Rewards.Work + Cooldown) / 1000)}:R> if you want your next paycheck.`,
 						color: SenkoClient.colors.dark,
 						thumbnail: {
-							url: "attachment://image.png"
+							url: "https://assets.senkosworld.com/media/Yotsutani/Yotsutani.png"
 						}
 					}
 				],
-				files: [new MessageAttachment("./src/Data/content/Yotsutani/Yotsutani.png", "image.png")],
 				ephemeral: true
 			});
 		} else {
@@ -78,11 +77,10 @@ module.exports = {
 							description: `Senko told you ${Item.name} had broken. It cost you ${Icons.yen}  ${Item.price}x to ${Item.type}.\n\n— ${Icons.yen}  ${600 - Item.price}x added`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: `https://assets.senkosworld.com/media/senko/${randomArrayItem(["heh", "heh2", "judgement", "upset"])}.png`
 							}
 						}
-					],
-					files: [{ attachment: `./src/Data/content/senko/${randomArrayItem(["heh", "heh2", "judgement", "upset"])}.png`, name: "image.png" }]
+					]
 				});
 			} else {
 				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 600;
@@ -100,11 +98,10 @@ module.exports = {
 							description: `I'll make sure to pay you again tomorrow.\n\n— ${Icons.yen} 600x added`,
 							color: SenkoClient.colors.light,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/Yotsutani/Yotsutani.png"
 							}
 						}
-					],
-					files: [new MessageAttachment("./src/Data/content/Yotsutani/Yotsutani.png", "image.png")]
+					]
 				});
 			}
 		}

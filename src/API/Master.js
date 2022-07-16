@@ -127,7 +127,7 @@ async function addStats(interaction, CurrentStats, Stat) {
 function randomBummedImageName() {
 	const Images = [
 		"huh",
-		"senko_think"
+		"think"
 	];
 
 	return randomArray(Images);

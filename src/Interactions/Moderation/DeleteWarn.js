@@ -30,11 +30,10 @@ module.exports = {
 					description: "You must be able to moderate members to use this!",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 
@@ -59,10 +58,9 @@ module.exports = {
 								title: `One of your warns has been deleted in ${interaction.guild.name}!`,
 								description: `Here is some info about what warn was deleted\nWarn id: **${warnId}**\nWarn reason: ${warn.reason}\nWarn note: ${warn.note}`,
 								color: SenkoClient.colors.light,
-								thumbnail: { url: "attachment://image.png" }
+								thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 							}
-						],
-						files: [{ attachment: "./src/Data/content/senko/book.png", name: "image.png" }]
+						]
 					}).catch(()=>{});
 
 					return interaction.followUp({
@@ -71,10 +69,9 @@ module.exports = {
 								title: "All done!",
 								description: `I have deleted warn **${warnId}** from **${warn.userTag}**\n\n> ${warn.reason}\n> ${warn.note}`,
 								color: SenkoClient.colors.light,
-								thumbnail: { url: "attachment://image.png" }
+								thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 							}
-						],
-						files: [{ attachment: "./src/Data/content/senko/book.png", name: "image.png" }]
+						]
 					});
 				}
 			}
@@ -86,10 +83,9 @@ module.exports = {
 					title: "I looked around",
 					description: `But I cannot find a warning that has **${warnId}** for it's ID...`,
 					color: SenkoClient.colors.dark,
-					thumbnail: { url: "attachment://image.png" }
+					thumbnail: { url: "https://assets.senkosworld.com/media/senko/think.png" }
 				}
-			],
-			files: [{ attachment: "./src/Data/content/senko/senko_think.png", name: "image.png" }]
+			]
 		});
 	}
 };

@@ -38,11 +38,10 @@ module.exports = {
 							description: "This item is out of stock right now check back next time!",
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 					ephemeral: true
 				});
 
@@ -55,11 +54,10 @@ module.exports = {
 							description: `You may only have **${shopItem.max}** total!`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 					ephemeral: true
 				});
 
@@ -70,11 +68,10 @@ module.exports = {
 							description: "You don't have enough Yen!",
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 					ephemeral: true
 				});
 
@@ -86,11 +83,10 @@ module.exports = {
 							description: `Are you sure you want to purchase __${shopItem.name}__ for ${Icons.yen} __${shopItem.price}x__?`,
 							color: SenkoClient.colors.light,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/package.png"
 							}
 						}
 					],
-					files: [{ attachment: "./src/Data/content/senko/senko_package.png", name: "image.png" }],
 					components: [
 						{
 							type: 1,
@@ -119,11 +115,10 @@ module.exports = {
 							description: `Thanks for purchasing **${shopItem.name}** for ${Icons.yen} ${shopItem.price}x!`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/tofu.png"
 							}
 						}
 					],
-					files: [ { attachment: "./src/Data/content/senko/tofu.png", name: "image.png" } ],
 					components: []
 				};
 

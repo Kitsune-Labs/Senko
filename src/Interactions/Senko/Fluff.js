@@ -76,11 +76,10 @@ module.exports = {
 			embeds: [
 				{
 					description: `I don't want to right now! W-We can <t:${Math.floor((accountData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
-					thumbnail: { url: "attachment://image.png" },
+					thumbnail: { url: "https://assets.senkosworld.com/media/senko/upset2.png" },
 					color: SenkoClient.colors.light
 				}
-			],
-			files: [{ attachment: "./src/Data/content/senko/upset2.png", name: "image.png" }]
+			]
 		});
 
 		// if (Stats.Fluffs >= 10) await awardAchievement(interaction, "NewFloofer");
@@ -103,11 +102,10 @@ module.exports = {
 					description: `${randomArray(Responses)}\n\n*${randomArray(UserInput).replace("_USER_", interaction.user.username)}*`,
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: `https://assets.senkosworld.com/media/senko/${randomArray(["fluffed", "fluffed2", "pout"])}.png`
 					}
 				}
-			],
-			files: [{ attachment: `./src/Data/content/senko/${randomArray(["fluffed", "fluffed_2", "pout"])}.png`, name: "image.png" }]
+			]
 		};
 
 		if (randomNumber(100) > 75) {

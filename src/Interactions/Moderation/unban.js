@@ -39,11 +39,10 @@ module.exports = {
 					description: "You must be able to ban members to use this!",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 
@@ -54,11 +53,10 @@ module.exports = {
 					description: "It looks like I can't unban members! (Make sure I have the \"Ban Members\" permission)",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 
@@ -72,10 +70,9 @@ module.exports = {
 					title: "I don't see anything",
 					description: "This user is not banned from this server",
 					color: SenkoClient.colors.dark,
-					thumbnail: { url: "attachment://image.png" }
+					thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/book.png", name: "image.png" }],
 			ephemeral: true
 		});
 
@@ -105,10 +102,9 @@ module.exports = {
 					title: "All done dear!",
 					description: `I've unbanned ${userId} for you!\n\n${unbanReason ? `Reason: ${unbanReason}` : ""}`,
 					color: SenkoClient.colors.light,
-					thumbnail: { url: "attachment://image.png" }
+					thumbnail: { url: "https://assets.senkosworld.com/media/senko/bless.png" }
 				}
-			],
-			files: [{ attachment: "./src/Data/content/senko/senko_bless.png", name: "image.png" }]
+			]
 		});
 	}
 };

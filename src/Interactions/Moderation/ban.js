@@ -66,11 +66,10 @@ module.exports = {
 					description: "You must be able to ban members to use this!",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 
@@ -81,17 +80,15 @@ module.exports = {
 					description: "It looks like I can't ban members! (Make sure I have the \"Ban Members\" permission)",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 
 		await interaction.deferReply({ fetchReply: true });
 
-		
 		const users = [];
 		const reactions = [
 			{
@@ -108,7 +105,7 @@ module.exports = {
 			},
 			{
 				text: "Y-You did what?",
-				image: "thinking_nervous"
+				image: "what"
 			}
 		];
 
@@ -190,10 +187,9 @@ module.exports = {
 								title: "Banned Kitsune",
 								description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned for __${reason}__\n\n${randomResponse.text}`,
 								color: "RED",
-								thumbnail: { url: "attachment://image.png" }
+								thumbnail: { url: `https://assets.senkosworld.com/media/senko/${randomResponse.image}.png` }
 							}
-						],
-						files: [{ attachment: `./src/Data/content/senko/${randomResponse.image}.png`, name: "image.png" }]
+						]
 					};
 
 					if (reason === "No reason provided") responseStruct.embeds[0].description = `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned!`;

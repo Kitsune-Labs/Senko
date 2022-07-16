@@ -45,11 +45,10 @@ module.exports = {
 					description: randomArray(Responses).replace("_USER_", interaction.user.username),
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/pat.png"
 					}
 				}
-			],
-			files: [{ attachment: "./src/Data/content/senko/pat.png", name: "image.png" }]
+			]
 		};
 
 		if (calcTimeLeft(accountData.RateLimits.Pat_Rate.Date, config.cooldowns.daily)) {
@@ -66,7 +65,7 @@ module.exports = {
 
 		if (accountData.RateLimits.Pat_Rate.Amount >= 20) {
 			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Pat_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-			MessageStruct.files = [{ attachment: `./src/Data/content/senko/${randomBummedImageName()}.png`, name: "image.png" }];
+			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomBummedImageName()}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}

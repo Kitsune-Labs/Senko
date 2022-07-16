@@ -51,11 +51,10 @@ module.exports = {
 					description: "We should probably buy some more soon...",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/nervous.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/SenkoNervousSpeak.png", name: "image.png" }],
 			ephemeral: true
 		});
 

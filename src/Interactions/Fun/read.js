@@ -30,10 +30,9 @@ module.exports = {
 						title: "You don't own any chapters!",
 						description: "You can buy them when they're avaliable in the shop!",
 						color: SenkoClient.colors.light,
-						thumbnail: { url: "attachment://image.png" }
+						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 					}
 				],
-				files: [{ attachment: "./src/Data/content/senko/what.png", name: "image.png" }],
 				ephemeral: true
 			});
 

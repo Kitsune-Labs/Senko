@@ -55,11 +55,10 @@ module.exports = {
 					description: "You must be able to moderate members to use this!",
 					color: SenkoClient.colors.dark,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
 			],
-			files: [{ attachment: "./src/Data/content/senko/heh.png", name: "image.png" }],
 			ephemeral: true
 		});
 

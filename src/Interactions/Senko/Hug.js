@@ -69,7 +69,6 @@ module.exports = {
 						color: SenkoClient.colors.light
 					}
 				]
-				// files: [ { attachment: `./src/Data/content/hug/${file}`, name: file.endsWith(".png") ? "hug.png" : "hug.gif" } ]
 			});
 		}
 
@@ -79,11 +78,10 @@ module.exports = {
 					description: randomArray(Responses).replace("_USER_", interaction.user.username),
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: "attachment://image.png"
+						url: "https://assets.senkosworld.com/media/senko/hug_tail.png"
 					}
 				}
-			],
-			files: [{ attachment: "./src/Data/content/senko/hug.png", name: "image.png" }]
+			]
 		};
 
 		if (calcTimeLeft(accountData.RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
@@ -104,7 +102,7 @@ module.exports = {
 
 		if (accountData.RateLimits.Hug_Rate.Amount >= 20) {
 			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((accountData.RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
-			MessageStruct.files = [{ attachment: "./src/Data/content/senko/bummed.png", name: "image.png" }];
+			MessageStruct.embeds[0].thumbnail.url = "https://assets.senkosworld.com/media/senko/bummed.png";
 
 			return interaction.followUp(MessageStruct);
 		}
