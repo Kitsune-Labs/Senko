@@ -33,6 +33,7 @@ module.exports = {
 		}
 	],
 	defer: true,
+	category: "fun",
 	/**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient

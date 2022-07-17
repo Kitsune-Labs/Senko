@@ -12,6 +12,7 @@ module.exports = {
 		}
 	],
 	usableAnywhere: true,
+	category: "fun",
 	/**
      * @param {CommandInteraction} interaction
      */
@@ -22,7 +23,7 @@ module.exports = {
 			embeds: [
 				{
 					title: "Let me think...",
-					description: "",
+					description: `I rate **${Item}** a ${Math.floor(Math.random() * 10)}/10!`,
 					color: SenkoClient.colors.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/think.png"
@@ -37,8 +38,6 @@ module.exports = {
 			spliceArray(MessageBuild.files, 0);
 
 			MessageBuild.thumbnail.url = "https://assets.senkosworld.com/media/senko/bless.png";
-		} else {
-			MessageBuild.embeds[0].description = `I rate **${Item}** a ${Math.floor(Math.random() * 10)}/10!`;
 		}
 
 		interaction.reply(MessageBuild);

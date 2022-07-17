@@ -33,6 +33,7 @@ module.exports = {
 	desc: "Have Senko-san prepare you a drink",
 	userData: true,
 	defer: true,
+	category: "fun",
 	/**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient

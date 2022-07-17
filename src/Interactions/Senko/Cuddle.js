@@ -14,6 +14,7 @@ const Responses = [
 module.exports = {
 	name: "cuddle",
 	desc: "Cuddle with Senko-san!",
+	category: "fun",
 	/**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient

@@ -10,6 +10,7 @@ module.exports = {
 	name: "eat",
 	desc: "eat",
 	userData: true,
+	category: "fun",
 	/**
 	 * @param {CommandInteraction} interaction
 	 * @param {Client} SenkoClient

@@ -6,6 +6,7 @@ module.exports = {
 	name: "claim",
 	desc: "Claim rewards from Senko",
 	userData: true,
+	category: "economy",
 	options: [
 		{
 			name: "daily",

@@ -14,6 +14,7 @@ module.exports = {
 		}
 	],
 	usableAnywhere: true,
+	category: "fun",
 	/**
      * @param {CommandInteraction} interaction
      */

@@ -6,6 +6,7 @@ module.exports = {
 	name: "read",
 	desc: "Read the manga chapters you get from the market!",
 	userData: true,
+	category: "fun",
 	/**
 	 * @param {CommandInteraction} interaction
 	 * @param {Client} SenkoClient

@@ -7,6 +7,7 @@ module.exports = {
 	usableAnywhere: true,
 	defer: true,
 	ephemeral: true,
+	category: "account",
 	/**
      * @param {CommandInteraction} interaction
      */

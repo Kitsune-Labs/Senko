@@ -61,8 +61,8 @@ module.exports = {
 			required: false
 		}
 	],
-	no_data: true,
 	usableAnywhere: true,
+	category: "fun",
 	/**
      * @param {CommandInteraction} interaction
      */

@@ -33,6 +33,7 @@ module.exports = {
 		desc: "Warn this user",
 		type: 2
 	},
+	category: "admin",
 	/**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction

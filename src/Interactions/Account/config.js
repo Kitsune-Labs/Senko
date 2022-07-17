@@ -35,6 +35,7 @@ module.exports = {
 		}
 	],
 	usableAnywhere: true,
+	category: "account",
 	/**
 	 * @param {CommandInteraction} interaction
      */

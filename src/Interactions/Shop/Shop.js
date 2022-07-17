@@ -10,6 +10,7 @@ module.exports = {
 	desc: "Buy item's from Senko's Market",
 	userData: true,
 	defer: true,
+	category: "economy",
 	/**
 	 * @param {CommandInteraction} interaction
      */

@@ -55,6 +55,7 @@ module.exports = {
 	desc: "Mofumofu!",
 	userData: true,
 	defer: true,
+	category: "fun",
 	/**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient

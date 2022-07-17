@@ -8,6 +8,7 @@ const bits = require("../../API/Bits.json");
 module.exports = {
 	name: "kick",
 	desc: "Kick a member",
+	category: "admin",
 	options: [
 		{
 			name: "user",

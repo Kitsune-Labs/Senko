@@ -18,6 +18,7 @@ module.exports = {
 		}
 	],
 	usableAnywhere: true,
+	category: "admin",
 
 	/**
      * @param {Client} SenkoClient

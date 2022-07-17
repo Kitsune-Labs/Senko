@@ -8,6 +8,7 @@ module.exports = {
 	name: "work",
 	desc: "Have Nakano go to work to provide income",
 	userData: true,
+	category: "economy",
 	/**
      * @param {CommandInteraction} interaction
      */

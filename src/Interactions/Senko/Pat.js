@@ -35,6 +35,7 @@ module.exports = {
 	desc: "Pat Senko's Head (Don't touch her ears!)",
 	userData: true,
 	defer: true,
+	category: "fun",
 	/**
      * @param {CommandInteraction} interaction
      */

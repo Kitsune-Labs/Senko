@@ -8,6 +8,7 @@ module.exports = {
 	name: "preview",
 	desc: "Preview an item from Senko's Market",
 	usableAnywhere: true,
+	category: "economy",
 	/**
 	 * @param {CommandInteraction} interaction
      */

@@ -7,6 +7,7 @@ const { addYen } = require("../../API/Master");
 module.exports = {
 	name: "rock-paper-scissors",
 	desc: "Play a game of rock paper scissors with Shiro.",
+	category: "fun",
 	options: [
 		{
 			name: "choice",

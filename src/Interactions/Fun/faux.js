@@ -49,6 +49,7 @@ module.exports = {
 	usableAnywhere: true,
 	defer: true,
 	ephemeral: true,
+	category: "fun",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient

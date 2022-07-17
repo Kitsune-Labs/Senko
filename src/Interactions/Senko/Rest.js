@@ -30,6 +30,7 @@ module.exports = {
 	desc: "Rest on Senkos lap",
 	userData: true,
 	defer: true,
+	category: "fun",
 	/**
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
