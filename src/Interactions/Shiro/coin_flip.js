@@ -12,7 +12,7 @@ module.exports = {
 		{
 			name: "choice",
 			description: "You can choose heads or tails.",
-			type: "STRING",
+			type: 3,
 			required: true,
 			choices: [
 				{

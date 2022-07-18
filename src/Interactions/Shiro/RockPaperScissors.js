@@ -12,7 +12,7 @@ module.exports = {
 		{
 			name: "choice",
 			description: "Choose your move",
-			type: "STRING",
+			type: 3,
 			required: true,
 			choices: [
 				{

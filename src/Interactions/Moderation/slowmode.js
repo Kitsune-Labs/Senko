@@ -19,7 +19,7 @@ module.exports = {
 					name: "seconds",
 					description: "How long should the slowmode be in seconds",
 					required: true,
-					type: "NUMBER",
+					type: 10,
 					minValue: 1,
 					maxValue: 21600
 				}

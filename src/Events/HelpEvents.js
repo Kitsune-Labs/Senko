@@ -313,7 +313,7 @@ module.exports = {
 									value: contributors.map(n=>`${Icons.RightArrow} ${n}`).join("\n")
 								}
 							],
-							color: "#fc844c"
+							color: 0xfc844c
 						}
 					],
 					components: interaction.message.components

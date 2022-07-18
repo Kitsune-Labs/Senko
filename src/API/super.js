@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Guild } = require("discord.js");
+const { Guild, User } = require("discord.js");
 const { createClient } = require("@supabase/supabase-js");
 const { Bitfield } = require("bitfields");
 // const extend = require("extend");
@@ -11,21 +11,33 @@ const Supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 	detectSessionInUrl: true
 });
 
+/**
+ * @returns {Supabase}
+ */
 function fetchSupabaseApi() {
 	return Supabase;
 }
 
+/**
+ * @async
+ * @returns {JSON}
+ */
 async function fetchConfig() {
 	const { data } = await Supabase.from("config").select("*").eq("id", "all");
 
 	return data[0];
 }
 
+/**
+ * @async
+ * @returns {JSON}
+ */
 async function fetchMarket() {
 	return (await fetchConfig()).MarketItems;
 }
 
 /**
+ * @async
  * @param {Guild} guild
  */
 async function fetchSuperGuild(guild) {
@@ -37,6 +49,7 @@ async function fetchSuperGuild(guild) {
 }
 
 /**
+ * @async
  * @param {Guild} guild
  */
 async function makeSuperGuild(guild) {
@@ -76,6 +89,7 @@ async function makeSuperGuild(guild) {
 }
 
 /**
+ * @async
  * @param {Guild} guild
  * @param {JSON} Data
  */
@@ -93,6 +107,7 @@ async function updateSuperGuild(guild, Data) {
 }
 
 /**
+ * @async
  * @param {Guild} guild
  */
 async function deleteSuperGuild(guild) {
@@ -101,7 +116,12 @@ async function deleteSuperGuild(guild) {
 	console.log("Deleted super guild");
 }
 
-
+/**
+ * @async
+ * @param {User} user
+ * @param {boolean} dontMakeData
+ * @returns {JSON}
+ */
 async function fetchSuperUser(user, dontMakeData) {
 	const { data, error } = await Supabase.from("Users").select("*").eq("id", user.id);
 
@@ -113,6 +133,11 @@ async function fetchSuperUser(user, dontMakeData) {
 	return data[0];
 }
 
+/**
+ * @async
+ * @param {User} user
+ * @returns {JSON}
+ */
 async function makeSuperUser(user) {
 	await Supabase.from("Users").insert([{ id: user.id }]);
 
@@ -123,18 +148,19 @@ async function makeSuperUser(user) {
 	return data[0];
 }
 
+/**
+ * @async
+ * @param {User} user
+ * @param {JSON} Data
+ * @returns {boolean}
+ */
 async function updateSuperUser(user, Data) {
 	if (Data.LocalUser && Data.LocalUser.profileConfig.Currency.Yen >= 100000) Data.LocalUser.profileConfig.Currency.Yen = 100000;
 	if (Data.LocalUser && Data.LocalUser.profileConfig.Currency.Tofu >= 50) Data.LocalUser.profileConfig.Currency.Tofu = 50;
 
 	const { error } = await Supabase.from("Users").update(Data).eq("id", typeof user !== "string" ? user.id : user);
 
-	if (error) {
-		console.log(error);
-		return false;
-	}
-
-	return true;
+	return !error;
 }
 
 module.exports = {

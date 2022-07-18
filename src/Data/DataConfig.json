@@ -6,10 +6,10 @@
         "thirty": 30000
     },
     "clientPermissions": [
-        "EMBED_LINKS",
-        "ATTACH_FILES",
-        "USE_EXTERNAL_EMOJIS",
-        "ADD_REACTIONS",
-        "VIEW_CHANNEL"
+        "EmbedLinks",
+        "AttachFiles",
+        "UseExternalEmojis",
+        "AddReactions",
+        "ViewChannel"
     ]
 }

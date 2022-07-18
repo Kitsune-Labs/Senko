@@ -13,7 +13,7 @@ module.exports = {
 		{
 			name: "add",
 			type: 1,
-			description: "Add a channel",
+			description: "Add a channel that commands can be used in",
 			options: [
 				{
 					name: "channel",
@@ -26,7 +26,7 @@ module.exports = {
 		},
 		{
 			name: "remove",
-			description: "Remove a channel",
+			description: "Remove a channel that commands are used in",
 			type: 1,
 			options: [
 				{
@@ -40,12 +40,12 @@ module.exports = {
 		},
 		{
 			name: "list",
-			description: "List all channels",
+			description: "List all channels that commands can be used in",
 			type: 1
 		},
 		{
 			name: "remove-all-channels",
-			description: "Remove all channels",
+			description: "Remove all channels that commands are used in",
 			type: 1
 		},
 		{

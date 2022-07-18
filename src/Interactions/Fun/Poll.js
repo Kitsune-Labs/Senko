@@ -59,6 +59,12 @@ module.exports = {
 			description: "Option 8",
 			type: 3,
 			required: false
+		},
+		{
+			name: "option-9",
+			description: "Option 9",
+			type: 3,
+			required: false
 		}
 	],
 	usableAnywhere: true,

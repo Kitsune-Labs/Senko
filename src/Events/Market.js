@@ -1,8 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Client } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { getName } = require("../API/Master.js");
-// eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
 
 const { fetchConfig, updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super.js");
@@ -50,7 +48,7 @@ module.exports = {
 				if (accountData.LocalUser.profileConfig.Inventory[itemName] && accountData.LocalUser.profileConfig.Inventory[itemName] >= shopItem.max) return interaction.reply({
 					embeds: [
 						{
-							title: `${Icons.exclamation}  Sorry ${getName(interaction)}`,
+							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
 							description: `You may only have **${shopItem.max}** total!`,
 							color: SenkoClient.colors.dark,
 							thumbnail: {
@@ -64,7 +62,7 @@ module.exports = {
 				if (accountData.LocalUser.profileConfig.Currency.Yen < shopItem.price) return interaction.reply({
 					embeds: [
 						{
-							title: `${Icons.exclamation}  Sorry ${getName(interaction)}`,
+							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
 							description: "You don't have enough Yen!",
 							color: SenkoClient.colors.dark,
 							thumbnail: {
@@ -149,7 +147,7 @@ module.exports = {
 							description: "I'll put back your item and hopefully you can buy it next time!",
 							color: SenkoClient.colors.dark,
 							thumbnail: {
-								url: "attachment://image.png"
+								url: "https://assets.senkosworld.com/media/senko/smile.png"
 							}
 						}
 					],

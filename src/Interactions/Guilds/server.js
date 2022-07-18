@@ -41,7 +41,7 @@ module.exports = {
 						{
 							name: "channel",
 							description: "Channel",
-							type: "CHANNEL",
+							type: 7,
 							required: true
 						}
 					]
@@ -66,7 +66,7 @@ module.exports = {
 						{
 							name: "channel",
 							description: "Channel",
-							type: "CHANNEL",
+							type: 7,
 							required: true
 						}
 					]

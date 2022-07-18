@@ -1,10 +1,10 @@
 const { randomArrayItem } = require("@kitsune-labs/utilities");
 
 module.exports = {
-	dark: "#4690FF",
-	light: "#FFFFF9",
-	blue: "#242E40",
-	light_red: "#e70034",
-	dark_red: "#b5011e",
-	random: () => randomArrayItem(["#FF7C7C", "#4690FF", "#FF9933"])
+	dark: 0x4690FF,
+	light: 0xFFFFF9,
+	blue: 0x242E40,
+	light_red: 0xFF7C7C,
+	dark_red: 0xb5011e,
+	random: () => randomArrayItem([this.light_red, this.blue, this.light])
 };

@@ -20,7 +20,8 @@ module.exports = {
      */
 	start: async (SenkoClient, interaction) => {
 		interaction.reply({
-			content: owoify(cleanUserString(interaction.options.getString("text")))
+			content: owoify(cleanUserString(interaction.options.getString("text"))),
+			ephemeral: true
 		});
 	}
 };

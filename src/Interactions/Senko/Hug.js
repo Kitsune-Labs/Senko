@@ -29,7 +29,7 @@ module.exports = {
 		{
 			name: "user",
 			description: "Hug someone",
-			type: "USER"
+			type: 6
 		}
 	],
 	defer: true,

@@ -48,7 +48,6 @@ SenkoClient.once("ready", async () => {
 	print("#FF6633", "Senko", "Started\n");
 
 	let commands = SenkoClient.application.commands;
-	// return commands.set([]);
 	if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
 	// return commands.set([]);
@@ -81,7 +80,7 @@ SenkoClient.once("ready", async () => {
 
 	const commandsToSet = [];
 
-	if (process.env.NIGHTLY !== "true") {
+	if (process.env.NIGHTLY == "true") {
 		readdirSync("./src/Interactions/").forEach(async Folder => {
 			const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
 

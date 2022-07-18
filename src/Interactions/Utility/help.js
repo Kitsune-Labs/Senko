@@ -20,7 +20,7 @@ module.exports = {
 						name: "Index"
 					},
 					title: "📑 Messenger Index",
-					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\nPing: ${Math.floor(SenkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy*\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
+					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\nPing: ${Math.floor(SenkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
 					color: SenkoClient.colors.random()
 				}
 			],

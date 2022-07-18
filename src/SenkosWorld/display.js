@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, Colors } = require("discord.js");
 
 module.exports = {
 	name: "display",
@@ -53,15 +53,15 @@ module.exports = {
 						image: {
 							url: "https://media.discordapp.net/attachments/956732513261334568/960222673613496400/Senkos_World_Welcome_Banner.png"
 						},
-						color: "#fc844c"
+						color: 0xfc844c
 					},
 					{
 						description: "**Follow Discord's Community Guidelines & Terms of Service**\n> [discord.com/guidelines](https://discord.com/guidelines) - [discord.com/terms](https://discord.com/terms)\n\n**Respect Everyone**\n> Yes, even if you don't like them!\n> Do not post media that could induce epilepsy or seizures without a **visible** warning\n\n**No age-gated content (aka 18+/NSFW content)**\n> Do not ask for it.\n\n**No dark humor**\n> Please do not send dark humor jokes or other dark humor content.\n\n**No War Content**\n> This is not the server for it, find another server that has that topic.",
-						color: "#fc844c"
+						color: 0xfc844c
 					},
 					{
 						description: "Ban Appeals can be found at [senkosworld.com/appeal](https://senkosworld.com/appeal)\n\nStaff applications can be found at [senkosworld.com/apply](https://senkosworld.com/apply)",
-						color: "#fc844c"
+						color: 0xfc844c
 					}
 				],
 				components: [
@@ -159,7 +159,7 @@ module.exports = {
 				embeds: [
 					{
 						title: "🌸 Frequently asked Questions 🌸",
-						color: "DARK_BUT_NOT_BLACK"
+						color: Colors.DarkButNotBlack
 					},
 					{
 						title: "Level Permissions",

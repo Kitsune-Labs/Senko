@@ -1,6 +1,6 @@
 const { randomArrayItem: randomArray, randomNumber, wait, spliceArray } = require("@kitsune-labs/utilities");
 // eslint-disable-next-line no-unused-vars
-const { User, Interaction, Permissions } = require("discord.js");
+const { User, Interaction } = require("discord.js");
 const { updateSuperUser, fetchSuperUser } = require("./super");
 const Achievements = require("../Data/Achievements.json");
 const config = require("../Data/DataConfig.json");
@@ -13,6 +13,7 @@ const bits = require("./Bits.json");
  * @param {String} Color
  * @param {String} Type
  * @param {String} content
+ * @returns {}
  */
 function print(Color, Type, content) {
 	console.log(`[${chalk.hex(Color || "#252525").underline(Type)}]: ${content}`);
@@ -20,21 +21,17 @@ function print(Color, Type, content) {
 
 /**
  * @param {String} string
+ * @returns {String}
  */
 function stringEndsWithS(string) {
 	return string.endsWith("s") ? `${string}'` : `${string}'s`;
 }
 
 /**
- * @param {Interaction} interaction
- */
-function getName(interaction) {
-	return interaction.member.nickname || interaction.member.user.username;
-}
-
-/**
+ * @async
  * @param {User} message.author
  * @param {Number} amount
+ * @returns {}
  */
 async function addYen(user, amount) {
 	let Data = await fetchSuperUser(user);
@@ -46,8 +43,10 @@ async function addYen(user, amount) {
 }
 
 /**
+ * @async
  * @param {User} user
  * @param {Number} amount
+ * @returns {}
  */
 async function removeYen(user, amount) {
 	let Data = await fetchSuperUser(user);
@@ -59,93 +58,34 @@ async function removeYen(user, amount) {
 }
 
 /**
+ * @async
  * @param {Interaction} interaction
- * @param {String} Permission
- */
-function hasPerm(interaction, Permission) {
-	if (interaction.member.permissions.has(Permission)) return true;
-	return false;
-}
-
-/**
- * @param {Interaction} interaction
- * @param {String} Permission
- * @param {Number} ClientID
- */
-function selfPerm(interaction, Permission, ClientID) {
-	if (interaction.guild.members.cache.get(ClientID ? ClientID : process.SenkoClient.user.id).permissions.has(Permission)) return true;
-	return false;
-}
-
-/**
- * @param {Interaction} interaction
- * @param {String} Permission
+ * @param {boolean}
  */
 async function CheckPermission(interaction, Permission) {
-	let perms = interaction.channel.permissionsFor(interaction.user, Permission);
-	const bitPermissions = new Permissions(perms.bitfield);
-	const Result = bitPermissions.has([Permissions.FLAGS[Permission]]);
-
-	if (Result) return true;
-	return false;
+	return interaction.memberPermissions.has(Permission);
 }
 
-async function rateLimitCoolDown(interaction, RateLimits, Stat) {
-	const TimeStamp = Date.now();
-
-	if (!config.cooldowns.daily - (TimeStamp - RateLimits[Stat].Date) >= 0) {
-		RateLimits[Stat].Amount = 0;
-		RateLimits[Stat].Date = TimeStamp;
-
-		await updateSuperUser(interaction.user, {
-			RateLimits: RateLimits
-		});
-
-		return {
-			maxed: false,
-			current: RateLimits[Stat].Amount,
-			TimeStamp: TimeStamp
-		};
-	}
-
-	return {
-		maxed: true,
-		current: RateLimits[Stat].Amount,
-		TimeStamp: TimeStamp
-	};
-}
-
-async function addStats(interaction, CurrentStats, Stat) {
-	CurrentStats.RateLimits[Stat].Amount = CurrentStats.Amount++;
-	CurrentStats.RateLimits[Stat].Date = Date.now();
-
-	await updateSuperUser(interaction.user, {
-		RateLimits: CurrentStats.RateLimits
-	});
-}
-
+/**
+ * @deprecated
+ */
 function randomBummedImageName() {
-	const Images = [
-		"huh",
-		"think"
-	];
-
-	return randomArray(Images);
+	return randomArray(["huh", "think"]);
 }
 
+/**
+ * @param {string} Content
+ * @returns {string}
+ */
 function clean(Content) {
 	return Content.toString().replace(/`/g, `\`${String.fromCharCode(8203)}`).replace(/@/g, `@${String.fromCharCode(8203)}`);
 }
 
-const Characters = ["\"", "'", "\\", "/", "!", "~", "`", "_", "-", "|", "{", "}", "[", "]", ";", ":", ">", "<", ",", ".", "=", "+", "*", "\n"];
-
-function strip(Content) {
-	for (var char of Characters) {
-		Content = Content.replaceAll(char, "");
-	}
-	return Content;
-}
-
+/**
+ * @async
+ * @param {Interaction} interaction
+ * @returns
+ */
 async function disableComponents(interaction) {
 	for (var component of interaction.message.components[0].components) {
 		component.disabled = true;
@@ -156,19 +96,19 @@ async function disableComponents(interaction) {
 	});
 }
 
+/**
+ * @param {number} LastDate
+ * @param {number} Cooldown
+ * @returns {boolean}
+ */
 function calcTimeLeft(LastDate, Cooldown) {
 	return Date.now() - LastDate > Cooldown;
-}
-
-function insertString(firstString, index, string) {
-	if (index > 0) return firstString.substring(0, index) + string + firstString.substr(index);
-	return string + firstString;
 }
 
 /**
  * @param {Interaction} interaction
  * @param {String} AchievementName
- * @returns {Boolean}
+ * @returns {}
  * @deprecated
  */
 async function awardAchievement(interaction, AchievementName) {
@@ -221,6 +161,10 @@ async function awardAchievement(interaction, AchievementName) {
 	});
 }
 
+/**
+ * @param {string} string
+ * @returns {string}
+ */
 function cleanUserString(string) {
 	return string.replaceAll("s/eese popc/ild p", "[blocked]").replaceAll("s eese popc ild p", "[blocked]").replaceAll("seese popc ild p", "[blocked]");
 }
@@ -232,20 +176,13 @@ module.exports = {
 	stringEndsWithS,
 	addYen,
 	removeYen,
-	hasPerm,
-	selfPerm,
-	getName,
 	CheckPermission,
-	rateLimitCoolDown,
-	addStats,
 	randomNumber,
 	randomBummedImageName,
 	randomArray,
 	clean,
-	strip,
 	disableComponents,
 	calcTimeLeft,
-	insertString,
 	awardAchievement,
 	cleanUserString
 };

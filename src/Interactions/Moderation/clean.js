@@ -12,13 +12,15 @@ module.exports = {
 			name: "amount",
 			description: "The amount of messages to delete",
 			required: true,
-			type: "NUMBER",
+			type: 10,
 			minValue: 1,
 			maxValue: 100
 		}
 	],
 	usableAnywhere: true,
 	category: "admin",
+	defer: true,
+	ephemeral: true,
 
 	/**
      * @param {Client} SenkoClient
@@ -26,12 +28,11 @@ module.exports = {
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
-			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
-			ephemeral: true
+		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.followUp({
+			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
 		});
 
-		if (!CheckPermission(interaction, "MANAGE_MESSAGES")) return interaction.reply({
+		if (!CheckPermission(interaction, "MANAGE_MESSAGES")) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",
@@ -41,11 +42,10 @@ module.exports = {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
-			],
-			ephemeral: true
+			]
 		});
 
-		if (!interaction.member.permissions.has("MANAGE_MESSAGES")) return interaction.reply({
+		if (!interaction.member.permissions.has("MANAGE_MESSAGES")) return interaction.followUp({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -55,24 +55,18 @@ module.exports = {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
 				}
-			],
-			ephemeral: true
+			]
 		});
 
 		const amount = interaction.options.getNumber("amount");
 
 		interaction.channel.bulkDelete(amount).then((data) => {
-			interaction.reply({
+			interaction.followUp({
 				content: data.size > 1 ? `I have removed ${data.size} messages` : `I have removed ${data.size} message`
-			}).then(()=>{
-				setTimeout(() => {
-					interaction.deleteReply();
-				}, 5000);
 			});
 		}).catch(error => {
-			interaction.reply({
-				content: `There was an error!\n\n__${error}__`,
-				ephemeral: true
+			interaction.followUp({
+				content: `There was an error!\n\n__${error}__`
 			});
 		});
 	}

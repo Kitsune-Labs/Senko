@@ -12,7 +12,7 @@ module.exports = {
 		{
 			name: "warn-id",
 			description: "The ID of the warn",
-			type: "STRING",
+			type: 3,
 			required: true
 		}
 	],

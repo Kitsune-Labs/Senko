@@ -44,7 +44,7 @@ module.exports = {
 			files: AvatarURL ? null : [{ attachment: "./src/Data/content/DiscordAvatar.png", name: "image.png" }],
 			components: [
 				{
-					type: "ACTION_ROW",
+					type: 1,
 					components: [
 						{ type: 2, label: "Avatar", style: 5, url: AvatarURL ? AvatarURL : "https://discord.com/404", disabled: AvatarURL ? false : true },
 						{ type: 2, label: "Banner", style: 5, url: "https://discord.com/404", disabled: true }

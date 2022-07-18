@@ -15,7 +15,7 @@ module.exports = {
 			name: "user",
 			description: "Someone else",
 			required: false,
-			type: "USER"
+			type: 6
 		}
 	],
 	defer: true,
@@ -48,7 +48,7 @@ module.exports = {
 					image: {
 						url: `attachment://${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png"}`
 					},
-					color: accountData.LocalUser.profileConfig.cardColor || SenkoClient.colors.light
+					color: parseInt(accountData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || SenkoClient.colors.light
 				}
 			],
 			files: [{ attachment: `src/Data/content/banners/${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner : ShopItems.DefaultBanner.banner}`, name: ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png" }]

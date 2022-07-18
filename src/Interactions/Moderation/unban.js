@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, Colors } = require("discord.js");
 const { CheckPermission } = require("../../API/Master");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
@@ -12,12 +12,12 @@ module.exports = {
 			name: "user-id",
 			description: "User Id",
 			required: true,
-			type: "STRING"
+			type: 3 //? Might make this an interger | https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType#Integer
 		},
 		{
 			name: "reason",
 			description: "Why is this user unbanned?",
-			type: "STRING"
+			type: 3
 		}
 	],
 	usableAnywhere: true,
@@ -87,7 +87,7 @@ module.exports = {
 					{
 						title: "Action Report - Kitsune Pardoned",
 						description: `${userId} [${userId || "000000000000000000"}]\nReason: ${unbanReason || "No reason given"}`,
-						color: "GREEN",
+						color: Colors.Green,
 						author: {
 							name: `${interaction.user.tag}  [${interaction.user.id}]`,
 							icon_url: `${interaction.user.displayAvatarURL({ dynamic: true })}`

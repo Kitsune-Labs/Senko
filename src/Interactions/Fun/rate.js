@@ -35,7 +35,6 @@ module.exports = {
 		if (Item.toLowerCase() === "senko" || Item.toLowerCase() === "senko-san") {
 			MessageBuild.embeds[0].title = "I don't need to think!";
 			MessageBuild.embeds[0].description = "I'm obviously a 10/10!";
-			spliceArray(MessageBuild.files, 0);
 
 			MessageBuild.thumbnail.url = "https://assets.senkosworld.com/media/senko/bless.png";
 		}

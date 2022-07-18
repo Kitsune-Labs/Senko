@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, Interaction, Colors } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
@@ -14,37 +14,37 @@ module.exports = {
 			name: "user",
 			description: "The user to ban",
 			required: true,
-			type: "USER"
+			type: 6
 		},
 		{
 			name: "reason",
 			description: "The reason for the ban",
-			type: "STRING"
+			type: 3
 		},
 		{
 			name: "dm",
 			description: "Send a DM to the user (Default True)",
-			type: "BOOLEAN"
+			type: 6
 		},
 		{
 			name: "user2",
 			description: "The 2nd user to ban",
-			type: "USER"
+			type: 6
 		},
 		{
 			name: "user3",
 			description: "The 3rd user to ban",
-			type: "USER"
+			type: 6
 		},
 		{
 			name: "user4",
 			description: "The 4th user to ban",
-			type: "USER"
+			type: 6
 		},
 		{
 			name: "user5",
 			description: "The 5th user to ban",
-			type: "USER"
+			type: 6
 		}
 	],
 	usableAnywhere: true,
@@ -133,7 +133,7 @@ module.exports = {
 							{
 								title: "Ban error",
 								description: "You cannot ban yourself",
-								color: "YELLOW"
+								color: Colors.Yellow
 							}
 						]
 					});
@@ -143,7 +143,7 @@ module.exports = {
 							{
 								title: "Ban error",
 								description: `You cannot ban ${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw}, they either have a higher or equal role to yours.`,
-								color: "YELLOW"
+								color: Colors.Yellow
 							}
 						]
 					});
@@ -153,7 +153,7 @@ module.exports = {
 							{
 								title: "Ban error",
 								description: `You cannot ban ${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw}, they are the server owner.`,
-								color: "YELLOW"
+								color: Colors.Yellow
 							}
 						]
 					});
@@ -163,7 +163,7 @@ module.exports = {
 							{
 								title: "Ban error",
 								description: "You cannot ban me.",
-								color: "YELLOW"
+								color: Colors.Yellow
 							}
 						]
 					});
@@ -173,7 +173,7 @@ module.exports = {
 							{
 								title: "Action Report - Kitsune Banned",
 								description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} [${typeof userToOutlaw != "string" ? userToOutlaw.user.id : userToOutlaw}]\nReason: __${reason}__`,
-								color: "RED",
+								color: Colors.Red,
 								author: {
 									name: `${interaction.user.tag}  [${interaction.user.id}]`,
 									icon_url: `${interaction.user.displayAvatarURL({ dynamic: true })}`
@@ -187,7 +187,7 @@ module.exports = {
 							{
 								title: "Banned Kitsune",
 								description: `${typeof userToOutlaw != "string" ? userToOutlaw.user.tag : userToOutlaw} has been banned for __${reason}__\n\n${randomResponse.text}`,
-								color: "RED",
+								color: Colors.Red,
 								thumbnail: { url: `https://assets.senkosworld.com/media/senko/${randomResponse.image}.png` }
 							}
 						]
@@ -201,7 +201,7 @@ module.exports = {
 								{
 									title: `You have been banned from ${interaction.guild.name}`,
 									description: `Reason: ${reason}`, //\n\nAppeal: ${GuildData.OutlawAppealForm.replaceAll("[", "\\[").replaceAll("]", "\\]")}`,
-									color: "RED"
+									color: Colors.Red
 								}
 							]
 						}).catch(err => {

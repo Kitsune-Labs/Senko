@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, Interaction, Colors } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
@@ -14,12 +14,12 @@ module.exports = {
 			name: "user",
 			description: "The user to kick",
 			required: true,
-			type: "USER"
+			type: 6
 		},
 		{
 			name: "reason",
 			description: "The reason for the kick",
-			type: "STRING"
+			type: 3
 		}
 	],
 	/**
@@ -70,7 +70,7 @@ module.exports = {
 				{
 					title: "Kick error",
 					description: "You cannot kick yourself",
-					color: "YELLOW"
+					color: Colors.Yellow
 				}
 			],
 			ephemeral: true
@@ -81,7 +81,7 @@ module.exports = {
 				{
 					title: "Kick error",
 					description: `You cannot kick ${guildUser.user.tag}, they either have a higher or equal role to yours.`,
-					color: "YELLOW"
+					color: Colors.Yellow
 				}
 			],
 			ephemeral: true
@@ -92,7 +92,7 @@ module.exports = {
 				{
 					title: "Kick error",
 					description: "You cannot kick the server owner",
-					color: "YELLOW"
+					color: Colors.Yellow
 				}
 			],
 			ephemeral: true
@@ -105,7 +105,7 @@ module.exports = {
 				{
 					title: "Action Report - Kitsune Kicked",
 					description: `${typeof userToKick != "string" ? userToKick.tag : userToKick} [${typeof userToKick != "string" ? userToKick.id : userToKick}]\nReason: __${reason}__`,
-					color: "YELLOW",
+					color: Colors.Yellow,
 					author: {
 						name: `${interaction.user.tag}  [${interaction.user.id}]`,
 						icon_url: `${interaction.user.displayAvatarURL({ dynamic: true })}`
@@ -119,7 +119,7 @@ module.exports = {
 				{
 					title: "Kicked Kitsune",
 					description: `${typeof userToKick != "string" ? userToKick.tag : userToKick} has been kicked for __${reason}__`,
-					color: "RED"
+					color: Colors.Red
 				}
 			]
 		};
@@ -132,7 +132,7 @@ module.exports = {
 					{
 						title: `You have been kicked from ${interaction.guild.name}`,
 						description: `Reason: ${reason}`,
-						color: "ORANGE"
+						color: Colors.Orange
 					}
 				]
 			}).catch(err => {

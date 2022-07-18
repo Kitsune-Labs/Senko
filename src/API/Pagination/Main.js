@@ -1,11 +1,13 @@
 // eslint-disable-next-line no-unused-vars
-const { Interaction, MessageEmbed } = require("discord.js");
+const { Interaction, MessageEmbed, Embed } = require("discord.js");
 
 /**
+ * @async
  * @param {Interaction} interaction
  * @param {MessageEmbed[]} pages
- * @param {Number} timeout
- * @returns
+ * @param {number} timeout
+ * @param {boolean} isEphemeral
+ * @returns {Embed}
  */
 module.exports = async (interaction, pages, timeout = 120000, isEphemeral) => {
 	let page = 0;
@@ -15,18 +17,18 @@ module.exports = async (interaction, pages, timeout = 120000, isEphemeral) => {
 		fetchReply: true,
 		components: [
 			{
-				type: "ACTION_ROW",
+				type: 1,
 				components: [
 					{
-						type: "BUTTON",
+						type: 2,
 						emoji: "<:WhiteArrow1Left:943299054568374322>",
-						style: "PRIMARY",
+						style: 1,
 						custom_id: "page_left"
 					},
 					{
-						type: "BUTTON",
+						type: 2,
 						emoji: "<:WhiteArrow1Right:943299054580928582>",
-						style: "PRIMARY",
+						style: 1,
 						custom_id: "page_right"
 					}
 				]

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, Modal } = require("discord.js");
+const { Client, CommandInteraction, ModalBuilder } = require("discord.js");
 const { updateSuperUser } = require("../../API/super");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
@@ -29,8 +29,9 @@ module.exports = {
 	start: async (SenkoClient, interaction, guildData, accountData) => {
 		const commandType = interaction.options.getSubcommand();
 
+
 		if (commandType === "change") {
-			interaction.showModal(new Modal({
+			interaction.showModal(new ModalBuilder({
 				title: "About Me",
 				customId: "submit_about_me",
 				components: [

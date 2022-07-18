@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client } = require("discord.js");
+const { Client, Colors } = require("discord.js");
 const { print, clean, wait } = require("../API/Master.js");
 const { v4: uuidv4 } = require("uuid");
 const { fetchSuperGuild } = require("../API/super");
@@ -43,7 +43,7 @@ module.exports = {
 					{
 						title: "Message Deleted",
 						description: `Message URL\n${message.url}\n\n${message.author.tag} ||[${message.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${message.channel} ||[${message.channel.id}]||\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji URLs**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`,
-						color: "RED",
+						color: Colors.Red,
 						footer: {
 							text: `Case ${caseId}`
 						}
@@ -117,7 +117,7 @@ module.exports = {
 					{
 						title: "Message Updated",
 						description: `${oldMessage.author.tag} ||[${oldMessage.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${oldMessage.channel} ||[${oldMessage.channel.id}]||\n\n__**Old Message**__\`\`\`diff\n- ${clean(oldMessage.content)}\`\`\`\n__**New Message**__\`\`\`diff\n+ ${clean(newMessage.content)}\`\`\`\n${emojis.length > 0 ? `__**Old Message Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${oldMessage.stickers.size > 0 ? `\n__**Stickers**__${oldMessage.stickers.map(s => `\n${s.url}`)}` : ""}`,
-						color: "YELLOW",
+						color: Colors.Yellow,
 						footer: {
 							text: `Case ${caseId}`
 						}

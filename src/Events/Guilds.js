@@ -2,6 +2,7 @@ const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild, updateSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
 const { print, cleanUserString } = require("../API/Master.js");
+const { Colors } = require("discord.js");
 
 module.exports = {
 	/**
@@ -72,15 +73,14 @@ module.exports = {
 		SenkoClient.on("guildBanAdd", async (member) => {
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
-				type: "MEMBER_BAN_ADD"
+				type: 22
 			});
 
 			const banLog = fetchedLogs.entries.first();
-			if (banLog.executor.id === SenkoClient.user.id) return;
+			if (banLog.executor.id === SenkoClient.user.id || process.env.NIGHTLY === "true") return;
 
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
-
 
 			if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
 				(await member.guild.channels.fetch(guildData.ActionLogs)).send({
@@ -88,7 +88,7 @@ module.exports = {
 						{
 							title: "Action Report - Kitsune Banned",
 							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${banLog.reason || "None"}`,
-							color: "RED",
+							color: Colors.Red,
 							// thumbnail: {
 							//     url: member.user.displayAvatarURL({ dynamic: true })
 							// },
@@ -106,10 +106,12 @@ module.exports = {
 			if (member.guild.id === "777251087592718336") {
 				const fetchedLogs = await member.guild.fetchAuditLogs({
 					limit: 1,
-					type: "MEMBER_BAN_REMOVE"
+					type: 23
 				});
 
 				const banLog = fetchedLogs.entries.first();
+
+				if (banLog.executor.id === SenkoClient.user.id || process.env.NIGHTLY === "true") return;
 
 				const guildData = await fetchSuperGuild(member.guild);
 				var guildFlags = Bitfield.fromHex(guildData.flags);
@@ -120,7 +122,7 @@ module.exports = {
 							{
 								title: "Action Report - Kitsune Pardoned",
 								description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(banLog.reason) || "None"}`,
-								color: "GREEN",
+								color: Colors.Green,
 								thumbnail: {
 									url: member.user.displayAvatarURL({ dynamic: true })
 								},
@@ -136,6 +138,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberAdd", async (member) => {
+			if (process.env.NIGHTLY === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
 
 			if (guildData.MemberLogs) {
@@ -153,6 +156,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberRemove", async member => {
+			if (process.env.NIGHTLY === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
 
@@ -162,7 +166,7 @@ module.exports = {
 						{
 							title: "Kitsune Left",
 							description: `${member.user.tag} [${member.user.id}]`,
-							color: "YELLOW"
+							color: Colors.Yellow
 						}
 					]
 				});
@@ -172,7 +176,7 @@ module.exports = {
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
-				type: "MEMBER_KICK"
+				type: 20
 			});
 
 			const kickLog = fetchedLogs.entries.first();
@@ -184,7 +188,7 @@ module.exports = {
 						{
 							title: "Action Report - Kitsune Kicked",
 							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(kickLog.reason) || "None"}`,
-							color: "YELLOW",
+							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
 							},
@@ -199,11 +203,12 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async member => {
+			if (process.env.NIGHTLY === "true") return;
 			const guildData = await fetchSuperGuild(member.guild);
-			const guildFlags = await Bitfield.fromHex(guildData.flags);
+			const guildFlags = Bitfield.fromHex(guildData.flags);
 			member = await member.guild.members.fetch(member.id);
 
-			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return print("#FFFF66", "GUILD", "Member timeout's are disabled for this guild");
+			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return;
 
 			const rawAudit = await member.guild.fetchAuditLogs({ limit: 1 });
 
@@ -217,7 +222,7 @@ module.exports = {
 						{
 							title: "Action Report - Timeout Removed",
 							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]`,
-							color: "GREEN",
+							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
 							}
@@ -232,7 +237,7 @@ module.exports = {
 						{
 							title: "Action Report - Kitsune Timed Out",
 							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(audit.reason) || "None"}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
-							color: "YELLOW",
+							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
 							}

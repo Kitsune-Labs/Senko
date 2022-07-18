@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, Message } = require("discord.js");
+const { Client, CommandInteraction, Message, Colors } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { updateSuperGuild } = require("../../API/super");
@@ -15,17 +15,17 @@ module.exports = {
 			name: "user",
 			description: "The user to warn",
 			required: true,
-			type: "USER"
+			type: 6
 		},
 		{
 			name: "reason",
 			description: "Reason",
-			type: "STRING"
+			type: 3
 		},
 		{
 			name: "note",
 			description: "If you want to provide a note outside of the reason type it here",
-			type: "STRING"
+			type: 3
 		}
 	],
 	user_ui: {
@@ -78,7 +78,7 @@ module.exports = {
 				{
 					title: "Warned Kitsune",
 					description: `I have warned __${user.user.tag}__ for __${reason}__`,
-					color: "#FF6699"
+					color: 0xFF6699
 				}
 			]
 		};
@@ -116,7 +116,7 @@ module.exports = {
 					{
 						title: "Action Report - Kitsune Warned",
 						description: `${user.user.tag} [${user.id}]\nReason: ${warnStruct.reason}\nNote: ${warnStruct.note}`,
-						color: "YELLOW",
+						color: Colors.Yellow,
 						thumbnail: {
 							url: user.user.displayAvatarURL({ dynamic: true })
 						},
@@ -139,7 +139,7 @@ module.exports = {
 					{
 						title: `You have been warned in ${interaction.guild.name}`,
 						description: `Your reason: ${warnStruct.reason}\nNote: ${warnStruct.note}`,
-						color: "YELLOW"
+						color: Colors.Yellow
 					}
 				]
 			});

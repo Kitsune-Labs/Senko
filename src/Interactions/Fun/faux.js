@@ -8,39 +8,39 @@ module.exports = {
 	options: [
 		{
 			name: "translate",
-			description: "translate",
+			description: "Automatically decide for me",
 			type: 1,
 			options: [
 				{
 					name: "message",
 					description: "The message that will be encoded or decoded with FAUX",
-					type: "STRING",
+					type: 3,
 					required: true
 				}
 			]
 		},
 		{
 			name: "encode",
-			description: "encode",
+			description: "Encode a FAUX message",
 			type: 1,
 			options: [
 				{
 					name: "message",
 					description: "The message that will be encoded with FAUX",
-					type: "STRING",
+					type: 3,
 					required: true
 				}
 			]
 		},
 		{
 			name: "decode",
-			description: "decode",
+			description: "Decode a FAUX message",
 			type: 1,
 			options: [
 				{
 					name: "message",
 					description: "The message that will be decoded with FAUX",
-					type: "STRING",
+					type: 3,
 					required: true
 				}
 			]
