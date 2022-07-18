@@ -2,6 +2,7 @@ const DataConfig = require("../Data/DataConfig.json");
 const { CheckPermission, print } = require("../API/Master");
 const { fetchSuperGuild, fetchConfig, fetchSuperUser } = require("../API/super.js");
 const Icons = require("../Data/Icons.json");
+const { InteractionType } = require("discord.js");
 
 module.exports = {
 	/**
@@ -12,7 +13,7 @@ module.exports = {
          * @type {import("discord.js").InteractionCollector}
          */
 		SenkoClient.on("interactionCreate", async (interaction) => {
-			if (!interaction.isCommand() || interaction.user.bot || interaction.replied || !interaction.guild) return;
+			if (interaction.type !== InteractionType.ApplicationCommand || interaction.user.bot || interaction.replied || !interaction.guild) return;
 			const dataConfig = await fetchConfig();
 
 			dataConfig.OutlawedUsers = JSON.parse(dataConfig.OutlawedUsers);

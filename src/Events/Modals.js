@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client } = require("discord.js");
+const { Client, InteractionType } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const { print, cleanUserString } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
@@ -14,7 +14,7 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async (interaction) => {
-			if (!interaction.isModalSubmit()) return;
+			if (interaction.type !== InteractionType.ModalSubmit) return;
 			const accountData = await fetchSuperUser(interaction.user);
 
 			switch(interaction.customId) {

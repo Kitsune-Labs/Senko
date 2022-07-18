@@ -4,7 +4,7 @@ const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
-	intents: ["GUILDS", "GUILD_BANS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"],
+	intents: ["Guilds", "GuildBans", "GuildMembers"],
 
 	allowedMentions: {
 		parse: ["users", "roles"],

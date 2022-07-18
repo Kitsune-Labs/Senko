@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../../Data/Icons.json");
-const { randomArray, randomNumber, addYen, awardAchievement, calcTimeLeft } = require("../../API/Master.js");
-const config = require("../../Data/DataConfig.json");
-const { updateSuperUser } = require("../../API/super");
+const Icons = require("../Data/Icons.json");
+const { randomArray, randomNumber, addYen, awardAchievement, calcTimeLeft } = require("../API/Master.js");
+const config = require("../Data/DataConfig.json");
+const { updateSuperUser } = require("../API/super");
 
 const reactions = [
 	{
