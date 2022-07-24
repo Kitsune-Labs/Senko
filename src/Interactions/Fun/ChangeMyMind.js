@@ -22,7 +22,14 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	start: async (senkoClient, interaction, guildData, accountData) => {
 		interaction.reply({
-			content: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.get("text").value}`)
+			embeds: [
+				{
+					image: {
+						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.get("text").value}`)
+					},
+					color: senkoClient.colors.light
+				}
+			]
 		});
 	}
 };

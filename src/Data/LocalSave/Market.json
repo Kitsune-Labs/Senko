@@ -136,7 +136,7 @@
         "price": 500,
         "amount": 1,
         "max": 1,
-        "color": "PURPLE",
+        "color": "0x9900cc",
         "type": "color",
         "autoSale": true
     },
