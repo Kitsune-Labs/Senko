@@ -7,6 +7,9 @@ const Paginate = require("../../API/Pagination/Main");
 module.exports = {
 	name: "warns",
 	desc: "View warns for a user",
+	defer: false,
+	usableAnywhere: true,
+	category: "admin",
 	options: [
 		{
 			name: "user",
@@ -14,9 +17,6 @@ module.exports = {
 			type: 6
 		}
 	],
-	defer: false,
-	usableAnywhere: true,
-	category: "admin",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient

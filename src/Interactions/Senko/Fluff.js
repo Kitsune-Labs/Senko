@@ -99,8 +99,8 @@ module.exports = {
 		const MessageStruct = {
 			embeds: [
 				{
-					title: `${randomArray(Sounds)}`,
-					description: `${randomArray(Responses)}\n\n*${randomArray(UserInput).replace("_USER_", interaction.user.username)}*`,
+					title: randomArray(UserInput).replace("_USER_", interaction.user.username),
+					description: randomArray(Responses),
 					color: SenkoClient.colors.light,
 					thumbnail: {
 						url: `https://assets.senkosworld.com/media/senko/${randomArray(["fluffed", "fluffed2", "pout"])}.png`

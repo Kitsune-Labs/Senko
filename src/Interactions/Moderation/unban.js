@@ -7,6 +7,9 @@ const bits = require("../../API/Bits.json");
 module.exports = {
 	name: "unban",
 	desc: "Unban a user",
+	usableAnywhere: true,
+	category: "admin",
+	permissions: ["BanMembers"],
 	options: [
 		{
 			name: "user-id",
@@ -20,8 +23,6 @@ module.exports = {
 			type: 3
 		}
 	],
-	usableAnywhere: true,
-	category: "admin",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
@@ -33,7 +34,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("BAN_MEMBERS")) return interaction.reply({
+		if (!interaction.member.permissions.has("BanMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -47,7 +48,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction, "BAN_MEMBERS")) return interaction.reply({
+		if (!CheckPermission(interaction, "BanMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",

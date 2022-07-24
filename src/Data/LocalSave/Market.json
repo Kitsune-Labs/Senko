@@ -1,6 +1,6 @@
 {
     "DefaultBanner": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Default Banner",
         "desc": "The banner everyone gets",
         "price": 0,
@@ -10,7 +10,7 @@
         "onsale": false
     },
     "kitsunebi_orange": {
-        "class": "material",
+        "class": "Materials",
         "name": "Kitsune Bi - Orange",
         "desc": "Maybe it can be used to craft a title?",
         "price": 200,
@@ -18,7 +18,7 @@
         "onsale": false
     },
     "kitsunebi_red": {
-        "class": "material",
+        "class": "Materials",
         "name": "Kitsune Bi - Red",
         "desc": "Maybe it can be used to craft a title?",
         "price": 200,
@@ -26,7 +26,7 @@
         "onsale": false
     },
     "kitsunebi_blue": {
-        "class": "material",
+        "class": "Materials",
         "name": "Kitsune Bi - Blue",
         "desc": "Maybe it can be used to craft a title?",
         "price": 200,
@@ -34,7 +34,7 @@
         "onsale": false
     },
     "divine_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Divine Title",
         "desc": "Adds \"Divine\" to your profile name",
         "price": 777,
@@ -44,7 +44,7 @@
         "autoSale": true
     },
     "sakurashiro": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Shiro Sakura Banner",
         "desc": "Shiro with some sakura on the edges!",
         "price": 777,
@@ -55,7 +55,7 @@
         "banner": "SakuraShiro.png"
     },
     "pumpkinpie": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Pumpkin Pie",
         "desc": "Perfectly spiced.",
         "price": 400,
@@ -63,7 +63,7 @@
         "autoSale": true
     },
     "pumpkin": {
-        "class": "material",
+        "class": "Materials",
         "name": "Pumpkin",
         "desc": "An orange colored sphere.",
         "price": 100,
@@ -71,7 +71,7 @@
         "autoSale": true
     },
     "chestnuts": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Chestnuts",
         "desc": "くり",
         "price": 500,
@@ -79,7 +79,7 @@
         "autoSale": true
     },
     "apples": {
-        "class": "food",
+        "class": "Consumables",
         "name": "3 Apples",
         "desc": "\"Fruits of autumn\"",
         "price": 300,
@@ -87,7 +87,7 @@
         "autoSale": true
     },
     "senkokeychain": {
-        "class": "general",
+        "class": "Misc",
         "name": "Senko tail key-chain",
         "desc": "The softest tail made",
         "price": 3000,
@@ -95,7 +95,7 @@
         "autoSale": true
     },
     "shirokeychain": {
-        "class": "general",
+        "class": "Misc",
         "name": "Shiro tail key-chain",
         "desc": "Shiro won't like this I bet",
         "price": 3000,
@@ -103,7 +103,7 @@
         "autoSale": true
     },
     "yozorakeychain": {
-        "class": "general",
+        "class": "Misc",
         "name": "Yozora tail key-chain",
         "desc": "What will Yozora think of this?",
         "price": 3000,
@@ -111,7 +111,7 @@
         "autoSale": true
     },
     "tiny_green_hat": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Tiny Green Hat Badge",
         "desc": "It has a beak like a bird.",
         "price": 100,
@@ -120,7 +120,7 @@
         "autoSale": true
     },
     "purrfect_loaf": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Purrfect Loaf Badge",
         "desc": "A freshly baked loaf of bread to brighten your day",
         "price": 100,
@@ -130,7 +130,7 @@
         "autoSale": true
     },
     "color_purple": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Purple Card Color",
         "desc": "Make your profile card purple like Yozora!",
         "price": 500,
@@ -150,7 +150,7 @@
         "source": "Limited time item that was sold for 5 hours for Easter 2021"
     },
     "raspberrybox": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Raspberry Box",
         "desc": "Freshly Picked!",
         "price": 500,
@@ -158,7 +158,7 @@
         "autoSale": true
     },
     "yokodoll": {
-        "class": "general",
+        "class": "Misc",
         "name": "Yokodoll",
         "desc": "A little yoko doll of Nakano.",
         "price": 750,
@@ -166,7 +166,7 @@
         "autoSale": true
     },
     "sakurroseawine": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Sakura Rose Wine",
         "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
         "price": 300,
@@ -174,7 +174,7 @@
         "autoSale": true
     },
     "yakitori": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Yakitori",
         "desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
         "price": 947,
@@ -182,7 +182,7 @@
         "autoSale": true
     },
     "omurice": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Omurice",
         "desc": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
         "price": 712,
@@ -190,7 +190,7 @@
         "autoSale": true
     },
     "hojicha": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Hojicha",
         "desc": "Low in caffeine, delicious, and an alternative to coffee!",
         "price": 1754,
@@ -198,7 +198,7 @@
         "autoSale": true
     },
     "taiyaki": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Taiyaki",
         "desc": "Fish-shaped cake with a read bean paste filling.",
         "price": 636,
@@ -206,7 +206,7 @@
         "autoSale": true
     },
     "udon": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Udon",
         "desc": "Some comforting food.",
         "price": 100,
@@ -214,7 +214,7 @@
         "autoSale": true
     },
     "sushi": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Sushi",
         "desc": "Seafood is great! You should try it out",
         "price": 181,
@@ -222,7 +222,7 @@
         "autoSale": true
     },
     "bento": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Bento",
         "desc": "Hey, hey! Can I take some of your rice?",
         "price": 305,
@@ -230,7 +230,7 @@
         "autoSale": true
     },
     "ramen": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Ramen",
         "desc": "Ramen is delicious.",
         "price": 283,
@@ -238,7 +238,7 @@
         "autoSale": true
     },
     "ozoni": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Ozoni",
         "desc": "It isn't new years, yet",
         "price": 283,
@@ -246,7 +246,7 @@
         "autoSale": true
     },
     "senkobanner_1": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Senko Manga Banner",
         "desc": "A banner made of Senkos from the manga!",
         "price": 7777,
@@ -255,7 +255,7 @@
         "banner": "SenkoBanner.png"
     },
     "thehelpfulfoxsenko": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Rustic Senko Pout Banner",
         "desc": "A relic from the past, This helpful fox Senko-san is here for your pampering needs!",
         "price": 7777,
@@ -264,7 +264,7 @@
         "banner": "TheHelpfulFoxSenko-san.png"
     },
     "dango": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Dango",
         "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
         "price": 210,
@@ -272,7 +272,7 @@
         "autoSale": true
     },
     "greentea": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Green Tea",
         "desc": "Its actually quite good",
         "price": 130,
@@ -280,7 +280,7 @@
         "autoSale": true
     },
     "md_1": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 1 - Holy World",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -288,7 +288,7 @@
         "autoSale": true
     },
     "md_2": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 2 - Theme of Senko",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -296,7 +296,7 @@
         "autoSale": true
     },
     "md_3": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 3 - In a fluster",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -304,7 +304,7 @@
         "autoSale": true
     },
     "md_4": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 4 - Happy Circle",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -312,7 +312,7 @@
         "autoSale": true
     },
     "md_5": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 5 - Chill out",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -320,7 +320,7 @@
         "autoSale": true
     },
     "md_6": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 6 - Mofumofu Time",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -328,7 +328,7 @@
         "autoSale": true
     },
     "md_7": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 7 - Restless",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -336,7 +336,7 @@
         "autoSale": true
     },
     "md_8": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 8 - Exhausted Nakano",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -344,7 +344,7 @@
         "autoSale": true
     },
     "md_9": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 9 - Sleeping on her lap",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -352,7 +352,7 @@
         "autoSale": true
     },
     "md_10": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 10 - Refresh",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -360,7 +360,7 @@
         "autoSale": true
     },
     "md_11": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 11 - Senko's tear",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -368,7 +368,7 @@
         "autoSale": true
     },
     "md_12": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 12 - Reminiscences of childhood",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -376,7 +376,7 @@
         "autoSale": true
     },
     "md_13": {
-        "class": "general",
+        "class": "Music",
         "name": "Music Disk 13 - Emergency",
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
@@ -384,7 +384,7 @@
         "autoSale": true
     },
     "md_14": {
-        "class": "general",
+        "class": "Music",
         "name": "Special Music Disk 1 - I got you",
         "desc": "eng",
         "price": 7777777,
@@ -392,8 +392,8 @@
         "autoSale": false
     },
     "sknss_v1": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 1. Ch. 1",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 1",
         "desc": "The first tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -402,8 +402,8 @@
         "autoSale": true
     },
     "sknss_v2": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 1. Ch. 2",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 2",
         "desc": "The second tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -412,8 +412,8 @@
         "autoSale": true
     },
     "sknss_v3": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 1. Ch. 3",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 3",
         "desc": "The third tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -422,8 +422,8 @@
         "autoSale": true
     },
     "sknss_v4": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 1. Ch. 4",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 4",
         "desc": "The fourth tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -432,8 +432,8 @@
         "autoSale": true
     },
     "sknss_v5": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 1. Ch. 5",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 5",
         "desc": "The fifth tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -442,8 +442,8 @@
         "autoSale": true
     },
     "sknss_v6": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 1. Ch. 6",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 6",
         "desc": "The sixth tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -452,8 +452,8 @@
         "autoSale": true
     },
     "sknss_v7": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 1. Ch. 7",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 7",
         "desc": "The seventh tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -462,8 +462,8 @@
         "autoSale": true
     },
     "sknss_v8": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 2. Ch. 8",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 2. Ch. 8",
         "desc": "The eighth tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -471,8 +471,8 @@
         "autoSale": true
     },
     "sknss_v10": {
-        "class": "general",
-        "name": "Sewayaki Kitsune no Senko-san Manga - Vol 2. Ch. 10",
+        "class": "Manga",
+        "name": "Sewayaki Kitsune no Senko-san - Vol 2. Ch. 10",
         "desc": "The tenth tail of the Sewayaki Kitsune no Senko-san manga!",
         "price": 500,
         "amount": 1,
@@ -480,7 +480,7 @@
         "autoSale": true
     },
     "tempura": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Tempura",
         "desc": "Tempura is a dish of battered and fried fish, seafood, or vegetables. This one has vegetables.",
         "price": 300,
@@ -488,7 +488,7 @@
         "autoSale": true
     },
     "kaiseki": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Kaiseki",
         "desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
         "price": 500,
@@ -496,7 +496,7 @@
         "autoSale": true
     },
     "tsukemono": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Tsukemono",
         "desc": "Traditional pickles that have been eaten in Japan since prehistoric times. Extremely healthy too!",
         "price": 300,
@@ -504,7 +504,7 @@
         "autoSale": true
     },
     "soba": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Soba",
         "desc": "Very delicious & healthy, Also similar to Udon.",
         "price": 1000,
@@ -512,7 +512,7 @@
         "autoSale": true
     },
     "color_white": {
-        "class": "profile",
+        "class": "Colors",
         "name": "White Card Color",
         "desc": "Make your profile card white like Shiro!",
         "price": 500,
@@ -523,7 +523,7 @@
         "autoSale": true
     },
     "Christmas_Banner_21": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Senko's Christmas Present Banner",
         "desc": "I hope it's everyone's favorite holiday!",
         "price": 500,
@@ -532,7 +532,7 @@
         "banner": "ChristmasBanner21.png"
     },
     "CandyCane": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Candy Cane",
         "desc": "A tiny candy cane badge",
         "price": 100,
@@ -549,7 +549,7 @@
         "onsale": false
     },
     "snowflake": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Snowflake",
         "desc": "A snowflake badge",
         "price": 100,
@@ -558,7 +558,7 @@
         "badge": "<a:snowflake_a:917908202459390042>"
     },
     "holly_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Holly Title",
         "desc": "Adds \"Holly\" to your profile name",
         "price": 777,
@@ -566,7 +566,7 @@
         "title": "🎁 Holly"
     },
     "color_red": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Red Card Color",
         "desc": "Make your profile card red!",
         "price": 500,
@@ -577,7 +577,7 @@
         "autoSale": true
     },
     "ChristmasTree": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Christmas Tree Badge",
         "desc": "Adds a Christmas Tree to your profile",
         "price": 100,
@@ -586,7 +586,7 @@
         "badge": "🎄"
     },
     "color_teal": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Teal Card Color",
         "desc": "I think it has to do with ice?",
         "price": 300,
@@ -597,7 +597,7 @@
         "autoSale": true
     },
     "special_title_641851eb": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Special Bee title",
         "desc": "For a \"June Bee\"",
         "price": 99999999999999,
@@ -606,7 +606,7 @@
         "source": "Special person"
     },
     "developer_kitsune_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Developer Title",
         "desc": "For the developers",
         "price": 99999999999999,
@@ -615,7 +615,7 @@
         "source": "For the developers @ Kitsune Labs"
     },
     "contributing_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Contributing Title",
         "desc": "For the Contributors",
         "price": 99999999999999,
@@ -624,7 +624,7 @@
         "source": "Contribute to the development of Senko"
     },
     "Transgender_Pride_Flag": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Transgender Pride Flag Banner",
         "desc": "🏳️‍⚧️🏳️‍⚧️🏳️‍⚧️",
         "price": 0,
@@ -633,7 +633,7 @@
         "banner": "TransPrideFlag.png"
     },
     "MooseKaiBanner": {
-        "class": "profile",
+        "class": "Banners",
         "name": "MooseKai's Snowsgiving 2021 Banner",
         "desc": "For MooseKai#6097",
         "price": 99999999999999,
@@ -643,7 +643,7 @@
         "source": "Won the Discord Snowsgiving 2021 event"
     },
     "cherry": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Cherry Badge",
         "desc": "Do you think it's a good idea to eat it?",
         "price": 50,
@@ -653,7 +653,7 @@
         "autoSale": true
     },
     "ButterCrackers": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Butter Crackers",
         "desc": "They taste like butter",
         "price": 50,
@@ -661,7 +661,7 @@
         "autoSale": true
     },
     "RiceBall": {
-        "class": "food",
+        "class": "Badges",
         "name": "Rice Ball Badge",
         "desc": "🍙🍙🍙",
         "price": 50,
@@ -679,7 +679,7 @@
         "onsale": false
     },
     "master_thrower": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Master Thrower",
         "desc": "Adds \"Master Thrower\" to your profile name",
         "price": 99999999999999,
@@ -687,7 +687,7 @@
         "title": "☃️ Master Thrower"
     },
     "popcorn": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Popcorn Badge",
         "desc": "nom nom nom",
         "price": 50,
@@ -697,7 +697,7 @@
         "autoSale": true
     },
     "bacon": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Bacon Badge",
         "desc": "Why would anyone stick bacon on themselves?",
         "price": 50,
@@ -707,7 +707,7 @@
         "autoSale": true
     },
     "croissant": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Croissant Badge",
         "desc": "🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐",
         "price": 50,
@@ -717,7 +717,7 @@
         "autoSale": true
     },
     "chocolate_box": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Box of heart shaped chocolate",
         "desc": "Awww! How sweet of you!",
         "amount": 1,
@@ -730,7 +730,7 @@
         }
     },
     "roses": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Rose Badge",
         "desc": "AWwwww, You didnt have to!",
         "amount": 1,
@@ -744,7 +744,7 @@
         }
     },
     "conversation_hearts": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Tiny Conversation Hearts",
         "desc": "Flavored in Banana, Orange, Grape, Cherry, and lemon!",
         "amount": 1,
@@ -757,7 +757,7 @@
         }
     },
     "color_pg": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Pastel Green Card Color",
         "desc": "Pastel Green is kinda soft",
         "price": 300,
@@ -768,7 +768,7 @@
         "autoSale": true
     },
     "kitsune_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Kitsune Title",
         "desc": "For true kitsune's",
         "price": 300,
@@ -778,7 +778,7 @@
         "autoSale": true
     },
     "fluffy_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Fluffy Title",
         "desc": "For the fluffiest kitsune's out there!",
         "price": 300,
@@ -788,7 +788,7 @@
         "title": "Fluffy"
     },
     "light_blue_color": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Light Blue card color",
         "desc": "A nice light blue color, similar to the sky above",
         "price": 100,
@@ -799,7 +799,7 @@
         "type": "color"
     },
     "light_red_color": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Light Red card color",
         "desc": "As light as Koenji's clothing",
         "price": 100,
@@ -810,7 +810,7 @@
         "type": "color"
     },
     "pastel_yellow": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Pastel Yellow card color",
         "desc": "Sunny yellow, like the sun",
         "price": 100,
@@ -821,7 +821,7 @@
         "type": "color"
     },
     "lemon_cake": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Lemon Cake",
         "desc": "Lemon cake is quite sweet",
         "price": 50,
@@ -829,7 +829,7 @@
         "autoSale": true
     },
     "lime_green_color": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Lime Green card color",
         "desc": "A greeny lime color",
         "price": 100,
@@ -840,7 +840,7 @@
         "type": "color"
     },
     "shiro_wave": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Shiro Wave Banner",
         "desc": "Shiro with wavy hair",
         "price": 300,
@@ -850,7 +850,7 @@
         "banner": "ShiroWind.png"
     },
     "discord_animated": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Discord Banner [Animated]",
         "desc": "Discord branding",
         "price": 0,
@@ -860,7 +860,7 @@
         "banner": "Discord.gif"
     },
     "discord_characters": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Discord's Characters",
         "desc": "Discord's Characters",
         "price": 0,
@@ -870,7 +870,7 @@
         "banner": "DiscordBanner2.png"
     },
     "discord_holy_world": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Discord in the Holy World",
         "desc": "Discord in the Holy World",
         "price": 0,
@@ -880,7 +880,7 @@
         "banner": "DiscordBanner.png"
     },
     "astronaut_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Astronaut Title",
         "desc": "To Mars and beyond!",
         "price": 300,
@@ -890,7 +890,7 @@
         "autoSale": true
     },
     "saint_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Saint Title",
         "desc": "Saints!",
         "price": 300,
@@ -900,7 +900,7 @@
         "autoSale": true
     },
     "rainbow_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Rainbow Title Icon",
         "desc": "Displays a 🌈 before your name",
         "price": 200,
@@ -910,7 +910,7 @@
         "autoSale": true
     },
     "violet_color": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Violet card color",
         "desc": "A nice violet color",
         "price": 100,
@@ -921,7 +921,7 @@
         "type": "color"
     },
     "turtle_badge": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Turtle Badge",
         "desc": "So slow!",
         "amount": 1,
@@ -930,7 +930,7 @@
         "badge": "🐢"
     },
     "fisher_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Fisher Title",
         "desc": "Fisherman's title",
         "price": 300,
@@ -940,7 +940,7 @@
         "autoSale": true
     },
     "sailor_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Sailor Title",
         "desc": "Sailor's title",
         "price": 300,
@@ -950,7 +950,7 @@
         "autoSale": true
     },
     "pink_color": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Pink card color",
         "desc": "A nice pink color",
         "price": 100,
@@ -961,7 +961,7 @@
         "type": "color"
     },
     "yellow_color": {
-        "class": "profile",
+        "class": "Colors",
         "name": "Yellow card color",
         "desc": "A nice yellow color",
         "price": 100,
@@ -972,7 +972,7 @@
         "type": "color"
     },
     "joker_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Joker Title",
         "desc": "Joker's title",
         "price": 300,
@@ -982,7 +982,7 @@
         "autoSale": true
     },
     "panda_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Panda Title",
         "desc": "Panda title",
         "price": 300,
@@ -992,7 +992,7 @@
         "autoSale": true
     },
     "unicorn_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Unicorn Title",
         "desc": "Unicorn title",
         "price": 300,
@@ -1002,7 +1002,7 @@
         "autoSale": true
     },
     "magician_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Magician's Title",
         "desc": "Magician's title",
         "price": 300,
@@ -1012,7 +1012,7 @@
         "autoSale": true
     },
     "party_maker_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Party Maker Title",
         "desc": "Party maker's title",
         "price": 300,
@@ -1022,7 +1022,7 @@
         "autoSale": true
     },
     "chef_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Chef Title",
         "desc": "Chef's title",
         "price": 300,
@@ -1032,7 +1032,7 @@
         "autoSale": true
     },
     "tourist_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Tourist Title",
         "desc": "Tourist's title",
         "price": 300,
@@ -1042,7 +1042,7 @@
         "autoSale": true
     },
     "pirate_title": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Pirate Title",
         "desc": "Pirate's title",
         "price": 300,
@@ -1052,7 +1052,7 @@
         "autoSale": true
     },
     "carrot_cake": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Carrot Cake",
         "desc": "Carrot cake",
         "price": 100,
@@ -1062,7 +1062,7 @@
         "type": "food"
     },
     "chicken_nuggies": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Chicken Nuggets",
         "desc": "Chicken nuggets",
         "price": 100,
@@ -1072,7 +1072,7 @@
         "type": "food"
     },
     "corn_badge": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Corn badge",
         "desc": "Corn badge",
         "price": 50,
@@ -1082,7 +1082,7 @@
         "autoSale": true
     },
     "pancakes": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Pancakes",
         "desc": "Pancakes",
         "price": 100,
@@ -1092,7 +1092,7 @@
         "type": "food"
     },
     "fried_rice": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Fried Rice",
         "desc": "Fried rice",
         "price": 100,
@@ -1102,7 +1102,7 @@
         "type": "food"
     },
     "shrimp_badge": {
-        "class": "profile",
+        "class": "Badges",
         "name": "Shrimp badge",
         "desc": "Shrimp badge",
         "price": 50,
@@ -1112,7 +1112,7 @@
         "autoSale": true
     },
     "apple_pie": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Apple Pie",
         "desc": "Apple pie",
         "price": 100,
@@ -1122,7 +1122,7 @@
         "type": "food"
     },
     "pudding": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Pudding",
         "desc": "Pudding",
         "price": 100,
@@ -1132,7 +1132,7 @@
         "type": "food"
     },
     "zosui": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Zosui",
         "desc": "A soup containing rice stewed in stock, often with egg, meat, seafood, vegetables or mushroom, and flavored with miso or soy",
         "price": 100,
@@ -1142,7 +1142,7 @@
         "type": "food"
     },
     "gyudon": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Gyūdon",
         "desc": "Donburi topped with seasoned beef and onion",
         "price": 100,
@@ -1152,7 +1152,7 @@
         "type": "food"
     },
     "Katsudon": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Katsudon",
         "desc": "A bowl of rice topped with a deep-fried breaded pork cutlet, egg, vegetables, and condiments.",
         "price": 100,
@@ -1162,7 +1162,7 @@
         "type": "food"
     },
     "Somen_Noodles_chilled": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Sōmen Noodles (Chilled)",
         "desc": "Thin white wheat noodles served chilled with a dipping sauce",
         "price": 100,
@@ -1172,7 +1172,7 @@
         "type": "food"
     },
     "Somen_Noodles_hot": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Nyumen Noodles (Hot Sōmen Noodles)",
         "desc": "Hot in temperature Sōmen Noodles",
         "price": 100,
@@ -1182,7 +1182,7 @@
         "type": "food"
     },
     "Champon_noodles": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Champon Noodles",
         "desc": "Yellow noodles of medium thickness served with a great variety of seafood and vegetable toppings in a hot chicken broth",
         "price": 100,
@@ -1192,7 +1192,7 @@
         "type": "food"
     },
     "Hiyashi_chuka": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Hiyashi chūka",
         "desc": "Thin, yellow noodles served cold with a variety of toppings, such as cucumber, tomato, ham or chicken, bean sprouts, thin-sliced omelet, and a cold sauce",
         "price": 100,
@@ -1202,7 +1202,7 @@
         "type": "food"
     },
     "Mazesoba": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Mazesoba",
         "desc": "Wheat noodles served with a number of savory toppings, including raw egg, ginger, and meat",
         "price": 100,
@@ -1212,7 +1212,7 @@
         "type": "food"
     },
     "Curry_bread": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Curry Bread",
         "desc": "Deep fried bread filled with Japanese curry sauce",
         "price": 100,
@@ -1222,7 +1222,7 @@
         "type": "food"
     },
     "Anpan": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Anpan (Sweet Roll)",
         "desc": "A sweet roll filled with red bean paste",
         "price": 100,
@@ -1232,7 +1232,7 @@
         "type": "food"
     },
     "Yakisoba_pan": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Yakisoba-pan",
         "desc": "A bread roll sandwich with a yakisoba filling",
         "price": 100,
@@ -1242,7 +1242,7 @@
         "type": "food"
     },
     "miso_soup": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Miso Soup",
         "desc": "A soup made with miso suspended in dashi",
         "price": 50,
@@ -1252,7 +1252,7 @@
         "type": "food"
     },
     "Kukicha_tea": {
-        "class": "food",
+        "class": "Consumables",
         "name": "Kukicha tea",
         "desc": "A blend of green tea made of stems, stalks, and twigs",
         "price": 50,
@@ -1262,7 +1262,7 @@
         "type": "food"
     },
     "SenkoTailBanner": {
-        "class": "profile",
+        "class": "Banners",
         "name": "Senko Tail Banner",
         "desc": "A banner given to Contributors",
         "price": 9999999999999999,
@@ -1273,7 +1273,7 @@
         "banner": "SenkoTailBanner.png"
     },
     "theCutie": {
-        "class": "profile",
+        "class": "Titles",
         "name": "The Cute Person",
         "desc": "Thou whomst haveth this is a cutie",
         "price": 7777777,
@@ -1282,7 +1282,7 @@
         "source": "Won in a giveaway"
     },
     "theGH": {
-        "class": "profile",
+        "class": "Titles",
         "name": "The Great Hugger Title",
         "desc": "Thou whomst haveth this is a big hugger",
         "price": 360,
@@ -1290,7 +1290,7 @@
         "autoSale": true
     },
     "theAdorable": {
-        "class": "profile",
+        "class": "Titles",
         "name": "The Adorable Title",
         "desc": "Thou whomst haveth this is a very Adorable person",
         "price": 200,
@@ -1298,7 +1298,7 @@
         "autoSale": true
     },
     "VROOOM": {
-        "class": "profile",
+        "class": "Titles",
         "name": "VROOOOOOOOOM",
         "desc": "VROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM!",
         "price": 7777777,
@@ -1307,7 +1307,7 @@
         "source": "Won in a giveaway"
     },
     "Sagiri": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Sagiri",
         "desc": "Not to be confused with the anime",
         "price": 7777777,
@@ -1316,7 +1316,7 @@
         "source": "Won in a giveaway"
     },
     "divine_messenger": {
-        "class": "profile",
+        "class": "Titles",
         "name": "Divine Messenger title",
         "desc": "For Divine Messengers",
         "price": 7777777,

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, Message, Colors } = require("discord.js");
+const { Client, CommandInteraction, Message, Colors, PermissionFlagsBits } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { updateSuperGuild } = require("../../API/super");
@@ -10,6 +10,8 @@ const bits = require("../../API/Bits.json");
 module.exports = {
 	name: "warn",
 	desc: "warn",
+	category: "admin",
+	permissions: ["ModerateMembers"],
 	options: [
 		{
 			name: "user",
@@ -28,12 +30,6 @@ module.exports = {
 			type: 3
 		}
 	],
-	user_ui: {
-		name: "warn",
-		desc: "Warn this user",
-		type: 2
-	},
-	category: "admin",
 	/**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
@@ -49,7 +45,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("MODERATE_MEMBERS")) return interaction.reply({
+		if (!interaction.member.permissions.has("ModerateMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",

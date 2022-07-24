@@ -1,8 +1,9 @@
 const DataConfig = require("../Data/DataConfig.json");
 const { CheckPermission, print } = require("../API/Master");
-const { fetchSuperGuild, fetchConfig, fetchSuperUser } = require("../API/super.js");
+const { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser, fetchLevel } = require("../API/super.js");
 const Icons = require("../Data/Icons.json");
 const { InteractionType } = require("discord.js");
+const { randomNumber } = require("@kitsune-labs/utilities");
 
 module.exports = {
 	/**
@@ -34,7 +35,7 @@ module.exports = {
 
 			const InteractionCommand = SenkoClient.SlashCommands.get(interaction.commandName);
 			const superGuildData = await fetchSuperGuild(interaction.guild);
-			const AccountData = await fetchSuperUser(interaction.user);
+			const accountData = await fetchSuperUser(interaction.user);
 
 			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.colors.dark, thumbnail:{url:"https://assets.senkosworld.com/media/senko/heh.png"}}], ephemeral:true});
 
@@ -70,7 +71,7 @@ module.exports = {
 			}
 
 			if (!permissionEmbed.embeds[0].description.endsWith("\n")) {
-				if (CheckPermission(interaction, "EMBED_LINKS")) return interaction.reply(permissionEmbed);
+				if (CheckPermission(interaction, "EmbedLinks")) return interaction.reply(permissionEmbed);
 				return interaction.reply(permissionMessage);
 			}
 
@@ -95,7 +96,59 @@ module.exports = {
 
 			print("teal", "CS", interaction.commandName);
 
-			InteractionCommand.start(SenkoClient, interaction, superGuildData, AccountData).catch(e => {
+			//! Start level
+			let xp = accountData.LocalUser.accountConfig.level.xp;
+			let level = accountData.LocalUser.accountConfig.level.level;
+			const Amount = 300 * (level * 5);
+
+			if (xp > Amount) {
+				level += Math.floor(xp / Amount);
+				xp = xp % Amount;
+			} else {
+				xp = xp + randomNumber(25);
+			}
+
+			if (level > accountData.LocalUser.accountConfig.level.level) {
+				interaction.channel.send({
+					content: `${interaction.user}`,
+					embeds: [
+						{
+							title: "Congratulations dear!",
+							description: `You are now level **${level}**`,
+							color: SenkoClient.colors.light,
+							thumbnail: {
+								url: interaction.user.displayAvatarURL()
+							}
+						}
+					]
+				});
+			}
+
+			accountData.LocalUser.accountConfig.level.xp = xp;
+			accountData.LocalUser.accountConfig.level.level = level;
+
+			updateSuperUser(interaction.user, {
+				LocalUser: accountData.LocalUser
+			});
+
+
+			// //! The magic of KitsuneBi
+			// const Amount = 600 * (levelData.level * 5) * 2;
+
+			// console.log(levelData.xp / Amount);
+
+			// if (levelData.xp > Amount) {
+			// 	levelData.level = Math.ceil(levelData.xp / Amount);
+			// 	levelData.xp = levelData.xp % Amount;
+
+			// } else {
+			// 	levelData.xp = levelData.xp + randomNumber(50);
+			// }
+
+
+			//! End level
+
+			InteractionCommand.start(SenkoClient, interaction, superGuildData, accountData, Amount).catch(e => {
 				const messageStruct = {
 					embeds: [
 						{

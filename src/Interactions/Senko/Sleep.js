@@ -46,7 +46,7 @@ module.exports = {
 					description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", interaction.user.username)}*`,
 					color: SenkoClient.colors.light,
 					thumbnail: {
-						url: `https://assets.senkosworld.com/media/senko/${randomArrayItem(["cuddle", "sleep"])}`
+						url: `https://assets.senkosworld.com/media/senko/${randomArrayItem(["cuddle", "sleep"])}.png`
 					}
 				}
 			]

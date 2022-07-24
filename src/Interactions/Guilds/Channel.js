@@ -9,6 +9,11 @@ const { updateSuperGuild } = require("../../API/super");
 module.exports = {
 	name: "channel",
 	desc: "Add/Remove channels where Senko can be used in",
+	defer: true,
+	ephemeral: true,
+	usableAnywhere: true,
+	category: "admin",
+	permissions: ["Administrator"],
 	options: [
 		{
 			name: "add",
@@ -54,10 +59,6 @@ module.exports = {
 			type: 1
 		}
 	],
-	defer: true,
-	ephemeral: true,
-	usableAnywhere: true,
-	category: "admin",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
@@ -65,7 +66,7 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, { Channels }, AccountData) => {
 		const command = interaction.options.getSubcommand();
-		const command_permission = await CheckPermission(interaction, "MANAGE_CHANNELS");
+		const command_permission = await CheckPermission(interaction, "ManageChannels");
 
 		function listChannels() {
 			interaction.followUp({
@@ -87,7 +88,7 @@ module.exports = {
 			if (!command_permission) return listChannels();
 			var channel = interaction.options.getChannel("channel");
 
-			if (channel.type != "GUILD_TEXT") return interaction.followUp({
+			if (channel.type != 0) return interaction.followUp({
 				embeds: [
 					{
 						title: "Oh dear...",
@@ -119,7 +120,7 @@ module.exports = {
 				embeds: [
 					{
 						title: "Done!",
-						description: `People can now use my commands in <#${channel.id}>!`,
+						description: `People can now use my commands in ${channel}!`,
 						color: SenkoClient.colors.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/talk.png"

@@ -63,7 +63,7 @@ async function removeYen(user, amount) {
  * @param {boolean}
  */
 async function CheckPermission(interaction, Permission) {
-	return interaction.memberPermissions.has(Permission);
+	return interaction.guild.members.me.permissions.has(Permission);
 }
 
 /**

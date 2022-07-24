@@ -46,7 +46,7 @@ module.exports = {
 		/**
          * @param {CommandInteraction} interaction
          */
-		SenkoClient.on("interactionCreate", (interaction) => {
+		SenkoClient.on("interactionCreate", async (interaction) => {
 			if (!interaction.isButton()) return;
 
 			const categories = {
@@ -58,10 +58,11 @@ module.exports = {
 				utility: []
 			};
 
-			for (var index of SenkoClient.SlashCommands) {
-				const category = index[1].category || null;
+			for (var entry of SenkoClient.application.commands.fetchAll) {
+				const commandEntry = entry[1];
+				const { category } = SenkoClient.SlashCommands.get(commandEntry.name);
 
-				if (category) categories[category].push(`**[${index[0]}](https://senkosworld.com "${index[1].desc}")**\n≻ ${index[1].desc}`);
+				if (category) categories[category].push(`</${commandEntry.name}:${commandEntry.id}> ≻ ${commandEntry.description}`);
 			}
 
 			switch (interaction.customId) {
@@ -306,7 +307,7 @@ module.exports = {
 								name: "Index ≻ Honorable Mentions"
 							},
 							title: "🏅 Honorable Mentions",
-							description: "[Wikipedia](https://wikipedia.org/) for some shop item ideas\n[Rimukoro](https://twitter.com/Rimukoro) for creating the Sewayaki Kitsune no Senko-san series!",
+							description: "[Wikipedia](https://wikipedia.org/) for some market ideas\n[Rimukoro](https://twitter.com/Rimukoro) for creating the Sewayaki Kitsune no Senko-san series\n[VACEfron](https://github.com/VACEfron) for some command API's",
 							fields: [
 								{
 									name: "Contributors",

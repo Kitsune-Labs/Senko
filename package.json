@@ -11,7 +11,7 @@
         "axios": "0.27.2",
         "bitfields": "1.0.3",
         "charverter": "^1.1.0-dev",
-        "discord.js": "14.0.1",
+        "discord.js": "14.0.3",
         "dotenv": "16.0.1",
         "uuid": "8.3.2"
     },

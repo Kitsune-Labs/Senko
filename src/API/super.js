@@ -20,7 +20,7 @@ function fetchSupabaseApi() {
 
 /**
  * @async
- * @returns {JSON}
+ * @returns {Promise<JSON>}
  */
 async function fetchConfig() {
 	const { data } = await Supabase.from("config").select("*").eq("id", "all");
@@ -30,15 +30,17 @@ async function fetchConfig() {
 
 /**
  * @async
- * @returns {JSON}
+ * @param {Boolean} useLocal
+ * @returns {Promise<JSON>}
  */
-async function fetchMarket() {
-	return (await fetchConfig()).MarketItems;
+async function fetchMarket(useLocal) {
+	return useLocal ? require("../Data/LocalSave/Market.json") : (await fetchConfig()).MarketItems;
 }
 
 /**
  * @async
  * @param {Guild} guild
+ * @returns {Promise<JSON>}
  */
 async function fetchSuperGuild(guild) {
 	let { data, error } = await Supabase.from("Guilds").select("*").eq("guildId", guild.id);
@@ -120,7 +122,7 @@ async function deleteSuperGuild(guild) {
  * @async
  * @param {User} user
  * @param {boolean} dontMakeData
- * @returns {JSON}
+ * @returns {Promise<JSON>}
  */
 async function fetchSuperUser(user, dontMakeData) {
 	const { data, error } = await Supabase.from("Users").select("*").eq("id", user.id);
@@ -136,7 +138,7 @@ async function fetchSuperUser(user, dontMakeData) {
 /**
  * @async
  * @param {User} user
- * @returns {JSON}
+ * @returns {Promise<JSON>}
  */
 async function makeSuperUser(user) {
 	await Supabase.from("Users").insert([{ id: user.id }]);
@@ -152,7 +154,7 @@ async function makeSuperUser(user) {
  * @async
  * @param {User} user
  * @param {JSON} Data
- * @returns {boolean}
+ * @returns {Promise<boolean>}
  */
 async function updateSuperUser(user, Data) {
 	if (Data.LocalUser && Data.LocalUser.profileConfig.Currency.Yen >= 100000) Data.LocalUser.profileConfig.Currency.Yen = 100000;
@@ -163,17 +165,26 @@ async function updateSuperUser(user, Data) {
 	return !error;
 }
 
+
+/**
+ * @async
+ * @param {User} user
+ * @returns {Promise<JSON>}
+ */
+async function fetchLevel(user) {
+	return (await fetchSuperUser(user)).LocalUser.accountConfig.level;
+}
+
 module.exports = {
 	fetchSuperGuild,
 	makeSuperGuild,
 	updateSuperGuild,
 	deleteSuperGuild,
-
 	fetchSuperUser,
 	makeSuperUser,
 	updateSuperUser,
-
 	fetchSupabaseApi,
 	fetchConfig,
-	fetchMarket
+	fetchMarket,
+	fetchLevel
 };

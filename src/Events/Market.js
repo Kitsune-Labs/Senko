@@ -15,12 +15,10 @@ module.exports = {
 			const shopItems = await fetchMarket();
 
 			if (interaction.isSelectMenu() && interaction.customId == "shop_purchase") {
-				const item = interaction.values[0].split("_").splice(1, 3);
-
+				const item = interaction.values[0].split("#").splice(1, 3);
 				const configData = await fetchConfig();
-
-				const itemName = Object.keys(shopItems).at(item[0]);
-				const shopItem = await shopItems[itemName];
+				const itemName = item[0];
+				const shopItem = await shopItems[item[0]];
 
 				interaction.channel.messages.cache.get(interaction.message.id).edit({
 					components: interaction.message.components
@@ -77,8 +75,8 @@ module.exports = {
 					content: `${interaction.user}`,
 					embeds: [
 						{
-							title: "Confirm Purchase!",
-							description: `Are you sure you want to purchase __${shopItem.name}__ for ${Icons.yen} __${shopItem.price}x__?`,
+							title: "Confirm Purchase",
+							description: `Are you sure you want to purchase **${shopItem.name}** for ${Icons.yen} **${shopItem.price}**?\nYou will have ${Icons.yen} **${accountData.LocalUser.profileConfig.Currency.Yen - shopItem.price}** left`,
 							color: SenkoClient.colors.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/package.png"

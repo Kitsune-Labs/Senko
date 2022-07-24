@@ -11,5 +11,9 @@
         "UseExternalEmojis",
         "AddReactions",
         "ViewChannel"
-    ]
+    ],
+    "levelConfig": {
+        "multiplier": 1,
+        "amount_per_use": 100
+    }
 }

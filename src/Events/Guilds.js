@@ -1,7 +1,7 @@
 const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild, updateSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
-const { print, cleanUserString } = require("../API/Master.js");
+const { cleanUserString } = require("../API/Master.js");
 const { Colors } = require("discord.js");
 
 module.exports = {

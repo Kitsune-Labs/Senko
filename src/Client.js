@@ -1,6 +1,6 @@
 require("dotenv/config");
 
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, PermissionsBitField } = require("discord.js");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
@@ -44,6 +44,10 @@ process.on("unhandledRejection", async(reason)=>{
 	console.log(reason);
 });
 
+process.on("uncaughtException", async(reason)=>{
+	console.log(reason);
+});
+
 SenkoClient.once("ready", async () => {
 	print("#FF6633", "Senko", "Started\n");
 
@@ -80,7 +84,7 @@ SenkoClient.once("ready", async () => {
 
 	const commandsToSet = [];
 
-	if (process.env.NIGHTLY == "true") {
+	if (process.env.NIGHTLY !== "true") {
 		readdirSync("./src/Interactions/").forEach(async Folder => {
 			const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
 
@@ -108,12 +112,14 @@ SenkoClient.once("ready", async () => {
 			};
 
 			if (cmd[1].options) commandStruct.options = cmd[1].options;
+			if (cmd[1].permissions) commandStruct.defaultMemberPermissions = new PermissionsBitField(cmd[1].permissions);
 			if (!commandsToSet.includes(cmd[0])) commandsToSet.push(commandStruct);
 		}
 	}
 
-	// await commands.set([]);
-	await commands.set(commandsToSet);
+	await commands.set(commandsToSet).then(cmds => {
+		Reflect.set(SenkoClient.application.commands, "fetchAll", cmds);
 
-	print("#F39800", "INTERACTIONS", "Ready");
+		print("#F39800", "INTERACTIONS", "Ready");
+	});
 });

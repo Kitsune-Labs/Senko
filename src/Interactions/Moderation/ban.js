@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction, Colors } = require("discord.js");
+const { Client, Interaction, Colors, PermissionFlagsBits } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
@@ -9,6 +9,9 @@ const { randomArrayItem } = require("@kitsune-labs/utilities");
 module.exports = {
 	name: "ban",
 	desc: "Ban's a user",
+	usableAnywhere: true,
+	category: "admin",
+	permissions: ["BanMembers"],
 	options: [
 		{
 			name: "user",
@@ -47,8 +50,6 @@ module.exports = {
 			type: 6
 		}
 	],
-	usableAnywhere: true,
-	category: "admin",
 	/**
      * @param {Client} SenkoClient
      * @param {Interaction} interaction
@@ -60,7 +61,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("BAN_MEMBERS")) return interaction.reply({
+		if (!interaction.member.permissions.has("BanMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -74,7 +75,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction, "BAN_MEMBERS")) return interaction.reply({
+		if (!CheckPermission(interaction, "BanMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",

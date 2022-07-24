@@ -25,7 +25,7 @@ module.exports = {
 	 * @param {Client} SenkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async (SenkoClient, interaction, GuildData, accountData, XpLeft) => {
 		const User = interaction.options.getUser("user") || interaction.user;
 		accountData = await fetchSuperUser(User, true);
 
@@ -33,6 +33,8 @@ module.exports = {
 
 		const ShopItems = await fetchMarket();
 		const AccountFlags = Bitfield.fromHex(accountData.LocalUser.accountConfig.flags);
+		const xp = accountData.LocalUser.accountConfig.level.xp;
+		const level = accountData.LocalUser.accountConfig.level.level;
 
 		if (User.id !== interaction.user.id && AccountFlags.get(BitData.privacy)) return interaction.reply({
 			content: "Sorry! This user has set their profile to private.",
@@ -41,28 +43,33 @@ module.exports = {
 
 		const { OutlawedUsers } = await fetchConfig();
 
+		const xpMath = XpLeft - xp;
+
 		const MessageBuilt = {
 			embeds: [
 				{
-					description: `${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${accountData.LocalUser.profileConfig.aboutMe !== null ? `**__About Me__**\n${accountData.LocalUser.profileConfig.aboutMe}\n\n` : ""}${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${accountData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${accountData.Stats.Fluffs}** fluffs\n${Icons.medal}  **${accountData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n`,
+					description: `${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${accountData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${accountData.Stats.Fluffs}** fluffs\n\n${accountData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${accountData.LocalUser.profileConfig.aboutMe}` : ""}\n\n`,
+					// \n${Icons.medal}  **${accountData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
+					color: parseInt(accountData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || SenkoClient.colors.light,
 					image: {
 						url: `attachment://${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png"}`
 					},
-					color: parseInt(accountData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || SenkoClient.colors.light
+					thumbnail: {
+						url: User.displayAvatarURL()
+					}
 				}
 			],
 			files: [{ attachment: `src/Data/content/banners/${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner : ShopItems.DefaultBanner.banner}`, name: ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png" }]
 		};
 
-		let BadgeString = "**__Badges__**\n";
+		let BadgeString = "**Badges**\n";
 		let BAmount = 0;
-
-		// AccountData.Inventory.map(x => ShopItems[x.codename] && ShopItems[x.codename].badge ? ShopItems[x.codename].badge : "").join("")
 
 		for (var index in accountData.LocalUser.profileConfig.Inventory) {
 			const sItem = ShopItems[index];
 
 			if (sItem && sItem.badge !== undefined /*&& BAmount < 10*/) {
+				if (BAmount === 10) BadgeString += "\n";
 				BadgeString += `${sItem.badge || Icons.tick} `;
 
 				BAmount++;
@@ -70,12 +77,6 @@ module.exports = {
 		}
 
 		if (BAmount != 0) MessageBuilt.embeds[0].description += BadgeString;
-
-		if (SenkoClient.guilds.cache.get("777251087592718336").members.cache.get(User.id).roles.cache.has("810018023364231179")) {
-			let a = MessageBuilt.embeds[0].description.split("Profile");
-
-			MessageBuilt.embeds[0].description = `${a[0]} Profile  [ <:SD:974835483328794665><:M:974835596214296576><:K:974835596142993428> ] ${a[1]}`;
-		}
 
 		interaction.followUp(MessageBuilt);
 	}

@@ -9,6 +9,7 @@ module.exports = {
 	name: "kick",
 	desc: "Kick a member",
 	category: "admin",
+	permissions: ["KickMembers"],
 	options: [
 		{
 			name: "user",
@@ -33,7 +34,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("KICK_MEMBERS")) return interaction.reply({
+		if (!interaction.member.permissions.has("KickMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -47,7 +48,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction, "KICK_MEMBERS")) return interaction.reply({
+		if (!CheckPermission(interaction, "KickMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",

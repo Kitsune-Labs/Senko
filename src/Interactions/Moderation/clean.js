@@ -7,6 +7,11 @@ const bits = require("../../API/Bits.json");
 module.exports = {
 	name: "clean",
 	desc: "clean",
+	usableAnywhere: true,
+	category: "admin",
+	defer: true,
+	ephemeral: true,
+	permissions: ["ManageMessages"],
 	options: [
 		{
 			name: "amount",
@@ -17,10 +22,6 @@ module.exports = {
 			maxValue: 100
 		}
 	],
-	usableAnywhere: true,
-	category: "admin",
-	defer: true,
-	ephemeral: true,
 
 	/**
      * @param {Client} SenkoClient
@@ -32,7 +33,7 @@ module.exports = {
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
 		});
 
-		if (!CheckPermission(interaction, "MANAGE_MESSAGES")) return interaction.followUp({
+		if (!CheckPermission(interaction, "ManageMessages")) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",
@@ -45,7 +46,7 @@ module.exports = {
 			]
 		});
 
-		if (!interaction.member.permissions.has("MANAGE_MESSAGES")) return interaction.followUp({
+		if (!interaction.member.permissions.has("ManageMessages")) return interaction.followUp({
 			embeds: [
 				{
 					title: "Sorry dear!",

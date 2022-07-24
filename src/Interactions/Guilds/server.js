@@ -12,6 +12,9 @@ const { CheckPermission } = require("../../API/Master");
 module.exports = {
 	name: "server",
 	desc: "server",
+	usableAnywhere: true,
+	category: "admin",
+	permissions: ["Administrator"],
 	options: [
 		{
 			name: "info",
@@ -79,8 +82,6 @@ module.exports = {
 			]
 		}
 	],
-	usableAnywhere: true,
-	category: "admin",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
@@ -153,7 +154,7 @@ module.exports = {
 			case "action-reports":
 				var actionChannel = interaction.options.getChannel("channel");
 
-				if (!actionChannel || actionChannel.type != "GUILD_TEXT") return interaction.reply({
+				if (!actionChannel || actionChannel.type != 0) return interaction.reply({
 					embeds: [
 						{
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
@@ -185,7 +186,7 @@ module.exports = {
 			case "message-logging":
 				var messageChannel = interaction.options.getChannel("channel");
 
-				if (!messageChannel || messageChannel.type != "GUILD_TEXT") return interaction.reply({
+				if (!messageChannel || messageChannel.type != 0) return interaction.reply({
 					embeds: [
 						{
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
@@ -260,7 +261,7 @@ module.exports = {
 				embeds: [
 					{
 						title: "Senko's Required Permissions",
-						description: `__**Required**__\nEmbed Links: ${CheckPermission(interaction, "EMBED_LINKS") ? Icons.check : Icons.tick }\nAttach Files: ${CheckPermission(interaction, "ATTACH_FILES") ? Icons.check : Icons.tick }\nSend Messages: ${CheckPermission(interaction, "SEND_MESSAGES") ? Icons.check : Icons.tick }\nUse External Emojis: ${CheckPermission(interaction, "USE_EXTERNAL_EMOJIS") ? Icons.check : Icons.tick}\n\n__**Moderation Requirements (Optional)**__\nBan Members: ${CheckPermission(interaction, "BAN_MEMBERS") ? Icons.check : Icons.tick}\nKick Members: ${CheckPermission(interaction, "KICK_MEMBERS") ? Icons.check : Icons.tick}\nModerate Members: ${CheckPermission(interaction, "MODERATE_MEMBERS") ? Icons.check : Icons.tick}\nManage Messages: ${CheckPermission(interaction, "MANAGE_MESSAGES") ? Icons.check : Icons.tick}\nView Audit Log: ${CheckPermission(interaction, "VIEW_AUDIT_LOG") ? Icons.check : Icons.tick}`,
+						description: `__**Required**__\nEmbed Links: ${CheckPermission(interaction, "EmbedLinks") ? Icons.check : Icons.tick }\nAttach Files: ${CheckPermission(interaction, "AttachFiles") ? Icons.check : Icons.tick }\nSend Messages: ${CheckPermission(interaction, "SendMessages") ? Icons.check : Icons.tick }\nUse External Emojis: ${CheckPermission(interaction, "UseExternalEmojis") ? Icons.check : Icons.tick}\n\n__**Moderation Requirements (Optional)**__\nBan Members: ${CheckPermission(interaction, "BanMembers") ? Icons.check : Icons.tick}\nKick Members: ${CheckPermission(interaction, "KickMembers") ? Icons.check : Icons.tick}\nModerate Members: ${CheckPermission(interaction, "ModerateMembers") ? Icons.check : Icons.tick}\nManage Messages: ${CheckPermission(interaction, "ManageMessages") ? Icons.check : Icons.tick}\nView Audit Log: ${CheckPermission(interaction, "ViewAuditLog") ? Icons.check : Icons.tick}`,
 						color: SenkoClient.colors.light
 					}
 				]

@@ -9,6 +9,9 @@ const bits = require("../../API/Bits.json");
 module.exports = {
 	name: "slowmode",
 	desc: "Change the slowmode of a channel",
+	usableAnywhere: true,
+	category: "admin",
+	permissions: ["ManageChannels"],
 	options: [
 		{
 			name: "set",
@@ -31,8 +34,6 @@ module.exports = {
 			type: 1
 		}
 	],
-	usableAnywhere: true,
-	category: "admin",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
@@ -44,7 +45,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("MANAGE_CHANNELS")) return interaction.reply({
+		if (!interaction.member.permissions.has("ManageChannels")) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -58,7 +59,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction, "MANAGE_CHANNELS")) return interaction.followUp({
+		if (!CheckPermission(interaction, "ManageChannels")) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",

@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction, Message } = require("discord.js");
+const { CommandInteraction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
-const { fetchSupabaseApi, fetchConfig, fetchMarket } = require("../../API/super.js");
-
+// eslint-disable-next-line no-unused-vars
+const { fetchSupabaseApi, fetchMarket } = require("../../API/super.js");
 const Supabase = fetchSupabaseApi();
 
 module.exports = {
@@ -18,79 +18,70 @@ module.exports = {
 	start: async (SenkoClient, interaction, GuildData, accountData) => {
 		const ShopItems = await fetchMarket();
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
-
-		const superConfig = await fetchConfig();
 		const shopData = rawShopData[0].market;
+		const MenuItems = [];
 
 		shopData.items.push(...rawShopData[0].SpecialMarket);
-		/**
-         * @type {Message}
-         */
-		const Shop = {
-			title: "Senko's Market",
-			description: `Please take your time and review what is available in the market.\n\nYou can use \`/preview\` to view extended info about an item like it's description, price, banner, and color\n\n> ${Icons.package}  Market refresh <t:${shopData.updates}:R>\n> ${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
+
+		const itemClasses = {
+			Badges: [],
+			Titles: [],
+			Banners: [],
+			Colors: [],
+			Consumables: [],
+			Materials: [],
+			Manga: [],
+			Music: [],
+			Events: [],
+			Frozen: [],
+			Misc: []
+		};
+
+		for (var item of shopData.items) {
+			const shopItem = ShopItems[item];
+
+			if (itemClasses[shopItem.class]) {
+				itemClasses[shopItem.class].push({ id: item, data: shopItem });
+			} else {
+				itemClasses.Misc.push({ id: item, data: shopItem });
+			}
+		}
+
+		const previewCommand = await SenkoClient.application.commands.fetchAll.find(d => d.name === "preview");
+
+		const marketResponse = {
+			title: "🛍️ Senko's Market",
+			description: `Please take your time to review what is available.\n\nUse </preview:${previewCommand.id}> to view details about an item like it's description, price, banner preview, and more!\n\n${Icons.package}  Market refresh <t:${shopData.updates}:R>\n${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
+			fields: [],
 			color: SenkoClient.colors.light,
 			thumbnail: {
 				url: "https://assets.senkosworld.com/media/senko/package.png"
 			}
 		};
 
-		let ProfileItems = "";
-		let FoodItems = "";
-		let MaterialItems = "";
-		let GeneralItems = "";
-		let EventItems = "";
-		const MenuItems = [];
+		// TODO: Add support for frozen & event items
+		for (var index in itemClasses) {
+			if (itemClasses[index].length > 0 && !marketResponse.fields.find(f=>f.name === index)) marketResponse.fields.push({ name: `${index}`, value: "" });
 
-		superConfig.EventMarket.map(eventItem => {
-			const eI = ShopItems[eventItem];
+			itemClasses[index].map(item => {
+				marketResponse.fields.find(f=>f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}\n`;
 
-			if (eI) {
-				EventItems += `[${Icons.yen}  ${eI.price}] **${eI.name}**`; // ${Icons.package}  —  **${eI.name}** [${Icons.yen}  ${eI.price}]\n`;
-
-				MenuItems.push({ label: `${eI.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(eventItem)}_${interaction.user.id}` });
-			}
-		});
-
-		for (var Thing of shopData.items) {
-			var Item = await ShopItems[Thing];
-
-			let ItemString = `[${Icons.yen}  ${Item.price == 0 ? "FREE" : Item.price}] **${Item.name}**`;
-
-			MenuItems.push({ label: `${Item.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(Thing)}_${interaction.user.id}` });
-
-			// if (superConfig.EventMarket.includes(Thing)) EventItems += `${Icons[Item.seasonal.season]}  ${Item.seasonal.season}  —  **${Item.name}** [${Icons.yen}  ${Item.price}x]\n`;
-
-			switch(Item.class) {
-			case "food":
-				FoodItems += `${ItemString}\n`;
-				break;
-			case "material":
-				MaterialItems += `${ItemString}\n`;
-				break;
-			case "profile":
-				ProfileItems += `${ItemString}\n`;
-				break;
-			case "general":
-				GeneralItems += `${ItemString}\n`;
-				break;
-			default:
-				console.log(`${Item.name} doesn't have a correct category.`);
-			}
+				MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}` });
+			});
 		}
 
-		let ShopString = "";
+		// superConfig.EventMarket.map(eventItem => {
+		// 	const eI = ShopItems[eventItem];
 
-		if (ProfileItems.length > 0) ShopString += `> **Cosmetic Booth**\n${ProfileItems}`;
-		if (GeneralItems.length > 0) ShopString += `\n\n> **General Goods**\n${GeneralItems}`;
-		if (FoodItems.length > 0) ShopString += `\n\n> **Food Items**\n${FoodItems}`;
-		if (MaterialItems.length > 0) ShopString += `\n\n> **Material Booth**\n${MaterialItems}`;
-		if (EventItems.length > 0) ShopString += `\n\n> **Event Booth**\n${EventItems}`;
+		// 	if (eI) {
+		// 		EventItems += `[${Icons.yen}  ${eI.price}] **${eI.name}**`; // ${Icons.package}  —  **${eI.name}** [${Icons.yen}  ${eI.price}]\n`;
 
-		Shop.description += `\n\n${ShopString}`;
+		// 		MenuItems.push({ label: `${eI.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(eventItem)}_${interaction.user.id}` });
+		// 	}
+		// });
 
 		interaction.followUp({
-			embeds: [ Shop ],
+			embeds: [marketResponse],
 			components: [
 				{
 					type: 1,
