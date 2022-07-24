@@ -48,7 +48,7 @@ module.exports = {
 		const MessageBuilt = {
 			embeds: [
 				{
-					description: `${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${accountData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${accountData.Stats.Fluffs}** fluffs\n\n${accountData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${accountData.LocalUser.profileConfig.aboutMe}` : ""}\n\n`,
+					description: `${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${accountData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${accountData.Stats.Fluffs}** fluffs\n\n${accountData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${accountData.LocalUser.profileConfig.aboutMe}\n\n` : ""}`,
 					// \n${Icons.medal}  **${accountData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
 					color: parseInt(accountData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || SenkoClient.colors.light,
 					image: {
