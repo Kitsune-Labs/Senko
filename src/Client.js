@@ -104,7 +104,7 @@ SenkoClient.once("ready", async () => {
 	}
 
 	for (var cmd of SenkoClient.SlashCommands) {
-		if (cmd[1].noGlobal && cmd[1].noGlobal === false) {
+		if (!cmd[1].noGlobal || cmd[1].noGlobal === false) {
 			const commandStruct = {
 				name: `${cmd[0]}`,
 				description: `${cmd[1].desc}`,

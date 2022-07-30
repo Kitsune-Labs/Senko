@@ -94,7 +94,7 @@ module.exports = {
 				return interaction.followUp(messageStruct1);
 			}
 
-			print("teal", "CS", interaction.commandName);
+			print("#fc844c", "CS", interaction.commandName);
 
 			//! Start level
 			if (!accountData.LocalUser.accountConfig.level) accountData.LocalUser.accountConfig.level = {
