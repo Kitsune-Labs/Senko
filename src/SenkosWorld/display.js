@@ -5,6 +5,8 @@ module.exports = {
 	name: "display",
 	desc: "for use by developers",
 	SenkosWorld: true,
+	permissions: "0",
+	noGlobal: true,
 	options: [
 		{
 			name: "rules",
@@ -32,7 +34,6 @@ module.exports = {
 			type: 1
 		}
 	],
-	permissions: "0",
 	/**
      * @param {Client} SenkoClient
      * @param {CommandInteraction} interaction
@@ -40,7 +41,7 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction) => {
 		if (interaction.user.id !== "609097445825052701") return interaction.reply({ content: "🗿", ephemeral: true });
-		const Command = interaction.options.getSubcommand();
+		const Command = interaction.options.get();
 		await interaction.deferReply({ ephemeral: true });
 
 		switch (Command) {

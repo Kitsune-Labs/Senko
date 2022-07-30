@@ -1,0 +1,26 @@
+{
+	"profileConfig": {
+		"title": null,
+		"aboutMe": null,
+		"banner": "DefaultBanner",
+		"cardColor": "#FF9933",
+		"badges": "00000000000000000000000000",
+		"completedQuests": "00000000000000000000000000000000000000000000000000",
+		"achievements": [],
+		"activePowers": [],
+		"claimableItems": [],
+		"Inventory": {},
+		"Currency": {
+			"Yen": 200,
+			"Tofu": 0
+		}
+	},
+	"accountConfig": {
+		"flags": "00000000000000000000000000",
+		"rank": "00000000000000",
+		"level": {
+			"level": 1,
+			"xp": 0
+		}
+	}
+}

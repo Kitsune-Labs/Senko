@@ -97,6 +97,12 @@ module.exports = {
 			print("teal", "CS", interaction.commandName);
 
 			//! Start level
+			if (!accountData.LocalUser.accountConfig.level) accountData.LocalUser.accountConfig.level = {
+				level: 1,
+				xp: 0
+			};
+
+
 			let xp = accountData.LocalUser.accountConfig.level.xp;
 			let level = accountData.LocalUser.accountConfig.level.level;
 			const Amount = 300 * (level * 5);

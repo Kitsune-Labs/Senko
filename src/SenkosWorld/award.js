@@ -7,6 +7,10 @@ const { updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super")
 module.exports = {
 	name: "award",
 	desc: "for use by developers",
+	defer: true,
+	ephemeral: true,
+	permissions: "0",
+	noGlobal: true,
 	options: [
 		{
 			name: "user-id",
@@ -21,9 +25,6 @@ module.exports = {
 			required: true
 		}
 	],
-	defer: true,
-	ephemeral: true,
-	permissions: "0",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} SenkoClient
