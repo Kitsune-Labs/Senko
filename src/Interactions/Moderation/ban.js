@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction, Colors, PermissionFlagsBits } = require("discord.js");
+const { Client, Interaction, Colors } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");

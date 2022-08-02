@@ -52,14 +52,13 @@ module.exports = {
 					// \n${Icons.medal}  **${accountData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
 					color: parseInt(accountData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || SenkoClient.colors.light,
 					image: {
-						url: `attachment://${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png"}`
+						url: accountData.LocalUser.profileConfig.banner ? `https://assets.senkosworld.com/media/banners/${ShopItems[accountData.LocalUser.profileConfig.banner].banner}` : "https://assets.senkosworld.com/media/banners/DefaultBanner.png"
 					},
 					thumbnail: {
 						url: User.displayAvatarURL()
 					}
 				}
-			],
-			files: [{ attachment: `src/Data/content/banners/${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner : ShopItems.DefaultBanner.banner}`, name: ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].banner.endsWith(".png") ? "banner.png" : "banner.gif" : "banner.png" }]
+			]
 		};
 
 		let BadgeString = "**Badges**\n";

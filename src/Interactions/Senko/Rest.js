@@ -4,7 +4,7 @@ const { Client, Interaction } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 
 const config = require("../../Data/DataConfig.json");
-const { randomBummedImageName, randomNumber, addYen, randomArray, calcTimeLeft } = require("../../API/Master");
+const { randomNumber, addYen, randomArray, calcTimeLeft } = require("../../API/Master");
 const { updateSuperUser } = require("../../API/super");
 
 
@@ -63,7 +63,7 @@ module.exports = {
 
 		if (accountData.RateLimits.Rest_Rate.Amount >= 5) {
 			MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Rest_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomBummedImageName()}.png`;
+			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomArray(["huh", "think"])}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}

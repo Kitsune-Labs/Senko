@@ -42,7 +42,7 @@ module.exports = {
 							const warn = warns[k];
 
 							Page.title = `${warn.userTag}'s warnings`;
-							Page.description += `Warn ${warn.uuid}\n> Warned by ${warn.moderator} ||[${warn.moderatorId}]|| on <t:${Math.ceil(warn.date/1000)}> for "${warn.reason}"\nNote: ${warn.note}\nReceived DM: ${warn.userDmd}\n\n`;
+							Page.description += `Warn **${warn.uuid}**\n> Warned by ${warn.moderator} ||[${warn.moderatorId}]|| on <t:${Math.ceil(warn.date/1000)}> for "${warn.reason}"\nNote: ${warn.note}\nReceived DM: ${warn.userDmd}\n\n`;
 							break;
 						}
 					}

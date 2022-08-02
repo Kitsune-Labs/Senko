@@ -3,7 +3,7 @@ const { Client, Interaction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const config = require("../../Data/DataConfig.json");
-const { randomNumber, addYen, randomBummedImageName, randomArray, calcTimeLeft } = require("../../API/Master");
+const { randomNumber, addYen, randomArray, calcTimeLeft } = require("../../API/Master");
 const { updateSuperUser } = require("../../API/super");
 
 const Responses = [
@@ -65,7 +65,7 @@ module.exports = {
 
 		if (accountData.RateLimits.Drink_Rate.Amount >= 5) {
 			MessageStruct.embeds[0].description = `**${randomArray(NoMore).replace("_USER_", interaction.user.username)}**\n\n${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomBummedImageName()}.png`;
+			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomArray(["huh", "think"])}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}

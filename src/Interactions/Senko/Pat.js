@@ -1,7 +1,7 @@
 
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
-const { randomArray, randomBummedImageName, randomNumber, addYen, calcTimeLeft } = require("../../API/Master");
+const { randomArray, randomNumber, addYen, calcTimeLeft } = require("../../API/Master");
 const { updateSuperUser } = require("../../API/super");
 
 const Responses = [
@@ -66,7 +66,7 @@ module.exports = {
 
 		if (accountData.RateLimits.Pat_Rate.Amount >= 20) {
 			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Pat_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomBummedImageName()}.png`;
+			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomArray(["huh", "think"])}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}

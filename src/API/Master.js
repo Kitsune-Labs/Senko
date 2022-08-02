@@ -67,13 +67,6 @@ async function CheckPermission(interaction, Permission) {
 }
 
 /**
- * @deprecated
- */
-function randomBummedImageName() {
-	return randomArray(["huh", "think"]);
-}
-
-/**
  * @param {string} Content
  * @returns {string}
  */
@@ -178,7 +171,6 @@ module.exports = {
 	removeYen,
 	CheckPermission,
 	randomNumber,
-	randomBummedImageName,
 	randomArray,
 	clean,
 	disableComponents,
