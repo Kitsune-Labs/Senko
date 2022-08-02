@@ -1323,5 +1323,23 @@
         "autoSale": false,
         "title": "<:toriigate:815386514636537857>  Divine Messenger",
         "source": "Be a Staff member in Senko's World!"
+    },
+    "The_Scarlet_Devil": {
+        "class": "Titles",
+        "name": "The Scarlet Devil",
+        "desc": "The Scarlet Devil has arrived!",
+        "price": 7777777,
+        "autoSale": false,
+        "title": "The Scarlet Devil",
+        "source": "Won in a giveaway"
+    },
+    "The_Coolest": {
+        "class": "Titles",
+        "name": "Coolest Person",
+        "desc": "They say the person who posseses this title is the coolest of them all",
+        "price": 7777777,
+        "autoSale": false,
+        "title": "Coolest person",
+        "source": "Won in a giveaway"
     }
 }

@@ -4,7 +4,7 @@ const { Client, Collection, PermissionsBitField } = require("discord.js");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
-	intents: ["Guilds", "GuildBans", "GuildMembers"],
+	intents: ["Guilds", "GuildBans", "GuildMembers", "GuildMessages"],
 
 	allowedMentions: {
 		parse: ["users", "roles"],
@@ -63,25 +63,6 @@ SenkoClient.once("ready", async () => {
 
 	print("#FFFB00", "EVENTS", "Ready");
 
-	if (process.env.NIGHTLY !== "true") {
-		for (let file of readdirSync("./src/SenkosWorld/")) {
-			const pull = require(`./SenkosWorld/${file}`);
-
-			const commandData = {
-				name: pull.name,
-				description: pull.desc
-			};
-
-			if (pull.options) commandData.options = pull.options;
-
-			SenkoClient.SlashCommands.set(pull.name, pull);
-			// await SenkoClient.guilds.cache.get("777251087592718336").commands.set([]);
-			await SenkoClient.guilds.cache.get("777251087592718336").commands.set([ commandData ]);
-		}
-
-		print("#FFFB00", "Senko's_World!", "Ready");
-	}
-
 	const commandsToSet = [];
 
 	if (process.env.NIGHTLY !== "true") {
@@ -122,4 +103,28 @@ SenkoClient.once("ready", async () => {
 
 		print("#F39800", "INTERACTIONS", "Ready");
 	});
+
+
+	if (process.env.NIGHTLY !== "true") {
+		const devTools = [];
+		for (let file of readdirSync("./src/SenkosWorld/")) {
+			const pull = require(`./SenkosWorld/${file}`);
+
+			const commandData = {
+				name: pull.name,
+				description: pull.desc,
+				dm_permission: false,
+				permissions: "0"
+			};
+
+			if (pull.options) commandData.options = pull.options;
+
+			SenkoClient.SlashCommands.set(pull.name, pull);
+			devTools.push(commandData);
+		}
+
+		await SenkoClient.guilds.cache.get("777251087592718336").commands.set(devTools);
+
+		print("#FFFB00", "Developer Tools", "Ready");
+	}
 });
