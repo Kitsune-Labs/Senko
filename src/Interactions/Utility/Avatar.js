@@ -36,12 +36,11 @@ module.exports = {
 					title: "Avatar",
 					description: AvatarURL ? null : "This user doesn't have an avatar",
 					image: {
-						url: AvatarURL ? AvatarURL : "attachment://image.png"
+						url: AvatarURL ? AvatarURL : "https://assets.senkosworld.com/media/DiscordAvatar.png"
 					},
 					color: SenkoClient.colors.light
 				}
 			],
-			files: AvatarURL ? null : [{ attachment: "./src/Data/content/DiscordAvatar.png", name: "image.png" }],
 			components: [
 				{
 					type: 1,

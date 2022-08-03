@@ -1,7 +1,7 @@
 const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild, updateSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
-const { cleanUserString } = require("../API/Master.js");
+const { cleanUserString, CheckPermission } = require("../API/Master.js");
 const { Colors } = require("discord.js");
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
 						guildFlags.set(bits.BETAs.ModCommands, false);
 
 						interaction.message.embeds[0].fields[0].value = "```diff\n- Disabled```";
-						interaction.message.components[0].components[0].style = "SUCCESS";
+						interaction.message.components[0].components[0].style = 3;
 						interaction.message.components[0].components[0].label = "Enable Moderation Commands";
 
 						await updateSuperGuild(interaction.guild, {
@@ -54,7 +54,7 @@ module.exports = {
 
 					guildFlags.set(bits.BETAs.ModCommands, true);
 					interaction.message.embeds[0].fields[0].value = "```diff\n+ Enabled```";
-					interaction.message.components[0].components[0].style = "DANGER";
+					interaction.message.components[0].components[0].style = 4;
 					interaction.message.components[0].components[0].label = "Disable Moderation Commands";
 
 					await updateSuperGuild(interaction.guild, {
@@ -71,13 +71,16 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanAdd", async (member) => {
+			if (!CheckPermission("ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			member = await member.guild.members.fetch(member.id);
+
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
 				type: 22
 			});
 
 			const banLog = fetchedLogs.entries.first();
-			if (banLog.executor.id === SenkoClient.user.id || process.env.NIGHTLY === "true") return;
+			if (banLog.executor.id === SenkoClient.user.id) return;
 
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
@@ -103,43 +106,45 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanRemove", async (member) => {
-			if (member.guild.id === "777251087592718336") {
-				const fetchedLogs = await member.guild.fetchAuditLogs({
-					limit: 1,
-					type: 23
-				});
+			if (!CheckPermission("ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			member = await member.guild.members.fetch(member.id);
 
-				const banLog = fetchedLogs.entries.first();
+			const fetchedLogs = await member.guild.fetchAuditLogs({
+				limit: 1,
+				type: 23
+			});
 
-				if (banLog.executor.id === SenkoClient.user.id || process.env.NIGHTLY === "true") return;
+			const banLog = fetchedLogs.entries.first();
 
-				const guildData = await fetchSuperGuild(member.guild);
-				var guildFlags = Bitfield.fromHex(guildData.flags);
+			if (banLog.executor.id === SenkoClient.user.id) return;
 
-				if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
-					(await member.guild.channels.fetch(guildData.ActionLogs)).send({
-						embeds: [
-							{
-								title: "Action Report - Kitsune Pardoned",
-								description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(banLog.reason) || "None"}`,
-								color: Colors.Green,
-								thumbnail: {
-									url: member.user.displayAvatarURL({ dynamic: true })
-								},
-								author: {
-									name: `${`${banLog.executor.username}#${banLog.executor.discriminator}` || "Unknown"}  [${banLog.executor.id || "000000000000000000"}]`,
-									icon_url: `${banLog.executor.displayAvatarURL({ dynamic: true })}`
-								}
+			const guildData = await fetchSuperGuild(member.guild);
+			var guildFlags = Bitfield.fromHex(guildData.flags);
+
+			if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
+				(await member.guild.channels.fetch(guildData.ActionLogs)).send({
+					embeds: [
+						{
+							title: "Action Report - Kitsune Pardoned",
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(banLog.reason) || "None"}`,
+							color: Colors.Green,
+							thumbnail: {
+								url: member.user.displayAvatarURL({ dynamic: true })
+							},
+							author: {
+								name: `${`${banLog.executor.username}#${banLog.executor.discriminator}` || "Unknown"}  [${banLog.executor.id || "000000000000000000"}]`,
+								icon_url: `${banLog.executor.displayAvatarURL({ dynamic: true })}`
 							}
-						]
-					});
-				}
+						}
+					]
+				});
 			}
 		});
 
 		SenkoClient.on("guildMemberAdd", async (member) => {
 			if (process.env.NIGHTLY === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
+			member = await member.guild.members.fetch(member.id);
 
 			if (guildData.MemberLogs) {
 				(await member.guild.channels.fetch(guildData.MemberLogs)).send({
@@ -159,8 +164,9 @@ module.exports = {
 			if (process.env.NIGHTLY === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
+			member = await member.guild.members.fetch(member.id);
 
-			if (guildData.MemberLogs /* && guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)*/) {
+			if (guildData.MemberLogs) {
 				(await member.guild.channels.fetch(guildData.MemberLogs)).send({
 					embeds: [
 						{
@@ -173,7 +179,7 @@ module.exports = {
 			}
 
 			//! Kicks
-
+			if (!CheckPermission("ViewAuditLog")) return;
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
 				type: 20
@@ -203,7 +209,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async member => {
-			if (process.env.NIGHTLY === "true") return;
+			if (!CheckPermission("ViewAuditLog") || process.env.NIGHTLY === "true") return;
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = Bitfield.fromHex(guildData.flags);
 			member = await member.guild.members.fetch(member.id);

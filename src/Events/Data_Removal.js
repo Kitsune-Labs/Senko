@@ -11,7 +11,7 @@ module.exports = {
 			if (Interaction.isButton()) {
 				switch (Interaction.customId) {
 				case "B0BB293E-C99E-467C-84DA-663BE1F5EF85":
-					await Supabase.from("Guilds").delete().eq("id", Interaction.member.id);
+					await Supabase.from("Users").delete().eq("id", Interaction.member.id);
 
 					Interaction.update({
 						embeds: [

@@ -27,7 +27,7 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, GuildData, accountData, XpLeft) => {
 		const User = interaction.options.getUser("user") || interaction.user;
-		accountData = await fetchSuperUser(User, true);
+		if (User !== interaction.user) accountData = await fetchSuperUser(User, true);
 
 		if (!accountData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
 
@@ -52,7 +52,7 @@ module.exports = {
 					// \n${Icons.medal}  **${accountData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
 					color: parseInt(accountData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || SenkoClient.colors.light,
 					image: {
-						url: accountData.LocalUser.profileConfig.banner ? `https://assets.senkosworld.com/media/banners/${ShopItems[accountData.LocalUser.profileConfig.banner].banner}` : "https://assets.senkosworld.com/media/banners/DefaultBanner.png"
+						url: `https://assets.senkosworld.com/media/banners/${ShopItems[accountData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`
 					},
 					thumbnail: {
 						url: User.displayAvatarURL()

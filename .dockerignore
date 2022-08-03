@@ -2,3 +2,12 @@ dev
 Github
 .vscode
 .github
+src/Data/LocalSave
+src/Data/Locales
+src/test
+.eslintrc
+.gitattributes
+.gitignore
+example.env
+LICENSE
+README.md
