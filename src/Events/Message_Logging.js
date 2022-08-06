@@ -42,7 +42,7 @@ module.exports = {
 				embeds: [
 					{
 						title: "Message Deleted",
-						description: `Message URL\n${message.url}\n\n${message.author.tag} ||[${message.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${message.channel} ||[${message.channel.id}]||\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji URLs**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`,
+						description: `Message URL\n${message.url}\n\n${message.author.tag} ||[${message.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${message.channel} ||[${message.channel.id}]||\n\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji URLs**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`,
 						color: Colors.Red,
 						footer: {
 							text: `Case ${caseId}`
