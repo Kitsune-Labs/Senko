@@ -2,8 +2,6 @@
 const { Guild, User } = require("discord.js");
 const { createClient } = require("@supabase/supabase-js");
 const { Bitfield } = require("bitfields");
-// const extend = require("extend");
-
 
 const Supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, {
 	autoRefreshToken: true,

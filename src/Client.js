@@ -1,10 +1,10 @@
 require("dotenv/config");
 
-const { Client, Collection, PermissionsBitField } = require("discord.js");
+const { Client, Collection, PermissionsBitField, IntentsBitField } = require("discord.js");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
-	intents: ["Guilds", "GuildBans", "GuildMembers", "GuildMessages"],
+	intents: ["Guilds", "GuildBans", "GuildMembers", "GuildMessages", "MessageContent"],
 
 	allowedMentions: {
 		parse: ["users", "roles"],
