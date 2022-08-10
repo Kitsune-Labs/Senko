@@ -1,4 +1,5 @@
-const { MessageAttachment } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
+const { CommandInteraction } = require("discord.js");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const { randomArrayItem } = require("@kitsune-labs/utilities");

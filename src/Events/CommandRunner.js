@@ -1,6 +1,6 @@
 const DataConfig = require("../Data/DataConfig.json");
 const { CheckPermission, print } = require("../API/Master");
-const { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser, fetchLevel } = require("../API/super.js");
+const { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser } = require("../API/super.js");
 const Icons = require("../Data/Icons.json");
 const { InteractionType } = require("discord.js");
 const { randomNumber } = require("@kitsune-labs/utilities");
@@ -131,22 +131,11 @@ module.exports = {
 				LocalUser: accountData.LocalUser
 			});
 
-
-			// //! The magic of KitsuneBi
-			// const Amount = 600 * (levelData.level * 5) * 2;
-
-			// console.log(levelData.xp / Amount);
-
-			// if (levelData.xp > Amount) {
-			// 	levelData.level = Math.ceil(levelData.xp / Amount);
-			// 	levelData.xp = levelData.xp % Amount;
-
-			// } else {
-			// 	levelData.xp = levelData.xp + randomNumber(50);
-			// }
-
-
 			//! End level
+
+			updateSuperUser(interaction.user, {
+				LastUsed: new Date().toISOString()
+			});
 
 			InteractionCommand.start(SenkoClient, interaction, superGuildData, accountData, Amount).catch(e => {
 				const messageStruct = {
