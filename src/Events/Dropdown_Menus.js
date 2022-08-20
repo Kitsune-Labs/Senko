@@ -10,10 +10,9 @@ module.exports = {
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async Interaction => {
 			if (!Interaction.isButton() || !Interaction.isSelectMenu()) return;
-
 			const ShopItems = await fetchMarket();
-			const accountFlags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
 			const AccountData = await fetchSuperUser(Interaction.user);
+			const accountFlags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
 
 			function setFlag(item, value) {
 				const flags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);

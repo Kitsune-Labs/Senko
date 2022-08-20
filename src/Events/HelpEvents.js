@@ -272,7 +272,7 @@ module.exports = {
 								name: "Index ≻ Utility"
 							},
 							title: "⚙️ Utility Commands",
-							description: `${categories.account.map(c=>c).join("\n")}`,
+							description: `${categories.utility.map(c=>c).join("\n")}`,
 							color: SenkoClient.colors.random()
 						}
 					],

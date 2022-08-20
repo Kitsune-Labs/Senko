@@ -65,7 +65,7 @@ SenkoClient.once("ready", async () => {
 
 	const commandsToSet = [];
 
-	if (process.env.NIGHTLY !== "true") {
+	if (process.env.NIGHTLY == "true") {
 		readdirSync("./src/Interactions/").forEach(async Folder => {
 			const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".js"));
 

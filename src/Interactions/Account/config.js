@@ -248,7 +248,7 @@ module.exports = {
 							{
 								type: 3,
 								placeholder: `Currently ${CurrentColor}`,
-								custom_id: "banner_set",
+								custom_id: "color_equip",
 								options: ColorColors
 							}
 						]
