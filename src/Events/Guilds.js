@@ -71,7 +71,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanAdd", async (member) => {
-			if (!CheckPermission("ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return;
 			member = await member.guild.members.fetch(member.id);
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -106,7 +106,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanRemove", async (member) => {
-			if (!CheckPermission("ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return;
 			member = await member.guild.members.fetch(member.id);
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -179,7 +179,7 @@ module.exports = {
 			}
 
 			//! Kicks
-			if (!CheckPermission("ViewAuditLog")) return;
+			if (!CheckPermission(member.guild, "ViewAuditLog")) return;
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
 				type: 20
@@ -209,7 +209,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async member => {
-			if (!CheckPermission("ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return;
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = Bitfield.fromHex(guildData.flags);
 			member = await member.guild.members.fetch(member.id);

@@ -64,14 +64,14 @@ module.exports = {
 			};
 
 			for (var permission of DataConfig.clientPermissions) {
-				if (!CheckPermission(interaction, permission)) {
+				if (!CheckPermission(interaction.guild, permission)) {
 					permissionEmbed.embeds[0].description += `${permission}\n`;
 					permissionMessage.content += `${permission}\n`;
 				}
 			}
 
 			if (!permissionEmbed.embeds[0].description.endsWith("\n")) {
-				if (CheckPermission(interaction, "EmbedLinks")) return interaction.reply(permissionEmbed);
+				if (CheckPermission(interaction.guild, "EmbedLinks")) return interaction.reply(permissionEmbed);
 				return interaction.reply(permissionMessage);
 			}
 

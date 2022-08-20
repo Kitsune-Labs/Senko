@@ -33,7 +33,7 @@ module.exports = {
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
 		});
 
-		if (!CheckPermission(interaction, "ManageMessages")) return interaction.followUp({
+		if (!CheckPermission(interaction.guild, "ManageMessages")) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",

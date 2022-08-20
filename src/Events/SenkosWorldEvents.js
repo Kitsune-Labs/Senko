@@ -69,7 +69,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777257201219403816> from your roles",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -101,7 +101,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777257276033597441> from your roles",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -133,7 +133,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777259097632407552> from your roles",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -165,7 +165,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777259001548111923> from your roles",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -197,7 +197,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777645674492854322> from your roles",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -229,7 +229,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777645607585185793> from your roles",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -262,7 +262,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777656121430376448> from your roles\n\nYou will no longer receive pings for announcements",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -294,7 +294,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777656183703076885> from your roles\n\nYou will no longer receive pings for community news",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -326,7 +326,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&777656896852328450> from your roles\n\nYou will no longer receive pings for community events",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -358,7 +358,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&885714280073297931> from your roles\n\nYou will no longer receive pings for new Senko manga releases",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -391,7 +391,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&939235387681947728> from your roles\n\nI wish you didn't have to leave",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -423,7 +423,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&962822738349813831> from your roles\n\nYou will no longer receive pings when I get updated",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -454,7 +454,7 @@ module.exports = {
 						interaction.reply({
 							embeds: [
 								{
-									title: `${Icons.check}  Role removed`,
+									title: `${Icons.tick}  Role removed`,
 									description: "I've removed <@&972564820589162557> from your roles\n\nYou will no longer receive MC Server pings",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
@@ -470,6 +470,69 @@ module.exports = {
 								{
 									title: `${Icons.check}  Role added`,
 									description: "I've added <@&972564820589162557> to your roles\n\nYou will now receive MC Server pings",
+									color: SenkoClient.colors.light,
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
+								}
+							],
+							ephemeral: true
+						});
+					}
+					break;
+
+				case "fox_posts":
+					if (interaction.member.roles.cache.has("1010352066541146124")) {
+						await interaction.member.roles.remove("1010352066541146124");
+
+						interaction.reply({
+							embeds: [
+								{
+									title: `${Icons.tick}  Role removed`,
+									description: "I've removed <@&1010352066541146124> from your roles\n\nYou will no longer receive pings for new foxes in <#984923552862052392>",
+									color: SenkoClient.colors.light,
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
+								}
+							],
+							ephemeral: true
+						});
+					} else {
+						await interaction.member.roles.add("1010352066541146124");
+
+						interaction.reply({
+							embeds: [
+								{
+									title: `${Icons.check}  Role added`,
+									description: "I've added <@&1010352066541146124> to your roles\n\nYou will now receive pings when a new fox is posted in <#984923552862052392>",
+									color: SenkoClient.colors.light,
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
+								}
+							],
+							ephemeral: true
+						});
+					}
+					break;
+				case "sw_polls":
+					if (interaction.member.roles.cache.has("1010377801792241736")) {
+						await interaction.member.roles.remove("1010377801792241736");
+
+						interaction.reply({
+							embeds: [
+								{
+									title: `${Icons.tick}  Role removed`,
+									description: "I've removed <@&1010377801792241736> from your roles\n\nYou will no longer receive pings for new polls",
+									color: SenkoClient.colors.light,
+									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
+								}
+							],
+							ephemeral: true
+						});
+					} else {
+						await interaction.member.roles.add("1010377801792241736");
+
+						interaction.reply({
+							embeds: [
+								{
+									title: `${Icons.check}  Role added`,
+									description: "I've added <@&1010377801792241736> to your roles\n\nYou will now receive pings when a new poll has been posted by a moderator",
 									color: SenkoClient.colors.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
 								}

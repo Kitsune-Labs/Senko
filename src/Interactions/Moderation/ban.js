@@ -75,7 +75,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction, "BanMembers")) return interaction.reply({
+		if (!CheckPermission(interaction.guild, "BanMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",

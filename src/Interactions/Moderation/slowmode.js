@@ -59,7 +59,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction, "ManageChannels")) return interaction.followUp({
+		if (!CheckPermission(interaction.guild, "ManageChannels")) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",

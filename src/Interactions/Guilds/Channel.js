@@ -66,7 +66,7 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction, { Channels }, AccountData) => {
 		const command = interaction.options.getSubcommand();
-		const command_permission = await CheckPermission(interaction, "ManageChannels");
+		const command_permission = await CheckPermission(interaction.guild, "ManageChannels");
 
 		function listChannels() {
 			interaction.followUp({

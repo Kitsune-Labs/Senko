@@ -40,9 +40,11 @@ module.exports = {
      */
 	// eslint-disable-next-line no-unused-vars
 	start: async (SenkoClient, interaction) => {
-		if (interaction.user.id !== "609097445825052701") return interaction.reply({ content: "🗿", ephemeral: true });
-		const Command = interaction.options.get();
+		if (interaction.user.id !== "609097445825052701") return;
+		//                                      👍
+		const Command = interaction.options._subcommand;
 		await interaction.deferReply({ ephemeral: true });
+		console.log(Command);
 
 		switch (Command) {
 		case "rules":
@@ -85,6 +87,8 @@ module.exports = {
 			interaction.followUp({ content: "Finished", ephemeral: true });
 			break;
 		case "roles":
+			console.log(interaction.channel.name);
+
 			interaction.channel.send({
 				embeds: [
 					{
@@ -95,7 +99,7 @@ module.exports = {
 				],
 				components: [
 					{
-						type: "ACTION_ROW",
+						type: 1,
 						components: [
 							{ type: 2, label: "Senko's Color", style: 2, customId: "senko_color" },
 							{ type: 2, label: "Shiro's Color", style: 2, customId: "shiro_color" },
@@ -103,7 +107,7 @@ module.exports = {
 						]
 					},
 					{
-						type: "ACTION_ROW",
+						type: 1,
 						components: [
 							{ type: 2, label: "Yozora's Color", style: 2, customId: "sora_color" },
 							{ type: 2, label: "Koenji's Color", style: 2, customId: "Koenji_color" },
@@ -117,19 +121,26 @@ module.exports = {
 				embeds: [
 					{
 						title: "Notification Roles",
-						description: "**Announcements**\nAny announcement that doesn't need @everyone\n\n**Community News**\nServer changes, partnerships, other related things\n\n**Community Events**\nThings like giveaways, game nights, etc\n\n**Senko Manga Releases**\nWhen a new chapter from the Senko manga releases (in english) you'll be notified\n\n**Senko Bot Updates**\nWhen Senko (the bot) gets updated receive a ping",
+						description: "**Announcements**\nAny announcement that doesn't need @everyone\n\n**Community News**\nServer changes, partnerships, other related things\n\n**Community Events**\nThings like giveaways, game nights, etc\n\n**Senko Manga Releases**\nWhen a new chapter from the Senko manga releases (in english) you'll be notified\n\n**Senko Bot Updates**\nWhen Senko (the bot) gets updated receive a ping\n\n**Fox Posts**\nPings you when a new fox is in <#984923552862052392>\n\n**Poll Pings**\nReceive a ping when a moderator makes a poll (Ping is at the moderators discretion)",
 						color: SenkoClient.colors.dark
 					}
 				],
 				components: [
 					{
-						type: "ACTION_ROW",
+						type: 1,
 						components: [
 							{ type: 2, label: "Announcements", style: 2, customId: "sw_announcements" },
 							{ type: 2, label: "Community News", style: 2, customId: "sw_news" },
 							{ type: 2, label: "Events", style: 2, customId: "sw_events" },
 							{ type: 2, label: "Senko Manga Releases", style: 2, customId: "sw_manga" },
 							{ type: 2, label: "Senko Bot Updates", style: 2, customId: "sw_senkodates" }
+						]
+					},
+					{
+						type: 1,
+						components: [
+							{ type: 2, label: "Fox Post's", style: 2, customId: "fox_posts" },
+							{ type: 2, label: "Poll Pings", style: 2, customId: "sw_polls" }
 						]
 					}
 				]
@@ -145,7 +156,7 @@ module.exports = {
 				],
 				components: [
 					{
-						type: "ACTION_ROW",
+						type: 1,
 						components: [
 							{ type: 2, label: "Senko's Lab", style: 2, customId: "sw_senkos-lab" }
 						]
