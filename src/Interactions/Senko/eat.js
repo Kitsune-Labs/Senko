@@ -29,7 +29,7 @@ module.exports = {
 		for (const item of Object.keys(accountData.LocalUser.profileConfig.Inventory)) {
 			const mItem = Market[item];
 
-			if (mItem && mItem.class == "food") {
+			if (mItem && mItem.class == "Consumables") {
 				possibleItems.push(item);
 			}
 		}
