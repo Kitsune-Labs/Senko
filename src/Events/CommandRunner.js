@@ -1,5 +1,8 @@
 const DataConfig = require("../Data/DataConfig.json");
-const { CheckPermission, print } = require("../API/Master");
+const { print, error } = require("@kitsune-labs/utilities");
+
+
+const { CheckPermission } = require("../API/Master");
 const { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser } = require("../API/super.js");
 const Icons = require("../Data/Icons.json");
 const { InteractionType } = require("discord.js");
@@ -33,7 +36,7 @@ module.exports = {
 				ephemeral: true
 			});
 
-			const InteractionCommand = SenkoClient.SlashCommands.get(interaction.commandName);
+			const InteractionCommand = SenkoClient.api.Commands.get(interaction.commandName);
 			const superGuildData = await fetchSuperGuild(interaction.guild);
 			const accountData = await fetchSuperUser(interaction.user);
 
@@ -137,7 +140,13 @@ module.exports = {
 				LastUsed: new Date().toISOString()
 			});
 
-			InteractionCommand.start(SenkoClient, interaction, superGuildData, accountData, Amount).catch(e => {
+			InteractionCommand.start({
+				senkoClient: SenkoClient,
+				interaction: interaction,
+				guildData: superGuildData,
+				userData: accountData,
+				xpAmount: Amount
+			}).catch(err => {
 				const messageStruct = {
 					embeds: [
 						{
@@ -158,9 +167,7 @@ module.exports = {
 					interaction.reply(messageStruct);
 				}
 
-				print("red", "ERROR", `${interaction.commandName} failed!`);
-
-				console.log(e);
+				error(err);
 			});
 		});
 	}

@@ -13,13 +13,13 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		interaction.reply({
 			embeds: [
 				{
 					title: "Data Removal",
 					description: "Please confirm that you want to delete all your data.\n\n**⚠️ This is irreversible! ⚠️**",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: { url: "https://assets.senkosworld.com/media/senko/upset2.png" }
 				}
 			],

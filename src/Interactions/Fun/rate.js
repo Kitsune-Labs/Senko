@@ -1,4 +1,4 @@
-const { spliceArray, cleanUserString } = require("../../API/Master.js");
+const { cleanUserString } = require("../../API/Master.js");
 
 module.exports = {
 	name: "rate",
@@ -16,7 +16,7 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		const Item = cleanUserString(interaction.options.getString("thing"));
 
 		const MessageBuild = {
@@ -24,7 +24,7 @@ module.exports = {
 				{
 					title: "Let me think...",
 					description: `I rate **${Item}** a ${Math.floor(Math.random() * 10)}/10!`,
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/think.png"
 					}

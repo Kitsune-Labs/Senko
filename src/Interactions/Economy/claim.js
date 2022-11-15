@@ -27,13 +27,13 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const Command = interaction.options.getSubcommand();
 		await interaction.deferReply();
 
 		switch (Command) {
 		case "daily":
-			var DailyTimeStamp = accountData.Rewards.Daily;
+			var DailyTimeStamp = userData.Rewards.Daily;
 			var DailyCooldown = 86400000;
 
 			if (DailyCooldown - (Date.now() - DailyTimeStamp) >= 0) {
@@ -42,7 +42,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: `I've already given you your daily yen, come back to me <t:${Math.floor((DailyTimeStamp + DailyCooldown) / 1000)}:R>!`,
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
@@ -51,12 +51,12 @@ module.exports = {
 					ephemeral: true
 				});
 			} else {
-				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 200;
-				accountData.Rewards.Daily = Date.now();
+				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 200;
+				userData.Rewards.Daily = Date.now();
 
 				await updateSuperUser(interaction.user, {
-					LocalUser: accountData.LocalUser,
-					Rewards: accountData.Rewards
+					LocalUser: userData.LocalUser,
+					Rewards: userData.Rewards
 				});
 
 				interaction.followUp({
@@ -64,7 +64,7 @@ module.exports = {
 						{
 							title: `${Icons.heart}  Here you go dear!`,
 							description: `Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 200x added`,
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/happy.png"
 							}
@@ -74,7 +74,7 @@ module.exports = {
 			}
 			break;
 		case "weekly":
-			var WeeklyTimeStamp = accountData.Rewards.Weekly;
+			var WeeklyTimeStamp = userData.Rewards.Weekly;
 			var WeeklyCooldown = 604800000;
 
 			if (WeeklyCooldown - (Date.now() - WeeklyTimeStamp) >= 0) {
@@ -83,7 +83,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: `From what I can remember i've given you your weekly yen, come back <t:${Math.floor((WeeklyTimeStamp + WeeklyCooldown) / 1000)}:R>!`,
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/hat_think.png"
 							}
@@ -93,12 +93,12 @@ module.exports = {
 				});
 
 			} else {
-				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 130;
-				accountData.Rewards.Weekly = Date.now();
+				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 130;
+				userData.Rewards.Weekly = Date.now();
 
 				await updateSuperUser(interaction.user, {
-					LocalUser: accountData.LocalUser,
-					Rewards: accountData.Rewards
+					LocalUser: userData.LocalUser,
+					Rewards: userData.Rewards
 				});
 
 				interaction.followUp({
@@ -106,7 +106,7 @@ module.exports = {
 						{
 							title: `${Icons.heart}  It's that time again!`,
 							description: `Here is your Yen for this week; Now spend it wisely!\n\n— ${Icons.yen} 1300x added`,
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/happy.png"
 							}
@@ -116,8 +116,8 @@ module.exports = {
 			}
 			break;
 		case "items":
-			var CI = accountData.LocalUser.profileConfig.claimableItems;
-			var inventory = accountData.LocalUser.profileConfig.Inventory;
+			var CI = userData.LocalUser.profileConfig.claimableItems;
+			var inventory = userData.LocalUser.profileConfig.Inventory;
 			var market = await fetchMarket();
 
 			if (CI.length > 0) {
@@ -126,7 +126,7 @@ module.exports = {
 						{
 							title: "Here we are!",
 							description: "I have these items for you to have!\n",
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/package.png"
 							}
@@ -143,7 +143,7 @@ module.exports = {
 				} while (CI.length > 0);
 
 				await updateSuperUser(interaction.user, {
-					LocalUser: accountData.LocalUser
+					LocalUser: userData.LocalUser
 				});
 
 				return interaction.followUp(claimMessage);
@@ -154,7 +154,7 @@ module.exports = {
 					{
 						title: "Hmmm.....",
 						description: "I've scourged around and couldn't find anything",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/smile2.png"
 						}

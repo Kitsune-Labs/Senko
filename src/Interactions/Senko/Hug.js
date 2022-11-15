@@ -38,8 +38,7 @@ module.exports = {
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, guildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const OptionalUser = interaction.options.getUser("user");
 
 		if (OptionalUser) {
@@ -52,7 +51,7 @@ module.exports = {
 				embeds: [
 					{
 						description: `${Icons.heart}  It's okay dear, ill hug you...`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						image: {
 							url: randomArray(hardLinks.media.hugs)
 						}
@@ -67,7 +66,7 @@ module.exports = {
 						image: {
 							url: randomArray(hardLinks.media.hugs)
 						},
-						color: SenkoClient.colors.light
+						color: senkoClient.api.Theme.light
 					}
 				]
 			});
@@ -77,7 +76,7 @@ module.exports = {
 			embeds: [
 				{
 					description: randomArray(Responses).replace("_USER_", interaction.user.username),
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/hug_tail.png"
 					}
@@ -85,9 +84,9 @@ module.exports = {
 			]
 		};
 
-		if (calcTimeLeft(accountData.RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
-			accountData.RateLimits.Hug_Rate.Amount = 0;
-			accountData.RateLimits.Hug_Rate.Date = Date.now();
+		if (calcTimeLeft(userData.RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
+			userData.RateLimits.Hug_Rate.Amount = 0;
+			userData.RateLimits.Hug_Rate.Date = Date.now();
 
 			await updateSuperUser(interaction.user, {
 				RateLimits: {
@@ -98,11 +97,11 @@ module.exports = {
 				}
 			});
 
-			accountData.RateLimits.Hug_Rate.Amount = 0;
+			userData.RateLimits.Hug_Rate.Amount = 0;
 		}
 
-		if (accountData.RateLimits.Hug_Rate.Amount >= 20) {
-			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((accountData.RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
+		if (userData.RateLimits.Hug_Rate.Amount >= 20) {
+			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((userData.RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
 			MessageStruct.embeds[0].thumbnail.url = "https://assets.senkosworld.com/media/senko/bummed.png";
 
 			return interaction.followUp(MessageStruct);
@@ -116,17 +115,17 @@ module.exports = {
 
 		MessageStruct.embeds[0].title = randomArray(Sounds);
 
-		accountData.Stats.Hugs++;
-		accountData.RateLimits.Hug_Rate.Amount++;
-		accountData.RateLimits.Hug_Rate.Date = Date.now();
+		userData.Stats.Hugs++;
+		userData.RateLimits.Hug_Rate.Amount++;
+		userData.RateLimits.Hug_Rate.Date = Date.now();
 
 		await updateSuperUser(interaction.user, {
-			Stats: accountData.Stats,
+			Stats: userData.Stats,
 
-			RateLimits: accountData.RateLimits
+			RateLimits: userData.RateLimits
 		});
 
-		if (accountData.RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
+		if (userData.RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
 
 		interaction.followUp(MessageStruct);
 	}

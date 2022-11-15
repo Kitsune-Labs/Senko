@@ -60,25 +60,24 @@ module.exports = {
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
-		if (calcTimeLeft(accountData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
-			accountData.RateLimits.Fluff_Rate.Amount = 0;
-			accountData.RateLimits.Fluff_Rate.Date = Date.now();
+	start: async ({senkoClient, interaction, userData}) => {
+		if (calcTimeLeft(userData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
+			userData.RateLimits.Fluff_Rate.Amount = 0;
+			userData.RateLimits.Fluff_Rate.Date = Date.now();
 
 			await updateSuperUser(interaction.user, {
-				RateLimits: accountData.RateLimits
+				RateLimits: userData.RateLimits
 			});
 
-			accountData.RateLimits.Fluff_Rate.Amount = 0;
+			userData.RateLimits.Fluff_Rate.Amount = 0;
 		}
 
-		if (accountData.RateLimits.Fluff_Rate.Amount >= 50) return interaction.followUp({
+		if (userData.RateLimits.Fluff_Rate.Amount >= 50) return interaction.followUp({
 			embeds: [
 				{
-					description: `I don't want to right now! W-We can <t:${Math.floor((accountData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
+					description: `I don't want to right now! W-We can <t:${Math.floor((userData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
 					thumbnail: { url: "https://assets.senkosworld.com/media/senko/upset2.png" },
-					color: SenkoClient.colors.light
+					color: senkoClient.api.Theme.light
 				}
 			]
 		});
@@ -87,13 +86,13 @@ module.exports = {
 		// if (Stats.Fluffs >= 50) await awardAchievement(interaction, "AdeptFloofer");
 		// if (Stats.Fluffs >= 100) await awardAchievement(interaction, "MasterFloofer");
 
-		accountData.Stats.Fluffs++;
-		accountData.RateLimits.Fluff_Rate.Amount++;
-		accountData.RateLimits.Fluff_Rate.Date = Date.now();
+		userData.Stats.Fluffs++;
+		userData.RateLimits.Fluff_Rate.Amount++;
+		userData.RateLimits.Fluff_Rate.Date = Date.now();
 
 		await updateSuperUser(interaction.user, {
-			Stats: accountData.Stats,
-			RateLimits: accountData.RateLimits
+			Stats: userData.Stats,
+			RateLimits: userData.RateLimits
 		});
 
 		const MessageStruct = {
@@ -101,7 +100,7 @@ module.exports = {
 				{
 					title: randomArray(UserInput).replace("_USER_", interaction.user.username),
 					description: randomArray(Responses),
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: `https://assets.senkosworld.com/media/senko/${randomArray(["fluffed", "fluffed2", "pout"])}.png`
 					}
@@ -117,9 +116,9 @@ module.exports = {
 
 		if (randomNumber(500) < 5) {
 			MessageStruct.embeds[0].description += `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
-			accountData.LocalUser.profileConfig.Currency.Tofu++;
+			userData.LocalUser.profileConfig.Currency.Tofu++;
 			await updateSuperUser(interaction.user, {
-				LocalUser: accountData.LocalUser
+				LocalUser: userData.LocalUser
 			});
 		}
 

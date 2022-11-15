@@ -39,12 +39,12 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const MessageStruct = {
 			embeds: [
 				{
 					description: randomArray(Responses).replace("_USER_", interaction.user.username),
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/pat.png"
 					}
@@ -52,29 +52,29 @@ module.exports = {
 			]
 		};
 
-		if (calcTimeLeft(accountData.RateLimits.Pat_Rate.Date, config.cooldowns.daily)) {
-			accountData.RateLimits.Pat_Rate.Amount = 0;
-			accountData.RateLimits.Pat_Rate.Date = Date.now();
+		if (calcTimeLeft(userData.RateLimits.Pat_Rate.Date, config.cooldowns.daily)) {
+			userData.RateLimits.Pat_Rate.Amount = 0;
+			userData.RateLimits.Pat_Rate.Date = Date.now();
 
 			await updateSuperUser(interaction.user, {
-				RateLimits: accountData.RateLimits
+				RateLimits: userData.RateLimits
 			});
 
-			accountData.RateLimits.Pat_Rate.Amount = 0;
+			userData.RateLimits.Pat_Rate.Amount = 0;
 		}
 
 
-		if (accountData.RateLimits.Pat_Rate.Amount >= 20) {
-			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Pat_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+		if (userData.RateLimits.Pat_Rate.Amount >= 20) {
+			MessageStruct.embeds[0].description = `${randomArray(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(userData.RateLimits.Pat_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
 			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomArray(["huh", "think"])}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}
 
 
-		accountData.Stats.Pats++;
-		accountData.RateLimits.Pat_Rate.Amount++;
-		accountData.RateLimits.Pat_Rate.Date = Date.now();
+		userData.Stats.Pats++;
+		userData.RateLimits.Pat_Rate.Amount++;
+		userData.RateLimits.Pat_Rate.Date = Date.now();
 
 		if (randomNumber(100) > 75) {
 			addYen(interaction.user, 50);
@@ -86,12 +86,12 @@ module.exports = {
 		MessageStruct.embeds[0].title = randomArray(Sounds);
 
 		await updateSuperUser(interaction.user, {
-			Stats: accountData.Stats,
+			Stats: userData.Stats,
 
-			RateLimits: accountData.RateLimits
+			RateLimits: userData.RateLimits
 		});
 
-		if (accountData.RateLimits.Pat_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop patting her for today`;
+		if (userData.RateLimits.Pat_Rate.Amount >= 20) MessageStruct.embeds[0].description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop patting her for today`;
 
 
 		interaction.followUp(MessageStruct);

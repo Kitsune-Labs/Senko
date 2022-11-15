@@ -32,7 +32,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  Sorry!`,
 							description: "This item is out of stock right now check back next time!",
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
@@ -48,7 +48,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
 							description: `You may only have **${shopItem.max}** total!`,
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
@@ -62,7 +62,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
 							description: "You don't have enough Yen!",
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
@@ -77,7 +77,7 @@ module.exports = {
 						{
 							title: "Confirm Purchase",
 							description: `Are you sure you want to purchase **${shopItem.name}** for ${Icons.yen} **${shopItem.price}**?\nYou will have ${Icons.yen} **${accountData.LocalUser.profileConfig.Currency.Yen - shopItem.price}** left`,
-							color: SenkoClient.colors.light,
+							color: SenkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/package.png"
 							}
@@ -109,7 +109,7 @@ module.exports = {
 						{
 							title: `${Icons.heart}  See you next time!`,
 							description: `Thanks for purchasing **${shopItem.name}** for ${Icons.yen} ${shopItem.price}x!`,
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/tofu.png"
 							}
@@ -143,7 +143,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  Very well then`,
 							description: "I'll put back your item and hopefully you can buy it next time!",
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/smile.png"
 							}
@@ -166,7 +166,7 @@ module.exports = {
 						{
 							title: `${shopItem.name}`,
 							description: `${shopItem.desc}\n`,
-							color: shopItem.color || SenkoClient.colors.dark,
+							color: shopItem.color || SenkoClient.api.Theme.dark,
 							fields: [
 								{ name: `${Icons.yen}`, value: `${shopItem.price}x`, inline: true }
 							]

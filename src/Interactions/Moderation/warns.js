@@ -19,21 +19,20 @@ module.exports = {
 	],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async ({senkoClient, interaction, guildData}) => {
 		const user = interaction.options.getUser("user") || interaction.user;
 
-		if (GuildData.warns[user.id]) {
-			const warns = GuildData.warns[user.id];
+		if (guildData.warns[user.id]) {
+			const warns = guildData.warns[user.id];
 			const PageEstimate = Math.ceil(warns.length / 8) < 1 ? 1 : Math.ceil(warns.length / 8);
 			const Pages = [];
 
 			for (let i = 0; i < PageEstimate; i++) {
 				const Page = {
 					description: "",
-					color: SenkoClient.colors.light
+					color: senkoClient.api.Theme.light
 				};
 
 				for (let j = 0; j < 8; j++) {
@@ -58,7 +57,7 @@ module.exports = {
 					{
 						title: `${Icons.exclamation}  All clean`,
 						description: `${user.tag} doesn't have any warns!`,
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 					}
 				]

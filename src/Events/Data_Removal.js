@@ -18,7 +18,7 @@ module.exports = {
 							{
 								title: "Data Removal",
 								description: "🗑️  Your data has been removed",
-								color: SenkoClient.colors.dark,
+								color: SenkoClient.api.Theme.dark,
 								thumbnail: { url: "attachment://image.png" }
 							}
 						],

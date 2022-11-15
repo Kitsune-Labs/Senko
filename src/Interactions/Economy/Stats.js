@@ -11,11 +11,11 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const StatsTitle = ["Here are your stats dear!", "Here you go!"];
 
-		const Currency = accountData.LocalUser.profileConfig.Currency;
-		const Stats = accountData.Stats;
+		const Currency = userData.LocalUser.profileConfig.Currency;
+		const Stats = userData.Stats;
 
 		interaction.followUp({
 			embeds: [
@@ -33,7 +33,7 @@ module.exports = {
 						{ name: "Steps", value: `${Stats.Steps}x`, inline: true },
 						{ name: "Drinks", value: `${Stats.Drinks}x`, inline: true }
 					],
-					color: SenkoClient.colors.random(),
+					color: senkoClient.api.Theme.random(),
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/idle.png"
 					}

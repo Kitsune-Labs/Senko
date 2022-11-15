@@ -29,13 +29,13 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		await interaction.reply({
 			embeds: [
 				{
 					title: "Ding!",
 					description: "Shiro flipped the coin and we're now anticipating the outcome.",
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/shiro/sneak1.png"
 					}
@@ -62,7 +62,7 @@ module.exports = {
 					{
 						title: "Thunk!",
 						description: "The coin flipped and the outcome is...\n\nA tie!?!?",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/surprised1.png"
 						}
@@ -77,7 +77,7 @@ module.exports = {
 					{
 						title: "Bonk!",
 						description: "The coin flipped and the outcome is...\n\nShiro won...",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/superior.png"
 						}
@@ -93,7 +93,7 @@ module.exports = {
 					{
 						title: "Ting!",
 						description: `The coin flipped and the outcome is...\n\nYou won!\n\n— ${Icons.yen}  30x added`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}

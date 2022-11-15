@@ -24,10 +24,9 @@ module.exports = {
 	category: "utility",
 	/**
      * @param {Interaction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async ({senkoClient, interaction}) => {
 		const whoUser = await interaction.options.getUser("user") || interaction.user;
 		const guildMember = interaction.guild.members.cache.get(whoUser.id || whoUser);
 		const AvatarURL = guildMember && guildMember.user ? guildMember.user.avatarURL({ dynamic: true, size: 2048 }) : null;
@@ -36,8 +35,8 @@ module.exports = {
 			url: `https://discord.com/api/users/${whoUser.id || whoUser}`,
 			method: "GET",
 			headers: {
-				"User-Agent": SenkoClient.tools.UserAgent,
-				"Authorization": `Bot ${SenkoClient.token}`
+				"User-Agent": senkoClient.tools.UserAgent,
+				"Authorization": `Bot ${senkoClient.token}`
 			}
 		}).then(async ({ data: userData }) => {
 			const banStatus = await interaction.guild.bans.fetch(userData.id).catch(()=>{});

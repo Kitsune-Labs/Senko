@@ -35,11 +35,10 @@ module.exports = {
 		}
 	],
 	/**
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      * @param {CommandInteraction} interaction
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		if (interaction.user.id !== "609097445825052701") return;
 		//                                      👍
 		const Command = interaction.options._subcommand;
@@ -94,7 +93,7 @@ module.exports = {
 					{
 						title: "Vanity Roles",
 						description: "<@&777257201219403816>    <@&777257276033597441>    <@&777259097632407552>\n<@&777259001548111923>    <@&777645674492854322>    <@&777645607585185793>",
-						color: SenkoClient.colors.light
+						color: senkoClient.api.Theme.light
 					}
 				],
 				components: [
@@ -122,7 +121,7 @@ module.exports = {
 					{
 						title: "Notification Roles",
 						description: "**Announcements**\nAny announcement that doesn't need @everyone\n\n**Community News**\nServer changes, partnerships, other related things\n\n**Community Events**\nThings like giveaways, game nights, etc\n\n**Senko Manga Releases**\nWhen a new chapter from the Senko manga releases (in english) you'll be notified\n\n**Senko Bot Updates**\nWhen Senko (the bot) gets updated receive a ping\n\n**Fox Posts**\nPings you when a new fox is in <#984923552862052392>\n\n**Poll Pings**\nReceive a ping when a moderator makes a poll (Ping is at the moderators discretion)",
-						color: SenkoClient.colors.dark
+						color: senkoClient.api.Theme.dark
 					}
 				],
 				components: [
@@ -151,7 +150,7 @@ module.exports = {
 					{
 						title: "Hidden Categories",
 						description: "**Senko's Lab**\nProjects and testing area's for stuff",
-						color: SenkoClient.colors.light
+						color: senkoClient.api.Theme.light
 					}
 				],
 				components: [
@@ -176,22 +175,22 @@ module.exports = {
 					{
 						title: "Level Permissions",
 						description: "**Level 5** – The ability to use External stickers, Embedded links, and speak in Voice Channels\n\n**Level 10** – The ability to upload files in basically every channel, Stream in Voice Channels, change your Nickname, and create Public Threads\n\n**Level 20** – The ability to promote your social media and Discord servers in <#966396091165736990>\n\n**Level 30** - The ability to create Private Threads\n\nBoosting will grant you \"Honorary Kitsune\" which will exempt you from level locks",
-						color: SenkoClient.colors.dark_red
+						color: senkoClient.api.Theme.dark_red
 					},
 					{
 						title: "Server Boosting",
 						description: "We highly suggest boosting servers that are under level 3, but if you do boost you'll get some exclusive things like:\n\nBecoming exempt from the level lock\nAccess to a special channel\nDouble chat XP",
-						color: SenkoClient.colors.light_red
+						color: senkoClient.api.Theme.light_red
 					},
 					{
 						title: "Partnering",
 						description: "We open for partners! Message <@609097445825052701> to get started",
-						color: SenkoClient.colors.dark_red
+						color: senkoClient.api.Theme.dark_red
 					},
 					{
 						title: "Roles",
 						description: "Roles can be found in <#832387166737924097>",
-						color: SenkoClient.colors.light_red
+						color: senkoClient.api.Theme.light_red
 					}
 				]
 			});
@@ -204,7 +203,7 @@ module.exports = {
 					{
 						title: "MC Server Roles",
 						description: "**Minecraft Server News/Announcements**",
-						color: SenkoClient.colors.light
+						color: senkoClient.api.Theme.light
 					}
 				],
 				components: [

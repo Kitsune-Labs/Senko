@@ -33,8 +33,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (senkoClient, interaction, guildData, accountData) => {
+	start: async ({interaction}) => {
 		interaction.reply({
 			embeds: [
 				{

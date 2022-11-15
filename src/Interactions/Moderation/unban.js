@@ -25,11 +25,10 @@ module.exports = {
 	],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
+	start: async ({senkoClient, interaction, guildData}) => {
+		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});
@@ -39,7 +38,7 @@ module.exports = {
 				{
 					title: "Sorry dear!",
 					description: "You must be able to ban members to use this!",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -53,7 +52,7 @@ module.exports = {
 				{
 					title: "Oh dear...",
 					description: "It looks like I can't unban members! (Make sure I have the \"Ban Members\" permission)",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -71,7 +70,7 @@ module.exports = {
 				{
 					title: "I don't see anything",
 					description: "This user is not banned from this server",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 				}
 			],
@@ -82,8 +81,8 @@ module.exports = {
 
 		await interaction.guild.members.unban(userId, unbanReason || "No reason given");
 
-		if (GuildData.ActionLogs) {
-			(await interaction.guild.channels.fetch(GuildData.ActionLogs)).send({
+		if (guildData.ActionLogs) {
+			(await interaction.guild.channels.fetch(guildData.ActionLogs)).send({
 				embeds: [
 					{
 						title: "Action Report - Kitsune Pardoned",
@@ -103,7 +102,7 @@ module.exports = {
 				{
 					title: "All done dear!",
 					description: `I've unbanned ${userId} for you!\n\n${unbanReason ? `Reason: ${unbanReason}` : ""}`,
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: { url: "https://assets.senkosworld.com/media/senko/bless.png" }
 				}
 			]

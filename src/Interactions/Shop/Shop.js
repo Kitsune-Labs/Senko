@@ -14,8 +14,7 @@ module.exports = {
 	/**
 	 * @param {CommandInteraction} interaction
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const ShopItems = await fetchMarket();
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
 		const shopData = rawShopData[0].market;
@@ -47,13 +46,13 @@ module.exports = {
 			}
 		}
 
-		const previewCommand = await SenkoClient.application.commands.fetchAll.find(d => d.name === "preview");
+		const previewCommand = await senkoClient.application.commands.fetchAll.find(d => d.name === "preview");
 
 		const marketResponse = {
 			title: "🛍️ Senko's Market",
-			description: `Please take your time to review what is available.\n\nUse </preview:${previewCommand.id}> to view details about an item like it's description, price, banner preview, and more!\n\n${Icons.package}  Market refresh <t:${shopData.updates}:R>\n${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
+			description: `Please take your time to review what is available.\n\nUse </preview:${previewCommand.id}> to view details about an item like it's description, price, banner preview, and more!\n\n${Icons.package}  Market refresh <t:${shopData.updates}:R>\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
 			fields: [],
-			color: SenkoClient.colors.light,
+			color: senkoClient.api.Theme.light,
 			thumbnail: {
 				url: "https://assets.senkosworld.com/media/senko/package.png"
 			}

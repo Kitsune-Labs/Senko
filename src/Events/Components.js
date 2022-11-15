@@ -30,7 +30,7 @@ module.exports = {
 							{
 								title: `${Icons.exclamation}  Alright dear`,
 								description: "All of the channels have been removed",
-								color: SenkoClient.colors.light,
+								color: SenkoClient.api.Theme.light,
 								thumbnail: {
 									url: "attachment://image.png"
 								}
@@ -116,7 +116,7 @@ module.exports = {
 							{
 								title: `${Icons.exclamation}  You can't eat that!`,
 								description: "That is not your food",
-								color: SenkoClient.colors.dark,
+								color: SenkoClient.api.Theme.dark,
 								thumbnail: {
 									url: "https://assets.senkosworld.com/media/senko/pout.png"
 								}
@@ -155,7 +155,7 @@ module.exports = {
 								{
 									title: `You and Senko had ${item.name}!`,
 									description: `Senko says it was ${randomArrayItem(reactions)}\n\n— 1x ${item.name} removed`,
-									color: SenkoClient.colors.light,
+									color: SenkoClient.api.Theme.light,
 									thumbnail: {
 										url: randomArray([HardLinks.senkoBless, HardLinks.senkoEat, HardLinks.senkoDrink])
 									}

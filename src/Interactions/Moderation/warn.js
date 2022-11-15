@@ -31,11 +31,14 @@ module.exports = {
 		}
 	],
 	/**
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      * @param {CommandInteraction} interaction
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, { warns, ActionLogs, flags }) => {
+	start: async ({senkoClient, interaction, guildData}) => {
+		let warns = guildData.Warns;
+		let ActionLogs = guildData.ActionLogs;
+		let flags = guildData.flags;
+
 		const user = interaction.options.getMember("user");
 		const reason = interaction.options.getString("reason") || "No Reason Provided";
 		const note = interaction.options.getString("note") || "No note(s) provided";
@@ -50,7 +53,7 @@ module.exports = {
 				{
 					title: "Sorry dear!",
 					description: "You must be able to moderate members to use this!",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}

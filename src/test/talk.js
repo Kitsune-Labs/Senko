@@ -27,7 +27,7 @@ module.exports = {
 		// 	embeds: [{
 		// 		title: "Senko-san",
 		// 		description: `Nanoja!\n\nDo you have a question ${interaction.user.username}?`,
-		// 		color: SenkoClient.colors.light,
+		// 		color: SenkoClient.api.Theme.light,
 		// 		thumbnail: {
 		// 			url: "https://assets.senkosworld.com/media/labs/placeholder.png"
 		// 		},

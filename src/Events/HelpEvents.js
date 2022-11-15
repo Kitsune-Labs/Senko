@@ -60,7 +60,7 @@ module.exports = {
 
 			for (var entry of SenkoClient.application.commands.fetchAll) {
 				const commandEntry = entry[1];
-				const { category } = SenkoClient.SlashCommands.get(commandEntry.name);
+				const { category } = SenkoClient.api.Commands.get(commandEntry.name);
 
 				if (category) categories[category].push(`</${commandEntry.name}:${commandEntry.id}> ≻ ${commandEntry.description}`);
 			}
@@ -75,7 +75,7 @@ module.exports = {
 							},
 							title: "📄 Messenger Index",
 							description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n[Privacy Policy](https://senkosworld.com/privacy) - [Terms of Use](https://senkosworld.com/terms)\nPing: ${Math.floor(SenkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
-							color: SenkoClient.colors.random()
+							color: SenkoClient.api.Theme.random()
 						}
 					],
 					components: [
@@ -108,7 +108,7 @@ module.exports = {
 							},
 							title: "📑 Fun Commands",
 							description: `${categories.fun.map(c=>c).join("\n")}`,
-							color: SenkoClient.colors.random()
+							color: SenkoClient.api.Theme.random()
 						}
 					],
 					components: [
@@ -141,7 +141,7 @@ module.exports = {
 							},
 							title: "📑 Economy Commands",
 							description: `${categories.economy.map(c=>c).join("\n")}`,
-							color: SenkoClient.colors.random()
+							color: SenkoClient.api.Theme.random()
 						}
 					],
 					components: [
@@ -174,7 +174,7 @@ module.exports = {
 							},
 							title: "📑 Social Commands",
 							description: `${categories.social.map(c=>c).join("\n")}`,
-							color: SenkoClient.colors.random()
+							color: SenkoClient.api.Theme.random()
 						}
 					],
 					components: [
@@ -207,7 +207,7 @@ module.exports = {
 							},
 							title: "📑 Administration Commands",
 							description: `${categories.admin.map(c=>c).join("\n")}`,
-							color: SenkoClient.colors.random()
+							color: SenkoClient.api.Theme.random()
 						}
 					],
 					components: [
@@ -240,7 +240,7 @@ module.exports = {
 							},
 							title: "📑 Account Commands",
 							description: `${categories.account.map(c=>c).join("\n")}`,
-							color: SenkoClient.colors.random()
+							color: SenkoClient.api.Theme.random()
 						}
 					],
 					components: [
@@ -273,7 +273,7 @@ module.exports = {
 							},
 							title: "⚙️ Utility Commands",
 							description: `${categories.utility.map(c=>c).join("\n")}`,
-							color: SenkoClient.colors.random()
+							color: SenkoClient.api.Theme.random()
 						}
 					],
 					components: [

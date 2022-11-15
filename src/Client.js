@@ -1,15 +1,17 @@
 require("dotenv/config");
-const { Client, Collection, PermissionsBitField } = require("discord.js");
+const { print, error, fatal } = require("@kitsune-labs/utilities");
+
+const { Client, Collection, PermissionsBitField, GatewayIntentBits: gIntents } = require("discord.js");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
-	intents: ["MessageContent", "GuildMessages", "Guilds", "GuildBans", "GuildMembers"],
+	intents: [gIntents.MessageContent, gIntents.GuildMessages, gIntents.Guilds, gIntents.GuildBans, gIntents.GuildMembers],
 
 	allowedMentions: {
-		parse: ["users", "roles"],
+		parse: ["users", "roles", "everyone"],
 		repliedUser: false
 	},
-	restRequestTimeout: 60000,
+	restRequestTimeout: 100000,
 	userAgentSuffix: [`Kitsune-Labs/Senko (v${require("../package.json").version})`]
 });
 
@@ -18,33 +20,35 @@ SenkoClient.setMaxListeners(20);
 if (process.env.NIGHTLY === "true") {
 	SenkoClient.login(process.env.NIGHTLY_TOKEN);
 
-	require("./API/Master").print("#FF6633", "SENKO", "NIGHTLY Mode");
+	print("SENKO", "NIGHTLY Mode");
 } else {
 	SenkoClient.login(process.env.TOKEN);
 
-	require("./API/Master").print("#5865F2", "SENKO", "PRODUCTION Mode");
+	print("SENKO", "PRODUCTION Mode");
 }
-
-const { print } = require("./API/Master");
-
-SenkoClient.SlashCommands = new Collection();
-SenkoClient.colors = require("./Data/Palettes/Main.js");
 
 Reflect.set(SenkoClient, "tools", {
 	UserAgent: `${require("discord.js/src/util/Constants").UserAgent} (Kitsune-Labs/Senko, v${require("../package.json").version})`,
 	colors: require("./Data/Palettes/Main.js")
 });
 
-// print("#5865F2", "UserAgent", SenkoClient.tools.UserAgent);
+Reflect.set(SenkoClient, "api", {
+	Commands: new Collection(),
+
+	UserAgent: `${require("discord.js/src/util/Constants").UserAgent} (Kitsune-Labs/Senko, v${require("../package.json").version})`,
+	Theme: require("./Data/Palettes/Main.js")
+});
+
+print("UserAgent", SenkoClient.tools.UserAgent);
 
 process.SenkoClient = SenkoClient;
 
 process.on("unhandledRejection", async(reason)=>{
-	console.log(reason);
+	error(reason);
 });
 
 process.on("uncaughtException", async(reason)=>{
-	console.log(reason);
+	fatal(reason);
 });
 
 SenkoClient.once("ready", async () => {
@@ -71,7 +75,7 @@ SenkoClient.once("ready", async () => {
 			for (let interact of Interactions) {
 				let pull = require(`./Interactions/${Folder}/${interact}`);
 
-				SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+				SenkoClient.api.Commands.set(`${pull.name}`, pull);
 			}
 		});
 	} else {
@@ -79,11 +83,11 @@ SenkoClient.once("ready", async () => {
 
 		for (var file of readdirSync("./src/DevInteractions/")) {
 			const pull = require(`./DevInteractions/${file}`);
-			SenkoClient.SlashCommands.set(`${pull.name}`, pull);
+			SenkoClient.api.Commands.set(`${pull.name}`, pull);
 		}
 	}
 
-	for (var cmd of SenkoClient.SlashCommands) {
+	for (var cmd of SenkoClient.api.Commands) {
 		if (!cmd[1].noGlobal || cmd[1].noGlobal === false) {
 			const commandStruct = {
 				name: `${cmd[0]}`,
@@ -118,7 +122,7 @@ SenkoClient.once("ready", async () => {
 
 			if (pull.options) commandData.options = pull.options;
 
-			SenkoClient.SlashCommands.set(pull.name, pull);
+			SenkoClient.api.Commands.set(pull.name, pull);
 			devTools.push(commandData);
 		}
 

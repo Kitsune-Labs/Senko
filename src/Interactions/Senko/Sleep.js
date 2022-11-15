@@ -38,13 +38,12 @@ module.exports = {
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async ({senkoClient, interaction, guildData, userData}) => {
 		const MessageStruct = {
 			embeds: [
 				{
 					description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", interaction.user.username)}*`,
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: `https://assets.senkosworld.com/media/senko/${randomArrayItem(["cuddle", "sleep"])}.png`
 					}
@@ -52,33 +51,33 @@ module.exports = {
 			]
 		};
 
-		if (calcTimeLeft(accountData.RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {
-			accountData.RateLimits.Sleep_Rate.Amount = 0;
-			accountData.RateLimits.Sleep_Rate.Date = Date.now();
+		if (calcTimeLeft(userData.RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {
+			userData.RateLimits.Sleep_Rate.Amount = 0;
+			userData.RateLimits.Sleep_Rate.Date = Date.now();
 
 			await updateSuperUser(interaction.user, {
-				RateLimits: accountData.RateLimits
+				RateLimits: userData.RateLimits
 			});
 
-			accountData.RateLimits.Sleep_Rate.Amount = 0;
+			userData.RateLimits.Sleep_Rate.Amount = 0;
 		}
 
 
-		if (accountData.RateLimits.Sleep_Rate.Amount >= 1) {
-			MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(accountData.RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+		if (userData.RateLimits.Sleep_Rate.Amount >= 1) {
+			MessageStruct.embeds[0].description = `${randomArray(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(userData.RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
 			MessageStruct.embeds[0].thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomArray(["huh", "think"])}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}
 
-		accountData.Stats.Sleeps++;
-		accountData.RateLimits.Sleep_Rate.Amount++;
-		accountData.RateLimits.Sleep_Rate.Date = Date.now();
+		userData.Stats.Sleeps++;
+		userData.RateLimits.Sleep_Rate.Amount++;
+		userData.RateLimits.Sleep_Rate.Date = Date.now();
 
 		await updateSuperUser(interaction.user, {
-			Stats: accountData.Stats,
+			Stats: userData.Stats,
 
-			RateLimits: accountData.RateLimits
+			RateLimits: userData.RateLimits
 		});
 
 		interaction.followUp(MessageStruct);

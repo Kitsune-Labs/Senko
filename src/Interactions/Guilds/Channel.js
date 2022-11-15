@@ -61,10 +61,10 @@ module.exports = {
 	],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, { Channels }, AccountData) => {
+	start: async ({senkoClient, interaction, guildData}) => {
+		const Channels = guildData.Channels;
 		const command = interaction.options.getSubcommand();
 		const command_permission = await CheckPermission(interaction.guild, "ManageChannels");
 
@@ -74,7 +74,7 @@ module.exports = {
 					{
 						title: "I have gathered my commands and you may use them in",
 						description: `${Channels[0] ? Channels.map(i => ` <#${i}>`) : "every channel"}`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/package.png"
 						}
@@ -93,7 +93,7 @@ module.exports = {
 					{
 						title: "Oh dear...",
 						description: "It appears that this channel is not a text channel!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh.png" }
 					}
 				]
@@ -104,7 +104,7 @@ module.exports = {
 					{
 						title: "Silly!",
 						description: "This channel has already been added!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 					}
 				]
@@ -121,7 +121,7 @@ module.exports = {
 					{
 						title: "Done!",
 						description: `People can now use my commands in ${channel}!`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/talk.png"
 						}
@@ -139,7 +139,7 @@ module.exports = {
 					{
 						title: "Lets see...",
 						description: "I can't seem to find this channel in my list!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 					}
 				]
@@ -156,7 +156,7 @@ module.exports = {
 					{
 						title: `${Icons.exclamation} Alright dear`,
 						description: `I have removed ${channel} as per your request`,
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/smile2.png"
 						}
@@ -174,7 +174,7 @@ module.exports = {
 					{
 						title: "Lets see...",
 						description: "I can't find any channels to remove!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
 					}
 				]
@@ -185,7 +185,7 @@ module.exports = {
 					{
 						title: "Are you sure you want to remove all these channels?",
 						description: `${Channels.map(i => `<#${i}>`)}\n\nThis **cannot** be undone`,
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/nervous.png"
 						}
@@ -209,7 +209,7 @@ module.exports = {
 					{
 						title: "Lets see...",
 						description: "I can't find any channels to remove!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
 					}
 				]
@@ -231,7 +231,7 @@ module.exports = {
 					{
 						title: "Lets see...",
 						description: "I can't find any deleted channels to remove!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
 					}
 				]
@@ -246,7 +246,7 @@ module.exports = {
 					{
 						title: "I have gathered your channels and reviewed them",
 						description: `I have found ${removed_channels > 1 ? " channel" : "channels"} that no longer exist${removed_channels > 1 ? " s" : ""} and have removed them!`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/talk.png"
 						}

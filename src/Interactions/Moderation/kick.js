@@ -24,12 +24,11 @@ module.exports = {
 		}
 	],
 	/**
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      * @param {Interaction} interaction
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
+	start: async ({senkoClient, interaction, guildData}) => {
+		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});
@@ -39,7 +38,7 @@ module.exports = {
 				{
 					title: "Sorry dear!",
 					description: "You must be able to kick members to use this!",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -53,7 +52,7 @@ module.exports = {
 				{
 					title: "Oh dear...",
 					description: "It looks like I can't kick members! (Make sure I have the \"Kick Members\" permission)",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -151,8 +150,8 @@ module.exports = {
 			};
 		}
 
-		if (GuildData.ActionLogs) {
-			(await interaction.guild.channels.fetch(GuildData.ActionLogs)).send(kickStruct).catch(err => {
+		if (guildData.ActionLogs) {
+			(await interaction.guild.channels.fetch(guildData.ActionLogs)).send(kickStruct).catch(err => {
 				responseStruct.embeds[0].description += `Cannot send action log: \n\n${err}`;
 			});
 		}

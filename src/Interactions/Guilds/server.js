@@ -84,10 +84,9 @@ module.exports = {
 	],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async ({senkoClient, interaction, guildData}) => {
 		function checkAdmin() {
 			if (!interaction.member.permissions.has("ADMINISTRATOR")) {
 				interaction.reply({
@@ -95,7 +94,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: "I have to restrict this to Administrator's only",
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh.png" }
 						}
 					],
@@ -106,7 +105,7 @@ module.exports = {
 			return true;
 		}
 
-		const guildFlags = Bitfield.fromHex(GuildData.flags);
+		const guildFlags = Bitfield.fromHex(guildData.flags);
 
 		switch (interaction.options.getSubcommand()) {
 		case "configuration":
@@ -116,8 +115,8 @@ module.exports = {
 				embeds: [
 					{
 						title: "Server Configuration",
-						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${SenkoClient.user.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${GuildData.ActionLogs !== null ? `<#${GuildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${GuildData.MessageLogs !== null ? `<#${GuildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${GuildData.MemberLogging ? `<#${GuildData.MemberLogging}>` : `${Icons.tick}  Not set`}`,
-						color: SenkoClient.colors.dark,
+						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${senkoClient.user.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${guildData.ActionLogs !== null ? `<#${guildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${guildData.MessageLogs !== null ? `<#${guildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${guildData.MemberLogging ? `<#${guildData.MemberLogging}>` : `${Icons.tick}  Not set`}`,
+						color: senkoClient.api.Theme.dark,
 						fields: [
 							{ name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
 						]
@@ -125,7 +124,7 @@ module.exports = {
 					{
 						title: "Action log configuration",
 						description: "Disabling an action will not log it in your Action Logging channel",
-						color: SenkoClient.colors.light
+						color: senkoClient.api.Theme.light
 					}
 				],
 				components: [
@@ -159,7 +158,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
 							description: "You need to specify a text channel!",
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
 						}
 					],
@@ -175,7 +174,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  okay dear`,
 							description: `I've set your Action Reports to ${actionChannel}`,
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
@@ -191,7 +190,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
 							description: "You need to specify a text channel!",
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
 						}
 					],
@@ -207,7 +206,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  okay dear`,
 							description: `I will send Edited & Deleted messages in ${messageChannel}`,
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
@@ -230,7 +229,7 @@ module.exports = {
 						{
 							title: `${Icons.question}  okay dear`,
 							description: "I don't know your reasoning, but I've done what you said and removed your Action Reports channel!",
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
@@ -247,7 +246,7 @@ module.exports = {
 						{
 							title: `${Icons.question}  okay dear`,
 							description: "If that's what you want I shall no longer look for edited or deleted messages",
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
 						}
 					],
@@ -262,7 +261,7 @@ module.exports = {
 					{
 						title: "Senko's Required Permissions",
 						description: `__**Required**__\nEmbed Links: ${CheckPermission(interaction.guild, "EmbedLinks") ? Icons.check : Icons.tick }\nAttach Files: ${CheckPermission(interaction.guild, "AttachFiles") ? Icons.check : Icons.tick }\nSend Messages: ${CheckPermission(interaction.guild, "SendMessages") ? Icons.check : Icons.tick }\nUse External Emojis: ${CheckPermission(interaction.guild, "UseExternalEmojis") ? Icons.check : Icons.tick}\n\n__**Moderation Requirements (Optional)**__\nBan Members: ${CheckPermission(interaction.guild, "BanMembers") ? Icons.check : Icons.tick}\nKick Members: ${CheckPermission(interaction.guild, "KickMembers") ? Icons.check : Icons.tick}\nModerate Members: ${CheckPermission(interaction.guild, "ModerateMembers") ? Icons.check : Icons.tick}\nManage Messages: ${CheckPermission(interaction.guild, "ManageMessages") ? Icons.check : Icons.tick}\nView Audit Log: ${CheckPermission(interaction.guild, "ViewAuditLog") ? Icons.check : Icons.tick}`,
-						color: SenkoClient.colors.light
+						color: senkoClient.api.Theme.light
 					}
 				]
 			});
@@ -275,7 +274,7 @@ module.exports = {
 					{
 						title: `${guild.name}`,
 						description: `**Description**\n${guild.description ? `${interaction.guild.description}\n` : "No description"}\n**Vanity URL**: ${guild.vanityURLCode ? `https://discord.gg/${guild.vanityURLCode}  (${(await guild.fetchVanityData()).uses} uses)` : "None"}\n**Region**: ${guild.preferredLocale}\n**${guild.memberCount}** members\n**${guild.emojis.cache.size}** emojis\n**${guild.stickers.cache.size}** stickers\n**${guild.premiumSubscriptionCount}** boosts\n**${(await guild.bans.fetch()).size}** bans`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: { url: guild.iconURL({ dynamic: true }) }
 						// image: { url: guild.bannerURL({ size: 4096 }) },
 					}

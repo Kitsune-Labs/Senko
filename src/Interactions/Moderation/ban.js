@@ -51,12 +51,11 @@ module.exports = {
 		}
 	],
 	/**
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      * @param {Interaction} interaction
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
+	start: async ({senkoClient, interaction, guildData}) => {
+		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});
@@ -66,7 +65,7 @@ module.exports = {
 				{
 					title: "Sorry dear!",
 					description: "You must be able to ban members to use this!",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -80,7 +79,7 @@ module.exports = {
 				{
 					title: "Oh dear...",
 					description: "It looks like I can't ban members! (Make sure I have the \"Ban Members\" permission)",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -158,7 +157,7 @@ module.exports = {
 							}
 						]
 					});
-				} else if (Option.member && userToOutlaw.user.id === SenkoClient.user.id) {
+				} else if (Option.member && userToOutlaw.user.id === senkoClient.user.id) {
 					interaction.channel.send({
 						embeds: [
 							{
@@ -201,7 +200,7 @@ module.exports = {
 							embeds: [
 								{
 									title: `You have been banned from ${interaction.guild.name}`,
-									description: `Reason: ${reason}`, //\n\nAppeal: ${GuildData.OutlawAppealForm.replaceAll("[", "\\[").replaceAll("]", "\\]")}`,
+									description: `Reason: ${reason}`, //\n\nAppeal: ${guildData.OutlawAppealForm.replaceAll("[", "\\[").replaceAll("]", "\\]")}`,
 									color: Colors.Red
 								}
 							]
@@ -219,8 +218,8 @@ module.exports = {
 							};
 						}
 
-						if (GuildData.ActionLogs) {
-							(await interaction.guild.channels.fetch(GuildData.ActionLogs)).send(banStruct).catch(err => {
+						if (guildData.ActionLogs) {
+							(await interaction.guild.channels.fetch(guildData.ActionLogs)).send(banStruct).catch(err => {
 								responseStruct.embeds[0].description += `Cannot send action log: \n\n${err}`;
 							});
 						}

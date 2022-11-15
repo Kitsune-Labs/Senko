@@ -17,15 +17,14 @@ module.exports = {
 	category: "fun",
 	/**
      * @param {Interaction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		const MessageStruct = {
 			embeds: [
 				{
 					description: `**${randomArray(Responses).replace("_USER_", interaction.user.username)}**`,
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/cuddle.png"
 					}

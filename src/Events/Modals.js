@@ -32,7 +32,7 @@ module.exports = {
 							{
 								title: "Suggestion",
 								description: `${cleanUserString(interaction.fields[0].value)}`,
-								color: SenkoClient.colors.dark
+								color: SenkoClient.api.Theme.dark
 							}
 						]
 					})
@@ -59,7 +59,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
 							description: "Check it out with **/profile**",
-							color: SenkoClient.colors.light,
+							color: SenkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/package.png"
 							}

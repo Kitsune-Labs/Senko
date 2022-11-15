@@ -20,7 +20,7 @@ module.exports = {
 					image: {
 						url: "https://media.discordapp.net/attachments/889284097841717258/898649644870012968/Boo.png"
 					},
-					color: SenkoClient.colors.random()
+					color: SenkoClient.api.Theme.random()
 				}
 			]
 		});

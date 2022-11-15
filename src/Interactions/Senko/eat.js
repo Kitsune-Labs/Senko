@@ -15,8 +15,7 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
 	 * @param {Client} SenkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const Market = await fetchMarket();
 		const possibleItems = [];
 		const chosenItems = {
@@ -26,7 +25,7 @@ module.exports = {
 			3: { name: null, id: null }
 		};
 
-		for (const item of Object.keys(accountData.LocalUser.profileConfig.Inventory)) {
+		for (const item of Object.keys(userData.LocalUser.profileConfig.Inventory)) {
 			const mItem = Market[item];
 
 			if (mItem && mItem.class == "Consumables") {
@@ -50,7 +49,7 @@ module.exports = {
 				{
 					title: `${Icons.exclamation}  We ran out of food!`,
 					description: "We should probably buy some more soon...",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/nervous.png"
 					}
@@ -64,7 +63,7 @@ module.exports = {
 				{
 					title: `${Icons.question}  What should we have to eat?`,
 					description: "",
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: HardLinks.senkoThink
 					}

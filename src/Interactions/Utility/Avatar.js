@@ -17,10 +17,10 @@ module.exports = {
 	usableAnywhere: true,
 	category: "utility",
 	/**
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		const User = interaction.options.getUser("user") || interaction.member;
 		const AvatarURL = User.user ? User.user.avatarURL({ dynamic: true, size: 2048 }) : User.avatarURL({ dynamic: true, size: 2048 });
 
@@ -38,7 +38,7 @@ module.exports = {
 					image: {
 						url: AvatarURL ? AvatarURL : "https://assets.senkosworld.com/media/DiscordAvatar.png"
 					},
-					color: SenkoClient.colors.light
+					color: senkoClient.api.Theme.light
 				}
 			],
 			components: [
@@ -56,8 +56,8 @@ module.exports = {
 			url: `https://discord.com/api/v9/users/${User.id}`,
 			method: "GET",
 			headers: {
-				"User-Agent": SenkoClient.tools.UserAgent,
-				"Authorization": `Bot ${SenkoClient.token}`
+				"User-Agent": senkoClient.tools.UserAgent,
+				"Authorization": `Bot ${senkoClient.token}`
 			}
 		}).then(async (response) => {
 			if (response.data.banner) {
@@ -65,7 +65,7 @@ module.exports = {
 
 				messageStruct.embeds.push({
 					title: "Banner",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					image: {
 						url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`
 					}

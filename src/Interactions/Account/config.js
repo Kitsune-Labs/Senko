@@ -39,8 +39,8 @@ module.exports = {
 	/**
 	 * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
-		const userInventory = accountData.LocalUser.profileConfig.Inventory;
+	start: async ({senkoClient, interaction, userData}) => {
+		const userInventory = userData.LocalUser.profileConfig.Inventory;
 		const Command = interaction.options.getSubcommand();
 		const ShopItems = await fetchMarket();
 
@@ -53,7 +53,7 @@ module.exports = {
 					{
 						title: "You don't own anything!",
 						description: "You can buy banners when they're avaliable in the shop!",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 					}
 				],
@@ -77,7 +77,7 @@ module.exports = {
 					{
 						title: "You don't own any banners!",
 						description: "You can buy them when they're avaliable in the shop!",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 					}
 				],
@@ -92,7 +92,7 @@ module.exports = {
 						components: [
 							{
 								type: 3,
-								placeholder: `Currently ${ShopItems[accountData.LocalUser.profileConfig.banner] ? ShopItems[accountData.LocalUser.profileConfig.banner].name : "Default Banner"}`,
+								placeholder: `Currently ${ShopItems[userData.LocalUser.profileConfig.banner] ? ShopItems[userData.LocalUser.profileConfig.banner].name : "Default Banner"}`,
 								custom_id: "banner_set",
 								options: Banners
 							}
@@ -103,13 +103,13 @@ module.exports = {
 			});
 			break;
 		case "settings":
-			var AccountFlags = Bitfield.fromHex(accountData.LocalUser.accountConfig.flags);
+			var AccountFlags = Bitfield.fromHex(userData.LocalUser.accountConfig.flags);
 
 			var AccountEmbed = {
 				title: "Account Settings",
 				description: `${Icons.tick} = Disabled\n${Icons.check} = Enabled`,
 				fields: [],
-				color: SenkoClient.colors.light
+				color: senkoClient.api.Theme.light
 			};
 
 			var Components = [
@@ -150,7 +150,7 @@ module.exports = {
 					{
 						title: "You don't own anything!",
 						description: "You can buy banners when they're avaliable in the shop!",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 					}
 				],
@@ -174,7 +174,7 @@ module.exports = {
 					{
 						title: "You don't own any titles!",
 						description: "You can buy them when they're avaliable in the shop!",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 					}
 				],
@@ -189,7 +189,7 @@ module.exports = {
 						components: [
 							{
 								type: 3,
-								placeholder: `Currently ${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].name : "No Title"}`,
+								placeholder: `Currently ${ShopItems[userData.LocalUser.profileConfig.title] ? ShopItems[userData.LocalUser.profileConfig.title].name : "No Title"}`,
 								custom_id: "title_equip",
 								options: TitleColors
 							}
@@ -205,7 +205,7 @@ module.exports = {
 					{
 						title: "You don't own anything!",
 						description: "You can buy banners when they're avaliable in the shop!",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 					}
 				],
@@ -221,7 +221,7 @@ module.exports = {
 				if (ShopItem && ShopItem.color) {
 					ColorColors.push({ label: `${ShopItem.name}`, value: `color_change_${item}`, description: `${ShopItem.desc}`});
 
-					if (accountData.LocalUser.profileConfig.cardColor === ShopItem.color) {
+					if (userData.LocalUser.profileConfig.cardColor === ShopItem.color) {
 						CurrentColor = ShopItem.name;
 					}
 				}
@@ -232,7 +232,7 @@ module.exports = {
 					{
 						title: "You don't own any card colors!",
 						description: "You can buy them when they're avaliable in the shop!",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 					}
 				],

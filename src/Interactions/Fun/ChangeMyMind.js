@@ -19,15 +19,14 @@ module.exports = {
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (senkoClient, interaction, guildData, accountData) => {
+	start: async ({senkoClient, interaction}) => {
 		interaction.reply({
 			embeds: [
 				{
 					image: {
 						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.get("text").value}`)
 					},
-					color: senkoClient.colors.light
+					color: senkoClient.api.Theme.light
 				}
 			]
 		});

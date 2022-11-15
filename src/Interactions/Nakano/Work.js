@@ -13,7 +13,7 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction, GuildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const DestructibleItems = [
 			{
 				name: "air conditioner",
@@ -48,13 +48,13 @@ module.exports = {
 
 		const Cooldown = config.cooldowns.daily;
 
-		if (Cooldown - (Date.now() - accountData.Rewards.Work) >= 0) {
+		if (Cooldown - (Date.now() - userData.Rewards.Work) >= 0) {
 			interaction.reply({
 				embeds: [
 					{
 						title: `${Icons.exclamation}  Not going to happen.`,
-						description: `Come back <t:${Math.floor((accountData.Rewards.Work + Cooldown) / 1000)}:R> if you want your next paycheck.`,
-						color: SenkoClient.colors.dark,
+						description: `Come back <t:${Math.floor((userData.Rewards.Work + Cooldown) / 1000)}:R> if you want your next paycheck.`,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/Yotsutani/Yotsutani.png"
 						}
@@ -64,12 +64,12 @@ module.exports = {
 			});
 		} else {
 			if (RNG <= 30) {
-				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 600 - Item.price;
-				accountData.Rewards.Work = Date.now();
+				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 600 - Item.price;
+				userData.Rewards.Work = Date.now();
 
 				await updateSuperUser(interaction.user, {
-					LocalUser: accountData.LocalUser,
-					Rewards: accountData.Rewards
+					LocalUser: userData.LocalUser,
+					Rewards: userData.Rewards
 				});
 
 				interaction.reply({
@@ -77,7 +77,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation}  You arrived at your home and something happened.`,
 							description: `Senko told you ${Item.name} had broken. It cost you ${Icons.yen}  ${Item.price}x to ${Item.type}.\n\n— ${Icons.yen}  ${600 - Item.price}x added`,
-							color: SenkoClient.colors.dark,
+							color: senkoClient.api.Theme.dark,
 							thumbnail: {
 								url: `https://assets.senkosworld.com/media/senko/${randomArrayItem(["heh", "heh2", "judgement", "upset"])}.png`
 							}
@@ -85,12 +85,12 @@ module.exports = {
 					]
 				});
 			} else {
-				accountData.LocalUser.profileConfig.Currency.Yen = accountData.LocalUser.profileConfig.Currency.Yen + 600;
-				accountData.Rewards.Work = Date.now();
+				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 600;
+				userData.Rewards.Work = Date.now();
 
 				await updateSuperUser(interaction.user, {
-					LocalUser: accountData.LocalUser,
-					Rewards: accountData.Rewards
+					LocalUser: userData.LocalUser,
+					Rewards: userData.Rewards
 				});
 
 				interaction.reply({
@@ -98,7 +98,7 @@ module.exports = {
 						{
 							title: `${Icons.yen}  Here is your check.`,
 							description: `I'll make sure to pay you again tomorrow.\n\n— ${Icons.yen} 600x added`,
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/Yotsutani/Yotsutani.png"
 							}

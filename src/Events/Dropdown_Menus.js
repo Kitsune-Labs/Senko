@@ -98,7 +98,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Profile Updated!",
-							color: SenkoClient.colors.light
+							color: SenkoClient.api.Theme.light
 						}
 					],
 					components: []

@@ -22,19 +22,18 @@ module.exports = {
 	category: "account",
 	/**
 	 * @param {CommandInteraction} interaction
-	 * @param {Client} SenkoClient
+	 * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, accountData, XpLeft) => {
+	start: async ({senkoClient, interaction, userData, xpAmount}) => {
 		const User = interaction.options.getUser("user") || interaction.user;
-		if (User !== interaction.user) accountData = await fetchSuperUser(User, true);
+		if (User !== interaction.user) userData = await fetchSuperUser(User, true);
 
-		if (!accountData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
+		if (!userData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
 
 		const ShopItems = await fetchMarket();
-		const AccountFlags = Bitfield.fromHex(accountData.LocalUser.accountConfig.flags);
-		const xp = accountData.LocalUser.accountConfig.level.xp;
-		const level = accountData.LocalUser.accountConfig.level.level;
+		const AccountFlags = Bitfield.fromHex(userData.LocalUser.accountConfig.flags);
+		const xp = userData.LocalUser.accountConfig.level.xp;
+		const level = userData.LocalUser.accountConfig.level.level;
 
 		if (User.id !== interaction.user.id && AccountFlags.get(BitData.privacy)) return interaction.reply({
 			content: "Sorry! This user has set their profile to private.",
@@ -43,16 +42,16 @@ module.exports = {
 
 		const { OutlawedUsers } = await fetchConfig();
 
-		const xpMath = XpLeft - xp;
+		const xpMath = xpAmount - xp;
 
 		const MessageBuilt = {
 			embeds: [
 				{
-					description: `${ShopItems[accountData.LocalUser.profileConfig.title] ? ShopItems[accountData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${accountData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${accountData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${accountData.Stats.Fluffs}** fluffs\n\n${accountData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${accountData.LocalUser.profileConfig.aboutMe}\n\n` : ""}`,
-					// \n${Icons.medal}  **${accountData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
-					color: parseInt(accountData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || SenkoClient.colors.light,
+					description: `${ShopItems[userData.LocalUser.profileConfig.title] ? ShopItems[userData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${userData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${userData.Stats.Fluffs}** fluffs\n\n${userData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${userData.LocalUser.profileConfig.aboutMe}\n\n` : ""}`,
+					// \n${Icons.medal}  **${userData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
+					color: parseInt(userData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || senkoClient.api.Theme.light,
 					image: {
-						url: `https://assets.senkosworld.com/media/banners/${ShopItems[accountData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`
+						url: `https://assets.senkosworld.com/media/banners/${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`
 					},
 					thumbnail: {
 						url: User.displayAvatarURL()
@@ -64,7 +63,7 @@ module.exports = {
 		let BadgeString = "**Badges**\n";
 		let BAmount = 0;
 
-		for (var index in accountData.LocalUser.profileConfig.Inventory) {
+		for (var index in userData.LocalUser.profileConfig.Inventory) {
 			const sItem = ShopItems[index];
 
 			if (sItem && sItem.badge !== undefined /*&& BAmount < 10*/) {

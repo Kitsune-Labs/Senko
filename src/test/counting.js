@@ -61,7 +61,7 @@ module.exports = {
 					{
 						title: "Counting Information",
 						description: `The next number is ${Number}`,
-						color: SenkoClient.colors.dark,
+						color: SenkoClient.api.Theme.dark,
 						thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
 					}
 				]
@@ -82,7 +82,7 @@ module.exports = {
 						{
 							title: "Counting Information",
 							description: `Channel set to ${channel}`,
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
 						}
 					],
@@ -102,7 +102,7 @@ module.exports = {
 						{
 							title: "Counting Information",
 							description: `Number set to ${number}`,
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/package.png" }
 						}
 					],

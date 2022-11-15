@@ -45,7 +45,7 @@ module.exports = {
 								{
 									title: "Senko-san",
 									description: `See you later!\n\nI wish we could talk together more ${interaction.user.username}...`,
-									color: SenkoClient.colors.dark,
+									color: SenkoClient.api.Theme.dark,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/bummed.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -56,7 +56,7 @@ module.exports = {
 								{
 									title: "Senko-san",
 									description: `Have a good day ${interaction.user.username}!`,
-									color: SenkoClient.colors.dark,
+									color: SenkoClient.api.Theme.dark,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy1.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -67,7 +67,7 @@ module.exports = {
 								{
 									title: "Senko-san",
 									description: `Sayōnara ${interaction.user.username}!`,
-									color: SenkoClient.colors.dark,
+									color: SenkoClient.api.Theme.dark,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy1.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -112,7 +112,7 @@ module.exports = {
 								{
 									title: `${Icons.heart} Senko-san`,
 									description: "Well hello then!\n\nI hope you're having a great day!",
-									color: SenkoClient.colors.dark,
+									color: SenkoClient.api.Theme.dark,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -125,7 +125,7 @@ module.exports = {
 								{
 									title: `Senko-san`,
 									description: "Im doing great; Thanks for asking!",
-									color: SenkoClient.colors.light,
+									color: SenkoClient.api.Theme.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/happy.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -145,7 +145,7 @@ module.exports = {
 								{
 									title: `${Icons.tears} Senko-san`,
 									description: "Not so great, my favorite spoon broke...",
-									color: SenkoClient.colors.light,
+									color: SenkoClient.api.Theme.light,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/nervous.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -167,7 +167,7 @@ module.exports = {
 								{
 									title: `Senko-san`,
 									description: "Sadly there isn't, unless you can somehow travel back to the past...",
-									color: SenkoClient.colors.dark,
+									color: SenkoClient.api.Theme.dark,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/think.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -180,7 +180,7 @@ module.exports = {
 								{
 									title: `Senko-san`,
 									description: "It's okay dear\n\nthere isn't a way to get another one like this anyways...",
-									color: SenkoClient.colors.dark,
+									color: SenkoClient.api.Theme.dark,
 									thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh2.png" },
 									footer: { text: interaction.user.tag }
 								}

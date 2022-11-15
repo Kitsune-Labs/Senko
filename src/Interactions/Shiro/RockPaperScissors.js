@@ -33,7 +33,7 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		const BotChoices = ["rps_rock", "rps_paper", "rps_scissors"];
 		const BotChoice = BotChoices[Math.floor(Math.random() * BotChoices.length)];
 		const UserChoice = interaction.options.getString("choice");
@@ -43,7 +43,7 @@ module.exports = {
 				{
 					title: "Rock, Paper, Scissors",
 					description: "Shiro seems determined to win",
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/shiro/sneak1.png"
 					}
@@ -66,7 +66,7 @@ module.exports = {
 					{
 						title: `${things[UserChoice]} vs ${things[BotChoice]}`,
 						description: "It's a tie!\n\nShiro looks confused",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/surprised1.png"
 						}
@@ -83,7 +83,7 @@ module.exports = {
 					{
 						title: "🪨 vs ✂️",
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}
@@ -99,7 +99,7 @@ module.exports = {
 					{
 						title: "🗞️ vs 🪨",
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}
@@ -115,7 +115,7 @@ module.exports = {
 					{
 						title: "✂️ vs 🗞️",
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
 						}
@@ -130,7 +130,7 @@ module.exports = {
 					{
 						title: "🪨 vs 🗞️",
 						description: "Shiro won!\n\nShiro looks happy!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
 						}
@@ -145,7 +145,7 @@ module.exports = {
 					{
 						title: "🗞️ vs ✂️",
 						description: "Shiro won!\n\nShiro looks happy!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
 						}
@@ -160,7 +160,7 @@ module.exports = {
 					{
 						title: "✂️ vs 🪨",
 						description: "Shiro won!\n\nShiro looks happy!",
-						color: SenkoClient.colors.dark,
+						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
 						}

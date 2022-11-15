@@ -36,11 +36,10 @@ module.exports = {
 	],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
+	start: async ({senkoClient, interaction, guildData}) => {
+		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});
@@ -50,7 +49,7 @@ module.exports = {
 				{
 					title: "Sorry dear!",
 					description: "You must be able to manage channels to use this!",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/huh.png"
 					}
@@ -64,7 +63,7 @@ module.exports = {
 				{
 					title: "Oh dear...",
 					description: "It looks like I can't manage channels! (Make sure I have the \"Manage Channels\" permission)",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -85,7 +84,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation} Alright dear!`,
 							description: `I've set the channel slowmode to ${time} seconds!`,
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_tip.png" }
 						}
 					],
@@ -100,7 +99,7 @@ module.exports = {
 						{
 							title: `${Icons.exclamation} Alright dear!`,
 							description: "I've removed the channel slowmode!",
-							color: SenkoClient.colors.light,
+							color: senkoClient.api.Theme.light,
 							thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
 						}
 					],

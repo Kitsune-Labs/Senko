@@ -21,16 +21,15 @@ module.exports = {
 	],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
+	start: async ({senkoClient, interaction, guildData}) => {
 		if (!interaction.member.permissions.has("ManageMembers")) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
 					description: "You must be able to moderate members to use this!",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -43,15 +42,15 @@ module.exports = {
 
 		const warnId = interaction.options.getString("warn-id");
 
-		for (var key in GuildData.warns) {
-			const userWarn = GuildData.warns[key];
+		for (var key in guildData.warns) {
+			const userWarn = guildData.warns[key];
 
 			for (var warn of userWarn) {
 				if (warn.uuid === warnId) {
 					spliceArray(userWarn, warn);
 
 					await updateSuperGuild(interaction.guild, {
-						warns: GuildData.warns
+						warns: guildData.warns
 					});
 
 					(await interaction.guild.members.fetch(key)).send({
@@ -59,7 +58,7 @@ module.exports = {
 							{
 								title: `One of your warns has been deleted in ${interaction.guild.name}!`,
 								description: `Here is some info about what warn was deleted\nWarn id: **${warnId}**\nWarn reason: ${warn.reason}\nWarn note: ${warn.note}`,
-								color: SenkoClient.colors.light,
+								color: senkoClient.api.Theme.light,
 								thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 							}
 						]
@@ -70,7 +69,7 @@ module.exports = {
 							{
 								title: "All done!",
 								description: `I have deleted warn **${warnId}** from **${warn.userTag}**\n\n> ${warn.reason}\n> ${warn.note}`,
-								color: SenkoClient.colors.light,
+								color: senkoClient.api.Theme.light,
 								thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
 							}
 						]
@@ -84,7 +83,7 @@ module.exports = {
 				{
 					title: "I looked around",
 					description: `But I cannot find a warning that has **${warnId}** for it's ID...`,
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: { url: "https://assets.senkosworld.com/media/senko/think.png" }
 				}
 			]

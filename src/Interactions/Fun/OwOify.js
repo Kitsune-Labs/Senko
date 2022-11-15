@@ -18,7 +18,7 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({interaction}) => {
 		interaction.reply({
 			content: owoify(cleanUserString(interaction.options.getString("text"))),
 			ephemeral: true

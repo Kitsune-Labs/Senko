@@ -23,12 +23,10 @@ module.exports = {
 	category: "account",
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, guildData, accountData) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const commandType = interaction.options.getSubcommand();
-
 
 		if (commandType === "change") {
 			interaction.showModal(new ModalBuilder({
@@ -54,10 +52,10 @@ module.exports = {
 		}
 
 		if (commandType === "remove") {
-			accountData.LocalUser.profileConfig.aboutMe = null;
+			userData.LocalUser.profileConfig.aboutMe = null;
 
 			await updateSuperUser(interaction.user, {
-				LocalUser: accountData.LocalUser
+				LocalUser: userData.LocalUser
 			});
 
 			interaction.reply({
@@ -65,7 +63,7 @@ module.exports = {
 					{
 						title: `${Icons.question}  I have removed your About Me ${interaction.user.username}`,
 						description: "But I am confused on why you would remove it!",
-						color: SenkoClient.colors.light,
+						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/smile2.png"
 						}

@@ -27,14 +27,14 @@ module.exports = {
 	],
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		if (interaction.user.id !== "609097445825052701") return interaction.followUp({ content: "🗿" });
 		const ShopItems = await fetchMarket();
 		const User = interaction.options.getString("user-id");
 		const DevItem = ShopItems[interaction.options.getString("item")];
-		const FetchedUser = await SenkoClient.users.fetch(User);
+		const FetchedUser = await senkoClient.users.fetch(User);
 
 		if (!DevItem) return interaction.followUp({ content: "item null", ephemeral: true });
 		if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
@@ -52,7 +52,7 @@ module.exports = {
 				{
 					title: `${Icons.package}  You received an item from Senko-san!`,
 					description: `**I-I FOUND THIS FOR YOU!**\n\n__${DevItem.name}__ is now claimable with **/claim items**!`,
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: { url: "https://assets.senkosworld.com/media/senko/excited.png" }
 				}
 			]

@@ -24,12 +24,11 @@ module.exports = {
 	],
 
 	/**
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      * @param {Interaction} interaction
      */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return interaction.followUp({
+	start: async ({senkoClient, interaction, guildData}) => {
+		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.followUp({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
 		});
 
@@ -38,7 +37,7 @@ module.exports = {
 				{
 					title: "Oh dear...",
 					description: "It looks like I can't manage messsages! (Make sure I have the \"Manage Messages\" permission)",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}
@@ -51,7 +50,7 @@ module.exports = {
 				{
 					title: "Sorry dear!",
 					description: "You must be able to manage messages to use this!",
-					color: SenkoClient.colors.dark,
+					color: senkoClient.api.Theme.dark,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/heh.png"
 					}

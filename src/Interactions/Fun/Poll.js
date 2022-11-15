@@ -72,7 +72,7 @@ module.exports = {
 	/**
      * @param {CommandInteraction} interaction
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		const Topic = cleanUserString(interaction.options.getString("topic"));
 		let OptionString = "";
 		let MaxOptions = 0;
@@ -95,7 +95,7 @@ module.exports = {
 						iconURL: interaction.user.avatarURL({ dynamic: true })
 					},
 					description: `**${Topic}**\n\n${OptionString}\n\nWhat will you pick?`,
-					color: SenkoClient.colors.light,
+					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://assets.senkosworld.com/media/senko/hat_think.png"
 					}

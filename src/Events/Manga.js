@@ -53,7 +53,7 @@ module.exports = {
 						image: {
 							url: SelectedManga[Page]
 						},
-						color: SenkoClient.colors.random()
+						color: SenkoClient.api.Theme.random()
 					});
 
 					Page++;

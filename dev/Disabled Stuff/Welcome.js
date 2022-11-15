@@ -43,7 +43,7 @@ module.exports = {
 
 		//                 embed.title ? embed.title = replaceString(embed.title) : null;
 		//                 embed.description ? embed.description = replaceString(embed.description) : null;
-		//                 embed.color ? embed.color == "_ACCENT_" ? embed.color = response.data.banner_color : null : embed.color = SenkoClient.colors.light;
+		//                 embed.color ? embed.color == "_ACCENT_" ? embed.color = response.data.banner_color : null : embed.color = SenkoClient.api.Theme.light;
 		//                 embed.thumbnail ? embed.thumbnail.url == "_AVATAR_" ? embed.thumbnail.url = member.user.displayAvatarURL({ dynamic: true }) : embed.thumbnail.url : embed.thumbnail = null;
 		//                 embed.image ? embed.image.url == "_AVATAR_" ? embed.image.url = member.user.displayAvatarURL({ dynamic: true }) : embed.image.url : embed.image = null;
 		//                 embed.footer ? embed.footer.text = replaceString(embed.footer.text) : embed.footer = null;

@@ -10,9 +10,9 @@ module.exports = {
 	category: "utility",
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} SenkoClient
+     * @param {Client} senkoClient
      */
-	start: async (SenkoClient, interaction) => {
+	start: async ({senkoClient, interaction}) => {
 		interaction.followUp({
 			embeds: [
 				{
@@ -20,8 +20,8 @@ module.exports = {
 						name: "Index"
 					},
 					title: "📑 Messenger Index",
-					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n[Privacy Policy](https://senkosworld.com/privacy) - [Terms of Use](https://senkosworld.com/terms)\n\nPing: ${Math.floor(SenkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - SenkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
-					color: SenkoClient.colors.random()
+					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n[Privacy Policy](https://senkosworld.com/privacy) - [Terms of Use](https://senkosworld.com/terms)\n\nPing: ${Math.floor(senkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
+					color: senkoClient.api.Theme.random()
 				}
 			],
 			components: [
@@ -45,7 +45,7 @@ module.exports = {
 					type: 1,
 					components: [
 						{ type: 2, label: "Honorable Mentions", style: 2, custom_id: "honorable_mentions" },
-						{ type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${SenkoClient.user.id}&permissions=137439266880` },
+						{ type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${senkoClient.user.id}&permissions=137439266880` },
 						{ type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" },
 						{ type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
 					]
