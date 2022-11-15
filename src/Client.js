@@ -1,7 +1,7 @@
 require("dotenv/config");
-const { print, error, fatal } = require("@kitsune-labs/utilities");
+const { print, warn, error, fatal } = require("@kitsune-labs/utilities");
 
-const { Client, Collection, PermissionsBitField, GatewayIntentBits: gIntents } = require("discord.js");
+const { Client, Collection, PermissionsBitField, GatewayIntentBits: gIntents, WebhookClient } = require("discord.js");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
@@ -16,55 +16,76 @@ const SenkoClient = new Client({
 });
 
 SenkoClient.setMaxListeners(20);
+process.SenkoClient = SenkoClient;
 
 if (process.env.NIGHTLY === "true") {
 	SenkoClient.login(process.env.NIGHTLY_TOKEN);
 
-	print("SENKO", "NIGHTLY Mode");
+	print("SENKO NIGHTLY Mode");
 } else {
 	SenkoClient.login(process.env.TOKEN);
 
-	print("SENKO", "PRODUCTION Mode");
+	print("SENKO PRODUCTION Mode");
 }
-
-Reflect.set(SenkoClient, "tools", {
-	UserAgent: `${require("discord.js/src/util/Constants").UserAgent} (Kitsune-Labs/Senko, v${require("../package.json").version})`,
-	colors: require("./Data/Palettes/Main.js")
-});
 
 Reflect.set(SenkoClient, "api", {
 	Commands: new Collection(),
 
-	UserAgent: `${require("discord.js/src/util/Constants").UserAgent} (Kitsune-Labs/Senko, v${require("../package.json").version})`,
-	Theme: require("./Data/Palettes/Main.js")
+	Icons: require("./Data/Icons.json"),
+	UserAgent: `DiscordBot (Discord.js v${require("../package.json")["discord.js"]}) Kitsune-Labs/Senko, v${require("../package.json").version}`,
+	Theme: require("./Data/Palettes/Main.js"),
+	Bitfield: require("bitfields").Bitfield,
+	BitData: require("./API/Bits.json"),
+	loadedCommands: null,
+	statusLog: new WebhookClient({ url: process.env.STATUS_URL})
 });
 
-print("UserAgent", SenkoClient.tools.UserAgent);
+// print(`User Agent: ${SenkoClient.api.UserAgent}`);
 
-process.SenkoClient = SenkoClient;
 
 process.on("unhandledRejection", async(reason)=>{
+	SenkoClient.api.statusLog.send({
+		content: "<@609097445825052701>",
+		embeds: [
+			{
+				title: "Senko - Unhandled Rejection",
+				description: JSON.stringify(reason),
+				color: SenkoClient.api.Theme.light
+			}
+		]
+	});
+
 	error(reason);
 });
 
 process.on("uncaughtException", async(reason)=>{
+	SenkoClient.api.statusLog.send({
+		content: "<@609097445825052701>",
+		embeds: [
+			{
+				title: "Senko - Uncaught Exception",
+				description: JSON.stringify(reason),
+				color: SenkoClient.api.Theme.light
+			}
+		]
+	});
+
 	fatal(reason);
 });
 
 SenkoClient.once("ready", async () => {
-	print("#FF6633", "Senko", "Started\n");
+	print("Senko Started");
 
 	let commands = SenkoClient.application.commands;
 	if (process.env.NIGHTLY === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
 	// return commands.set([]);
 
-
 	for (let file of readdirSync("./src/Events/").filter(file => file.endsWith(".js"))) {
 		require(`./Events/${file}`).execute(SenkoClient);
 	}
 
-	print("#FFFB00", "EVENTS", "Ready");
+	print("Events ready");
 
 	const commandsToSet = [];
 
@@ -79,7 +100,7 @@ SenkoClient.once("ready", async () => {
 			}
 		});
 	} else {
-		print("#FF6633", "SENKO", "Development mode is enabled, no regular interactions will be loaded.");
+		warn("Development mode is enabled, no regular interactions will be loaded.");
 
 		for (var file of readdirSync("./src/DevInteractions/")) {
 			const pull = require(`./DevInteractions/${file}`);
@@ -88,25 +109,25 @@ SenkoClient.once("ready", async () => {
 	}
 
 	for (var cmd of SenkoClient.api.Commands) {
-		if (!cmd[1].noGlobal || cmd[1].noGlobal === false) {
-			const commandStruct = {
-				name: `${cmd[0]}`,
-				description: `${cmd[1].desc}`,
-				dm_permission: false
-			};
+		const command = cmd[1];
 
-			if (cmd[1].options) commandStruct.options = cmd[1].options;
-			if (cmd[1].permissions) commandStruct.defaultMemberPermissions = new PermissionsBitField(cmd[1].permissions);
-			if (!commandsToSet.includes(cmd[0])) commandsToSet.push(commandStruct);
-		}
+		const structure = {
+			name: command.name,
+			description: command.desc,
+			dm_permission: false
+		};
+
+		if (command.options) structure.options = command.options;
+		if (command.permissions) structure.defaultMemberPermissions = new PermissionsBitField(command.permissions);
+
+		commandsToSet.push(structure);
 	}
 
-	await commands.set(commandsToSet).then(cmds => {
-		Reflect.set(SenkoClient.application.commands, "fetchAll", cmds);
+	await commands.set(commandsToSet).then(async cmds => {
+		SenkoClient.api.loadedCommands = cmds;
 
-		print("#F39800", "INTERACTIONS", "Ready");
+		print("Commands Ready");
 	});
-
 
 	if (process.env.NIGHTLY !== "true") {
 		const devTools = [];
@@ -128,6 +149,6 @@ SenkoClient.once("ready", async () => {
 
 		await SenkoClient.guilds.cache.get("777251087592718336").commands.set(devTools);
 
-		print("#FFFB00", "Developer Tools", "Ready");
+		print("Developer Tools Ready");
 	}
 });

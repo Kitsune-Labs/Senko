@@ -1,4 +1,21 @@
 {
+    "Template": {
+        "class": "Other",
+        "name": "Shop Template",
+        "desc": "How did you get this?",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "onsale": false,
+        "banner": "DefaultBanner.png",
+        "badge": "⭐",
+        "status": "😊",
+        "color": "#FFFFFF",
+        "title": "Template",
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
+    },
     "DefaultBanner": {
         "class": "Banners",
         "name": "Default Banner",
@@ -285,7 +302,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_2": {
         "class": "Music",
@@ -293,7 +312,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_3": {
         "class": "Music",
@@ -301,7 +322,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_4": {
         "class": "Music",
@@ -309,7 +332,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_5": {
         "class": "Music",
@@ -317,7 +342,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_6": {
         "class": "Music",
@@ -325,7 +352,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_7": {
         "class": "Music",
@@ -333,7 +362,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_8": {
         "class": "Music",
@@ -341,7 +372,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_9": {
         "class": "Music",
@@ -349,7 +382,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_10": {
         "class": "Music",
@@ -357,7 +392,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_11": {
         "class": "Music",
@@ -365,7 +402,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_12": {
         "class": "Music",
@@ -373,7 +412,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_13": {
         "class": "Music",
@@ -381,7 +422,9 @@
         "desc": "Forever ashubiduba mofu-mofu!",
         "price": 500,
         "amount": 1,
-        "autoSale": true
+        "autoSale": true,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "md_14": {
         "class": "Music",
@@ -389,7 +432,9 @@
         "desc": "eng",
         "price": 7777777,
         "amount": 1,
-        "autoSale": false
+        "autoSale": false,
+        "soundFile": "/src/Data/Sounds/none.mp3",
+        "soundVolume": 0.5
     },
     "sknss_v1": {
         "class": "Manga",
@@ -1341,5 +1386,27 @@
         "autoSale": false,
         "title": "Coolest person",
         "source": "Won in a giveaway"
+    },
+    "NervousStatus": {
+        "class": "Status",
+        "name": "Nervous Senko",
+        "desc": "O-oh d-dear, h-how?",
+        "price": 200,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "onsale": false,
+        "status": "<:SenkoNervous:1041550103661510727>"
+    },
+    "SenkosLabStatus": {
+        "class": "Status",
+        "name": "Senko's Lab",
+        "desc": "What is the blue stuff?",
+        "price": 200,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "onsale": false,
+        "status": "<:SenkosLab:990328255590580294>"
     }
 }

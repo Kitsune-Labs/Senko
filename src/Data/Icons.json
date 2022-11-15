@@ -14,6 +14,9 @@
     "LeftArrow": "<:WhiteArrow1Left:943299054568374322>",
     "RightArrow": "<:WhiteArrow1Right:943299054580928582>",
 
+    "disabled": "<:disabled:1035746717435445258>",
+    "enabled": "<:enabled:1035746718693728337>",
+
 
 
 
@@ -29,10 +32,33 @@
     "sparkle": "<:5s:973789795891441725>",
     "KitsuneBi_Blue": "<:KitsuneBi_Blue:966824323186823208>",
 
-
-
     "Fall": "<:Fallitem:902291880987996241>",
     "Winter": "<a:snowflake:917908202459390042>",
     "New Years 2022": "🎉",
-    "Valentines": "💝"
+    "Valentines": "💝",
+
+    "StatusIcons": {
+        "SenkoNervous": "<:SenkoNervous:1041550103661510727>",
+        "SenkoReading": "<:SenkoRead:1041550102596157630>",
+        "SenkoPouting": "<:SenkoPout:1041550105129517097>",
+        "SenkosLab": "<:SenkosLab:990328255590580294>",
+        "SenkoWaving": "<:SenkoWave:990328240520437770>",
+        "SmugSenko": "<:Smug:982060150951141466>",
+        "SenkoPinged": "<:UpsetPing:990328262611832842>",
+        "SenkoWhistle": "<:Whistle:990328253409550406>",
+        "SenkoBan": "<:BanHammer:990328257863905310>",
+        "SenkoParty": "<:Party:990328250741981224>",
+        "SenkoRiot": "<:Riot:990328260367888384>",
+
+        "ShiroWave": "<:ShiroWave:1011996708848275536>",
+        "Shirwoaaaahhhhh": "<:Shirwoaaaahhhhh:1041549698902786068>",
+        "SuperiorShiro": "<:SuperiorShiro:1041549622637776967>",
+        "ShiroPout": "<:ShiroPout:1041549620259590265>",
+
+        "SuzuWave": "<:SuzuWave:1011996207398264902>",
+
+        "FukudaWave": "<:FukudaWave:1011996202922954752>",
+
+        "YozoraWave": "<:YozoraWave:1011996209059205201>"
+    }
 }

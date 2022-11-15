@@ -27,7 +27,7 @@ module.exports = {
 					{
 						title: `${Icons.exclamation} You are outlawed!`,
 						description: `${dataConfig.OutlawedUsers[interaction.member.id]}\n\nThere is no mistake.`,
-						color: SenkoClient.colors.dark_red,
+						color: SenkoClient.api.Theme.dark_red,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/pout.png"
 						}
@@ -40,7 +40,7 @@ module.exports = {
 			const superGuildData = await fetchSuperGuild(interaction.guild);
 			const accountData = await fetchSuperUser(interaction.user);
 
-			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.colors.dark, thumbnail:{url:"https://assets.senkosworld.com/media/senko/heh.png"}}], ephemeral:true});
+			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.api.Theme.dark, thumbnail:{url:"https://assets.senkosworld.com/media/senko/heh.png"}}], ephemeral:true});
 
 			if (InteractionCommand.defer){
 				if(InteractionCommand.ephemeral&&InteractionCommand.ephemeral===true){
@@ -55,7 +55,7 @@ module.exports = {
 					{
 						title: "Oh dear...",
 						description: "It looks like im missing some permissions, here is what I am missing:\n\n",
-						color: SenkoClient.colors.dark
+						color: SenkoClient.api.Theme.dark
 					}
 				],
 				ephemeral: true
@@ -84,7 +84,7 @@ module.exports = {
 						{
 							title: "S-Sorry dear!",
 							description: `${interaction.guild.name} has requested you use ${superGuildData.Channels.map(i=>`<#${i}>`)}!`,
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
@@ -118,7 +118,7 @@ module.exports = {
 						{
 							title: "Congratulations dear!",
 							description: `You are now level **${level}**`,
-							color: SenkoClient.colors.light,
+							color: SenkoClient.api.Theme.light,
 							thumbnail: {
 								url: interaction.user.displayAvatarURL()
 							}
@@ -152,7 +152,7 @@ module.exports = {
 						{
 							title: "Woops!",
 							description: `I seem to have dropped ${InteractionCommand.name}, I will attempt to fix it please come back soon!`,
-							color: SenkoClient.colors.dark,
+							color: SenkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/heh.png"
 							}
@@ -168,6 +168,17 @@ module.exports = {
 				}
 
 				error(err);
+
+				SenkoClient.api.statusLog.send({
+					content: "<@609097445825052701>",
+					embeds: [
+						{
+							title: "Senko - Command Error",
+							description: JSON.stringify(err),
+							color: SenkoClient.api.Theme.light
+						}
+					]
+				});
 			});
 		});
 	}

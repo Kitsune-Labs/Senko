@@ -9,8 +9,7 @@ module.exports = {
      */
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async Interaction => {
-			if (!Interaction.isButton() || !Interaction.isSelectMenu()) return;
-			const ShopItems = await fetchMarket();
+			//if (!Interaction.isButton() || !Interaction.isSelectMenu()) return;
 			const AccountData = await fetchSuperUser(Interaction.user);
 			const accountFlags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
 
@@ -19,6 +18,7 @@ module.exports = {
 				flags.set(item, value);
 				AccountData.LocalUser.accountConfig.flags = flags.toHex();
 			}
+
 
 			if (Interaction.isButton()) {
 				switch (Interaction.customId) {
@@ -30,7 +30,7 @@ module.exports = {
 							LocalUser: AccountData.LocalUser
 						});
 
-						Interaction.message.embeds[0].fields[0].value = Icons.tick;
+						Interaction.message.embeds[0].fields[0].value = Icons.disabled;
 						Interaction.message.components[0].components[0].style = "DANGER";
 
 						Interaction.update({
@@ -45,7 +45,7 @@ module.exports = {
 							LocalUser: AccountData.LocalUser
 						});
 
-						Interaction.message.embeds[0].fields[0].value = Icons.check;
+						Interaction.message.embeds[0].fields[0].value = Icons.enabled;
 						Interaction.message.components[0].components[0].style = "SUCCESS";
 
 						Interaction.update({
@@ -64,7 +64,7 @@ module.exports = {
 							LocalUser: AccountData.LocalUser
 						});
 
-						Interaction.message.embeds[0].fields[1].value = Icons.tick;
+						Interaction.message.embeds[0].fields[1].value = Icons.disabled;
 						Interaction.message.components[0].components[1].style = "DANGER";
 
 						Interaction.update({
@@ -79,7 +79,7 @@ module.exports = {
 							LocalUser: AccountData.LocalUser
 						});
 
-						Interaction.message.embeds[0].fields[1].value = Icons.check;
+						Interaction.message.embeds[0].fields[1].value = Icons.enabled;
 						Interaction.message.components[0].components[1].style = "SUCCESS";
 
 						Interaction.update({
@@ -104,6 +104,7 @@ module.exports = {
 					components: []
 				};
 
+				const ShopItems = await fetchMarket();
 				const InteractionValue = Interaction.values[0].replace("title_", "").replace("banner_change_", "").replace("color_change_", "");
 				const ShopItem = ShopItems[InteractionValue];
 

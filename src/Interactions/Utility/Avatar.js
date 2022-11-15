@@ -56,7 +56,7 @@ module.exports = {
 			url: `https://discord.com/api/v9/users/${User.id}`,
 			method: "GET",
 			headers: {
-				"User-Agent": senkoClient.tools.UserAgent,
+				"User-Agent": senkoClient.api.UserAgent,
 				"Authorization": `Bot ${senkoClient.token}`
 			}
 		}).then(async (response) => {

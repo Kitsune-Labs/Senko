@@ -48,7 +48,7 @@ module.exports = {
 				url: `https://discord.com/api/v9/channels/${interaction.member.voice.channelId}/invites`,
 				method: "POST",
 				headers: {
-					"User-Agent": SenkoClient.tools.UserAgent,
+					"User-Agent": SenkoClient.api.UserAgent,
 					"Authorization": `Bot ${SenkoClient.token}`,
 					"Content-Type": "application/json"
 				},

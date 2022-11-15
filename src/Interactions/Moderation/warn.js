@@ -86,6 +86,7 @@ module.exports = {
 
 		const warnStruct = {
 			userTag: user.user.tag,
+			userId: user.user.id,
 			reason: reason,
 			note: note,
 			date: Date.now(),

@@ -2,12 +2,18 @@
 const { Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
-	name: "",
-	desc: "",
-	options: [],
+	name: "server",
+	desc: "Server related stuff",
+	options: [
+		{
+			name: "settings",
+			description: "Change the server settings",
+			type: 1
+		}
+	],
 	defer: false,
 	ephemeral: false,
-	usableAnywhere: false,
+	usableAnywhere: true,
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient

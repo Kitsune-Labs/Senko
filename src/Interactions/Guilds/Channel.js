@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare */
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
 const { spliceArray, CheckPermission } = require("../../API/Master");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
@@ -13,7 +13,7 @@ module.exports = {
 	ephemeral: true,
 	usableAnywhere: true,
 	category: "admin",
-	permissions: ["Administrator"],
+	permissions: [PermissionFlagsBits.Administrator],
 	options: [
 		{
 			name: "add",

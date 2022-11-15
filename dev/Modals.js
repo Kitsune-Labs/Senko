@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, InteractionType } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { print, cleanUserString } = require("../API/Master.js");
+const { print, cleanUserString } = require("../src/API/Master.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../Data/Icons.json");
+const Icons = require("../src/Data/Icons.json");
 const fetch = require("node-fetch");
-const { fetchSuperUser, updateSuperUser } = require("../API/super.js");
+const { fetchSuperUser, updateSuperUser } = require("../src/API/super.js");
 
 module.exports = {
 	/**

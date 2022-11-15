@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
@@ -14,7 +14,7 @@ module.exports = {
 	desc: "server",
 	usableAnywhere: true,
 	category: "admin",
-	permissions: ["Administrator"],
+	permissions: [PermissionFlagsBits.Administrator],
 	options: [
 		{
 			name: "info",

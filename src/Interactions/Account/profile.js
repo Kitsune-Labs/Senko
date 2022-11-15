@@ -9,7 +9,7 @@ const Achievements = require("../../Data/Achievements.json");
 
 module.exports = {
 	name: "profile",
-	desc: "Your profile, or someone else's",
+	desc: "View your profile, or someone else's",
 	options: [
 		{
 			name: "user",
@@ -47,7 +47,7 @@ module.exports = {
 		const MessageBuilt = {
 			embeds: [
 				{
-					description: `${ShopItems[userData.LocalUser.profileConfig.title] ? ShopItems[userData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${userData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${userData.Stats.Fluffs}** fluffs\n\n${userData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${userData.LocalUser.profileConfig.aboutMe}\n\n` : ""}`,
+					description: `${userData.LocalUser.profileConfig.Status ? `${ShopItems[userData.LocalUser.profileConfig.Status].status} - ` : ""} ${ShopItems[userData.LocalUser.profileConfig.title] ? ShopItems[userData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers.includes(User.id) ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${userData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${userData.Stats.Fluffs}** fluffs\n\n${userData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${userData.LocalUser.profileConfig.aboutMe}\n\n` : ""}`,
 					// \n${Icons.medal}  **${userData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
 					color: parseInt(userData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || senkoClient.api.Theme.light,
 					image: {

@@ -93,7 +93,7 @@ module.exports = {
 				});
 
 			} else {
-				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 130;
+				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 1400;
 				userData.Rewards.Weekly = Date.now();
 
 				await updateSuperUser(interaction.user, {
@@ -105,7 +105,7 @@ module.exports = {
 					embeds: [
 						{
 							title: `${Icons.heart}  It's that time again!`,
-							description: `Here is your Yen for this week; Now spend it wisely!\n\n— ${Icons.yen} 1300x added`,
+							description: `Here is your Yen for this week; Now spend it wisely!\n\n— ${Icons.yen} 1400x added`,
 							color: senkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/happy.png"

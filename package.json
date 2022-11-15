@@ -1,8 +1,8 @@
 {
     "version": "3.1.4",
     "scripts": {
-        "start": "node src/Client.js | pino-pretty",
-        "dev": "NIGHTLY='true' node src/Client.js | pino-pretty"
+        "start": "node src/Client.js",
+        "dev": "NIGHTLY='true' node src/Client.js"
     },
     "dependencies": {
         "@kitsune-labs/chalk-node": "^4.1.3",
@@ -14,9 +14,8 @@
         "charverter": "^1.1.0-dev",
         "discord.js": "14.6.0",
         "dotenv": "16.0.3",
-        "uuid": "9.0.0",
-        "pino": "8.7.0",
-        "pino-pretty": "9.1.1"
+        "jszip": "^3.10.1",
+        "uuid": "9.0.0"
     },
     "devDependencies": {
         "eslint": "^8.27.0",

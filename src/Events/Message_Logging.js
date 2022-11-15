@@ -59,7 +59,7 @@ module.exports = {
 					method: "GET",
 					responseType: "stream",
 					headers: {
-						"User-Agent": SenkoClient.tools.UserAgent
+						"User-Agent": SenkoClient.api.UserAgent
 					}
 				}).then(async (response) => {
 					const fileId = `case-${caseId}_${attachment.name}`;

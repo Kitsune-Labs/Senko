@@ -35,7 +35,7 @@ module.exports = {
 				method: "GET",
 				url: `https://discord.com/api/users/${id}`,
 				headers: {
-					"User-Agent": SenkoClient.tools.UserAgent,
+					"User-Agent": SenkoClient.api.UserAgent,
 					"Authorization": `Bot ${SenkoClient.token}`
 				}
 			}).then(response => {
@@ -58,7 +58,7 @@ module.exports = {
 				utility: []
 			};
 
-			for (var entry of SenkoClient.application.commands.fetchAll) {
+			for (var entry of SenkoClient.api.loadedCommands) {
 				const commandEntry = entry[1];
 				const { category } = SenkoClient.api.Commands.get(commandEntry.name);
 
