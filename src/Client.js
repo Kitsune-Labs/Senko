@@ -48,7 +48,7 @@ process.on("unhandledRejection", async(reason)=>{
 		content: "<@609097445825052701>",
 		embeds: [
 			{
-				title: "Senko - Unhandled Rejection",
+				title: "Error - Unhandled Rejection",
 				description: reason.stack.toString(),
 				color: SenkoClient.api.Theme.light
 			}
@@ -63,7 +63,7 @@ process.on("uncaughtException", async(reason)=>{
 		content: "<@609097445825052701>",
 		embeds: [
 			{
-				title: "Senko - Uncaught Exception",
+				title: "Error - Uncaught Exception",
 				description: reason.stack.toString(),
 				color: SenkoClient.api.Theme.light
 			}

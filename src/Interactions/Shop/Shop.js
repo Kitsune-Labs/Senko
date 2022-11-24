@@ -46,7 +46,7 @@ module.exports = {
 			}
 		}
 
-		const previewCommand = await senkoClient.application.commands.fetchAll.find(d => d.name === "preview");
+		const previewCommand = await senkoClient.api.loadedCommands.find(d => d.name === "preview");
 
 		const marketResponse = {
 			title: "🛍️ Senko's Market",
