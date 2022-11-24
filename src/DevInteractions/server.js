@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction, PermissionFlagsBits, ButtonStyle, PermissionsBitField } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../../Data/Icons.json");
+const Icons = require("../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
-const HardLinks = require("../../Data/HardLinks.json");
+const HardLinks = require("../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
-const bits = require("../../API/Bits.json");
-const { updateSuperGuild } = require("../../API/super");
-const { CheckPermission, print } = require("../../API/Master");
+const bits = require("../API/Bits.json");
+const { updateSuperGuild } = require("../API/super");
+const { CheckPermission } = require("../API/Master");
 
 module.exports = {
 	name: "server",
@@ -89,7 +89,7 @@ module.exports = {
      */
 	start: async ({senkoClient, interaction, guildData}) => {
 		function checkAdmin() {
-			if (!interaction.member.permissions.has("ADMINISTRATOR")) {
+			if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
 				interaction.reply({
 					embeds: [
 						{
@@ -107,10 +107,6 @@ module.exports = {
 		}
 		const guildFlags = Bitfield.fromHex(guildData.flags);
 
-		function getFlag(flagName) {
-			return guildFlags.get(flagName);
-		}
-
 		switch (interaction.options.getSubcommand()) {
 		case "settings":
 			if (!checkAdmin()) return;
@@ -122,16 +118,16 @@ module.exports = {
 						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${senkoClient.user.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${guildData.ActionLogs !== null ? `<#${guildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${guildData.MessageLogs !== null ? `<#${guildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${guildData.MemberLogging ? `<#${guildData.MemberLogging}>` : `${Icons.tick}  Not set`}`,
 						color: senkoClient.api.Theme.dark,
 						fields: [
-							{name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${getFlag(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
+							{name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
 						]
 					},
 					{
 						title: "Action log configuration",
 						description: "Disabling an action will not log it in your Action Logging channel.",
 						fields: [
-							{name: "Ban Logs", value: `\`\`\`diff\n${getFlag(bits.ActionLogs.BanActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`},
-							{name: "Kick Logs", value: `\`\`\`diff\n${getFlag(bits.ActionLogs.KickActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`},
-							{name: "Timeout Logs", value: `\`\`\`diff\n${getFlag(bits.ActionLogs.TimeoutActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`}
+							{name: "Ban Logs", value: `\`\`\`diff\n${guildFlags.get(bits.ActionLogs.BanActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`},
+							{name: "Kick Logs", value: `\`\`\`diff\n${guildFlags.get(bits.ActionLogs.KickActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`},
+							{name: "Timeout Logs", value: `\`\`\`diff\n${guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`}
 						],
 						color: senkoClient.api.Theme.light
 					}

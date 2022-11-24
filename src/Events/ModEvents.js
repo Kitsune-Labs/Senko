@@ -28,6 +28,7 @@ module.exports = {
 				switch (split[1]) {
 				case "ban_log":
 					guildFlags.set(senkoClient.api.BitData.ActionLogs.BanActionDisabled, !flags.bans);
+					flags.bans = guildFlags.get(senkoClient.api.BitData.ActionLogs.BanActionDisabled);
 
 					await updateSuperGuild(interaction.guild, {
 						flags: guildFlags.toHex()
@@ -39,6 +40,7 @@ module.exports = {
 					break;
 				case "kick_log":
 					guildFlags.set(senkoClient.api.BitData.ActionLogs.KickActionDisabled, !flags.kicks);
+					flags.kicks = guildFlags.get(senkoClient.api.BitData.ActionLogs.KickActionDisabled);
 
 					await updateSuperGuild(interaction.guild, {
 						flags: guildFlags.toHex()
@@ -50,6 +52,7 @@ module.exports = {
 					break;
 				case "timeout_log":
 					guildFlags.set(senkoClient.api.BitData.ActionLogs.TimeoutActionDisabled, !flags.timeout);
+					flags.timeout = guildFlags.get(senkoClient.api.BitData.ActionLogs.TimeoutActionDisabled);
 
 					await updateSuperGuild(interaction.guild, {
 						flags: guildFlags.toHex()
@@ -61,6 +64,7 @@ module.exports = {
 					break;
 				case "mod_beta":
 					guildFlags.set(senkoClient.api.BitData.BETAs.ModCommands, !flags.mod_enabled);
+					flags.mod_enabled = guildFlags.get(senkoClient.api.BitData.BETAs.ModCommands);
 
 					await updateSuperGuild(interaction.guild, {
 						flags: guildFlags.toHex()
