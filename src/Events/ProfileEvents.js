@@ -229,7 +229,23 @@ module.exports = {
 					});
 					break;
 				case "profile:remove":
+					userData.LocalUser.profileConfig.aboutMe = null;
 
+					await updateSuperUser(interaction.user, {
+						LocalUser: userData.LocalUser
+					});
+
+					interaction.reply({
+						embeds: [
+							{
+								title: "All done dear!",
+								description: "Your about me has been removed!",
+								color: senkoClient.api.Theme.light,
+								thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile.png" }
+							}
+						],
+						ephemeral: true
+					});
 					break;
 				}
 			}

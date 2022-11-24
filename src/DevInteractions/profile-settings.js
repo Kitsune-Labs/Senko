@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
-const { fetchMarket } = require("../../API/super");
+const { fetchMarket } = require("../API/super");
 
 module.exports = {
 	name: "profile-settings",

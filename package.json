@@ -7,7 +7,7 @@
     "dependencies": {
         "@kitsune-labs/faux": "^1.0.1",
         "@kitsune-labs/utilities": "^1.3.1",
-        "@supabase/supabase-js": "2.1.0",
+        "@supabase/supabase-js": "2.1.1",
         "axios": "0.27.2",
         "bitfields": "1.0.3",
         "charverter": "^1.1.0-dev",
