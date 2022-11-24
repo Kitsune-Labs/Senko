@@ -22,11 +22,17 @@ module.exports = {
 
 			dataConfig.OutlawedUsers = JSON.parse(dataConfig.OutlawedUsers);
 
-			if (dataConfig.OutlawedUsers[interaction.member.id]) return interaction.reply({
+			const InteractionCommand = SenkoClient.api.Commands.get(interaction.commandName);
+			const superGuildData = await fetchSuperGuild(interaction.guild);
+			const accountData = await fetchSuperUser(interaction.user);
+
+			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.api.Theme.dark, thumbnail:{url:"https://assets.senkosworld.com/media/senko/heh.png"}}], ephemeral:true});
+
+			if (dataConfig.OutlawedUsers[interaction.member.id] && !InteractionCommand.whitelist) return interaction.reply({
 				embeds: [
 					{
-						title: `${Icons.exclamation} You are outlawed!`,
-						description: `${dataConfig.OutlawedUsers[interaction.member.id]}\n\nThere is no mistake.`,
+						title: `${Icons.exclamation} You have been banished!`,
+						description: `${dataConfig.OutlawedUsers[interaction.member.id]}`,
 						color: SenkoClient.api.Theme.dark_red,
 						thumbnail: {
 							url: "https://assets.senkosworld.com/media/senko/pout.png"
@@ -35,12 +41,6 @@ module.exports = {
 				],
 				ephemeral: true
 			});
-
-			const InteractionCommand = SenkoClient.api.Commands.get(interaction.commandName);
-			const superGuildData = await fetchSuperGuild(interaction.guild);
-			const accountData = await fetchSuperUser(interaction.user);
-
-			if (!InteractionCommand) return interaction.reply({embeds:[{title:"Woops!", description:`I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color:SenkoClient.api.Theme.dark, thumbnail:{url:"https://assets.senkosworld.com/media/senko/heh.png"}}], ephemeral:true});
 
 			if (InteractionCommand.defer){
 				if(InteractionCommand.ephemeral&&InteractionCommand.ephemeral===true){
@@ -97,7 +97,7 @@ module.exports = {
 				return interaction.followUp(messageStruct1);
 			}
 
-			print("#fc844c", "CS", interaction.commandName);
+			print(`Command Ran: ${interaction.commandName}`);
 
 			//! Start level
 			let xp = accountData.LocalUser.accountConfig.level.xp;
@@ -174,7 +174,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Senko - Command Error",
-							description: JSON.stringify(err),
+							description: err.stack.toString(),
 							color: SenkoClient.api.Theme.light
 						}
 					]

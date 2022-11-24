@@ -49,13 +49,13 @@ process.on("unhandledRejection", async(reason)=>{
 		embeds: [
 			{
 				title: "Senko - Unhandled Rejection",
-				description: JSON.stringify(reason),
+				description: reason.stack.toString(),
 				color: SenkoClient.api.Theme.light
 			}
 		]
 	});
 
-	error(reason);
+	fatal(reason.stack);
 });
 
 process.on("uncaughtException", async(reason)=>{
@@ -64,13 +64,13 @@ process.on("uncaughtException", async(reason)=>{
 		embeds: [
 			{
 				title: "Senko - Uncaught Exception",
-				description: JSON.stringify(reason),
+				description: reason.stack.toString(),
 				color: SenkoClient.api.Theme.light
 			}
 		]
 	});
 
-	fatal(reason);
+	error(reason.stack);
 });
 
 SenkoClient.once("ready", async () => {

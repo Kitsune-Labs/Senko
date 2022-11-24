@@ -22,6 +22,7 @@ module.exports = {
 			maxValue: 100
 		}
 	],
+	whitelist: true,
 
 	/**
      * @param {Client} senkoClient

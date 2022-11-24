@@ -8,6 +8,7 @@ module.exports = {
 	ephemeral: true,
 	usableAnywhere: true,
 	category: "utility",
+	whitelist: true,
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient

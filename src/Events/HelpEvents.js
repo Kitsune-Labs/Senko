@@ -58,8 +58,8 @@ module.exports = {
 				utility: []
 			};
 
-			for (var entry of SenkoClient.api.loadedCommands) {
-				const commandEntry = entry[1];
+			for (var index in SenkoClient.api.loadedCommands) {
+				var commandEntry = SenkoClient.api.loadedCommands[index];
 				const { category } = SenkoClient.api.Commands.get(commandEntry.name);
 
 				if (category) categories[category].push(`</${commandEntry.name}:${commandEntry.id}> ≻ ${commandEntry.description}`);

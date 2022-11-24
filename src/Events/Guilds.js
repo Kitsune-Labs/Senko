@@ -1,8 +1,10 @@
 const { Bitfield } = require("bitfields");
-const { deleteSuperGuild, fetchSuperGuild, updateSuperGuild } = require("../API/super.js");
+const { deleteSuperGuild, fetchSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
 const { cleanUserString, CheckPermission } = require("../API/Master.js");
-const { Colors } = require("discord.js");
+const { Colors, PermissionFlagsBits } = require("discord.js");
+const {print, warn, error} = require("@kitsune-labs/utilities");
+
 
 module.exports = {
 	/**
@@ -28,50 +30,8 @@ module.exports = {
 			await deleteSuperGuild(guild);
 		});
 
-		SenkoClient.on("interactionCreate", async interaction => {
-			if (interaction.isButton()) {
-				const { flags } = await fetchSuperGuild(interaction.guild);
-				const guildFlags = Bitfield.fromHex(flags);
-
-				switch (interaction.customId) {
-				case "guild_moderation":
-					if (guildFlags.get(bits.BETAs.ModCommands)) {
-						guildFlags.set(bits.BETAs.ModCommands, false);
-
-						interaction.message.embeds[0].fields[0].value = "```diff\n- Disabled```";
-						interaction.message.components[0].components[0].style = 3;
-						interaction.message.components[0].components[0].label = "Enable Moderation Commands";
-
-						await updateSuperGuild(interaction.guild, {
-							flags: guildFlags.toHex()
-						});
-
-						return interaction.update({
-							embeds: interaction.message.embeds,
-							components: interaction.message.components
-						});
-					}
-
-					guildFlags.set(bits.BETAs.ModCommands, true);
-					interaction.message.embeds[0].fields[0].value = "```diff\n+ Enabled```";
-					interaction.message.components[0].components[0].style = 4;
-					interaction.message.components[0].components[0].label = "Disable Moderation Commands";
-
-					await updateSuperGuild(interaction.guild, {
-						flags: guildFlags.toHex()
-					});
-
-					interaction.update({
-						embeds: interaction.message.embeds,
-						components: interaction.message.components
-					});
-					break;
-				}
-			}
-		});
-
 		SenkoClient.on("guildBanAdd", async (member) => {
-			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return error("I do not have ViewAuditLog permission for this guild.");
 			member = await member.guild.members.fetch(member.id);
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -106,7 +66,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanRemove", async (member) => {
-			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return error("I do not have ViewAuditLog permission for this guild.");
 			member = await member.guild.members.fetch(member.id);
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -179,7 +139,7 @@ module.exports = {
 			}
 
 			//! Kicks
-			if (!CheckPermission(member.guild, "ViewAuditLog")) return;
+			if (!CheckPermission(member.guild, "ViewAuditLog")) return error("I do not have ViewAuditLog permission for this guild.");
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
 				type: 20
@@ -209,18 +169,17 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async member => {
-			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return;
+			if (!CheckPermission(member.guild, PermissionFlagsBits.ViewAuditLog) /*|| process.env.NIGHTLY === "true"*/) return error("I do not have ViewAuditLog permission for this guild.");
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = Bitfield.fromHex(guildData.flags);
 			member = await member.guild.members.fetch(member.id);
 
-			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return;
+			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return warn("Timeout logs are disabled for this guild");
 
 			const rawAudit = await member.guild.fetchAuditLogs({ limit: 1 });
 
 			const audit = rawAudit.entries.first();
-			if (audit.changes[0].key !== "communication_disabled_until") return;
-			if (audit.target.id !== member.id) return;
+			if (audit.changes[0].key !== "communication_disabled_until" || audit.target.id !== member.id) return;
 
 			if (member.communicationDisabledUntilTimestamp === null && guildData.ActionLogs) {
 				(await member.guild.channels.fetch(guildData.ActionLogs)).send({

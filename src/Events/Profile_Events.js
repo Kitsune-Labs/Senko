@@ -18,7 +18,8 @@ module.exports = {
          */
 		senkoClient.on("interactionCreate", async (interaction) => {
 			let profile = null;
-			for (var entry of senkoClient.api.loadedCommands) {
+			for (var index in senkoClient.api.loadedCommands) {
+				var entry = senkoClient.api.loadedCommands[index];
 				const commandEntry = entry[1];
 				const { name } = senkoClient.api.Commands.get(commandEntry.name);
 

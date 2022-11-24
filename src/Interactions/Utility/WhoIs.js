@@ -22,6 +22,7 @@ module.exports = {
 	defer: true,
 	usableAnywhere: true,
 	category: "utility",
+	whitelist: true,
 	/**
      * @param {Interaction} interaction
      * @param {Client} senkoClient

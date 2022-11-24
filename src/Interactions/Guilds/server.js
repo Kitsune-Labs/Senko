@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ButtonStyle, PermissionsBitField } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
@@ -7,7 +7,7 @@ const HardLinks = require("../../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 const { updateSuperGuild } = require("../../API/super");
-const { CheckPermission } = require("../../API/Master");
+const { CheckPermission, print } = require("../../API/Master");
 
 module.exports = {
 	name: "server",
@@ -22,7 +22,7 @@ module.exports = {
 			type: 1
 		},
 		{
-			name: "configuration",
+			name: "settings",
 			description: "Guild Configuration",
 			type: 1
 		},
@@ -82,6 +82,7 @@ module.exports = {
 			]
 		}
 	],
+	whitelist: true,
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient
@@ -104,11 +105,14 @@ module.exports = {
 			}
 			return true;
 		}
-
 		const guildFlags = Bitfield.fromHex(guildData.flags);
 
+		function getFlag(flagName) {
+			return guildFlags.get(flagName);
+		}
+
 		switch (interaction.options.getSubcommand()) {
-		case "configuration":
+		case "settings":
 			if (!checkAdmin()) return;
 
 			interaction.reply({
@@ -118,12 +122,17 @@ module.exports = {
 						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${senkoClient.user.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${guildData.ActionLogs !== null ? `<#${guildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${guildData.MessageLogs !== null ? `<#${guildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${guildData.MemberLogging ? `<#${guildData.MemberLogging}>` : `${Icons.tick}  Not set`}`,
 						color: senkoClient.api.Theme.dark,
 						fields: [
-							{ name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
+							{name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${getFlag(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
 						]
 					},
 					{
 						title: "Action log configuration",
-						description: "Disabling an action will not log it in your Action Logging channel",
+						description: "Disabling an action will not log it in your Action Logging channel.",
+						fields: [
+							{name: "Ban Logs", value: `\`\`\`diff\n${getFlag(bits.ActionLogs.BanActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`},
+							{name: "Kick Logs", value: `\`\`\`diff\n${getFlag(bits.ActionLogs.KickActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`},
+							{name: "Timeout Logs", value: `\`\`\`diff\n${getFlag(bits.ActionLogs.TimeoutActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`}
+						],
 						color: senkoClient.api.Theme.light
 					}
 				],
@@ -131,15 +140,15 @@ module.exports = {
 					{
 						type: 1,
 						components: [
-							{ type: 2, label: guildFlags.get(bits.BETAs.ModCommands) ? "Disable Moderation Commands" :"Enable Moderation Commands", style: guildFlags.get(bits.BETAs.ModCommands) ? 4 : 3, custom_id: "guild_moderation" }
+							{type: 2, label: "Update Moderation Commands", style: 2, custom_id: "mod:mod_beta"}
 						]
 					},
 					{
 						type: 1,
 						components: [
-							{ type: 2, label: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? "Enable Ban Logs" : "Disable Ban Logs", style: guildFlags.get(bits.ActionLogs.BanActionDisabled) ? 3 : 4, custom_id: "g_disable_bans" },
-							{ type: 2, label: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? "Enable Kick Logs": "Disable Kick Logs", style: guildFlags.get(bits.ActionLogs.KickActionDisabled) ? 3 : 4, custom_id: "g_disable_kicks" },
-							{ type: 2, label: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "Enable Timeout Logs" : "Disable Timeout Logs", style: guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? 3 : 4, custom_id: "g_disable_timeouts" }
+							{type: 2, label: "Update Ban Logging", style: 1, custom_id: "mod:ban_log"},
+							{type: 2, label: "Update Kick Logging", style: 1, custom_id: "mod:kick_log"},
+							{type: 2, label: "Update Timeout Logging", style: 1, custom_id: "mod:timeout_log"}
 						]
 					}
 				],

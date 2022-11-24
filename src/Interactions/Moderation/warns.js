@@ -17,6 +17,7 @@ module.exports = {
 			type: 6
 		}
 	],
+	whitelist: true,
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient

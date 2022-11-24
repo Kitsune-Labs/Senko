@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction } = require("discord.js");
 const jszip = require("jszip");
-const supabase = require("../API/super").fetchSupabaseApi();
+const supabase = require("../../API/super").fetchSupabaseApi();
 
 module.exports = {
 	name: "account",
@@ -31,6 +31,7 @@ module.exports = {
 		}
 	],
 	usableAnywhere: true,
+	whitelist: true,
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient

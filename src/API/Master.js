@@ -1,23 +1,22 @@
-const { randomArrayItem: randomArray, randomNumber, wait, spliceArray } = require("@kitsune-labs/utilities");
+const { randomArrayItem: randomArray, randomNumber, wait, spliceArray, print } = require("@kitsune-labs/utilities");
 // eslint-disable-next-line no-unused-vars
 const { User, Interaction } = require("discord.js");
 const { updateSuperUser, fetchSuperUser } = require("./super");
 const Achievements = require("../Data/Achievements.json");
 const config = require("../Data/DataConfig.json");
-const chalk = require("@kitsune-labs/chalk-node");
 const Icons = require("../Data/Icons.json");
 const { Bitfield } = require("bitfields");
 const bits = require("./Bits.json");
 
-/**
- * @param {String} Color
- * @param {String} Type
- * @param {String} content
- * @returns {}
- */
-function print(Color, Type, content) {
-	console.log(`[${chalk.hex(Color || "#252525").underline(Type)}]: ${content}`);
-}
+// /**
+//  * @param {String} Color
+//  * @param {String} Type
+//  * @param {String} content
+//  * @returns {}
+//  */
+// function print(Color, Type, content) {
+// 	console.log(`[${chalk.hex(Color || "#252525").underline(Type)}]: ${content}`);
+// }
 
 /**
  * @param {String} string

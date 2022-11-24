@@ -1,0 +1,9 @@
+{
+	"settings": {
+		"blockJoin": false,
+		"joinPunishment": "Kick"
+	},
+	"rules": {
+		"blockedWordsInName": []
+	}
+}
