@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction, PermissionFlagsBits, ButtonStyle, PermissionsBitField } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const Icons = require("../Data/Icons.json");
+const Icons = require("../../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
-const HardLinks = require("../Data/HardLinks.json");
+const HardLinks = require("../../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
-const bits = require("../API/Bits.json");
-const { updateSuperGuild } = require("../API/super");
-const { CheckPermission } = require("../API/Master");
+const bits = require("../../API/Bits.json");
+const { updateSuperGuild } = require("../../API/super");
+const { CheckPermission } = require("../../API/Master");
 
 module.exports = {
 	name: "server",
