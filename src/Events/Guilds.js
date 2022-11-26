@@ -101,10 +101,10 @@ module.exports = {
 			}
 		});
 
+
 		SenkoClient.on("guildMemberAdd", async (member) => {
 			if (process.env.NIGHTLY === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
-			member = await member.guild.members.fetch(member.id);
 
 			if (guildData.MemberLogs) {
 				(await member.guild.channels.fetch(guildData.MemberLogs)).send({
@@ -121,10 +121,10 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberRemove", async member => {
+			print(member);
 			if (process.env.NIGHTLY === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
-			member = await member.guild.members.fetch(member.id);
 
 			if (guildData.MemberLogs) {
 				(await member.guild.channels.fetch(guildData.MemberLogs)).send({
