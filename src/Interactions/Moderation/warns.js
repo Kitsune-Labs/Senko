@@ -2,7 +2,7 @@
 const { Client, CommandInteraction } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
-const Paginate = require("../API/Pagination/Main");
+const Paginate = require("../../API/Pagination/Main");
 
 module.exports = {
 	name: "warns",
