@@ -4,6 +4,7 @@ const Icons = require("../../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
 const { fetchSupabaseApi, fetchMarket } = require("../../API/super.js");
 const Supabase = fetchSupabaseApi();
+const {print, warn} = require("@kitsune-labs/utilities");
 
 module.exports = {
 	name: "shop",
@@ -16,6 +17,7 @@ module.exports = {
      */
 	start: async ({senkoClient, interaction, userData}) => {
 		const ShopItems = await fetchMarket();
+		// const rawShopData = /*{ data: rawShopData } =*/ process.env.PSEUDO_MARKET === "true" ? require("../../Data/LocalSave/PseudoMarket.json") : await Supabase.from("config").select("*").eq("id", "all");
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all");
 		const shopData = rawShopData[0].market;
 		const MenuItems = [];
@@ -32,7 +34,7 @@ module.exports = {
 			Manga: [],
 			Music: [],
 			Events: [],
-			Frozen: [],
+			Special: [],
 			Misc: []
 		};
 
@@ -42,6 +44,7 @@ module.exports = {
 			if (itemClasses[shopItem.class]) {
 				itemClasses[shopItem.class].push({ id: item, data: shopItem });
 			} else {
+				warn(`Item ${item.name} has no class!`);
 				itemClasses.Misc.push({ id: item, data: shopItem });
 			}
 		}
@@ -50,7 +53,7 @@ module.exports = {
 
 		const marketResponse = {
 			title: "🛍️ Senko's Market",
-			description: `Please take your time to review what is available.\n\nUse </preview:${previewCommand.id}> to view details about an item like it's description, price, banner preview, and more!\n\n${Icons.package}  Market refresh <t:${shopData.updates}:R>\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
+			description: `Please take your time to review what is available.\n\nUse </preview:${previewCommand ? previewCommand.id : 0}> to view details about an item like it's description, price, banner preview, and more!\n\n${Icons.package}  Market refresh <t:${shopData.updates}:R>\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
 			fields: [],
 			color: senkoClient.api.Theme.light,
 			thumbnail: {
@@ -58,7 +61,6 @@ module.exports = {
 			}
 		};
 
-		// TODO: Add support for frozen & event items
 		for (var index in itemClasses) {
 			if (itemClasses[index].length > 0 && !marketResponse.fields.find(f=>f.name === index)) marketResponse.fields.push({ name: `${index}`, value: "" });
 
@@ -68,6 +70,14 @@ module.exports = {
 				MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}` });
 			});
 		}
+
+		// rawShopData[0].SpecialMarket.map(item => {
+		// 	if (!marketResponse.fields.find(f=>f.name === "Special")) marketResponse.fields.push({ name: "Special", value: "" });
+		// 	var si = ShopItems[item];
+
+		// 	marketResponse.fields.find(f=>f.name === "Special").value += `> ${Icons.yen}  ${si.price == 0 ? "**FREE**" : si.price} **≻** ${si.name} - (Part of the ${si.set} set)\n`;
+		// 	MenuItems.push({ label: `${si.name}`, value: `shopbuy#${item}#${interaction.user.id}` });
+		// });
 
 		// superConfig.EventMarket.map(eventItem => {
 		// 	const eI = ShopItems[eventItem];

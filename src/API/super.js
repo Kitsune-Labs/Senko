@@ -56,28 +56,7 @@ async function makeSuperGuild(guild) {
 	await Supabase.from("Guilds").insert([
 		{
 			guildId: guild.id,
-			Channels: [],
-			flags: new Bitfield(50).toHex(),
-			WelcomeChannel: {
-				message: {
-					embeds: [
-						{
-							title: "Welcome to _GUILD_ _USER_!",
-							description: "We hope you have fun in our server!",
-							color: "_ACCENT_",
-							thumbnail: {
-								url: "_AVATAR_"
-							}
-						}
-					]
-				},
-				config: {
-					channel: null
-				}
-			},
-			MessageLogs: null,
-			ActionLogs: null,
-			warns: {}
+			flags: new Bitfield(50).toHex()
 		}
 	]);
 

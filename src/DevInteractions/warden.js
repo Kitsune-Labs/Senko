@@ -30,6 +30,7 @@ module.exports = {
 	],
 	permissions: [PermissionFlagsBits.Administrator],
 	usableAnywhere: true,
+	category: "admin",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient

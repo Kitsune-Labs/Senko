@@ -3,7 +3,7 @@ const { Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
 	name: "help",
-	desc: "Help",
+	desc: "Information about commands.",
 	defer: true,
 	ephemeral: true,
 	usableAnywhere: true,
@@ -29,17 +29,17 @@ module.exports = {
 				{
 					type: 1,
 					components: [
-						{ type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: true },
-						{ type: 2, label: "Fun", style: 3, custom_id: "help_fun" },
-						{ type: 2, label: "Economy", style: 3, custom_id: "help_economy" },
-						{ type: 2, label: "Administration", style: 3, custom_id: "help_admin" },
-						{ type: 2, label: "Account", style: 3, custom_id: "help_account", disabled: false }
+						{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: true },
+						{ type: 2, label: "Fun", style: 3, custom_id: "help:fun" },
+						{ type: 2, label: "Economy", style: 3, custom_id: "help:economy" },
+						{ type: 2, label: "Administration", style: 3, custom_id: "help:admin" },
+						{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
 					]
 				},
 				{
 					type: 1,
 					components: [
-						{ type: 2, label: "Utility", style: 3, custom_id: "help_utility", disabled: false }
+						{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
 					]
 				},
 				{
@@ -48,7 +48,7 @@ module.exports = {
 						{ type: 2, label: "Honorable Mentions", style: 2, custom_id: "honorable_mentions" },
 						{ type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${senkoClient.user.id}&permissions=137439266880` },
 						{ type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" },
-						{ type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
+						//{ type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
 					]
 				}
 			]

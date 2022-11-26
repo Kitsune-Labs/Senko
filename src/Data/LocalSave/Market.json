@@ -1,20 +1,20 @@
 {
     "Template": {
-        "class": "Other",
+        "class": "Other, Consumables, Banners, Materials, Misc, Music, Titles, Colors, Badges",
         "name": "Shop Template",
         "desc": "How did you get this?",
         "price": 0,
         "amount": 1,
         "max": 1,
         "autosale": false,
-        "onsale": false,
         "banner": "DefaultBanner.png",
         "badge": "⭐",
         "status": "😊",
         "color": "#FFFFFF",
         "title": "Template",
         "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
+        "soundVolume": 0.5,
+        "set": "Template"
     },
     "DefaultBanner": {
         "class": "Banners",
@@ -667,15 +667,6 @@
         "amount": 1,
         "title": "🏗️ Contributor Kitsune",
         "source": "Contribute to the development of Senko"
-    },
-    "Transgender_Pride_Flag": {
-        "class": "Banners",
-        "name": "Transgender Pride Flag Banner",
-        "desc": "🏳️‍⚧️🏳️‍⚧️🏳️‍⚧️",
-        "price": 0,
-        "amount": 1,
-        "type": "banner",
-        "banner": "TransPrideFlag.png"
     },
     "MooseKaiBanner": {
         "class": "Banners",
@@ -1408,5 +1399,163 @@
         "autosale": false,
         "onsale": false,
         "status": "<:SenkosLab:990328255590580294>"
+    },
+
+    "Transgender_Pride_Flag": {
+        "class": "Banners",
+        "name": "Transgender Pride Flag Banner",
+        "desc": "🏳️‍⚧️",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "TransPrideFlag.png",
+        "set": "Love is never wrong"
+    },
+    "Progressive_Pride_Flag": {
+        "class": "Banners",
+        "name": "Progressive Pride Flag Banner",
+        "desc": "",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "ProgressivePrideFlag.png",
+        "set": "Love is never wrong"
+    },
+    "Pride_Flag": {
+        "class": "Banners",
+        "name": "Pride Flag Banner",
+        "desc": "🏳️‍🌈",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "PrideFlag.png",
+        "set": "Love is never wrong"
+    },
+
+
+    "thx_pumpkin_pie": {
+        "class": "Consumables",
+        "name": "Pumpkin Pie",
+        "desc": "Yummy",
+        "price": 300,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_konnyaku": {
+        "class": "Consumables",
+        "name": "Konnyaku",
+        "desc": "A yam cake served with sweet or savory sauce.",
+        "price": 200,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_cheesecake": {
+        "class": "Consumables",
+        "name": "Cheesecake",
+        "desc": "This isn't your ordinary cheesecake, this is thanksgiving cheesecake!",
+        "price": 200,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_amaca": {
+        "class": "Consumables",
+        "name": "Amaca",
+        "desc": "A casserole filled with potato's, chestnuts and carrots.",
+        "price": 400,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_cornbread": {
+        "class": "Consumables",
+        "name": "Cornbread",
+        "desc": "I don't even know where to start on how good this is.",
+        "price": 400,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_leaf_badge": {
+        "class": "Badges",
+        "name": "🍂 Autumn Leaf",
+        "desc": "Soothing",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🍂",
+        "set": "Autumn"
+    },
+    "thx_pie_badge": {
+        "class": "Badges",
+        "name": "🥧 Pie",
+        "desc": "Pie Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🥧",
+        "set": "Autumn"
+    },
+    "thx_pumpkin_badge": {
+        "class": "Badges",
+        "name": "🎃 Pumpkin",
+        "desc": "Pumpkin Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🎃",
+        "set": "Autumn"
+    },
+    "thx_corn_badge": {
+        "class": "Badges",
+        "name": "🌽 Corn",
+        "desc": "Corn Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🌽",
+        "set": "Autumn"
+    },
+    "thx_grateful_title": {
+        "class": "Titles",
+        "name": "The Grateful",
+        "desc": "Grateful for everything",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "title": "The Grateful",
+        "set": "Autumn"
+    },
+    "thx_thankful_title": {
+        "class": "Titles",
+        "name": "The Thankful",
+        "desc": "Thankful for everything",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "title": "The Thankful",
+        "set": "Autumn"
+    },
+    "thx_blessed_title": {
+        "class": "Titles",
+        "name": "The Blessed",
+        "desc": "Blessed for everything",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "title": "The Blessed",
+        "set": "Autumn"
     }
 }

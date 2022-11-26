@@ -1,0 +1,32 @@
+[{
+	"market": {
+		"updates": 99999,
+		"items": [
+		  "miso_soup",
+		  "sakurroseawine",
+		  "tourist_title",
+		  "hojicha",
+		  "sushi",
+		  "yokodoll",
+		  "yakitori",
+		  "md_4",
+		  "md_6",
+		  "pirate_title",
+		  "color_pg",
+		  "kitsune_title",
+		  "md_1",
+		  "pink_color",
+		  "light_blue_color",
+		  "md_9",
+		  "ButterCrackers"
+		]
+	},
+	"SpecialMarket": [
+		"Transgender_Pride_Flag",
+		"Progressive_Pride_Flag",
+		"Pride_Flag"
+	],
+	"EventMarket": [
+		"thx_pumpkin_pie"
+	]
+}]

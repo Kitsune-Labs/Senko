@@ -19,9 +19,6 @@ module.exports = {
 		SenkoClient.on("interactionCreate", async (interaction) => {
 			if (interaction.type !== InteractionType.ApplicationCommand || interaction.user.bot || interaction.replied || !interaction.guild) return;
 			const dataConfig = await fetchConfig();
-
-			dataConfig.OutlawedUsers = JSON.parse(dataConfig.OutlawedUsers);
-
 			const InteractionCommand = SenkoClient.api.Commands.get(interaction.commandName);
 			const superGuildData = await fetchSuperGuild(interaction.guild);
 			const accountData = await fetchSuperUser(interaction.user);
@@ -167,9 +164,9 @@ module.exports = {
 					interaction.reply(messageStruct);
 				}
 
-				error(err);
+				error(err.stack.toString());
 
-				SenkoClient.api.statusLog.send({
+				if (process.env.NIGHTLY !== "true") SenkoClient.api.statusLog.send({
 					content: "<@609097445825052701>",
 					embeds: [
 						{

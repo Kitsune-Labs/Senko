@@ -2,6 +2,7 @@
 const { Client, CommandInteraction, Collection } = require("discord.js");
 const { default: axios } = require("axios");
 const Icons = require("../Data/Icons.json");
+const {print} = require("@kitsune-labs/utilities");
 
 module.exports = {
 	/**
@@ -55,18 +56,25 @@ module.exports = {
 				social: [],
 				admin: [],
 				account: [],
-				utility: []
+				utility: [],
+				uncategorized: []
 			};
 
-			for (var index in SenkoClient.api.loadedCommands) {
-				var commandEntry = SenkoClient.api.loadedCommands[index];
-				const { category } = SenkoClient.api.Commands.get(commandEntry.name);
+			SenkoClient.api.loadedCommands.forEach(cmd => {
+				const command = SenkoClient.api.Commands.get(cmd.name);
 
-				if (category) categories[category].push(`</${commandEntry.name}:${commandEntry.id}> ≻ ${commandEntry.description}`);
-			}
+				categories[command.category || "uncategorized"].push(`</${cmd.name}:${cmd.id}> ≻ ${cmd.description}`);
+			});
+
+			// for (var index in SenkoClient.api.loadedCommands) {
+			// 	var commandEntry = SenkoClient.api.loadedCommands[index];
+			// 	const { category } = SenkoClient.api.Commands.get(commandEntry.name);
+
+			// 	categories[category].push(`</${commandEntry.name}:${commandEntry.id}> ≻ ${commandEntry.description}`);
+			// }
 
 			switch (interaction.customId) {
-			case "help_home":
+			case "help:home":
 				interaction.update({
 					embeds: [
 						{
@@ -82,24 +90,24 @@ module.exports = {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Home", style: 1, custom_id: "help_home", disabled: true },
-								{ type: 2, label: "Fun", style: 3, custom_id: "help_fun" },
-								{ type: 2, label: "Economy", style: 3, custom_id: "help_economy" },
-								{ type: 2, label: "Administration", style: 3, custom_id: "help_admin" },
-								{ type: 2, label: "Account", style: 3, custom_id: "help_account", disabled: false }
+								{ type: 2, label: "Home", style: 1, custom_id: "help:home", disabled: true },
+								{ type: 2, label: "Fun", style: 3, custom_id: "help:fun" },
+								{ type: 2, label: "Economy", style: 3, custom_id: "help:economy" },
+								{ type: 2, label: "Administration", style: 3, custom_id: "help:admin" },
+								{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
 							]
 						},
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Utility", style: 3, custom_id: "help_utility", disabled: false }
+								{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
 							]
 						},
 						bottomButtons
 					]
 				});
 				break;
-			case "help_fun":
+			case "help:fun":
 				interaction.update({
 					embeds: [
 						{
@@ -115,24 +123,24 @@ module.exports = {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-								{ type: 2, label: "Fun", style: 1, custom_id: "help_fun", disabled: true },
-								{ type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false },
-								{ type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false },
-								{ type: 2, label: "Account", style: 3, custom_id: "help_account", disabled: false }
+								{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: false },
+								{ type: 2, label: "Fun", style: 1, custom_id: "help:fun", disabled: true },
+								{ type: 2, label: "Economy", style: 3, custom_id: "help:economy", disabled: false },
+								{ type: 2, label: "Administration", style: 3, custom_id: "help:admin", disabled: false },
+								{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
 							]
 						},
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Utility", style: 3, custom_id: "help_utility", disabled: false }
+								{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
 							]
 						},
 						bottomButtons
 					]
 				});
 				break;
-			case "help_economy":
+			case "help:economy":
 				interaction.update({
 					embeds: [
 						{
@@ -148,24 +156,24 @@ module.exports = {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-								{ type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false },
-								{ type: 2, label: "Economy", style: 1, custom_id: "help_economy", disabled: true },
-								{ type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false },
-								{ type: 2, label: "Account", style: 3, custom_id: "help_account", disabled: false }
+								{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: false },
+								{ type: 2, label: "Fun", style: 3, custom_id: "help:fun", disabled: false },
+								{ type: 2, label: "Economy", style: 1, custom_id: "help:economy", disabled: true },
+								{ type: 2, label: "Administration", style: 3, custom_id: "help:admin", disabled: false },
+								{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
 							]
 						},
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Utility", style: 3, custom_id: "help_utility", disabled: false }
+								{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
 							]
 						},
 						bottomButtons
 					]
 				});
 				break;
-			case "help_social":
+			case "help:social":
 				interaction.update({
 					embeds: [
 						{
@@ -181,24 +189,24 @@ module.exports = {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-								{ type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false },
-								{ type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false },
-								{ type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false },
-								{ type: 2, label: "Account", style: 3, custom_id: "help_account", disabled: false }
+								{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: false },
+								{ type: 2, label: "Fun", style: 3, custom_id: "help:fun", disabled: false },
+								{ type: 2, label: "Economy", style: 3, custom_id: "help:economy", disabled: false },
+								{ type: 2, label: "Administration", style: 3, custom_id: "help:admin", disabled: false },
+								{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
 							]
 						},
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Utility", style: 3, custom_id: "help_utility", disabled: false }
+								{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
 							]
 						},
 						bottomButtons
 					]
 				});
 				break;
-			case "help_admin":
+			case "help:admin":
 				interaction.update({
 					embeds: [
 						{
@@ -214,24 +222,24 @@ module.exports = {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-								{ type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false },
-								{ type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false },
-								{ type: 2, label: "Administration", style: 1, custom_id: "help_admin", disabled: true },
-								{ type: 2, label: "Account", style: 3, custom_id: "help_account", disabled: false }
+								{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: false },
+								{ type: 2, label: "Fun", style: 3, custom_id: "help:fun", disabled: false },
+								{ type: 2, label: "Economy", style: 3, custom_id: "help:economy", disabled: false },
+								{ type: 2, label: "Administration", style: 1, custom_id: "help:admin", disabled: true },
+								{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
 							]
 						},
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Utility", style: 3, custom_id: "help_utility", disabled: false }
+								{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
 							]
 						},
 						bottomButtons
 					]
 				});
 				break;
-			case "help_account":
+			case "help:account":
 				interaction.update({
 					embeds: [
 						{
@@ -247,24 +255,24 @@ module.exports = {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-								{ type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false },
-								{ type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false },
-								{ type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false },
-								{ type: 2, label: "Account", style: 1, custom_id: "help_account", disabled: true }
+								{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: false },
+								{ type: 2, label: "Fun", style: 3, custom_id: "help:fun", disabled: false },
+								{ type: 2, label: "Economy", style: 3, custom_id: "help:economy", disabled: false },
+								{ type: 2, label: "Administration", style: 3, custom_id: "help:admin", disabled: false },
+								{ type: 2, label: "Account", style: 1, custom_id: "help:account", disabled: true }
 							]
 						},
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Utility", style: 3, custom_id: "help_utility", disabled: false }
+								{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
 							]
 						},
 						bottomButtons
 					]
 				});
 				break;
-			case "help_utility":
+			case "help:utility":
 				interaction.update({
 					embeds: [
 						{
@@ -280,17 +288,17 @@ module.exports = {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Home", style: 4, custom_id: "help_home", disabled: false },
-								{ type: 2, label: "Fun", style: 3, custom_id: "help_fun", disabled: false },
-								{ type: 2, label: "Economy", style: 3, custom_id: "help_economy", disabled: false },
-								{ type: 2, label: "Administration", style: 3, custom_id: "help_admin", disabled: false },
-								{ type: 2, label: "Account", style: 3, custom_id: "help_account", disabled: false }
+								{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: false },
+								{ type: 2, label: "Fun", style: 3, custom_id: "help:fun", disabled: false },
+								{ type: 2, label: "Economy", style: 3, custom_id: "help:economy", disabled: false },
+								{ type: 2, label: "Administration", style: 3, custom_id: "help:admin", disabled: false },
+								{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
 							]
 						},
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Utility", style: 1, custom_id: "help_utility", disabled: true }
+								{ type: 2, label: "Utility", style: 1, custom_id: "help:utility", disabled: true }
 							]
 						},
 						bottomButtons
