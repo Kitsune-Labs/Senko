@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
-const { spliceArray, CheckPermission } = require("../../API/Master");
+const { spliceArray } = require("../../API/Master");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { updateSuperGuild } = require("../../API/super");
@@ -67,7 +67,7 @@ module.exports = {
 	start: async ({senkoClient, interaction, guildData}) => {
 		const Channels = guildData.Channels;
 		const command = interaction.options.getSubcommand();
-		const command_permission = await CheckPermission(interaction.guild, "ManageChannels");
+		const command_permission = interaction.member.permissions.has(PermissionFlagsBits.ManageChannels);
 
 		function listChannels() {
 			interaction.followUp({

@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { Bitfield } = require("bitfields");
-const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
 
 module.exports = {
@@ -45,7 +44,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("ManageChannels")) return interaction.reply({
+		if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -59,7 +58,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction.guild, "ManageChannels")) return interaction.followUp({
+		if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",

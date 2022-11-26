@@ -1,11 +1,9 @@
 const DataConfig = require("../Data/DataConfig.json");
 const { print, error } = require("@kitsune-labs/utilities");
 
-
-const { CheckPermission } = require("../API/Master");
 const { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser } = require("../API/super.js");
 const Icons = require("../Data/Icons.json");
-const { InteractionType } = require("discord.js");
+const { InteractionType, PermissionFlagsBits } = require("discord.js");
 const { randomNumber } = require("@kitsune-labs/utilities");
 
 module.exports = {
@@ -64,14 +62,14 @@ module.exports = {
 			};
 
 			for (var permission of DataConfig.clientPermissions) {
-				if (!CheckPermission(interaction.guild, permission)) {
+				if (!interaction.guild.members.me.permissions.has(permission)) {
 					permissionEmbed.embeds[0].description += `${permission}\n`;
 					permissionMessage.content += `${permission}\n`;
 				}
 			}
 
 			if (!permissionEmbed.embeds[0].description.endsWith("\n")) {
-				if (CheckPermission(interaction.guild, "EmbedLinks")) return interaction.reply(permissionEmbed);
+				if (interaction.guild.members.me.permissions.has(PermissionFlagsBits.EmbedLinks)) return interaction.reply(permissionEmbed);
 				return interaction.reply(permissionMessage);
 			}
 

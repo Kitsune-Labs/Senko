@@ -1,5 +1,5 @@
 // const { owoify } = require("../../API/modules/owoify");
-const { cleanUserString } = require("../../API/Master");
+const { sanitizeString } = require("../../API/Master");
 const { owoify } = require("@kitsune-labs/utilities");
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
      */
 	start: async ({interaction}) => {
 		interaction.reply({
-			content: owoify(cleanUserString(interaction.options.getString("text"))),
+			content: owoify(sanitizeString(interaction.options.getString("text"))),
 			ephemeral: true
 		});
 	}

@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, Interaction, PermissionFlagsBits } = require("discord.js");
 const { Bitfield } = require("bitfields");
-const { CheckPermission } = require("../../API/Master.js");
 const bits = require("../../API/Bits.json");
 
 module.exports = {
@@ -33,7 +32,7 @@ module.exports = {
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
 		});
 
-		if (!CheckPermission(interaction.guild, "ManageMessages")) return interaction.followUp({
+		if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageMessages)) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",
@@ -46,7 +45,7 @@ module.exports = {
 			]
 		});
 
-		if (!interaction.member.permissions.has("ManageMessages")) return interaction.followUp({
+		if (!interaction.member.permissions.has(PermissionFlagsBits.ManageMessages)) return interaction.followUp({
 			embeds: [
 				{
 					title: "Sorry dear!",

@@ -57,15 +57,6 @@ async function removeYen(user, amount) {
 }
 
 /**
- * @async
- * @param {Interaction} interaction
- * @param {boolean}
- */
-async function CheckPermission(Guild, Permission) {
-	return Guild.members.me.permissions.has(Permission);
-}
-
-/**
  * @param {string} Content
  * @returns {string}
  */
@@ -157,8 +148,8 @@ async function awardAchievement(interaction, AchievementName) {
  * @param {string} string
  * @returns {string}
  */
-function cleanUserString(string) {
-	return string.replaceAll("s/eese popc/ild p", "[blocked]").replaceAll("s eese popc ild p", "[blocked]").replaceAll("seese popc ild p", "[blocked]");
+function sanitizeString(string) {
+	return string; // string.replaceAll("s/eese popc/ild p", "[blocked]").replaceAll("s eese popc ild p", "[blocked]").replaceAll("seese popc ild p", "[blocked]");
 }
 
 module.exports = {
@@ -168,12 +159,11 @@ module.exports = {
 	stringEndsWithS,
 	addYen,
 	removeYen,
-	CheckPermission,
 	randomNumber,
 	randomArray,
 	clean,
 	disableComponents,
 	calcTimeLeft,
 	awardAchievement,
-	cleanUserString
+	sanitizeString
 };

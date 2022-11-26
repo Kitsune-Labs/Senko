@@ -1,7 +1,7 @@
 const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
-const { cleanUserString, CheckPermission } = require("../API/Master.js");
+const { sanitizeString } = require("../API/Master.js");
 const { Colors, PermissionFlagsBits } = require("discord.js");
 const {print, warn, error} = require("@kitsune-labs/utilities");
 
@@ -31,7 +31,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanAdd", async (member) => {
-			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return error("I do not have ViewAuditLog permission for this guild.");
+			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
 			member = await member.guild.members.fetch(member.id);
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -66,7 +66,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildBanRemove", async (member) => {
-			if (!CheckPermission(member.guild, "ViewAuditLog") || process.env.NIGHTLY === "true") return error("I do not have ViewAuditLog permission for this guild.");
+			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
 			member = await member.guild.members.fetch(member.id);
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -86,7 +86,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Pardoned",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(banLog.reason) || "None"}`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${sanitizeString(banLog.reason) || "None"}`,
 							color: Colors.Green,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
@@ -121,7 +121,6 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberRemove", async member => {
-			print(member);
 			if (process.env.NIGHTLY === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
@@ -139,7 +138,7 @@ module.exports = {
 			}
 
 			//! Kicks
-			if (!CheckPermission(member.guild, "ViewAuditLog")) return error("I do not have ViewAuditLog permission for this guild.");
+			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
 				type: 20
@@ -153,7 +152,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Kicked",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(kickLog.reason) || "None"}`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${sanitizeString(kickLog.reason) || "None"}`,
 							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
@@ -169,7 +168,7 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async member => {
-			if (!CheckPermission(member.guild, PermissionFlagsBits.ViewAuditLog) /*|| process.env.NIGHTLY === "true"*/) return error("I do not have ViewAuditLog permission for this guild.");
+			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = Bitfield.fromHex(guildData.flags);
 			member = await member.guild.members.fetch(member.id);
@@ -201,7 +200,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Timed Out",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${cleanUserString(audit.reason) || "None"}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${sanitizeString(audit.reason) || "None"}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
 							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })

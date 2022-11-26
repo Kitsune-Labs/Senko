@@ -7,7 +7,6 @@ const HardLinks = require("../../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 const { updateSuperGuild } = require("../../API/super");
-const { CheckPermission } = require("../../API/Master");
 
 module.exports = {
 	name: "server",
@@ -265,7 +264,7 @@ module.exports = {
 				embeds: [
 					{
 						title: "Senko's Required Permissions",
-						description: `__**Required**__\nEmbed Links: ${CheckPermission(interaction.guild, "EmbedLinks") ? Icons.check : Icons.tick }\nAttach Files: ${CheckPermission(interaction.guild, "AttachFiles") ? Icons.check : Icons.tick }\nSend Messages: ${CheckPermission(interaction.guild, "SendMessages") ? Icons.check : Icons.tick }\nUse External Emojis: ${CheckPermission(interaction.guild, "UseExternalEmojis") ? Icons.check : Icons.tick}\n\n__**Moderation Requirements (Optional)**__\nBan Members: ${CheckPermission(interaction.guild, "BanMembers") ? Icons.check : Icons.tick}\nKick Members: ${CheckPermission(interaction.guild, "KickMembers") ? Icons.check : Icons.tick}\nModerate Members: ${CheckPermission(interaction.guild, "ModerateMembers") ? Icons.check : Icons.tick}\nManage Messages: ${CheckPermission(interaction.guild, "ManageMessages") ? Icons.check : Icons.tick}\nView Audit Log: ${CheckPermission(interaction.guild, "ViewAuditLog") ? Icons.check : Icons.tick}`,
+						description: `__**Required**__\nEmbed Links: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.EmbedLinks) ? Icons.check : Icons.tick }\nAttach Files: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.AttachFiles) ? Icons.check : Icons.tick }\nSend Messages: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.SendMessages) ? Icons.check : Icons.tick }\nUse External Emojis: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.UseExternalEmojis) ? Icons.check : Icons.tick}\n\n__**Moderation Requirements (Optional)**__\nBan Members: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.BanMembers) ? Icons.check : Icons.tick}\nKick Members: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.KickMembers) ? Icons.check : Icons.tick}\nModerate Members: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.ModerateMembers) ? Icons.check : Icons.tick}\nManage Messages: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageMessages) ? Icons.check : Icons.tick}\nView Audit Log: ${interaction.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog) ? Icons.check : Icons.tick}`,
 						color: senkoClient.api.Theme.light
 					}
 				]

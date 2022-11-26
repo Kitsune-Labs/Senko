@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, InteractionType } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
-const { print, cleanUserString } = require("../src/API/Master.js");
+const { print, sanitizeString } = require("../src/API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../src/Data/Icons.json");
 const fetch = require("node-fetch");
@@ -31,7 +31,7 @@ module.exports = {
 						embeds: [
 							{
 								title: "Suggestion",
-								description: `${cleanUserString(interaction.fields[0].value)}`,
+								description: `${sanitizeString(interaction.fields[0].value)}`,
 								color: SenkoClient.api.Theme.dark
 							}
 						]
@@ -42,14 +42,14 @@ module.exports = {
 					embeds: [
 						{
 							title: `${Icons.check}  Suggestion Submitted!`,
-							description: `Your suggestion: \n\n${cleanUserString(interaction.fields[0].value)}`
+							description: `Your suggestion: \n\n${sanitizeString(interaction.fields[0].value)}`
 						}
 					]
 				});
 				break;
 
 			case "submit_about_me":
-				accountData.LocalUser.profileConfig.aboutMe = `${cleanUserString(interaction.fields.getField("submit_about_me_1").value.replaceAll(/[\r\n]+/gm, "\n"))}`;
+				accountData.LocalUser.profileConfig.aboutMe = `${sanitizeString(interaction.fields.getField("submit_about_me_1").value.replaceAll(/[\r\n]+/gm, "\n"))}`;
 				await updateSuperUser(interaction.user, {
 					LocalUser: accountData.LocalUser
 				});

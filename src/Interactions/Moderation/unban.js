@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, Colors } = require("discord.js");
-const { CheckPermission } = require("../../API/Master");
+const { Client, CommandInteraction, Colors, PermissionFlagsBits } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 
@@ -34,7 +33,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("BanMembers")) return interaction.reply({
+		if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -48,7 +47,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!CheckPermission(interaction.guild, "BanMembers")) return interaction.reply({
+		if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.BanMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",
