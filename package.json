@@ -1,8 +1,8 @@
 {
     "version": "4.0.1",
     "scripts": {
-        "start": "node src/Client.js",
-        "dev": "clear; NIGHTLY='true' node src/Client.js"
+        "start": "node src/SenkoClient.js",
+        "dev": "clear; NIGHTLY='true' node src/SenkoClient.js"
     },
     "dependencies": {
         "@kitsune-labs/faux": "^1.0.1",
@@ -10,6 +10,7 @@
         "@supabase/supabase-js": "2.1.1",
         "axios": "0.27.2",
         "bitfields": "1.0.3",
+        "canvas": "^2.10.2",
         "charverter": "^1.1.0-dev",
         "discord.js": "14.6.0",
         "dotenv": "16.0.3",
