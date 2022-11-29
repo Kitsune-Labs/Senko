@@ -33,7 +33,7 @@ Reflect.set(SenkoClient, "api", {
 
 	Icons: require("./Data/Icons.json"),
 	UserAgent: `DiscordBot (Discord.js v${require("../package.json")["discord.js"]}) Kitsune-Labs/Senko, v${require("../package.json").version}`,
-	Theme: require("./Data/Palettes/Main.js"),
+	Theme: require("./Data/Palettes/Winter.js"),
 	Bitfield: require("bitfields").Bitfield,
 	BitData: require("./API/Bits.json"),
 	loadedCommands: null,

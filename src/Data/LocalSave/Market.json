@@ -565,7 +565,8 @@
         "max": 1,
         "color": "#FFFFF9",
         "type": "color",
-        "autoSale": true
+        "autoSale": true,
+        "set": "Christmas"
     },
     "Christmas_Banner_21": {
         "class": "Banners",
@@ -574,7 +575,8 @@
         "price": 500,
         "amount": 1,
         "type": "banner",
-        "banner": "ChristmasBanner21.png"
+        "banner": "ChristmasBanner21.png",
+        "set": "Christmas"
     },
     "CandyCane": {
         "class": "Badges",
@@ -583,7 +585,8 @@
         "price": 100,
         "amount": 1,
         "max": 1,
-        "badge": "<:CandyCane:926930144852078672>"
+        "badge": "<:CandyCane:926930144852078672>",
+        "set": "Christmas"
     },
     "present": {
         "class": "special",
@@ -591,7 +594,8 @@
         "desc": "I wonder whats inside?",
         "price": 50,
         "amount": 1,
-        "onsale": false
+        "onsale": false,
+        "set": "Christmas"
     },
     "snowflake": {
         "class": "Badges",
@@ -600,7 +604,8 @@
         "price": 100,
         "amount": 1,
         "max": 1,
-        "badge": "<a:snowflake_a:917908202459390042>"
+        "badge": "<a:snowflake_a:917908202459390042>",
+        "set": "Christmas"
     },
     "holly_title": {
         "class": "Titles",
@@ -608,7 +613,8 @@
         "desc": "Adds \"Holly\" to your profile name",
         "price": 777,
         "amount": 1,
-        "title": "🎁 Holly"
+        "title": "🎁 Holly",
+        "set": "Christmas"
     },
     "color_red": {
         "class": "Colors",
@@ -619,7 +625,8 @@
         "max": 1,
         "color": "#CC3333",
         "type": "color",
-        "autoSale": true
+        "autoSale": true,
+        "set": "Christmas"
     },
     "ChristmasTree": {
         "class": "Badges",
@@ -628,7 +635,8 @@
         "price": 100,
         "amount": 1,
         "max": 1,
-        "badge": "🎄"
+        "badge": "🎄",
+        "set": "Christmas"
     },
     "color_teal": {
         "class": "Colors",
@@ -641,6 +649,19 @@
         "type": "color",
         "autoSale": true
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
     "special_title_641851eb": {
         "class": "Titles",
         "name": "Special Bee title",
@@ -657,7 +678,18 @@
         "price": 99999999999999,
         "amount": 1,
         "title": "🛠️ Developer Kitsune",
-        "source": "For the developers @ Kitsune Labs"
+        "source": "For the developers @ Kitsune Labs",
+        "set": "Kitsune Labs"
+    },
+    "divine_messenger": {
+        "class": "Titles",
+        "name": "Divine Messenger title",
+        "desc": "For Divine Messengers",
+        "price": 7777777,
+        "autoSale": false,
+        "title": "<:toriigate:815386514636537857>  Divine Messenger",
+        "source": "Be a Staff member in Senko's World!",
+        "set": "Messenger Kitsune"
     },
     "contributing_title": {
         "class": "Titles",
@@ -666,18 +698,59 @@
         "price": 99999999999999,
         "amount": 1,
         "title": "🏗️ Contributor Kitsune",
-        "source": "Contribute to the development of Senko"
+        "source": "Contribute to the development of Senko",
+        "set": "Contributor"
     },
     "MooseKaiBanner": {
         "class": "Banners",
         "name": "MooseKai's Snowsgiving 2021 Banner",
-        "desc": "For MooseKai#6097",
+        "desc": "Set \"MooseKai's Snowsgiving 2021 Banner\" as your banner.",
         "price": 99999999999999,
         "amount": 1,
         "type": "banner",
         "banner": "MooseKai.png",
-        "source": "Won the Discord Snowsgiving 2021 event"
+        "source": "Won the Discord Snowsgiving 2021 event",
+        "set": "Christmas"
     },
+    "master_thrower": {
+        "class": "Titles",
+        "name": "Master Thrower",
+        "desc": "Adds \"Master Thrower\" to your profile name",
+        "price": 99999999999999,
+        "amount": 1,
+        "title": "☃️ Master Thrower",
+        "set": "Christmas"
+    },
+    "sen_title": {
+        "class": "Titles",
+        "name": "Super cool and also straight",
+        "desc": "Set \"Super cool and also straight\" as your title.",
+        "price": 99999999999999,
+        "amount": 1,
+        "title": "Super cool and also straight",
+        "set": "Messenger Kitsune"
+    },
+    "sam_title": {
+        "class": "Titles",
+        "name": "Samīfokkusu",
+        "desc": "Set \"Samīfokkusu\" as your title.",
+        "price": 99999999999999,
+        "amount": 1,
+        "title": "Samīfokkusu",
+        "set": "Messenger Kitsune"
+    },
+
+
+
+
+
+
+
+
+
+
+
+
     "cherry": {
         "class": "Badges",
         "name": "Cherry Badge",
@@ -708,19 +781,12 @@
     },
     "NewYearsPresent_2021": {
         "class": "gift",
-        "name": "New Years Present - 5000 Yen",
+        "name": "New Years Present - +5000 Yen",
         "desc": "Thanks for being with us, Hopefully 2022 will be better!",
         "price": -5000,
         "amount": 1,
-        "onsale": false
-    },
-    "master_thrower": {
-        "class": "Titles",
-        "name": "Master Thrower",
-        "desc": "Adds \"Master Thrower\" to your profile name",
-        "price": 99999999999999,
-        "amount": 1,
-        "title": "☃️ Master Thrower"
+        "onsale": false,
+        "set": "New Years"
     },
     "popcorn": {
         "class": "Badges",
@@ -777,7 +843,8 @@
         "seasonal": {
             "isSeasonal": true,
             "season": "Valentines"
-        }
+        },
+        "set": "Valentines"
     },
     "conversation_hearts": {
         "class": "Consumables",
@@ -790,7 +857,8 @@
         "seasonal": {
             "isSeasonal": true,
             "season": "Valentines"
-        }
+        },
+        "set": "Valentines"
     },
     "color_pg": {
         "class": "Colors",
@@ -801,7 +869,8 @@
         "max": 1,
         "color": "#1EFFB5",
         "type": "color",
-        "autoSale": true
+        "autoSale": true,
+        "set": "Christmas"
     },
     "kitsune_title": {
         "class": "Titles",
@@ -893,7 +962,8 @@
         "amount": 1,
         "autosale": false,
         "type": "banner",
-        "banner": "Discord.gif"
+        "banner": "Discord.gif",
+        "set": "Discord"
     },
     "discord_characters": {
         "class": "Banners",
@@ -903,7 +973,8 @@
         "amount": 1,
         "autosale": false,
         "type": "banner",
-        "banner": "DiscordBanner2.png"
+        "banner": "DiscordBanner2.png",
+        "set": "Discord"
     },
     "discord_holy_world": {
         "class": "Banners",
@@ -913,7 +984,8 @@
         "amount": 1,
         "autosale": false,
         "type": "banner",
-        "banner": "DiscordBanner.png"
+        "banner": "DiscordBanner.png",
+        "set": "Discord"
     },
     "astronaut_title": {
         "class": "Titles",
@@ -1350,15 +1422,6 @@
         "autoSale": false,
         "title": "Sagiri Izumi",
         "source": "Won in a giveaway"
-    },
-    "divine_messenger": {
-        "class": "Titles",
-        "name": "Divine Messenger title",
-        "desc": "For Divine Messengers",
-        "price": 7777777,
-        "autoSale": false,
-        "title": "<:toriigate:815386514636537857>  Divine Messenger",
-        "source": "Be a Staff member in Senko's World!"
     },
     "The_Scarlet_Devil": {
         "class": "Titles",

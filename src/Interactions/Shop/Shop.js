@@ -49,6 +49,20 @@ module.exports = {
 			}
 		}
 
+		for (var eventItem of rawShopData[0].EventMarket) {
+			const shopItem = ShopItems[eventItem];
+
+			itemClasses.Events.push({ id: item, data: shopItem });
+			if (!itemClasses[shopItem.class]) warn(`Item ${item.name} has no class!`);
+		}
+
+		for (var specialItem of rawShopData[0].SpecialMarket) {
+			const shopItem = ShopItems[specialItem];
+
+			itemClasses.Special.push({ id: item, data: shopItem });
+			if (!itemClasses[shopItem.class]) warn(`Item ${item.name} has no class!`);
+		}
+
 		const previewCommand = await senkoClient.api.loadedCommands.find(d => d.name === "preview");
 
 		const marketResponse = {
@@ -65,29 +79,11 @@ module.exports = {
 			if (itemClasses[index].length > 0 && !marketResponse.fields.find(f=>f.name === index)) marketResponse.fields.push({ name: `${index}`, value: "" });
 
 			itemClasses[index].map(item => {
-				marketResponse.fields.find(f=>f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}\n`;
+				marketResponse.fields.find(f=>f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}${item.data.set ? ` (Part of the ${item.data.set} set)\n` : "\n"}`;
 
-				MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}` });
+				if (!MenuItems.find(i=>i.label === item.data.name)) MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}#${Math.floor(Math.random() * 100)}` });
 			});
 		}
-
-		// rawShopData[0].SpecialMarket.map(item => {
-		// 	if (!marketResponse.fields.find(f=>f.name === "Special")) marketResponse.fields.push({ name: "Special", value: "" });
-		// 	var si = ShopItems[item];
-
-		// 	marketResponse.fields.find(f=>f.name === "Special").value += `> ${Icons.yen}  ${si.price == 0 ? "**FREE**" : si.price} **≻** ${si.name} - (Part of the ${si.set} set)\n`;
-		// 	MenuItems.push({ label: `${si.name}`, value: `shopbuy#${item}#${interaction.user.id}` });
-		// });
-
-		// superConfig.EventMarket.map(eventItem => {
-		// 	const eI = ShopItems[eventItem];
-
-		// 	if (eI) {
-		// 		EventItems += `[${Icons.yen}  ${eI.price}] **${eI.name}**`; // ${Icons.package}  —  **${eI.name}** [${Icons.yen}  ${eI.price}]\n`;
-
-		// 		MenuItems.push({ label: `${eI.name}`, value: `shopbuy_${Object.keys(ShopItems).indexOf(eventItem)}_${interaction.user.id}` });
-		// 	}
-		// });
 
 		interaction.followUp({
 			embeds: [marketResponse],
