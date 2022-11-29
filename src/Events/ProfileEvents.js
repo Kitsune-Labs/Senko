@@ -261,7 +261,7 @@ module.exports = {
 					embeds: [
 						{
 							title: `${Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
-							description: `Check it out using </profile:${profile.id}>`,
+							description: `Check it out using ${profile ? `</profile:${profile.id}>` : "/profile"}`,
 							color: senkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://assets.senkosworld.com/media/senko/package.png"
@@ -284,7 +284,7 @@ module.exports = {
 				interaction.reply({
 					embeds: [
 						{
-							description: `Status Updated, Check it out using </profile:${profile.id}>!`,
+							description: `Status Updated, Check it out using ${profile ? `</profile:${profile.id}>` : "/profile"}`,
 							color: senkoClient.api.Theme.light
 						}
 					],
