@@ -565,8 +565,7 @@
         "max": 1,
         "color": "#FFFFF9",
         "type": "color",
-        "autoSale": true,
-        "set": "Christmas"
+        "autoSale": true
     },
     "Christmas_Banner_21": {
         "class": "Banners",
@@ -586,7 +585,8 @@
         "amount": 1,
         "max": 1,
         "badge": "<:CandyCane:926930144852078672>",
-        "set": "Christmas"
+        "set": "Christmas",
+        "autoSale": true
     },
     "present": {
         "class": "special",
@@ -605,7 +605,8 @@
         "amount": 1,
         "max": 1,
         "badge": "<a:snowflake_a:917908202459390042>",
-        "set": "Christmas"
+        "set": "Christmas",
+        "autoSale": true
     },
     "holly_title": {
         "class": "Titles",
@@ -614,7 +615,8 @@
         "price": 777,
         "amount": 1,
         "title": "🎁 Holly",
-        "set": "Christmas"
+        "set": "Christmas",
+        "autoSale": true
     },
     "color_red": {
         "class": "Colors",
@@ -636,7 +638,8 @@
         "amount": 1,
         "max": 1,
         "badge": "🎄",
-        "set": "Christmas"
+        "set": "Christmas",
+        "autoSale": true
     },
     "color_teal": {
         "class": "Colors",
@@ -647,6 +650,7 @@
         "max": 1,
         "color": "#4AD1FF",
         "type": "color",
+        "set": "Christmas",
         "autoSale": true
     },
 
