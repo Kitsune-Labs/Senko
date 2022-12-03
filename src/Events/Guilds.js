@@ -145,7 +145,7 @@ module.exports = {
 			});
 
 			const kickLog = fetchedLogs.entries.first();
-			if (kickLog.createdAt < member.joinedAt || !kickLog || kickLog.executor.id === SenkoClient.user.id || kickLog.target.id !== member.id) return;
+			if (!kickLog || kickLog.createdAt < member.joinedAt || kickLog.executor.id === SenkoClient.user.id || kickLog.target.id !== member.id) return;
 
 			if (guildData.ActionLogs && !guildFlags.get(bits.ActionLogs.KickActionDisabled)) {
 				(await member.guild.channels.fetch(guildData.ActionLogs)).send({
