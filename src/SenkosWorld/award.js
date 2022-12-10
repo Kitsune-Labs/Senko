@@ -30,7 +30,7 @@ module.exports = {
      * @param {Client} senkoClient
      */
 	start: async ({senkoClient, interaction}) => {
-		if (interaction.user.id !== "609097445825052701") return interaction.followUp({ content: "🗿" });
+		if (interaction.user.id !== "609097445825052701") return;
 		const ShopItems = await fetchMarket();
 		const User = interaction.options.getString("user-id");
 		const DevItem = ShopItems[interaction.options.getString("item")];
