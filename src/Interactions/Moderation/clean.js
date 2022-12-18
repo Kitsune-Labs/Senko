@@ -10,7 +10,7 @@ module.exports = {
 	category: "admin",
 	defer: true,
 	ephemeral: true,
-	permissions: ["ManageMessages"],
+	permissions: [PermissionFlagsBits.ManageMessages],
 	options: [
 		{
 			name: "amount",

@@ -10,7 +10,7 @@ module.exports = {
 	desc: "Change the slowmode of a channel",
 	usableAnywhere: true,
 	category: "admin",
-	permissions: ["ManageChannels"],
+	permissions: [PermissionFlagsBits.ManageChannels],
 	options: [
 		{
 			name: "set",

@@ -272,7 +272,7 @@ module.exports = {
 				});
 			}
 
-			if (interaction.isSelectMenu() && interaction.customId.startsWith("status:")) {
+			if (interaction.isStringSelectMenu() && interaction.customId.startsWith("status:")) {
 				const userData = await fetchSuperUser(interaction.user);
 
 				userData.LocalUser.profileConfig.Status = interaction.values[0].split(":")[1];

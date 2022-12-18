@@ -140,7 +140,9 @@ module.exports = {
 				interaction: interaction,
 				guildData: superGuildData,
 				userData: accountData,
-				xpAmount: Amount
+				xpAmount: Amount,
+				locale: require(`../Data/Locales/${interaction.locale}.json`)[InteractionCommand.name] || require("../Data/Locales/en-US.json"),
+				generalLocale: require(`../Data/Locales/${interaction.locale}.json`) || require("../Data/Locales/en-US.json")
 			}).catch(err => {
 				const messageStruct = {
 					embeds: [

@@ -9,7 +9,7 @@ module.exports = {
      */
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async Interaction => {
-			if (Interaction.isSelectMenu() && Interaction.values[0].match("read_")) {
+			if (Interaction.isStringSelectMenu() && Interaction.values[0].match("read_")) {
 				let Page = 1;
 				const SelectedManga = Manga[Interaction.values[0].replace("read_", "")];
 				const Embeds = [];

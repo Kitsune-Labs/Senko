@@ -11,7 +11,7 @@ module.exports = {
 	name: "warn",
 	desc: "warn",
 	category: "admin",
-	permissions: ["ModerateMembers"],
+	permissions: [PermissionFlagsBits.ModerateMembers],
 	options: [
 		{
 			name: "user",

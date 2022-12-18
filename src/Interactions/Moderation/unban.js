@@ -8,7 +8,7 @@ module.exports = {
 	desc: "Unban a user",
 	usableAnywhere: true,
 	category: "admin",
-	permissions: ["BanMembers"],
+	permissions: [PermissionFlagsBits.BanMembers],
 	options: [
 		{
 			name: "user-id",

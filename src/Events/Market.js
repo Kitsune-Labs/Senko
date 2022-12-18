@@ -14,7 +14,7 @@ module.exports = {
 		SenkoClient.on("interactionCreate", async interaction => {
 			const shopItems = await fetchMarket();
 
-			if (interaction.isSelectMenu() && interaction.customId == "shop_purchase") {
+			if (interaction.isStringSelectMenu() && interaction.customId == "shop_purchase") {
 				const item = interaction.values[0].split("#").splice(1, 3);
 				const configData = await fetchConfig();
 				const itemName = item[0];
@@ -155,7 +155,7 @@ module.exports = {
 				if (interaction.isButton() && interaction.customId.startsWith("shop_cancel-")) return interaction.reply({ content: "I can't put things back that aren't yours", ephemeral: true });
 			}
 
-			if (interaction.isSelectMenu() && interaction.customId == "shop_preview") {
+			if (interaction.isStringSelectMenu() && interaction.customId == "shop_preview") {
 				const item = interaction.values[0].split("_").splice(1, 3);
 
 				const itemName = Object.keys(shopItems).at(item[0]);

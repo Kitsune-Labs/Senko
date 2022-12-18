@@ -1,11 +1,16 @@
 require("dotenv/config");
 const { print, warn, error, fatal } = require("@kitsune-labs/utilities");
-const { v4: uuidv4 } = require("uuid");
-const { Client, Collection, PermissionsBitField, GatewayIntentBits: gIntents, WebhookClient, Colors } = require("discord.js");
+const { Client, Collection, PermissionsBitField, GatewayIntentBits: GatewayIntents, WebhookClient } = require("discord.js");
 const { readdirSync } = require("fs");
 
 const SenkoClient = new Client({
-	intents: [gIntents.MessageContent, gIntents.GuildMessages, gIntents.Guilds, gIntents.GuildBans, gIntents.GuildMembers],
+	intents: [
+		GatewayIntents.MessageContent,
+		GatewayIntents.GuildMessages,
+		GatewayIntents.Guilds,
+		GatewayIntents.GuildBans,
+		GatewayIntents.GuildMembers
+	],
 
 	allowedMentions: {
 		parse: ["users", "roles", "everyone"],

@@ -1,0 +1,40 @@
+{
+	"general": {
+		"invalid_mod": "Votre guilde n'a pas activé les commandes de modération, demandez à votre administrateur de guilde de les activer avec `/server configuration`."
+	},
+    "ban": {
+        "Reply": {
+            "Title": "Kitsune Banni",
+            "Desc": "**_USER_** a été banni du serveur.",
+            "Desc2": "**_USER_** a été banni du serveur pour \"**_REASON_**\".",
+            "Desc3": "**_USER_** a été banni du serveur et sera débanni à **_TIME_** (_TIME2_).",
+            "Desc4": "**_USER_** a été banni du serveur pour \"**_REASON_**\" et sera débanni à **_TIME_** (_TIME2_).",
+            "NoReason": "Aucune raison fournie.",
+            "NoDM": "Je n'ai pas pu DM l'utilisateur.",
+			"BanErrorTitle": "Erreur de bannissement",
+			"BanError": "Vous ne pouvez pas bannir **_USER_**, soit ils ont un rôle supérieur ou égal au vôtre, ils sont propriétaire du serveur, ou c'est moi."
+        },
+		"Permissions": {
+			"OhDear": "Oh là là...",
+			"Desc": "Il semble que je ne puisse pas bannir les membres! (Assurez-vous que j'ai la permission de \"Bannir les membres\")"
+		},
+        "randomResponse": [
+			{
+				"text": "Je vais utiliser mon feu Kitsune pour les effrayer s'ils reviennent! :KitsuneBi_Blue:",
+				"image": "kitsune_fire"
+			},
+			{
+				"text": "Ne reviens jamais!!!",
+				"image": "angry2"
+			},
+			{
+				"text": "Comment osez-vous enfreindre les règles !",
+				"image": "judgement"
+			},
+			{
+				"text": "Tu as fait quoi?",
+				"image": "what"
+			}
+		]
+    }
+}

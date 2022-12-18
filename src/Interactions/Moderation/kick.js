@@ -8,7 +8,7 @@ module.exports = {
 	name: "kick",
 	desc: "Kick a member",
 	category: "admin",
-	permissions: ["KickMembers"],
+	permissions: [PermissionFlagsBits.KickMembers],
 	options: [
 		{
 			name: "user",

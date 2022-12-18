@@ -9,7 +9,7 @@ module.exports = {
      */
 	execute: async (SenkoClient) => {
 		SenkoClient.on("interactionCreate", async Interaction => {
-			//if (!Interaction.isButton() || !Interaction.isSelectMenu()) return;
+			//if (!Interaction.isButton() || !Interaction.isStringSelectMenu()) return;
 			const AccountData = await fetchSuperUser(Interaction.user);
 			const accountFlags = Bitfield.fromHex(AccountData.LocalUser.accountConfig.flags);
 
@@ -92,7 +92,7 @@ module.exports = {
 				}
 			}
 
-			if (Interaction.isSelectMenu()) {
+			if (Interaction.isStringSelectMenu()) {
 				const ReplyEmbed = {
 					content: null,
 					embeds: [

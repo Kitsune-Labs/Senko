@@ -10,7 +10,7 @@ module.exports = {
 	desc: "delete a warn from a guild member",
 	usableAnywhere: true,
 	category: "admin",
-	permissions: ["ManageGuild"],
+	permissions: [PermissionFlagsBits.ManageGuild],
 	options: [
 		{
 			name: "warn-id",
