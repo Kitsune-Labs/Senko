@@ -5,6 +5,7 @@ const { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser } = requir
 const Icons = require("../Data/Icons.json");
 const { InteractionType, PermissionFlagsBits } = require("discord.js");
 const { randomNumber } = require("@kitsune-labs/utilities");
+const fs = require("fs");
 
 module.exports = {
 	/**
@@ -141,8 +142,8 @@ module.exports = {
 				guildData: superGuildData,
 				userData: accountData,
 				xpAmount: Amount,
-				locale: require(`../Data/Locales/${interaction.locale}.json`)[InteractionCommand.name] || require("../Data/Locales/en-US.json"),
-				generalLocale: require(`../Data/Locales/${interaction.locale}.json`) || require("../Data/Locales/en-US.json")
+				locale: fs.existsSync(`./Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale }.json`)[InteractionCommand.name] : require("../Data/Locales/en-US.json")[InteractionCommand.name],
+				generalLocale: fs.existsSync(`./Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`).general : require("../Data/Locales/en-US.json").general
 			}).catch(err => {
 				const messageStruct = {
 					embeds: [

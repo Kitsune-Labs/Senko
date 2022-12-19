@@ -32,7 +32,8 @@ module.exports = {
 
 		SenkoClient.on("guildBanAdd", async (member) => {
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
-			member = await member.guild.members.fetch(member.id);
+			// member = await member.guild.members.fetch(member.id);
+
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,

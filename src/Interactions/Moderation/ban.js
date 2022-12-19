@@ -145,20 +145,26 @@ module.exports = {
 		}
 
 		for (var account of Accounts) {
-			if (account.user.id === senkoClient.user.id || account.member.roles.highest.position >= interaction.member.roles.highest.position || account.user.id === interaction.guild.ownerId) {
-				makeEmbed(account, false, locale.Reply.BanError.replace("_USER_", account.user.tag || account));
+			if (account.user && account.member) {
+				if (account.user.id === senkoClient.user.id || account.member.roles.highest.position >= interaction.member.roles.highest.position || account.user.id === interaction.guild.ownerId) makeEmbed(account, false, locale.Reply.BanError.replace("_USER_", account.user.tag || account));
 			} else {
-				await account.user.send({
-					embeds: [
-						{
-							title: `You have been banned from ${interaction.guild.name}`,
-							description: `Reason: ${Reason}${Duration ? `\n[__Banned until <t:${convertToMs()}>__]` : "\n[__Permanately Banned__]"} ${guildData.BanAppeal ? `\n\n${stringEndsWithS(interaction.guild.name)} ban appeal:\n${guildData.BanAppeal}` : ""}`,
-							color: Colors.Red
-						}
-					]
-				}).then(()=>makeEmbed(account, false)).catch(()=>makeEmbed(account, true));
+				const isMember = await interaction.guild.members.fetch(account.value).catch(()=>false);
 
-				await account.ban({ reason: Reason, days: 1 });
+				if (isMember) {
+					await account.user.send({
+						embeds: [
+							{
+								title: `You have been banned from ${interaction.guild.name}`,
+								description: `Reason: ${Reason}${Duration ? `\n[__Banned until <t:${convertToMs()}>__]` : "\n[__Permanately Banned__]"} ${guildData.BanAppeal ? `\n\n${stringEndsWithS(interaction.guild.name)} ban appeal:\n${guildData.BanAppeal}` : ""}`,
+								color: Colors.Red
+							}
+						]
+					}).then(()=>makeEmbed(account, false)).catch(()=>makeEmbed(account, true));
+				} else {
+					makeEmbed(account, true);
+				}
+
+				await interaction.guild.members.ban(account.user.id || account, { reason: Reason, days: 1 });
 
 				ActionLog.embeds.push({
 					title: "Action Report - Kitsune Banned",
