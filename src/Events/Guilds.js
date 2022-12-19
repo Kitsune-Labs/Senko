@@ -51,11 +51,8 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Banned",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${banLog.reason || "None"}`,
+							description: `${member.user.tag || member} [${member.user.id || member}]\n> __${banLog.reason || "No reason provided."}__`,
 							color: Colors.Red,
-							// thumbnail: {
-							//     url: member.user.displayAvatarURL({ dynamic: true })
-							// },
 							author: {
 								name: `${`${banLog.executor.username}#${banLog.executor.discriminator}` || "Unknown"}  [${banLog.executor.id || "000000000000000000"}]`,
 								icon_url: `${banLog.executor.displayAvatarURL({ dynamic: true })}`
@@ -90,7 +87,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Pardoned",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${sanitizeString(banLog.reason) || "None"}`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${sanitizeString(banLog.reason) || "No reason provided."}`,
 							color: Colors.Green,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
@@ -117,7 +114,7 @@ module.exports = {
 				embeds: [
 					{
 						title: "New Kitsune",
-						description: `${member} [${member.id} | ${member.user.tag}]\n${member.user.bot ? "IS a bot" : "Not a bot"}\nCreated on <t:${parseInt(member.user.createdTimestamp / 1000)}>`,
+						description: `${member} [${member.id} | ${member.user.tag}]\n${member.user.bot ? "**IS a bot**" : "Not a bot"}\nCreated on <t:${parseInt(member.user.createdTimestamp / 1000)}>`,
 						color: SenkoClient.api.Theme.light,
 						thumbnail: { url: member.user.displayAvatarURL({ dynamic: true, size: 4096 }) }
 					}
@@ -160,7 +157,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Kicked",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${sanitizeString(kickLog.reason) || "None"}`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${sanitizeString(kickLog.reason) || "No reason provided."}`,
 							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
@@ -213,7 +210,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Timed Out",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\nReason: ${sanitizeString(audit.reason) || "None"}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${sanitizeString(audit.reason) || "No reason provided."}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
 							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
