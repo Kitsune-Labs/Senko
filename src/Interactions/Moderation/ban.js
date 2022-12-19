@@ -158,6 +158,8 @@ module.exports = {
 					]
 				}).then(()=>makeEmbed(account, false)).catch(()=>makeEmbed(account, true));
 
+				await account.ban({ reason: Reason, days: 1 });
+
 				ActionLog.embeds.push({
 					title: "Action Report - Kitsune Banned",
 					description: `${account.user ? account.user.tag : account} [${account.user ? account.user.id : account}]\n> __${Reason}__\n${Duration ? `\n[__Banned until <t:${convertToMs()}>__]` : "\n[__Permanately Banned__]"}`,
