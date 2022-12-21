@@ -182,7 +182,7 @@ module.exports = {
 				if (shopItem.color) MessageStructure.embeds[0].fields.push({ name: "Colored", value: "** **", inline: true });
 				if (shopItem.banner) {
 					MessageStructure.embeds[0].image = { url: `attachment://${shopItem.banner}` };
-					MessageStructure.files.push({ attachment: `./src/Data/content/banners/${shopItem.banner}`, name: shopItem.banner });
+					MessageStructure.files.push({ attachment: `https://assets.senkosworld.com/media/banners/${shopItem.banner}`, name: shopItem.banner });
 				}
 
 				interaction.update(MessageStructure);
