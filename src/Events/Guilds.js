@@ -32,8 +32,6 @@ module.exports = {
 
 		SenkoClient.on("guildBanAdd", async (member) => {
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
-			// member = await member.guild.members.fetch(member.id);
-
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
@@ -68,7 +66,6 @@ module.exports = {
 
 		SenkoClient.on("guildBanRemove", async (member) => {
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
-			member = await member.guild.members.fetch(member.id);
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
@@ -126,7 +123,6 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberRemove", async (member) => {
-			member = await member.guild.members.fetch(member.id);
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData.flags);
 			const memberLoggingChannel = guildData.MemberLogs ? await member.guild.channels.fetch(guildData.MemberLogs) : null;
@@ -176,7 +172,6 @@ module.exports = {
 		});
 
 		SenkoClient.on("guildMemberUpdate", async (member) => {
-			member = await member.guild.members.fetch(member.id);
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = Bitfield.fromHex(guildData.flags);

@@ -2,6 +2,7 @@
 const { Guild, User } = require("discord.js");
 const { createClient } = require("@supabase/supabase-js");
 const { Bitfield } = require("bitfields");
+const { fatal } = require("@kitsune-labs/utilities");
 
 const Supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, {
 	autoRefreshToken: true,
@@ -43,7 +44,8 @@ async function fetchMarket(useLocal) {
 async function fetchSuperGuild(guild) {
 	let { data, error } = await Supabase.from("Guilds").select("*").eq("guildId", guild.id);
 
-	if (error || data[0] === undefined) return await makeSuperGuild(guild);
+	if (error) return fatal(error.message);
+	if (data[0] === undefined) return await makeSuperGuild(guild);
 
 	return data[0];
 }
@@ -119,8 +121,6 @@ async function fetchSuperUser(user, dontMakeData) {
  */
 async function makeSuperUser(user) {
 	await Supabase.from("Users").insert([{ id: user.id }]);
-
-	console.log("Created super user");
 
 	const { data } = await Supabase.from("Users").select("*").eq("id", user.id);
 

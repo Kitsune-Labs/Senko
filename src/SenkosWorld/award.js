@@ -6,7 +6,7 @@ const { updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super")
 
 module.exports = {
 	name: "award",
-	desc: "for use by developers",
+	desc: "developer tool",
 	defer: true,
 	ephemeral: true,
 	permissions: "0",
