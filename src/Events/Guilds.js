@@ -2,7 +2,7 @@ const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
 const { sanitizeString } = require("../API/Master.js");
-const { Colors, PermissionFlagsBits } = require("discord.js");
+const { Colors, PermissionFlagsBits, AuditLogEvent } = require("discord.js");
 const {warn, error} = require("@kitsune-labs/utilities");
 
 
@@ -35,7 +35,7 @@ module.exports = {
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
-				type: 22
+				type: AuditLogEvent.MemberBanAdd
 			});
 
 			const banLog = fetchedLogs.entries.first();
@@ -69,7 +69,7 @@ module.exports = {
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
-				type: 23
+				type: AuditLogEvent.MemberBanRemove
 			});
 
 			const banLog = fetchedLogs.entries.first();
@@ -144,7 +144,7 @@ module.exports = {
 
 			//! Kicks
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
-			const fetchedLogs = await member.guild.fetchAuditLogs({limit: 1, type: 20});
+			const fetchedLogs = await member.guild.fetchAuditLogs({limit: 1, type: AuditLogEvent.MemberKick});
 
 			const kickLog = fetchedLogs.entries.first();
 			if (!kickLog || kickLog.createdAt < member.joinedAt || kickLog.executor.id === SenkoClient.user.id || kickLog.target.id !== member.id) return;
@@ -179,7 +179,7 @@ module.exports = {
 
 			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return warn("Timeout logs are disabled for this guild");
 
-			const rawAudit = await member.guild.fetchAuditLogs({ limit: 1 });
+			const rawAudit = await member.guild.fetchAuditLogs({type: AuditLogEvent.MemberUpdate, limit: 1 });
 
 			const audit = rawAudit.entries.first();
 			if (audit.changes[0] && audit.changes[0].key !== "communication_disabled_until" || audit.target.id !== member.id) return;
