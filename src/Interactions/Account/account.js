@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, ButtonStyle } = require("discord.js");
 const jszip = require("jszip");
 const supabase = require("../../API/super").fetchSupabaseApi();
 
@@ -112,7 +112,6 @@ module.exports = {
 				fields: [],
 				color: senkoClient.api.Theme.light
 			};
-
 			var Components = [
 				{
 					type: 1,
@@ -120,30 +119,51 @@ module.exports = {
 						{ type: 2, label: "Change Privacy", style: 3, custom_id: "user_privacy" },
 						{ type: 2, label: "DM Achievements", style: 3, custom_id: "user_dm_achievements", disabled: true }
 					]
+				},
+				{
+					type: 1,
+					components: [
+						{ type: 2, label: "30 day removal (Default)", style: userData.DeletionDays == 30 ? ButtonStyle.Success : ButtonStyle.Primary, custom_id: "removal:30", disabled: userData.DeletionDays == 30 ? true : false },
+						{ type: 2, label: "60 day removal", style: userData.DeletionDays == 60 ? ButtonStyle.Success : ButtonStyle.Primary, custom_id: "removal:60", disabled: userData.DeletionDays == 60 ? true : false },
+						{ type: 2, label: "1 year removal", style: userData.DeletionDays == 365 ? ButtonStyle.Success : ButtonStyle.Primary, custom_id: "removal:365", disabled: userData.DeletionDays == 365 ? true : false }
+					]
 				}
 			];
 
+			var ReturnMessage = {
+				embeds: [
+					AccountEmbed,
+					{
+						title: "Data Settings",
+						description: `Your data will be deleted in **__${userData.DeletionDays}__** days without use.`,
+						color: senkoClient.api.Theme.light
+					}
+				],
+				components: Components,
+				ephemeral: true
+			};
+
+			if (AccountFlags.get(senkoClient.api.BitData.IndefiniteData)) {
+				Components[1].components.push({ type: 2, label: "Keep Forever", style: userData.DeletionDays == 7777777 ? ButtonStyle.Success : ButtonStyle.Primary, custom_id: "removal:7777777", disabled: userData.DeletionDays == 7777777 ? true : false });
+			}
+
 			if (AccountFlags.get(senkoClient.api.BitData.privacy)) {
-				AccountEmbed.fields.push({ name: "Private Profile", value: senkoClient.api.Icons.enabled, inline: true });
+				AccountEmbed.fields.push({ name: "Private Profile", value: senkoClient.api.Icons.enabled });
 				Components[0].components[0].style = 3;
 			} else {
-				AccountEmbed.fields.push({ name: "Private Profile", value: senkoClient.api.Icons.disabled, inline: true });
+				AccountEmbed.fields.push({ name: "Private Profile", value: senkoClient.api.Icons.disabled });
 				Components[0].components[0].style = 4;
 			}
 
 			if (AccountFlags.get(senkoClient.api.BitData.DMAchievements)) {
-				AccountEmbed.fields.push({ name: "DM Achievements", value: senkoClient.api.Icons.enabled, inline: true });
+				AccountEmbed.fields.push({ name: "DM Achievements", value: senkoClient.api.Icons.enabled });
 				Components[0].components[1].style = 3;
 			} else {
-				AccountEmbed.fields.push({ name: "DM Achievements", value: senkoClient.api.Icons.disabled, inline: true });
+				AccountEmbed.fields.push({ name: "DM Achievements", value: senkoClient.api.Icons.disabled });
 				Components[0].components[1].style = 4;
 			}
 
-			interaction.reply({
-				embeds: [AccountEmbed],
-				ephemeral: true,
-				components: Components
-			});
+			interaction.reply(ReturnMessage);
 			break;
 		}
 	}

@@ -20,7 +20,7 @@ module.exports = {
      * @param {Client} senkoClient
      */
 	// eslint-disable-next-line no-unused-vars
-	start: async (senkoClient, interaction, guildData, accountData) => {
+	start: async ({interaction}) => {
 		const text = interaction.options.get("text");
 
 		interaction.reply({

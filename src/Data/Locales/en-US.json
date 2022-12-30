@@ -1,6 +1,8 @@
 {
 	"general": {
-		"invalid_mod": "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
+		"invalid_mod": "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
+		"YenAwarded": "_AMOUNT_ <:senkoin:979540287720423455> added for interaction",
+		"TofuAwarded": "You found a rare item!\n— _AMOUNT_ <:Tofu:926933207088254986> added"
 	},
     "ban": {
         "Reply": {
@@ -39,5 +41,27 @@
 				"image": "what"
 			}
 		]
-    }
+    },
+	"fluff": {
+		"RateLimit": "I don't want to right now! W-We can _TIME_ though...",
+		"UserInput": [
+			"_USER_ strokes Senko's tail",
+			"_USER_ fluffs Senko-san",
+			"_USER_ caresses Senko's tail",
+			"_USER_ ingulfs in Senko's fluffy tail",
+			"_USER_ hugs Senko's silky tail",
+			"_USER_ cuddles Senko's tail"
+		],
+		"Responses": [
+			"<:5f:973789742858657843>  Please be more gentle with my tail!",
+			"<:5e:973789742950916167>  Do you have to be so verbose?",
+			"<:5q:973789742934142996>  You can't stay like that forever, can you?",
+			"Be more careful! It's very delicate...",
+			"I'm not sure how much I can handle...",
+			"<:5f:973789742858657843>",
+			"...",
+			"How dare you!",
+			"<:5e:973789742950916167>  EHYAAAAA!!"
+		]
+	}
 }

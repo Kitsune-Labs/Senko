@@ -61,6 +61,7 @@ module.exports = {
 			};
 
 			SenkoClient.api.loadedCommands.forEach(cmd => {
+				if (!cmd) return;
 				const command = SenkoClient.api.Commands.get(cmd.name);
 
 				categories[command.category || "uncategorized"].push(`</${cmd.name}:${cmd.id}> ≻ ${cmd.description}`);
@@ -306,7 +307,7 @@ module.exports = {
 				});
 				break;
 			case "honorable_mentions":
-				if (interaction.message.components[0].components[0].disabled === true) interaction.message.components[0].components[0].disabled = false;
+				if (interaction.message.components[0].components[0].data.disabled === true) interaction.message.components[0].components[0].data.disabled = false;
 
 				interaction.update({
 					embeds: [

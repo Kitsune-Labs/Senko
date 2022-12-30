@@ -5,6 +5,7 @@
     "FilterEnabled": 5,
     "BlockSpecialCharacters": 6,
     "DMAchievements": 7,
+    "IndefiniteData": 12,
 
     "ActionLogs": {
         "BanActionDisabled": 8,

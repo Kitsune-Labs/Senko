@@ -11,7 +11,12 @@ module.exports = {
 			description: "User",
 			type: 6,
 			required: false
-		}
+		},
+		// {
+		// 	name: "blur",
+		// 	description: "Blur media, useful for server mods",
+		// 	type: 5
+		// }
 	],
 	defer: true,
 	usableAnywhere: true,
@@ -24,6 +29,7 @@ module.exports = {
 	start: async ({senkoClient, interaction}) => {
 		const User = interaction.options.getUser("user") || interaction.member;
 		const AvatarURL = User.user ? User.user.avatarURL({ dynamic: true, size: 2048 }) : User.avatarURL({ dynamic: true, size: 2048 });
+		const blur = interaction.options.get("blur") ? "spoiler_" : "";
 
 		/**
          * @type {Message}
@@ -68,7 +74,8 @@ module.exports = {
 					title: "Banner",
 					color: senkoClient.api.Theme.dark,
 					image: {
-						url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`
+						url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`,
+						name: `${blur}banner${ext}`
 					}
 				});
 

@@ -2,6 +2,7 @@ const { Bitfield } = require("bitfields");
 const BitData = require("../API/Bits.json");
 const Icons = require("../Data/Icons.json");
 const { updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super");
+const { ButtonStyle } = require("discord.js");
 
 module.exports = {
 	/**
@@ -31,7 +32,7 @@ module.exports = {
 						});
 
 						Interaction.message.embeds[0].fields[0].value = Icons.disabled;
-						Interaction.message.components[0].components[0].style = "DANGER";
+						Interaction.message.components[0].components[0].data.style = ButtonStyle.Danger;
 
 						Interaction.update({
 							embeds: [ Interaction.message.embeds[0] ],
@@ -46,7 +47,7 @@ module.exports = {
 						});
 
 						Interaction.message.embeds[0].fields[0].value = Icons.enabled;
-						Interaction.message.components[0].components[0].style = "SUCCESS";
+						Interaction.message.components[0].components[0].data.style = ButtonStyle.Success;
 
 						Interaction.update({
 							embeds: [ Interaction.message.embeds[0] ],
@@ -65,7 +66,7 @@ module.exports = {
 						});
 
 						Interaction.message.embeds[0].fields[1].value = Icons.disabled;
-						Interaction.message.components[0].components[1].style = "DANGER";
+						Interaction.message.components[0].components[1].data.style = ButtonStyle.Danger;
 
 						Interaction.update({
 							embeds: [ Interaction.message.embeds[0] ],
@@ -80,7 +81,7 @@ module.exports = {
 						});
 
 						Interaction.message.embeds[0].fields[1].value = Icons.enabled;
-						Interaction.message.components[0].components[1].style = "SUCCESS";
+						Interaction.message.components[0].components[1].data.style = ButtonStyle.Success;
 
 						Interaction.update({
 							embeds: [ Interaction.message.embeds[0] ],

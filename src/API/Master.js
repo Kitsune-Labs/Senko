@@ -19,18 +19,18 @@ const bits = require("./Bits.json");
 // }
 
 /**
- * @param {String} string
- * @returns {String}
+ * Returns a string with an apostrophe and 's' appended if the string does not
+ * already end with 's', otherwise returns the string.
+ * @param {string} string - The string to be checked and modified.
  */
 function stringEndsWithS(string) {
 	return string.endsWith("s") ? `${string}'` : `${string}'s`;
 }
 
 /**
- * @async
+ * Add yen to a user's profile.
  * @param {User} message.author
  * @param {Number} amount
- * @returns {}
  */
 async function addYen(user, amount) {
 	let Data = await fetchSuperUser(user);
@@ -42,10 +42,9 @@ async function addYen(user, amount) {
 }
 
 /**
- * @async
+ * Remove yen from a user's profile.
  * @param {User} user
  * @param {Number} amount
- * @returns {}
  */
 async function removeYen(user, amount) {
 	let Data = await fetchSuperUser(user);
@@ -65,9 +64,8 @@ function clean(Content) {
 }
 
 /**
- * @async
+ * Disables all components on a message.
  * @param {Interaction} interaction
- * @returns
  */
 async function disableComponents(interaction) {
 	for (var component of interaction.message.components[0].components) {
@@ -80,9 +78,10 @@ async function disableComponents(interaction) {
 }
 
 /**
+ *
  * @param {number} LastDate
  * @param {number} Cooldown
- * @returns {boolean}
+ * @returns `bool`
  */
 function calcTimeLeft(LastDate, Cooldown) {
 	return Date.now() - LastDate > Cooldown;
@@ -144,14 +143,6 @@ async function awardAchievement(interaction, AchievementName) {
 	});
 }
 
-/**
- * @param {string} string
- * @returns {string}
- */
-function sanitizeString(string) {
-	return string; // string.replaceAll("s/eese popc/ild p", "[blocked]").replaceAll("s eese popc ild p", "[blocked]").replaceAll("seese popc ild p", "[blocked]");
-}
-
 module.exports = {
 	print,
 	wait,
@@ -164,6 +155,5 @@ module.exports = {
 	clean,
 	disableComponents,
 	calcTimeLeft,
-	awardAchievement,
-	sanitizeString
+	awardAchievement
 };

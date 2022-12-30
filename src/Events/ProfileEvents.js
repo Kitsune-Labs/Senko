@@ -2,7 +2,6 @@
 const { Client, ModalBuilder, InteractionType } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const { print } = require("@kitsune-labs/utilities");
-const { sanitizeString } = require("../API/Master.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../Data/Icons.json");
 const { fetchMarket, fetchSuperUser, updateSuperUser } = require("../API/super.js");
@@ -252,7 +251,7 @@ module.exports = {
 
 			if (interaction.type === InteractionType.ModalSubmit) {
 				const userData = await fetchSuperUser(interaction.user);
-				userData.LocalUser.profileConfig.aboutMe = `${sanitizeString(interaction.fields.getField("submit_about_me_1").value.replaceAll(/[\r\n]+/gm, "\n"))}`;
+				userData.LocalUser.profileConfig.aboutMe = `${interaction.fields.getField("submit_about_me_1").value.replaceAll(/[\r\n]+/gm, "\n")}`;
 				await updateSuperUser(interaction.user, {
 					LocalUser: userData.LocalUser
 				});

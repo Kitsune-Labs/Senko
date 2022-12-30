@@ -37,8 +37,8 @@ module.exports = async (interaction, pages, timeout = 120000, isEphemeral) => {
 	};
 
 	if (pages.length == 1) {
-		MessageStructure.components[0].components[0].disabled = true;
-		MessageStructure.components[0].components[1].disabled = true;
+		MessageStructure.components[0].components[0].data.disabled = true;
+		MessageStructure.components[0].components[1].data.disabled = true;
 	}
 
 	if (!interaction.deferred) await interaction.deferReply({ ephemeral: isEphemeral });
@@ -70,8 +70,8 @@ module.exports = async (interaction, pages, timeout = 120000, isEphemeral) => {
 	});
 
 	function disable() {
-		MessageStructure.components[0].components[0].disabled = true;
-		MessageStructure.components[0].components[1].disabled = true;
+		MessageStructure.components[0].components[0].data.disabled = true;
+		MessageStructure.components[0].components[1].data.disabled = true;
 
 		interaction.editReply(MessageStructure);
 	}

@@ -87,12 +87,12 @@
   resolved "https://registry.yarnpkg.com/@kitsune-labs/faux/-/faux-1.0.1.tgz#4f9ddac1ad8b27607ac8abf5e0c93262b104ad22"
   integrity sha512-ctQ7yl1+4vh/DWf5ey7jtAr83btoYLpmRItuXjIODW23IuBIxB7/CnRgO3u9M3x7jsDAxFCAi6xPY8jFxrU7RA==
 
-"@kitsune-labs/utilities@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@kitsune-labs/utilities/-/utilities-1.3.3.tgz#0dee0041c6a44b87eb1e2b1d96a9a594949cc0fb"
-  integrity sha512-WhBKyMVEz8c5WdCyHsCF/WlDrr5zityoGZlpBF/7/oOIQSnJKDLR6y91aDh/cN1T2JF4lK1COUY7ux7ARG1hEg==
+"@kitsune-labs/utilities@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@kitsune-labs/utilities/-/utilities-1.4.0.tgz#9f3fa43aa743662ef2b1500e2de31a18d7ac99d4"
+  integrity sha512-F1TJqn9ynxn5mb4NqdrBl66msTe1H/BffvqppvnGGvMQAOzoCJft4bxu0JKhDJMKbMiG7RHLtkBOR7nHuXPw5w==
   dependencies:
-    pino "^8.7.0"
+    pino "^8.8.0"
     pino-pretty "^9.1.1"
 
 "@mapbox/node-pre-gyp@^1.0.0":
@@ -156,7 +156,7 @@
   dependencies:
     cross-fetch "^3.1.5"
 
-"@supabase/gotrue-js@^2.5.0":
+"@supabase/gotrue-js@^2.6.1":
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/@supabase/gotrue-js/-/gotrue-js-2.6.1.tgz#55661e4e0cf5926520d3a294e16ea76b7fc55f89"
   integrity sha512-ez40a1TORJIlF6xlA8oALx8W8vneyInz77+Hmlt2qJvKGF4LhhbBN/YI7FYmxJ8KMUaDZeWJzUwTNNOIQhE6Vg==
@@ -185,13 +185,13 @@
   dependencies:
     cross-fetch "^3.1.5"
 
-"@supabase/supabase-js@2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-2.2.1.tgz#c280150d810c4f20052684a810093df8c9b32027"
-  integrity sha512-gHm0bYu8NXCVlKIOcuUT9s/izbNlrwIw+UCKTT9sj2gR9QcYoz4jjIWnvNF8Uwtp5Mq1444NI7OH1yK70yJykQ==
+"@supabase/supabase-js@2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-2.2.3.tgz#787639f14b5887d299839825aafa3f6a51dbff1b"
+  integrity sha512-UOKnbkwtCGpI/yoW5FbiDqV1tvtP+kJkYROosCGS7M+EAaNhklNYaU3l3wNfxpR5LW7wOO1O17cb+5CSRjv/zg==
   dependencies:
     "@supabase/functions-js" "^2.0.0"
-    "@supabase/gotrue-js" "^2.5.0"
+    "@supabase/gotrue-js" "^2.6.1"
     "@supabase/postgrest-js" "^1.1.1"
     "@supabase/realtime-js" "^2.1.0"
     "@supabase/storage-js" "^2.1.0"
@@ -426,10 +426,10 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
-canvas@^2.10.2:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.10.2.tgz#66d827e24acd6c34667453728e13d337417d4b20"
-  integrity sha512-FSmlsip0nZ0U4Zcfht0qBJqDhlfGuevTZKE8h+dBOYrJjGvY3iqMGSzzbvkaFhvMXiVxfcMaPHS/kge++T5SKg==
+canvas@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.11.0.tgz#7f0c3e9ae94cf469269b5d3a7963a7f3a9936434"
+  integrity sha512-bdTjFexjKJEwtIo0oRx8eD4G2yWoUOXP9lj279jmQ2zMnTQhT8C3512OKz3s+ZOaQlLbE7TuVvRDYDB3Llyy5g==
   dependencies:
     "@mapbox/node-pre-gyp" "^1.0.0"
     nan "^2.17.0"
@@ -1570,10 +1570,10 @@ pino-std-serializers@^6.0.0:
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-6.0.0.tgz#4c20928a1bafca122fdc2a7a4a171ca1c5f9c526"
   integrity sha512-mMMOwSKrmyl+Y12Ri2xhH1lbzQxwwpuru9VjyJpgFIH4asSj88F2csdMwN6+M5g1Ll4rmsYghHLQJw81tgZ7LQ==
 
-pino@^8.7.0:
-  version "8.7.0"
-  resolved "https://registry.yarnpkg.com/pino/-/pino-8.7.0.tgz#58621608a3d8540ae643cdd9194cdd94130c78d9"
-  integrity sha512-l9sA5uPxmZzwydhMWUcm1gI0YxNnYl8MfSr2h8cwLvOAzQLBLewzF247h/vqHe3/tt6fgtXeG9wdjjoetdI/vA==
+pino@^8.8.0:
+  version "8.8.0"
+  resolved "https://registry.yarnpkg.com/pino/-/pino-8.8.0.tgz#1f0d6695a224aa06afc7ad60f2ccc4772d3b9233"
+  integrity sha512-cF8iGYeu2ODg2gIwgAHcPrtR63ILJz3f7gkogaHC/TXVVXxZgInmNYiIpDYEwgEkxZti2Se6P2W2DxlBIZe6eQ==
   dependencies:
     atomic-sleep "^1.0.0"
     fast-redact "^3.1.1"

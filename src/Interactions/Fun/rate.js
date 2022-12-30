@@ -1,5 +1,3 @@
-const { sanitizeString } = require("../../API/Master.js");
-
 module.exports = {
 	name: "rate",
 	desc: "Rate something",
@@ -17,7 +15,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
 	start: async ({senkoClient, interaction}) => {
-		const Item = sanitizeString(interaction.options.getString("thing"));
+		const Item = interaction.options.getString("thing");
 
 		const MessageBuild = {
 			embeds: [

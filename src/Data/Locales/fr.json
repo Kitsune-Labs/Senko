@@ -1,6 +1,8 @@
 {
 	"general": {
-		"invalid_mod": "Votre guilde n'a pas activé les commandes de modération, demandez à votre administrateur de guilde de les activer avec `/server configuration`."
+		"invalid_mod": "Votre guilde n'a pas activé les commandes de modération, demandez à votre administrateur de guilde de les activer avec `/server configuration`.",
+		"YenAwarded": "_AMOUNT_ <:senkoin:979540287720423455> ajouté pour interaction",
+		"TofuAwarded": "Vous avez trouvé un objet rare !\n— _AMOUNT_ <:Tofu:926933207088254986> ajouté"
 	},
     "ban": {
         "Reply": {
@@ -36,5 +38,26 @@
 				"image": "what"
 			}
 		]
-    }
+    },
+	"fluff": {
+		"RateLimit": "Je ne veux pas maintenant ! M-Mais on peut _TIME_ quand même...",
+		"UserInput": [
+			"_USER_ caresse la queue de Senko",
+			"_USER_ caresse Senko-san",
+			"_USER_ se noie dans la queue moelleuse de Senko.",
+			"_USER_ serre la queue soyeuse de Senko dans ses bras.",
+			"_USER_ fait des câlins à la queue de Senko."
+		],
+		"Responses": [
+			"<:5f:973789742858657843> S'il te plaît, sois plus doux avec ma queue!",
+			"<:5e:973789742950916167> Est-ce que tu dois être si verbeux?",
+			"<:5q:973789742934142996> Tu ne peux pas rester comme ça pour toujours, non?",
+			"Sois plus attentif! C'est très délicat...",
+			"Je ne suis pas sûr de ce que je peux supporter...",
+			"<:5f:973789742858657843>",
+			"...",
+			"Comment oses-tu!",
+			"<:5e:973789742950916167>  EHYAAAAA!!"
+		]
+	}
 }

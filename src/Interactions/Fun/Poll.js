@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 const { CommandInteraction } = require("discord.js");
-const { sanitizeString } = require("../../API/Master");
 
 module.exports = {
 	name: "poll",
@@ -73,7 +72,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
 	start: async ({senkoClient, interaction}) => {
-		const Topic = sanitizeString(interaction.options.getString("topic"));
+		const Topic = interaction.options.getString("topic");
 		let OptionString = "";
 		let MaxOptions = 0;
 		const Numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
@@ -81,7 +80,7 @@ module.exports = {
 
 		for (var Option of interaction.options._hoistedOptions) {
 			if (Option.name !== "topic") {
-				OptionString += `${Numbers[MaxOptions]}  ${sanitizeString(Option.value)}\n`;
+				OptionString += `${Numbers[MaxOptions]}  ${Option.value}\n`;
 				Reactions.push(Numbers[MaxOptions]);
 				MaxOptions++;
 			}

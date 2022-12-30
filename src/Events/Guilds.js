@@ -1,7 +1,6 @@
 const { Bitfield } = require("bitfields");
 const { deleteSuperGuild, fetchSuperGuild } = require("../API/super.js");
 const bits = require("../API/Bits.json");
-const { sanitizeString } = require("../API/Master.js");
 const { Colors, PermissionFlagsBits, AuditLogEvent } = require("discord.js");
 const {warn, error} = require("@kitsune-labs/utilities");
 
@@ -50,7 +49,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Banned",
-							description: `${member.user.tag || member} [${member.user.id || member}]\n> __${banLog.reason || "No reason provided."}__`,
+							description: `${member.user.tag || member} [${member.user.id || member}]\n> __${banLog.reason || "No reason provided."}__\n\n[__Permanately Banned__]`,
 							color: Colors.Red,
 							author: {
 								name: `${`${banLog.executor.username}#${banLog.executor.discriminator}` || "Unknown"}  [${banLog.executor.id || "000000000000000000"}]`,
@@ -85,7 +84,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Pardoned",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${sanitizeString(banLog.reason) || "No reason provided."}`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${banLog.reason || "No reason provided."}`,
 							color: Colors.Green,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
@@ -154,7 +153,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Kicked",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${sanitizeString(kickLog.reason) || "No reason provided."}`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${kickLog.reason || "No reason provided."}`,
 							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })
@@ -206,7 +205,7 @@ module.exports = {
 					embeds: [
 						{
 							title: "Action Report - Kitsune Timed Out",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${sanitizeString(audit.reason) || "No reason provided."}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
+							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${audit.reason || "No reason provided."}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
 							color: Colors.Yellow,
 							thumbnail: {
 								url: member.user.displayAvatarURL({ dynamic: true })

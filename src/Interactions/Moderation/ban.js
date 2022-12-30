@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Client, CommandInteraction, ApplicationCommandOptionType: CommandOption, PermissionFlagsBits, Colors } = require("discord.js");
-const {print, randomArrayItem} = require("@kitsune-labs/utilities");
+const {randomArrayItem, convertToMs} = require("@kitsune-labs/utilities");
 const {stringEndsWithS} = require("../../API/Master");
 
 module.exports = {
@@ -92,36 +92,6 @@ module.exports = {
 			content: "** **",
 			embeds: []
 		};
-
-		function convertToMs() {
-			var ms = 0;
-			var duration = Duration ? Duration.split(" ") : [];
-			for (var time of duration) {
-				var number = parseInt(time);
-				var unit = time.replace(number, "");
-				switch (unit) {
-				case "s":
-					ms += number * 1000;
-					break;
-				case "m":
-					ms += number * 60000;
-					break;
-				case "h":
-					ms += number * 3600000;
-					break;
-				case "d":
-					ms += number * 86400000;
-					break;
-				case "w":
-					ms += number * 604800000;
-					break;
-				case "y":
-					ms += number * 31536000000;
-					break;
-				}
-			}
-			return Math.fround((Date.now() + ms) / 1000);
-		}
 
 		function makeEmbed(member, sendFailed, customResponse) {
 			const randomResponse = randomArrayItem( locale.randomResponse);

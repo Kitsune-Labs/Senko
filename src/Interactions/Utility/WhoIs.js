@@ -78,7 +78,7 @@ module.exports = {
 				const extension = await userData.banner.startsWith("a_") ? ".gif" : ".png";
 
 				messageStruct.embeds[0].image.url = `https://cdn.discordapp.com/banners/${userData.id}/${userData.banner}${extension}?size=2048`;
-				messageStruct.components[0].components[1].disabled = false;
+				messageStruct.components[0].components[1].data.disabled = false;
 				messageStruct.components[0].components[1].url = `https://cdn.discordapp.com/banners/${userData.id}/${userData.banner}${extension}?size=2048`;
 			}
 
