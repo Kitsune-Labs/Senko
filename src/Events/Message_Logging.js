@@ -17,7 +17,7 @@ module.exports = {
 
 			const guildData = await fetchSuperGuild(message.guild);
 
-			if (!guildData.MessageLogs) return print("#ffff6", "MLD", "Message logging is disabled for this Guild.");
+			if (!guildData.MessageLogs) return print("Message logging is disabled for this Guild.");
 
 			const caseId = `${uuidv4().slice(0, 8)}`;
 			const linkedFiles = [];
@@ -93,7 +93,7 @@ module.exports = {
 
 			const guildData = await fetchSuperGuild(oldMessage.guild);
 
-			if (!guildData.MessageLogs) return print("#ffff6", "MLD", "Message logging is disabled for this Guild.");
+			if (!guildData.MessageLogs) return print("Message logging is disabled for this Guild.");
 
 			const caseId = `${uuidv4().slice(0, 8)}`;
 			const emojis = [];

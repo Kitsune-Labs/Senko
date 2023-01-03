@@ -136,7 +136,7 @@ module.exports = {
 				LastUsed: new Date().toISOString()
 			});
 
-			print(`Locale: ${interaction.locale} | ${interaction.locale}.json exists = ${existsSync(`../Data/Locales/${interaction.locale}.json`)}`);
+			if (process.env.NIGHTLY === "true") print(`Locale: ${interaction.locale} | ${interaction.locale}.json exists = ${existsSync(`../Data/Locales/${interaction.locale}.json`)}`);
 
 			InteractionCommand.start({
 				senkoClient: SenkoClient,

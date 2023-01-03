@@ -180,8 +180,8 @@ module.exports = {
 
 			const rawAudit = await member.guild.fetchAuditLogs({type: AuditLogEvent.MemberUpdate, limit: 1 });
 
-			const audit = rawAudit.entries.first();
-			if (audit.changes[0] && audit.changes[0].key !== "communication_disabled_until" || audit.target.id !== member.id) return;
+			const audit = await rawAudit.entries.first();
+			if (audit.changes[0].key !== "communication_disabled_until" || audit.target.id !== member.id) return;
 
 			if (member.communicationDisabledUntilTimestamp === null && guildData.ActionLogs) {
 				actionLoggingChannel.send({
