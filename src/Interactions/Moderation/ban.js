@@ -134,7 +134,7 @@ module.exports = {
 					makeEmbed(account, true);
 				}
 
-				await interaction.guild.members.ban(account.user.id || account, { reason: Reason, days: 1 });
+				await interaction.guild.members.ban(account.user.id || account, { reason: `${interaction.user.tag} - ${Reason}`, days: 1 });
 
 				ActionLog.embeds.push({
 					title: "Action Report - Kitsune Banned",
