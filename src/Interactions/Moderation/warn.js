@@ -36,7 +36,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
 	start: async ({senkoClient, interaction, guildData}) => {
-		let warns = guildData.Warns;
+		let warns = guildData.warns;
 		let ActionLogs = guildData.ActionLogs;
 		let flags = guildData.flags;
 
