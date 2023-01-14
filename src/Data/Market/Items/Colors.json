@@ -1,0 +1,137 @@
+{
+	"color_purple": {
+        "class": "Colors",
+        "name": "Purple Card Color",
+        "desc": "Make your profile card purple like Yozora!",
+        "price": 500,
+        "amount": 1,
+        "max": 1,
+        "color": "0x9900cc",
+        "type": "color",
+        "autoSale": true
+    },
+	"color_white": {
+        "class": "Colors",
+        "name": "White Card Color",
+        "desc": "Make your profile card white like Shiro!",
+        "price": 500,
+        "amount": 1,
+        "max": 1,
+        "color": "#FFFFF9",
+        "type": "color",
+        "autoSale": true
+    },
+	"color_red": {
+        "class": "Colors",
+        "name": "Red Card Color",
+        "desc": "Make your profile card red!",
+        "price": 500,
+        "amount": 1,
+        "max": 1,
+        "color": "#CC3333",
+        "type": "color",
+        "autoSale": false,
+        "set": "Christmas"
+    },
+	"color_teal": {
+        "class": "Colors",
+        "name": "Teal Card Color",
+        "desc": "I think it has to do with ice?",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "color": "#4AD1FF",
+        "type": "color",
+        "set": "Christmas",
+        "autoSale": false
+    },
+	"color_pg": {
+        "class": "Colors",
+        "name": "Pastel Green Card Color",
+        "desc": "Pastel Green is kinda soft",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "color": "#1EFFB5",
+        "type": "color",
+        "autoSale": false,
+        "set": "Christmas"
+    },
+	"light_blue_color": {
+        "class": "Colors",
+        "name": "Light Blue card color",
+        "desc": "A nice light blue color, similar to the sky above",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "color": "#36b7ff",
+        "type": "color"
+    },
+    "light_red_color": {
+        "class": "Colors",
+        "name": "Light Red card color",
+        "desc": "As light as Koenji's clothing",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "color": "#e75a6f",
+        "type": "color"
+    },
+    "pastel_yellow": {
+        "class": "Colors",
+        "name": "Pastel Yellow card color",
+        "desc": "Sunny yellow, like the sun",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "color": "#f8f060",
+        "type": "color"
+    },
+	"lime_green_color": {
+        "class": "Colors",
+        "name": "Lime Green card color",
+        "desc": "A greeny lime color",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "color": "#17ff00",
+        "type": "color"
+    },
+	"violet_color": {
+        "class": "Colors",
+        "name": "Violet card color",
+        "desc": "A nice violet color",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "color": "#9b00ff",
+        "type": "color"
+    },
+	"pink_color": {
+        "class": "Colors",
+        "name": "Pink card color",
+        "desc": "A nice pink color",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "color": "#ff00ff",
+        "type": "color"
+    },
+    "yellow_color": {
+        "class": "Colors",
+        "name": "Yellow card color",
+        "desc": "A nice yellow color",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "color": "#ffff00",
+        "type": "color"
+    }
+}

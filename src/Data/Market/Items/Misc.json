@@ -1,0 +1,34 @@
+{
+	"senkokeychain": {
+        "class": "Misc",
+        "name": "Senko tail key-chain",
+        "desc": "The softest tail made",
+        "price": 3000,
+        "amount": 1,
+        "autoSale": true
+    },
+    "shirokeychain": {
+        "class": "Misc",
+        "name": "Shiro tail key-chain",
+        "desc": "Shiro won't like this I bet",
+        "price": 3000,
+        "amount": 1,
+        "autoSale": true
+    },
+    "yozorakeychain": {
+        "class": "Misc",
+        "name": "Yozora tail key-chain",
+        "desc": "What will Yozora think of this?",
+        "price": 3000,
+        "amount": 1,
+        "autoSale": true
+    },
+	"yokodoll": {
+        "class": "Misc",
+        "name": "Yokodoll",
+        "desc": "A little yoko doll of Nakano.",
+        "price": 750,
+        "amount": 1,
+        "autoSale": true
+	}
+}

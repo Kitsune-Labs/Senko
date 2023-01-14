@@ -1,0 +1,95 @@
+{
+	"sakurashiro": {
+        "class": "Banners",
+        "name": "Shiro Sakura Banner",
+        "desc": "Shiro with some sakura on the edges!",
+        "price": 777,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "autoSale": true,
+        "banner": "SakuraShiro.png"
+    },
+	"senkobanner_1": {
+        "class": "Banners",
+        "name": "Senko Manga Banner",
+        "desc": "A banner made of Senkos from the manga!",
+        "price": 7777,
+        "amount": 1,
+        "type": "banner",
+        "banner": "SenkoBanner.png"
+    },
+    "thehelpfulfoxsenko": {
+        "class": "Banners",
+        "name": "Rustic Senko Pout Banner",
+        "desc": "A relic from the past, This helpful fox Senko-san is here for your pampering needs!",
+        "price": 7777,
+        "amount": 1,
+        "type": "banner",
+        "banner": "TheHelpfulFoxSenko-san.png"
+    },
+	"Christmas_Banner_21": {
+        "class": "Banners",
+        "name": "Senko's Christmas Present Banner",
+        "desc": "I hope it's everyone's favorite holiday!",
+        "price": 500,
+        "amount": 1,
+        "type": "banner",
+        "banner": "ChristmasBanner21.png",
+        "set": "Christmas"
+    },
+	"shiro_wave": {
+        "class": "Banners",
+        "name": "Shiro Wave Banner",
+        "desc": "Shiro with wavy hair",
+        "price": 300,
+        "amount": 1,
+        "autosale": true,
+        "type": "banner",
+        "banner": "ShiroWind.png"
+    },
+    "discord_animated": {
+        "class": "Banners",
+        "name": "Discord Banner [Animated]",
+        "desc": "Discord branding",
+        "price": 0,
+        "amount": 1,
+        "autosale": false,
+        "type": "banner",
+        "banner": "Discord.gif",
+        "set": "Discord"
+    },
+    "discord_characters": {
+        "class": "Banners",
+        "name": "Discord's Characters",
+        "desc": "Discord's Characters",
+        "price": 0,
+        "amount": 1,
+        "autosale": false,
+        "type": "banner",
+        "banner": "DiscordBanner2.png",
+        "set": "Discord"
+    },
+    "discord_holy_world": {
+        "class": "Banners",
+        "name": "Discord in the Holy World",
+        "desc": "Discord in the Holy World",
+        "price": 0,
+        "amount": 1,
+        "autosale": false,
+        "type": "banner",
+        "banner": "DiscordBanner.png",
+        "set": "Discord"
+    },
+	"SenkoTailBanner": {
+        "class": "Banners",
+        "name": "Senko Tail Banner",
+        "desc": "A banner given to Contributors",
+        "price": 9999999999999999,
+        "amount": 1,
+        "max": 1,
+        "autoSale": false,
+        "type": "banner",
+        "banner": "SenkoTailBanner.png"
+    }
+}

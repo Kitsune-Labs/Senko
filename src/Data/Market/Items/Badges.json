@@ -1,0 +1,192 @@
+{
+	"tiny_green_hat": {
+        "class": "Badges",
+        "name": "Tiny Green Hat Badge",
+        "desc": "It has a beak like a bird.",
+        "price": 100,
+        "amount": 1,
+        "badge": "<:Hat:911085376284819547>",
+        "autoSale": true
+    },
+    "purrfect_loaf": {
+        "class": "Badges",
+        "name": "Purrfect Loaf Badge",
+        "desc": "A freshly baked loaf of bread to brighten your day",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "badge": "🍞",
+        "autoSale": true
+    },
+	"CandyCane": {
+        "class": "Badges",
+        "name": "Candy Cane",
+        "desc": "A tiny candy cane badge",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "badge": "<:CandyCane:926930144852078672>",
+        "set": "Christmas",
+        "autoSale": false
+    },
+	"snowflake": {
+        "class": "Badges",
+        "name": "Snowflake",
+        "desc": "A snowflake badge",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "badge": "<a:snowflake_a:917908202459390042>",
+        "set": "Christmas",
+        "autoSale": false
+    },
+	"ChristmasTree": {
+        "class": "Badges",
+        "name": "Christmas Tree Badge",
+        "desc": "Adds a Christmas Tree to your profile",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "badge": "🎄",
+        "set": "Christmas",
+        "autoSale": false
+    },
+	"cherry": {
+        "class": "Badges",
+        "name": "Cherry Badge",
+        "desc": "Do you think it's a good idea to eat it?",
+        "price": 50,
+        "amount": 3,
+        "max": 1,
+        "badge": "🍒",
+        "autoSale": true
+    },
+	"RiceBall": {
+        "class": "Badges",
+        "name": "Rice Ball Badge",
+        "desc": "🍙🍙🍙",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🍙",
+        "autoSale": true
+    },
+	"popcorn": {
+        "class": "Badges",
+        "name": "Popcorn Badge",
+        "desc": "nom nom nom",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🍿",
+        "autoSale": true
+    },
+    "bacon": {
+        "class": "Badges",
+        "name": "Bacon Badge",
+        "desc": "Why would anyone stick bacon on themselves?",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🥓",
+        "autoSale": true
+    },
+    "croissant": {
+        "class": "Badges",
+        "name": "Croissant Badge",
+        "desc": "🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐🥐",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🥐",
+        "autoSale": true
+    },
+	"roses": {
+        "class": "Badges",
+        "name": "Rose Badge",
+        "desc": "AWwwww, You didnt have to!",
+        "amount": 1,
+        "price": 10,
+        "max": 1,
+        "badge": "🌹",
+        "season": "Valentines",
+        "seasonal": {
+            "isSeasonal": true,
+            "season": "Valentines"
+        },
+        "set": "Valentines"
+    },
+	"turtle_badge": {
+        "class": "Badges",
+        "name": "Turtle Badge",
+        "desc": "So slow!",
+        "amount": 1,
+        "price": 50,
+        "max": 1,
+        "badge": "🐢"
+    },
+	"corn_badge": {
+        "class": "Badges",
+        "name": "Corn badge",
+        "desc": "Corn badge",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🌽",
+        "autoSale": true
+    },
+    "shrimp_badge": {
+        "class": "Badges",
+        "name": "Shrimp badge",
+        "desc": "Shrimp badge",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "badge": "🦐",
+        "autoSale": true
+    },
+	"thx_leaf_badge": {
+        "class": "Badges",
+        "name": "🍂 Autumn Leaf",
+        "desc": "Soothing",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🍂",
+        "set": "Autumn"
+    },
+    "thx_pie_badge": {
+        "class": "Badges",
+        "name": "🥧 Pie",
+        "desc": "Pie Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🥧",
+        "set": "Autumn"
+    },
+    "thx_pumpkin_badge": {
+        "class": "Badges",
+        "name": "🎃 Pumpkin",
+        "desc": "Pumpkin Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🎃",
+        "set": "Autumn"
+    },
+    "thx_corn_badge": {
+        "class": "Badges",
+        "name": "🌽 Corn",
+        "desc": "Corn Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🌽",
+        "set": "Autumn"
+    }
+}

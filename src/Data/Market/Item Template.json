@@ -1,0 +1,19 @@
+{
+	"Template": {
+		"class": "Other, Consumables, Banners, Materials, Misc, Music, Titles, Colors, Badges",
+		"name": "Shop Template",
+		"desc": "How did you get this?",
+		"price": 0,
+		"amount": 1,
+		"max": 1,
+		"autosale": false,
+		"banner": "DefaultBanner.png",
+		"badge": "⭐",
+		"status": "😊",
+		"color": "#FFFFFF",
+		"title": "Template",
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5,
+		"set": "Template"
+	}
+}

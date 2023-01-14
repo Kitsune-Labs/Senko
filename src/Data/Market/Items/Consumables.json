@@ -1,0 +1,440 @@
+{
+	"pumpkinpie": {
+        "class": "Consumables",
+        "name": "Pumpkin Pie",
+        "desc": "Perfectly spiced.",
+        "price": 400,
+        "amount": 1,
+        "autoSale": true
+    },
+	"chestnuts": {
+        "class": "Consumables",
+        "name": "Chestnuts",
+        "desc": "くり",
+        "price": 500,
+        "amount": 20,
+        "autoSale": true
+    },
+    "apples": {
+        "class": "Consumables",
+        "name": "3 Apples",
+        "desc": "\"Fruits of autumn\"",
+        "price": 300,
+        "amount": 3,
+        "autoSale": true
+    },
+	"raspberrybox": {
+        "class": "Consumables",
+        "name": "Raspberry Box",
+        "desc": "Freshly Picked!",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "sakurroseawine": {
+        "class": "Consumables",
+        "name": "Sakura Rose Wine",
+        "desc": "A limited series of wine is created every year specially for the festival of Sakura-tree in Transcarpathia. Made from Pinot Noir grapes harvested on the southern side of the Chateau Chizay vineyards.",
+        "price": 300,
+        "amount": 1,
+        "autoSale": true
+    },
+    "yakitori": {
+        "class": "Consumables",
+        "name": "Yakitori",
+        "desc": "This Yakitori consists of bite-sized pieces of chicken meat served on a bamboo skewer.",
+        "price": 947,
+        "amount": 2,
+        "autoSale": true
+    },
+    "omurice": {
+        "class": "Consumables",
+        "name": "Omurice",
+        "desc": "This omurice consists of an omelette made with fried rice and thin, fried scrambled eggs",
+        "price": 712,
+        "amount": 1,
+        "autoSale": true
+    },
+    "hojicha": {
+        "class": "Consumables",
+        "name": "Hojicha",
+        "desc": "Low in caffeine, delicious, and an alternative to coffee!",
+        "price": 1754,
+        "amount": 1,
+        "autoSale": true
+    },
+    "taiyaki": {
+        "class": "Consumables",
+        "name": "Taiyaki",
+        "desc": "Fish-shaped cake with a read bean paste filling.",
+        "price": 636,
+        "amount": 1,
+        "autoSale": true
+    },
+    "udon": {
+        "class": "Consumables",
+        "name": "Udon",
+        "desc": "Some comforting food.",
+        "price": 100,
+        "amount": 1,
+        "autoSale": true
+    },
+    "sushi": {
+        "class": "Consumables",
+        "name": "Sushi",
+        "desc": "Seafood is great! You should try it out",
+        "price": 181,
+        "amount": 4,
+        "autoSale": true
+    },
+    "bento": {
+        "class": "Consumables",
+        "name": "Bento",
+        "desc": "Hey, hey! Can I take some of your rice?",
+        "price": 305,
+        "amount": 1,
+        "autoSale": true
+    },
+    "ramen": {
+        "class": "Consumables",
+        "name": "Ramen",
+        "desc": "Ramen is delicious.",
+        "price": 283,
+        "amount": 1,
+        "autoSale": true
+    },
+    "ozoni": {
+        "class": "Consumables",
+        "name": "Ozoni",
+        "desc": "It isn't new years, yet",
+        "price": 283,
+        "amount": 1,
+        "autoSale": true
+    },
+	"dango": {
+        "class": "Consumables",
+        "name": "Dango",
+        "desc": "A dumpling made from rice flour mixed with uruchi rice flour and glutinous rice flour",
+        "price": 210,
+        "amount": 3,
+        "autoSale": true
+    },
+    "greentea": {
+        "class": "Consumables",
+        "name": "Green Tea",
+        "desc": "Its actually quite good",
+        "price": 130,
+        "amount": 1,
+        "autoSale": true
+    },
+	"tempura": {
+        "class": "Consumables",
+        "name": "Tempura",
+        "desc": "Tempura is a dish of battered and fried fish, seafood, or vegetables. This one has vegetables.",
+        "price": 300,
+        "amount": 1,
+        "autoSale": true
+    },
+    "kaiseki": {
+        "class": "Consumables",
+        "name": "Kaiseki",
+        "desc": "A course comprised of small, seasonally themed dishes crafted with the utmost precision and attention to detail",
+        "price": 500,
+        "amount": 1,
+        "autoSale": true
+    },
+    "tsukemono": {
+        "class": "Consumables",
+        "name": "Tsukemono",
+        "desc": "Traditional pickles that have been eaten in Japan since prehistoric times. Extremely healthy too!",
+        "price": 300,
+        "amount": 3,
+        "autoSale": true
+    },
+    "soba": {
+        "class": "Consumables",
+        "name": "Soba",
+        "desc": "Very delicious & healthy, Also similar to Udon.",
+        "price": 1000,
+        "amount": 1,
+        "autoSale": true
+    },
+	"ButterCrackers": {
+        "class": "Consumables",
+        "name": "Butter Crackers",
+        "desc": "They taste like butter",
+        "price": 50,
+        "amount": 1,
+        "autoSale": true
+    },
+	"chocolate_box": {
+        "class": "Consumables",
+        "name": "Box of heart shaped chocolate",
+        "desc": "Awww! How sweet of you!",
+        "amount": 1,
+        "price": 10,
+        "max": 1,
+        "season": "Valentines",
+        "seasonal": {
+            "isSeasonal": true,
+            "season": "Valentines"
+        }
+    },
+	"conversation_hearts": {
+        "class": "Consumables",
+        "name": "Tiny Conversation Hearts",
+        "desc": "Flavored in Banana, Orange, Grape, Cherry, and lemon!",
+        "amount": 1,
+        "price": 10,
+        "max": 1,
+        "season": "Valentines",
+        "seasonal": {
+            "isSeasonal": true,
+            "season": "Valentines"
+        },
+        "set": "Valentines"
+    },
+	"lemon_cake": {
+        "class": "Consumables",
+        "name": "Lemon Cake",
+        "desc": "Lemon cake is quite sweet",
+        "price": 50,
+        "amount": 1,
+        "autoSale": true
+    },
+	"carrot_cake": {
+        "class": "Consumables",
+        "name": "Carrot Cake",
+        "desc": "Carrot cake",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "chicken_nuggies": {
+        "class": "Consumables",
+        "name": "Chicken Nuggets",
+        "desc": "Chicken nuggets",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+	"pancakes": {
+        "class": "Consumables",
+        "name": "Pancakes",
+        "desc": "Pancakes",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "fried_rice": {
+        "class": "Consumables",
+        "name": "Fried Rice",
+        "desc": "Fried rice",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+	"apple_pie": {
+        "class": "Consumables",
+        "name": "Apple Pie",
+        "desc": "Apple pie",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "pudding": {
+        "class": "Consumables",
+        "name": "Pudding",
+        "desc": "Pudding",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "zosui": {
+        "class": "Consumables",
+        "name": "Zosui",
+        "desc": "A soup containing rice stewed in stock, often with egg, meat, seafood, vegetables or mushroom, and flavored with miso or soy",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "gyudon": {
+        "class": "Consumables",
+        "name": "Gyūdon",
+        "desc": "Donburi topped with seasoned beef and onion",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Katsudon": {
+        "class": "Consumables",
+        "name": "Katsudon",
+        "desc": "A bowl of rice topped with a deep-fried breaded pork cutlet, egg, vegetables, and condiments.",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Somen_Noodles_chilled": {
+        "class": "Consumables",
+        "name": "Sōmen Noodles (Chilled)",
+        "desc": "Thin white wheat noodles served chilled with a dipping sauce",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Somen_Noodles_hot": {
+        "class": "Consumables",
+        "name": "Nyumen Noodles (Hot Sōmen Noodles)",
+        "desc": "Hot in temperature Sōmen Noodles",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Champon_noodles": {
+        "class": "Consumables",
+        "name": "Champon Noodles",
+        "desc": "Yellow noodles of medium thickness served with a great variety of seafood and vegetable toppings in a hot chicken broth",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Hiyashi_chuka": {
+        "class": "Consumables",
+        "name": "Hiyashi chūka",
+        "desc": "Thin, yellow noodles served cold with a variety of toppings, such as cucumber, tomato, ham or chicken, bean sprouts, thin-sliced omelet, and a cold sauce",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Mazesoba": {
+        "class": "Consumables",
+        "name": "Mazesoba",
+        "desc": "Wheat noodles served with a number of savory toppings, including raw egg, ginger, and meat",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Curry_bread": {
+        "class": "Consumables",
+        "name": "Curry Bread",
+        "desc": "Deep fried bread filled with Japanese curry sauce",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Anpan": {
+        "class": "Consumables",
+        "name": "Anpan (Sweet Roll)",
+        "desc": "A sweet roll filled with red bean paste",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Yakisoba_pan": {
+        "class": "Consumables",
+        "name": "Yakisoba-pan",
+        "desc": "A bread roll sandwich with a yakisoba filling",
+        "price": 100,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "miso_soup": {
+        "class": "Consumables",
+        "name": "Miso Soup",
+        "desc": "A soup made with miso suspended in dashi",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+    "Kukicha_tea": {
+        "class": "Consumables",
+        "name": "Kukicha tea",
+        "desc": "A blend of green tea made of stems, stalks, and twigs",
+        "price": 50,
+        "amount": 1,
+        "max": 1,
+        "autoSale": true,
+        "type": "food"
+    },
+	"thx_pumpkin_pie": {
+        "class": "Consumables",
+        "name": "Pumpkin Pie",
+        "desc": "Yummy",
+        "price": 300,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_konnyaku": {
+        "class": "Consumables",
+        "name": "Konnyaku",
+        "desc": "A yam cake served with sweet or savory sauce.",
+        "price": 200,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_cheesecake": {
+        "class": "Consumables",
+        "name": "Cheesecake",
+        "desc": "This isn't your ordinary cheesecake, this is thanksgiving cheesecake!",
+        "price": 200,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_amaca": {
+        "class": "Consumables",
+        "name": "Amaca",
+        "desc": "A casserole filled with potato's, chestnuts and carrots.",
+        "price": 400,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+    "thx_cornbread": {
+        "class": "Consumables",
+        "name": "Cornbread",
+        "desc": "I don't even know where to start on how good this is.",
+        "price": 400,
+        "amount": 1,
+        "autosale": false,
+        "set": "Autumn"
+    },
+}

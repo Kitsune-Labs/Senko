@@ -1,0 +1,24 @@
+{
+	"NervousStatus": {
+        "class": "Status",
+        "name": "Nervous Senko",
+        "desc": "O-oh d-dear, h-how?",
+        "price": 200,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "onsale": false,
+        "status": "<:SenkoNervous:1041550103661510727>"
+    },
+    "SenkosLabStatus": {
+        "class": "Status",
+        "name": "Senko's Lab",
+        "desc": "What is the blue stuff?",
+        "price": 200,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "onsale": false,
+        "status": "<:SenkosLab:990328255590580294>"
+    }
+}

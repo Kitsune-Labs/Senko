@@ -1,0 +1,68 @@
+{
+    "Pride_Flag": {
+        "class": "Banners",
+        "name": "Pride Flag Banner",
+        "desc": "🏳️‍🌈",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "PrideFlag.png",
+        "set": "Love is never wrong"
+    },
+    "Progressive_Pride_Flag": {
+        "class": "Banners",
+        "name": "Progressive Pride Flag Banner",
+        "desc": "Representing the progression towards acceptance and equality for all orientations and genders",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "ProgressivePrideFlag.png",
+        "set": "Love is never wrong"
+    },
+	"Transgender_Pride_Flag": {
+        "class": "Banners",
+        "name": "Transgender Pride Flag Banner",
+        "desc": "Representing the transgender community and their struggle for acceptance and equality.",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "TransPrideFlag.png",
+        "set": "Love is never wrong"
+    },
+    "Nonbinary_Pride_Flag": {
+        "class": "Banners",
+        "name": "Nonbinary Pride Flag Banner",
+        "desc": "🏳️‍⚧️💛⚪️🖤",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "NonbinaryPrideFlag.png",
+        "set": "Love is never wrong"
+    },
+    "Asexual_Pride_Flag": {
+        "class": "Banners",
+        "name": "Asexual Pride Flag Banner",
+        "desc": "🏳️‍🌈💜🖤",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "AsexualPrideFlag.png",
+        "set": "Love is never wrong"
+    },
+    "Pansexual_Pride_Flag": {
+        "class": "Banners",
+        "name": "Pansexual Pride Flag Banner",
+        "desc": "🏳️‍🌈💗💛💙",
+        "price": 0,
+        "amount": 1,
+        "max": 1,
+        "type": "banner",
+        "banner": "PansexualPrideFlag.png",
+        "set": "Love is never wrong"
+    }
+}
