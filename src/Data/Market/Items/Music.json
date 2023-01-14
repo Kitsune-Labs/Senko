@@ -138,5 +138,5 @@
         "autoSale": false,
         "soundFile": "/src/Data/Sounds/none.mp3",
         "soundVolume": 0.5
-    },
+    }
 }

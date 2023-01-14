@@ -92,10 +92,10 @@ module.exports = {
 			if (!oldMessage.guild || oldMessage.author.bot || oldMessage.system || oldMessage.content === newMessage.content) return;
 
 			const guildData = await fetchSuperGuild(oldMessage.guild);
-
 			if (!guildData.MessageLogs) return print("Message logging is disabled for this Guild.");
 
-			const caseId = `${uuidv4().slice(0, 8)}`;
+			const guildMessageLogs = await oldMessage.guild.channels.fetch(guildData.MessageLogs);
+			const caseId = uuidv4().slice(0, 8);
 			const emojis = [];
 
 			for (var possibleEmoji of oldMessage.content.split(" ")) {
@@ -133,7 +133,22 @@ module.exports = {
 				]
 			};
 
-			oldMessage.guild.channels.cache.get(guildData.MessageLogs).send(messageStructure);
+			// if (messageStructure.embeds[0].description.length >= 6000) {
+			// 	messageStructure.embeds[0].description = `${oldMessage.author.tag} ||[${oldMessage.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${oldMessage.channel} ||[${oldMessage.channel.id}]||\n\n__**Old Message**__\`\`\`ini\n[ Can be found below in "before.txt" ]\`\`\`\n__**New Message**__\`\`\`ini\n[ Can be found below in "after.txt" ]\`\`\`\n${emojis.length > 0 ? `__**Old Message Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${oldMessage.stickers.size > 0 ? `\n__**Stickers**__${oldMessage.stickers.map(s => `\n${s.url}`)}` : ""}`;
+
+
+			// 	fs.writeFileSync("./src/temp/before.txt", oldMessage.content);
+			// 	fs.writeFileSync("./src/temp/after.txt", newMessage.content);
+
+			// 	messageStructure.files = [
+			// 		{ attachment: "./src/temp/before.txt", name: "before.txt" },
+			// 		{ attachment: "./src/temp/after.txt", name: "after.txt" }
+			// 	];
+			// }
+
+			console.log(messageStructure);
+
+			guildMessageLogs.send(messageStructure);
 		});
 	}
 };

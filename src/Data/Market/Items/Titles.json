@@ -201,5 +201,136 @@
         "autosale": false,
         "title": "The Blessed",
         "set": "Autumn"
+    },
+    "mystic_title": {
+        "class": "Titles",
+        "name": "Mystic Title",
+        "desc": "A title for the mysterious and enigmatic",
+        "price": 500,
+        "amount": 1,
+        "max": 1,
+        "title": "🔮 Mystic",
+        "autoSale": false
+    },
+    "enlightened_title": {
+        "class": "Titles",
+        "name": "Enlightened Title",
+        "desc": "A title for the wise and knowledgeable",
+        "price": 500,
+        "amount": 1,
+        "max": 1,
+        "title": "✨ Enlightened",
+        "autoSale": false
+    },
+    "nomad_title": {
+        "class": "Titles",
+        "name": "Nomad Title",
+        "desc": "A title for the wanderers and travelers",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "title": "Nomad",
+        "autoSale": false
+    },
+    "samurai_title": {
+        "class": "Titles",
+        "name": "Samurai Title",
+        "desc": "A title for the honorable and skilled warriors",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🗡 Samurai",
+        "autoSale": false
+    },
+    "Dragon_title": {
+        "class": "Titles",
+        "name": "Dragon Title",
+        "desc": "A title for the fierce and powerful",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🐲 Dragon",
+        "autoSale": false
+    },
+    "Ninja_title": {
+        "class": "Titles",
+        "name": "Ninja Title",
+        "desc": "A title for the stealthy and deadly",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🗡️ Ninja",
+        "autoSale": false
+    },
+    "scientist_title": {
+        "class": "Titles",
+        "name": "Scientist Title",
+        "desc": "A title for the curious and inquisitive",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🔬 Scientist",
+        "autoSale": false
+    },
+    {
+    "Friendly_title": {
+        "class": "Titles",
+        "name": "Friendly Title",
+        "desc": "A title for the friendly and kind",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🤗 Friendly",
+        "autoSale": false
+    },
+    "Helpful_title": {
+        "class": "Titles",
+        "name": "Helpful Title",
+        "desc": "A title for the helpful and supportive",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🤝 Helpful",
+        "autoSale": false
+    },
+    "Positive_title": {
+        "class": "Titles",
+        "name": "Positive Title",
+        "desc": "A title for the positive and optimistic",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🌞 Positive",
+        "autoSale": false
+    },
+    "Friendly_title": {
+        "class": "Titles",
+        "name": "Friendly Title",
+        "desc": "A title for the friendly and kind",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🤗 Friendly",
+        "autoSale": false
+    },
+    "Helpful_title": {
+        "class": "Titles",
+        "name": "Helpful Title",
+        "desc": "A title for the helpful and supportive",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🤝 Helpful",
+        "autoSale": false
+    },
+    "Positive_title": {
+        "class": "Titles",
+        "name": "Positive Title",
+        "desc": "A title for the positive and optimistic",
+        "price": 600,
+        "amount": 1,
+        "max": 1,
+        "title": "🌞 Positive",
+        "autoSale": false
     }
 }

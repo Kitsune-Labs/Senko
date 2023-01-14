@@ -8,7 +8,7 @@
         "max": 1,
         "type": "banner",
         "banner": "PrideFlag.png",
-        "set": "Love is never wrong"
+        "set": "All Love is Valid"
     },
     "Progressive_Pride_Flag": {
         "class": "Banners",
@@ -19,7 +19,7 @@
         "max": 1,
         "type": "banner",
         "banner": "ProgressivePrideFlag.png",
-        "set": "Love is never wrong"
+        "set": "All Love is Valid"
     },
 	"Transgender_Pride_Flag": {
         "class": "Banners",
@@ -30,7 +30,7 @@
         "max": 1,
         "type": "banner",
         "banner": "TransPrideFlag.png",
-        "set": "Love is never wrong"
+        "set": "All Love is Valid"
     },
     "Nonbinary_Pride_Flag": {
         "class": "Banners",
@@ -41,7 +41,7 @@
         "max": 1,
         "type": "banner",
         "banner": "NonbinaryPrideFlag.png",
-        "set": "Love is never wrong"
+        "set": "All Love is Valid"
     },
     "Asexual_Pride_Flag": {
         "class": "Banners",
@@ -52,7 +52,7 @@
         "max": 1,
         "type": "banner",
         "banner": "AsexualPrideFlag.png",
-        "set": "Love is never wrong"
+        "set": "All Love is Valid"
     },
     "Pansexual_Pride_Flag": {
         "class": "Banners",
@@ -63,6 +63,6 @@
         "max": 1,
         "type": "banner",
         "banner": "PansexualPrideFlag.png",
-        "set": "Love is never wrong"
+        "set": "All Love is Valid"
     }
 }
