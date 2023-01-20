@@ -172,6 +172,7 @@ module.exports = {
 
 		SenkoClient.on("guildMemberUpdate", async (member) => {
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
+			member = await member.guild.members.fetch(member.id);
 			const guildData = await fetchSuperGuild(member.guild);
 			const guildFlags = Bitfield.fromHex(guildData.flags);
 			const actionLoggingChannel = guildData.ActionLogs ? await member.guild.channels.fetch(guildData.ActionLogs) : null;
@@ -199,7 +200,6 @@ module.exports = {
 					error(err);
 				});
 			}
-
 			if (member.communicationDisabledUntilTimestamp != null && guildData.ActionLogs) {
 				actionLoggingChannel.send({
 					embeds: [
