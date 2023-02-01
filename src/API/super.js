@@ -41,11 +41,19 @@ async function fetchMarket(useLocal) {
  * @param {Guild} guild
  * @returns {Promise<JSON>}
  */
-async function fetchSuperGuild(guild) {
+async function fetchSuperGuild(guild, makeNewGuild = true) {
 	let { data, error } = await Supabase.from("Guilds").select("*").eq("guildId", guild.id);
 
-	if (error) return fatal(error.message);
-	if (data[0] === undefined) return await makeSuperGuild(guild);
+	if (error) {
+		fatal(error.message);
+		return null;
+	}
+
+	if (data[0] === undefined && makeNewGuild) {
+		return await makeSuperGuild(guild);
+	} else if (data[0] === undefined && !makeNewGuild) {
+		return null;
+	}
 
 	return data[0];
 }

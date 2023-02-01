@@ -70,7 +70,7 @@ module.exports = {
 						flags: guildFlags.toHex()
 					});
 
-					interaction.message.embeds[0].fields[0].value = flags.mod_enabled ? "```diff\n- Disabled```" : "```diff\n+ Enabled```";
+					interaction.message.embeds[0].fields[0].value = flags.mod_enabled ? "```diff\n+ Enabled```" : "```diff\n- Disabled```";
 
 					await interaction.update({ embeds: interaction.message.embeds });
 					break;
