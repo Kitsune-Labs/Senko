@@ -1,10 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, ApplicationCommandOptionType: CommandOption } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 const _super = require("../API/super.js");
 
 module.exports = {
 	name: "make-data",
-	desc: "developer tool",
 	options: [
 		{
 			name: "user",
@@ -13,8 +12,6 @@ module.exports = {
 			required: true
 		}
 	],
-	usableAnywhere: true,
-	category: "utility",
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient

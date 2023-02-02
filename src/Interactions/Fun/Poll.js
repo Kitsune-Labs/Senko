@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 
 module.exports = {
 	name: "poll",
@@ -8,61 +8,61 @@ module.exports = {
 		{
 			name: "topic",
 			description: "Description",
-			type: 3,
+			type: CommandOption.String,
 			required: true
 		},
 		{
 			name: "option",
 			description: "Option 1",
-			type: 3,
+			type: CommandOption.String,
 			required: true
 		},
 		{
 			name: "option-2",
 			description: "Option 2",
-			type: 3,
+			type: CommandOption.String,
 			required: true
 		},
 		{
 			name: "option-3",
 			description: "Option 3",
-			type: 3,
+			type: CommandOption.String,
 			required: false
 		},
 		{
 			name: "option-4",
 			description: "Option 4",
-			type: 3,
+			type: CommandOption.String,
 			required: false
 		},
 		{
 			name: "option-5",
 			description: "Option 5",
-			type: 3,
+			type: CommandOption.String,
 			required: false
 		},
 		{
 			name: "option-6",
 			description: "Option 6",
-			type: 3,
+			type: CommandOption.String,
 			required: false
 		},
 		{
 			name: "option-7",
 			description: "Option 7",
-			type: 3,
+			type: CommandOption.String,
 			required: false
 		},
 		{
 			name: "option-8",
 			description: "Option 8",
-			type: 3,
+			type: CommandOption.String,
 			required: false
 		},
 		{
 			name: "option-9",
 			description: "Option 9",
-			type: 3,
+			type: CommandOption.String,
 			required: false
 		}
 	],

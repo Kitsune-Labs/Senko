@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction, Colors, PermissionFlagsBits } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 
@@ -8,18 +8,18 @@ module.exports = {
 	name: "kick",
 	desc: "Kick a member",
 	category: "admin",
-	permissions: [PermissionFlagsBits.KickMembers],
+	permissions: [Permissions.KickMembers],
 	options: [
 		{
 			name: "user",
 			description: "The user to kick",
 			required: true,
-			type: 6
+			type: CommandOption.User
 		},
 		{
 			name: "reason",
 			description: "The reason for the kick",
-			type: 3
+			type: CommandOption.String
 		}
 	],
 	whitelist: true,
@@ -33,7 +33,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has(PermissionFlagsBits.KickMembers)) return interaction.reply({
+		if (!interaction.member.permissions.has(Permissions.KickMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -47,7 +47,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.KickMembers)) return interaction.reply({
+		if (!interaction.guild.members.me.permissions.has(Permissions.KickMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",

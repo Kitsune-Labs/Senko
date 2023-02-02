@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-unused-vars
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
+
 module.exports = {
 	name: "rate",
 	desc: "Rate something",
@@ -5,7 +8,7 @@ module.exports = {
 		{
 			name: "thing",
 			description: "What should I rate?",
-			type: 3,
+			type: CommandOption.String,
 			required: true
 		}
 	],

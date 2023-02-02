@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare */
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType } = require("discord.js");
 const { spliceArray } = require("../../API/Master");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
@@ -13,17 +13,18 @@ module.exports = {
 	ephemeral: true,
 	usableAnywhere: true,
 	category: "admin",
-	permissions: [PermissionFlagsBits.Administrator],
+	permissions: [Permissions.Administrator],
 	options: [
 		{
 			name: "add",
-			type: 1,
+			type: CommandOption.Subcommand,
 			description: "Add a channel that commands can be used in",
 			options: [
 				{
 					name: "channel",
 					description: "channel",
-					type: 7,
+					type: CommandOption.Channel,
+					channel_types: [ChannelType.GuildText],
 					required: true,
 					value: "add_channel"
 				}
@@ -37,7 +38,8 @@ module.exports = {
 				{
 					name: "channel",
 					description: "channel",
-					type: 7,
+					type: CommandOption.Channel,
+					channel_types: [ChannelType.GuildText],
 					required: true,
 					value: "remove_channel"
 				}
@@ -46,17 +48,17 @@ module.exports = {
 		{
 			name: "list",
 			description: "List all channels that commands can be used in",
-			type: 1
+			type: CommandOption.Subcommand
 		},
 		{
 			name: "remove-all-channels",
 			description: "Remove all channels that commands are used in",
-			type: 1
+			type: CommandOption.Subcommand
 		},
 		{
 			name: "remove-deleted-channels",
 			description: "Remove deleted channels",
-			type: 1
+			type: CommandOption.Subcommand
 		}
 	],
 	whitelist: true,
@@ -67,7 +69,7 @@ module.exports = {
 	start: async ({senkoClient, interaction, guildData}) => {
 		const Channels = guildData.Channels;
 		const command = interaction.options.getSubcommand();
-		const command_permission = interaction.member.permissions.has(PermissionFlagsBits.ManageChannels);
+		const command_permission = interaction.member.permissions.has(Permissions.ManageChannels);
 
 		function listChannels() {
 			interaction.followUp({

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 const faux = require("@kitsune-labs/faux");
 
 module.exports = {
@@ -9,12 +9,12 @@ module.exports = {
 		{
 			name: "translate",
 			description: "Automatically decide for me",
-			type: 1,
+			type: CommandOption.Subcommand,
 			options: [
 				{
 					name: "message",
 					description: "The message that will be encoded or decoded with FAUX",
-					type: 3,
+					type: CommandOption.String,
 					required: true
 				}
 			]
@@ -22,12 +22,12 @@ module.exports = {
 		{
 			name: "encode",
 			description: "Encode a FAUX message",
-			type: 1,
+			type: CommandOption.Subcommand,
 			options: [
 				{
 					name: "message",
 					description: "The message that will be encoded with FAUX",
-					type: 3,
+					type: CommandOption.String,
 					required: true
 				}
 			]
@@ -35,12 +35,12 @@ module.exports = {
 		{
 			name: "decode",
 			description: "Decode a FAUX message",
-			type: 1,
+			type: CommandOption.Subcommand,
 			options: [
 				{
 					name: "message",
 					description: "The message that will be decoded with FAUX",
-					type: 3,
+					type: CommandOption.String,
 					required: true
 				}
 			]
@@ -52,7 +52,6 @@ module.exports = {
 	category: "fun",
 	/**
      * @param {CommandInteraction} interaction
-     * @param {Client} senkoClient
      */
 	start: async ({interaction}) => {
 		switch(interaction.options.getSubcommand()) {

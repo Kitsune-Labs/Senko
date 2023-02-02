@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors, ComponentType } = require("discord.js");
 
 module.exports = {
 	name: "help",
@@ -47,7 +47,7 @@ module.exports = {
 					components: [
 						{ type: 2, label: "Honorable Mentions", style: 2, custom_id: "honorable_mentions" },
 						{ type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${senkoClient.user.id}&permissions=137439266880` },
-						{ type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" },
+						{ type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" }
 						//{ type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }
 					]
 				}

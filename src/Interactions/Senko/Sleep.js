@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 
@@ -38,7 +38,7 @@ module.exports = {
      * @param {Interaction} interaction
      * @param {Client} SenkoClient
      */
-	start: async ({senkoClient, interaction, guildData, userData}) => {
+	start: async ({senkoClient, interaction, userData}) => {
 		const MessageStruct = {
 			embeds: [
 				{

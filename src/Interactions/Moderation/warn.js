@@ -1,33 +1,34 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, Message, Colors, PermissionFlagsBits } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { updateSuperGuild } = require("../../API/super");
 const { v4: uuidv4 } = require("uuid");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
+const { print } = require("../../API/Master");
 
 module.exports = {
 	name: "warn",
 	desc: "warn",
 	category: "admin",
-	permissions: [PermissionFlagsBits.ModerateMembers],
+	permissions: [Permissions.ModerateMembers],
 	options: [
 		{
 			name: "user",
 			description: "The user to warn",
 			required: true,
-			type: 6
+			type: CommandOption.User
 		},
 		{
 			name: "reason",
 			description: "Reason",
-			type: 3
+			type: CommandOption.String
 		},
 		{
 			name: "note",
 			description: "If you want to provide a note outside of the reason type it here",
-			type: 3
+			type: CommandOption.String
 		}
 	],
 	whitelist: true,
@@ -49,7 +50,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has("ModerateMembers")) return interaction.reply({
+		if (!interaction.member.permissions.has(Permissions.ModerateMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -62,10 +63,15 @@ module.exports = {
 			],
 			ephemeral: true
 		});
+		let roleSize = 1;
 
-		if (!user) return interaction.reply({ content: "I cannot find this user (ID's do not work)", ephemeral: true });
+		await interaction.guild.roles.fetch().then(roles => {
+			roleSize = roles.size;
+		});
+		if (interaction.member.id != interaction.guild.ownerId && roleSize > 1 && user.roles.highest.rawPosition >= interaction.member.roles.highest.rawPosition) return interaction.reply({ content: "You can't warn members that have an equal or higher role", ephemeral: true });
+
+		if (!user) return interaction.reply({ content: "I can't find this user!", ephemeral: true });
 		if (user.id === interaction.user.id) return interaction.reply({ content: "You cannot warn yourself", ephemeral: true });
-		if (user.roles.highest.rawPosition >= interaction.member.roles.highest.rawPosition) return interaction.reply({ content: "You can't warn members that have a higher role", ephemeral: true });
 		if (user.user.bot) return interaction.reply({ content: `${Icons.exclamation}  You cannot warn bots`, ephemeral: true });
 
 		await interaction.deferReply();

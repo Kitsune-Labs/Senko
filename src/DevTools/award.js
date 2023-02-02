@@ -1,27 +1,24 @@
-const Icons = require("../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors, ComponentType } = require("discord.js");
+const Icons = require("../Data/Icons.json");
 const { updateSuperUser, fetchSuperUser, fetchMarket } = require("../API/super");
 
 
 module.exports = {
 	name: "award",
-	desc: "developer tool",
 	defer: true,
 	ephemeral: true,
-	permissions: "0",
-	noGlobal: true,
 	options: [
 		{
 			name: "user-id",
 			description: "User Id",
-			type: 3,
+			type: CommandOption.String,
 			required: true
 		},
 		{
 			name: "item",
 			description: "Item ID from the shop",
-			type: 3,
+			type: CommandOption.String,
 			required: true
 		}
 	],

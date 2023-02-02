@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors, ComponentType } = require("discord.js");
 const { fetchSupabaseApi, fetchMarket } = require("../../API/super.js");
 
 const Supabase = fetchSupabaseApi();
@@ -25,10 +25,10 @@ module.exports = {
 			ephemeral: true,
 			components: [
 				{
-					type: 1,
+					type: ComponentType.ActionRow,
 					components: [
 						{
-							type: 3,
+							type: ComponentType.StringSelect,
 							placeholder: "Select an item to preview",
 							custom_id: "shop_preview",
 							options: []

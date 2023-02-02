@@ -127,6 +127,8 @@ SenkoClient.once("ready", async () => {
 
 		if (command.options) structure.options = command.options;
 		if (command.permissions) structure.defaultMemberPermissions = new PermissionsBitField(command.permissions);
+		if (command.name_localized) structure.name_localized = command.name_localized;
+		if (command.description_localized) structure.description_localized = command.description_localized;
 
 		commandsToSet.push(structure);
 	}
@@ -139,17 +141,19 @@ SenkoClient.once("ready", async () => {
 
 	if (process.env.NIGHTLY !== "true") {
 		const devTools = [];
-		for (let file of readdirSync("./src/SenkosWorld/")) {
-			const pull = require(`./SenkosWorld/${file}`);
+		for (let file of readdirSync("./src/DevTools/")) {
+			const pull = require(`./DevTools/${file}`);
 
 			const commandData = {
 				name: pull.name,
-				description: pull.desc,
+				description: "Developer Tool",
 				dm_permission: false,
 				permissions: "0"
 			};
 
 			if (pull.options) commandData.options = pull.options;
+			if (pull.name_localized) commandData.name_localized = pull.name_localized;
+			if (pull.description_localized) commandData.description_localized = pull.description_localized;
 
 			SenkoClient.api.Commands.set(pull.name, pull);
 			devTools.push(commandData);

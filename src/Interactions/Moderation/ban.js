@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, ApplicationCommandOptionType: CommandOption, PermissionFlagsBits, Colors } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 const {randomArrayItem, convertToMs} = require("@kitsune-labs/utilities");
 const {stringEndsWithS} = require("../../API/Master");
 
@@ -46,14 +46,14 @@ module.exports = {
 	],
 	usableAnywhere: true,
 	category: "admin",
-	permissions: [PermissionFlagsBits.BanMembers],
+	permissions: [Permissions.BanMembers],
 	/**
      * @param {CommandInteraction} interaction
      * @param {Client} senkoClient
      */
 	start: async ({senkoClient, interaction, guildData, locale, generalLocale}) => {
 		// It shouldn't need this but im hanging onto it just in case
-		if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers)) return;
+		if (!interaction.member.permissions.has(Permissions.BanMembers)) return;
 		await interaction.deferReply({ephemeral: true});
 
 		if (!senkoClient.api.Bitfield.fromHex(guildData.flags).get(senkoClient.api.BitData.BETAs.ModCommands)) return interaction.followUp({
@@ -61,7 +61,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.BanMembers)) return interaction.reply({
+		if (!interaction.guild.members.me.permissions.has(Permissions.BanMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: locale.Permissions.OhDear,

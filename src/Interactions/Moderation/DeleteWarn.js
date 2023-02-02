@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { spliceArray } = require("@kitsune-labs/utilities");
@@ -10,12 +10,12 @@ module.exports = {
 	desc: "delete a warn from a guild member",
 	usableAnywhere: true,
 	category: "admin",
-	permissions: [PermissionFlagsBits.ManageGuild],
+	permissions: [Permissions.ManageGuild],
 	options: [
 		{
 			name: "warn-id",
-			description: "The ID of the warn",
-			type: 3,
+			description: "The warn ID",
+			type: CommandOption.String,
 			required: true
 		}
 	],
@@ -25,7 +25,7 @@ module.exports = {
      * @param {Client} senkoClient
      */
 	start: async ({senkoClient, interaction, guildData}) => {
-		if (!interaction.member.permissions.has("ManageMembers")) return interaction.reply({
+		if (!interaction.member.permissions.has(Permissions.ModerateMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",

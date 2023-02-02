@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { addYen, randomNumber, randomArray } = require("../../API/Master");
@@ -16,7 +16,7 @@ module.exports = {
 	desc: "Cuddle with Senko-san!",
 	category: "fun",
 	/**
-     * @param {Interaction} interaction
+     * @param {CommandInteraction} interaction
      * @param {Client} senkoClient
      */
 	start: async ({senkoClient, interaction}) => {

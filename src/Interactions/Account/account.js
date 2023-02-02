@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, ButtonStyle } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 const jszip = require("jszip");
 const supabase = require("../../API/super").fetchSupabaseApi();
 
@@ -10,24 +10,24 @@ module.exports = {
 		{
 			name: "data",
 			description: "Account data",
-			type: 2,
+			type: CommandOption.SubcommandGroup,
 			options: [
 				{
 					name: "request",
 					description: "Request your account data",
-					type: 1
+					type: CommandOption.Subcommand
 				},
 				{
 					name: "delete",
 					description: "Delete your account data",
-					type: 1
+					type: CommandOption.Subcommand
 				}
 			]
 		},
 		{
 			name: "settings",
 			description: "Account settings",
-			type: 1
+			type: CommandOption.Subcommand
 		}
 	],
 	usableAnywhere: true,

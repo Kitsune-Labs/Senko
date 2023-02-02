@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors, ComponentType } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
 const { fetchSupabaseApi, fetchMarket } = require("../../API/super.js");
 const Supabase = fetchSupabaseApi();
-const {print, warn} = require("@kitsune-labs/utilities");
+const {warn} = require("@kitsune-labs/utilities");
 
 module.exports = {
 	name: "shop",
@@ -89,10 +89,10 @@ module.exports = {
 			embeds: [marketResponse],
 			components: [
 				{
-					type: 1,
+					type: ComponentType.ActionRow,
 					components: [
 						{
-							type: 3,
+							type: ComponentType.StringSelect,
 							placeholder: "Select an item to purchase",
 							custom_id: "shop_purchase",
 							options: MenuItems

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction, Client, Message } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors, ComponentType } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
@@ -9,13 +9,13 @@ module.exports = {
 		{
 			name: "user",
 			description: "User",
-			type: 6,
+			type: CommandOption.User,
 			required: false
 		},
 		// {
 		// 	name: "blur",
 		// 	description: "Blur media, useful for server mods",
-		// 	type: 5
+		// 	type: CommandOption.Boolean
 		// }
 	],
 	defer: true,

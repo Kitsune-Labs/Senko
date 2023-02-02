@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, Colors, PermissionFlagsBits } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 
@@ -8,18 +8,18 @@ module.exports = {
 	desc: "Unban a user",
 	usableAnywhere: true,
 	category: "admin",
-	permissions: [PermissionFlagsBits.BanMembers],
+	permissions: [Permissions.BanMembers],
 	options: [
 		{
 			name: "user-id",
 			description: "User Id",
 			required: true,
-			type: 3 //? Might make this an interger | https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType#Integer
+			type: CommandOption.String
 		},
 		{
 			name: "reason",
 			description: "Why is this user unbanned?",
-			type: 3
+			type: CommandOption.String
 		}
 	],
 	whitelist: true,
@@ -33,7 +33,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers)) return interaction.reply({
+		if (!interaction.member.permissions.has(Permissions.BanMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -47,7 +47,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.BanMembers)) return interaction.reply({
+		if (!interaction.guild.members.me.permissions.has(Permissions.BanMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",

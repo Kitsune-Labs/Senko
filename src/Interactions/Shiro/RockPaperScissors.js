@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 const { wait } = require("../../API/Master.js");
 const { addYen } = require("../../API/Master");
@@ -12,7 +12,7 @@ module.exports = {
 		{
 			name: "choice",
 			description: "Choose your move",
-			type: 3,
+			type: CommandOption.String,
 			required: true,
 			choices: [
 				{

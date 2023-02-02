@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, PermissionFlagsBits } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const { Bitfield } = require("bitfields");
@@ -10,18 +10,18 @@ module.exports = {
 	desc: "Change the slowmode of a channel",
 	usableAnywhere: true,
 	category: "admin",
-	permissions: [PermissionFlagsBits.ManageChannels],
+	permissions: [Permissions.ManageChannels],
 	options: [
 		{
 			name: "set",
 			description: "Set the slowmode",
-			type: 1,
+			type: CommandOption.Subcommand,
 			options: [
 				{
 					name: "seconds",
 					description: "How long should the slowmode be in seconds",
 					required: true,
-					type: 10,
+					type: CommandOption.Number,
 					minValue: 1,
 					maxValue: 21600
 				}
@@ -30,7 +30,7 @@ module.exports = {
 		{
 			name: "remove",
 			description: "Remove this channel's slowmode",
-			type: 1
+			type: CommandOption.Subcommand
 		}
 	],
 	whitelist: true,
@@ -44,7 +44,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.reply({
+		if (!interaction.member.permissions.has(Permissions.ManageChannels)) return interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
@@ -58,7 +58,7 @@ module.exports = {
 			ephemeral: true
 		});
 
-		if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)) return interaction.followUp({
+		if (!interaction.guild.members.me.permissions.has(Permissions.ManageChannels)) return interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",

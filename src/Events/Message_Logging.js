@@ -17,7 +17,8 @@ module.exports = {
 
 			const guildData = await fetchSuperGuild(message.guild);
 
-			if (!guildData.MessageLogs) return print("Message logging is disabled for this Guild.");
+			// 							?
+			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) return print("Message logging is disabled for this Guild.");
 
 			const caseId = `${uuidv4().slice(0, 8)}`;
 			const linkedFiles = [];
@@ -42,7 +43,7 @@ module.exports = {
 				embeds: [
 					{
 						title: "Message Deleted",
-						description: `Message URL\n${message.url}\n\n${message.author.tag} ||[${message.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${message.channel} ||[${message.channel.id}]||\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji URLs**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`,
+						description: `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`,
 						color: Colors.Red,
 						footer: {
 							text: `Case ${caseId}`
@@ -50,6 +51,14 @@ module.exports = {
 					}
 				]
 			};
+
+			if (guildData.AdvancedMessageLogging.message_deletions) {
+				messageStructure.embeds[0].title = null;
+
+				messageStructure.embeds[0].description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`;
+			}
+
+			if (message.attachments.size == 0) messageStructure.embeds[0].footer = null;
 
 			for (var rawAttachment of message.attachments) {
 				const attachment = rawAttachment[1];
@@ -73,12 +82,14 @@ module.exports = {
 				});
 			}
 
-			message.guild.channels.cache.get(guildData.MessageLogs).send(messageStructure).then(async sentMessage => {
+			const channelToSendTo = await message.guild.channels.fetch(guildData.AdvancedMessageLogging.message_deletions || guildData.MessageLogs).catch(() => { });
+
+			channelToSendTo.send(messageStructure).then(async sentMessage => {
 				while (message.attachments.size !== files.length) {
 					await wait(500);
 				}
 
-				if (files.length > 0) await sentMessage.reply({ content: `Message attachments from ${message.author.tag} ||[${message.author.id}]|| for case ${caseId}`, files: files });
+				if (files.length > 0) await sentMessage.reply({ content: `Message attachments for case ${caseId}`, files: files });
 
 				for (var linkedFile of linkedFiles) {
 					fs.unlink(linkedFile, () => {
@@ -92,10 +103,10 @@ module.exports = {
 			if (!oldMessage.guild || oldMessage.author.bot || oldMessage.system || oldMessage.content === newMessage.content) return;
 
 			const guildData = await fetchSuperGuild(oldMessage.guild);
-			if (!guildData.MessageLogs) return print("Message logging is disabled for this Guild.");
+			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) return print("Message logging is disabled for this Guild.");
 
-			const guildMessageLogs = await oldMessage.guild.channels.fetch(guildData.MessageLogs);
-			const caseId = uuidv4().slice(0, 8);
+			const channelToSendTo = await newMessage.guild.channels.fetch(guildData.AdvancedMessageLogging.message_edits || guildData.MessageLogs).catch(() => { });
+			// const caseId = uuidv4().slice(0, 8);
 			const emojis = [];
 
 			for (var possibleEmoji of oldMessage.content.split(" ")) {
@@ -116,11 +127,11 @@ module.exports = {
 				embeds: [
 					{
 						title: "Message Updated",
-						description: `${oldMessage.author.tag} ||[${oldMessage.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${oldMessage.channel} ||[${oldMessage.channel.id}]||\n\n__**Old Message**__\`\`\`diff\n- ${clean(oldMessage.content)}\`\`\`\n__**New Message**__\`\`\`diff\n+ ${clean(newMessage.content)}\`\`\`\n${emojis.length > 0 ? `__**Old Message Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${oldMessage.stickers.size > 0 ? `\n__**Stickers**__${oldMessage.stickers.map(s => `\n${s.url}`)}` : ""}`,
-						color: Colors.Yellow,
-						footer: {
-							text: `Case ${caseId}`
-						}
+						description: `${oldMessage.author.tag} in ${oldMessage.channel} (||user id: ${oldMessage.author.id}||)\n\n__**Old Message**__\`\`\`diff\n- ${clean(oldMessage.content)}\`\`\`\n__**New Message**__\`\`\`diff\n+ ${clean(newMessage.content)}\`\`\`\n${emojis.length > 0 ? `__**Emoji's in previous message**__${emojis.map(em => `\n${em}`)}` : ""}`,
+						color: Colors.Yellow
+						// footer: {
+						// 	text: `Case ${caseId}`
+						// }
 					}
 				],
 				components: [
@@ -132,6 +143,12 @@ module.exports = {
 					}
 				]
 			};
+
+			if (guildData.AdvancedMessageLogging.message_edits) {
+				messageStructure.embeds[0].title = null;
+
+				messageStructure.embeds[0].description = `${oldMessage.author.tag} in ${oldMessage.channel} (||user id: [${oldMessage.author.id}]||)\n\n\`\`\`diff\n- ${clean(oldMessage.content)}\`\`\`\n\`\`\`diff\n+ ${clean(newMessage.content)}\`\`\`\n${emojis.length > 0 ? `__**Emoji's in previous message**__${emojis.map(em => `\n${em}`)}` : ""}`;
+			}
 
 			// if (messageStructure.embeds[0].description.length >= 6000) {
 			// 	messageStructure.embeds[0].description = `${oldMessage.author.tag} ||[${oldMessage.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${oldMessage.channel} ||[${oldMessage.channel.id}]||\n\n__**Old Message**__\`\`\`ini\n[ Can be found below in "before.txt" ]\`\`\`\n__**New Message**__\`\`\`ini\n[ Can be found below in "after.txt" ]\`\`\`\n${emojis.length > 0 ? `__**Old Message Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${oldMessage.stickers.size > 0 ? `\n__**Stickers**__${oldMessage.stickers.map(s => `\n${s.url}`)}` : ""}`;
@@ -146,9 +163,9 @@ module.exports = {
 			// 	];
 			// }
 
-			console.log(messageStructure);
-
-			guildMessageLogs.send(messageStructure);
+			channelToSendTo.send(messageStructure);
 		});
+
+		
 	}
 };

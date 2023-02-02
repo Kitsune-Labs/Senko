@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction, Message } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors, ComponentType } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
@@ -9,13 +9,13 @@ module.exports = {
 		{
 			name: "user",
 			description: "User",
-			type: 6,
+			type: CommandOption.User,
 			required: false
 		},
 		{
 			name: "show-roles",
 			description: "Shows the roles the member has",
-			type: 5,
+			type: CommandOption.Boolean,
 			default: false
 		}
 	],
@@ -27,10 +27,11 @@ module.exports = {
      * @param {Interaction} interaction
      * @param {Client} senkoClient
      */
-	start: async ({senkoClient, interaction}) => {
+	start: async ({senkoClient, interaction, guildData}) => {
 		const whoUser = await interaction.options.getUser("user") || interaction.user;
 		const guildMember = interaction.guild.members.cache.get(whoUser.id || whoUser);
 		const AvatarURL = guildMember && guildMember.user ? guildMember.user.avatarURL({ dynamic: true, size: 2048 }) : null;
+		const warns = guildData.warns[whoUser.id || whoUser] ? guildData.warns[whoUser.id || whoUser].length : 0;
 
 		axios({
 			url: `https://discord.com/api/users/${whoUser.id || whoUser}`,
@@ -48,7 +49,7 @@ module.exports = {
 			const messageStruct = {
 				embeds: [
 					{
-						description: `${guildMember && guildMember.nickname ? guildMember.nickname : `<@${userData.id}> ${userData.username}#${userData.discriminator} [${userData.id}]`}\n\nBot: ${userData.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember && guildMember.premiumSinceTimestamp ? `**Yes**\n> **Booster since** <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nRegistered on ${whoUser.createdTimestamp ? `<t:${parseInt(whoUser.createdTimestamp / 1000)}>` : "unknown (Most likely not in Guild)" }\nJoined: ${guildMember ? `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>` : "**unknown (Most likely not in Guild)**"}\nBanned: ${banStatus ? `**Yes**\n> **Ban Reason:** ${banStatus.reason}` : "**No**"}`,
+						description: `${guildMember && guildMember.nickname ? guildMember.nickname : `<@${userData.id}> ${userData.username}#${userData.discriminator} [${userData.id}]`}\n\nBot: ${userData.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember && guildMember.premiumSinceTimestamp ? `**Yes**\n> **Booster since** <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nRegistered on ${whoUser.createdTimestamp ? `<t:${parseInt(whoUser.createdTimestamp / 1000)}>` : "unknown (Most likely not in Guild)" }\nJoined: ${guildMember ? `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>` : "**unknown (Most likely not in Guild)**"}\nBanned: ${banStatus ? `**Yes**\n> **Ban Reason:** ${banStatus.reason}` : "**No**"}\nWarnings Received: **${warns}**`,
 						color: 0xfc844c,
 						thumbnail: {
 							url: AvatarURL ? AvatarURL : null
@@ -78,7 +79,7 @@ module.exports = {
 				const extension = await userData.banner.startsWith("a_") ? ".gif" : ".png";
 
 				messageStruct.embeds[0].image.url = `https://cdn.discordapp.com/banners/${userData.id}/${userData.banner}${extension}?size=2048`;
-				messageStruct.components[0].components[1].data.disabled = false;
+				messageStruct.components[0].components[1].disabled = false;
 				messageStruct.components[0].components[1].url = `https://cdn.discordapp.com/banners/${userData.id}/${userData.banner}${extension}?size=2048`;
 			}
 

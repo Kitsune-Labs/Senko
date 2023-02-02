@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 const Icons = require("../../Data/Icons.json");
 const { updateSuperUser, fetchMarket } = require("../../API/super");
 const { spliceArray } = require("@kitsune-labs/utilities");
@@ -11,17 +13,17 @@ module.exports = {
 		{
 			name: "daily",
 			description: "Claim your daily reward",
-			type: 1
+			type: CommandOption.Subcommand
 		},
 		{
 			name: "weekly",
 			description: "Claim your weekly reward",
-			type: 1
+			type: CommandOption.Subcommand
 		},
 		{
 			name: "items",
 			description: "Claim items Senko has given you",
-			type: 1
+			type: CommandOption.Subcommand
 		}
 	],
 	/**

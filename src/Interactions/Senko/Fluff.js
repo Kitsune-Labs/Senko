@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, Interaction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 const { randomArray, randomNumber, addYen, calcTimeLeft } = require("../../API/Master.js");
 const config = require("../../Data/DataConfig.json");
 const { updateSuperUser } = require("../../API/super");
@@ -33,8 +33,8 @@ module.exports = {
 	defer: true,
 	category: "fun",
 	/**
-     * @param {Interaction} interaction
-     * @param {Client} SenkoClient
+     * @param {CommandInteraction} interaction
+     * @param {Client} senkoClient
      */
 	start: async ({senkoClient, interaction, userData, locale, generalLocale}) => {
 		if (calcTimeLeft(userData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {

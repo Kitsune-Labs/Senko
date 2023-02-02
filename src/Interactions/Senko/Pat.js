@@ -1,4 +1,5 @@
-
+// eslint-disable-next-line no-unused-vars
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 const config = require("../../Data/DataConfig.json");
 const Icons = require("../../Data/Icons.json");
 const { randomArray, randomNumber, addYen, calcTimeLeft } = require("../../API/Master");

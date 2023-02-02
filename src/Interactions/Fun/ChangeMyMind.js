@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 
@@ -11,7 +11,7 @@ module.exports = {
 			name: "text",
 			description: "text",
 			required: true,
-			type: 3
+			type: CommandOption.String
 		}
 	],
 	category: "fun",

@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 const { owoify } = require("@kitsune-labs/utilities");
 
 module.exports = {
@@ -7,7 +9,7 @@ module.exports = {
 		{
 			name: "text",
 			description: "Text to OwOify",
-			type: 3,
+			type: CommandOption.String,
 			required: true
 		}
 	],

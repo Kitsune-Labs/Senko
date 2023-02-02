@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction, PermissionFlagsBits, ButtonStyle, PermissionsBitField } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle, ComponentType } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 // eslint-disable-next-line no-unused-vars
-const HardLinks = require("../../Data/HardLinks.json");
 const { Bitfield } = require("bitfields");
 const bits = require("../../API/Bits.json");
 const { updateSuperGuild } = require("../../API/super");
@@ -18,32 +17,33 @@ module.exports = {
 		{
 			name: "info",
 			description: "Server info",
-			type: 1
+			type: CommandOption.Subcommand
 		},
 		{
 			name: "settings",
 			description: "Guild Configuration",
-			type: 1
+			type: CommandOption.Subcommand
 		},
 		{
 			name: "permissions",
 			description: "Display what permissions Senko needs",
-			type: 1
+			type: CommandOption.Subcommand
 		},
 		{
 			name: "action-reports",
 			description: "set",
-			type: 2,
+			type: CommandOption.SubcommandGroup,
 			options: [
 				{
 					name: "set",
 					description: "Set the Action Reports channel",
-					type: 1,
+					type: CommandOption.Subcommand,
 					options: [
 						{
 							name: "channel",
 							description: "Channel",
-							type: 7,
+							type: CommandOption.Channel,
+							channel_types: [ChannelType.GuildText],
 							required: true
 						}
 					]
@@ -51,24 +51,25 @@ module.exports = {
 				{
 					name: "remove",
 					description: "Set the Action Reports channel",
-					type: 1
+					type: CommandOption.Subcommand
 				}
 			]
 		},
 		{
 			name: "message-logging",
 			description: "Message Logging",
-			type: 2,
+			type: CommandOption.SubcommandGroup,
 			options: [
 				{
 					name: "set",
 					description: "Set the Message Logging channel",
-					type: 1,
+					type: CommandOption.Subcommand,
 					options: [
 						{
 							name: "channel",
 							description: "Channel",
-							type: 7,
+							type: CommandOption.Channel,
+							channel_types: [ChannelType.GuildText],
 							required: true
 						}
 					]
@@ -76,7 +77,12 @@ module.exports = {
 				{
 					name: "remove",
 					description: "Remove the Message Logging channel",
-					type: 1
+					type: CommandOption.Subcommand
+				},
+				{
+					name: "advanced",
+					description: "Advanced Message Logging settings",
+					type: CommandOption.Subcommand
 				}
 			]
 		}
@@ -242,7 +248,11 @@ module.exports = {
 				break;
 			case "message-logging":
 				await updateSuperGuild(interaction.guild, {
-					MessageLogs: null
+					MessageLogs: null,
+					AdvancedMessageLogging: {
+						message_edits: null,
+						message_deletions: null
+					}
 				});
 
 				interaction.reply({
@@ -285,6 +295,72 @@ module.exports = {
 				]
 			});
 			break;
+		case "advanced":
+			if (!checkAdmin()) return;
+			var EditCheck = guildData.AdvancedMessageLogging.message_edits ? true : false;
+			var DeleteCheck = guildData.AdvancedMessageLogging.message_deletions ? true : false;
+
+			interaction.reply({
+				embeds: [
+					{
+						title: "Advanced Message Log Settings",
+						description: `> ${DeleteCheck ? `Deleted messages will be sent to <#${guildData.AdvancedMessageLogging.message_deletions}>` : "Deleted messages will be sent to the default message logging channel if applicable"}\n\n> ${EditCheck ? `Edited messages will be sent to <#${guildData.AdvancedMessageLogging.message_edits}>` : "Edited messages will be sent to the default message logging channel if applicable"}`,
+						color: senkoClient.api.Theme.light
+					}
+				],
+				ephemeral: true,
+				components: [
+					{
+						type: ComponentType.ActionRow,
+						components: [
+							{
+								type: ComponentType.Button,
+								label: DeleteCheck ? "Update Deleted Messages Channel" : "Setup Deleted Messages Channel",
+								style: DeleteCheck ? ButtonStyle.Primary : ButtonStyle.Success,
+								custom_id: "log:deleted-messages"
+							},
+							{
+								type: ComponentType.Button,
+								label: EditCheck ? "Update Edited Messages Channel" : "Setup Edited Messages Channel",
+								style: EditCheck ? ButtonStyle.Primary : ButtonStyle.Success,
+								custom_id: "log:edited-messages"
+							}
+						]
+					},
+					{
+						type: ComponentType.ActionRow,
+						components: [
+							{
+								type: ComponentType.Button,
+								label: "Remove Deleted Messages Channel",
+								style: ButtonStyle.Danger,
+								custom_id: "log:remove-deleted-messages",
+								disabled: DeleteCheck ? false : true
+							},
+							{
+								type: ComponentType.Button,
+								label: "Remove Edited Messages Channel",
+								style: ButtonStyle.Danger,
+								custom_id: "log:remove-edited-messages",
+								disabled: EditCheck ? false : true
+							}
+						]
+					},
+					{
+						type: ComponentType.ActionRow,
+						components: [
+							{
+								type: ComponentType.Button,
+								emoji: {
+									name: "🔃"
+								},
+								style: ButtonStyle.Secondary,
+								custom_id: "log:refresh"
+							}
+						]
+					}
+				]
+			});
 		}
 	}
 };

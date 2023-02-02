@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 const { randomArrayItem } = require("@kitsune-labs/utilities");
 
 const responses = [
@@ -25,7 +25,7 @@ module.exports = {
 			name: "text",
 			description: "text",
 			required: true,
-			type: 3
+			type: CommandOption.String
 		}
 	],
 	category: "fun",

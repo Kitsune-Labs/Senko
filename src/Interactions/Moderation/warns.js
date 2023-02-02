@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits: Permissions, ApplicationCommandOptionType: CommandOption, ChannelType, Colors } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Icons = require("../../Data/Icons.json");
 const Paginate = require("../../API/Pagination/Main");
@@ -14,7 +14,7 @@ module.exports = {
 		{
 			name: "user",
 			description: "The user to view warns for",
-			type: 6
+			type: CommandOption.User
 		}
 	],
 	whitelist: true,

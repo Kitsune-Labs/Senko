@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { CommandInteraction, Client } = require("discord.js");
+const { Client, CommandInteraction, PermissionFlagsBits, ApplicationCommandOptionType: CommandOption, ChannelType, ButtonStyle } = require("discord.js");
 const { fetchConfig, fetchSuperUser, fetchMarket } = require("../../API/super");
 const Icons = require("../../Data/Icons.json");
 const { Bitfield } = require("bitfields");
@@ -15,7 +15,7 @@ module.exports = {
 			name: "user",
 			description: "Someone else",
 			required: false,
-			type: 6
+			type: CommandOption.User
 		}
 	],
 	defer: true,

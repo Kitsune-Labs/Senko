@@ -48,7 +48,7 @@ module.exports = {
          * @param {CommandInteraction} interaction
          */
 		SenkoClient.on("interactionCreate", async (interaction) => {
-			if (!interaction.isButton()) return;
+			if (!interaction.isButton() || !interaction.customId.startsWith("help:") || !interaction.customId.startsWith("honorable_mentions")) return;
 
 			const categories = {
 				fun: [],
