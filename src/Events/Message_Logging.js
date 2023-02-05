@@ -86,9 +86,12 @@ module.exports = {
 			const channelToSendTo = await message.guild.channels.fetch(guildData.AdvancedMessageLogging.message_deletions || guildData.MessageLogs).catch(() => { });
 
 			if (messageStructure.embeds[0].description.length >= 2048) {
-				messageStructure.embeds[0].description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above).```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`;
-
-				fs.writeFileSync(`./src/temp/${caseId}.txt`, message.content);
+				if (guildData.AdvancedMessageLogging.message_deletions) {
+					messageStructure.embeds[0].description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? "\n__**Message Content**__```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`;
+				} else {
+					messageStructure.embeds[0].description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`;
+				}
+				fs.writeFileSync(`./src/temp/${caseId}.txt`, `> DELETED MESSAGE\n\n\n\n${message.content}`);
 				linkedFiles.push(`./src/temp/${caseId}.txt`);
 
 				messageStructure.files.push({ attachment: `./src/temp/${caseId}.txt`, name: "Message.txt" });
