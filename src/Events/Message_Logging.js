@@ -49,7 +49,8 @@ module.exports = {
 							text: `Case ${caseId}`
 						}
 					}
-				]
+				],
+				files: []
 			};
 
 			if (guildData.AdvancedMessageLogging.message_deletions) {
@@ -84,6 +85,15 @@ module.exports = {
 
 			const channelToSendTo = await message.guild.channels.fetch(guildData.AdvancedMessageLogging.message_deletions || guildData.MessageLogs).catch(() => { });
 
+			if (messageStructure.embeds[0].description.length >= 2048) {
+				messageStructure.embeds[0].description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above).```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map(r=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map(s => `\n${s.url}`)}` : ""}`;
+
+				fs.writeFileSync(`./src/temp/${caseId}.txt`, message.content);
+				linkedFiles.push(`./src/temp/${caseId}.txt`);
+
+				messageStructure.files.push({ attachment: `./src/temp/${caseId}.txt`, name: "Message.txt" });
+			}
+
 			channelToSendTo.send(messageStructure).then(async sentMessage => {
 				while (message.attachments.size !== files.length) {
 					await wait(500);
@@ -91,10 +101,14 @@ module.exports = {
 
 				if (files.length > 0) await sentMessage.reply({ content: `Message attachments for case ${caseId}`, files: files });
 
-				for (var linkedFile of linkedFiles) {
-					fs.unlink(linkedFile, () => {
-						console.log(`Removed ${linkedFile}`);
-					});
+				await wait(1000);
+
+				if (linkedFiles.length > 0) {
+					for (var linkedFile of linkedFiles) {
+						fs.unlink(linkedFile, () => {
+							console.log(`Deleted ${linkedFile}`);
+						});
+					}
 				}
 			});
 		});
@@ -106,7 +120,8 @@ module.exports = {
 			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) return print("Message logging is disabled for this Guild.");
 
 			const channelToSendTo = await newMessage.guild.channels.fetch(guildData.AdvancedMessageLogging.message_edits || guildData.MessageLogs).catch(() => { });
-			// const caseId = uuidv4().slice(0, 8);
+			const caseId = uuidv4().slice(0, 8);
+			const linkedFiles = [];
 			const emojis = [];
 
 			for (var possibleEmoji of oldMessage.content.split(" ")) {
@@ -141,7 +156,8 @@ module.exports = {
 							{ type: 2, label: "Go to Message", style: 5, url: newMessage.url }
 						]
 					}
-				]
+				],
+				files: []
 			};
 
 			if (guildData.AdvancedMessageLogging.message_edits) {
@@ -150,22 +166,33 @@ module.exports = {
 				messageStructure.embeds[0].description = `${oldMessage.author.tag} in ${oldMessage.channel} (||user id: [${oldMessage.author.id}]||)\n\n\`\`\`diff\n- ${clean(oldMessage.content)}\`\`\`\n\`\`\`diff\n+ ${clean(newMessage.content)}\`\`\`\n${emojis.length > 0 ? `__**Emoji's in previous message**__${emojis.map(em => `\n${em}`)}` : ""}`;
 			}
 
-			// if (messageStructure.embeds[0].description.length >= 6000) {
-			// 	messageStructure.embeds[0].description = `${oldMessage.author.tag} ||[${oldMessage.author.id}]||\non <t:${Math.round(Date.now() / 1000)}:f>\nin ${oldMessage.channel} ||[${oldMessage.channel.id}]||\n\n__**Old Message**__\`\`\`ini\n[ Can be found below in "before.txt" ]\`\`\`\n__**New Message**__\`\`\`ini\n[ Can be found below in "after.txt" ]\`\`\`\n${emojis.length > 0 ? `__**Old Message Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${oldMessage.stickers.size > 0 ? `\n__**Stickers**__${oldMessage.stickers.map(s => `\n${s.url}`)}` : ""}`;
+			if (messageStructure.embeds[0].description.length >= 2048) {
+				if (guildData.AdvancedMessageLogging.message_edits) {
+					messageStructure.embeds[0].description = `${oldMessage.author.tag} in ${oldMessage.channel} (||user id: [${oldMessage.author.id}]||)\n\n\`\`\`fix\nMessage's are too big to fit in embed, view the messages below (or above)\`\`\`\n${emojis.length > 0 ? `__**Emoji's in previous message**__${emojis.map(em => `\n${em}`)}` : ""}`;
+				} else {
+					messageStructure.embeds[0].description = `${oldMessage.author.tag} in ${oldMessage.channel} (||user id: ${oldMessage.author.id}||)\n\n\`\`\`fix\nMessage's are too big to fit in embed, view the messages below (or above)\`\`\`\n${emojis.length > 0 ? `__**Emoji's in previous message**__${emojis.map(em => `\n${em}`)}` : ""}`;
+				}
 
+				fs.writeFileSync(`./src/temp/${caseId}.txt`, `> OLD MESSAGE\n\n\n\n${oldMessage.content}`);
+				fs.writeFileSync(`./src/temp/${caseId}_2.txt`, `> UPDATED MESSAGE\n\n\n\n${newMessage.content}`);
+				linkedFiles.push(`./src/temp/${caseId}.txt`);
+				linkedFiles.push(`./src/temp/${caseId}_2.txt`);
 
-			// 	fs.writeFileSync("./src/temp/before.txt", oldMessage.content);
-			// 	fs.writeFileSync("./src/temp/after.txt", newMessage.content);
+				messageStructure.files.push({ attachment: `./src/temp/${caseId}.txt`, name: "Old Message.txt" });
+				messageStructure.files.push({ attachment: `./src/temp/${caseId}_2.txt`, name: "Updated Message.txt" });
+			}
 
-			// 	messageStructure.files = [
-			// 		{ attachment: "./src/temp/before.txt", name: "before.txt" },
-			// 		{ attachment: "./src/temp/after.txt", name: "after.txt" }
-			// 	];
-			// }
+			channelToSendTo.send(messageStructure).then(async () => {
+				await wait(1000);
 
-			channelToSendTo.send(messageStructure);
+				if (linkedFiles.length > 0) {
+					for (var file of linkedFiles) {
+						fs.unlink(file, () => {
+							console.log(`Deleted ${file}`);
+						});
+					}
+				}
+			});
 		});
-
-		
 	}
 };
