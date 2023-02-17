@@ -4,9 +4,15 @@
         "es2021": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
     "rules": {
         "quotes": ["error", "double"],
@@ -20,6 +26,13 @@
         "no-else-return": "error",
         "no-multi-spaces": "error",
         "no-extra-parens": "error",
-        "brace-style": "error"
+        "brace-style": "error",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "no-var": "off"
     }
 }

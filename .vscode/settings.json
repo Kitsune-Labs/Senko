@@ -36,5 +36,6 @@
         "**/.settings": true,
         "**/.factorypath": true,
         "**/node_modules": true
-    }
+    },
+    "dotenv.enableAutocloaking": false
 }
