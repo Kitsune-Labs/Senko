@@ -1,10 +1,10 @@
 import { Bitfield } from "bitfields";
 import { deleteSuperGuild, fetchSuperGuild } from "../API/super";
 import bits from "../API/Bits.json";
-import { Colors, PermissionFlagsBits, AuditLogEvent, TextChannel } from "discord.js";
+import { Colors, PermissionFlagsBits, AuditLogEvent } from "discord.js";
+import type { TextChannel }	from "discord.js";
 import { warn, error } from "@kitsune-labs/utilities";
 import type { SenkoClientTypes } from "../types/AllTypes";
-
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
@@ -178,31 +178,32 @@ export default class {
 			}
 		});
 
-		senkoClient.on("guildMemberUpdate", async (member) => {
-			// @ts-expect-error
-			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
-			member = await member.guild.members.fetch(member.id);
-			const guildData = await fetchSuperGuild(member.guild);
-			const guildFlags = Bitfield.fromHex(guildData!.flags);
-			const actionLoggingChannel = guildData!.ActionLogs ? await member.guild.channels.fetch(guildData!.ActionLogs) : null;
+		senkoClient.on("guildMemberUpdate", async (oldMember, newMember) => {
+			await newMember.fetch();
 
+			if (!newMember.guild.members!.me!.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
+			const guildData = await fetchSuperGuild(newMember.guild);
+			const guildFlags = Bitfield.fromHex(guildData!.flags);
+			const actionLoggingChannel = guildData!.ActionLogs ? await newMember.guild.channels.fetch(guildData!.ActionLogs) as TextChannel : null;
+
+			if (!actionLoggingChannel) return warn("Action logs are not set for this guild");
 			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return warn("Timeout logs are disabled for this guild");
 
-			const rawAudit = await member.guild.fetchAuditLogs({type: AuditLogEvent.MemberUpdate, limit: 1 });
+			const rawAudit = await newMember.guild.fetchAuditLogs({type: AuditLogEvent.MemberUpdate, limit: 1 });
+			const audit = rawAudit.entries.first();
 
-			const audit = await rawAudit.entries.first();
-			if (!audit || audit.changes[0]!.key !== "communication_disabled_until" || audit.target!.id !== member.id) return;
+			if (oldMember.communicationDisabledUntilTimestamp === newMember.communicationDisabledUntilTimestamp) return warn("Member is not timed out, or the timeout is the same");
+			if (!audit || audit.changes[0]!.key !== "communication_disabled_until" || audit.target!.id !== newMember.id) return;
 
-			if (member.communicationDisabledUntilTimestamp === null && guildData!.ActionLogs) {
-				// @ts-ignore
+			if (newMember.communicationDisabledUntilTimestamp === null && guildData!.ActionLogs) {
 				actionLoggingChannel.send({
 					embeds: [
 						{
 							title: "Action Report - Timeout Removed",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]`,
+							description: `${newMember.user.tag || "Unknown"} [${newMember.user.id || "000000000000000000"}]`,
 							color: Colors.Yellow,
 							thumbnail: {
-								url: member.user.displayAvatarURL()
+								url: newMember.user.displayAvatarURL()
 							}
 						}
 					]
@@ -211,16 +212,15 @@ export default class {
 				});
 			}
 
-			if (member.communicationDisabledUntilTimestamp != null && guildData!.ActionLogs) {
-				// @ts-ignore
+			if (newMember.communicationDisabledUntilTimestamp != null && guildData!.ActionLogs) {
 				actionLoggingChannel.send({
 					embeds: [
 						{
 							title: "Action Report - Kitsune Timed Out",
-							description: `${member.user.tag || "Unknown"} [${member.user.id || "000000000000000000"}]\n> ${audit.reason || "No reason provided."}\nEnds on <t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(member.communicationDisabledUntilTimestamp / 1000)}:R>)`,
+							description: `${newMember.user.tag || "Unknown"} [${newMember.user.id || "000000000000000000"}]\n> ${audit.reason || "No reason provided."}\nEnds on <t:${Math.ceil(newMember.communicationDisabledUntilTimestamp / 1000)}> (<t:${Math.ceil(newMember.communicationDisabledUntilTimestamp / 1000)}:R>)`,
 							color: Colors.Yellow,
 							thumbnail: {
-								url: member.user.displayAvatarURL()
+								url: newMember.user.displayAvatarURL()
 							}
 						}
 					]

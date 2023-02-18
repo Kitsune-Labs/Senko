@@ -1,5 +1,5 @@
 import type { SenkoClientTypes } from "../types/AllTypes";
-import type { Attachment, Sticker } from "discord.js";
+import type { Attachment, Sticker, TextChannel } from "discord.js";
 import { Colors, Message } from "discord.js";
 import { clean } from "../API/Master";
 import { v4 as uuidv4 } from "uuid";
@@ -42,7 +42,7 @@ export default class {
 				embeds: [
 					{
 						title: "Message Deleted",
-						description: `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`,
+						description: `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`,
 						color: Colors.Red,
 						footer: {
 							text: `Case ${caseId}`
@@ -54,7 +54,7 @@ export default class {
 
 			if (guildData.AdvancedMessageLogging.message_deletions) {
 				messageStructure.embeds[0]!.title = "";
-				messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+				messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 			}
 
 			if (message.attachments.size == 0) messageStructure.embeds[0]!.footer.text = "";
@@ -91,9 +91,9 @@ export default class {
 
 			if (messageStructure.embeds[0]!.description.length >= 2048) {
 				if (guildData.AdvancedMessageLogging.message_deletions) {
-					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? "\n__**Message Content**__```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n__**Message Content**__```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 				} else {
-					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||)\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker)=> `\n${s.url}`)}` : ""}`;
+					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker)=> `\n${s.url}`)}` : ""}`;
 				}
 				fs.writeFileSync(`./src/temp/${caseId}.txt`, `> DELETED MESSAGE\n\n\n\n${message.content}`);
 				linkedFiles.push(`./src/temp/${caseId}.txt`);
@@ -127,15 +127,14 @@ export default class {
 			const guildData = await fetchSuperGuild(oldMessage.guild);
 			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) return print("Message logging is disabled for this Guild.");
 
-			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null);
+			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null) as TextChannel | null;
 			const caseId = uuidv4().slice(0, 8);
 			const linkedFiles: Array<any> = [];
 			const emojis = [];
 
 			for (const possibleEmoji of oldMessage.content!.split(" ")) {
 				if (possibleEmoji.replaceAll("_", "").match(/<:?[a-zA-Z0-9].+?:\d+>/g)) {
-					// @ts-ignore
-					for (const e of possibleEmoji.match(/:\d+>/g)) {
+					for (const e of possibleEmoji.match(/:\d+>/g)!) {
 						const emojiID = e.slice(1, e.length - 1);
 
 						if (possibleEmoji.startsWith("<a:")) {
@@ -193,7 +192,7 @@ export default class {
 				messageStructure.files.push({ attachment: `./src/temp/${caseId}_2.txt`, name: "Updated Message.txt" });
 			}
 
-			// @ts-ignore
+
 			if (channelToSendTo) channelToSendTo.send(messageStructure).then(async () => {
 				await wait(1000);
 
