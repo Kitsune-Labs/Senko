@@ -49,7 +49,7 @@ export default {
 					description: "We should probably buy some more soon...",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/nervous.png"
+						url: "https://cdn.senko.gg/public/senko/nervous.png"
 					}
 				}
 			],

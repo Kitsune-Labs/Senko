@@ -68,7 +68,7 @@ export default {
 					description: locale.Permissions.Desc,
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}
 			],
@@ -102,7 +102,7 @@ export default {
 				title: customResponse ? locale.Reply.BanErrorTitle : locale.Reply.Title,
 				description: customResponse || locale.Reply.Desc,
 				color: Colors.Red,
-				thumbnail: { url: `https://assets.senkosworld.com/media/senko/${randomResponse.image}.png` },
+				thumbnail: { url: `https://cdn.senko.gg/public/senko/${randomResponse.image}.png` },
 				footer: {}
 			};
 

@@ -40,7 +40,7 @@ export default class {
 						description: "That is not your food",
 						color: SenkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/pout.png"
+							url: "https://cdn.senko.gg/public/senko/pout.png"
 						}
 					}],
 					ephemeral: true

@@ -47,7 +47,7 @@ export default {
 					title: `${Icons.package}  You received an item from Senko-san!`,
 					description: `**I-I FOUND THIS FOR YOU!**\n\n__${DevItem.name}__ is now claimable with **/claim items**!`,
 					color: senkoClient.api.Theme.light,
-					thumbnail: { url: "https://assets.senkosworld.com/media/senko/excited.png" }
+					thumbnail: { url: "https://cdn.senko.gg/public/senko/excited.png" }
 				}
 			]
 		}).catch();

@@ -96,7 +96,7 @@ export default {
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: "I have to restrict this to Administrator's only",
 							color: senkoClient.api.Theme.dark,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/heh.png" }
 						}
 					],
 					ephemeral: true
@@ -167,7 +167,7 @@ export default {
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
 							description: "You need to specify a text channel!",
 							color: senkoClient.api.Theme.dark,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_think.png" }
 						}
 					],
 					ephemeral: true
@@ -183,7 +183,7 @@ export default {
 							title: `${Icons.exclamation}  okay dear`,
 							description: `I've set your Action Reports to ${actionChannel}`,
 							color: senkoClient.api.Theme.light,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 						}
 					],
 					content: "Action Reports channel set!",
@@ -200,7 +200,7 @@ export default {
 							title: `${Icons.exclamation}  That doesn't seem correct...`,
 							description: "You need to specify a text channel!",
 							color: senkoClient.api.Theme.dark,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_think.png" }
 						}
 					],
 					ephemeral: true
@@ -216,7 +216,7 @@ export default {
 							title: `${Icons.exclamation}  okay dear`,
 							description: `I will send Edited & Deleted messages in ${messageChannel}`,
 							color: senkoClient.api.Theme.light,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 						}
 					],
 					ephemeral: true
@@ -240,7 +240,7 @@ export default {
 							title: `${Icons.question}  okay dear`,
 							description: "I don't know your reasoning, but I've done what you said and removed your Action Reports channel!",
 							color: senkoClient.api.Theme.dark,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 						}
 					],
 					ephemeral: true
@@ -261,7 +261,7 @@ export default {
 							title: `${Icons.question}  okay dear`,
 							description: "If that's what you want I shall no longer look for edited or deleted messages",
 							color: senkoClient.api.Theme.dark,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 						}
 					],
 					ephemeral: true

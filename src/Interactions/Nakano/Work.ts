@@ -52,7 +52,7 @@ export default {
 						description: `Come back <t:${Math.floor((userData.Rewards.Work + Cooldown) / 1000)}:R> if you want your next paycheck.`,
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/Yotsutani/Yotsutani.png"
+							url: "https://cdn.senko.gg/public/Yotsutani/Yotsutani.png"
 						}
 					}
 				],
@@ -75,7 +75,7 @@ export default {
 							description: `Senko told you ${Item!.name} had broken. It cost you ${Icons.yen}  ${Item!.price}x to ${Item!.type}.\n\n— ${Icons.yen}  ${600 - Item!.price}x added`,
 							color: senkoClient.api.Theme.dark,
 							thumbnail: {
-								url: `https://assets.senkosworld.com/media/senko/${randomArrayItem(["heh", "heh2", "judgement", "upset"])}.png`
+								url: `https://cdn.senko.gg/public/senko/${randomArrayItem(["heh", "heh2", "judgement", "upset"])}.png`
 							}
 						}
 					]
@@ -96,7 +96,7 @@ export default {
 							description: `I'll make sure to pay you again tomorrow.\n\n— ${Icons.yen} 600x added`,
 							color: senkoClient.api.Theme.light,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/Yotsutani/Yotsutani.png"
+								url: "https://cdn.senko.gg/public/Yotsutani/Yotsutani.png"
 							}
 						}
 					]

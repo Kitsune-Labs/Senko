@@ -62,7 +62,7 @@ export default class {
 								title: "You don't own any titles!",
 								description: "You can buy them when they're avaliable in the shop!",
 								color: senkoClient.api.Theme.light,
-								thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 							}
 						],
 						ephemeral: true
@@ -104,7 +104,7 @@ export default class {
 								title: "You don't own any banners!",
 								description: "You can buy them when they're avaliable in the shop!",
 								color: senkoClient.api.Theme.light,
-								thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 							}
 						],
 						ephemeral: true
@@ -151,7 +151,7 @@ export default class {
 								title: "You don't own any card colors!",
 								description: "You can buy them when they're avaliable in the shop!",
 								color: senkoClient.api.Theme.light,
-								thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 							}
 						],
 						ephemeral: true
@@ -193,7 +193,7 @@ export default class {
 								title: "You don't own any Status'!",
 								description: "You can buy them when they're avaliable in the shop!",
 								color: senkoClient.api.Theme.light,
-								thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 							}
 						],
 						ephemeral: true
@@ -230,7 +230,7 @@ export default class {
 								title: "All done dear!",
 								description: "Your about me has been removed!",
 								color: senkoClient.api.Theme.light,
-								thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile.png" }
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/smile.png" }
 							}
 						],
 						ephemeral: true
@@ -253,7 +253,7 @@ export default class {
 							description: `Check it out using ${profile ? `</profile:${profile.id}>` : "/profile"}`,
 							color: senkoClient.api.Theme.light,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/package.png"
+								url: "https://cdn.senko.gg/public/senko/package.png"
 							}
 						}
 					],

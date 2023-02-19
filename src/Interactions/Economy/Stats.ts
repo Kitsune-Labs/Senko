@@ -31,7 +31,7 @@ export default {
 					],
 					color: senkoClient.api.Theme.random(),
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/idle.png"
+						url: "https://cdn.senko.gg/public/senko/idle.png"
 					}
 				}
 			],

@@ -37,7 +37,7 @@ export default {
 					description: "You must be able to ban members to use this!",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}
 			],
@@ -51,7 +51,7 @@ export default {
 					description: "It looks like I can't unban members! (Make sure I have the \"Ban Members\" permission)",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}
 			],
@@ -70,7 +70,7 @@ export default {
 					title: "I don't see anything",
 					description: "This user is not banned from this server",
 					color: senkoClient.api.Theme.dark,
-					thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
+					thumbnail: { url: "https://cdn.senko.gg/public/senko/book.png" }
 				}
 			],
 			ephemeral: true
@@ -103,7 +103,7 @@ export default {
 					title: "All done dear!",
 					description: `I've unbanned ${userId} for you!\n\n${unbanReason ? `Reason: ${unbanReason}` : ""}`,
 					color: senkoClient.api.Theme.light,
-					thumbnail: { url: "https://assets.senkosworld.com/media/senko/bless.png" }
+					thumbnail: { url: "https://cdn.senko.gg/public/senko/bless.png" }
 				}
 			]
 		});

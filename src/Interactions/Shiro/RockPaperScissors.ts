@@ -43,7 +43,7 @@ export default {
 					description: "Shiro seems determined to win",
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/shiro/sneak1.png"
+						url: "https://cdn.senko.gg/public/shiro/sneak1.png"
 					}
 				}
 			],
@@ -66,7 +66,7 @@ export default {
 						description: "It's a tie!\n\nShiro looks confused",
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/surprised1.png"
+							url: "https://cdn.senko.gg/public/shiro/surprised1.png"
 						}
 					}
 				]
@@ -83,7 +83,7 @@ export default {
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
+							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}
 					}
 				]
@@ -99,7 +99,7 @@ export default {
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
+							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}
 					}
 				]
@@ -115,7 +115,7 @@ export default {
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
+							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}
 					}
 				]
@@ -130,7 +130,7 @@ export default {
 						description: "Shiro won!\n\nShiro looks happy!",
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
+							url: "https://cdn.senko.gg/public/shiro/ShiroSmug.png"
 						}
 					}
 				]
@@ -145,7 +145,7 @@ export default {
 						description: "Shiro won!\n\nShiro looks happy!",
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
+							url: "https://cdn.senko.gg/public/shiro/ShiroSmug.png"
 						}
 					}
 				]
@@ -160,7 +160,7 @@ export default {
 						description: "Shiro won!\n\nShiro looks happy!",
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/ShiroSmug.png"
+							url: "https://cdn.senko.gg/public/shiro/ShiroSmug.png"
 						}
 					}
 				]

@@ -38,7 +38,7 @@ export default {
 					title: "Avatar",
 					description: AvatarURL ? null : "This user doesn't have an avatar",
 					image: {
-						url: AvatarURL ? AvatarURL : "https://assets.senkosworld.com/media/DiscordAvatar.png"
+						url: AvatarURL ? AvatarURL : "https://cdn.senko.gg/public/DiscordAvatar.png"
 					},
 					color: senkoClient.api.Theme.light
 				}

@@ -29,7 +29,7 @@ module.exports = {
 		// 		description: `Nanoja!\n\nDo you have a question ${interaction.user.username}?`,
 		// 		color: SenkoClient.api.Theme.light,
 		// 		thumbnail: {
-		// 			url: "https://assets.senkosworld.com/media/labs/placeholder.png"
+		// 			url: "https://cdn.senko.gg/public/labs/placeholder.png"
 		// 		},
 		// 		footer: {
 		// 			text: interaction.user.tag
@@ -64,7 +64,7 @@ module.exports = {
 				embeds: [{
 					description: "How have you been dear?",
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/labs/placeholder.png"
+						url: "https://cdn.senko.gg/public/labs/placeholder.png"
 					},
 					footer: {
 						text: interaction.user.tag

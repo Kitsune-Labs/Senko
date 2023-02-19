@@ -41,7 +41,7 @@ export default {
 					description: `${Icons.hojicha}  ${randomArrayItem(Responses)}`,
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/drink.png"
+						url: "https://cdn.senko.gg/public/senko/drink.png"
 					}
 				}
 			]
@@ -60,7 +60,7 @@ export default {
 
 		if (userData.RateLimits.Drink_Rate.Amount >= 5) {
 			MessageStruct.embeds[0]!.description = `**${randomArrayItem(NoMore).replace("_USER_", interaction.user.username)}**\n\n${randomArrayItem(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(userData.RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-			MessageStruct.embeds[0]!.thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomArrayItem(["huh", "think"])}.png`;
+			MessageStruct.embeds[0]!.thumbnail.url = `https://cdn.senko.gg/public/senko/${randomArrayItem(["huh", "think"])}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}

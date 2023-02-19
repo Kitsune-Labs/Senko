@@ -70,7 +70,7 @@ export default {
 			fields: [],
 			color: senkoClient.api.Theme.light,
 			thumbnail: {
-				url: "https://assets.senkosworld.com/media/senko/package.png"
+				url: "https://cdn.senko.gg/public/senko/package.png"
 			}
 		};
 

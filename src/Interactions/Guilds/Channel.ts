@@ -74,7 +74,7 @@ export default {
 						description: `${Channels[0] ? Channels.map(i => ` <#${i}>`) : "every channel"}`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/package.png"
+							url: "https://cdn.senko.gg/public/senko/package.png"
 						}
 					}
 				]
@@ -93,7 +93,7 @@ export default {
 						title: "Oh dear...",
 						description: "It appears that this channel is not a text channel!",
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/heh.png" }
 					}
 				]
 			});
@@ -104,7 +104,7 @@ export default {
 						title: "Silly!",
 						description: "This channel has already been added!",
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 					}
 				]
 			});
@@ -122,7 +122,7 @@ export default {
 						description: `People can now use my commands in ${channel}!`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/talk.png"
+							url: "https://cdn.senko.gg/public/senko/talk.png"
 						}
 					}
 				]
@@ -140,7 +140,7 @@ export default {
 						title: "Lets see...",
 						description: "I can't seem to find this channel in my list!",
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/talk.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 					}
 				]
 			});
@@ -158,7 +158,7 @@ export default {
 						description: `I have removed ${channel} as per your request`,
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/smile2.png"
+							url: "https://cdn.senko.gg/public/senko/smile2.png"
 						}
 					}
 				]
@@ -175,7 +175,7 @@ export default {
 						title: "Lets see...",
 						description: "I can't find any channels to remove!",
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
 					}
 				]
 			});
@@ -187,7 +187,7 @@ export default {
 						description: `${Channels.map(i => `<#${i}>`)}\n\nThis **cannot** be undone`,
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/nervous.png"
+							url: "https://cdn.senko.gg/public/senko/nervous.png"
 						}
 					}
 				],
@@ -210,7 +210,7 @@ export default {
 						title: "Lets see...",
 						description: "I can't find any channels to remove!",
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
 					}
 				]
 			});
@@ -233,7 +233,7 @@ export default {
 						title: "Lets see...",
 						description: "I can't find any deleted channels to remove!",
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/smile2.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
 					}
 				]
 			});
@@ -249,7 +249,7 @@ export default {
 						description: `I have found ${removed_channels > 1 ? " channel" : "channels"} that no longer exist${removed_channels > 1 ? " s" : ""} and have removed them!`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/talk.png"
+							url: "https://cdn.senko.gg/public/senko/talk.png"
 						}
 					}
 				]

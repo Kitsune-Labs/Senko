@@ -69,7 +69,7 @@ export default {
 						title: `${Icons.exclamation}  All clean`,
 						description: `${user.tag} doesn't have any warns!`,
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/book.png" }
 					}
 				]
 			});

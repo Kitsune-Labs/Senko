@@ -21,7 +21,7 @@ export default {
 					description: `**${randomArrayItem(Responses).replace("_USER_", interaction.user.username)}**`,
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/cuddle.png"
+						url: "https://cdn.senko.gg/public/senko/cuddle.png"
 					}
 				}
 			]

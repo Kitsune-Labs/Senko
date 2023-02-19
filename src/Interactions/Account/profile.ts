@@ -48,7 +48,7 @@ export default {
 					// \n${Icons.medal}  **${userData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
 					color: parseInt(userData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || senkoClient.api.Theme.light,
 					image: {
-						url: `https://assets.senkosworld.com/media/banners/${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`
+						url: `https://cdn.senko.gg/public/banners/${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`
 					},
 					thumbnail: {
 						url: User.displayAvatarURL()

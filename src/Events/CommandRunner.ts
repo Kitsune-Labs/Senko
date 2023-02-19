@@ -25,7 +25,7 @@ export default class {
 			const superGuildData = await fetchSuperGuild(interaction.guild);
 			const accountData = await fetchSuperUser(interaction.user);
 
-			if (!LoadedInteractionCommand) return interaction.reply({ embeds: [{ title: "Woops!", description: `I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color: SenkoClient.api.Theme.dark, thumbnail: { url: "https://assets.senkosworld.com/media/senko/heh.png" } }], ephemeral: true });
+			if (!LoadedInteractionCommand) return interaction.reply({ embeds: [{ title: "Woops!", description: `I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color: SenkoClient.api.Theme.dark, thumbnail: { url: "https://cdn.senko.gg/public/senko/heh.png" } }], ephemeral: true });
 
 			if (dataConfig.OutlawedUsers[interaction.member.id] && !LoadedInteractionCommand.whitelist) return interaction.reply({
 				embeds: [{
@@ -33,7 +33,7 @@ export default class {
 					description: "You have been banished from using the Senko Bot for breaking our rules.",
 					color: SenkoClient.api.Theme.dark_red,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/pout.png"
+						url: "https://cdn.senko.gg/public/senko/pout.png"
 					}
 				}],
 				ephemeral: true
@@ -81,7 +81,7 @@ export default class {
 					description: "It looks like there was an issue retrieving data, please try again later!",
 					color: SenkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}],
 				ephemeral: true
@@ -94,7 +94,7 @@ export default class {
 						description: `${interaction.guild.name} has requested you use ${superGuildData.Channels.map(i=>`<#${i}>`)}!`,
 						color: SenkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/heh.png"
+							url: "https://cdn.senko.gg/public/senko/heh.png"
 						}
 					}],
 					ephemeral: true
@@ -162,7 +162,7 @@ export default class {
 						description: `I seem to have dropped ${LoadedInteractionCommand.name}, I will attempt to fix it please come back soon!`,
 						color: SenkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/heh.png"
+							url: "https://cdn.senko.gg/public/senko/heh.png"
 						}
 					}],
 					ephemeral: true
@@ -176,7 +176,7 @@ export default class {
 
 				error(err.stack.toString());
 
-				if (process.env["NIGHTLY"] !== "true") SenkoClient.api.statusLog.send({
+				SenkoClient.api.statusLog.send({
 					content: "<@609097445825052701>",
 					embeds: [{
 						title: "Senko - Command Error",

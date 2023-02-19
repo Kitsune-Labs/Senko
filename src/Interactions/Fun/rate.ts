@@ -25,7 +25,7 @@ export default {
 					description: `I rate **${Item}** a ${Math.floor(Math.random() * 10)}/10!`,
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/think.png"
+						url: "https://cdn.senko.gg/public/senko/think.png"
 					}
 				}
 			]
@@ -35,7 +35,7 @@ export default {
 			MessageBuild.embeds[0]!.title = "I don't need to think!";
 			MessageBuild.embeds[0]!.description = "I'm obviously a 10/10!";
 
-			MessageBuild.embeds[0]!.thumbnail.url = "https://assets.senkosworld.com/media/senko/bless.png";
+			MessageBuild.embeds[0]!.thumbnail.url = "https://cdn.senko.gg/public/senko/bless.png";
 		}
 
 		interaction.reply(MessageBuild);

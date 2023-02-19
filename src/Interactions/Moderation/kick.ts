@@ -36,7 +36,7 @@ export default {
 					description: "You must be able to kick members to use this!",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}
 			],
@@ -50,7 +50,7 @@ export default {
 					description: "It looks like I can't kick members! (Make sure I have the \"Kick Members\" permission)",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}
 			],

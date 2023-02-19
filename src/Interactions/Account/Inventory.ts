@@ -40,7 +40,7 @@ export default {
 					title: `${Icons.exclamation} It's empty!`,
 					description: "We should probably buy some stuff to fill it up",
 					color: senkoClient.api.Theme.dark,
-					thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_think.png" }
+					thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_think.png" }
 				}
 			],
 			ephemeral: true

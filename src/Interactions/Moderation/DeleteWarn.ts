@@ -27,7 +27,7 @@ export default {
 					description: "You must be able to moderate members to use this!",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}
 			],
@@ -59,7 +59,7 @@ export default {
 								title: `One of your warns has been deleted in ${interaction.guild!.name}!`,
 								description: `Here is some info about what warn was deleted\nWarn id: **${warnId}**\nWarn reason: ${warn.reason}\nWarn note: ${warn.note}`,
 								color: senkoClient.api.Theme.light,
-								thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/book.png" }
 							}
 						]
 					}).catch();
@@ -70,7 +70,7 @@ export default {
 								title: "All done!",
 								description: `I have deleted warn **${warnId}** from **${warn.userTag}**\n\n> ${warn.reason}\n> ${warn.note}`,
 								color: senkoClient.api.Theme.light,
-								thumbnail: { url: "https://assets.senkosworld.com/media/senko/book.png" }
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/book.png" }
 							}
 						]
 					});
@@ -84,7 +84,7 @@ export default {
 					title: "I looked around",
 					description: `But I cannot find a warning that has **${warnId}** for it's ID...`,
 					color: senkoClient.api.Theme.dark,
-					thumbnail: { url: "https://assets.senkosworld.com/media/senko/think.png" }
+					thumbnail: { url: "https://cdn.senko.gg/public/senko/think.png" }
 				}
 			]
 		});

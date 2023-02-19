@@ -111,7 +111,7 @@ export async function fetchLevel(user: User): Promise < any > {
 	return (await fetchSuperUser(user)) !.LocalUser.accountConfig.level;
 }
 
-export async function fetchAllGuilds(): Promise <GuildData[]> {
+export async function fetchAllGuilds(): Promise <GuildData[] | null> {
 	const { data } = await Supabase.from("Guilds").select("*");
 
 	return data as GuildData[];

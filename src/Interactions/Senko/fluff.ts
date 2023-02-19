@@ -25,7 +25,7 @@ export default {
 		if (userData.RateLimits.Fluff_Rate.Amount >= 50) return interaction.followUp({
 			embeds: [{
 				description: locale.RateLimit.replace("_TIME_", `<t:${Math.floor((userData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R>`), //`I don't want to right now! W-We can <t:${Math.floor((userData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
-				thumbnail: { url: "https://assets.senkosworld.com/media/senko/upset2.png" },
+				thumbnail: { url: "https://cdn.senko.gg/public/senko/upset2.png" },
 				color: senkoClient.api.Theme.light
 			}]
 		});
@@ -45,7 +45,7 @@ export default {
 				description: randomArray(locale.Responses),
 				color: senkoClient.api.Theme.light,
 				thumbnail: {
-					url: `https://assets.senkosworld.com/media/senko/${randomArray(["fluffed", "fluffed2", "pout"])}.png`
+					url: `https://cdn.senko.gg/public/senko/${randomArray(["fluffed", "fluffed2", "pout"])}.png`
 				}
 			}]
 		};
@@ -54,12 +54,12 @@ export default {
 			addYen(interaction.user, 10);
 
 			// @ts-expect-error - TS says that "embeds[0].description" may be undefined, even though its right above it
-			MessageStruct.embeds[0].description += locale.YenAwarded.replace("_AMOUNT_", "10"); // `\n\n— ${Icons.yen}  10x added for interaction`;
+			MessageStruct.embeds[0].description += locale.general.YenAwarded.replace("_AMOUNT_", "10"); // `\n\n— ${Icons.yen}  10x added for interaction`;
 		}
 
 		if (randomNumber(500) < 5) {
 			// @ts-expect-error - TS says that "embeds[0].description" may be undefined, even though its right above it
-			MessageStruct.embeds[0].description += locale.TofuAwarded.replace("_AMOUNT_", "1"); // `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
+			MessageStruct.embeds[0].description += locale.general.TofuAwarded.replace("_AMOUNT_", "1"); // `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
 			userData.LocalUser.profileConfig.Currency.Tofu++;
 			await updateSuperUser(interaction.user, {
 				LocalUser: userData.LocalUser

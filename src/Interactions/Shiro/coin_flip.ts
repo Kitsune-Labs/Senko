@@ -37,7 +37,7 @@ export default {
 					description: "Shiro flipped the coin and we're now anticipating the outcome.",
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/shiro/sneak1.png"
+						url: "https://cdn.senko.gg/public/shiro/sneak1.png"
 					}
 				}
 			],
@@ -65,7 +65,7 @@ export default {
 						description: "The coin flipped and the outcome is...\n\nA tie!?!?",
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/surprised1.png"
+							url: "https://cdn.senko.gg/public/shiro/surprised1.png"
 						}
 					}
 				]
@@ -80,7 +80,7 @@ export default {
 						description: "The coin flipped and the outcome is...\n\nShiro won...",
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/superior.png"
+							url: "https://cdn.senko.gg/public/shiro/superior.png"
 						}
 					}
 				]
@@ -96,7 +96,7 @@ export default {
 						description: `The coin flipped and the outcome is...\n\nYou won!\n\n— ${Icons.yen}  30x added`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/shiro/pout1.png"
+							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}
 					}
 				]

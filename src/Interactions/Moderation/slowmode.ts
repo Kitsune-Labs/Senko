@@ -47,7 +47,7 @@ export default {
 					description: "You must be able to manage channels to use this!",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/huh.png"
+						url: "https://cdn.senko.gg/public/senko/huh.png"
 					}
 				}
 			],
@@ -61,7 +61,7 @@ export default {
 					description: "It looks like I can't manage channels! (Make sure I have the \"Manage Channels\" permission)",
 					color: senkoClient.api.Theme.dark,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/heh.png"
+						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
 				}
 			],
@@ -84,7 +84,7 @@ export default {
 							title: `${Icons.exclamation} Alright dear!`,
 							description: `I've set the channel slowmode to ${time} seconds!`,
 							color: senkoClient.api.Theme.light,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/hat_tip.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_tip.png" }
 						}
 					],
 					ephemeral: true
@@ -100,7 +100,7 @@ export default {
 							title: `${Icons.exclamation} Alright dear!`,
 							description: "I've removed the channel slowmode!",
 							color: senkoClient.api.Theme.light,
-							thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 						}
 					],
 					ephemeral: true

@@ -48,7 +48,7 @@ export default {
 			embeds: [
 				{
 					description: locale.RateLimit.replace("_TIME_", `<t:${Math.floor((userData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R>`), //`I don't want to right now! W-We can <t:${Math.floor((userData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
-					thumbnail: { url: "https://assets.senkosworld.com/media/senko/upset2.png" },
+					thumbnail: { url: "https://cdn.senko.gg/public/senko/upset2.png" },
 					color: senkoClient.api.Theme.light
 				}
 			]
@@ -74,7 +74,7 @@ export default {
 					description: randomArrayItem(locale.Responses),
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: `https://assets.senkosworld.com/media/senko/${randomArrayItem(["fluffed", "fluffed2", "pout"])}.png`
+						url: `https://cdn.senko.gg/public/senko/${randomArrayItem(["fluffed", "fluffed2", "pout"])}.png`
 					}
 				}
 			]

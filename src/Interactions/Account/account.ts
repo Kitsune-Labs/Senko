@@ -5,7 +5,7 @@ import jszip from "jszip";
 import { fetchAllGuilds } from "../../API/super";
 import type { GuildWarn } from "../../types/SupabaseTypes";
 import { Bitfield } from "bitfields";
-import type { DJSEmbedField } from "../../types/Discord.js";
+import type { DJSEmbedField } from "../../types/Discord.js.js";
 
 export default {
 	name: "account",
@@ -51,7 +51,7 @@ export default {
 			var data = await fetchAllGuilds();
 
 			// @ts-expect-error
-			if (data.length == 0 || data == null || !data[interaction.guildId]) {
+			if (data.length == 0 || data == null) {
 				interaction.followUp({ content: "There was an error in fetching guild data!", ephemeral: true });
 				return;
 			}
@@ -100,7 +100,7 @@ export default {
 						title: "Data Removal",
 						description: "Please confirm that you want to delete all your data.\n\n**⚠️ This is irreversible! ⚠️**",
 						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/upset2.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/upset2.png" }
 					}
 				],
 				components: [

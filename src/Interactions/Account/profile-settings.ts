@@ -39,7 +39,7 @@ export default {
 			embeds: [
 				{
 					title: "Profile Settings",
-					description: `Here you can edit your profile card settings!\n\n**Title**: ${userData.LocalUser.profileConfig.title && ShopItems[userData.LocalUser.profileConfig.title] ? ShopItems[userData.LocalUser.profileConfig.title].title : "None!"}\n**Banner**: [${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].name}](${`https://assets.senkosworld.com/media/banners/${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`})\n**Card Color**: ${currentColor || "Default"}\n**About Me**: ${userData.LocalUser.profileConfig.aboutMe || "Not Set!"}`,
+					description: `Here you can edit your profile card settings!\n\n**Title**: ${userData.LocalUser.profileConfig.title && ShopItems[userData.LocalUser.profileConfig.title] ? ShopItems[userData.LocalUser.profileConfig.title].title : "None!"}\n**Banner**: [${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].name}](${`https://cdn.senko.gg/public/banners/${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`})\n**Card Color**: ${currentColor || "Default"}\n**About Me**: ${userData.LocalUser.profileConfig.aboutMe || "Not Set!"}`,
 					color: senkoClient.api.Theme.light
 				}
 			],

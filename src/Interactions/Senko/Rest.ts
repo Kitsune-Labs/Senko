@@ -35,7 +35,7 @@ export default {
 					description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", interaction.user.username)}*`,
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/cuddle.png"
+						url: "https://cdn.senko.gg/public/senko/cuddle.png"
 					}
 				}
 			]
@@ -55,7 +55,7 @@ export default {
 
 		if (userData.RateLimits.Rest_Rate.Amount >= 5) {
 			MessageStruct.embeds[0]!.description = `${randomArrayItem(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(userData.RateLimits.Rest_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
-			MessageStruct.embeds[0]!.thumbnail.url = `https://assets.senkosworld.com/media/senko/${randomArrayItem(["huh", "think"])}.png`;
+			MessageStruct.embeds[0]!.thumbnail.url = `https://cdn.senko.gg/public/senko/${randomArrayItem(["huh", "think"])}.png`;
 
 			return interaction.followUp(MessageStruct);
 		}

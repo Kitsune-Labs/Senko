@@ -25,7 +25,7 @@ export default {
 						title: "You don't own any chapters!",
 						description: "You can buy them when they're avaliable in the shop!",
 						color: senkoClient.api.Theme.light,
-						thumbnail: { url: "https://assets.senkosworld.com/media/senko/what.png" }
+						thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 					}
 				],
 				ephemeral: true

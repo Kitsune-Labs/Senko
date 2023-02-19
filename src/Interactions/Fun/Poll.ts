@@ -97,7 +97,7 @@ export default {
 					description: `**${Topic}**\n\n${OptionString}\n\nWhat will you pick?`,
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
-						url: "https://assets.senkosworld.com/media/senko/hat_think.png"
+						url: "https://cdn.senko.gg/public/senko/hat_think.png"
 					}
 				}
 			],

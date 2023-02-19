@@ -27,7 +27,7 @@ export default class {
 							description: "This item is out of stock right now check back next time!",
 							color: senkoClient.api.Theme.dark,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/heh.png"
+								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
 						}
 					],
@@ -44,7 +44,7 @@ export default class {
 							description: `You may only have **${shopItem.max}** total!`,
 							color: senkoClient.api.Theme.dark,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/heh.png"
+								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
 						}
 					],
@@ -58,7 +58,7 @@ export default class {
 							description: "You don't have enough Yen!",
 							color: senkoClient.api.Theme.dark,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/heh.png"
+								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
 						}
 					],
@@ -73,7 +73,7 @@ export default class {
 							description: `Are you sure you want to purchase **${shopItem.name}** for ${Icons.yen} **${shopItem.price}**?\nYou will have ${Icons.yen} **${accountData!.LocalUser.profileConfig.Currency.Yen - shopItem.price}** left`,
 							color: senkoClient.api.Theme.light,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/package.png"
+								url: "https://cdn.senko.gg/public/senko/package.png"
 							}
 						}
 					],
@@ -106,7 +106,7 @@ export default class {
 							description: `Thanks for purchasing **${shopItem.name}** for ${Icons.yen} ${shopItem.price}x!`,
 							color: senkoClient.api.Theme.dark,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/tofu.png"
+								url: "https://cdn.senko.gg/public/senko/tofu.png"
 							}
 						}
 					],
@@ -143,7 +143,7 @@ export default class {
 							description: "I'll put back your item and hopefully you can buy it next time!",
 							color: senkoClient.api.Theme.dark,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/smile.png"
+								url: "https://cdn.senko.gg/public/senko/smile.png"
 							}
 						}
 					],
@@ -185,7 +185,7 @@ export default class {
 				if (shopItem.banner) {
 					MessageStructure.embeds[0]!.image = { url: `attachment://${shopItem.banner}` };
 					// @ts-ignore
-					MessageStructure.files.push({ attachment: `https://assets.senkosworld.com/media/banners/${shopItem.banner}`, name: shopItem.banner });
+					MessageStructure.files.push({ attachment: `https://cdn.senko.gg/public/banners/${shopItem.banner}`, name: shopItem.banner });
 				}
 
 				interaction.update(MessageStructure);

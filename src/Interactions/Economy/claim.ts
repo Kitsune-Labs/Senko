@@ -43,7 +43,7 @@ export default {
 						description: `I've already given you your daily yen, come back to me <t:${Math.floor((DailyTimeStamp + DailyCooldown) / 1000)}:R>!`,
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/heh.png"
+							url: "https://cdn.senko.gg/public/senko/heh.png"
 						}
 					}
 				],
@@ -65,7 +65,7 @@ export default {
 						description: `Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 200x added`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/happy.png"
+							url: "https://cdn.senko.gg/public/senko/happy.png"
 						}
 					}
 				]
@@ -83,7 +83,7 @@ export default {
 						description: `From what I can remember i've given you your weekly yen, come back <t:${Math.floor((WeeklyTimeStamp + WeeklyCooldown) / 1000)}:R>!`,
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/hat_think.png"
+							url: "https://cdn.senko.gg/public/senko/hat_think.png"
 						}
 					}
 				],
@@ -105,7 +105,7 @@ export default {
 						description: `Here is your Yen for this week; Now spend it wisely!\n\n— ${Icons.yen} 1400x added`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/happy.png"
+							url: "https://cdn.senko.gg/public/senko/happy.png"
 						}
 					}
 				]
@@ -124,7 +124,7 @@ export default {
 							description: "I have these items for you to have!\n",
 							color: senkoClient.api.Theme.light,
 							thumbnail: {
-								url: "https://assets.senkosworld.com/media/senko/package.png"
+								url: "https://cdn.senko.gg/public/senko/package.png"
 							}
 						}
 					]
@@ -153,7 +153,7 @@ export default {
 						description: "I've scourged around and couldn't find anything",
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							url: "https://assets.senkosworld.com/media/senko/smile2.png"
+							url: "https://cdn.senko.gg/public/senko/smile2.png"
 						}
 					}
 				]

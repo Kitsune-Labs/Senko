@@ -11,6 +11,11 @@ export default {
 	start: async ({senkoClient, interaction}) => {
 		Paginate(interaction, [
 			{
+				title: "Senko v5.0.0",
+				description: "I'm excited to announce the arrival of version 5! There aren't many small changes or additions in this version but it does have a big change...\n\nVersion 5 marks the day Senko has been rewritten in typescript!\n\nI have also reverted the removal of the timestamp in the deleted message embed\nAnd finally, a new domain has been created for Senko and can be found at https://senko.gg/ !\nFinally, an issue with timeout logs has also been fixed",
+				color: senkoClient.api.Theme.light
+			},
+			{
 				title: "Senko v4.3.0",
 				description: "> **Senko**\nFixed a possible issue where deleted messages may not be sent to a logging channel due to the channel not being cached. > **Updated Commands**\n**/server message-logging**\nAdded advanced support to allow separate channels for deleted/edited messages\n\n**/warn**\nAn issue with warning members when no user roles were made/given should now be fixed\n\n**/whois**\nFixed an issue that would break the interaction if the user has a banner",
 				color: senkoClient.api.Theme.light
