@@ -1,7 +1,7 @@
 {
     "version": "5.0.0",
     "scripts": {
-        "start": "ts-node  ./comp/SenkoClient.js",
+        "start": "ts-node ./src/SenkoClient.ts",
         "dev": "clear; NIGHTLY='true' ts-node ./src/SenkoClient.ts",
         "merge": "node ./src/Data/Market/Merge.js",
         "tsc": "clear; tsc -b",
