@@ -1,5 +1,5 @@
 import type { SenkoClientTypes } from "../types/AllTypes";
-import type { Attachment, Sticker, TextChannel } from "discord.js";
+import type { Attachment, GuildTextBasedChannel, Sticker } from "discord.js";
 import { Colors, Message } from "discord.js";
 import { clean } from "../API/Master";
 import { v4 as uuidv4 } from "uuid";
@@ -127,7 +127,7 @@ export default class {
 			const guildData = await fetchSuperGuild(oldMessage.guild);
 			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) return print("Message logging is disabled for this Guild.");
 
-			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null) as TextChannel | null;
+			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null) as GuildTextBasedChannel | null;
 			const caseId = uuidv4().slice(0, 8);
 			const linkedFiles: Array<any> = [];
 			const emojis = [];

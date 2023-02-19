@@ -1,8 +1,7 @@
 import { Bitfield } from "bitfields";
 import { deleteSuperGuild, fetchSuperGuild } from "../API/super";
 import bits from "../API/Bits.json";
-import { Colors, PermissionFlagsBits, AuditLogEvent } from "discord.js";
-import type { TextChannel }	from "discord.js";
+import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel } from "discord.js";
 import { warn, error } from "@kitsune-labs/utilities";
 import type { SenkoClientTypes } from "../types/AllTypes";
 
@@ -43,7 +42,7 @@ export default class {
 			var guildFlags = Bitfield.fromHex(guildData!.flags);
 
 			if (guildData!.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
-				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as TextChannel;
+				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel;
 
 				loggingChannel.send({
 					embeds: [
@@ -80,7 +79,7 @@ export default class {
 			var guildFlags = Bitfield.fromHex(guildData!.flags);
 
 			if (guildData!.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
-				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as TextChannel;
+				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel;
 
 				loggingChannel.send({
 					embeds: [
@@ -109,7 +108,7 @@ export default class {
 			var guildData = await fetchSuperGuild(member.guild);
 
 			if (guildData!.MemberLogs) {
-				const loggingChannel = await member.guild.channels.fetch(guildData!.MemberLogs) as TextChannel;
+				const loggingChannel = await member.guild.channels.fetch(guildData!.MemberLogs) as GuildTextBasedChannel;
 
 				loggingChannel.send({
 					embeds: [
@@ -184,7 +183,7 @@ export default class {
 			if (!newMember.guild.members!.me!.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
 			const guildData = await fetchSuperGuild(newMember.guild);
 			const guildFlags = Bitfield.fromHex(guildData!.flags);
-			const actionLoggingChannel = guildData!.ActionLogs ? await newMember.guild.channels.fetch(guildData!.ActionLogs) as TextChannel : null;
+			const actionLoggingChannel = guildData!.ActionLogs ? await newMember.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel : null;
 
 			if (!actionLoggingChannel) return warn("Action logs are not set for this guild");
 			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return warn("Timeout logs are disabled for this guild");

@@ -95,6 +95,8 @@ SenkoClient.once("ready", async () => {
 	// @ts-expect-error
 	if (process.env["NIGHTLY"] === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
+	await commands.set([]);
+
 	// return commands.set([]);
 
 	for (const file of readdirSync("./src/Events/").filter(file => file.endsWith(".ts" || ".js"))) {

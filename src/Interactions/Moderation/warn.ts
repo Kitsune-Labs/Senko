@@ -1,5 +1,5 @@
 import type { SenkoCommand } from "../../types/AllTypes";
-import type { GuildMember, TextChannel } from "discord.js";
+import { ChannelType, GuildMember, GuildTextBasedChannel } from "discord.js";
 import { PermissionFlagsBits as Permissions, ApplicationCommandOptionType as CommandOption, Colors } from "discord.js";
 import Icons from "../../Data/Icons.json";
 import { updateSuperGuild } from "../../API/super";
@@ -113,8 +113,9 @@ export default {
 		await updateSuperGuild(interaction.guild!, { warns: warns });
 
 		if (ActionLogs) {
-			const channel = await interaction.guild!.channels.fetch(ActionLogs) as TextChannel;
+			const channel = await interaction.guild!.channels.fetch(ActionLogs) as GuildTextBasedChannel;
 
+			if (channel.type !== ChannelType.GuildText) return;
 			if (!channel) return messageStruct.content = "I do not have access to the Action Logs channel or it does not exist!";
 
 			channel.send({
