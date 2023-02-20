@@ -95,7 +95,7 @@ SenkoClient.once("ready", async () => {
 	// @ts-expect-error
 	if (process.env["NIGHTLY"] === "true") commands = SenkoClient.guilds.cache.get("777251087592718336").commands;
 
-	await commands.set([]);
+	// await commands.set([]);
 
 	// return commands.set([]);
 
@@ -153,8 +153,8 @@ SenkoClient.once("ready", async () => {
 		error(err);
 	});
 
-	if (process.env["NIGHTLY"] !== "true") {
-		const devTools = [];
+	if (process.env["NIGHTLY"] === "true") {
+		const devTools: any = [];
 		for (const file of readdirSync("./src/DevTools/")) {
 			const pull = require(`./DevTools/${file}`) as SenkoCommand;
 
@@ -174,8 +174,11 @@ SenkoClient.once("ready", async () => {
 			devTools.push(commandData);
 		}
 
-		// @ts-expect-error
-		await SenkoClient.guilds.cache.get("777251087592718336").commands.set(devTools);
+
+		SenkoClient.guilds.fetch("777251087592718336").then(async guild => {
+			await guild.commands.set(devTools);
+		});
+		// await SenkoClient.guilds.cache.get("777251087592718336").commands.set(devTools);
 
 		print("Developer Tools Ready");
 	}

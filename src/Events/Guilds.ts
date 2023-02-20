@@ -1,7 +1,7 @@
 import { Bitfield } from "bitfields";
 import { deleteSuperGuild, fetchSuperGuild } from "../API/super";
 import bits from "../API/Bits.json";
-import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel } from "discord.js";
+import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel, ChannelType } from "discord.js";
 import { warn, error } from "@kitsune-labs/utilities";
 import type { SenkoClientTypes } from "../types/AllTypes";
 
@@ -44,6 +44,8 @@ export default class {
 			if (guildData!.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
 				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel;
 
+				if (loggingChannel.type !== ChannelType.GuildText) return warn("Action Log channel is not a text channel.");
+
 				loggingChannel.send({
 					embeds: [
 						{
@@ -81,6 +83,8 @@ export default class {
 			if (guildData!.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
 				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel;
 
+				if (loggingChannel.type !== ChannelType.GuildText) return warn("Action Log channel is not a text channel.");
+
 				loggingChannel.send({
 					embeds: [
 						{
@@ -110,6 +114,8 @@ export default class {
 			if (guildData!.MemberLogs) {
 				const loggingChannel = await member.guild.channels.fetch(guildData!.MemberLogs) as GuildTextBasedChannel;
 
+				if (loggingChannel.type !== ChannelType.GuildText) return warn("Action Log channel is not a text channel.");
+
 				loggingChannel.send({
 					embeds: [
 						{
@@ -133,7 +139,7 @@ export default class {
 			const actionLoggingChannel = guildData!.MemberLogs ? await member.guild.channels.fetch(guildData!.MemberLogs) : null;
 
 			// @ts-ignore
-			if (memberLoggingChannel) memberLoggingChannel.send({
+			if (memberLoggingChannel && memberLoggingChannel.type !== ChannelType.GuildText) memberLoggingChannel.send({
 				embeds: [
 					{
 						title: "Kitsune Left",
@@ -154,7 +160,7 @@ export default class {
 			const kickLog = fetchedLogs.entries.first();
 			if (!kickLog || kickLog.createdAt < member.joinedAt! || kickLog.executor!.id === senkoClient.user!.id || kickLog.target!.id !== member.id) return;
 
-			if (actionLoggingChannel && !guildFlags.get(bits.ActionLogs.KickActionDisabled)) {
+			if (actionLoggingChannel && !guildFlags.get(bits.ActionLogs.KickActionDisabled) && actionLoggingChannel.type !== ChannelType.GuildText) {
 				// @ts-ignore
 				actionLoggingChannel.send({
 					embeds: [
@@ -194,7 +200,7 @@ export default class {
 			if (oldMember.communicationDisabledUntilTimestamp === newMember.communicationDisabledUntilTimestamp) return warn("Member is not timed out, or the timeout is the same");
 			if (!audit || audit.changes[0]!.key !== "communication_disabled_until" || audit.target!.id !== newMember.id) return;
 
-			if (newMember.communicationDisabledUntilTimestamp === null && guildData!.ActionLogs) {
+			if (newMember.communicationDisabledUntilTimestamp === null && guildData!.ActionLogs && actionLoggingChannel.type !== ChannelType.GuildText) {
 				actionLoggingChannel.send({
 					embeds: [
 						{
@@ -211,7 +217,7 @@ export default class {
 				});
 			}
 
-			if (newMember.communicationDisabledUntilTimestamp != null && guildData!.ActionLogs) {
+			if (newMember.communicationDisabledUntilTimestamp != null && guildData!.ActionLogs && actionLoggingChannel.type !== ChannelType.GuildText) {
 				actionLoggingChannel.send({
 					embeds: [
 						{
