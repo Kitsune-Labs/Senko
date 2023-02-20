@@ -201,6 +201,7 @@ export default class {
 			if (!audit || audit.changes[0]!.key !== "communication_disabled_until" || audit.target!.id !== newMember.id) return;
 
 			if (newMember.communicationDisabledUntilTimestamp === null && guildData!.ActionLogs && actionLoggingChannel.type !== ChannelType.GuildText) {
+				// @ts-ignore
 				actionLoggingChannel.send({
 					embeds: [
 						{
@@ -218,6 +219,7 @@ export default class {
 			}
 
 			if (newMember.communicationDisabledUntilTimestamp != null && guildData!.ActionLogs && actionLoggingChannel.type !== ChannelType.GuildText) {
+				// @ts-ignore
 				actionLoggingChannel.send({
 					embeds: [
 						{
