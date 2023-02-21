@@ -98,7 +98,7 @@ export default class {
 						}
 					}
 
-					if (!Selection2[1]) return interaction.followUp({
+					if (!Selection2[1]) return interaction.reply({
 						embeds: [
 							{
 								title: "You don't own any banners!",
@@ -145,7 +145,7 @@ export default class {
 						}
 					}
 
-					if (!Selection3[1]) return interaction.followUp({
+					if (!Selection3[1]) return interaction.reply({
 						embeds: [
 							{
 								title: "You don't own any card colors!",
