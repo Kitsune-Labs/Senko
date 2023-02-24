@@ -2,7 +2,8 @@ dev
 Github
 .vscode
 .github
-src/Data/LocalSave
+src/Data/LocalSave/
+src/Data/Market/
 src/test
 .eslintrc
 .gitattributes

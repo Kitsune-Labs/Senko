@@ -33,7 +33,7 @@ export default {
 	],
 	whitelist: true,
 	start: async ({senkoClient, interaction, guildData}) => {
-		let warns = guildData.warns;
+		let guildWarns = guildData.warns;
 		const ActionLogs = guildData.ActionLogs;
 		const flags = guildData.flags;
 
@@ -102,15 +102,13 @@ export default {
 			userDmd: false
 		};
 
-		if (user.id in warns) {
-			warns[user.id]!.push(warnStruct);
+		if (user.id in guildWarns) {
+			guildWarns[user.id]!.push(warnStruct);
 		} else {
-			warns = {
-				[user.id]: [warnStruct]
-			};
+			guildWarns[user.id] = [warnStruct];
 		}
 
-		await updateSuperGuild(interaction.guild!, { warns: warns });
+		await updateSuperGuild(interaction.guild!, { warns: guildWarns });
 
 		if (ActionLogs) {
 			const channel = await interaction.guild!.channels.fetch(ActionLogs) as GuildTextBasedChannel;

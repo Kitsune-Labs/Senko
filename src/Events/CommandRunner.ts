@@ -5,8 +5,9 @@ import { CommandInteractionOptionResolver, InteractionType, PermissionFlagsBits 
 import type { ApplicationCommand, Interaction, CommandInteraction } from "discord.js";
 import { existsSync } from "fs";
 
-import { print, error, randomNumber } from "@kitsune-labs/utilities";
+import { randomNumber } from "@kitsune-labs/utilities";
 import Icons from "../Data/Icons.json";
+import { winston } from "../SenkoClient";
 
 export const SenkoClientPermissions = [
 	PermissionFlagsBits.EmbedLinks,
@@ -25,7 +26,25 @@ export default class {
 			const superGuildData = await fetchSuperGuild(interaction.guild);
 			const accountData = await fetchSuperUser(interaction.user);
 
-			if (!LoadedInteractionCommand) return interaction.reply({ embeds: [{ title: "Woops!", description: `I can't seem to find "${interaction.commandName}", I will attempt to find it for you, come talk to me in a few minutes!`, color: SenkoClient.api.Theme.dark, thumbnail: { url: "https://cdn.senko.gg/public/senko/heh.png" } }], ephemeral: true });
+			if (!LoadedInteractionCommand) {
+				winston.log("warn", `User tried to run "${interaction.commandName}" but it doesn't exist in ${SenkoClient.api.Commands.keys}!`);
+
+				return interaction.reply({
+					embeds: [
+						{
+							title: "Oh dear...",
+							description: `It seems that ${interaction.commandName} has gone missing! I'll do my best to find it, please check back soon.`,
+							color: SenkoClient.api.Theme.dark,
+							thumbnail: {
+								url: "https://cdn.senko.gg/public/senko/heh.png"
+							}
+						}
+					],
+					ephemeral: true
+				});
+			}
+
+			const CommandTime = Date.now();
 
 			if (dataConfig.OutlawedUsers[interaction.member.id] && !LoadedInteractionCommand.whitelist) return interaction.reply({
 				embeds: [{
@@ -87,11 +106,12 @@ export default class {
 				ephemeral: true
 			});
 
+
 			if (superGuildData.Channels.length > 0 && !superGuildData.Channels.includes(interaction.channelId) && !LoadedInteractionCommand.usableAnywhere) {
 				const messageStruct1 = {
 					embeds: [{
 						title: "S-Sorry dear!",
-						description: `${interaction.guild.name} has requested you use ${superGuildData.Channels.map(i=>`<#${i}>`)}!`,
+						description: `${interaction.guild.name} has requested you use ${superGuildData.Channels.map(i => `<#${i}>`)}!`,
 						color: SenkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/senko/heh.png"
@@ -104,7 +124,7 @@ export default class {
 				return interaction.followUp(messageStruct1);
 			}
 
-			print(`Command Ran: ${interaction.commandName}`);
+			winston.log("info", `Running command "${interaction.commandName}"`);
 
 			//! Start level
 			let xp = accountData.LocalUser.accountConfig.level.xp;
@@ -158,8 +178,8 @@ export default class {
 			}).catch(err => {
 				const messageStruct = {
 					embeds: [{
-						title: "Woops!",
-						description: `I seem to have dropped ${LoadedInteractionCommand.name}, I will attempt to fix it please come back soon!`,
+						title: "Oh my...",
+						description: `It seems that ${LoadedInteractionCommand.name} had an error functioning correctly... Let me try to resolve the issue!`,
 						color: SenkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/senko/heh.png"
@@ -174,7 +194,7 @@ export default class {
 					interaction.reply(messageStruct);
 				}
 
-				error(err.stack.toString());
+				winston.info("error", `Command ${LoadedInteractionCommand.name} encountered an error: ${err}`);
 
 				SenkoClient.api.statusLog.send({
 					content: "<@609097445825052701>",
@@ -184,6 +204,8 @@ export default class {
 						color: SenkoClient.api.Theme.light
 					}]
 				});
+			}).finally(() => {
+				winston.log("info", `Command "${interaction.commandName}" finished in ${Date.now() - CommandTime}ms`);
 			});
 		});
 	}

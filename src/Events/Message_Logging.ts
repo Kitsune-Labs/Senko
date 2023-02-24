@@ -1,12 +1,13 @@
 import type { SenkoClientTypes } from "../types/AllTypes";
-import type { Attachment, GuildTextBasedChannel, Sticker } from "discord.js";
+import type { Attachment, Sticker } from "discord.js";
 import { Colors, Message } from "discord.js";
 import { clean } from "../API/Master";
 import { v4 as uuidv4 } from "uuid";
 import { fetchSuperGuild } from "../API/super";
 import fs from "fs";
 import axios from "axios";
-import { print, wait, fatal, error } from "@kitsune-labs/utilities";
+import { wait } from "@kitsune-labs/utilities";
+import { winston } from "../SenkoClient";
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
@@ -15,9 +16,15 @@ export default class {
 
 			const guildData = await fetchSuperGuild(message.guild);
 
-			if (!guildData) return fatal("Guild data not found!");
+			if (!guildData) {
+				winston.log("fatal", "Guild data not found!");
+				return;
+			}
 
-			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) return print("Message logging is disabled for this Guild.");
+			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) {
+				winston.log("info", "Message logging is disabled for this Guild.");
+				return;
+			}
 
 			const caseId = uuidv4().slice(0, 8);
 			const linkedFiles: string[] = [];
@@ -71,6 +78,7 @@ export default class {
 					}
 				}).then(async (response) => {
 					const fileId = `case-${caseId}_${attachment.name}`;
+
 					const fileWrite = await response.data.pipe(fs.createWriteStream(`./src/temp/${fileId}`));
 
 					await fileWrite.on("finish", async () => {
@@ -86,7 +94,8 @@ export default class {
 			try {
 				channelToSendTo = await message.guild.channels.fetch(guildData.AdvancedMessageLogging.message_deletions || guildData.MessageLogs);
 			} catch (err) {
-				return error(err);
+				winston.log("error", err);
+				return;
 			}
 
 			if (messageStructure.embeds[0]!.description.length >= 2048) {
@@ -125,9 +134,13 @@ export default class {
 			if (!oldMessage.guild || oldMessage.author!.bot || oldMessage.system || oldMessage.content === newMessage.content) return;
 
 			const guildData = await fetchSuperGuild(oldMessage.guild);
-			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) return print("Message logging is disabled for this Guild.");
+			if (!guildData) return;
+			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) {
+				winston.log("info", "Message logging is disabled for this Guild.");
+				return;
+			}
 
-			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null) as GuildTextBasedChannel | null;
+			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null) as any | null;
 			const caseId = uuidv4().slice(0, 8);
 			const linkedFiles: Array<any> = [];
 			const emojis = [];

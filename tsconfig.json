@@ -29,7 +29,7 @@
 		"./src/",
 		"./env.d.ts",
 		"./.env"
-, "src/Interactions/Senko/fluff.ts"	],
+	],
 	"exclude": [
 		"node_modules/",
 		"comp",

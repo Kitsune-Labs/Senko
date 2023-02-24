@@ -1,7 +1,52 @@
 import "dotenv/config";
-import type { ExtendedProcess, SenkoClientTypes, SenkoCommand } from "./types/AllTypes";
 
-import { print, warn, error, fatal } from "@kitsune-labs/utilities";
+import { format } from "winston";
+import * as Winston from "winston";
+const { printf } = format;
+
+Winston.addColors({
+	fatal: ["white", "bold", "bgRed"],
+	error: "red",
+	warn: "yellow",
+	info: "green",
+	debug: "blue",
+	trace: "magenta",
+	senko: "yellow"
+});
+
+export const winston = Winston.createLogger({
+	levels: {
+		senko: 0,
+		fatal: 1,
+		error: 2,
+		warn: 3,
+		info: 4,
+		debug: 5,
+		trace: 6
+	},
+
+	transports: [
+		new Winston.transports.Console({
+			format: format.combine(
+				format.timestamp({format: "HH:mm:ss"}),
+				format.colorize(),
+				format.errors({stack: true}),
+				printf(({ level, message, timestamp, stack }) => {
+					return `${timestamp} ${level}: ${stack || message}`;
+				})
+			)
+		}),
+		new Winston.transports.File({
+			format: format.combine(
+				format.timestamp({format: "MM:DD:YYYY HH:mm:ss"}),
+				format.json()
+			),
+			filename: `src/temp/combined-${Date.now()}.log`
+		})
+	]
+});
+
+import type { ExtendedProcess, SenkoClientTypes, SenkoCommand } from "./types/AllTypes";
 import { Client, Collection, PermissionsBitField, GatewayIntentBits as GatewayIntents, WebhookClient, Guild } from "discord.js";
 import { readdirSync } from "fs";
 
@@ -31,13 +76,14 @@ SenkoClient.setMaxListeners(20);
 if (process.env["NIGHTLY"] === "true") {
 	SenkoClient.login(process.env["NIGHTLY_TOKEN"]);
 
-	print("SENKO NIGHTLY Mode");
+	winston.log("senko", "SENKO NIGHTLY Mode");
 } else {
 	SenkoClient.login(process.env["TOKEN"]);
 
-	print("SENKO PRODUCTION Mode");
+	winston.log("senko", "SENKO PRODUCTION Mode");
 }
-console.time("Startup");
+
+const StartupTime = Date.now();
 
 Reflect.set(SenkoClient, "api", {
 	Commands: new Collection(),
@@ -48,16 +94,14 @@ Reflect.set(SenkoClient, "api", {
 	BitData: require("./API/Bits.json"),
 	loadedCommands: null,
 	// @ts-ignore
-	statusLog: new WebhookClient({url: process.env["STATUS_URL"]}),
-	SenkosWorld: async function(): Promise<Guild> {
+	statusLog: new WebhookClient({ url: process.env["STATUS_URL"] }),
+	SenkosWorld: async function (): Promise<Guild> {
 		return await SenkoClient.guilds.fetch("777251087592718336");
 	}
 });
 
-// print(`User Agent: ${SenkoClient.api.UserAgent}`);
 
-
-process.on("unhandledRejection", async (reason: any) =>{
+process.on("unhandledRejection", async (reason: any) => {
 	SenkoClient.api.statusLog.send({
 		content: "<@609097445825052701>",
 		embeds: [
@@ -69,10 +113,10 @@ process.on("unhandledRejection", async (reason: any) =>{
 		]
 	});
 
-	fatal(reason.stack.toString());
+	winston.log("fatal", reason.stack);
 });
 
-process.on("uncaughtException", async(reason: any)=>{
+process.on("uncaughtException", async (reason: any) => {
 	SenkoClient.api.statusLog.send({
 		content: "<@609097445825052701>",
 		embeds: [
@@ -84,11 +128,11 @@ process.on("uncaughtException", async(reason: any)=>{
 		]
 	});
 
-	error(reason);
+	winston.log("error", reason.stack);
 });
 
 SenkoClient.once("ready", async () => {
-	print("Senko Started");
+	winston.log("info", "Starting Senko...");
 
 	// @ts-expect-error
 	let commands = SenkoClient.application.commands;
@@ -104,13 +148,13 @@ SenkoClient.once("ready", async () => {
 		new eventModule.default().execute(SenkoClient);
 	}
 
-	print("Events ready");
+	winston.log("info", "Events ready");
 
 	const commandsToSet = [];
 
 	if (process.env["NIGHTLY"] !== "true") {
 		readdirSync("./src/Interactions/").forEach(async Folder => {
-			const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f =>f .endsWith(".ts" || ".js"));
+			const Interactions = readdirSync(`./src/Interactions/${Folder}/`).filter(f => f.endsWith(".ts" || ".js"));
 
 			for (const interact of Interactions) {
 				const pull = require(`./Interactions/${Folder}/${interact}`).default;
@@ -119,7 +163,7 @@ SenkoClient.once("ready", async () => {
 			}
 		});
 	} else {
-		warn("Development mode is enabled, no regular interactions will be loaded.");
+		winston.log("warn", "Development mode is enabled, no regular interactions will be loaded.");
 
 		for (const file of readdirSync("./src/DevInteractions/")) {
 			const pull = require(`./DevInteractions/${file}`).default;
@@ -148,9 +192,9 @@ SenkoClient.once("ready", async () => {
 	await commands.set(commandsToSet).then(async cmds => {
 		SenkoClient.api.loadedCommands = cmds;
 
-		print("Commands Ready");
+		winston.log("info", "Commands Ready");
 	}).catch(err => {
-		error(err);
+		winston.log("error", err);
 	});
 
 	if (process.env["NIGHTLY"] === "true") {
@@ -180,9 +224,9 @@ SenkoClient.once("ready", async () => {
 		});
 		// await SenkoClient.guilds.cache.get("777251087592718336").commands.set(devTools);
 
-		print("Developer Tools Ready");
+		winston.log("info", "Developer Tools Ready");
 	}
 
 	// require("./ServerApi/Server")(SenkoClient);
-	console.timeEnd("Startup");
+	winston.log("senko", `Ready in ${Date.now() - StartupTime}ms!`);
 });

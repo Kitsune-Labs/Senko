@@ -2,7 +2,7 @@ import type { Guild, User } from "discord.js";
 import type { ConfigTypes, GuildData, UserData } from "../types/SupabaseTypes";
 import { createClient } from "@supabase/supabase-js";
 import { Bitfield } from "bitfields";
-import { fatal } from "@kitsune-labs/utilities";
+import { winston } from "../SenkoClient";
 
 // @ts-ignore
 export const Supabase = createClient(process.env["SUPABASE_URL"], process.env["SUPABASE_KEY"], {
@@ -34,30 +34,31 @@ export async function fetchSuperGuild(guild: Guild, makeNewGuild = true): Promis
 	const { data, error } = await Supabase.from("Guilds").select("*").eq("guildId", guild.id);
 
 	if (error) {
-		fatal(error.message);
+		winston.log("fatal", `ERROR FETCHING GUILD DATA: ${error}`);
 		return null;
 	}
 
-	if (data![0] === undefined && makeNewGuild) {
+	if (data[0] === undefined && makeNewGuild) {
 		return await makeSuperGuild(guild);
-	} else if (data![0] === undefined && !makeNewGuild) {
+	} else if (data[0] === undefined && !makeNewGuild) {
 		return null;
 	}
 
-	return data![0];
+	return data[0];
 }
 
-export async function makeSuperGuild(guild: Guild): Promise < GuildData > {
-	await Supabase.from("Guilds").insert([{
+export async function makeSuperGuild(guild: Guild): Promise < GuildData | null > {
+	const { error } = await Supabase.from("Guilds").insert([{
 		guildId: guild.id,
 		flags: new Bitfield(50).toHex()
 	}]);
 
-	console.log("Created super guild");
+	if (error) {
+		winston.log("fatal", error.message);
+		return null;
+	}
 
-	const { data } = await Supabase.from("Guilds").select("*").eq("guildId", guild.id);
-
-	return data![0];
+	return await fetchSuperGuild(guild);
 }
 
 export async function updateSuperGuild(guild: Guild, Data: any): Promise < boolean > {

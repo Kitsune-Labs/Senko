@@ -1,5 +1,6 @@
 import axios from "axios";
 import Icons from "../Data/Icons.json";
+import { winston } from "../SenkoClient";
 import type { SenkoClientTypes } from "../types/AllTypes";
 
 export default class {
@@ -38,8 +39,16 @@ export default class {
 			});
 		}
 
-		senkoClient.on("interactionCreate", async (interaction) => {
-			if (!interaction.isButton() || !interaction.customId.startsWith("help:") || !interaction.customId.startsWith("honorable_mentions")) return;
+		senkoClient.on("interactionCreate", async (interaction: any) => {
+			console.log(typeof interaction);
+
+			// winston.log("info", `Interaction created: ${interaction.customId}`);
+			if (!interaction.isButton()) return;
+			if (!interaction.customId.startsWith("help:")) return;
+			if (!interaction.customId.startsWith("help:") && !interaction.customId.startsWith("honorable_mentions")) return;
+
+			// if (!interaction.isButton() || !interaction.customId.startsWith("help:") || !interaction.customId.startsWith("honorable_mentions")) return;
+			// winston.log("info", `Interaction is a button: ${interaction.customId}`);
 
 			const categories = {
 				fun: [] as Array<any>,
@@ -59,13 +68,7 @@ export default class {
 				categories[command.category || "uncategorized"].push(`</${cmd.name}:${cmd.id}> ≻ ${cmd.description}`);
 			});
 
-			// for (var index in SenkoClient.api.loadedCommands) {
-			// 	var commandEntry = SenkoClient.api.loadedCommands[index];
-			// 	const { category } = SenkoClient.api.Commands.get(commandEntry.name);
-
-			// 	categories[category].push(`</${commandEntry.name}:${commandEntry.id}> ≻ ${commandEntry.description}`);
-			// }
-
+			winston.log("info", "switching interaction");
 			switch (interaction.customId) {
 			case "help:home":
 				interaction.update({
@@ -109,7 +112,7 @@ export default class {
 								name: "Index ≻ Fun"
 							},
 							title: "📑 Fun Commands",
-							description: `${categories.fun.map(c=>c).join("\n")}`,
+							description: `${categories.fun.map(c => c).join("\n")}`,
 							color: senkoClient.api.Theme.random()
 						}
 					],
@@ -142,7 +145,7 @@ export default class {
 								name: "Index ≻ Economy"
 							},
 							title: "📑 Economy Commands",
-							description: `${categories.economy.map(c=>c).join("\n")}`,
+							description: `${categories.economy.map(c => c).join("\n")}`,
 							color: senkoClient.api.Theme.random()
 						}
 					],
@@ -175,7 +178,7 @@ export default class {
 								name: "Index ≻ Social"
 							},
 							title: "📑 Social Commands",
-							description: `${categories.social.map(c=>c).join("\n")}`,
+							description: `${categories.social.map(c => c).join("\n")}`,
 							color: senkoClient.api.Theme.random()
 						}
 					],
@@ -208,7 +211,7 @@ export default class {
 								name: "Index ≻ Administration"
 							},
 							title: "📑 Administration Commands",
-							description: `${categories.admin.map(c=>c).join("\n")}`,
+							description: `${categories.admin.map(c => c).join("\n")}`,
 							color: senkoClient.api.Theme.random()
 						}
 					],
@@ -241,7 +244,7 @@ export default class {
 								name: "Index ≻ Account"
 							},
 							title: "📑 Account Commands",
-							description: `${categories.account.map(c=>c).join("\n")}`,
+							description: `${categories.account.map(c => c).join("\n")}`,
 							color: senkoClient.api.Theme.random()
 						}
 					],
@@ -274,7 +277,7 @@ export default class {
 								name: "Index ≻ Utility"
 							},
 							title: "⚙️ Utility Commands",
-							description: `${categories.utility.map(c=>c).join("\n")}`,
+							description: `${categories.utility.map(c => c).join("\n")}`,
 							color: senkoClient.api.Theme.random()
 						}
 					],
@@ -300,7 +303,6 @@ export default class {
 				});
 				break;
 			case "honorable_mentions":
-				// @ts-expect-error
 				if (interaction.message.components[0]!.components[0]!.data.disabled === true) interaction.message.components[0]!.components[0]!.data.disabled = false;
 
 				interaction.update({
@@ -314,7 +316,7 @@ export default class {
 							fields: [
 								{
 									name: "Contributors",
-									value: contributors.map(n=>`${Icons.RightArrow} ${n}`).join("\n")
+									value: contributors.map(n => `${Icons.RightArrow} ${n}`).join("\n")
 								}
 							],
 							color: 0xfc844c

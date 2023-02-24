@@ -1,21 +1,21 @@
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
 import { fetchSuperGuild, updateSuperGuild } from "../API/super";
-import { print } from "@kitsune-labs/utilities";
 import { Colors } from "discord.js";
 import type { Response } from "express";
 import type { SenkoClientTypes } from "../types/AllTypes";
 import type { GuildWarn } from "../types/SupabaseTypes";
+import { winston } from "../SenkoClient";
 
 export default class {
 	constructor() {
-		print("💽 Senko API Server Started");
+		winston.log("senko", "💽 Senko API Server Started");
 	}
 
 	async execute(senkoClient: SenkoClientTypes) {
 		const app = express();
 		app.use(express.json());
-		app.listen(process.env["NIGHTLY"] === "true" ? 8888 : 7777, () => print(`💽 Senko API Server running http://localhost:${process.env["NIGHTLY"] === "true" ? 8888 : 7777}`));
+		app.listen(process.env["NIGHTLY"] === "true" ? 8888 : 7777, () => winston.log("senko", `💽 Senko API Server running http://localhost:${process.env["NIGHTLY"] === "true" ? 8888 : 7777}`));
 
 		app.get("/status", (res: Response) => {
 			res.status(200).send({
