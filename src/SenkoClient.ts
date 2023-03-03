@@ -189,10 +189,6 @@ senkoClient.once("ready", async () => {
 		commandsToSet.push(structure);
 	}
 
-	writeFile("test.json", JSON.stringify(commandsToSet), { encoding: "utf-8" }, function() {
-		// ...
-	});
-
 	await commands.set(commandsToSet).then(async cmds => {
 		senkoClient.api.loadedCommands = cmds;
 
