@@ -38,7 +38,6 @@ export default {
 	usableAnywhere: true,
 	whitelist: true,
 	start: async ({senkoClient, interaction, userData}) => {
-		// @ts-expect-error
 		switch (interaction.options.getSubcommand()) {
 		case "request":
 			await interaction.deferReply({ ephemeral: true });
@@ -50,8 +49,7 @@ export default {
 			var array: any = {};
 			var data = await fetchAllGuilds();
 
-			// @ts-expect-error
-			if (data.length == 0 || data == null) {
+			if (data && data.length == 0 || data == null) {
 				interaction.followUp({ content: "There was an error in fetching guild data!", ephemeral: true });
 				return;
 			}

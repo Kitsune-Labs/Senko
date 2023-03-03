@@ -88,7 +88,7 @@ export default {
 	whitelist: true,
 	start: async ({senkoClient, interaction, guildData}) => {
 		function checkAdmin() {
-			// @ts-expect-error
+			// @ts-ignore
 			if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
 				interaction.reply({
 					embeds: [
@@ -107,7 +107,6 @@ export default {
 		}
 		const guildFlags = Bitfield.fromHex(guildData.flags);
 
-		// @ts-expect-error
 		switch (interaction.options.getSubcommand()) {
 		case "settings":
 			if (!checkAdmin()) return;
@@ -155,10 +154,8 @@ export default {
 		case "set":
 			if (!checkAdmin()) return;
 
-			// @ts-expect-error
 			switch (interaction.options.getSubcommandGroup()) {
 			case "action-reports":
-				// @ts-expect-error
 				var actionChannel = interaction.options.getChannel("channel");
 
 				if (!actionChannel || actionChannel.type != 0) return interaction.reply({
@@ -191,7 +188,6 @@ export default {
 				});
 				break;
 			case "message-logging":
-				// @ts-expect-error
 				var messageChannel = interaction.options.getChannel("channel");
 
 				if (!messageChannel || messageChannel.type != 0) return interaction.reply({
@@ -226,8 +222,6 @@ export default {
 			break;
 		case "remove":
 			if (!checkAdmin()) return;
-
-			// @ts-expect-error
 			switch (interaction.options.getSubcommandGroup()) {
 			case "action-reports":
 				await updateSuperGuild(interaction.guild!, {
@@ -289,8 +283,10 @@ export default {
 						title: `${guild!.name}`,
 						description: `**Description**\n${guild!.description ? `${interaction.guild!.description}\n` : "No description"}\n**Vanity URL**: ${guild!.vanityURLCode ? `https://discord.gg/${guild!.vanityURLCode}  (${(await guild!.fetchVanityData()).uses} uses)` : "None"}\n**Region**: ${guild!.preferredLocale}\n**${guild!.memberCount}** members\n**${guild!.emojis.cache.size}** emojis\n**${guild!.stickers.cache.size}** stickers\n**${guild!.premiumSubscriptionCount}** boosts\n**${(await guild!.bans.fetch()).size}** bans`,
 						color: senkoClient.api.Theme.light,
-						// @ts-expect-error
-						thumbnail: { url: guild!.iconURL({ dynamic: true }) }
+						thumbnail: {
+							// @ts-expect-error
+							url: guild!.iconURL()
+						}
 						// image: { url: guild.bannerURL({ size: 4096 }) },
 					}
 				]

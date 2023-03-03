@@ -1,6 +1,6 @@
 import { ButtonStyle } from "discord.js";
 import { fetchSupabaseApi, updateSuperUser } from "../API/super";
-import type { SenkoClientTypes } from "../types/AllTypes";
+import type { SenkoClientTypes, SenkoMessageOptions } from "../types/AllTypes";
 const Supabase = fetchSupabaseApi();
 
 export default class {
@@ -146,9 +146,8 @@ export default class {
 								}
 							],
 							components: [],
-							// @ts-ignore
 							ephemeral: true
-						});
+						} as SenkoMessageOptions);
 						break;
 					}
 				}

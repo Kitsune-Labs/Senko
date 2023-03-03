@@ -23,7 +23,7 @@ export default {
 	start: async ({senkoClient, interaction, userData, xpAmount}) => {
 		const User = interaction.options.getUser("user") || interaction.user;
 		// @ts-expect-error
-		if (User !== interaction.user) userData = await fetchSuperUser(User, true);
+		if (User !== interaction.user) userData = await fetchSuperUser(User, false);
 
 		if (!userData) return interaction.reply({ content: "This person doesn't have a profile!", ephemeral: true });
 
@@ -37,17 +37,19 @@ export default {
 			ephemeral: true
 		});
 
+		// @ts-ignore
 		const { OutlawedUsers } = await fetchConfig();
-
 		const xpMath = xpAmount - xp;
 
 		const MessageBuilt = {
 			embeds: [
 				{
+					// @ts-ignore
 					description: `${userData.LocalUser.profileConfig.Status ? `${ShopItems[userData.LocalUser.profileConfig.Status].status} - ` : ""} ${userData.LocalUser.profileConfig.title ? ShopItems[userData.LocalUser.profileConfig.title].title : ""} **${stringEndsWithS(User.username || User.username)}** Profile${OutlawedUsers[User.id] ? ` [${Icons.BANNED}]` : ""}\n\n${Icons.medal}  Level **${level}** (${xpMath > 0 ? xpMath : 0} xp left)\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** yen\n${Icons.tofu}  **${userData.LocalUser.profileConfig.Currency.Tofu}** tofu\n${Icons.tail1}  **${userData.Stats.Fluffs}** fluffs\n\n${userData.LocalUser.profileConfig.aboutMe !== null ? `**About Me**\n${userData.LocalUser.profileConfig.aboutMe}\n\n` : ""}`,
 					// \n${Icons.medal}  **${userData.LocalUser.profileConfig.achievements.length}/${Object.keys(Achievements).length}** achievements\n\n
 					color: parseInt(userData.LocalUser.profileConfig.cardColor.replace("#", "0x")) || senkoClient.api.Theme.light,
 					image: {
+						// @ts-ignore
 						url: `https://cdn.senko.gg/public/banners/${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`
 					},
 					thumbnail: {

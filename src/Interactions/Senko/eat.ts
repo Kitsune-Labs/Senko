@@ -75,8 +75,6 @@ export default {
 			]
 		};
 
-		// console.log(chosenItems);
-
 		if (chosenItems[0].name != null) {
 			// @ts-expect-error
 			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[0].name, style: 2, custom_id: `eat-${chosenItems[0].id}-${interaction.user.id}` });

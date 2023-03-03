@@ -1,5 +1,5 @@
 import type { Bitfield } from "bitfields";
-import type { ApplicationCommandOption, BaseMessageOptions, Client, Collection, CommandInteraction, WebhookClient } from "discord.js";
+import type { ApplicationCommandOption, BaseMessageOptions, ChatInputCommandInteraction, Client, Collection, CommandInteraction, CommandInteractionOptionResolver, WebhookClient } from "discord.js";
 import type { GuildData, UserData } from "./SupabaseTypes";
 
 export interface BitData {
@@ -79,7 +79,7 @@ export interface SenkoIcons {
 
 export interface SenkoClientTypes extends Client {
 	api: {
-		Commands: Collection<string, CommandInteraction>;
+		Commands: Collection<string, CommandInteraction | SenkoCommand>;
 		Icons: SenkoIcons;
 		UserAgent: string;
 		Theme: {
@@ -98,13 +98,9 @@ export interface SenkoClientTypes extends Client {
 	};
 }
 
-export interface ExtendedProcess extends NodeJS.Process {
-	SenkoClient: SenkoClientTypes;
-}
-
 export interface SenkoCommandApi {
 	readonly senkoClient: SenkoClientTypes;
-	readonly interaction: CommandInteraction;
+	readonly interaction: ChatInputCommandInteraction;
 	readonly guildData: GuildData;
 	readonly userData: UserData;
 	readonly xpAmount: number;
@@ -121,7 +117,11 @@ export interface SenkoCommand {
 	ephemeral?: boolean;
 	usableAnywhere?: boolean;
 	name_localized?: string;
-	description_localized?: string;
+	description_localized?: {
+		"en-US": string;
+		"jp": string;
+		"fr": string;
+	};
 	category: string;
 	permissions?: any;
 	whitelist?: boolean;

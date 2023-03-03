@@ -19,7 +19,7 @@ export default {
 	],
 	whitelist: true,
 	start: async ({senkoClient, interaction, guildData}) => {
-		// @ts-expect-error
+		// @ts-ignore
 		if (!interaction.member!.permissions.has(Permissions.ModerateMembers)) return interaction.reply({
 			embeds: [
 				{
@@ -36,7 +36,6 @@ export default {
 
 		await interaction.deferReply();
 
-		// @ts-expect-error
 		const warnId = interaction.options.getString("warn-id");
 
 		for (var key in guildData.warns) {

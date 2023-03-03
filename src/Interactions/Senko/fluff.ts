@@ -10,6 +10,9 @@ export default {
 	desc: "Mofumofu!",
 	defer: true,
 	category: "fun",
+	description_localized: {
+		"jp": "モフ モフ！"
+	},
 	start: async ({ senkoClient, interaction, userData, locale }) => {
 		if (calcTimeLeft(userData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
 			userData.RateLimits.Fluff_Rate.Amount = 0;

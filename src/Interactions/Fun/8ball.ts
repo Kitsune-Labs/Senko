@@ -33,7 +33,7 @@ export default {
 		interaction.reply({
 			embeds: [
 				{
-					title: interaction.options.get("text")!.value,
+					title: interaction.options.getString("text"),
 					description: randomArrayItem(responses)
 				}
 			]

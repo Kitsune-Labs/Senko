@@ -12,3 +12,4 @@ example.env
 LICENSE
 README.md
 comp/
+node_modules

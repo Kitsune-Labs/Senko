@@ -28,7 +28,7 @@ export default {
 			ephemeral: true
 		});
 
-		// @ts-expect-error
+		// @ts-ignore
 		if (!interaction.member!.permissions.has(Permissions.KickMembers)) return interaction.reply({
 			embeds: [
 				{
@@ -59,7 +59,7 @@ export default {
 
 		const userToKick = interaction.options.getUser("user");
 		const guildUser = interaction.options.getMember("user");
-		const reason = interaction.options.get("reason") || "No reason provided";
+		const reason = interaction.options.getString("reason") || "No reason provided";
 
 		if (userToKick!.id === interaction.user.id) return interaction.reply({
 			embeds: [
@@ -72,12 +72,12 @@ export default {
 			ephemeral: true
 		});
 
-		// @ts-expect-error
+		// @ts-ignore
 		if (guildUser!.roles.highest.rawPosition >= interaction.member!.roles.highest.rawPosition) return interaction.reply({
 			embeds: [
 				{
 					title: "Kick error",
-					// @ts-expect-error
+					// @ts-ignore
 					description: `You cannot kick ${guildUser!.user.tag}, they either have a higher or equal role to yours.`,
 					color: Colors.Yellow
 				}
@@ -134,7 +134,7 @@ export default {
 						color: Colors.Orange
 					}
 				]
-			}).catch(err => {
+			}).catch((err: any) => {
 				responseStruct.embeds[0]!.description += `\n\n${err}`;
 			});
 

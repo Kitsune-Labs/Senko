@@ -32,7 +32,6 @@
 	],
 	"exclude": [
 		"node_modules/",
-		"comp",
 		"./src/types/",
 		"./src/test/",
 		"./src/Templates/"

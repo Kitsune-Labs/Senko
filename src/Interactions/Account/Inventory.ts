@@ -9,7 +9,6 @@ export default {
 	defer: true,
 	ephemeral: true,
 	category: "account",
-	// @ts-ignore
 	start: async ({senkoClient, interaction, userData}) => {
 		const ShopItems = await fetchMarket();
 		const PageEstimate = Math.ceil(Object.keys(userData.LocalUser.profileConfig.Inventory).length / 8) < 1 ? 1 : Math.ceil(Object.keys(userData.LocalUser.profileConfig.Inventory).length / 8);
@@ -26,7 +25,6 @@ export default {
 				if (Item) {
 					const shopItem = ShopItems[Item];
 
-					// @ts-ignore
 					Page.description += `**${shopItem ? shopItem.name : `Data missing: ${Item}`}**\n${shopItem ? `> ${shopItem.desc}` : ""}\n> You own **${userData.LocalUser.profileConfig.Inventory[Item]}**\n\n`;
 				}
 			}

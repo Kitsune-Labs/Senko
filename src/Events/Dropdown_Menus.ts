@@ -152,6 +152,7 @@ export default class {
 						Interaction.update(ReplyEmbed);
 						return;
 					}
+					// @ts-expect-error
 					AccountData!.LocalUser.profileConfig.cardColor = ShopItem.color;
 
 					await updateSuperUser(Interaction.user, {

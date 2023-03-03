@@ -48,20 +48,19 @@ export default {
 	usableAnywhere: true,
 	category: "admin",
 	permissions: [Permissions.BanMembers],
-	// @ts-ignore
-	start: async ({senkoClient, interaction, guildData, locale, generalLocale}) => {
+	start: async ({ senkoClient, interaction, guildData, locale, generalLocale }) => {
 		// It shouldn't need this but im hanging onto it just in case
-		// @ts-expect-error
-		if (!interaction.member.permissions.has(Permissions.BanMembers)) return;
-		await interaction.deferReply({ephemeral: true});
+		// @ts-ignore
+		if (!interaction.member?.permissions.has(Permissions.BanMembers)) return;
+		await interaction.deferReply({ ephemeral: true });
 
 		if (!Bitfield.fromHex(guildData.flags).get(senkoClient.api.BitData.BETAs.ModCommands)) return interaction.followUp({
 			content: generalLocale.invalid_mod,
 			ephemeral: true
 		});
 
-		// @ts-expect-error
-		if (!interaction.guild.members.me.permissions.has(Permissions.BanMembers)) return interaction.reply({
+
+		if (!interaction.guild?.members.me!.permissions.has(Permissions.BanMembers)) return interaction.reply({
 			embeds: [
 				{
 					title: locale.Permissions.OhDear,
@@ -75,9 +74,7 @@ export default {
 			ephemeral: true
 		});
 
-		// @ts-expect-error
 		const Reason = interaction.options.getString("reason") || "No reason provided.";
-		// @ts-expect-error
 		const Duration = interaction.options.getString("duration");
 		const Accounts = [];
 		const ActionLog: SenkoMessageOptions = {
@@ -97,7 +94,7 @@ export default {
 		};
 
 		function makeEmbed(member: GuildMember, sendFailed: boolean, customResponse?: any) {
-			const randomResponse = randomArrayItem( locale.randomResponse);
+			const randomResponse = randomArrayItem(locale.randomResponse);
 			const ReplyEmbed = {
 				title: customResponse ? locale.Reply.BanErrorTitle : locale.Reply.Title,
 				description: customResponse || locale.Reply.Desc,
@@ -113,7 +110,7 @@ export default {
 			if (!customResponse) ReplyEmbed.description = ReplyEmbed.description.replace("_USER_", member.user.tag || member).replace("_REASON_", Reason || locale.Reply.NoReason).replace("_TIME_", `<t:${convertToMs(Duration || "")}>`).replace("_TIME2_", `<t:${convertToMs(Duration || "")}:R>`);
 			if (!customResponse) ReplyEmbed.description += `\n\n*${randomResponse.text}*`.replace(":KitsuneBi_Blue:", senkoClient.api.Icons.KitsuneBi_Blue);
 
-			if (sendFailed) ReplyEmbed.footer = { text:  locale.Reply.NoDM };
+			if (sendFailed) ReplyEmbed.footer = { text: locale.Reply.NoDM };
 
 			// @ts-expect-error
 			Reply.embeds.push(ReplyEmbed);
@@ -121,10 +118,10 @@ export default {
 
 		for (var account of Accounts) {
 			if (account.user && account.member) {
-				// @ts-expect-error
+				// @ts-ignore
 				if (account.user.id === senkoClient.user!.id || account.member.roles.highest.position >= interaction.member!.roles.highest.position || account.user.id === interaction.guild!.ownerId) makeEmbed(account, false, locale.Reply.BanError.replace("_USER_", account.user.tag || account));
 			} else {
-				const isMember = await interaction.guild!.members.fetch(account.value).catch(()=>false);
+				const isMember = await interaction.guild!.members.fetch(account.value).catch(() => false);
 
 				if (isMember) {
 					await account.user.send({
@@ -135,7 +132,7 @@ export default {
 								color: Colors.Red
 							}
 						]
-					}).then(()=>makeEmbed(account, false)).catch(()=>makeEmbed(account, true));
+					}).then(() => makeEmbed(account, false)).catch(() => makeEmbed(account, true));
 				} else {
 					makeEmbed(account, true);
 				}

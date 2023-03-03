@@ -40,15 +40,9 @@ export default class {
 		}
 
 		senkoClient.on("interactionCreate", async (interaction: any) => {
-			console.log(typeof interaction);
-
-			// winston.log("info", `Interaction created: ${interaction.customId}`);
 			if (!interaction.isButton()) return;
 			if (!interaction.customId.startsWith("help:")) return;
 			if (!interaction.customId.startsWith("help:") && !interaction.customId.startsWith("honorable_mentions")) return;
-
-			// if (!interaction.isButton() || !interaction.customId.startsWith("help:") || !interaction.customId.startsWith("honorable_mentions")) return;
-			// winston.log("info", `Interaction is a button: ${interaction.customId}`);
 
 			const categories = {
 				fun: [] as Array<any>,

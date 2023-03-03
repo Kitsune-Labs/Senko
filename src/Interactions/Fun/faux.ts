@@ -51,24 +51,20 @@ export default {
 	ephemeral: true,
 	category: "fun",
 	start: async ({interaction}) => {
-		// @ts-expect-error
 		switch(interaction.options.getSubcommand()) {
 		case "translate":
 			interaction.followUp({
-				// @ts-expect-error
-				content: faux.translate(interaction.options.getString("message"))
+				content: faux.translate(interaction.options.getString("message", true))
 			});
 			break;
 		case "encode":
 			interaction.followUp({
-				// @ts-expect-error
-				content: faux.encode(interaction.options.getString("message"))
+				content: faux.encode(interaction.options.getString("message", true))
 			});
 			break;
 		case "decode":
 			interaction.followUp({
-				// @ts-expect-error
-				content: faux.decode(interaction.options.getString("message"))
+				content: faux.decode(interaction.options.getString("message", true))
 			});
 			break;
 		}

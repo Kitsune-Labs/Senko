@@ -1,5 +1,6 @@
 import type { SenkoCommand } from "../../types/AllTypes";
 import { fetchMarket } from "../../API/super";
+import type { MarketItem } from "../../types/SupabaseTypes";
 
 export default {
 	name: "read",
@@ -11,7 +12,7 @@ export default {
 
 		new Promise<void>((resolve) => {
 			for (var item of Object.keys(userData.LocalUser.profileConfig.Inventory)) {
-				const ShopItem = ShopItems[item];
+				const ShopItem = ShopItems[item] as MarketItem;
 				if (ShopItem && ShopItem.manga) {
 					OwnedChapters.push({ label: `${ShopItem.name}`, value: `read_${ShopItem.manga}`, description: `${ShopItem.desc}`});
 				}

@@ -24,18 +24,18 @@ export default {
 	start: async ({senkoClient, interaction}) => {
 		if (interaction.user.id !== "609097445825052701") return;
 		const ShopItems = await fetchMarket();
-		// @ts-ignore
-		const User = interaction.options.getString("user-id");
-		// @ts-ignore
-		const DevItem = ShopItems[interaction.options.getString("item")];
+		const User = interaction.options.getString("user-id", true);
+		const DevItem = ShopItems[interaction.options.getString("item", true)];
 		const FetchedUser = await senkoClient.users.fetch(User);
 
 		if (!DevItem) return interaction.followUp({ content: "item null", ephemeral: true });
 		if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
 
 		const accountData = await fetchSuperUser(FetchedUser);
-		// @ts-ignore
-		accountData.LocalUser.profileConfig.claimableItems.push(interaction.options.getString("item"));
+
+		if (!accountData) return interaction.followUp({ content: "account data not found", ephemeral: true });
+
+		accountData.LocalUser.profileConfig.claimableItems.push(interaction.options.getString("item", true));
 
 		await updateSuperUser(FetchedUser, {
 			LocalUser: accountData!.LocalUser

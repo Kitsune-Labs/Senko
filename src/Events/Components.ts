@@ -73,8 +73,8 @@ export default class {
 
 					interaction.update({
 						embeds: [{
-							title: `You and Senko had ${item.name}!`,
-							description: `Senko says it was ${randomArrayItem(reactions)}\n\n— 1x ${item.name} removed`,
+							title: `You and Senko had ${item?.name}!`,
+							description: `Senko says it was ${randomArrayItem(reactions)}\n\n— 1x ${item?.name} removed`,
 							color: SenkoClient.api.Theme.light,
 							thumbnail: {
 								url: randomArrayItem([HardLinks.senkoBless, HardLinks.senkoEat, HardLinks.senkoDrink])

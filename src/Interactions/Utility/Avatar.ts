@@ -23,7 +23,7 @@ export default {
 	category: "utility",
 	whitelist: true,
 	start: async ({senkoClient, interaction}) => {
-		const User = interaction.options.getUser("user") || interaction.member;
+		const User: any = interaction.options.getUser("user") || interaction.member;
 		// @ts-ignore
 		const AvatarURL = User.user ? User.user.avatarURL({ size: 2048 }) : User.avatarURL({ size: 2048 }) as User;
 		// const blur = interaction.options.get("blur") ? "spoiler_" : "";
@@ -32,7 +32,6 @@ export default {
 			embeds: [
 				{
 					author: {
-						// @ts-expect-error
 						name: User.user ? User.user.tag : User.tag
 					},
 					title: "Avatar",
@@ -55,7 +54,6 @@ export default {
 		};
 
 		axios({
-			// @ts-expect-error
 			url: `https://discord.com/api/v9/users/${User.id}`,
 			method: "GET",
 			headers: {
@@ -71,13 +69,11 @@ export default {
 					title: "Banner",
 					color: senkoClient.api.Theme.dark,
 					image: {
-						// @ts-expect-error
 						url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`
 					}
 				});
 
 				messageStruct.components[0]!.components[1]!.disabled = false;
-				// @ts-expect-error
 				messageStruct.components[0]!.components[1]!.url = `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`;
 			}
 

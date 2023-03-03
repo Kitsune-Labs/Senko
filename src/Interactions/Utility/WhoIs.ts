@@ -72,7 +72,6 @@ export default {
 
 			// @ts-expect-error
 			if (interaction.options.getBoolean("show-roles") === true && guildMember) messageStruct.embeds[0]!.fields.push([
-				// @ts-expect-error
 				{ name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}`}
 			]);
 

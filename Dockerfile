@@ -2,8 +2,8 @@ FROM node:lts
 
 WORKDIR /senko
 COPY package*.json ./
-RUN yarn install
 COPY tsconfig.json ./
+RUN yarn install
 
 COPY . .
 

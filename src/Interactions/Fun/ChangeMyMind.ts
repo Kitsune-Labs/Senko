@@ -18,7 +18,7 @@ export default {
 			embeds: [
 				{
 					image: {
-						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.get("text")!.value}`)
+						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.getString("text")}`)
 					},
 					color: senkoClient.api.Theme.light
 				}

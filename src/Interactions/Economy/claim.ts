@@ -27,7 +27,6 @@ export default {
 		}
 	],
 	start: async ({senkoClient, interaction, userData}) => {
-		// @ts-expect-error
 		const Command = interaction.options.getSubcommand();
 		await interaction.deferReply();
 
@@ -133,6 +132,7 @@ export default {
 				do {
 					for (var item of CI) {
 						inventory[item] ? inventory[item]++ : inventory[item] = 1;
+						// @ts-ignore
 						claimMessage.embeds[0]!.description += `\n- ${market[item].name}`;
 						// @ts-ignore
 						spliceArray(CI, item);

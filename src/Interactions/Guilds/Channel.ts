@@ -61,9 +61,9 @@ export default {
 	whitelist: true,
 	start: async ({senkoClient, interaction, guildData}) => {
 		const Channels = guildData.Channels;
-		// @ts-expect-error
+
 		const command = interaction.options.getSubcommand();
-		// @ts-expect-error
+		// @ts-ignore
 		const command_permission = interaction.member!.permissions.has(Permissions.ManageChannels);
 
 		function listChannels() {
@@ -84,10 +84,9 @@ export default {
 		switch (command) {
 		case "add":
 			if (!command_permission) return listChannels();
-			// @ts-expect-error
-			var channel = interaction.options.getChannel("channel");
+			var addChannel = interaction.options.getChannel("channel", true);
 
-			if (channel.type != 0) return interaction.followUp({
+			if (addChannel.type != 0) return interaction.followUp({
 				embeds: [
 					{
 						title: "Oh dear...",
@@ -98,7 +97,7 @@ export default {
 				]
 			});
 
-			if (Channels.includes(channel.id)) return interaction.followUp({
+			if (Channels.includes(addChannel.id)) return interaction.followUp({
 				embeds: [
 					{
 						title: "Silly!",
@@ -109,7 +108,7 @@ export default {
 				]
 			});
 
-			Channels.push(channel.id);
+			Channels.push(addChannel.id);
 
 			await updateSuperGuild(interaction.guild!, {
 				Channels: Channels
@@ -119,7 +118,7 @@ export default {
 				embeds: [
 					{
 						title: "Done!",
-						description: `People can now use my commands in ${channel}!`,
+						description: `People can now use my commands in ${addChannel}!`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/senko/talk.png"
@@ -131,10 +130,9 @@ export default {
 		case "remove":
 			if (!command_permission) return listChannels();
 
-			// @ts-expect-error
-			var channel = interaction.options.getChannel("channel");
+			var rmChannel = interaction.options.getChannel("channel", true);
 
-			if (!Channels.includes(channel.id)) return interaction.followUp({
+			if (!Channels.includes(rmChannel.id)) return interaction.followUp({
 				embeds: [
 					{
 						title: "Lets see...",
@@ -145,6 +143,7 @@ export default {
 				]
 			});
 
+			// @ts-ignore
 			spliceArray(Channels, channel.id);
 
 			await updateSuperGuild(interaction.guild!, {
@@ -155,7 +154,7 @@ export default {
 				embeds: [
 					{
 						title: `${Icons.exclamation} Alright dear`,
-						description: `I have removed ${channel} as per your request`,
+						description: `I have removed ${rmChannel} as per your request`,
 						color: senkoClient.api.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/senko/smile2.png"
@@ -218,9 +217,9 @@ export default {
 			var removed_channels = 0;
 
 			for (var v_channel of Channels) {
-				var channel = interaction.guild!.channels.cache.get(v_channel);
+				var channel2 = interaction.guild!.channels.cache.get(v_channel);
 
-				if (!channel) {
+				if (!channel2) {
 					// @ts-ignore
 					spliceArray(Channels, v_channel);
 					removed_channels++;

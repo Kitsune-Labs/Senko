@@ -39,7 +39,7 @@ export default {
 			ephemeral: true
 		});
 
-		// @ts-expect-error
+		// @ts-ignore
 		if (!interaction.member!.permissions.has(Permissions.ManageChannels)) return interaction.reply({
 			embeds: [
 				{
@@ -70,10 +70,8 @@ export default {
 
 		await interaction.deferReply();
 
-		// @ts-expect-error
 		const time = interaction.options.getNumber("seconds");
 
-		// @ts-expect-error
 		switch (interaction.options.getSubcommand()) {
 		case "set":
 			// @ts-expect-error

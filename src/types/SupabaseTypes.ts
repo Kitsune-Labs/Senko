@@ -1,5 +1,14 @@
 import type { Message } from "discord.js";
 
+export interface CurrentMarket {
+	updates: number;
+	items: Array<string>;
+}
+
+export interface MarketItems {
+	[name: string]: MarketItem;
+}
+
 export interface MarketItem {
 	class: "Other" | "Consumables" | "Banners" | "Materials" | "Misc" | "Music" | "Titles" | "Colors" | "Badges";
 	name: string,
@@ -15,6 +24,7 @@ export interface MarketItem {
 	title?: string,
 	soundFile?: string,
 	soundVolume?: number,
+	manga?: string,
 	set?: string
 }
 

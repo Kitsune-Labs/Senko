@@ -17,8 +17,7 @@ export default {
 	category: "fun",
 	start: async ({interaction}) => {
 		interaction.reply({
-			// @ts-expect-error
-			content: owoify(interaction.options.getString("text")),
+			content: owoify(interaction.options.getString("text", true)),
 			ephemeral: true
 		});
 	}

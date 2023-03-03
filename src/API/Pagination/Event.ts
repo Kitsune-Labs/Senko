@@ -14,13 +14,15 @@ export default async function(interaction: (Interaction|any), pages: Embed[], ti
 						type: 2,
 						emoji: "<:WhiteArrow1Left:943299054568374322>",
 						style: 1,
-						custom_id: "page_left"
+						custom_id: "page_left",
+						disabled: false
 					},
 					{
 						type: 2,
 						emoji: "<:WhiteArrow1Right:943299054580928582>",
 						style: 1,
-						custom_id: "page_right"
+						custom_id: "page_right",
+						disabled: false
 					}
 				]
 			}
@@ -29,10 +31,8 @@ export default async function(interaction: (Interaction|any), pages: Embed[], ti
 	};
 
 	if (pages.length == 1) {
-		// @ts-ignore
-		MessageStructure.components[0].components[0].disabled = true;
-		// @ts-ignore
-		MessageStructure.components[0].components[1].disabled = true;
+		MessageStructure.components[0]!.components[0]!.disabled = true;
+		MessageStructure.components[0]!.components[1]!.disabled = true;
 	}
 
 	// @ts-ignore
@@ -64,10 +64,8 @@ export default async function(interaction: (Interaction|any), pages: Embed[], ti
 	});
 
 	function disable() {
-		// @ts-ignore
-		MessageStructure.components[0].components[0].disabled = true;
-		// @ts-ignore
-		MessageStructure.components[0].components[1].disabled = true;
+		MessageStructure.components[0]!.components[0]!.disabled = true;
+		MessageStructure.components[0]!.components[1]!.disabled = true;
 
 		interaction.editReply(MessageStructure);
 	}

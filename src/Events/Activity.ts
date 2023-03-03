@@ -6,7 +6,7 @@ export default class {
 		async function switchActivity() {
 			const data = await fetchConfig();
 
-			senkoClient.user!.setPresence(data.activity[Math.floor(Math.random() * data.activity.length)]);
+			if (data) senkoClient.user!.setPresence(data.activity[Math.floor(Math.random() * data.activity.length)]);
 		}
 
 		switchActivity();

@@ -1,6 +1,6 @@
-import type { Embed, CommandInteraction } from "discord.js";
+import type { Embed } from "discord.js";
 
-export default async function(interaction: CommandInteraction, pages: Embed[] | any, timeout = 120000, isEphemeral = false): Promise<void> {
+export default async function(interaction: any, pages: Embed[] | any, timeout = 120000, isEphemeral = false): Promise<void> {
 	if (pages.length <= 0) throw new Error("No pages provided.");
 
 	let page = 0;
@@ -32,24 +32,22 @@ export default async function(interaction: CommandInteraction, pages: Embed[] | 
 	};
 
 	if (pages.length == 1) {
-		// @ts-ignore
-		MessageStructure.components[0].components[0].disabled = true;
-		// @ts-ignore
-		MessageStructure.components[0].components[1].disabled = true;
+		MessageStructure.components[0]!.components[0]!.disabled = true;
+		MessageStructure.components[0]!.components[1]!.disabled = true;
 	}
 
 	if (!interaction.deferred) await interaction.deferReply({ ephemeral: isEphemeral });
 
 	// @ts-ignore
 	MessageStructure.embeds[0] = pages[page];
-	// @ts-ignore
+
 	pages[page].footer = { text: `Page ${page + 1} of ${pages.length}` };
 
 	const curPage = await interaction.editReply(MessageStructure);
 	const filter = (i: any) => i.customId === "page_left" || i.customId === "page_right";
 	const collector = curPage.createMessageComponentCollector({ filter, time: timeout });
 
-	collector.on("collect", async (i) => {
+	collector.on("collect", async (i: any) => {
 		switch (i.customId) {
 		case "page_left":
 			page = page > 0 ? --page : pages.length - 1;
@@ -63,7 +61,6 @@ export default async function(interaction: CommandInteraction, pages: Embed[] | 
 
 		// @ts-ignore
 		MessageStructure.embeds[0] = pages[page];
-		// @ts-ignore
 		pages[page].footer = { text: `Page ${page + 1} of ${pages.length}` };
 
 		await i.editReply(MessageStructure);
@@ -71,15 +68,13 @@ export default async function(interaction: CommandInteraction, pages: Embed[] | 
 	});
 
 	function disable() {
-		// @ts-ignore
-		MessageStructure.components[0].components[0].disabled = true;
-		// @ts-ignore
-		MessageStructure.components[0].components[1].disabled = true;
+		MessageStructure.components[0]!.components[0]!.disabled = true;
+		MessageStructure.components[0]!.components[1]!.disabled = true;
 
 		interaction.editReply(MessageStructure);
 	}
 
-	collector.on("end", (_, reason) => {
+	collector.on("end", (_: any, reason: any) => {
 		if (reason !== "messageDelete") {
 			disable();
 		}

@@ -53,7 +53,7 @@ export default {
 
 		const RNG = Math.floor(Math.random() * 2);
 		// @ts-ignore
-		const UserChoice = interaction.options.getString("choice");
+		const UserChoice = interaction.options.getString("choice", true);
 
 		await wait(2000);
 

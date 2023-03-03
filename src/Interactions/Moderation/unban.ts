@@ -29,7 +29,7 @@ export default {
 			ephemeral: true
 		});
 
-		// @ts-expect-error
+		// @ts-ignore
 		if (!interaction.member!.permissions.has(Permissions.BanMembers)) return interaction.reply({
 			embeds: [
 				{
@@ -58,9 +58,7 @@ export default {
 			ephemeral: true
 		});
 
-		// @ts-expect-error
-		const userId = interaction.options.getString("user-id");
-		// @ts-expect-error
+		const userId = interaction.options.getString("user-id", true);
 		const unbanReason = interaction.options.getString("reason");
 		const bannedUser = await interaction.guild!.bans.fetch(userId).catch(() => null);
 

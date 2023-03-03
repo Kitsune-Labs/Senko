@@ -75,6 +75,7 @@ export default class {
 								components: [
 									{
 										type: 3,
+										// @ts-ignore
 										placeholder: `Currently ${userData!.LocalUser.profileConfig.title ? shopItems[userData!.LocalUser.profileConfig.title].name : "No Title"}`,
 										custom_id: "title_equip",
 										options: Selection
@@ -117,6 +118,7 @@ export default class {
 								components: [
 									{
 										type: 3,
+										// @ts-ignore
 										placeholder: `Currently ${shopItems[userData!.LocalUser.profileConfig.banner] ? shopItems[userData!.LocalUser.profileConfig.banner].name : "Default Banner"}`,
 										custom_id: "banner_set",
 										options: Selection2

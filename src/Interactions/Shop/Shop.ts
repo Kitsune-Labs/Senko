@@ -4,6 +4,7 @@ import { fetchSupabaseApi, fetchMarket } from "../../API/super";
 const Supabase = fetchSupabaseApi();
 import { warn } from "@kitsune-labs/utilities";
 import type { SenkoCommand } from "../../types/AllTypes";
+import type { MarketItem } from "../../types/SupabaseTypes";
 
 export default {
 	name: "shop",
@@ -38,7 +39,7 @@ export default {
 		};
 
 		for (var item of shopData.items) {
-			const shopItem = ShopItems[item];
+			const shopItem = ShopItems[item] as MarketItem;
 
 			if (itemClasses[shopItem.class]) {
 				itemClasses[shopItem.class].push({ id: item, data: shopItem });
@@ -49,14 +50,14 @@ export default {
 		}
 
 		for (var eventItem of rawShopData[0].EventMarket) {
-			const shopItem = ShopItems[eventItem];
+			const shopItem = ShopItems[eventItem] as MarketItem;
 
 			itemClasses.Events.push({ id: item, data: shopItem });
 			if (!itemClasses[shopItem.class]) warn(`Item ${item.name} has no class!`);
 		}
 
 		for (var specialItem of rawShopData[0].SpecialMarket) {
-			const shopItem = ShopItems[specialItem];
+			const shopItem = ShopItems[specialItem] as MarketItem;
 
 			itemClasses.Special.push({ id: item, data: shopItem });
 			if (!itemClasses[shopItem.class]) warn(`Item ${item.name} has no class!`);

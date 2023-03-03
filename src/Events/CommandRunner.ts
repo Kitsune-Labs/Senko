@@ -1,8 +1,8 @@
 import type { SenkoClientTypes, SenkoCommand, SenkoMessageOptions } from "../types/AllTypes";
 
 import { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser } from "../API/super";
-import { CommandInteractionOptionResolver, InteractionType, PermissionFlagsBits } from "discord.js";
-import type { ApplicationCommand, Interaction, CommandInteraction } from "discord.js";
+import { ChatInputCommandInteraction, InteractionType, PermissionFlagsBits } from "discord.js";
+import type { Interaction } from "discord.js";
 import { existsSync } from "fs";
 
 import { randomNumber } from "@kitsune-labs/utilities";
@@ -19,7 +19,7 @@ export const SenkoClientPermissions = [
 
 export default class {
 	async execute(SenkoClient: SenkoClientTypes) {
-		SenkoClient.on("interactionCreate", async (interaction: ApplicationCommand | Interaction | CommandInteraction | CommandInteractionOptionResolver | any) => {
+		SenkoClient.on("interactionCreate", async (interaction: Interaction | ChatInputCommandInteraction | any) => {
 			if (!interaction || interaction.type !== InteractionType.ApplicationCommand || interaction.user.bot || interaction.replied || !interaction.guild) return;
 			const dataConfig = await fetchConfig();
 			const LoadedInteractionCommand = SenkoClient.api.Commands.get(interaction.commandName) as unknown as SenkoCommand;
@@ -43,6 +43,18 @@ export default class {
 					ephemeral: true
 				});
 			}
+
+			if (!superGuildData || !accountData || !dataConfig) return interaction.reply({
+				embeds: [{
+					title: "Oh my!",
+					description: "It looks like there was an issue retrieving data, please try again later!",
+					color: SenkoClient.api.Theme.dark,
+					thumbnail: {
+						url: "https://cdn.senko.gg/public/senko/heh.png"
+					}
+				}],
+				ephemeral: true
+			});
 
 			const CommandTime = Date.now();
 
@@ -93,18 +105,6 @@ export default class {
 				if (interaction.guild.members.me.permissions.has(PermissionFlagsBits.EmbedLinks)) return interaction.reply(permissionEmbed);
 				return interaction.reply(permissionMessage);
 			}
-
-			if (!superGuildData || !accountData) return interaction.reply({
-				embeds: [{
-					title: "Oh my!",
-					description: "It looks like there was an issue retrieving data, please try again later!",
-					color: SenkoClient.api.Theme.dark,
-					thumbnail: {
-						url: "https://cdn.senko.gg/public/senko/heh.png"
-					}
-				}],
-				ephemeral: true
-			});
 
 
 			if (superGuildData.Channels.length > 0 && !superGuildData.Channels.includes(interaction.channelId) && !LoadedInteractionCommand.usableAnywhere) {

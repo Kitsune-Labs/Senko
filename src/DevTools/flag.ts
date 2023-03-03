@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType as CommandOption } from "discord.js";
+import { ApplicationCommandOptionType as CommandOption, Guild } from "discord.js";
 import { Bitfield } from "bitfields";
 import type { SenkoCommand } from "../types/AllTypes";
 import { fetchSuperGuild, fetchSuperUser, updateSuperUser } from "../API/super";
@@ -87,26 +87,22 @@ export default {
 		}
 	],
 	start: async ({senkoClient, interaction}) => {
-		const user = interaction.options.getUser("user") || {};
-		// @ts-ignore
-		const flag = interaction.options.getString("flag") || "";
-		// @ts-ignore
-		const flagBit = senkoClient.api.BitData[flag] || false;
+		const user = interaction.options.getUser("user", true);
+		const flag = interaction.options.getString("flag", true);
+		// @ts-expect-error
+		const flagBit = senkoClient.api.BitData[flag];
 		const BitData = senkoClient.api.BitData;
-		// @ts-ignore
-		const userData = await fetchSuperUser(user) || {};
-		if (!userData) return interaction.reply({content: `User not found ${userData}`, ephemeral: true});
-		// @ts-ignore
-		const flags = userData.LocalUser ? Bitfield.fromHex(userData.LocalUser.accountConfig.flags) || {} : {};
 
-		// @ts-ignore
+		const userData = await fetchSuperUser(user);
+		if (!userData) return interaction.reply({content: `User not found ${userData}`, ephemeral: true});
+		const flags = Bitfield.fromHex(userData.LocalUser.accountConfig.flags);
+
 		switch (interaction.options.getSubcommand()) {
 		case "view-guild":
-			// @ts-ignore
-			var guild = await senkoClient.guilds.fetch(interaction.options.getString("guild-id")).catch(() => {
+			var guild = await senkoClient.guilds.fetch(interaction.options.getString("guild-id", true)).catch(() => {
 				return interaction.reply({content: "Guild not found", ephemeral: true});
-			});
-			// @ts-ignore
+			}) as Guild;
+
 			var guildData = await fetchSuperGuild(guild, false);
 			if (!guildData) return interaction.reply({content: `Guild not found: ${guildData}`, ephemeral: true});
 			var guildFlags = Bitfield.fromHex(guildData.flags);
@@ -116,23 +112,18 @@ export default {
 			interaction.reply({content: message, ephemeral: true});
 			break;
 		case "view":
-			// @ts-ignore
+			// @ts-expect-error
 			interaction.reply({content: `Flag ${flag} is ${flags.get(flag)}`, ephemeral: true});
 			break;
 		case "set":
-			// @ts-ignore
 			flags.set(flagBit, !flags.get(flagBit));
 
-			// @ts-ignore
 			userData.LocalUser.accountConfig.flags = flags.toHex();
 
-			// @ts-ignore
 			await updateSuperUser(user, {
-				// @ts-ignore
 				LocalUser: userData.LocalUser
 			});
 
-			// @ts-ignore
 			interaction.reply({content: `${flag} is now ${flags.get(flagBit)}`, ephemeral: true});
 			break;
 		}

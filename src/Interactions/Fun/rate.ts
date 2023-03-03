@@ -15,8 +15,7 @@ export default {
 	usableAnywhere: true,
 	category: "fun",
 	start: async ({senkoClient, interaction}) => {
-		// @ts-expect-error
-		const Item = interaction.options.getString("thing");
+		const Item = interaction.options.getString("thing", true);
 
 		const MessageBuild = {
 			embeds: [

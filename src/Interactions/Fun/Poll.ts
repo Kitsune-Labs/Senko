@@ -69,7 +69,6 @@ export default {
 	usableAnywhere: true,
 	category: "fun",
 	start: async ({senkoClient, interaction}) => {
-		// @ts-expect-error
 		const Topic = interaction.options.getString("topic");
 		let OptionString = "";
 		let MaxOptions = 0;
@@ -89,10 +88,10 @@ export default {
 			embeds: [
 				{
 					author: {
-						// @ts-expect-error
+						// @ts-ignore
 						name: interaction.member!.nickname || interaction.member!.user.username,
 						// @ts-expect-error
-						iconURL: interaction.user.avatarURL({ dynamic: true })
+						iconURL: interaction.user.avatarURL()
 					},
 					description: `**${Topic}**\n\n${OptionString}\n\nWhat will you pick?`,
 					color: senkoClient.api.Theme.light,

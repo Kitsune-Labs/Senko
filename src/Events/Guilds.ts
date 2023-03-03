@@ -2,8 +2,8 @@ import { Bitfield } from "bitfields";
 import { deleteSuperGuild, fetchSuperGuild } from "../API/super";
 import bits from "../API/Bits.json";
 import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel, ChannelType } from "discord.js";
-import { warn, error } from "@kitsune-labs/utilities";
 import type { SenkoClientTypes } from "../types/AllTypes";
+import { winston } from "../SenkoClient";
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
@@ -28,7 +28,7 @@ export default class {
 
 		senkoClient.on("guildBanAdd", async (member) => {
 			// @ts-expect-error
-			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
+			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
@@ -44,7 +44,7 @@ export default class {
 			if (guildData!.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
 				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel;
 
-				if (loggingChannel.type !== ChannelType.GuildText) return warn("Action Log channel is not a text channel.");
+				if (loggingChannel.type !== ChannelType.GuildText) return;
 
 				loggingChannel.send({
 					embeds: [
@@ -59,7 +59,7 @@ export default class {
 						}
 					]
 				}).catch((err: any) => {
-					error(err);
+					winston.log("error", err);
 				});
 			}
 		});
@@ -83,7 +83,7 @@ export default class {
 			if (guildData!.ActionLogs && !guildFlags.get(bits.ActionLogs.BanActionDisabled)) {
 				const loggingChannel = await member.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel;
 
-				if (loggingChannel.type !== ChannelType.GuildText) return warn("Action Log channel is not a text channel.");
+				if (loggingChannel.type !== ChannelType.GuildText) return;
 
 				loggingChannel.send({
 					embeds: [
@@ -100,8 +100,8 @@ export default class {
 							}
 						}
 					]
-				}).catch((err) => {
-					error(err);
+				}).catch((err: any) => {
+					winston.log("error", err);
 				});
 			}
 		});
@@ -114,7 +114,7 @@ export default class {
 			if (guildData!.MemberLogs) {
 				const loggingChannel = await member.guild.channels.fetch(guildData!.MemberLogs) as GuildTextBasedChannel;
 
-				if (loggingChannel.type !== ChannelType.GuildText) return warn("Action Log channel is not a text channel.");
+				if (loggingChannel.type !== ChannelType.GuildText) return;
 
 				loggingChannel.send({
 					embeds: [
@@ -126,8 +126,8 @@ export default class {
 							thumbnail: { url: member.user.displayAvatarURL({ size: 4096 }) }
 						}
 					]
-				}).catch((err) => {
-					error(err);
+				}).catch((err: any) => {
+					winston.log("error", err);
 				});
 			}
 		});
@@ -148,7 +148,7 @@ export default class {
 					}
 				]
 			}).catch((err: any) => {
-				error(err);
+				winston.log("error", err);
 			});
 
 
@@ -178,7 +178,7 @@ export default class {
 						}
 					]
 				}).catch((err: any) => {
-					error(err);
+					winston.log("error", err);
 				});
 			}
 		});
@@ -186,18 +186,18 @@ export default class {
 		senkoClient.on("guildMemberUpdate", async (oldMember, newMember) => {
 			await newMember.fetch();
 
-			if (!newMember.guild.members!.me!.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
+			if (!newMember.guild.members!.me!.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
 			const guildData = await fetchSuperGuild(newMember.guild);
 			const guildFlags = Bitfield.fromHex(guildData!.flags);
 			const actionLoggingChannel = guildData!.ActionLogs ? await newMember.guild.channels.fetch(guildData!.ActionLogs) as GuildTextBasedChannel : null;
 
-			if (!actionLoggingChannel) return warn("Action logs are not set for this guild");
-			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return warn("Timeout logs are disabled for this guild");
+			if (!actionLoggingChannel) return;
+			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return;
 
 			const rawAudit = await newMember.guild.fetchAuditLogs({type: AuditLogEvent.MemberUpdate, limit: 1 });
 			const audit = rawAudit.entries.first();
 
-			if (oldMember.communicationDisabledUntilTimestamp === newMember.communicationDisabledUntilTimestamp) return warn("Member is not timed out, or the timeout is the same");
+			if (oldMember.communicationDisabledUntilTimestamp === newMember.communicationDisabledUntilTimestamp) return;
 			if (!audit || audit.changes[0]!.key !== "communication_disabled_until" || audit.target!.id !== newMember.id) return;
 
 			if (newMember.communicationDisabledUntilTimestamp === null && guildData!.ActionLogs && actionLoggingChannel.type !== ChannelType.GuildText) {
@@ -214,7 +214,7 @@ export default class {
 						}
 					]
 				}).catch((err: any) => {
-					error(err);
+					winston.log("error", err);
 				});
 			}
 
@@ -232,7 +232,7 @@ export default class {
 						}
 					]
 				}).catch((err: any) => {
-					error(err);
+					winston.log("error", err);
 				});
 			}
 		});

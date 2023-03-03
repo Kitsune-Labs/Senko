@@ -11,10 +11,24 @@ export default class {
 				const item = interaction.values[0].split("#").splice(1, 3);
 				const configData = await fetchConfig();
 				const itemName = item[0];
-				const shopItem = await shopItems[item[0]];
+				const shopItem = shopItems[item[0]];
 
 				interaction.channel.messages.cache.get(interaction.message.id).edit({
 					components: interaction.message.components
+				});
+
+				if (!configData) return interaction.reply({
+					embeds: [
+						{
+							title: `${Icons.exclamation}  Sorry!`,
+							description: "There was an error fetching the shop data, please try again later!",
+							color: senkoClient.api.Theme.dark,
+							thumbnail: {
+								url: "https://cdn.senko.gg/public/senko/heh.png"
+							}
+						}
+					],
+					ephemeral: true
 				});
 
 				configData.market.items.push(...configData.SpecialMarket);
@@ -41,7 +55,7 @@ export default class {
 					embeds: [
 						{
 							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
-							description: `You may only have **${shopItem.max}** total!`,
+							description: `You may only have **${shopItem!.max}** total!`,
 							color: senkoClient.api.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/heh.png"
@@ -51,7 +65,7 @@ export default class {
 					ephemeral: true
 				});
 
-				if (accountData!.LocalUser.profileConfig.Currency.Yen < shopItem.price) return interaction.reply({
+				if (accountData!.LocalUser.profileConfig.Currency.Yen < shopItem!.price) return interaction.reply({
 					embeds: [
 						{
 							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
@@ -70,7 +84,7 @@ export default class {
 					embeds: [
 						{
 							title: "Confirm Purchase",
-							description: `Are you sure you want to purchase **${shopItem.name}** for ${Icons.yen} **${shopItem.price}**?\nYou will have ${Icons.yen} **${accountData!.LocalUser.profileConfig.Currency.Yen - shopItem.price}** left`,
+							description: `Are you sure you want to purchase **${shopItem!.name}** for ${Icons.yen} **${shopItem!.price}**?\nYou will have ${Icons.yen} **${accountData!.LocalUser.profileConfig.Currency.Yen - shopItem!.price}** left`,
 							color: senkoClient.api.Theme.light,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/package.png"

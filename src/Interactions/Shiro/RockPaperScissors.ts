@@ -36,7 +36,7 @@ export default {
 		// @ts-ignore
 		const UserChoice = interaction.options.getString("choice");
 
-		interaction.reply({
+		await interaction.reply({
 			embeds: [
 				{
 					title: "Rock, Paper, Scissors",

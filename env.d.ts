@@ -1,4 +1,4 @@
-declare global {
+export declare global {
   namespace NodeJS {
     interface ProcessEnv {
       readonly TOKEN: string;
@@ -11,5 +11,3 @@ declare global {
     }
   }
 }
-
-export {};

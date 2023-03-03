@@ -16,15 +16,8 @@ export default class {
 
 			const guildData = await fetchSuperGuild(message.guild);
 
-			if (!guildData) {
-				winston.log("fatal", "Guild data not found!");
-				return;
-			}
-
-			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) {
-				winston.log("info", "Message logging is disabled for this Guild.");
-				return;
-			}
+			if (!guildData) return;
+			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) return;
 
 			const caseId = uuidv4().slice(0, 8);
 			const linkedFiles: string[] = [];
@@ -123,7 +116,7 @@ export default class {
 				if (linkedFiles.length > 0) {
 					for (const linkedFile of linkedFiles) {
 						fs.unlink(linkedFile, () => {
-							console.log(`Deleted ${linkedFile}`);
+							winston.log("info", `Deleted ${linkedFile}`);
 						});
 					}
 				}
@@ -135,10 +128,7 @@ export default class {
 
 			const guildData = await fetchSuperGuild(oldMessage.guild);
 			if (!guildData) return;
-			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) {
-				winston.log("info", "Message logging is disabled for this Guild.");
-				return;
-			}
+			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) return;
 
 			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null) as any | null;
 			const caseId = uuidv4().slice(0, 8);
@@ -212,7 +202,7 @@ export default class {
 				if (linkedFiles.length > 0) {
 					for (var file of linkedFiles) {
 						fs.unlink(file, () => {
-							console.log(`Deleted ${file}`);
+							winston.log("info", `Deleted ${file}`);
 						});
 					}
 				}

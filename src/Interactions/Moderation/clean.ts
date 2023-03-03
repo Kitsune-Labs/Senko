@@ -23,8 +23,7 @@ export default {
 		}
 	],
 	whitelist: true,
-	// @ts-ignore
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.followUp({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
 		});
@@ -42,7 +41,7 @@ export default {
 			]
 		});
 
-		// @ts-expect-error
+		// @ts-ignore
 		if (!interaction.member!.permissions.has(Permissions.ManageMessages)) return interaction.followUp({
 			embeds: [
 				{
@@ -56,10 +55,9 @@ export default {
 			]
 		});
 
-		// @ts-expect-error
 		const amount = interaction.options.getNumber("amount");
 
-		// @ts-expect-error
+		// @ts-ignore
 		interaction.channel!.bulkDelete(amount).then((data: any) => {
 			interaction.followUp({
 				content: data.size > 1 ? `I have removed ${data.size} messages` : `I have removed ${data.size} message`

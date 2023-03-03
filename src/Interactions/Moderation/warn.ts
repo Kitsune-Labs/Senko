@@ -33,14 +33,12 @@ export default {
 	],
 	whitelist: true,
 	start: async ({senkoClient, interaction, guildData}) => {
-		let guildWarns = guildData.warns;
+		const guildWarns = guildData.warns;
 		const ActionLogs = guildData.ActionLogs;
 		const flags = guildData.flags;
 
 		const user = interaction.options.getMember("user") as GuildMember;
-		// @ts-expect-error
 		const reason = interaction.options.getString("reason") || "No Reason Provided";
-		// @ts-expect-error
 		const note = interaction.options.getString("note") || "No note(s) provided";
 
 		if (!Bitfield.fromHex(flags).get(bits.BETAs.ModCommands)) return interaction.reply({
@@ -48,7 +46,7 @@ export default {
 			ephemeral: true
 		});
 
-		// @ts-expect-error
+		// @ts-ignore
 		if (!interaction.member!.permissions.has(Permissions.ModerateMembers)) return interaction.reply({
 			embeds: [
 				{
@@ -67,7 +65,8 @@ export default {
 		await interaction.guild!.roles.fetch().then(roles => {
 			roleSize = roles.size;
 		});
-		// @ts-expect-error
+
+		// @ts-ignore
 		if (interaction.member!.id != interaction.guild!.ownerId && roleSize > 1 && user!.roles.highest.rawPosition >= interaction.member!.roles.highest.rawPosition) return interaction.reply({ content: "You can't warn members that have an equal or higher role", ephemeral: true });
 
 		if (!user) return interaction.reply({ content: "I can't find this user!", ephemeral: true });
@@ -132,7 +131,8 @@ export default {
 					}
 				]
 			}).catch(err => {
-				interaction.channel!.send({
+				// @ts-ignore
+				interaction.channel?.send({
 					content: `There was an error sending the action report: ${err}`
 				});
 			});
