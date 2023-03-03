@@ -48,7 +48,7 @@ export const winston = Winston.createLogger({
 
 import type { SenkoClientTypes, SenkoCommand } from "./types/AllTypes";
 import { Client, Collection, PermissionsBitField, GatewayIntentBits as GatewayIntents, WebhookClient, Guild } from "discord.js";
-import { readdirSync, writeFile } from "fs";
+import { readdirSync } from "fs";
 
 export const senkoClient = new Client({
 	intents: [
