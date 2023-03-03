@@ -82,7 +82,7 @@ export default class {
 				});
 			}
 
-			let channelToSendTo;
+			let channelToSendTo: any;
 
 			try {
 				channelToSendTo = await message.guild.channels.fetch(guildData.AdvancedMessageLogging.message_deletions || guildData.MessageLogs);
@@ -130,7 +130,7 @@ export default class {
 			if (!guildData) return;
 			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) return;
 
-			const channelToSendTo = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null) as any | null;
+			const channelToSendTo: any = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null);
 			const caseId = uuidv4().slice(0, 8);
 			const linkedFiles: Array<any> = [];
 			const emojis = [];
