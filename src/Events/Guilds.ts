@@ -66,7 +66,7 @@ export default class {
 
 		senkoClient.on("guildBanRemove", async (member) => {
 			// @ts-expect-error
-			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
+			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
 				limit: 1,
