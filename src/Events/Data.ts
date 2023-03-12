@@ -1,4 +1,4 @@
-import { ButtonStyle } from "discord.js";
+import { APIEmbed, ButtonStyle } from "discord.js";
 import { fetchSupabaseApi, updateSuperUser } from "../API/super";
 import type { SenkoClientTypes, SenkoMessageOptions } from "../types/AllTypes";
 const Supabase = fetchSupabaseApi();
@@ -15,21 +15,20 @@ export default class {
 						});
 
 						for (var a of Interaction.message.components[1]!.components) {
-							// @ts-expect-error
+							// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 							a.data.style = ButtonStyle.Primary;
-							// @ts-expect-error
+							// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 							a.data.disabled = false;
 						}
 
-						// @ts-expect-error
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 						Interaction.message.components[1]!.components[0]!.data.style = ButtonStyle.Success;
-						// @ts-expect-error
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 						Interaction.message.components[1]!.components[0]!.data.disabled = true;
 
 						Interaction.update({
 							embeds: [
-								// @ts-ignore
-								Interaction.message.embeds[0],
+								Interaction.message.embeds[0] as APIEmbed,
 								{
 									title: "Data Settings",
 									description: "Your data will be deleted in **__30__** days without use.",
@@ -45,21 +44,20 @@ export default class {
 						});
 
 						for (var a2 of Interaction.message.components[1]!.components) {
-							// @ts-expect-error
+							// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 							a2.data.style = ButtonStyle.Primary;
-							// @ts-expect-error
+							// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 							a2.data.disabled = false;
 						}
 
-						// @ts-expect-error
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 						Interaction.message.components[1]!.components[1]!.data.style = ButtonStyle.Success;
-						// @ts-expect-error
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 						Interaction.message.components[1]!.components[1]!.data.disabled = true;
 
 						Interaction.update({
 							embeds: [
-								// @ts-ignore
-								Interaction.message.embeds[0],
+								Interaction.message.embeds[0] as APIEmbed,
 								{
 									title: "Data Settings",
 									description: "Your data will be deleted in **__60__** days without use.",
@@ -75,21 +73,20 @@ export default class {
 						});
 
 						for (var a3 of Interaction.message.components[1]!.components) {
-							// @ts-expect-error
+							// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 							a3.data.style = ButtonStyle.Primary;
-							// @ts-expect-error
+							// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 							a3.data.disabled = false;
 						}
 
-						// @ts-expect-error
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 						Interaction.message.components[1]!.components[2]!.data.style = ButtonStyle.Success;
-						// @ts-expect-error
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 						Interaction.message.components[1]!.components[2]!.data.disabled = true;
 
 						Interaction.update({
 							embeds: [
-								// @ts-ignore
-								Interaction.message.embeds[0],
+								Interaction.message.embeds[0] as APIEmbed,
 								{
 									title: "Data Settings",
 									description: "Your data will be deleted in **__365__** days without use.",
@@ -111,15 +108,14 @@ export default class {
 							a4.data.disabled = false;
 						}
 
-						// @ts-expect-error
-						Interaction.message.components[1]!.components[3]!.data.style = ButtonStyle.Success;
-						// @ts-expect-error
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
+						Interaction.message.components[1]!.components[3]!.data.disabled = ButtonStyle.Success;
+						// @ts-ignore: Cannot assign to 'disabled' because it is a read-only property.
 						Interaction.message.components[1]!.components[3]!.data.disabled = true;
 
 						Interaction.update({
 							embeds: [
-								// @ts-ignore
-								Interaction.message.embeds[0],
+								Interaction.message.embeds[0] as APIEmbed,
 								{
 									title: "Data Settings",
 									description: "Your data will be deleted in **__7777777__** days without use.",

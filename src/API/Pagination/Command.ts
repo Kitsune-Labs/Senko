@@ -1,12 +1,12 @@
-import type { Embed } from "discord.js";
+import type { APIEmbed } from "discord.js";
 
-export default async function(interaction: any, pages: Embed[] | any, timeout = 120000, isEphemeral = false): Promise<void> {
+export default async function(interaction: any, pages: APIEmbed[] | any, timeout = 120000, isEphemeral = false): Promise<void> {
 	if (pages.length <= 0) throw new Error("No pages provided.");
 
 	let page = 0;
 
 	const MessageStructure = {
-		embeds: [],
+		embeds: [] as Array<APIEmbed>,
 		fetchReply: true,
 		components: [
 			{
@@ -38,7 +38,6 @@ export default async function(interaction: any, pages: Embed[] | any, timeout = 
 
 	if (!interaction.deferred) await interaction.deferReply({ ephemeral: isEphemeral });
 
-	// @ts-ignore
 	MessageStructure.embeds[0] = pages[page];
 
 	pages[page].footer = { text: `Page ${page + 1} of ${pages.length}` };
@@ -59,7 +58,6 @@ export default async function(interaction: any, pages: Embed[] | any, timeout = 
 
 		await i.deferUpdate();
 
-		// @ts-ignore
 		MessageStructure.embeds[0] = pages[page];
 		pages[page].footer = { text: `Page ${page + 1} of ${pages.length}` };
 

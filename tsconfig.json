@@ -24,6 +24,7 @@
 		"outDir": "comp",
 		"removeComments": true,
 		"resolveJsonModule": true,
+		"alwaysStrict": true
 	},
 	"include": [
 		"./src/",

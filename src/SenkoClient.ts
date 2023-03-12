@@ -35,19 +35,19 @@ export const winston = Winston.createLogger({
 					return `${timestamp} ${level}: ${stack || message}`;
 				})
 			)
-		}),
-		new Winston.transports.File({
-			format: format.combine(
-				format.timestamp({ format: "MM:DD:YYYY HH:mm:ss" }),
-				format.json()
-			),
-			filename: `src/temp/combined-${Date.now()}.log`
 		})
+		// new Winston.transports.File({
+		// 	format: format.combine(
+		// 		format.timestamp({ format: "MM:DD:YYYY HH:mm:ss" }),
+		// 		format.json()
+		// 	),
+		// 	filename: `src/temp/combined-${Date.now()}.log`
+		// })
 	]
 });
 
 import type { SenkoClientTypes, SenkoCommand } from "./types/AllTypes";
-import { Client, Collection, PermissionsBitField, GatewayIntentBits as GatewayIntents, WebhookClient, Guild } from "discord.js";
+import { Client, Collection, PermissionsBitField, GatewayIntentBits as GatewayIntents, WebhookClient } from "discord.js";
 import { readdirSync } from "fs";
 
 export const senkoClient = new Client({
@@ -55,8 +55,9 @@ export const senkoClient = new Client({
 		GatewayIntents.MessageContent,
 		GatewayIntents.GuildMessages,
 		GatewayIntents.Guilds,
-		GatewayIntents.GuildBans,
+		GatewayIntents.GuildModeration,
 		GatewayIntents.GuildMembers
+		// GatewayIntents.GuildInvites
 	],
 	allowedMentions: {
 		parse: ["users", "roles", "everyone"],
@@ -93,9 +94,7 @@ Reflect.set(senkoClient, "api", {
 	statusLog: new WebhookClient({
 		url: process.env["STATUS_URL"] as string
 	}),
-	SenkosWorld: async function (): Promise<Guild> {
-		return await senkoClient.guilds.fetch("777251087592718336");
-	}
+	SenkosWorld: senkoClient.guilds.fetch("777251087592718336")
 });
 
 
@@ -135,9 +134,13 @@ process.on("uncaughtException", async (reason: any) => {
 senkoClient.once("ready", async () => {
 	winston.log("info", "Starting Senko...");
 
-	let commands = senkoClient.application!.commands;
-	// @ts-ignore
-	if (process.env["NIGHTLY"] === "true") commands = senkoClient.guilds.cache.get("777251087592718336").commands;
+	let commands;
+
+	if (process.env["NIGHTLY"] === "true") {
+		commands = senkoClient.guilds.cache.get("777251087592718336")?.commands;
+	} else {
+		commands = senkoClient.application?.commands;
+	}
 
 	// await commands.set([]);
 
@@ -189,12 +192,12 @@ senkoClient.once("ready", async () => {
 		commandsToSet.push(structure);
 	}
 
-	await commands.set(commandsToSet).then(async cmds => {
+	await commands?.set(commandsToSet).then(async cmds => {
 		senkoClient.api.loadedCommands = cmds;
 
 		winston.log("info", "Commands Ready");
 	}).catch((err: any) => {
-		winston.log("error", err.stack);
+		console.log(err);
 	});
 
 	if (process.env["NIGHTLY"] === "true") {

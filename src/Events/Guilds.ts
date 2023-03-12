@@ -1,7 +1,7 @@
 import { Bitfield } from "bitfields";
 import { deleteSuperGuild, fetchSuperGuild } from "../API/super";
 import bits from "../API/Bits.json";
-import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel, ChannelType } from "discord.js";
+import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel, ChannelType, TextChannel } from "discord.js";
 import type { SenkoClientTypes } from "../types/AllTypes";
 import { winston } from "../SenkoClient";
 
@@ -120,8 +120,7 @@ export default class {
 					embeds: [
 						{
 							title: "New Kitsune",
-							// @ts-ignore
-							description: `${member} [${member.id} | ${member.user.tag}]\n${member.user.bot ? "**IS a bot**" : "Not a bot"}\nCreated on <t:${parseInt(member.user.createdTimestamp / 1000)}>`,
+							description: `${member} [${member.id} | ${member.user.tag}]\n${member.user.bot ? "**IS a bot**" : "Not a bot"}\nCreated on <t:${Math.round(member.user.createdTimestamp / 1000)}>`,
 							color: senkoClient.api.Theme.light,
 							thumbnail: { url: member.user.displayAvatarURL({ size: 4096 }) }
 						}
@@ -135,11 +134,13 @@ export default class {
 		senkoClient.on("guildMemberRemove", async (member) => {
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData!.flags);
-			const memberLoggingChannel = guildData!.MemberLogs ? await member.guild.channels.fetch(guildData!.MemberLogs) : null;
-			const actionLoggingChannel = guildData!.MemberLogs ? await member.guild.channels.fetch(guildData!.MemberLogs) : null;
+			if (!guildData?.MemberLogs) return;
 
-			// @ts-ignore
-			if (memberLoggingChannel && memberLoggingChannel.type !== ChannelType.GuildText) memberLoggingChannel.send({
+			const memberLogChannel = await member.guild.channels.fetch(guildData.MemberLogs) as TextChannel | null;
+
+			if (!memberLogChannel) return;
+
+			memberLogChannel.send({
 				embeds: [
 					{
 						title: "Kitsune Left",
@@ -153,16 +154,18 @@ export default class {
 
 
 			//! Kicks
-			// @ts-expect-error
-			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return error("I do not have ViewAuditLog permission for this guild.");
-			const fetchedLogs = await member.guild.fetchAuditLogs({limit: 1, type: AuditLogEvent.MemberKick});
+			if (!member.guild?.members.me?.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+			const actionLogs = await member.guild.channels.fetch(guildData.ActionLogs) as TextChannel | null;
 
+			if (!actionLogs) return;
+
+			const fetchedLogs = await member.guild.fetchAuditLogs({limit: 1, type: AuditLogEvent.MemberKick});
 			const kickLog = fetchedLogs.entries.first();
+
 			if (!kickLog || kickLog.createdAt < member.joinedAt! || kickLog.executor!.id === senkoClient.user!.id || kickLog.target!.id !== member.id) return;
 
-			if (actionLoggingChannel && !guildFlags.get(bits.ActionLogs.KickActionDisabled) && actionLoggingChannel.type !== ChannelType.GuildText) {
-				// @ts-ignore
-				actionLoggingChannel.send({
+			if (!guildFlags.get(bits.ActionLogs.KickActionDisabled)) {
+				actionLogs.send({
 					embeds: [
 						{
 							title: "Action Report - Kitsune Kicked",

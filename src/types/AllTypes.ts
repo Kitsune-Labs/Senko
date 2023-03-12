@@ -1,5 +1,5 @@
 import type { Bitfield } from "bitfields";
-import type { ApplicationCommandOption, BaseMessageOptions, ChatInputCommandInteraction, Client, Collection, CommandInteraction, WebhookClient } from "discord.js";
+import type { ApplicationCommandOption, BaseMessageOptions, ChatInputCommandInteraction, Client, Collection, CommandInteraction, Guild, WebhookClient } from "discord.js";
 import type { GuildData, UserData } from "./SupabaseTypes";
 
 export interface BitData {
@@ -94,7 +94,7 @@ export interface SenkoClientTypes extends Client {
 		BitData: BitData;
 		loadedCommands: any;
 		statusLog: WebhookClient;
-		SenkosWorld: () => Promise<any>;
+		SenkosWorld: Guild;
 	};
 }
 

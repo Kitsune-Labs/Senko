@@ -116,7 +116,7 @@ export default {
 					{
 						title: "Server Configuration",
 						description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${senkoClient.user!.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${guildData.ActionLogs !== null ? `<#${guildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${guildData.MessageLogs !== null ? `<#${guildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${guildData.MemberLogs ? `<#${guildData.MemberLogs}>` : `${Icons.tick}  Not set`}`,
-						color: senkoClient.api.Theme.dark,
+						color: senkoClient.api.Theme.light_red,
 						fields: [
 							{name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
 						]
@@ -129,7 +129,7 @@ export default {
 							{name: "Kick Logs", value: `\`\`\`diff\n${guildFlags.get(bits.ActionLogs.KickActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`},
 							{name: "Timeout Logs", value: `\`\`\`diff\n${guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n`}
 						],
-						color: senkoClient.api.Theme.light
+						color: senkoClient.api.Theme.light_red
 					}
 				],
 				components: [
@@ -156,22 +156,10 @@ export default {
 
 			switch (interaction.options.getSubcommandGroup()) {
 			case "action-reports":
-				var actionChannel = interaction.options.getChannel("channel");
-
-				if (!actionChannel || actionChannel.type != 0) return interaction.reply({
-					embeds: [
-						{
-							title: `${Icons.exclamation}  That doesn't seem correct...`,
-							description: "You need to specify a text channel!",
-							color: senkoClient.api.Theme.dark,
-							thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_think.png" }
-						}
-					],
-					ephemeral: true
-				});
+				var actionChannel = interaction.options.get("channel", true).channel;
 
 				await updateSuperGuild(interaction.guild!, {
-					ActionLogs: actionChannel.id
+					ActionLogs: actionChannel?.id
 				});
 
 				interaction.reply({
@@ -188,22 +176,10 @@ export default {
 				});
 				break;
 			case "message-logging":
-				var messageChannel = interaction.options.getChannel("channel");
-
-				if (!messageChannel || messageChannel.type != 0) return interaction.reply({
-					embeds: [
-						{
-							title: `${Icons.exclamation}  That doesn't seem correct...`,
-							description: "You need to specify a text channel!",
-							color: senkoClient.api.Theme.dark,
-							thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_think.png" }
-						}
-					],
-					ephemeral: true
-				});
+				var messageChannel = interaction.options.get("channel", true).channel;
 
 				await updateSuperGuild(interaction.guild!, {
-					MessageLogs: messageChannel.id
+					MessageLogs: messageChannel?.id
 				});
 
 				interaction.reply({
@@ -284,8 +260,7 @@ export default {
 						description: `**Description**\n${guild!.description ? `${interaction.guild!.description}\n` : "No description"}\n**Vanity URL**: ${guild!.vanityURLCode ? `https://discord.gg/${guild!.vanityURLCode}  (${(await guild!.fetchVanityData()).uses} uses)` : "None"}\n**Region**: ${guild!.preferredLocale}\n**${guild!.memberCount}** members\n**${guild!.emojis.cache.size}** emojis\n**${guild!.stickers.cache.size}** stickers\n**${guild!.premiumSubscriptionCount}** boosts\n**${(await guild!.bans.fetch()).size}** bans`,
 						color: senkoClient.api.Theme.light,
 						thumbnail: {
-							// @ts-expect-error
-							url: guild!.iconURL()
+							url: guild!.iconURL() as string
 						}
 						// image: { url: guild.bannerURL({ size: 4096 }) },
 					}
