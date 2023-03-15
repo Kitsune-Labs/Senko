@@ -21,7 +21,7 @@ export default {
 					},
 					title: "📑 Messenger Index",
 					// @ts-expect-error
-					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n[Privacy Policy](https://senkosworld.com/privacy) - [Terms of Use](https://senkosworld.com/terms)\n\nPing: ${Math.floor(senkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
+					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n[Privacy Policy](https://senko.gg/privacy) - [Terms of Use](https://senko.gg/terms)\n\nPing: ${Math.floor(senkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
 					color: senkoClient.api.Theme.random()
 				}
 			],
