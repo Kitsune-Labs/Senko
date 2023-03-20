@@ -1,7 +1,7 @@
 import { Bitfield } from "bitfields";
 import { deleteSuperGuild, fetchSuperGuild } from "../API/super";
 import bits from "../API/Bits.json";
-import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel, ChannelType, TextChannel } from "discord.js";
+import { Colors, PermissionFlagsBits, AuditLogEvent, GuildTextBasedChannel, ChannelType, TextChannel, Events } from "discord.js";
 import type { SenkoClientTypes } from "../types/AllTypes";
 import { winston } from "../SenkoClient";
 
@@ -22,12 +22,11 @@ export default class {
 		//     }
 		// });
 
-		senkoClient.on("guildDelete", async guild => {
+		senkoClient.on(Events.GuildDelete, async guild => {
 			await deleteSuperGuild(guild);
 		});
 
-		senkoClient.on("guildBanAdd", async (member) => {
-			// @ts-expect-error
+		senkoClient.on(Events.GuildBanAdd, async (member) => {
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -54,6 +53,7 @@ export default class {
 							color: Colors.Red,
 							author: {
 								name: `${`${banLog.executor!.username}#${banLog.executor!.discriminator}` || "Unknown"}  [${banLog.executor!.id || "000000000000000000"}]`,
+								// eslint-disable-next-line camelcase
 								icon_url: `${banLog.executor!.displayAvatarURL()}`
 							}
 						}
@@ -64,8 +64,7 @@ export default class {
 			}
 		});
 
-		senkoClient.on("guildBanRemove", async (member) => {
-			// @ts-expect-error
+		senkoClient.on(Events.GuildBanRemove, async (member) => {
 			if (!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
 
 			const fetchedLogs = await member.guild.fetchAuditLogs({
@@ -96,6 +95,7 @@ export default class {
 							},
 							author: {
 								name: `${`${banLog.executor!.username}#${banLog.executor!.discriminator}` || "Unknown"}  [${banLog.executor!.id || "000000000000000000"}]`,
+								// eslint-disable-next-line camelcase
 								icon_url: `${banLog.executor!.displayAvatarURL()}`
 							}
 						}
@@ -107,7 +107,7 @@ export default class {
 		});
 
 
-		senkoClient.on("guildMemberAdd", async (member) => {
+		senkoClient.on(Events.GuildMemberAdd, async (member) => {
 			if (process.env["NIGHTLY"] === "true") return;
 			var guildData = await fetchSuperGuild(member.guild);
 
@@ -131,7 +131,7 @@ export default class {
 			}
 		});
 
-		senkoClient.on("guildMemberRemove", async (member) => {
+		senkoClient.on(Events.GuildMemberRemove, async (member) => {
 			var guildData = await fetchSuperGuild(member.guild);
 			var guildFlags = Bitfield.fromHex(guildData!.flags);
 			if (!guildData?.MemberLogs) return;
@@ -159,7 +159,7 @@ export default class {
 
 			if (!actionLogs) return;
 
-			const fetchedLogs = await member.guild.fetchAuditLogs({limit: 1, type: AuditLogEvent.MemberKick});
+			const fetchedLogs = await member.guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.MemberKick });
 			const kickLog = fetchedLogs.entries.first();
 
 			if (!kickLog || kickLog.createdAt < member.joinedAt! || kickLog.executor!.id === senkoClient.user!.id || kickLog.target!.id !== member.id) return;
@@ -176,6 +176,7 @@ export default class {
 							},
 							author: {
 								name: `${`${kickLog.executor!.username}#${kickLog.executor!.discriminator}` || "Unknown"}  [${kickLog.executor!.id || "000000000000000000"}]`,
+								// eslint-disable-next-line camelcase
 								icon_url: `${kickLog.executor!.displayAvatarURL()}`
 							}
 						}
@@ -186,7 +187,7 @@ export default class {
 			}
 		});
 
-		senkoClient.on("guildMemberUpdate", async (oldMember, newMember) => {
+		senkoClient.on(Events.GuildMemberUpdate, async (oldMember, newMember) => {
 			await newMember.fetch();
 
 			if (!newMember.guild.members!.me!.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
@@ -197,7 +198,7 @@ export default class {
 			if (!actionLoggingChannel) return;
 			if (guildFlags.get(bits.ActionLogs.TimeoutActionDisabled)) return;
 
-			const rawAudit = await newMember.guild.fetchAuditLogs({type: AuditLogEvent.MemberUpdate, limit: 1 });
+			const rawAudit = await newMember.guild.fetchAuditLogs({ type: AuditLogEvent.MemberUpdate, limit: 1 });
 			const audit = rawAudit.entries.first();
 
 			if (oldMember.communicationDisabledUntilTimestamp === newMember.communicationDisabledUntilTimestamp) return;

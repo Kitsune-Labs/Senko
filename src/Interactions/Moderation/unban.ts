@@ -23,7 +23,7 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
@@ -88,6 +88,7 @@ export default {
 						color: Colors.Green,
 						author: {
 							name: `${interaction.user.tag}  [${interaction.user.id}]`,
+							// eslint-disable-next-line camelcase
 							icon_url: `${interaction.user.displayAvatarURL()}`
 						}
 					}

@@ -33,7 +33,7 @@ export default {
 	userData: true,
 	defer: true,
 	category: "fun",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const MessageStruct = {
 			embeds: [
 				{

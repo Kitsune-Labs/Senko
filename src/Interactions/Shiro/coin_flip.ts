@@ -27,9 +27,9 @@ export default {
 		}
 	],
 	/**
-     * @param {CommandInteraction} interaction
-     */
-	start: async ({senkoClient, interaction}) => {
+	 * @param {CommandInteraction} interaction
+	 */
+	start: async ({ senkoClient, interaction }) => {
 		await interaction.reply({
 			embeds: [
 				{

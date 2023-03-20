@@ -50,23 +50,23 @@ export default {
 	defer: true,
 	ephemeral: true,
 	category: "fun",
-	start: async ({interaction}) => {
-		switch(interaction.options.getSubcommand()) {
-		case "translate":
-			interaction.followUp({
-				content: faux.translate(interaction.options.getString("message", true))
-			});
-			break;
-		case "encode":
-			interaction.followUp({
-				content: faux.encode(interaction.options.getString("message", true))
-			});
-			break;
-		case "decode":
-			interaction.followUp({
-				content: faux.decode(interaction.options.getString("message", true))
-			});
-			break;
+	start: async ({ interaction }) => {
+		switch (interaction.options.getSubcommand()) {
+			case "translate":
+				interaction.followUp({
+					content: faux.translate(interaction.options.getString("message", true))
+				});
+				break;
+			case "encode":
+				interaction.followUp({
+					content: faux.encode(interaction.options.getString("message", true))
+				});
+				break;
+			case "decode":
+				interaction.followUp({
+					content: faux.decode(interaction.options.getString("message", true))
+				});
+				break;
 		}
 	}
 } as SenkoCommand;

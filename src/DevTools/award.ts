@@ -21,7 +21,7 @@ export default {
 			required: true
 		}
 	],
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		if (interaction.user.id !== "609097445825052701") return;
 		const ShopItems = await fetchMarket();
 		const User = interaction.options.getString("user-id", true);

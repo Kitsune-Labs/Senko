@@ -86,7 +86,7 @@ export default {
 			]
 		}
 	],
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		const user = interaction.options.getUser("user", true);
 		const flag = interaction.options.getString("flag", true);
 		// @ts-expect-error
@@ -94,38 +94,38 @@ export default {
 		const BitData = senkoClient.api.BitData;
 
 		const userData = await fetchSuperUser(user);
-		if (!userData) return interaction.reply({content: `User not found ${userData}`, ephemeral: true});
+		if (!userData) return interaction.reply({ content: `User not found ${userData}`, ephemeral: true });
 		const flags = Bitfield.fromHex(userData.LocalUser.accountConfig.flags);
 
 		switch (interaction.options.getSubcommand()) {
-		case "view-guild":
-			var guild = await senkoClient.guilds.fetch(interaction.options.getString("guild-id", true)).catch(() => {
-				return interaction.reply({content: "Guild not found", ephemeral: true});
-			}) as Guild;
+			case "view-guild":
+				var guild = await senkoClient.guilds.fetch(interaction.options.getString("guild-id", true)).catch(() => {
+					return interaction.reply({ content: "Guild not found", ephemeral: true });
+				}) as Guild;
 
-			var guildData = await fetchSuperGuild(guild, false);
-			if (!guildData) return interaction.reply({content: `Guild not found: ${guildData}`, ephemeral: true});
-			var guildFlags = Bitfield.fromHex(guildData.flags);
+				var guildData = await fetchSuperGuild(guild, false);
+				if (!guildData) return interaction.reply({ content: `Guild not found: ${guildData}`, ephemeral: true });
+				var guildFlags = Bitfield.fromHex(guildData.flags);
 
-			var message = `BanActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.BanActionDisabled)}\`\`\`\nKickActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.KickActionDisabled)}\`\`\`\nTimeoutActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.TimeoutActionDisabled)}\`\`\`\n\nModCommands: \`\`\`${guildFlags.get(BitData.BETAs.ModCommands)}\`\`\``;
+				var message = `BanActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.BanActionDisabled)}\`\`\`\nKickActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.KickActionDisabled)}\`\`\`\nTimeoutActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.TimeoutActionDisabled)}\`\`\`\n\nModCommands: \`\`\`${guildFlags.get(BitData.BETAs.ModCommands)}\`\`\``;
 
-			interaction.reply({content: message, ephemeral: true});
-			break;
-		case "view":
-			// @ts-expect-error
-			interaction.reply({content: `Flag ${flag} is ${flags.get(flag)}`, ephemeral: true});
-			break;
-		case "set":
-			flags.set(flagBit, !flags.get(flagBit));
+				interaction.reply({ content: message, ephemeral: true });
+				break;
+			case "view":
+				// @ts-expect-error
+				interaction.reply({ content: `Flag ${flag} is ${flags.get(flag)}`, ephemeral: true });
+				break;
+			case "set":
+				flags.set(flagBit, !flags.get(flagBit));
 
-			userData.LocalUser.accountConfig.flags = flags.toHex();
+				userData.LocalUser.accountConfig.flags = flags.toHex();
 
-			await updateSuperUser(user, {
-				LocalUser: userData.LocalUser
-			});
+				await updateSuperUser(user, {
+					LocalUser: userData.LocalUser
+				});
 
-			interaction.reply({content: `${flag} is now ${flags.get(flagBit)}`, ephemeral: true});
-			break;
+				interaction.reply({ content: `${flag} is now ${flags.get(flagBit)}`, ephemeral: true });
+				break;
 		}
 	}
 } as SenkoCommand;

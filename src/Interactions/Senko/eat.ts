@@ -9,7 +9,7 @@ export default {
 	desc: "eat",
 	userData: true,
 	category: "fun",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const Market = await fetchMarket();
 		const possibleItems = [];
 		const chosenItems = {
@@ -77,22 +77,22 @@ export default {
 
 		if (chosenItems[0].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[0].name, style: 2, custom_id: `eat-${chosenItems[0].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[0].name, style: 2, customId: `eat-${chosenItems[0].id}-${interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n1. ${chosenItems[0].name}`;
 		}
 		if (chosenItems[1].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[1].name, style: 2, custom_id: `eat-${chosenItems[1].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[1].name, style: 2, customId: `eat-${chosenItems[1].id}-${interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n2. ${chosenItems[1].name}`;
 		}
 		if (chosenItems[2].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[2].name, style: 2, custom_id: `eat-${chosenItems[2].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[2].name, style: 2, customId: `eat-${chosenItems[2].id}-${interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n3. ${chosenItems[2].name}`;
 		}
 		if (chosenItems[3].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[3].name, style: 2, custom_id: `eat-${chosenItems[3].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[3].name, style: 2, customId: `eat-${chosenItems[3].id}-${interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n4. ${chosenItems[3].name}`;
 		}
 

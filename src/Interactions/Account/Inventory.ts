@@ -9,7 +9,7 @@ export default {
 	defer: true,
 	ephemeral: true,
 	category: "account",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const ShopItems = await fetchMarket();
 		const PageEstimate = Math.ceil(Object.keys(userData.LocalUser.profileConfig.Inventory).length / 8) < 1 ? 1 : Math.ceil(Object.keys(userData.LocalUser.profileConfig.Inventory).length / 8);
 		const Pages: any[] = [];

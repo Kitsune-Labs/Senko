@@ -42,7 +42,7 @@ export default {
 		});
 
 		// @ts-ignore
-		if (!interaction.member!.permissions.has(Permissions.ManageMessages)) return interaction.followUp({
+		if (!interaction.member?.permissions.has(Permissions.ManageMessages)) return interaction.followUp({
 			embeds: [
 				{
 					title: "Sorry dear!",

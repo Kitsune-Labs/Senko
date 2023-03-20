@@ -30,7 +30,7 @@ export default {
 			]
 		}
 	],
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		const BotChoices = ["rps_rock", "rps_paper", "rps_scissors"];
 		const BotChoice = BotChoices[Math.floor(Math.random() * BotChoices.length)] as string;
 		// @ts-ignore
@@ -51,8 +51,11 @@ export default {
 		});
 
 		const things: any = {
+			// eslint-disable-next-line camelcase
 			rps_rock: "🪨",
+			// eslint-disable-next-line camelcase
 			rps_paper: "🗞️",
+			// eslint-disable-next-line camelcase
 			rps_scissors: "✂️"
 		};
 

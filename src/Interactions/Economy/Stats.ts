@@ -7,7 +7,7 @@ export default {
 	defer: true,
 	ephemeral: true,
 	category: "account",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const StatsTitle = ["Here are your stats dear!", "Here you go!"];
 
 		const Currency = userData.LocalUser.profileConfig.Currency;

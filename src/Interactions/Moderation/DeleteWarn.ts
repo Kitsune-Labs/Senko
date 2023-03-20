@@ -18,7 +18,7 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		// @ts-ignore
 		if (!interaction.member!.permissions.has(Permissions.ModerateMembers)) return interaction.reply({
 			embeds: [

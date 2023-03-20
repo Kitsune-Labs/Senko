@@ -22,7 +22,7 @@ export default {
 	usableAnywhere: true,
 	category: "utility",
 	whitelist: true,
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		const User: any = interaction.options.getUser("user") || interaction.member;
 		// @ts-ignore
 		const AvatarURL = User.user ? User.user.avatarURL({ size: 2048 }) : User.avatarURL({ size: 2048 }) as User;

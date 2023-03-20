@@ -33,7 +33,7 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
@@ -73,38 +73,38 @@ export default {
 		const time = interaction.options.getNumber("seconds");
 
 		switch (interaction.options.getSubcommand()) {
-		case "set":
-			// @ts-expect-error
-			interaction.channel!.setRateLimitPerUser(time).then(() => {
-				interaction.followUp({
-					embeds: [
-						{
-							title: `${Icons.exclamation} Alright dear!`,
-							description: `I've set the channel slowmode to ${time} seconds!`,
-							color: senkoClient.api.Theme.light,
-							thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_tip.png" }
-						}
-					],
-					ephemeral: true
+			case "set":
+				// @ts-expect-error
+				interaction.channel!.setRateLimitPerUser(time).then(() => {
+					interaction.followUp({
+						embeds: [
+							{
+								title: `${Icons.exclamation} Alright dear!`,
+								description: `I've set the channel slowmode to ${time} seconds!`,
+								color: senkoClient.api.Theme.light,
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/hat_tip.png" }
+							}
+						],
+						ephemeral: true
+					});
 				});
-			});
-			break;
-		case "remove":
-			// @ts-expect-error
-			interaction.channel!.setRateLimitPerUser(0).then(() => {
-				interaction.followUp({
-					embeds: [
-						{
-							title: `${Icons.exclamation} Alright dear!`,
-							description: "I've removed the channel slowmode!",
-							color: senkoClient.api.Theme.light,
-							thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
-						}
-					],
-					ephemeral: true
+				break;
+			case "remove":
+				// @ts-expect-error
+				interaction.channel!.setRateLimitPerUser(0).then(() => {
+					interaction.followUp({
+						embeds: [
+							{
+								title: `${Icons.exclamation} Alright dear!`,
+								description: "I've removed the channel slowmode!",
+								color: senkoClient.api.Theme.light,
+								thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
+							}
+						],
+						ephemeral: true
+					});
 				});
-			});
-			break;
+				break;
 		}
 	}
 } as SenkoCommand;

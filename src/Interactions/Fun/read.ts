@@ -6,7 +6,7 @@ export default {
 	name: "read",
 	desc: "Read the manga chapters you get from the market!",
 	category: "fun",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const ShopItems = await fetchMarket();
 		const OwnedChapters: any = [];
 
@@ -14,7 +14,7 @@ export default {
 			for (var item of Object.keys(userData.LocalUser.profileConfig.Inventory)) {
 				const ShopItem = ShopItems[item] as MarketItem;
 				if (ShopItem && ShopItem.manga) {
-					OwnedChapters.push({ label: `${ShopItem.name}`, value: `read_${ShopItem.manga}`, description: `${ShopItem.desc}`});
+					OwnedChapters.push({ label: `${ShopItem.name}`, value: `read_${ShopItem.manga}`, description: `${ShopItem.desc}` });
 				}
 			}
 
@@ -41,7 +41,7 @@ export default {
 							{
 								type: 3,
 								placeholder: "What should I read?",
-								custom_id: "read_manga",
+								customId: "read_manga",
 								options: OwnedChapters
 							}
 						]

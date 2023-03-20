@@ -2,13 +2,13 @@ import { Bitfield } from "bitfields";
 import BitData from "../API/Bits.json";
 import Icons from "../Data/Icons.json";
 import { updateSuperUser, fetchSuperUser, fetchMarket } from "../API/super";
-import { ButtonStyle } from "discord.js";
+import { ButtonStyle, Events } from "discord.js";
 import type { SenkoClientTypes } from "../types/AllTypes";
 
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
-		senkoClient.on("interactionCreate", async Interaction => {
+		senkoClient.on(Events.InteractionCreate, async Interaction => {
 			//if (!Interaction.isButton() || !Interaction.isStringSelectMenu()) return;
 			const AccountData = await fetchSuperUser(Interaction.user);
 			const accountFlags = Bitfield.fromHex(AccountData!.LocalUser.accountConfig.flags);
@@ -22,81 +22,73 @@ export default class {
 
 			if (Interaction.isButton()) {
 				switch (Interaction.customId) {
-				case "user_privacy":
-					if (accountFlags.get(BitData.Private)) {
-						setFlag(BitData.Private, false);
+					case "user_privacy":
+						if (accountFlags.get(BitData.Private)) {
+							setFlag(BitData.Private, false);
 
-						await updateSuperUser(Interaction.user, {
-							LocalUser: AccountData!.LocalUser
-						});
+							await updateSuperUser(Interaction.user, {
+								LocalUser: AccountData!.LocalUser
+							});
 
-						Interaction.message.embeds[0]!.fields[0]!.value = Icons.disabled;
-						// @ts-expect-error
-						Interaction.message.components[0]!.components[0]!.data.style = ButtonStyle.Danger;
+							Interaction.message.embeds[0]!.fields[0]!.value = Icons.disabled;
+							Interaction.message.components[0]!.components[0]!.data.style = ButtonStyle.Danger;
 
-						Interaction.update({
-							// @ts-expect-error
-							embeds: [ Interaction.message.embeds[0] ],
-							ephemeral: true,
-							components: Interaction.message.components
-						});
-					} else {
-						setFlag(BitData.Private, true);
+							Interaction.update({
+								embeds: [Interaction.message.embeds[0]],
+								ephemeral: true,
+								components: Interaction.message.components
+							});
+						} else {
+							setFlag(BitData.Private, true);
 
-						await updateSuperUser(Interaction.user, {
-							LocalUser: AccountData!.LocalUser
-						});
+							await updateSuperUser(Interaction.user, {
+								LocalUser: AccountData!.LocalUser
+							});
 
-						Interaction.message.embeds[0]!.fields[0]!.value = Icons.enabled;
-						// @ts-expect-error
-						Interaction.message.components[0]!.components[0]!.data.style = ButtonStyle.Success;
+							Interaction.message.embeds[0]!.fields[0]!.value = Icons.enabled;
+							Interaction.message.components[0]!.components[0]!.data.style = ButtonStyle.Success;
 
-						Interaction.update({
-							// @ts-expect-error
-							embeds: [ Interaction.message.embeds[0] ],
-							ephemeral: true,
-							components: Interaction.message.components
-						});
-					}
+							Interaction.update({
+								embeds: [Interaction.message.embeds[0]],
+								ephemeral: true,
+								components: Interaction.message.components
+							});
+						}
 
-					break;
-				case "user_dm_achievements":
-					if (accountFlags.get(BitData.DMAchievements)) {
-						setFlag(BitData.DMAchievements, false);
+						break;
+					case "user_dm_achievements":
+						if (accountFlags.get(BitData.DMAchievements)) {
+							setFlag(BitData.DMAchievements, false);
 
-						await updateSuperUser(Interaction.user, {
-							LocalUser: AccountData!.LocalUser
-						});
+							await updateSuperUser(Interaction.user, {
+								LocalUser: AccountData!.LocalUser
+							});
 
-						Interaction.message.embeds[0]!.fields[1]!.value = Icons.disabled;
-						// @ts-expect-error
-						Interaction.message.components[0]!.components[1]!.data.style = ButtonStyle.Danger;
+							Interaction.message.embeds[0]!.fields[1]!.value = Icons.disabled;
+							Interaction.message.components[0]!.components[1]!.data.style = ButtonStyle.Danger;
 
-						Interaction.update({
-							// @ts-expect-error
-							embeds: [ Interaction.message.embeds[0] ],
-							ephemeral: true,
-							components: Interaction.message.components
-						});
-					} else {
-						setFlag(BitData.DMAchievements, true);
+							Interaction.update({
+								embeds: [Interaction.message.embeds[0]],
+								ephemeral: true,
+								components: Interaction.message.components
+							});
+						} else {
+							setFlag(BitData.DMAchievements, true);
 
-						await updateSuperUser(Interaction.user, {
-							LocalUser: AccountData!.LocalUser
-						});
+							await updateSuperUser(Interaction.user, {
+								LocalUser: AccountData!.LocalUser
+							});
 
-						Interaction.message.embeds[0]!.fields[1]!.value = Icons.enabled;
-						// @ts-expect-error
-						Interaction.message.components[0]!.components[1]!.data.style = ButtonStyle.Success;
+							Interaction.message.embeds[0]!.fields[1]!.value = Icons.enabled;
+							Interaction.message.components[0]!.components[1]!.data.style = ButtonStyle.Success;
 
-						Interaction.update({
-							// @ts-expect-error
-							embeds: [ Interaction.message.embeds[0] ],
-							ephemeral: true,
-							components: Interaction.message.components
-						});
-					}
-					break;
+							Interaction.update({
+								embeds: [Interaction.message.embeds[0]],
+								ephemeral: true,
+								components: Interaction.message.components
+							});
+						}
+						break;
 				}
 			}
 

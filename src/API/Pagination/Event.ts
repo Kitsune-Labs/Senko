@@ -14,14 +14,14 @@ export default async function(interaction: (Interaction|any), pages: Embed[], ti
 						type: 2,
 						emoji: "<:WhiteArrow1Left:943299054568374322>",
 						style: 1,
-						custom_id: "page_left",
+						customId: "page_left",
 						disabled: false
 					},
 					{
 						type: 2,
 						emoji: "<:WhiteArrow1Right:943299054580928582>",
 						style: 1,
-						custom_id: "page_right",
+						customId: "page_right",
 						disabled: false
 					}
 				]

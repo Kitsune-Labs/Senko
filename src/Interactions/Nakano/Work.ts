@@ -9,7 +9,7 @@ export default {
 	desc: "Have Nakano go to work to provide income",
 	userData: true,
 	category: "economy",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const DestructibleItems = [
 			{
 				name: "air conditioner",

@@ -59,12 +59,12 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		const Channels = guildData.Channels;
 
 		const command = interaction.options.getSubcommand();
 		// @ts-ignore
-		const command_permission = interaction.member!.permissions.has(Permissions.ManageChannels);
+		const commandPermission = interaction.member!.permissions.has(Permissions.ManageChannels);
 
 		function listChannels() {
 			interaction.followUp({
@@ -82,178 +82,178 @@ export default {
 		}
 
 		switch (command) {
-		case "add":
-			if (!command_permission) return listChannels();
-			var addChannel = interaction.options.getChannel("channel", true);
+			case "add":
+				if (!commandPermission) return listChannels();
+				var addChannel = interaction.options.getChannel("channel", true);
 
-			if (addChannel.type != 0) return interaction.followUp({
-				embeds: [
-					{
-						title: "Oh dear...",
-						description: "It appears that this channel is not a text channel!",
-						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://cdn.senko.gg/public/senko/heh.png" }
-					}
-				]
-			});
-
-			if (Channels.includes(addChannel.id)) return interaction.followUp({
-				embeds: [
-					{
-						title: "Silly!",
-						description: "This channel has already been added!",
-						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
-					}
-				]
-			});
-
-			Channels.push(addChannel.id);
-
-			await updateSuperGuild(interaction.guild!, {
-				Channels: Channels
-			});
-
-			interaction.followUp({
-				embeds: [
-					{
-						title: "Done!",
-						description: `People can now use my commands in ${addChannel}!`,
-						color: senkoClient.api.Theme.light,
-						thumbnail: {
-							url: "https://cdn.senko.gg/public/senko/talk.png"
+				if (addChannel.type != 0) return interaction.followUp({
+					embeds: [
+						{
+							title: "Oh dear...",
+							description: "It appears that this channel is not a text channel!",
+							color: senkoClient.api.Theme.dark,
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/heh.png" }
 						}
-					}
-				]
-			});
-			break;
-		case "remove":
-			if (!command_permission) return listChannels();
+					]
+				});
 
-			var rmChannel = interaction.options.getChannel("channel", true);
-
-			if (!Channels.includes(rmChannel.id)) return interaction.followUp({
-				embeds: [
-					{
-						title: "Lets see...",
-						description: "I can't seem to find this channel in my list!",
-						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
-					}
-				]
-			});
-
-			// @ts-ignore
-			spliceArray(Channels, channel.id);
-
-			await updateSuperGuild(interaction.guild!, {
-				Channels: Channels
-			});
-
-			interaction.followUp({
-				embeds: [
-					{
-						title: `${Icons.exclamation} Alright dear`,
-						description: `I have removed ${rmChannel} as per your request`,
-						color: senkoClient.api.Theme.dark,
-						thumbnail: {
-							url: "https://cdn.senko.gg/public/senko/smile2.png"
+				if (Channels.includes(addChannel.id)) return interaction.followUp({
+					embeds: [
+						{
+							title: "Silly!",
+							description: "This channel has already been added!",
+							color: senkoClient.api.Theme.dark,
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 						}
-					}
-				]
-			});
-			break;
-		case "list":
-			listChannels();
-			break;
-		case "remove-all-channels":
-			if (!command_permission) return listChannels();
-			if (!Channels[0]) return interaction.followUp({
-				embeds: [
-					{
-						title: "Lets see...",
-						description: "I can't find any channels to remove!",
-						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
-					}
-				]
-			});
+					]
+				});
 
-			interaction.followUp({
-				embeds: [
-					{
-						title: "Are you sure you want to remove all these channels?",
-						description: `${Channels.map(i => `<#${i}>`)}\n\nThis **cannot** be undone`,
-						color: senkoClient.api.Theme.dark,
-						thumbnail: {
-							url: "https://cdn.senko.gg/public/senko/nervous.png"
+				Channels.push(addChannel.id);
+
+				await updateSuperGuild(interaction.guild!, {
+					Channels: Channels
+				});
+
+				interaction.followUp({
+					embeds: [
+						{
+							title: "Done!",
+							description: `People can now use my commands in ${addChannel}!`,
+							color: senkoClient.api.Theme.light,
+							thumbnail: {
+								url: "https://cdn.senko.gg/public/senko/talk.png"
+							}
 						}
-					}
-				],
-				components: [
-					{
-						type: 1,
-						components: [
-							{ type: 2, label: "Remove channels", style: 4, custom_id: "confirm_super_channel_removal" },
-							{ type: 2, label: "Cancel", style: 2, custom_id: "cancel_channel_removal" }
-						]
-					}
-				]
-			});
-			break;
-		case "remove-deleted-channels":
-			if (!command_permission) return listChannels();
-			if (!Channels[0]) return interaction.followUp({
-				embeds: [
-					{
-						title: "Lets see...",
-						description: "I can't find any channels to remove!",
-						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
-					}
-				]
-			});
+					]
+				});
+				break;
+			case "remove":
+				if (!commandPermission) return listChannels();
 
-			var removed_channels = 0;
+				var rmChannel = interaction.options.getChannel("channel", true);
 
-			for (var v_channel of Channels) {
-				var channel2 = interaction.guild!.channels.cache.get(v_channel);
+				if (!Channels.includes(rmChannel.id)) return interaction.followUp({
+					embeds: [
+						{
+							title: "Lets see...",
+							description: "I can't seem to find this channel in my list!",
+							color: senkoClient.api.Theme.dark,
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
+						}
+					]
+				});
 
-				if (!channel2) {
-					// @ts-ignore
-					spliceArray(Channels, v_channel);
-					removed_channels++;
+				// @ts-ignore
+				spliceArray(Channels, channel.id);
+
+				await updateSuperGuild(interaction.guild!, {
+					Channels: Channels
+				});
+
+				interaction.followUp({
+					embeds: [
+						{
+							title: `${Icons.exclamation} Alright dear`,
+							description: `I have removed ${rmChannel} as per your request`,
+							color: senkoClient.api.Theme.dark,
+							thumbnail: {
+								url: "https://cdn.senko.gg/public/senko/smile2.png"
+							}
+						}
+					]
+				});
+				break;
+			case "list":
+				listChannels();
+				break;
+			case "remove-all-channels":
+				if (!commandPermission) return listChannels();
+				if (!Channels[0]) return interaction.followUp({
+					embeds: [
+						{
+							title: "Lets see...",
+							description: "I can't find any channels to remove!",
+							color: senkoClient.api.Theme.dark,
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
+						}
+					]
+				});
+
+				interaction.followUp({
+					embeds: [
+						{
+							title: "Are you sure you want to remove all these channels?",
+							description: `${Channels.map(i => `<#${i}>`)}\n\nThis **cannot** be undone`,
+							color: senkoClient.api.Theme.dark,
+							thumbnail: {
+								url: "https://cdn.senko.gg/public/senko/nervous.png"
+							}
+						}
+					],
+					components: [
+						{
+							type: 1,
+							components: [
+								{ type: 2, label: "Remove channels", style: 4, customId: "confirm_super_channel_removal" },
+								{ type: 2, label: "Cancel", style: 2, customId: "cancel_channel_removal" }
+							]
+						}
+					]
+				});
+				break;
+			case "remove-deleted-channels":
+				if (!commandPermission) return listChannels();
+				if (!Channels[0]) return interaction.followUp({
+					embeds: [
+						{
+							title: "Lets see...",
+							description: "I can't find any channels to remove!",
+							color: senkoClient.api.Theme.dark,
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
+						}
+					]
+				});
+
+				var removedChannels = 0;
+
+				for (var vChannel of Channels) {
+					var channel2 = interaction.guild!.channels.cache.get(vChannel);
+
+					if (!channel2) {
+						// @ts-ignore
+						spliceArray(Channels, v_channel);
+						removedChannels++;
+					}
 				}
-			}
 
-			if (removed_channels === 0) return interaction.followUp({
-				embeds: [
-					{
-						title: "Lets see...",
-						description: "I can't find any deleted channels to remove!",
-						color: senkoClient.api.Theme.dark,
-						thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
-					}
-				]
-			});
-
-			await updateSuperGuild(interaction.guild!, {
-				Channels: Channels
-			});
-
-			interaction.followUp({
-				embeds: [
-					{
-						title: "I have gathered your channels and reviewed them",
-						description: `I have found ${removed_channels > 1 ? " channel" : "channels"} that no longer exist${removed_channels > 1 ? " s" : ""} and have removed them!`,
-						color: senkoClient.api.Theme.light,
-						thumbnail: {
-							url: "https://cdn.senko.gg/public/senko/talk.png"
+				if (removedChannels === 0) return interaction.followUp({
+					embeds: [
+						{
+							title: "Lets see...",
+							description: "I can't find any deleted channels to remove!",
+							color: senkoClient.api.Theme.dark,
+							thumbnail: { url: "https://cdn.senko.gg/public/senko/smile2.png" }
 						}
-					}
-				]
-			});
-			break;
+					]
+				});
+
+				await updateSuperGuild(interaction.guild!, {
+					Channels: Channels
+				});
+
+				interaction.followUp({
+					embeds: [
+						{
+							title: "I have gathered your channels and reviewed them",
+							description: `I have found ${removedChannels > 1 ? " channel" : "channels"} that no longer exist${removedChannels > 1 ? " s" : ""} and have removed them!`,
+							color: senkoClient.api.Theme.light,
+							thumbnail: {
+								url: "https://cdn.senko.gg/public/senko/talk.png"
+							}
+						}
+					]
+				});
+				break;
 		}
 	}
 } as SenkoCommand;

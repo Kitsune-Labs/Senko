@@ -18,7 +18,7 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		const user = interaction.options.getUser("user") || interaction.user;
 
 		if (guildData.warns[user.id]) {
@@ -40,7 +40,7 @@ export default {
 				for (const warn of warnings) {
 					Page.title = `${warn.userTag}'s warnings`;
 					Page.description += `Warn **${warn.uuid}**\n`;
-					Page.description += `> Warned by ${warn.moderator} ||[${warn.moderatorId}]|| on <t:${Math.ceil(warn.date/1000)}> for "${warn.reason}"\n`;
+					Page.description += `> Warned by ${warn.moderator} ||[${warn.moderatorId}]|| on <t:${Math.ceil(warn.date / 1000)}> for "${warn.reason}"\n`;
 					Page.description += `Note: ${warn.note}\n`;
 					Page.description += `Received DM: ${warn.userDmd}\n\n`;
 				}

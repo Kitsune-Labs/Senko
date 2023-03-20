@@ -23,7 +23,7 @@ export default {
 	usableAnywhere: true,
 	category: "utility",
 	whitelist: true,
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		const whoUser = await interaction.options.getUser("user") || interaction.user;
 		// @ts-expect-error
 		const guildMember = interaction.guild!.members.cache.get(whoUser.id || whoUser);
@@ -39,7 +39,7 @@ export default {
 				"Authorization": `Bot ${senkoClient.token}`
 			}
 		}).then(async ({ data: userData }) => {
-			const banStatus = await interaction.guild!.bans.fetch(userData.id).catch(()=>null);
+			const banStatus = await interaction.guild!.bans.fetch(userData.id).catch(() => null);
 
 			/**
 			 * @type {Message}
@@ -48,7 +48,7 @@ export default {
 				embeds: [
 					{
 						// @ts-ignore
-						description: `${guildMember && guildMember.nickname ? guildMember.nickname : `<@${userData.id}> ${userData.username}#${userData.discriminator} [${userData.id}]`}\n\nBot: ${userData.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember && guildMember.premiumSinceTimestamp ? `**Yes**\n> **Booster since** <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nRegistered on ${whoUser.createdTimestamp ? `<t:${parseInt(whoUser.createdTimestamp / 1000)}>` : "unknown (Most likely not in Guild)" }\nJoined: ${guildMember ? `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>` : "**unknown (Most likely not in Guild)**"}\nBanned: ${banStatus ? `**Yes**\n> **Ban Reason:** ${banStatus.reason}` : "**No**"}\nWarnings Received: **${warns}**`,
+						description: `${guildMember && guildMember.nickname ? guildMember.nickname : `<@${userData.id}> ${userData.username}#${userData.discriminator} [${userData.id}]`}\n\nBot: ${userData.bot ? "**Yes**" : "**No**"}\nBooster: ${guildMember && guildMember.premiumSinceTimestamp ? `**Yes**\n> **Booster since** <t:${Math.ceil(guildMember.premiumSinceTimestamp / 1000)}>` : "**No**"}\nRegistered on ${whoUser.createdTimestamp ? `<t:${parseInt(whoUser.createdTimestamp / 1000)}>` : "unknown (Most likely not in Guild)"}\nJoined: ${guildMember ? `<t:${parseInt(guildMember.joinedTimestamp / 1000)}>` : "**unknown (Most likely not in Guild)**"}\nBanned: ${banStatus ? `**Yes**\n> **Ban Reason:** ${banStatus.reason}` : "**No**"}\nWarnings Received: **${warns}**`,
 						color: 0xfc844c,
 						thumbnail: {
 							url: AvatarURL ? AvatarURL : null
@@ -72,7 +72,7 @@ export default {
 
 			// @ts-expect-error
 			if (interaction.options.getBoolean("show-roles") === true && guildMember) messageStruct.embeds[0]!.fields.push([
-				{ name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u=>u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}`}
+				{ name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u => u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}` }
 			]);
 
 			if (userData.banner) {

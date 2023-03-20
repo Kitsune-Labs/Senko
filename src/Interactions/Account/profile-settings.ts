@@ -7,7 +7,7 @@ export default {
 	ephemeral: true,
 	usableAnywhere: true,
 	category: "account",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const ShopItems = await fetchMarket();
 		let currentColor = null;
 
@@ -49,17 +49,17 @@ export default {
 					type: 1,
 					components: [
 						// September 14, 2022: This marks when I found out you can use semi-colons in the ID, that makes stuff so much easier
-						{type: 2, label: "Change Title", style: 1, custom_id: "profile:title", disabled: invLength},
-						{type: 2, label: "Change Banner", style: 1, custom_id: "profile:banner", disabled: invLength},
-						{type: 2, label: "Change Card Color", style: 1, custom_id: "profile:color", disabled: invLength}
-						// {type: 2, label: "Update Status", style: 1, custom_id: "profile:status", disabled: invLength}
+						{ type: 2, label: "Change Title", style: 1, customId: "profile:title", disabled: invLength },
+						{ type: 2, label: "Change Banner", style: 1, customId: "profile:banner", disabled: invLength },
+						{ type: 2, label: "Change Card Color", style: 1, customId: "profile:color", disabled: invLength }
+						// {type: 2, label: "Update Status", style: 1, customId: "profile:status", disabled: invLength}
 					]
 				},
 				{
 					type: 1,
 					components: [
-						{type: 2, label: "Update About Me", style: 1, custom_id: "profile:about-me"},
-						{type: 2, label: "Remove About Me", style: 4, custom_id: "profile:remove"}
+						{ type: 2, label: "Update About Me", style: 1, customId: "profile:about-me" },
+						{ type: 2, label: "Remove About Me", style: 4, customId: "profile:remove" }
 					]
 				}
 			],

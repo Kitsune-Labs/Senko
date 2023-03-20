@@ -14,7 +14,7 @@ export default {
 	name: "cuddle",
 	desc: "Cuddle with Senko-san!",
 	category: "fun",
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		const MessageStruct = {
 			embeds: [
 				{
@@ -32,7 +32,6 @@ export default {
 
 			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  10x added for interaction`;
 		}
-
 
 		interaction.reply(MessageStruct);
 	}

@@ -10,6 +10,7 @@ export default {
 	desc: "Mofumofu!",
 	defer: true,
 	category: "fun",
+	// eslint-disable-next-line camelcase
 	description_localized: {
 		"jp": "モフ モフ！"
 	},

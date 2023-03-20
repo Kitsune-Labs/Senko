@@ -41,21 +41,21 @@ module.exports = {
 		// 			type: 2,
 		// 			label: "I wanted to say hello!",
 		// 			style: 1,
-		// 			custom_id: "senko_talk_1_hello",
+		// 			customId: "senko_talk_1_hello",
 		// 			emoji: Icons.sparkle
 		// 		},
 		// 		{
 		// 			type: 2,
 		// 			label: "How are you?",
 		// 			style: 1,
-		// 			custom_id: "senko_talk_1_hru",
+		// 			customId: "senko_talk_1_hru",
 		// 			emoji: Icons.question
 		// 		},
 		// 		{
 		// 			type: 2,
 		// 			label: "What are you up to?",
 		// 			style: 1,
-		// 			custom_id: "senko_talk_1_wruu2",
+		// 			customId: "senko_talk_1_wruu2",
 		// 			emoji: Icons.question
 		// 		}]
 		// 	}]
@@ -76,19 +76,19 @@ module.exports = {
 						type: 2,
 						label: "I'm fine, thanks!",
 						style: 3,
-						custom_id: "senko_talk_2_fine"
+						customId: "senko_talk_2_fine"
 					},
 					{
 						type: 2,
 						label: "Things could be better.",
 						style: 2,
-						custom_id: "senko_talk_2_doingwell"
+						customId: "senko_talk_2_doingwell"
 					},
 					{
 						type: 2,
 						label: "Not so great...",
 						style: 4,
-						custom_id: "senko_talk_2_notdoinggreat"
+						customId: "senko_talk_2_notdoinggreat"
 					}
 					]
 				}]

@@ -32,7 +32,7 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({senkoClient, interaction, guildData}) => {
+	start: async ({ senkoClient, interaction, guildData }) => {
 		const guildWarns = guildData.warns;
 		const ActionLogs = guildData.ActionLogs;
 		const flags = guildData.flags;
@@ -126,6 +126,7 @@ export default {
 						},
 						author: {
 							name: `${interaction.user.tag}  [${interaction.user.id}]`,
+							// eslint-disable-next-line camelcase
 							icon_url: `${interaction.user.displayAvatarURL()}`
 						}
 					}

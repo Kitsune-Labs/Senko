@@ -1,5 +1,5 @@
 import type { SenkoClientTypes } from "../types/AllTypes";
-import type { Attachment, Sticker } from "discord.js";
+import { Attachment, Events, Sticker } from "discord.js";
 import { Colors, Message } from "discord.js";
 import { clean } from "../API/Master";
 import { v4 as uuidv4 } from "uuid";
@@ -11,13 +11,13 @@ import { winston } from "../SenkoClient";
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
-		senkoClient.on("messageDelete", async (message: Message|any) => {
+		senkoClient.on(Events.MessageDelete, async (message: Message | any) => {
 			if (!message.guild || message.author.bot || message.system) return;
 
 			const guildData = await fetchSuperGuild(message.guild);
 
 			if (!guildData) return;
-			if (!guildData.MessageLogs &&! guildData.AdvancedMessageLogging.message_deletions) return;
+			if (!guildData.MessageLogs && !guildData.AdvancedMessageLogging.message_deletions) return;
 
 			const caseId = uuidv4().slice(0, 8);
 			const linkedFiles: string[] = [];
@@ -49,12 +49,12 @@ export default class {
 						}
 					}
 				],
-				files:  []
+				files: []
 			};
 
 			if (guildData.AdvancedMessageLogging.message_deletions) {
 				messageStructure.embeds[0]!.title = "";
-				messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+				messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 			}
 
 			if (message.attachments.size == 0) messageStructure.embeds[0]!.footer.text = "";
@@ -77,7 +77,7 @@ export default class {
 					await fileWrite.on("finish", async () => {
 						linkedFiles.push(`./src/temp/${fileId}`);
 
-						files.push({attachment: `./src/temp/${fileId}`, name: `SPOILER_${fileId}` });
+						files.push({ attachment: `./src/temp/${fileId}`, name: `SPOILER_${fileId}` });
 					});
 				});
 			}
@@ -93,9 +93,9 @@ export default class {
 
 			if (messageStructure.embeds[0]!.description.length >= 2048) {
 				if (guildData.AdvancedMessageLogging.message_deletions) {
-					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n__**Message Content**__```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n__**Message Content**__```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 				} else {
-					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment)=> r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker)=> `\n${s.url}`)}` : ""}`;
+					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 				}
 				fs.writeFileSync(`./src/temp/${caseId}.txt`, `> DELETED MESSAGE\n\n\n\n${message.content}`);
 				linkedFiles.push(`./src/temp/${caseId}.txt`);
@@ -123,12 +123,12 @@ export default class {
 			});
 		});
 
-		senkoClient.on("messageUpdate", async (oldMessage, newMessage) => {
+		senkoClient.on(Events.MessageUpdate, async (oldMessage, newMessage) => {
 			if (!oldMessage.guild || oldMessage.author!.bot || oldMessage.system || oldMessage.content === newMessage.content) return;
 
 			const guildData = await fetchSuperGuild(oldMessage.guild);
 			if (!guildData) return;
-			if (!guildData!.MessageLogs &&! guildData!.AdvancedMessageLogging.message_deletions) return;
+			if (!guildData!.MessageLogs && !guildData!.AdvancedMessageLogging.message_deletions) return;
 
 			const channelToSendTo: any = await newMessage.guild!.channels.fetch(guildData!.AdvancedMessageLogging.message_edits || guildData!.MessageLogs).catch(() => null);
 			const caseId = uuidv4().slice(0, 8);

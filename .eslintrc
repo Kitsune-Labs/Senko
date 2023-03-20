@@ -17,7 +17,7 @@
     "rules": {
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
-        "indent": ["error", "tab"],
+        "indent": ["error", "tab", { "SwitchCase": 1 }],
         "comma-style": ["error", "last"],
         "comma-spacing": "error",
         "comma-dangle": "error",
@@ -27,6 +27,7 @@
         "no-multi-spaces": "error",
         "no-extra-parens": "error",
         "brace-style": "error",
+        "camelcase": "error",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-non-null-assertion": "off",

@@ -9,7 +9,7 @@ import { winston } from "../SenkoClient";
 
 export default class {
 	constructor() {
-		winston.log("senko", "💽 Senko API Server Started");
+		winston.log("senko", "💽 API Server Started");
 	}
 
 	async execute(senkoClient: SenkoClientTypes) {
@@ -20,7 +20,7 @@ export default class {
 		app.get("/status", (res: Response) => {
 			res.status(200).send({
 				uptime: senkoClient.uptime,
-				websocket_ping: senkoClient.ws.ping
+				websocketPing: senkoClient.ws.ping
 			});
 		});
 
@@ -74,6 +74,7 @@ export default class {
 							},
 							author: {
 								name: `${mod.tag}  [${mod.id}]`,
+								// eslint-disable-next-line camelcase
 								icon_url: `${mod.displayAvatarURL()}`
 							}
 						}

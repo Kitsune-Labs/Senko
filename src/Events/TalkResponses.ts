@@ -1,10 +1,12 @@
+/* eslint-disable camelcase */
 import { randomArrayItem } from "@kitsune-labs/utilities";
+import { Events } from "discord.js";
 import Icons from "../Data/Icons.json";
 import type { SenkoClientTypes } from "../types/AllTypes";
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
-		senkoClient.on("interactionCreate", async (interaction) => {
+		senkoClient.on(Events.InteractionCreate, async (interaction) => {
 			if (interaction.isButton() && interaction.customId.startsWith("senko_talk_")) {
 				// @ts-ignore
 				if (interaction.message.embeds[0].footer.text !== interaction.user.tag) return;
@@ -82,7 +84,7 @@ export default class {
 								{
 									type: 1,
 									components: [
-										{ type: 2, label: "Consume the fluffy", style: 1, custom_id: "senko_talk_consume_the_fluff", emoji: Icons.tail1 }
+										{ type: 2, label: "Consume the fluffy", style: 1, customId: "senko_talk_consume_the_fluff", emoji: Icons.tail1 }
 									]
 								}
 							]
@@ -127,8 +129,8 @@ export default class {
 								{
 									type: 1,
 									components: [
-										{ type: 2, label: "Want to go shopping later?", style: 1, custom_id: "senko_talk_1_shop", emoji: Icons.question },
-										{ type: 2, label: "See you later!", style: 2, custom_id: "senko_talk_leave", emoji: "👋" }
+										{ type: 2, label: "Want to go shopping later?", style: 1, customId: "senko_talk_1_shop", emoji: Icons.question },
+										{ type: 2, label: "See you later!", style: 2, customId: "senko_talk_leave", emoji: "👋" }
 									]
 								}
 							]
@@ -147,8 +149,8 @@ export default class {
 								{
 									type: 1,
 									components: [
-										{ type: 2, label: "Is there any way I can help?", style: 1, custom_id: "senko_talk_1_any_way", emoji: Icons.question },
-										{ type: 2, label: "Sorry I can't help...", style: 4, custom_id: "senko_talk_1_ch", emoji: Icons.tick }
+										{ type: 2, label: "Is there any way I can help?", style: 1, customId: "senko_talk_1_any_way", emoji: Icons.question },
+										{ type: 2, label: "Sorry I can't help...", style: 4, customId: "senko_talk_1_ch", emoji: Icons.tick }
 									]
 								}
 							]
@@ -221,8 +223,8 @@ export default class {
 								{
 									type: 1,
 									components: [
-										{ type: 2, label: "Can I fluff your tail?", style: 3, custom_id: "senko_talk_fluff_tail", emoji: Icons.tail1 },
-										{ type: 2, label: "There isn't", style: 4, custom_id: "senko_talk_leave" }
+										{ type: 2, label: "Can I fluff your tail?", style: 3, customId: "senko_talk_fluff_tail", emoji: Icons.tail1 },
+										{ type: 2, label: "There isn't", style: 4, customId: "senko_talk_leave" }
 									]
 								}
 							]

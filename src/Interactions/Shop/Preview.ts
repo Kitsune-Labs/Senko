@@ -9,7 +9,7 @@ export default {
 	desc: "Preview an item from Senko's Market",
 	usableAnywhere: true,
 	category: "economy",
-	start: async ({interaction}) => {
+	start: async ({ interaction }) => {
 		const ShopItems = await fetchMarket();
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all") as any;
 
@@ -27,7 +27,7 @@ export default {
 						{
 							type: ComponentType.StringSelect,
 							placeholder: "Select an item to preview",
-							custom_id: "shop_preview",
+							customId: "shop_preview",
 							options: []
 						}
 					]

@@ -14,7 +14,7 @@ export default {
 	],
 	usableAnywhere: true,
 	category: "fun",
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		const Item = interaction.options.getString("thing", true);
 
 		const MessageBuild = {

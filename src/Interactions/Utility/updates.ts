@@ -8,7 +8,7 @@ export default {
 	ephemeral: true,
 	usableAnywhere: true,
 	category: "utility",
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		Paginate(interaction, [
 			{
 				title: "Senko v5.0.0",

@@ -13,12 +13,12 @@ export default {
 		}
 	],
 	category: "fun",
-	start: async ({senkoClient, interaction}) => {
+	start: async ({ senkoClient, interaction }) => {
 		interaction.reply({
 			embeds: [
 				{
 					image: {
-						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.getString("text")}`)
+						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.getString("text", true)}`)
 					},
 					color: senkoClient.api.Theme.light
 				}

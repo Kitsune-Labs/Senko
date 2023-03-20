@@ -33,7 +33,7 @@ export default {
 	],
 	defer: true,
 	category: "fun",
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const OptionalUser = interaction.options.getUser("user");
 
 		if (OptionalUser) {
@@ -86,6 +86,7 @@ export default {
 
 			await updateSuperUser(interaction.user, {
 				RateLimits: {
+					// eslint-disable-next-line camelcase
 					Hug_Rate: {
 						Amount: 0,
 						Date: Date.now()

@@ -12,10 +12,7 @@ export default {
 	userData: true,
 	defer: true,
 	category: "economy",
-	/**
-	 * @param {CommandInteraction} interaction
-     */
-	start: async ({senkoClient, interaction, userData}) => {
+	start: async ({ senkoClient, interaction, userData }) => {
 		const ShopItems = await fetchMarket();
 		// const rawShopData = /*{ data: rawShopData } =*/ process.env.PSEUDO_MARKET === "true" ? require("../../Data/LocalSave/PseudoMarket.json") : await Supabase.from("config").select("*").eq("id", "all");
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all") as any;
@@ -77,13 +74,13 @@ export default {
 
 		for (var index in itemClasses) {
 			// @ts-expect-error
-			if (itemClasses[index].length > 0 && !marketResponse.fields.find(f=>f.name === index)) marketResponse.fields.push({ name: `${index}`, value: "" });
+			if (itemClasses[index].length > 0 && !marketResponse.fields.find(f => f.name === index)) marketResponse.fields.push({ name: `${index}`, value: "" });
 
 			itemClasses[index].map((item: any) => {
 				// @ts-expect-error
-				marketResponse.fields.find(f=>f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}${item.data.set ? ` **(Part of the ${item.data.set} set)**\n` : "\n"}`;
+				marketResponse.fields.find(f => f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}${item.data.set ? ` **(Part of the ${item.data.set} set)**\n` : "\n"}`;
 
-				if (!MenuItems.find(i=>i.label === item.data.name)) MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}#${Math.floor(Math.random() * 100)}` });
+				if (!MenuItems.find(i => i.label === item.data.name)) MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}#${Math.floor(Math.random() * 100)}` });
 			});
 		}
 
@@ -96,7 +93,7 @@ export default {
 						{
 							type: ComponentType.StringSelect,
 							placeholder: "Select an item to purchase",
-							custom_id: "shop_purchase",
+							customId: "shop_purchase",
 							options: MenuItems
 						}
 					]

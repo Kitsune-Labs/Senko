@@ -29,14 +29,14 @@ export default {
 		}
 	],
 	category: "fun",
-	start: async ({interaction}) => {
+	start: async ({ interaction }) => {
 		interaction.reply({
 			embeds: [
 				{
-					title: interaction.options.getString("text"),
+					title: interaction.options.getString("text", true),
 					description: randomArrayItem(responses)
 				}
 			]
-		} as SenkoMessageOptions);
+		});
 	}
 } as SenkoCommand;

@@ -15,7 +15,7 @@ export default {
 	],
 	usableAnywhere: true,
 	category: "fun",
-	start: async ({interaction}) => {
+	start: async ({ interaction }) => {
 		interaction.reply({
 			content: owoify(interaction.options.getString("text", true)),
 			ephemeral: true

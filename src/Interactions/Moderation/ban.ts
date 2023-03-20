@@ -145,8 +145,8 @@ export default {
 					color: Colors.Red,
 					author: {
 						name: `${interaction.user.tag}  [${interaction.user.id}]`,
-						// @ts-expect-error
-						icon_url: `${interaction.user.displayAvatarURL({ dynamic: true })}`
+						// eslint-disable-next-line camelcase
+						icon_url: interaction.user.displayAvatarURL()
 					}
 				});
 			}

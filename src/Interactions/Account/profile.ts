@@ -20,7 +20,7 @@ export default {
 	],
 	defer: true,
 	category: "account",
-	start: async ({senkoClient, interaction, userData, xpAmount}) => {
+	start: async ({ senkoClient, interaction, userData, xpAmount }) => {
 		const User = interaction.options.getUser("user") || interaction.user;
 		// @ts-expect-error
 		if (User !== interaction.user) userData = await fetchSuperUser(User, false);

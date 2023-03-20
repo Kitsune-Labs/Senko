@@ -9,10 +9,10 @@ export default {
 	category: "utility",
 	whitelist: true,
 	/**
-     * @param {CommandInteraction} interaction
-     * @param {Client} senkoClient
-     */
-	start: async ({senkoClient, interaction}) => {
+	 * @param {CommandInteraction} interaction
+	 * @param {Client} senkoClient
+	 */
+	start: async ({ senkoClient, interaction }) => {
 		interaction.followUp({
 			embeds: [
 				{
@@ -29,23 +29,23 @@ export default {
 				{
 					type: 1,
 					components: [
-						{ type: 2, label: "Home", style: 4, custom_id: "help:home", disabled: true },
-						{ type: 2, label: "Fun", style: 3, custom_id: "help:fun" },
-						{ type: 2, label: "Economy", style: 3, custom_id: "help:economy" },
-						{ type: 2, label: "Administration", style: 3, custom_id: "help:admin" },
-						{ type: 2, label: "Account", style: 3, custom_id: "help:account", disabled: false }
+						{ type: 2, label: "Home", style: 4, customId: "help:home", disabled: true },
+						{ type: 2, label: "Fun", style: 3, customId: "help:fun" },
+						{ type: 2, label: "Economy", style: 3, customId: "help:economy" },
+						{ type: 2, label: "Administration", style: 3, customId: "help:admin" },
+						{ type: 2, label: "Account", style: 3, customId: "help:account", disabled: false }
 					]
 				},
 				{
 					type: 1,
 					components: [
-						{ type: 2, label: "Utility", style: 3, custom_id: "help:utility", disabled: false }
+						{ type: 2, label: "Utility", style: 3, customId: "help:utility", disabled: false }
 					]
 				},
 				{
 					type: 1,
 					components: [
-						{ type: 2, label: "Honorable Mentions", style: 2, custom_id: "honorable_mentions" },
+						{ type: 2, label: "Honorable Mentions", style: 2, customId: "honorable_mentions" },
 						{ type: 2, label: "Invite me", style: 5, url: `https://discord.com/oauth2/authorize?scope=bot%20applications.commands&client_id=${senkoClient.user?.id}&permissions=137439266880` },
 						{ type: 2, label: "Support and Community", style: 5, url: "https://senkosworld.com/discord" }
 						//{ type: 2, label: "Tutorials & docs", style: 5, url: "https://docs.senkosworld.com/", disabled: true }

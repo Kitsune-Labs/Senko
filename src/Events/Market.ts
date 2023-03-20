@@ -1,10 +1,11 @@
 import Icons from "../Data/Icons.json";
 import { fetchConfig, updateSuperUser, fetchSuperUser, fetchMarket } from "../API/super";
 import type { SenkoClientTypes } from "../types/AllTypes";
+import { Events } from "discord.js";
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
-		senkoClient.on("interactionCreate", async (interaction: any) => {
+		senkoClient.on(Events.InteractionCreate, async (interaction: any) => {
 			const shopItems = await fetchMarket();
 
 			if (interaction.isStringSelectMenu() && interaction.customId == "shop_purchase") {
@@ -95,8 +96,8 @@ export default class {
 						{
 							type: 1,
 							components: [
-								{ type: 2, label: "Purchase", style: 3, custom_id: `shop_confirm-${Object.keys(shopItems).indexOf(itemName)}-${interaction.user.id}` },
-								{ type: 2, label: "Put back", style: 4, custom_id: `shop_cancel-${interaction.user.id}` }
+								{ type: 2, label: "Purchase", style: 3, customId: `shop_confirm-${Object.keys(shopItems).indexOf(itemName)}-${interaction.user.id}` },
+								{ type: 2, label: "Put back", style: 4, customId: `shop_cancel-${interaction.user.id}` }
 							]
 						}
 					]
