@@ -1,111 +1,162 @@
-import { ApplicationCommandOptionType as CommandOption } from "discord.js";
-import type { SenkoCommand, SenkoMessageOptions } from "../../types/AllTypes";
+import { ApplicationCommandOptionType as CommandOption, ButtonStyle, ComponentType } from "discord.js";
+import type { SenkoCommand } from "../../types/AllTypes";
 
 export default {
 	name: "poll",
-	desc: "Create a poll",
+	desc: "poll",
+	category: "admin",
 	options: [
 		{
-			name: "topic",
-			description: "Description",
+			name: "question",
+			description: "The question to ask",
 			type: CommandOption.String,
 			required: true
 		},
 		{
-			name: "option",
-			description: "Option 1",
+			name: "option-1",
+			description: "option",
 			type: CommandOption.String,
+			maxLength: 50,
+			minLength: 1,
 			required: true
 		},
 		{
 			name: "option-2",
-			description: "Option 2",
+			description: "option",
 			type: CommandOption.String,
-			required: true
+			maxLength: 50,
+			minLength: 1
 		},
 		{
 			name: "option-3",
-			description: "Option 3",
+			description: "option",
 			type: CommandOption.String,
-			required: false
+			maxLength: 50,
+			minLength: 1
 		},
 		{
 			name: "option-4",
-			description: "Option 4",
+			description: "option",
 			type: CommandOption.String,
-			required: false
+			maxLength: 50,
+			minLength: 1
 		},
 		{
 			name: "option-5",
-			description: "Option 5",
+			description: "option",
 			type: CommandOption.String,
-			required: false
+			maxLength: 50,
+			minLength: 1
 		},
 		{
 			name: "option-6",
-			description: "Option 6",
+			description: "option",
 			type: CommandOption.String,
-			required: false
+			maxLength: 50,
+			minLength: 1
 		},
 		{
 			name: "option-7",
-			description: "Option 7",
+			description: "option",
 			type: CommandOption.String,
-			required: false
+			maxLength: 50,
+			minLength: 1
 		},
 		{
 			name: "option-8",
-			description: "Option 8",
+			description: "option",
 			type: CommandOption.String,
-			required: false
+			maxLength: 50,
+			minLength: 1
 		},
 		{
 			name: "option-9",
-			description: "Option 9",
+			description: "option",
 			type: CommandOption.String,
-			required: false
+			maxLength: 50,
+			minLength: 1
+		},
+		{
+			name: "option-10",
+			description: "option",
+			type: CommandOption.String,
+			maxLength: 50,
+			minLength: 1
 		}
 	],
-	usableAnywhere: true,
-	category: "fun",
-	start: async ({senkoClient, interaction}) => {
-		const Topic = interaction.options.getString("topic");
-		let OptionString = "";
-		let MaxOptions = 0;
-		const Numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
-		const Reactions = [];
+	start: async ({ senkoClient, interaction }) => {
+		const options = interaction.options.data.filter((option) => option.name.startsWith("option-"));
+		const voteCounts = new Array(options.length).fill(0);
 
-		// @ts-expect-error
-		for (var Option of interaction.options._hoistedOptions) {
-			if (Option.name !== "topic") {
-				OptionString += `${Numbers[MaxOptions]}  ${Option.value}\n`;
-				Reactions.push(Numbers[MaxOptions]);
-				MaxOptions++;
-			}
-		}
-
-		const MesG = await interaction.reply({
+		const PollMessage: any = {
 			embeds: [
 				{
-					author: {
-						// @ts-ignore
-						name: interaction.member!.nickname || interaction.member!.user.username,
-						// @ts-expect-error
-						iconURL: interaction.user.avatarURL()
-					},
-					description: `**${Topic}**\n\n${OptionString}\n\nWhat will you pick?`,
+					description: `**${interaction.options.get("question", true)?.value}**\n\n${options.map((option, index) => `${index + 1}. ${option.value} (0 votes)`).join("\n")}`,
 					color: senkoClient.api.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/hat_think.png"
 					}
 				}
 			],
-			fetchReply: true
-			// TODO: change "any"
-		} as SenkoMessageOptions) as any;
+			components: []
+		};
 
-		for (var reaction of Reactions) {
-			await MesG.react(reaction);
-		}
+		options.map((option, index) => {
+			if (index < 5) {
+				if (!PollMessage.components[0]) PollMessage.components.push({
+					type: ComponentType.ActionRow,
+					components: []
+				});
+
+				PollMessage.components[0]?.components.push({
+					type: ComponentType.Button,
+					style: ButtonStyle.Secondary,
+					label: option.value,
+					customId: `poll-${index}`
+				});
+			} else {
+				if (!PollMessage.components[1]) PollMessage.components.push({
+					type: ComponentType.ActionRow,
+					components: []
+				});
+
+				PollMessage.components[1]?.components.push({
+					type: ComponentType.Button,
+					style: ButtonStyle.Secondary,
+					label: option.value,
+					customId: `poll-${index}`
+				});
+			}
+		});
+
+		const Message = await interaction.reply(PollMessage);
+
+		const filter = (i: any) => i.customId.startsWith("poll-");
+		const collector = Message.createMessageComponentCollector({ filter, componentType: ComponentType.Button });
+		const userVotes = new Map();
+
+		collector.on("collect", async (i) => {
+			// @ts-ignore
+			const index = parseInt(i.customId.split("-")[1]);
+
+			if (index >= 0 && index < voteCounts.length) {
+				const previousVote = userVotes.get(i.user.id);
+
+				if (previousVote === index) {
+					i.reply({ content: "You have already voted for this option!", ephemeral: true });
+					return;
+				}
+
+				if (previousVote !== undefined) {
+					voteCounts[previousVote] -= 1;
+				}
+
+				userVotes.set(i.user.id, index);
+				voteCounts[index] += 1;
+
+				PollMessage.embeds[0].description = `**${interaction.options.get("question", true)?.value}**\n\n${options.map((option, index) => `${index + 1}. ${option.value} (${voteCounts[index]} votes)`).join("\n")}`;
+				await i.update({ embeds: PollMessage.embeds, components: PollMessage.components });
+			}
+		});
 	}
 } as SenkoCommand;

@@ -1,8 +1,7 @@
 import type { SenkoClientTypes, SenkoCommand, SenkoMessageOptions } from "../types/AllTypes";
 
 import { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser } from "../API/super";
-import { ChatInputCommandInteraction, InteractionType, PermissionFlagsBits } from "discord.js";
-import type { Interaction } from "discord.js";
+import { PermissionFlagsBits, PermissionsBitField, Events, Interaction } from "discord.js";
 import { existsSync } from "fs";
 
 import { randomNumber } from "@kitsune-labs/utilities";
@@ -15,16 +14,16 @@ export const SenkoClientPermissions = [
 	PermissionFlagsBits.UseExternalEmojis,
 	PermissionFlagsBits.AddReactions,
 	PermissionFlagsBits.ViewChannel
-] as any;
+];
+
+export const SenkoClientPermissionBits = new PermissionsBitField(SenkoClientPermissions);
 
 export default class {
 	async execute(SenkoClient: SenkoClientTypes) {
-		SenkoClient.on("interactionCreate", async (interaction: Interaction | ChatInputCommandInteraction | any) => {
-			if (!interaction || interaction.type !== InteractionType.ApplicationCommand || interaction.user.bot || interaction.replied || !interaction.guild) return;
-			const dataConfig = await fetchConfig();
-			const LoadedInteractionCommand = SenkoClient.api.Commands.get(interaction.commandName) as unknown as SenkoCommand;
-			const superGuildData = await fetchSuperGuild(interaction.guild);
-			const accountData = await fetchSuperUser(interaction.user);
+		SenkoClient.on(Events.InteractionCreate, async (interaction: Interaction) => {
+			if (!interaction.isChatInputCommand() || !interaction.guild) return;
+
+			const LoadedInteractionCommand = SenkoClient.api.Commands.get(interaction.commandName) as SenkoCommand;
 
 			if (!LoadedInteractionCommand) {
 				winston.log("warn", `User tried to run "${interaction.commandName}" but it doesn't exist in ${SenkoClient.api.Commands.keys}!`);
@@ -44,6 +43,10 @@ export default class {
 				});
 			}
 
+			const dataConfig = await fetchConfig();
+			const superGuildData = await fetchSuperGuild(interaction.guild);
+			const accountData = await fetchSuperUser(interaction.user);
+
 			if (!superGuildData || !accountData || !dataConfig) return interaction.reply({
 				embeds: [{
 					title: "Oh my!",
@@ -58,7 +61,7 @@ export default class {
 
 			const CommandTime = Date.now();
 
-			if (dataConfig.OutlawedUsers[interaction.member.id] && !LoadedInteractionCommand.whitelist) return interaction.reply({
+			if (dataConfig.OutlawedUsers[interaction.user.id] && !LoadedInteractionCommand.whitelist) return interaction.reply({
 				embeds: [{
 					title: `${Icons.exclamation} You have been banished!`,
 					description: "You have been banished from using the Senko Bot for breaking our rules.",
@@ -78,34 +81,35 @@ export default class {
 				}
 			}
 
-			const permissionEmbed: SenkoMessageOptions = {
-				embeds: [{
-					title: "Oh dear...",
-					description: "It looks like im missing some permissions, here is what I am missing:\n\n",
-					color: SenkoClient.api.Theme.dark
-				}],
-				ephemeral: true
-			};
+			if (!interaction.guild.members.me?.permissions.has(SenkoClientPermissionBits)) {
+				const permissionEmbed: SenkoMessageOptions = {
+					embeds: [{
+						title: "Oh dear...",
+						description: "It looks like im missing some permissions, here is what I am missing:\n\n",
+						color: SenkoClient.api.Theme.dark
+					}],
+					ephemeral: true
+				};
 
-			const permissionMessage = {
-				content: "Oh dear...\n\nIt looks like im missing some permissions, here is what I am missing:\n\n",
-				ephemeral: true
-			};
+				const permissionMessage = {
+					content: "Oh dear...\n\nIt looks like im missing some permissions, here is what I am missing:\n\n",
+					ephemeral: true
+				};
 
-			for (const permission of SenkoClientPermissions) {
-				if (!interaction.guild.members.me.permissions.has(permission)) {
-					// @ts-expect-error
-					permissionEmbed.embeds[0].description += `${permission}\n`;
-					permissionMessage.content += `${permission}\n`;
+				for (const permission of SenkoClientPermissions) {
+					if (!interaction.guild.members.me?.permissions.has(permission)) {
+						// @ts-expect-error
+						permissionEmbed.embeds[0].description += `${permission}\n`;
+						permissionMessage.content += `${permission}\n`;
+					}
+				}
+
+				// @ts-expect-error
+				if (!permissionEmbed.embeds[0].description.endsWith("\n")) {
+					if (interaction.guild.members.me?.permissions.has(PermissionFlagsBits.EmbedLinks)) return interaction.reply(permissionEmbed);
+					return interaction.reply(permissionMessage);
 				}
 			}
-
-			// @ts-expect-error
-			if (!permissionEmbed.embeds[0].description.endsWith("\n")) {
-				if (interaction.guild.members.me.permissions.has(PermissionFlagsBits.EmbedLinks)) return interaction.reply(permissionEmbed);
-				return interaction.reply(permissionMessage);
-			}
-
 
 			if (superGuildData.Channels.length > 0 && !superGuildData.Channels.includes(interaction.channelId) && !LoadedInteractionCommand.usableAnywhere) {
 				const messageStruct1 = {
@@ -129,17 +133,12 @@ export default class {
 			//! Start level
 			let xp = accountData.LocalUser.accountConfig.level.xp;
 			let level = accountData.LocalUser.accountConfig.level.level;
-			const Amount = 300 * (level * 5);
+			const Amount = 1500 * level;
 
 			if (xp > Amount) {
 				level += Math.floor(xp / Amount);
-				xp = xp % Amount;
-			} else {
-				xp = xp + randomNumber(25);
-			}
-
-			if (level > accountData.LocalUser.accountConfig.level.level) {
-				interaction.channel.send({
+				xp %= Amount;
+				interaction.channel?.send({
 					content: `${interaction.user}`,
 					embeds: [{
 						title: "Congratulations dear!",
@@ -150,6 +149,8 @@ export default class {
 						}
 					}]
 				});
+			} else {
+				xp += randomNumber(25);
 			}
 
 			accountData.LocalUser.accountConfig.level.xp = xp;
