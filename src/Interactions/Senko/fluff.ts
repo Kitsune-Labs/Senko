@@ -14,7 +14,7 @@ export default {
 	description_localized: {
 		"jp": "モフ モフ！"
 	},
-	start: async ({ senkoClient, interaction, userData, locale }) => {
+	start: async ({ senkoClient, interaction, userData, locale, generalLocale }) => {
 		if (calcTimeLeft(userData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
 			userData.RateLimits.Fluff_Rate.Amount = 0;
 			userData.RateLimits.Fluff_Rate.Date = Date.now();
@@ -58,12 +58,12 @@ export default {
 			addYen(interaction.user, 10);
 
 			// @ts-expect-error - TS says that "embeds[0].description" may be undefined, even though its right above it
-			MessageStruct.embeds[0].description += locale.general.YenAwarded.replace("_AMOUNT_", "10"); // `\n\n— ${Icons.yen}  10x added for interaction`;
+			MessageStruct.embeds[0].description += generalLocale.YenAwarded.replace("_AMOUNT_", "10"); // `\n\n— ${Icons.yen}  10x added for interaction`;
 		}
 
 		if (randomNumber(500) < 5) {
 			// @ts-expect-error - TS says that "embeds[0].description" may be undefined, even though its right above it
-			MessageStruct.embeds[0].description += locale.general.TofuAwarded.replace("_AMOUNT_", "1"); // `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
+			MessageStruct.embeds[0].description += generalLocale.TofuAwarded.replace("_AMOUNT_", "1"); // `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
 			userData.LocalUser.profileConfig.Currency.Tofu++;
 			await updateSuperUser(interaction.user, {
 				LocalUser: userData.LocalUser
