@@ -28,13 +28,13 @@ export default {
 			type: CommandOption.Subcommand
 		},
 		{
-			name: "action-reports",
+			name: "action-logs",
 			description: "set",
 			type: CommandOption.SubcommandGroup,
 			options: [
 				{
 					name: "set",
-					description: "Set the Action Reports channel",
+					description: "Set the Action Log channel",
 					type: CommandOption.Subcommand,
 					options: [
 						{
@@ -48,7 +48,7 @@ export default {
 				},
 				{
 					name: "remove",
-					description: "Set the Action Reports channel",
+					description: "Set the Action Log channel",
 					type: CommandOption.Subcommand
 				}
 			]
@@ -115,7 +115,7 @@ export default {
 					embeds: [
 						{
 							title: "Server Configuration",
-							description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${senkoClient.user!.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Reports: ${guildData.ActionLogs !== null ? `<#${guildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${guildData.MessageLogs !== null ? `<#${guildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${guildData.MemberLogs ? `<#${guildData.MemberLogs}>` : `${Icons.tick}  Not set`}`,
+							description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${senkoClient.user!.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Logs: ${guildData.ActionLogs !== null ? `<#${guildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${guildData.MessageLogs !== null ? `<#${guildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${guildData.MemberLogs ? `<#${guildData.MemberLogs}>` : `${Icons.tick}  Not set`}`,
 							color: senkoClient.api.Theme.light_red,
 							fields: [
 								{ name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
@@ -155,7 +155,7 @@ export default {
 				if (!checkAdmin()) return;
 
 				switch (interaction.options.getSubcommandGroup()) {
-					case "action-reports":
+					case "action-logs":
 						var actionChannel = interaction.options.get("channel", true).channel;
 
 						await updateSuperGuild(interaction.guild!, {
@@ -166,12 +166,12 @@ export default {
 							embeds: [
 								{
 									title: `${Icons.exclamation}  okay dear`,
-									description: `I've set your Action Reports to ${actionChannel}`,
+									description: `I've set your Action Log channel to ${actionChannel}`,
 									color: senkoClient.api.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 								}
 							],
-							content: "Action Reports channel set!",
+							content: "Action Log channel set!",
 							ephemeral: true
 						});
 						break;
@@ -199,7 +199,7 @@ export default {
 			case "remove":
 				if (!checkAdmin()) return;
 				switch (interaction.options.getSubcommandGroup()) {
-					case "action-reports":
+					case "action-logs":
 						await updateSuperGuild(interaction.guild!, {
 							ActionLogs: null
 						});
@@ -208,7 +208,7 @@ export default {
 							embeds: [
 								{
 									title: `${Icons.question}  okay dear`,
-									description: "I don't know your reasoning, but I've done what you said and removed your Action Reports channel!",
+									description: "I don't know your reasoning, but I've done what you said and removed your Action Log channel!",
 									color: senkoClient.api.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 								}
