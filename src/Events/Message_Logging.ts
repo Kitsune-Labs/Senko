@@ -42,7 +42,7 @@ export default class {
 				embeds: [
 					{
 						title: "Message Deleted",
-						description: `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`,
+						description: `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\n__**Attachment(s)**__\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`,
 						color: Colors.Red,
 						footer: {
 							text: `Case ${caseId}`
@@ -54,7 +54,7 @@ export default class {
 
 			if (guildData.AdvancedMessageLogging.message_deletions) {
 				messageStructure.embeds[0]!.title = "";
-				messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+				messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\n__**Attachment(s)**__\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 			}
 
 			if (message.attachments.size == 0) messageStructure.embeds[0]!.footer.text = "";

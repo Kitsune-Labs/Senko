@@ -8,6 +8,7 @@ export declare global {
       readonly SUPABASE_URL: string;
       readonly SUPABASE_KEY: string;
       readonly PSEUDO_MARKET: string;
+      readonly OPENAI_API_KEY: string;
     }
   }
 }

@@ -44,7 +44,7 @@ export interface SenkoIcons {
 	bubble: string;
 	question: string;
 	tears: string;
-	sparkles: string;
+	sparkle: string;
 	KitsuneBi_Blue: string;
 	Fall: string;
 	Winter: string;
@@ -77,19 +77,21 @@ export interface SenkoIcons {
 	}
 }
 
+export interface SenkoTheme {
+	dark: number;
+	light: number;
+	blue: number;
+	light_red: number;
+	dark_red: number;
+	random: () => number;
+}
+
 export interface SenkoClientTypes extends Client {
 	api: {
 		Commands: Collection<string, CommandInteraction | SenkoCommand>;
 		Icons: SenkoIcons;
 		UserAgent: string;
-		Theme: {
-			dark: number;
-			light: number;
-			blue: number;
-			light_red: number;
-			dark_red: number;
-			random: () => number;
-		};
+		Theme: SenkoTheme;
 		Bitfield: Bitfield;
 		BitData: BitData;
 		loadedCommands: any;
@@ -107,6 +109,8 @@ export interface SenkoCommandApi {
 	readonly xpAmount: number;
 	readonly locale: any;
 	readonly generalLocale: any;
+	readonly Icons: SenkoIcons;
+	readonly Theme: SenkoTheme;
 }
 
 export const CommandCategories = ["fun", "economy", "social", "admin", "account", "utility", "uncategorized"];

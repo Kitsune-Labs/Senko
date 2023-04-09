@@ -29,7 +29,7 @@
 		"./src/",
 		"./env.d.ts",
 		"./.env"
-	],
+, "dev/Disabled Stuff/AuditLogTest.ts"	],
 	"exclude": [
 		"node_modules/",
 		"./src/types/",

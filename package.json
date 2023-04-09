@@ -1,7 +1,7 @@
 {
     "version": "5.0.0",
     "scripts": {
-        "start": "clear; ts-node ./src/SenkoClient.ts --trace-warnings",
+        "start": "ts-node ./src/SenkoClient.ts --trace-warnings",
         "dev": "clear; NIGHTLY='true' ts-node ./src/SenkoClient.ts --trace-warnings",
         "build": "clear; tsc --build --verbose",
         "merge": "node ./src/Data/Market/Merge.js"
@@ -11,6 +11,7 @@
         "@kitsune-labs/utilities": "^1.4.4",
         "@supabase/supabase-js": "2.12.0",
         "axios": "1.3.4",
+        "bcrypt": "^5.1.0",
         "bitfields": "1.0.3",
         "bufferutil": "^4.0.7",
         "canvas": "^2.11.0",
@@ -21,14 +22,15 @@
         "erlpack": "discord/erlpack",
         "express": "^4.18.2",
         "jszip": "^3.10.1",
+        "openai": "^3.2.1",
         "ts-node": "^10.9.1",
-        "typescript": "^5.0.2",
         "utf-8-validate": "^6.0.3",
         "uuid": "9.0.0",
         "winston": "^3.8.2",
         "zlib-sync": "^0.1.8"
     },
     "devDependencies": {
+        "@types/bcrypt": "^5.0.0",
         "@types/express": "^4.17.17",
         "@types/node": "^18.15.5",
         "@types/uuid": "^9.0.1",
@@ -36,6 +38,7 @@
         "@typescript-eslint/parser": "^5.56.0",
         "eslint": "^8.36.0",
         "prompt": "^1.3.0",
-        "supabase": "^1.42.8"
+        "supabase": "^1.42.8",
+        "typescript": "^5.0.4"
     }
 }

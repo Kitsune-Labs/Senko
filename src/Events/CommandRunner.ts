@@ -6,7 +6,7 @@ import { existsSync } from "fs";
 
 import { randomNumber } from "@kitsune-labs/utilities";
 import Icons from "../Data/Icons.json";
-import { winston } from "../SenkoClient";
+import { senkoClient, winston } from "../SenkoClient";
 
 export const SenkoClientPermissions = [
 	PermissionFlagsBits.EmbedLinks,
@@ -16,7 +16,23 @@ export const SenkoClientPermissions = [
 	PermissionFlagsBits.ViewChannel
 ];
 
+export const SenkoClientModerationPermissions = [
+	PermissionFlagsBits.KickMembers,
+	PermissionFlagsBits.BanMembers,
+	PermissionFlagsBits.ManageMessages,
+	PermissionFlagsBits.ManageChannels,
+	PermissionFlagsBits.ViewAuditLog,
+	PermissionFlagsBits.ModerateMembers
+];
+
 export const SenkoClientPermissionBits = new PermissionsBitField(SenkoClientPermissions);
+export const SenkoClientModerationPermissionBits = new PermissionsBitField(SenkoClientModerationPermissions);
+
+winston.info("");
+winston.log("senko", `Bot Invite: https://discord.com/oauth2/authorize?client_id=${senkoClient.user?.id}&scope=applications.commands%20bot&permissions=${SenkoClientPermissionBits.bitfield}`);
+winston.log("senko", `Bot Invite w/ Mod: https://discord.com/oauth2/authorize?client_id=${senkoClient.user?.id}&scope=applications.commands%20bot&permissions=${SenkoClientModerationPermissionBits.bitfield}`);
+winston.log("senko", `Combined Invite: https://discord.com/oauth2/authorize?client_id=${senkoClient.user?.id}&scope=applications.commands%20bot&permissions=${SenkoClientPermissionBits.bitfield + SenkoClientModerationPermissionBits.bitfield}`);
+winston.info("");
 
 export default class {
 	async execute(SenkoClient: SenkoClientTypes) {
@@ -175,7 +191,9 @@ export default class {
 				userData: accountData,
 				xpAmount: Amount,
 				locale: existsSync(`./src/Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`)[LoadedInteractionCommand.name] : require("../Data/Locales/en-US.json")[LoadedInteractionCommand.name],
-				generalLocale: existsSync(`./src/Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`).general : require("../Data/Locales/en-US.json").general
+				generalLocale: existsSync(`./src/Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`).general : require("../Data/Locales/en-US.json").general,
+				Icons: Icons,
+				Theme: senkoClient.api.Theme
 			}).catch(err => {
 				const messageStruct = {
 					embeds: [{
