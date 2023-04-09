@@ -1,5 +1,4 @@
 import { ApplicationCommandOptionType as CommandOption } from "discord.js";
-import Icons from "../Data/Icons.json";
 import { updateSuperUser, fetchSuperUser, fetchMarket } from "../API/super";
 import type { SenkoCommand } from "../types/AllTypes";
 
@@ -21,7 +20,7 @@ export default {
 			required: true
 		}
 	],
-	start: async ({ senkoClient, interaction }) => {
+	start: async ({ senkoClient, interaction, Icons }) => {
 		if (interaction.user.id !== "609097445825052701") return;
 		const ShopItems = await fetchMarket();
 		const User = interaction.options.getString("user-id", true);
