@@ -34,6 +34,7 @@
 		"node_modules/",
 		"./src/types/",
 		"./src/test/",
-		"./src/Templates/"
+		"./src/Templates/",
+		"./src/Data/test.ts"
 	]
 }
