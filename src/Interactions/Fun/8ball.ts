@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType as CommandOption } from "discord.js";
 import { randomArrayItem } from "@kitsune-labs/utilities";
-import type { SenkoCommand, SenkoMessageOptions } from "../../types/AllTypes";
+import type { SenkoCommand } from "../../types/AllTypes";
 
 const responses = [
 	"Yes", "No", "What do you think?",
