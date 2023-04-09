@@ -1,8 +1,8 @@
 {
 	"general": {
 		"invalid_mod": "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
-		"YenAwarded": "_AMOUNT_ <:senkoin:979540287720423455> added for interaction",
-		"TofuAwarded": "You found a rare item!\n— _AMOUNT_ <:Tofu:926933207088254986> added"
+		"YenAwarded": "\n\n_AMOUNT_ <:senkoin:979540287720423455> added for interaction",
+		"TofuAwarded": "\n\nYou found a rare item!\n— _AMOUNT_ <:Tofu:926933207088254986> added"
 	},
     "ban": {
         "Reply": {

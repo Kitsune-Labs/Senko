@@ -1,8 +1,8 @@
 {
 	"general": {
 		"invalid_mod": "Votre guilde n'a pas activé les commandes de modération, demandez à votre administrateur de guilde de les activer avec `/server configuration`.",
-		"YenAwarded": "_AMOUNT_ <:senkoin:979540287720423455> ajouté pour interaction",
-		"TofuAwarded": "Vous avez trouvé un objet rare !\n— _AMOUNT_ <:Tofu:926933207088254986> ajouté"
+		"YenAwarded": "\n\n_AMOUNT_ <:senkoin:979540287720423455> ajouté pour interaction",
+		"TofuAwarded": "\n\nVous avez trouvé un objet rare !\n— _AMOUNT_ <:Tofu:926933207088254986> ajouté"
 	},
     "ban": {
         "Reply": {
