@@ -1,68 +1,68 @@
 {
-    "Pride_Flag": {
-        "class": "Banners",
-        "name": "Pride Flag Banner",
-        "desc": "🏳️‍🌈",
-        "price": 0,
-        "amount": 1,
-        "max": 1,
-        "type": "banner",
-        "banner": "PrideFlag.png",
-        "set": "All Love is Valid"
-    },
-    "Progressive_Pride_Flag": {
-        "class": "Banners",
-        "name": "Progressive Pride Flag Banner",
-        "desc": "Representing the progression towards acceptance and equality for all orientations and genders",
-        "price": 0,
-        "amount": 1,
-        "max": 1,
-        "type": "banner",
-        "banner": "ProgressivePrideFlag.png",
-        "set": "All Love is Valid"
-    },
+	"Pride_Flag": {
+		"class": "Banners",
+		"name": "Pride Flag Banner",
+		"desc": "🏳️‍🌈",
+		"price": 0,
+		"amount": 1,
+		"max": 1,
+		"type": "banner",
+		"banner": "PrideFlag.png",
+		"origin": "All Love is Valid"
+	},
+	"Progressive_Pride_Flag": {
+		"class": "Banners",
+		"name": "Progressive Pride Flag Banner",
+		"desc": "Representing the progression towards acceptance and equality for all orientations and genders",
+		"price": 0,
+		"amount": 1,
+		"max": 1,
+		"type": "banner",
+		"banner": "ProgressivePrideFlag.png",
+		"origin": "All Love is Valid"
+	},
 	"Transgender_Pride_Flag": {
-        "class": "Banners",
-        "name": "Transgender Pride Flag Banner",
-        "desc": "Representing the transgender community and their struggle for acceptance and equality.",
-        "price": 0,
-        "amount": 1,
-        "max": 1,
-        "type": "banner",
-        "banner": "TransPrideFlag.png",
-        "set": "All Love is Valid"
-    },
-    "Nonbinary_Pride_Flag": {
-        "class": "Banners",
-        "name": "Nonbinary Pride Flag Banner",
-        "desc": "🏳️‍⚧️💛⚪️🖤",
-        "price": 0,
-        "amount": 1,
-        "max": 1,
-        "type": "banner",
-        "banner": "NonbinaryPrideFlag.png",
-        "set": "All Love is Valid"
-    },
-    "Asexual_Pride_Flag": {
-        "class": "Banners",
-        "name": "Asexual Pride Flag Banner",
-        "desc": "🏳️‍🌈💜🖤",
-        "price": 0,
-        "amount": 1,
-        "max": 1,
-        "type": "banner",
-        "banner": "AsexualPrideFlag.png",
-        "set": "All Love is Valid"
-    },
-    "Pansexual_Pride_Flag": {
-        "class": "Banners",
-        "name": "Pansexual Pride Flag Banner",
-        "desc": "🏳️‍🌈💗💛💙",
-        "price": 0,
-        "amount": 1,
-        "max": 1,
-        "type": "banner",
-        "banner": "PansexualPrideFlag.png",
-        "set": "All Love is Valid"
-    }
+		"class": "Banners",
+		"name": "Transgender Pride Flag Banner",
+		"desc": "Representing the transgender community and their struggle for acceptance and equality.",
+		"price": 0,
+		"amount": 1,
+		"max": 1,
+		"type": "banner",
+		"banner": "TransPrideFlag.png",
+		"origin": "All Love is Valid"
+	},
+	"Nonbinary_Pride_Flag": {
+		"class": "Banners",
+		"name": "Nonbinary Pride Flag Banner",
+		"desc": "🏳️‍⚧️💛⚪️🖤",
+		"price": 0,
+		"amount": 1,
+		"max": 1,
+		"type": "banner",
+		"banner": "NonbinaryPrideFlag.png",
+		"origin": "All Love is Valid"
+	},
+	"Asexual_Pride_Flag": {
+		"class": "Banners",
+		"name": "Asexual Pride Flag Banner",
+		"desc": "🏳️‍🌈💜🖤",
+		"price": 0,
+		"amount": 1,
+		"max": 1,
+		"type": "banner",
+		"banner": "AsexualPrideFlag.png",
+		"origin": "All Love is Valid"
+	},
+	"Pansexual_Pride_Flag": {
+		"class": "Banners",
+		"name": "Pansexual Pride Flag Banner",
+		"desc": "🏳️‍🌈💗💛💙",
+		"price": 0,
+		"amount": 1,
+		"max": 1,
+		"type": "banner",
+		"banner": "PansexualPrideFlag.png",
+		"origin": "All Love is Valid"
+	}
 }

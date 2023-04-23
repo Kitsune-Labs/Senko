@@ -192,7 +192,7 @@
             "isSeasonal": true,
             "season": "Valentines"
         },
-        "set": "Valentines"
+        "origin": "Valentines"
     },
 	"lemon_cake": {
         "class": "Consumables",
@@ -391,50 +391,5 @@
         "max": 1,
         "autoSale": true,
         "type": "food"
-    },
-	"thx_pumpkin_pie": {
-        "class": "Consumables",
-        "name": "Pumpkin Pie",
-        "desc": "Yummy",
-        "price": 300,
-        "amount": 1,
-        "autosale": false,
-        "set": "Autumn"
-    },
-    "thx_konnyaku": {
-        "class": "Consumables",
-        "name": "Konnyaku",
-        "desc": "A yam cake served with sweet or savory sauce.",
-        "price": 200,
-        "amount": 1,
-        "autosale": false,
-        "set": "Autumn"
-    },
-    "thx_cheesecake": {
-        "class": "Consumables",
-        "name": "Cheesecake",
-        "desc": "This isn't your ordinary cheesecake, this is thanksgiving cheesecake!",
-        "price": 200,
-        "amount": 1,
-        "autosale": false,
-        "set": "Autumn"
-    },
-    "thx_amaca": {
-        "class": "Consumables",
-        "name": "Amaca",
-        "desc": "A casserole filled with potato's, chestnuts and carrots.",
-        "price": 400,
-        "amount": 1,
-        "autosale": false,
-        "set": "Autumn"
-    },
-    "thx_cornbread": {
-        "class": "Consumables",
-        "name": "Cornbread",
-        "desc": "I don't even know where to start on how good this is.",
-        "price": 400,
-        "amount": 1,
-        "autosale": false,
-        "set": "Autumn"
     }
 }

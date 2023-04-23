@@ -1,90 +1,90 @@
 {
 	"sknss_v1": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 1",
-        "desc": "The first tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "manga": "Tail_1",
-        "autoSale": true
-    },
-    "sknss_v2": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 2",
-        "desc": "The second tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "manga": "Tail_2",
-        "autoSale": true
-    },
-    "sknss_v3": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 3",
-        "desc": "The third tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "manga": "Tail_3",
-        "autoSale": true
-    },
-    "sknss_v4": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 4",
-        "desc": "The fourth tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "manga": "Tail_4",
-        "autoSale": true
-    },
-    "sknss_v5": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 5",
-        "desc": "The fifth tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "manga": "Tail_5",
-        "autoSale": true
-    },
-    "sknss_v6": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 6",
-        "desc": "The sixth tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "manga": "Tail_6",
-        "autoSale": true
-    },
-    "sknss_v7": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 7",
-        "desc": "The seventh tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "manga": "Tail_7",
-        "autoSale": true
-    },
-    "sknss_v8": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 2. Ch. 8",
-        "desc": "The eighth tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "manga": "Tail_8",
-        "autoSale": true
-    },
-    "sknss_v10": {
-        "class": "Manga",
-        "name": "Sewayaki Kitsune no Senko-san - Vol 2. Ch. 10",
-        "desc": "The tenth tail of the Sewayaki Kitsune no Senko-san manga!",
-        "price": 500,
-        "amount": 1,
-        "manga": "Tail_10",
-        "autoSale": true
-    }
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 1",
+		"desc": "The first tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"manga": "Tail_1",
+		"autoSale": true
+	},
+	"sknss_v2": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 2",
+		"desc": "The second tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"manga": "Tail_2",
+		"autoSale": true
+	},
+	"sknss_v3": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 3",
+		"desc": "The third tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"manga": "Tail_3",
+		"autoSale": true
+	},
+	"sknss_v4": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 4",
+		"desc": "The fourth tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"manga": "Tail_4",
+		"autoSale": true
+	},
+	"sknss_v5": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 5",
+		"desc": "The fifth tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"manga": "Tail_5",
+		"autoSale": true
+	},
+	"sknss_v6": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 6",
+		"desc": "The sixth tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"manga": "Tail_6",
+		"autoSale": true
+	},
+	"sknss_v7": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 1. Ch. 7",
+		"desc": "The seventh tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"manga": "Tail_7",
+		"autoSale": true
+	},
+	"sknss_v8": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 2. Ch. 8",
+		"desc": "The eighth tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"manga": "Tail_8",
+		"autoSale": true
+	},
+	"sknss_v10": {
+		"class": "Manga",
+		"name": "Sewayaki Kitsune no Senko-san - Vol 2. Ch. 10",
+		"desc": "The tenth tail of the Sewayaki Kitsune no Senko-san manga!",
+		"price": 500,
+		"amount": 1,
+		"manga": "Tail_10",
+		"autoSale": true
+	}
 }

@@ -1,5 +1,5 @@
-import type { SenkoCommand } from "../../types/AllTypes";
-import Paginate from "../../API/Pagination/Command";
+import type { SenkoCommand } from "../../src/types/AllTypes";
+import Paginate from "../../src/API/Pagination/Command";
 
 export default {
 	name: "updates",

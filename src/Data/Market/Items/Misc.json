@@ -1,34 +1,38 @@
 {
 	"senkokeychain": {
-        "class": "Misc",
-        "name": "Senko tail key-chain",
-        "desc": "The softest tail made",
-        "price": 3000,
-        "amount": 1,
-        "autoSale": true
-    },
-    "shirokeychain": {
-        "class": "Misc",
-        "name": "Shiro tail key-chain",
-        "desc": "Shiro won't like this I bet",
-        "price": 3000,
-        "amount": 1,
-        "autoSale": true
-    },
-    "yozorakeychain": {
-        "class": "Misc",
-        "name": "Yozora tail key-chain",
-        "desc": "What will Yozora think of this?",
-        "price": 3000,
-        "amount": 1,
-        "autoSale": true
-    },
+		"class": "Misc",
+		"name": "Premium Senko Tail Keychain",
+		"desc": "An ultra-soft and cuddly Senko tail keychain, made from high-quality materials to ensure maximum fluffiness like Senko's tail!.",
+		"price": 3500,
+		"amount": 1,
+		"autoSale": true,
+		"origin": "Kitsune Collectibles"
+	},
+	"shirokeychain": {
+		"class": "Misc",
+		"name": "Deluxe Shiro Tail Keychain",
+		"desc": "A stylish Shiro tail keychain crafted with care, boasting intricate details that would surely impress Shiro herself.",
+		"price": 3500,
+		"amount": 1,
+		"autoSale": true,
+		"origin": "Kitsune Collectibles"
+	},
+	"yozorakeychain": {
+		"class": "Misc",
+		"name": "Elegant Yozora Tail Keychain",
+		"desc": "A beautifully designed Yozora tail keychain that captures her essence, making it the perfect accessory for her fans.",
+		"price": 3500,
+		"amount": 1,
+		"autoSale": true,
+		"origin": "Kitsune Collectibles"
+	},
 	"yokodoll": {
-        "class": "Misc",
-        "name": "Yokodoll",
-        "desc": "A little yoko doll of Nakano.",
-        "price": 750,
-        "amount": 1,
-        "autoSale": true
+		"class": "Misc",
+		"name": "Limited Edition Yokodoll",
+		"desc": "A highly-detailed and collectible Yokodoll of Nakano, crafted with love by artisans for the most dedicated enthusiasts.",
+		"price": 1000,
+		"amount": 1,
+		"autoSale": true,
+		"origin": "Kitsune Collectibles"
 	}
 }

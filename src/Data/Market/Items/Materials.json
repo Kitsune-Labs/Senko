@@ -1,34 +1,34 @@
 {
 	"kitsunebi_orange": {
-        "class": "Materials",
-        "name": "Kitsune Bi - Orange",
-        "desc": "Maybe it can be used to craft a title?",
-        "price": 200,
-        "amount": 1,
-        "onsale": false
-    },
-    "kitsunebi_red": {
-        "class": "Materials",
-        "name": "Kitsune Bi - Red",
-        "desc": "Maybe it can be used to craft a title?",
-        "price": 200,
-        "amount": 1,
-        "onsale": false
-    },
-    "kitsunebi_blue": {
-        "class": "Materials",
-        "name": "Kitsune Bi - Blue",
-        "desc": "Maybe it can be used to craft a title?",
-        "price": 200,
-        "amount": 1,
-        "onsale": false
-    },
+		"class": "Materials",
+		"name": "Kitsune Bi - Orange",
+		"desc": "Maybe it can be used to craft a title?",
+		"price": 200,
+		"amount": 1,
+		"onsale": false
+	},
+	"kitsunebi_red": {
+		"class": "Materials",
+		"name": "Kitsune Bi - Red",
+		"desc": "Maybe it can be used to craft a title?",
+		"price": 200,
+		"amount": 1,
+		"onsale": false
+	},
+	"kitsunebi_blue": {
+		"class": "Materials",
+		"name": "Kitsune Bi - Blue",
+		"desc": "Maybe it can be used to craft a title?",
+		"price": 200,
+		"amount": 1,
+		"onsale": false
+	},
 	"pumpkin": {
-        "class": "Materials",
-        "name": "Pumpkin",
-        "desc": "An orange colored sphere.",
-        "price": 100,
-        "amount": 1,
-        "autoSale": true
-    }
+		"class": "Materials",
+		"name": "Pumpkin",
+		"desc": "An orange colored sphere.",
+		"price": 100,
+		"amount": 1,
+		"autoSale": true
+	}
 }

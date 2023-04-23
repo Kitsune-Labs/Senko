@@ -1,0 +1,124 @@
+{
+	"thx_pumpkin_pie": {
+        "class": "Consumables",
+        "name": "Pumpkin Pie",
+        "desc": "Yummy",
+        "price": 300,
+        "amount": 1,
+        "autosale": false,
+        "origin": "Autumn"
+    },
+    "thx_konnyaku": {
+        "class": "Consumables",
+        "name": "Konnyaku",
+        "desc": "A yam cake served with sweet or savory sauce.",
+        "price": 200,
+        "amount": 1,
+        "autosale": false,
+        "origin": "Autumn"
+    },
+    "thx_cheesecake": {
+        "class": "Consumables",
+        "name": "Cheesecake",
+        "desc": "This isn't your ordinary cheesecake, this is thanksgiving cheesecake!",
+        "price": 200,
+        "amount": 1,
+        "autosale": false,
+        "origin": "Autumn"
+    },
+    "thx_amaca": {
+        "class": "Consumables",
+        "name": "Amaca",
+        "desc": "A casserole filled with potato's, chestnuts and carrots.",
+        "price": 400,
+        "amount": 1,
+        "autosale": false,
+        "origin": "Autumn"
+    },
+    "thx_cornbread": {
+        "class": "Consumables",
+        "name": "Cornbread",
+        "desc": "I don't even know where to start on how good this is.",
+        "price": 400,
+        "amount": 1,
+        "autosale": false,
+        "origin": "Autumn"
+    },
+	"thx_leaf_badge": {
+        "class": "Badges",
+        "name": "🍂 Autumn Leaf",
+        "desc": "Soothing",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🍂",
+        "origin": "Autumn"
+    },
+    "thx_pie_badge": {
+        "class": "Badges",
+        "name": "🥧 Pie",
+        "desc": "Pie Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🥧",
+        "origin": "Autumn"
+    },
+    "thx_pumpkin_badge": {
+        "class": "Badges",
+        "name": "🎃 Pumpkin",
+        "desc": "Pumpkin Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🎃",
+        "origin": "Autumn"
+    },
+    "thx_corn_badge": {
+        "class": "Badges",
+        "name": "🌽 Corn",
+        "desc": "Corn Badge",
+        "price": 300,
+        "amount": 1,
+        "max": 1,
+        "autosale": false,
+        "badge": "🌽",
+        "origin": "Autumn"
+    }
+	"thx_grateful_title": {
+		"class": "Titles",
+		"name": "The Grateful",
+		"desc": "Grateful for everything",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"autosale": false,
+		"title": "The Grateful",
+		"origin": "Autumn"
+	},
+	"thx_thankful_title": {
+		"class": "Titles",
+		"name": "The Thankful",
+		"desc": "Thankful for everything",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"autosale": false,
+		"title": "The Thankful",
+		"origin": "Autumn"
+	},
+	"thx_blessed_title": {
+		"class": "Titles",
+		"name": "The Blessed",
+		"desc": "Blessed for everything",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"autosale": false,
+		"title": "The Blessed",
+		"origin": "Autumn"
+	}
+}

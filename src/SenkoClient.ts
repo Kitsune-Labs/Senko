@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import "dotenv/config";
 
 import { format } from "winston";
@@ -47,7 +48,7 @@ export const winston = Winston.createLogger({
 });
 
 import type { SenkoClientTypes, SenkoCommand } from "./types/AllTypes";
-import { Client, Collection, PermissionsBitField, GatewayIntentBits as GatewayIntents, WebhookClient } from "discord.js";
+import { Client, Collection, PermissionsBitField, GatewayIntentBits as GatewayIntents, WebhookClient, Events } from "discord.js";
 import { readdirSync } from "fs";
 
 export const senkoClient = new Client({
@@ -98,40 +99,41 @@ Reflect.set(senkoClient, "api", {
 });
 
 
-process.on("unhandledRejection", async (reason: any) => {
+process.on("unhandledRejection", async (unhandledRejection: any) => {
 	senkoClient.api.statusLog.send({
 		content: "<@609097445825052701>",
 		embeds: [
 			{
 				title: senkoClient.user!.username,
-				description: reason.stack.toString(),
+				description: unhandledRejection.toString(),
 				color: senkoClient.api.Theme.light
 			}
 		]
 	});
 
-	winston.log("fatal", reason);
-	console.log(reason);
+	winston.log("fatal", JSON.stringify(unhandledRejection, null, 2));
 });
 
-process.on("uncaughtException", async (reason: any) => {
+process.on("uncaughtException", async (uncaughtException) => {
 	senkoClient.api.statusLog.send({
 		content: "<@609097445825052701>",
 		embeds: [
 			{
 				title: senkoClient.user!.username,
-				description: reason.stack.toString(),
+				description: uncaughtException.toString(),
 				color: senkoClient.api.Theme.light
 			}
 		]
 	});
 
-	winston.log("error", reason);
-	console.log(reason);
-	console.log(reason.code);
+	winston.log("error", JSON.stringify(uncaughtException, null, 2));
 });
 
-senkoClient.once("ready", async () => {
+senkoClient.on(Events.Debug, async (debug) => {
+	winston.log("debug", debug);
+});
+
+senkoClient.once(Events.ClientReady, async () => {
 	winston.log("info", "Starting Senko...");
 
 	let commands;

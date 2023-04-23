@@ -1,19 +1,19 @@
 import type { SenkoClientTypes, SenkoCommand, SenkoMessageOptions } from "../types/AllTypes";
 
-import { fetchSuperGuild, fetchConfig, fetchSuperUser, updateSuperUser } from "../API/super";
-import { PermissionFlagsBits, PermissionsBitField, Events, Interaction } from "discord.js";
+import { fetchSuperGuild, fetchConfig, updateSuperUser } from "../API/super";
+import { PermissionFlagsBits, PermissionsBitField, Events, Interaction, GuildMember } from "discord.js";
 import { existsSync } from "fs";
 
 import { randomNumber } from "@kitsune-labs/utilities";
 import Icons from "../Data/Icons.json";
 import { senkoClient, winston } from "../SenkoClient";
+import { SenkoMember } from "../Classes/SenkoMember";
 
 export const SenkoClientPermissions = [
 	PermissionFlagsBits.EmbedLinks,
 	PermissionFlagsBits.AttachFiles,
 	PermissionFlagsBits.UseExternalEmojis,
-	PermissionFlagsBits.AddReactions,
-	PermissionFlagsBits.ViewChannel
+	PermissionFlagsBits.AddReactions
 ];
 
 export const SenkoClientModerationPermissions = [
@@ -33,7 +33,6 @@ winston.log("senko", `Bot Invite: https://discord.com/oauth2/authorize?client_id
 winston.log("senko", `Bot Invite w/ Mod: https://discord.com/oauth2/authorize?client_id=${senkoClient.user?.id}&scope=applications.commands%20bot&permissions=${SenkoClientModerationPermissionBits.bitfield}`);
 winston.log("senko", `Combined Invite: https://discord.com/oauth2/authorize?client_id=${senkoClient.user?.id}&scope=applications.commands%20bot&permissions=${SenkoClientPermissionBits.bitfield + SenkoClientModerationPermissionBits.bitfield}`);
 winston.info("");
-
 export default class {
 	async execute(SenkoClient: SenkoClientTypes) {
 		SenkoClient.on(Events.InteractionCreate, async (interaction: Interaction) => {
@@ -59,9 +58,11 @@ export default class {
 				});
 			}
 
+			const senkoMember = new SenkoMember(interaction.member as GuildMember);
+
 			const dataConfig = await fetchConfig();
 			const superGuildData = await fetchSuperGuild(interaction.guild);
-			const accountData = await fetchSuperUser(interaction.user);
+			const accountData = await senkoMember.fetchData();
 
 			if (!superGuildData || !accountData || !dataConfig) return interaction.reply({
 				embeds: [{
@@ -193,7 +194,9 @@ export default class {
 				locale: existsSync(`./src/Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`)[LoadedInteractionCommand.name] : require("../Data/Locales/en-US.json")[LoadedInteractionCommand.name],
 				generalLocale: existsSync(`./src/Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`).general : require("../Data/Locales/en-US.json").general,
 				Icons: Icons,
-				Theme: senkoClient.api.Theme
+				Theme: senkoClient.api.Theme,
+				winston: winston,
+				senkoMember: senkoMember
 			}).catch(err => {
 				const messageStruct = {
 					embeds: [{

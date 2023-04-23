@@ -1,188 +1,190 @@
 {
 	"special_title_641851eb": {
-        "class": "Titles",
-        "name": "Special Bee title",
-        "desc": "For a \"June Bee\"",
-        "price": 7777777,
-        "amount": 1,
-        "title": "🐝 Special Bee",
-        "source": "Special person"
-    },
-    "developer_kitsune_title": {
-        "class": "Titles",
-        "name": "Developer Title",
-        "desc": "For the developers",
-        "price": 7777777,
-        "amount": 1,
-        "title": "🛠️ Developer Kitsune",
-        "source": "For the developers @ Kitsune Labs",
-        "set": "Kitsune Labs"
-    },
-    "divine_messenger": {
-        "class": "Titles",
-        "name": "Divine Messenger title",
-        "desc": "For Divine Messengers",
-        "price": 7777777,
-        "autoSale": false,
-        "title": "<:toriigate:815386514636537857>  Divine Messenger",
-        "source": "Be a Staff member in Senko's World!",
-        "set": "Messenger Kitsune"
-    },
-    "contributing_title": {
-        "class": "Titles",
-        "name": "Contributing Title",
-        "desc": "For the Contributors",
-        "price": 7777777,
-        "amount": 1,
-        "title": "🏗️ Contributor Kitsune",
-        "source": "Contribute to the development of Senko",
-        "set": "Contributor"
-    },
-    "Community_Builder_title": {
-        "class": "Titles",
-        "name": "Community Builder Title",
-        "desc": "A title for community builders and organizers",
-        "price": 7777777,
-        "amount": 1,
-        "max": 1,
-        "title": "🏘️ Community Builder",
-        "autoSale": false,
-        "contributing": true
-    },
-    "Mentor_title": {
-        "class": "Titles",
-        "name": "Mentor Title",
-        "desc": "A title for mentors and educators",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🧑‍🏫 Mentor",
-        "autoSale": false,
-        "contributing": true
-    },
-
-
-
-
-
-
-
-
-    "MooseKaiBanner": {
-        "class": "Banners",
-        "name": "MooseKai's Snowsgiving 2021 Banner",
-        "desc": "Set \"MooseKai's Snowsgiving 2021 Banner\" as your banner.",
-        "price": 7777777,
-        "amount": 1,
-        "type": "banner",
-        "banner": "MooseKai.png",
-        "source": "Won the Discord Snowsgiving 2021 event",
-        "set": "Christmas"
-    },
-    "master_thrower": {
-        "class": "Titles",
-        "name": "Master Thrower",
-        "desc": "Adds \"Master Thrower\" to your profile name",
-        "price": 7777777,
-        "amount": 1,
-        "title": "☃️ Master Thrower",
-        "set": "Christmas"
-    },
-    "sen_title": {
-        "class": "Titles",
-        "name": "Super cool and also straight",
-        "desc": "Set \"Super cool and also straight\" as your title.",
-        "price": 7777777,
-        "amount": 1,
-        "title": "Super cool and also straight",
-        "set": "Messenger Kitsune"
-    },
-    "sam_title": {
-        "class": "Titles",
-        "name": "Samīfokkusu",
-        "desc": "Set \"Samīfokkusu\" as your title.",
-        "price": 7777777,
-        "amount": 1,
-        "title": "Samīfokkusu",
-        "set": "Messenger Kitsune"
-    },
-    "NewYearsPresent_2021": {
-        "class": "gift",
-        "name": "New Years Present - +5000 Yen",
-        "desc": "Thanks for being with us, Hopefully 2022 will be better!",
-        "price": -5000,
-        "amount": 1,
-        "onsale": false,
-        "set": "New Years"
-    },
-    "segg": {
-        "class": "Misc",
-        "name": "segg",
-        "desc": "The Senko egg.",
-        "price": 1111,
-        "amount": 1,
-        "onsale": false,
-        "source": "Limited time item that was sold for 5 hours for Easter 2021"
-    },
-    "theCutie": {
-        "class": "Titles",
-        "name": "The Cute Person",
-        "desc": "Thou whomst haveth this is a cutie",
-        "price": 7777777,
-        "autoSale": false,
-        "title": "The Cutie",
-        "source": "Won in a giveaway"
-    },
-    "theGH": {
-        "class": "Titles",
-        "name": "The Great Hugger Title",
-        "desc": "Thou whomst haveth this is a big hugger",
-        "price": 7777777,
-        "title": "The Great Hugger",
-        "autoSale": true
-    },
-    "theAdorable": {
-        "class": "Titles",
-        "name": "The Adorable Title",
-        "desc": "Thou whomst haveth this is a very Adorable person",
-        "price": 7777777,
-        "title": "The Adorable",
-        "autoSale": true
-    },
-    "VROOOM": {
-        "class": "Titles",
-        "name": "VROOOOOOOOOM",
-        "desc": "VROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM!",
-        "price": 7777777,
-        "autoSale": false,
-        "title": "VROOOM",
-        "source": "Won in a giveaway"
-    },
-    "Sagiri": {
-        "class": "Titles",
-        "name": "Sagiri",
-        "desc": "Not to be confused with the anime",
-        "price": 7777777,
-        "autoSale": false,
-        "title": "Sagiri Izumi",
-        "source": "Won in a giveaway"
-    },
-    "The_Scarlet_Devil": {
-        "class": "Titles",
-        "name": "The Scarlet Devil",
-        "desc": "The Scarlet Devil has arrived!",
-        "price": 7777777,
-        "autoSale": false,
-        "title": "The Scarlet Devil",
-        "source": "Won in a giveaway"
-    },
-    "The_Coolest": {
-        "class": "Titles",
-        "name": "Coolest Person",
-        "desc": "They say the person who posseses this title is the coolest of them all",
-        "price": 7777777,
-        "autoSale": false,
-        "title": "Coolest person",
-        "source": "Won in a giveaway"
-    }
+		"class": "Titles",
+		"name": "Special Bee title",
+		"desc": "For a \"June Bee\"",
+		"price": 7777777,
+		"amount": 1,
+		"title": "🐝 Special Bee",
+		"source": "Special person"
+	},
+	"developer_kitsune_title": {
+		"class": "Titles",
+		"name": "Developer Title",
+		"desc": "For the developers",
+		"price": 7777777,
+		"amount": 1,
+		"title": "🛠️ Developer Kitsune",
+		"source": "For the developers @ Kitsune Labs",
+		"origin": "Kitsune Labs"
+	},
+	"divine_messenger": {
+		"class": "Titles",
+		"name": "Divine Messenger title",
+		"desc": "For Divine Messengers",
+		"price": 7777777,
+		"autoSale": false,
+		"title": "<:toriigate:815386514636537857>  Divine Messenger",
+		"source": "Be a Staff member in Senko's World!",
+		"origin": "Messenger Kitsune"
+	},
+	"contributing_title": {
+		"class": "Titles",
+		"name": "Contributing Title",
+		"desc": "For the Contributors",
+		"price": 7777777,
+		"amount": 1,
+		"title": "🏗️ Contributor Kitsune",
+		"source": "Contribute to the development of Senko",
+		"origin": "Contributor"
+	},
+	"Community_Builder_title": {
+		"class": "Titles",
+		"name": "Community Builder Title",
+		"desc": "A title for community builders and organizers",
+		"price": 7777777,
+		"amount": 1,
+		"max": 1,
+		"title": "🏘️ Community Builder",
+		"autoSale": false,
+		"contributing": true
+	},
+	"Mentor_title": {
+		"class": "Titles",
+		"name": "Mentor Title",
+		"desc": "A title for mentors and educators",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🧑‍🏫 Mentor",
+		"autoSale": false,
+		"contributing": true
+	},
+	"MooseKaiBanner": {
+		"class": "Banners",
+		"name": "MooseKai's Snowsgiving 2021 Banner",
+		"desc": "Set \"MooseKai's Snowsgiving 2021 Banner\" as your banner.",
+		"price": 7777777,
+		"amount": 1,
+		"type": "banner",
+		"banner": "MooseKai.png",
+		"source": "Won the Discord Snowsgiving 2021 event",
+		"origin": "Discord Snowsgiving 2021"
+	},
+	"master_thrower": {
+		"class": "Titles",
+		"name": "Master Thrower",
+		"desc": "Adds \"Master Thrower\" to your profile name",
+		"price": 7777777,
+		"amount": 1,
+		"title": "☃️ Master Thrower",
+		"origin": "Christmas"
+	},
+	"sen_title": {
+		"class": "Titles",
+		"name": "Super cool and also straight",
+		"desc": "Set \"Super cool and also straight\" as your title.",
+		"price": 7777777,
+		"amount": 1,
+		"title": "Super cool and also straight",
+		"origin": "Messenger Kitsune"
+	},
+	"sam_title": {
+		"class": "Titles",
+		"name": "Samīfokkusu",
+		"desc": "Set \"Samīfokkusu\" as your title.",
+		"price": 7777777,
+		"amount": 1,
+		"title": "Samīfokkusu",
+		"origin": "Messenger Kitsune"
+	},
+	"NewYearsPresent_2021": {
+		"class": "gift",
+		"name": "2021 New Years Present (+5000 Yen)",
+		"desc": "Thanks for being with us, Hopefully 2022 will be better!",
+		"price": -5000,
+		"amount": 1,
+		"onsale": false,
+		"origin": "New Years 2021"
+	},
+	"segg": {
+		"class": "Misc",
+		"name": "segg",
+		"desc": "The Senko egg.",
+		"price": 1111,
+		"amount": 1,
+		"onsale": false,
+		"source": "Limited time item that was sold for 5 hours for Easter 2021"
+	},
+	"theCutie": {
+		"class": "Titles",
+		"name": "The Cute Person",
+		"desc": "Thou whomst haveth this is a cutie",
+		"price": 7777777,
+		"autoSale": false,
+		"title": "The Cutie",
+		"source": "Won in a giveaway"
+	},
+	"theGH": {
+		"class": "Titles",
+		"name": "The Great Hugger Title",
+		"desc": "Thou whomst haveth this is a big hugger",
+		"price": 7777777,
+		"title": "The Great Hugger",
+		"autoSale": true
+	},
+	"theAdorable": {
+		"class": "Titles",
+		"name": "The Adorable Title",
+		"desc": "Thou whomst haveth this is a very Adorable person",
+		"price": 7777777,
+		"title": "The Adorable",
+		"autoSale": true
+	},
+	"VROOOM": {
+		"class": "Titles",
+		"name": "VROOOOOOOOOM",
+		"desc": "VROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM!",
+		"price": 7777777,
+		"autoSale": false,
+		"title": "VROOOM",
+		"source": "Won in a giveaway"
+	},
+	"Sagiri": {
+		"class": "Titles",
+		"name": "Sagiri",
+		"desc": "Not to be confused with the anime",
+		"price": 7777777,
+		"autoSale": false,
+		"title": "Sagiri Izumi",
+		"source": "Won in a giveaway"
+	},
+	"The_Scarlet_Devil": {
+		"class": "Titles",
+		"name": "The Scarlet Devil",
+		"desc": "The Scarlet Devil has arrived!",
+		"price": 7777777,
+		"autoSale": false,
+		"title": "The Scarlet Devil",
+		"source": "Won in a giveaway"
+	},
+	"The_Coolest": {
+		"class": "Titles",
+		"name": "Coolest Person",
+		"desc": "They say the person who posseses this title is the coolest of them all",
+		"price": 7777777,
+		"autoSale": false,
+		"title": "Coolest person",
+		"source": "Won in a giveaway"
+	},
+	"lime_green_color": {
+		"class": "Colors",
+		"name": "Lime Green card color",
+		"desc": "A greeny lime color",
+		"price": 7777777,
+		"autoSale": false,
+		"color": "#17ff00",
+		"type": "color",
+		"source": "Exclusive color"
+	}
 }

@@ -36,7 +36,7 @@
         "amount": 1,
         "type": "banner",
         "banner": "ChristmasBanner21.png",
-        "set": "Christmas"
+        "origin": "Christmas"
     },
 	"shiro_wave": {
         "class": "Banners",
@@ -57,7 +57,7 @@
         "autosale": false,
         "type": "banner",
         "banner": "Discord.gif",
-        "set": "Discord"
+        "origin": "Discord"
     },
     "discord_characters": {
         "class": "Banners",
@@ -68,7 +68,7 @@
         "autosale": false,
         "type": "banner",
         "banner": "DiscordBanner2.png",
-        "set": "Discord"
+        "origin": "Discord"
     },
     "discord_holy_world": {
         "class": "Banners",
@@ -79,7 +79,7 @@
         "autosale": false,
         "type": "banner",
         "banner": "DiscordBanner.png",
-        "set": "Discord"
+        "origin": "Discord"
     },
 	"SenkoTailBanner": {
         "class": "Banners",

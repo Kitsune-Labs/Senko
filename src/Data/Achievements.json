@@ -1,79 +1,14 @@
 {
-    "NewFloofer": {
-        "name": "New Floofer",
-        "description": "Fluff Senko 10 times!",
-        "yenReward": 100,
-        "color": "YELLOW"
-    },
-
-    "AdeptFloofer": {
-        "name": "Adept Floofer",
-        "description": "Fluff Senko 50 times!",
-        "yenReward": 200,
-        "color": "ORANGE"
-    },
-
-    "MasterFloofer": {
-        "name": "Master Floofer",
-        "description": "Fluff Senko 100 times!",
-        "yenReward": 500,
-        "color": "#FF6633"
-    },
-
-
-
-    "NewDrinker": {
-        "name": "New Drinker",
-        "description": "Have 10 drinks!",
-        "yenReward": 200
-    },
-
-    "AdeptDrinker": {
-        "name": "Adept Drinker",
-        "description": "Have 25 drinks!",
-        "yenReward": 500
-    },
-
-    "MasterDrinker": {
-        "name": "Master Drinker",
-        "description": "Have 50 drinks!",
-        "yenReward": 1000
-    },
-
-
-
-    "NewPatter": {
-        "name": "New Patter",
-        "description": "Pat Senko 10 times!",
-        "yenReward": 100
-    },
-
-    "AdeptPatter": {
-        "name": "Adept Patter",
-        "description": "Pat Senko 50 times!",
-        "yenReward": 200
-    },
-
-    "MasterPatter": {
-        "name": "Master Patter",
-        "description": "Pat Senko 100 times!",
-        "yenReward": 500
-    },
-
-
-
-    "PoorAccounting": {
-        "name": "Poor Accounting",
-        "description": "Acquire 500 Yen"
-    },
-
-    "AdeptAccounting": {
-        "name": "Adept Accounting",
-        "description": "Acquire 10,000 Yen"
-    },
-
-    "ProAccounting": {
-        "name": "Professional Accounting",
-        "description": "Acquire 100,000 Yen"
+    "Fluffs": {
+        "FirstFluff": {
+            "title": "First Fluff",
+            "description": "You have fluffed your first Senko tail!",
+            "rewards": [
+                {
+                    "type": "yen",
+                    "amount": 500
+                }
+            ]
+        }
     }
 }

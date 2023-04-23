@@ -1,336 +1,293 @@
 {
 	"divine_title": {
-        "class": "Titles",
-        "name": "Divine Title",
-        "desc": "Adds \"Divine\" to your profile name",
-        "price": 777,
-        "amount": 1,
-        "max": 1,
-        "title": "✨ Divine",
-        "autoSale": true
-    },
+		"class": "Titles",
+		"name": "Divine Title",
+		"desc": "Adds \"Divine\" to your profile name",
+		"price": 777,
+		"amount": 1,
+		"max": 1,
+		"title": "✨ Divine",
+		"autoSale": true
+	},
 	"holly_title": {
-        "class": "Titles",
-        "name": "Holly Title",
-        "desc": "Adds \"Holly\" to your profile name",
-        "price": 777,
-        "amount": 1,
-        "title": "🎁 Holly",
-        "set": "Christmas",
-        "autoSale": false
-    },
+		"class": "Titles",
+		"name": "Holly Title",
+		"desc": "Adds \"Holly\" to your profile name",
+		"price": 777,
+		"amount": 1,
+		"title": "🎁 Holly",
+		"origin": "Christmas",
+		"autoSale": false
+	},
 	"kitsune_title": {
-        "class": "Titles",
-        "name": "Kitsune Title",
-        "desc": "For true kitsune's",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🦊 Kitsune",
-        "autoSale": true
-    },
-    "fluffy_title": {
-        "class": "Titles",
-        "name": "Fluffy Title",
-        "desc": "For the fluffiest kitsune's out there!",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autoSale": true,
-        "title": "Fluffy"
-    },
+		"class": "Titles",
+		"name": "Kitsune Title",
+		"desc": "For true kitsune's",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🦊 Kitsune",
+		"autoSale": true
+	},
+	"fluffy_title": {
+		"class": "Titles",
+		"name": "Fluffy Title",
+		"desc": "For the fluffiest kitsune's out there!",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"autoSale": true,
+		"title": "Fluffy"
+	},
 	"astronaut_title": {
-        "class": "Titles",
-        "name": "Astronaut Title",
-        "desc": "To Mars and beyond!",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🚀 Astronaut",
-        "autoSale": true
-    },
-    "saint_title": {
-        "class": "Titles",
-        "name": "Saint Title",
-        "desc": "Saints!",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "⛪️ Saint",
-        "autoSale": true
-    },
-    "rainbow_title": {
-        "class": "Titles",
-        "name": "Rainbow Title Icon",
-        "desc": "Displays a 🌈 before your name",
-        "price": 200,
-        "amount": 1,
-        "max": 1,
-        "title": "🌈 ",
-        "autoSale": true
-    },
+		"class": "Titles",
+		"name": "Astronaut Title",
+		"desc": "To Mars and beyond!",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🚀 Astronaut",
+		"autoSale": true
+	},
+	"saint_title": {
+		"class": "Titles",
+		"name": "Saint Title",
+		"desc": "Saints!",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "⛪️ Saint",
+		"autoSale": true
+	},
+	"rainbow_title": {
+		"class": "Titles",
+		"name": "Rainbow Title Icon",
+		"desc": "Displays a 🌈 before your name",
+		"price": 200,
+		"amount": 1,
+		"max": 1,
+		"title": "🌈 ",
+		"autoSale": true
+	},
 	"fisher_title": {
-        "class": "Titles",
-        "name": "Fisher Title",
-        "desc": "Fisherman's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🎣 Fisher",
-        "autoSale": true
-    },
-    "sailor_title": {
-        "class": "Titles",
-        "name": "Sailor Title",
-        "desc": "Sailor's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "⛵️ Sailor",
-        "autoSale": true
-    },
+		"class": "Titles",
+		"name": "Fisher Title",
+		"desc": "Fisherman's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🎣 Fisher",
+		"autoSale": true
+	},
+	"sailor_title": {
+		"class": "Titles",
+		"name": "Sailor Title",
+		"desc": "Sailor's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "⛵️ Sailor",
+		"autoSale": true
+	},
 	"joker_title": {
-        "class": "Titles",
-        "name": "Joker Title",
-        "desc": "Joker's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🃏 Joker",
-        "autoSale": true
-    },
-    "panda_title": {
-        "class": "Titles",
-        "name": "Panda Title",
-        "desc": "Panda title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🐼 Panda",
-        "autoSale": true
-    },
-    "unicorn_title": {
-        "class": "Titles",
-        "name": "Unicorn Title",
-        "desc": "Unicorn title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🦄 Unicorn",
-        "autoSale": true
-    },
-    "magician_title": {
-        "class": "Titles",
-        "name": "Magician's Title",
-        "desc": "Magician's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🧙‍♂️ Magician",
-        "autoSale": true
-    },
-    "party_maker_title": {
-        "class": "Titles",
-        "name": "Party Maker Title",
-        "desc": "Party maker's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🎉 Party Maker",
-        "autoSale": true
-    },
-    "chef_title": {
-        "class": "Titles",
-        "name": "Chef Title",
-        "desc": "Chef's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🍽️ Chef",
-        "autoSale": true
-    },
-    "tourist_title": {
-        "class": "Titles",
-        "name": "Tourist Title",
-        "desc": "Tourist's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🌍 Tourist",
-        "autoSale": true
-    },
-    "pirate_title": {
-        "class": "Titles",
-        "name": "Pirate Title",
-        "desc": "Pirate's title",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "🏴‍☠️ Pirate",
-        "autoSale": true
-    },
-	"thx_grateful_title": {
-        "class": "Titles",
-        "name": "The Grateful",
-        "desc": "Grateful for everything",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autosale": false,
-        "title": "The Grateful",
-        "set": "Autumn"
-    },
-    "thx_thankful_title": {
-        "class": "Titles",
-        "name": "The Thankful",
-        "desc": "Thankful for everything",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autosale": false,
-        "title": "The Thankful",
-        "set": "Autumn"
-    },
-    "thx_blessed_title": {
-        "class": "Titles",
-        "name": "The Blessed",
-        "desc": "Blessed for everything",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autosale": false,
-        "title": "The Blessed",
-        "set": "Autumn"
-    },
-    "mystic_title": {
-        "class": "Titles",
-        "name": "Mystic Title",
-        "desc": "A title for the mysterious and enigmatic",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "title": "🔮 Mystic",
-        "autoSale": false
-    },
-    "enlightened_title": {
-        "class": "Titles",
-        "name": "Enlightened Title",
-        "desc": "A title for the wise and knowledgeable",
-        "price": 500,
-        "amount": 1,
-        "max": 1,
-        "title": "✨ Enlightened",
-        "autoSale": false
-    },
-    "nomad_title": {
-        "class": "Titles",
-        "name": "Nomad Title",
-        "desc": "A title for the wanderers and travelers",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "title": "Nomad",
-        "autoSale": false
-    },
-    "samurai_title": {
-        "class": "Titles",
-        "name": "Samurai Title",
-        "desc": "A title for the honorable and skilled warriors",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🗡 Samurai",
-        "autoSale": false
-    },
-    "Dragon_title": {
-        "class": "Titles",
-        "name": "Dragon Title",
-        "desc": "A title for the fierce and powerful",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🐲 Dragon",
-        "autoSale": false
-    },
-    "Ninja_title": {
-        "class": "Titles",
-        "name": "Ninja Title",
-        "desc": "A title for the stealthy and deadly",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🗡️ Ninja",
-        "autoSale": false
-    },
-    "scientist_title": {
-        "class": "Titles",
-        "name": "Scientist Title",
-        "desc": "A title for the curious and inquisitive",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🔬 Scientist",
-        "autoSale": false
-    },
-    {
-    "Friendly_title": {
-        "class": "Titles",
-        "name": "Friendly Title",
-        "desc": "A title for the friendly and kind",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🤗 Friendly",
-        "autoSale": false
-    },
-    "Helpful_title": {
-        "class": "Titles",
-        "name": "Helpful Title",
-        "desc": "A title for the helpful and supportive",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🤝 Helpful",
-        "autoSale": false
-    },
-    "Positive_title": {
-        "class": "Titles",
-        "name": "Positive Title",
-        "desc": "A title for the positive and optimistic",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🌞 Positive",
-        "autoSale": false
-    },
-    "Friendly_title": {
-        "class": "Titles",
-        "name": "Friendly Title",
-        "desc": "A title for the friendly and kind",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🤗 Friendly",
-        "autoSale": false
-    },
-    "Helpful_title": {
-        "class": "Titles",
-        "name": "Helpful Title",
-        "desc": "A title for the helpful and supportive",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🤝 Helpful",
-        "autoSale": false
-    },
-    "Positive_title": {
-        "class": "Titles",
-        "name": "Positive Title",
-        "desc": "A title for the positive and optimistic",
-        "price": 600,
-        "amount": 1,
-        "max": 1,
-        "title": "🌞 Positive",
-        "autoSale": false
-    }
+		"class": "Titles",
+		"name": "Joker Title",
+		"desc": "Joker's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🃏 Joker",
+		"autoSale": true
+	},
+	"panda_title": {
+		"class": "Titles",
+		"name": "Panda Title",
+		"desc": "Panda title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🐼 Panda",
+		"autoSale": true
+	},
+	"unicorn_title": {
+		"class": "Titles",
+		"name": "Unicorn Title",
+		"desc": "Unicorn title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🦄 Unicorn",
+		"autoSale": true
+	},
+	"magician_title": {
+		"class": "Titles",
+		"name": "Magician's Title",
+		"desc": "Magician's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🧙‍♂️ Magician",
+		"autoSale": true
+	},
+	"party_maker_title": {
+		"class": "Titles",
+		"name": "Party Maker Title",
+		"desc": "Party maker's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🎉 Party Maker",
+		"autoSale": true
+	},
+	"chef_title": {
+		"class": "Titles",
+		"name": "Chef Title",
+		"desc": "Chef's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🍽️ Chef",
+		"autoSale": true
+	},
+	"tourist_title": {
+		"class": "Titles",
+		"name": "Tourist Title",
+		"desc": "Tourist's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🌍 Tourist",
+		"autoSale": true
+	},
+	"pirate_title": {
+		"class": "Titles",
+		"name": "Pirate Title",
+		"desc": "Pirate's title",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "🏴‍☠️ Pirate",
+		"autoSale": true
+	},
+	"mystic_title": {
+		"class": "Titles",
+		"name": "Mystic Title",
+		"desc": "A title for the mysterious and enigmatic",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"title": "🔮 Mystic",
+		"autoSale": false
+	},
+	"enlightened_title": {
+		"class": "Titles",
+		"name": "Enlightened Title",
+		"desc": "A title for the wise and knowledgeable",
+		"price": 500,
+		"amount": 1,
+		"max": 1,
+		"title": "✨ Enlightened",
+		"autoSale": false
+	},
+	"nomad_title": {
+		"class": "Titles",
+		"name": "Nomad Title",
+		"desc": "A title for the wanderers and travelers",
+		"price": 300,
+		"amount": 1,
+		"max": 1,
+		"title": "Nomad",
+		"autoSale": false
+	},
+	"samurai_title": {
+		"class": "Titles",
+		"name": "Samurai Title",
+		"desc": "A title for the honorable and skilled warriors",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🗡 Samurai",
+		"autoSale": false
+	},
+	"Dragon_title": {
+		"class": "Titles",
+		"name": "Dragon Title",
+		"desc": "A title for the fierce and powerful",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🐲 Dragon",
+		"autoSale": false
+	},
+	"Ninja_title": {
+		"class": "Titles",
+		"name": "Ninja Title",
+		"desc": "A title for the stealthy and deadly",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🗡️ Ninja",
+		"autoSale": false
+	},
+	"scientist_title": {
+		"class": "Titles",
+		"name": "Scientist Title",
+		"desc": "A title for the curious and inquisitive",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🔬 Scientist",
+		"autoSale": false
+	},
+
+	"Friendly_title": {
+		"class": "Titles",
+		"name": "Friendly Title",
+		"desc": "A title for the friendly and kind",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🤗 Friendly",
+		"autoSale": false
+	},
+	"philosopher_title": {
+		"class": "Titles",
+		"name": "Philosopher Title",
+		"desc": "A title for the deep thinkers and intellectuals",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "💭 Philosopher",
+		"autoSale": false
+	},
+	"architect_title": {
+		"class": "Titles",
+		"name": "Architect Title",
+		"desc": "A title for the skilled designers and builders",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🏛️ Architect",
+		"autoSale": false
+	},
+	"musician_title": {
+		"class": "Titles",
+		"name": "Musician Title",
+		"desc": "A title for the talented and creative musicians",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🎵 Musician",
+		"autoSale": false
+	},
+	"artist_title": {
+		"class": "Titles",
+		"name": "Artist Title",
+		"desc": "A title for the imaginative and expressive artists",
+		"price": 600,
+		"amount": 1,
+		"max": 1,
+		"title": "🎨 Artist",
+		"autoSale": false
+	}
 }

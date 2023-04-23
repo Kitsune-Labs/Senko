@@ -26,7 +26,7 @@
         "amount": 1,
         "max": 1,
         "badge": "<:CandyCane:926930144852078672>",
-        "set": "Christmas",
+        "origin": "Christmas",
         "autoSale": false
     },
 	"snowflake": {
@@ -37,7 +37,7 @@
         "amount": 1,
         "max": 1,
         "badge": "<a:snowflake_a:917908202459390042>",
-        "set": "Christmas",
+        "origin": "Christmas",
         "autoSale": false
     },
 	"ChristmasTree": {
@@ -48,7 +48,7 @@
         "amount": 1,
         "max": 1,
         "badge": "🎄",
-        "set": "Christmas",
+        "origin": "Christmas",
         "autoSale": false
     },
 	"cherry": {
@@ -114,7 +114,7 @@
             "isSeasonal": true,
             "season": "Valentines"
         },
-        "set": "Valentines"
+        "origin": "Valentines"
     },
 	"turtle_badge": {
         "class": "Badges",
@@ -144,49 +144,5 @@
         "max": 1,
         "badge": "🦐",
         "autoSale": true
-    },
-	"thx_leaf_badge": {
-        "class": "Badges",
-        "name": "🍂 Autumn Leaf",
-        "desc": "Soothing",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autosale": false,
-        "badge": "🍂",
-        "set": "Autumn"
-    },
-    "thx_pie_badge": {
-        "class": "Badges",
-        "name": "🥧 Pie",
-        "desc": "Pie Badge",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autosale": false,
-        "badge": "🥧",
-        "set": "Autumn"
-    },
-    "thx_pumpkin_badge": {
-        "class": "Badges",
-        "name": "🎃 Pumpkin",
-        "desc": "Pumpkin Badge",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autosale": false,
-        "badge": "🎃",
-        "set": "Autumn"
-    },
-    "thx_corn_badge": {
-        "class": "Badges",
-        "name": "🌽 Corn",
-        "desc": "Corn Badge",
-        "price": 300,
-        "amount": 1,
-        "max": 1,
-        "autosale": false,
-        "badge": "🌽",
-        "set": "Autumn"
     }
 }

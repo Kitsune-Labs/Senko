@@ -1,4 +1,4 @@
-import type { SenkoCommand } from "../types/AllTypes";
+import type { SenkoCommand } from "../../../src/types/AllTypes";
 
 export default {
 	name: "test",

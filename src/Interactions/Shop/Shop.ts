@@ -78,7 +78,7 @@ export default {
 
 			itemClasses[index].map((item: any) => {
 				// @ts-expect-error
-				marketResponse.fields.find(f => f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}${item.data.set ? ` **(Part of the ${item.data.set} set)**\n` : "\n"}`;
+				marketResponse.fields.find(f => f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}${item.data.origin ? ` **(Part of the ${item.data.origin} set)**\n` : "\n"}`;
 
 				if (!MenuItems.find(i => i.label === item.data.name)) MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}#${Math.floor(Math.random() * 100)}` });
 			});

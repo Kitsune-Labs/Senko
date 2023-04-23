@@ -1,142 +1,142 @@
 {
 	"md_1": {
-        "class": "Music",
-        "name": "Music Disk 1 - Holy World",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_2": {
-        "class": "Music",
-        "name": "Music Disk 2 - Theme of Senko",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_3": {
-        "class": "Music",
-        "name": "Music Disk 3 - In a fluster",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_4": {
-        "class": "Music",
-        "name": "Music Disk 4 - Happy Circle",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_5": {
-        "class": "Music",
-        "name": "Music Disk 5 - Chill out",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_6": {
-        "class": "Music",
-        "name": "Music Disk 6 - Mofumofu Time",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_7": {
-        "class": "Music",
-        "name": "Music Disk 7 - Restless",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_8": {
-        "class": "Music",
-        "name": "Music Disk 8 - Exhausted Nakano",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_9": {
-        "class": "Music",
-        "name": "Music Disk 9 - Sleeping on her lap",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_10": {
-        "class": "Music",
-        "name": "Music Disk 10 - Refresh",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_11": {
-        "class": "Music",
-        "name": "Music Disk 11 - Senko's tear",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_12": {
-        "class": "Music",
-        "name": "Music Disk 12 - Reminiscences of childhood",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_13": {
-        "class": "Music",
-        "name": "Music Disk 13 - Emergency",
-        "desc": "Forever ashubiduba mofu-mofu!",
-        "price": 500,
-        "amount": 1,
-        "autoSale": true,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    },
-    "md_14": {
-        "class": "Music",
-        "name": "Special Music Disk 1 - I got you",
-        "desc": "eng",
-        "price": 7777777,
-        "amount": 1,
-        "autoSale": false,
-        "soundFile": "/src/Data/Sounds/none.mp3",
-        "soundVolume": 0.5
-    }
+		"class": "Music",
+		"name": "Music Disk 1 - Holy World",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_2": {
+		"class": "Music",
+		"name": "Music Disk 2 - Theme of Senko",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_3": {
+		"class": "Music",
+		"name": "Music Disk 3 - In a fluster",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_4": {
+		"class": "Music",
+		"name": "Music Disk 4 - Happy Circle",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_5": {
+		"class": "Music",
+		"name": "Music Disk 5 - Chill out",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_6": {
+		"class": "Music",
+		"name": "Music Disk 6 - Mofumofu Time",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_7": {
+		"class": "Music",
+		"name": "Music Disk 7 - Restless",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_8": {
+		"class": "Music",
+		"name": "Music Disk 8 - Exhausted Nakano",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_9": {
+		"class": "Music",
+		"name": "Music Disk 9 - Sleeping on her lap",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_10": {
+		"class": "Music",
+		"name": "Music Disk 10 - Refresh",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_11": {
+		"class": "Music",
+		"name": "Music Disk 11 - Senko's tear",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_12": {
+		"class": "Music",
+		"name": "Music Disk 12 - Reminiscences of childhood",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_13": {
+		"class": "Music",
+		"name": "Music Disk 13 - Emergency",
+		"desc": "Forever ashubiduba mofu-mofu!",
+		"price": 500,
+		"amount": 1,
+		"autoSale": true,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	},
+	"md_14": {
+		"class": "Music",
+		"name": "Special Music Disk 1 - I got you",
+		"desc": "eng",
+		"price": 7777777,
+		"amount": 1,
+		"autoSale": false,
+		"soundFile": "/src/Data/Sounds/none.mp3",
+		"soundVolume": 0.5
+	}
 }

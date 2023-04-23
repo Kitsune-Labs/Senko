@@ -38,7 +38,7 @@ export default class {
 				}
 			}
 
-			const messageStructure = {
+			const messageStructure: any = {
 				embeds: [
 					{
 						title: "Message Deleted",
@@ -51,6 +51,27 @@ export default class {
 				],
 				files: []
 			};
+
+			for (const possibleLink of message.content.split(" ")) {
+				if (possibleLink.match(/https:\/\/tenor\.com\/view\/[a-zA-Z0-9-]+/g)) {
+					await axios({
+						url: `${possibleLink}.gif`,
+						method: "GET",
+						headers: {
+							"User-Agent": senkoClient.api.UserAgent
+						}
+					}).then(async (response) => {
+						messageStructure.embeds.push({
+							description: possibleLink,
+							// @ts-ignore
+							image: {
+								url: response.request.res.responseUrl
+							},
+							color: Colors.Yellow
+						});
+					});
+				}
+			}
 
 			if (guildData.AdvancedMessageLogging.message_deletions) {
 				messageStructure.embeds[0]!.title = "";

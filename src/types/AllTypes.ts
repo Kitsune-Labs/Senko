@@ -1,6 +1,7 @@
 import type { Bitfield } from "bitfields";
 import type { ApplicationCommandOption, BaseMessageOptions, ChatInputCommandInteraction, Client, Collection, CommandInteraction, Events, Guild, WebhookClient } from "discord.js";
 import type { GuildData, UserData } from "./SupabaseTypes";
+import winston from "winston";
 
 export interface BitData {
 	Private: 1,
@@ -99,7 +100,10 @@ export interface SenkoClientTypes extends Client {
 		SenkosWorld: Guild;
 	};
 	on(event: Events, listener: (...args: any[]) => void): this;
+	once(event: Events, listener: (...args: any[]) => void): this;
 }
+
+import { SenkoMemberInterface } from "../Classes/SenkoMember";
 
 export interface SenkoCommandApi {
 	readonly senkoClient: SenkoClientTypes;
@@ -111,29 +115,53 @@ export interface SenkoCommandApi {
 	readonly generalLocale: any;
 	readonly Icons: SenkoIcons;
 	readonly Theme: SenkoTheme;
+	readonly winston: winston.Logger
+	readonly senkoMember: SenkoMemberInterface;
 }
 
 export const CommandCategories = ["fun", "economy", "social", "admin", "account", "utility", "uncategorized"];
 
+type winstonLevels = "senko" | "fatal" | "error" | "warn" | "info" | "debug" | "trace";
+
+export interface SenkoWinston {
+	log: (level: winstonLevels, message: string) => void;
+}
+
 export interface SenkoCommand {
 	name: string;
 	desc: string;
+	commandOptions?: {
+		defer?: boolean;
+		ephemeral?: boolean;
+		data?: boolean;
+		guildData?: boolean;
+		usableAnywhere?: boolean;
+		whitelisted?: boolean;
+	};
 	defer?: boolean;
 	ephemeral?: boolean;
 	usableAnywhere?: boolean;
+	whitelist?: boolean;
+
+	category: string;
+	permissions?: any;
+	options?: ApplicationCommandOption[];
 	name_localized?: string;
 	description_localized?: {
 		"en-US": string;
 		"jp": string;
 		"fr": string;
 	};
-	category: string;
-	permissions?: any;
-	whitelist?: boolean;
-	options?: ApplicationCommandOption[];
 	start: (Api: SenkoCommandApi) => Promise<void>;
 }
 
 export interface SenkoMessageOptions extends BaseMessageOptions {
 	ephemeral?: boolean;
+}
+
+export interface Achievement {
+	name: string;
+	description: string;
+	earned: number;
+	rewardType: "shopItem" | "yen" | "tofu"
 }

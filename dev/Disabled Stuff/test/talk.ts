@@ -1,28 +1,11 @@
-// eslint-disable-next-line no-unused-vars
-const { Client, CommandInteraction } = require("discord.js");
-// eslint-disable-next-line no-unused-vars
-const Icons = require("../Data/Icons.json");
-const { randomArray } = require("../API/Master");
+import { randomArrayItem } from "@kitsune-labs/utilities";
+import type { SenkoCommand } from "../../../src/types/AllTypes";
 
-module.exports = {
+export default {
 	name: "talk",
-	desc: "Speak to Senko-san",
-	defer: false,
-	/**
-	 * @param {CommandInteraction} interaction
-	 * @param {Client} SenkoClient
-	 */
-	// eslint-disable-next-line no-unused-vars
-	start: async (SenkoClient, interaction, GuildData, AccountData) => {
-		if (interaction.user.id !== "609097445825052701") return;
-
-		// Styles
-		// 1 = Primary
-		// 2 = Secondary
-		// 3 = Success
-		// 4 = Danger
-		// 5 = Link
-
+	desc: "Talk to Senko!",
+	category: "fun",
+	start: async ({ interaction }) => {
 		const possibleResponses = [//{
 		// 	embeds: [{
 		// 		title: "Senko-san",
@@ -95,6 +78,6 @@ module.exports = {
 			}
 		];
 
-		interaction.reply(randomArray(possibleResponses));
+		interaction.reply(randomArrayItem(possibleResponses));
 	}
-};
+} as SenkoCommand;
