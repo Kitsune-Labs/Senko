@@ -8,7 +8,8 @@
         "max": 1,
         "type": "banner",
         "autoSale": true,
-        "banner": "SakuraShiro.png"
+        "banner": "SakuraShiro.png",
+        "url": "https://cdn.senko.gg/public/banners/SakuraShiro.png"
     },
 	"senkobanner_1": {
         "class": "Banners",
@@ -17,7 +18,8 @@
         "price": 7777,
         "amount": 1,
         "type": "banner",
-        "banner": "SenkoBanner.png"
+        "banner": "SenkoBanner.png",
+        "url": "https://cdn.senko.gg/public/banners/SenkoBanner.png"
     },
     "thehelpfulfoxsenko": {
         "class": "Banners",
@@ -26,7 +28,8 @@
         "price": 7777,
         "amount": 1,
         "type": "banner",
-        "banner": "TheHelpfulFoxSenko-san.png"
+        "banner": "TheHelpfulFoxSenko-san.png",
+        "url": "https://cdn.senko.gg/public/banners/TheHelpfulFoxSenko-san.png"
     },
 	"Christmas_Banner_21": {
         "class": "Banners",
@@ -36,7 +39,8 @@
         "amount": 1,
         "type": "banner",
         "banner": "ChristmasBanner21.png",
-        "origin": "Christmas"
+        "origin": "Christmas",
+        "url": "https://cdn.senko.gg/public/banners/ChristmasBanner21.png"
     },
 	"shiro_wave": {
         "class": "Banners",
@@ -46,7 +50,8 @@
         "amount": 1,
         "autosale": true,
         "type": "banner",
-        "banner": "ShiroWind.png"
+        "banner": "ShiroWind.png",
+        "url": "https://cdn.senko.gg/public/banners/ShiroWind.png"
     },
     "discord_animated": {
         "class": "Banners",
@@ -57,7 +62,8 @@
         "autosale": false,
         "type": "banner",
         "banner": "Discord.gif",
-        "origin": "Discord"
+        "origin": "Discord",
+        "url": "https://cdn.senko.gg/public/banners/Discord.gif"
     },
     "discord_characters": {
         "class": "Banners",
@@ -68,7 +74,8 @@
         "autosale": false,
         "type": "banner",
         "banner": "DiscordBanner2.png",
-        "origin": "Discord"
+        "origin": "Discord",
+        "url": "https://cdn.senko.gg/public/banners/DiscordBanner2.png"
     },
     "discord_holy_world": {
         "class": "Banners",
@@ -79,7 +86,8 @@
         "autosale": false,
         "type": "banner",
         "banner": "DiscordBanner.png",
-        "origin": "Discord"
+        "origin": "Discord",
+        "url": "https://cdn.senko.gg/public/banners/DiscordBanner.png"
     },
 	"SenkoTailBanner": {
         "class": "Banners",
@@ -90,6 +98,7 @@
         "max": 1,
         "autoSale": false,
         "type": "banner",
-        "banner": "SenkoTailBanner.png"
+        "banner": "SenkoTailBanner.png",
+        "url": "https://cdn.senko.gg/public/banners/SenkoTailBanner.png"
     }
 }

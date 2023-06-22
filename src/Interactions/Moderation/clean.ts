@@ -23,17 +23,17 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({ senkoClient, interaction, guildData }) => {
-		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.followUp({
+	start: async ({ Senko, Interaction, GuildData }) => {
+		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return Interaction.followUp({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`"
 		});
 
-		if (!interaction.guild!.members.me!.permissions.has(Permissions.ManageMessages)) return interaction.followUp({
+		if (!Interaction.guild!.members.me!.permissions.has(Permissions.ManageMessages)) return Interaction.followUp({
 			embeds: [
 				{
 					title: "Oh dear...",
 					description: "It looks like I can't manage messsages! (Make sure I have the \"Manage Messages\" permission)",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -42,12 +42,12 @@ export default {
 		});
 
 		// @ts-ignore
-		if (!interaction.member?.permissions.has(Permissions.ManageMessages)) return interaction.followUp({
+		if (!Interaction.member?.permissions.has(Permissions.ManageMessages)) return Interaction.followUp({
 			embeds: [
 				{
 					title: "Sorry dear!",
 					description: "You must be able to manage messages to use this!",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -55,15 +55,15 @@ export default {
 			]
 		});
 
-		const amount = interaction.options.getNumber("amount");
+		const amount = Interaction.options.getNumber("amount");
 
 		// @ts-ignore
-		interaction.channel!.bulkDelete(amount).then((data: any) => {
-			interaction.followUp({
+		Interaction.channel!.bulkDelete(amount).then((data: any) => {
+			Interaction.followUp({
 				content: data.size > 1 ? `I have removed ${data.size} messages` : `I have removed ${data.size} message`
 			});
 		}).catch((error: DiscordAPIError) => {
-			interaction.followUp({
+			Interaction.followUp({
 				content: `There was an error!\n\n__${error}__`
 			});
 		});

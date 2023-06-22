@@ -32,27 +32,27 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({ senkoClient, interaction, guildData }) => {
-		const guildWarns = guildData.warns;
-		const ActionLogs = guildData.ActionLogs;
-		const flags = guildData.flags;
+	start: async ({ Senko, Interaction, GuildData }) => {
+		const guildWarns = GuildData.warns;
+		const ActionLogs = GuildData.ActionLogs;
+		const flags = GuildData.flags;
 
-		const user = interaction.options.getMember("user") as GuildMember;
-		const reason = interaction.options.getString("reason") || "No Reason Provided";
-		const note = interaction.options.getString("note") || "No note(s) provided";
+		const user = Interaction.options.getMember("user") as GuildMember;
+		const reason = Interaction.options.getString("reason") || "No Reason Provided";
+		const note = Interaction.options.getString("note") || "No note(s) provided";
 
-		if (!Bitfield.fromHex(flags).get(bits.BETAs.ModCommands)) return interaction.reply({
+		if (!Bitfield.fromHex(flags).get(bits.BETAs.ModCommands)) return Interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});
 
 		// @ts-ignore
-		if (!interaction.member!.permissions.has(Permissions.ModerateMembers)) return interaction.reply({
+		if (!Interaction.member!.permissions.has(Permissions.ModerateMembers)) return Interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
 					description: "You must be able to moderate members to use this!",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -62,18 +62,18 @@ export default {
 		});
 		let roleSize = 1;
 
-		await interaction.guild!.roles.fetch().then(roles => {
+		await Interaction.guild!.roles.fetch().then(roles => {
 			roleSize = roles.size;
 		});
 
 		// @ts-ignore
-		if (interaction.member!.id != interaction.guild!.ownerId && roleSize > 1 && user!.roles.highest.rawPosition >= interaction.member!.roles.highest.rawPosition) return interaction.reply({ content: "You can't warn members that have an equal or higher role", ephemeral: true });
+		if (Interaction.member!.id != Interaction.guild!.ownerId && roleSize > 1 && user!.roles.highest.rawPosition >= Interaction.member!.roles.highest.rawPosition) return Interaction.reply({ content: "You can't warn members that have an equal or higher role", ephemeral: true });
 
-		if (!user) return interaction.reply({ content: "I can't find this user!", ephemeral: true });
-		if (user.id === interaction.user.id) return interaction.reply({ content: "You cannot warn yourself", ephemeral: true });
-		if (user.user.bot) return interaction.reply({ content: `${Icons.exclamation}  You cannot warn bots`, ephemeral: true });
+		if (!user) return Interaction.reply({ content: "I can't find this user!", ephemeral: true });
+		if (user.id === Interaction.user.id) return Interaction.reply({ content: "You cannot warn yourself", ephemeral: true });
+		if (user.user.bot) return Interaction.reply({ content: `${Icons.exclamation}  You cannot warn bots`, ephemeral: true });
 
-		await interaction.deferReply();
+		await Interaction.deferReply();
 
 		const messageStruct = {
 			content: "",
@@ -95,8 +95,8 @@ export default {
 			reason: reason,
 			note: note,
 			date: Date.now(),
-			moderator: interaction.user.tag,
-			moderatorId: interaction.user.id,
+			moderator: Interaction.user.tag,
+			moderatorId: Interaction.user.id,
 			uuid: uuidv4().slice(0, 8),
 			userDmd: false
 		};
@@ -107,10 +107,10 @@ export default {
 			guildWarns[user.id] = [warnStruct];
 		}
 
-		await updateSuperGuild(interaction.guild!, { warns: guildWarns });
+		await updateSuperGuild(Interaction.guild!, { warns: guildWarns });
 
 		if (ActionLogs) {
-			const channel = await interaction.guild!.channels.fetch(ActionLogs) as GuildTextBasedChannel;
+			const channel = await Interaction.guild!.channels.fetch(ActionLogs) as GuildTextBasedChannel;
 
 			if (channel.type !== ChannelType.GuildText) return;
 			if (!channel) return messageStruct.content = "I do not have access to the Action Logs channel or it does not exist!";
@@ -125,15 +125,15 @@ export default {
 							url: user.user.displayAvatarURL()
 						},
 						author: {
-							name: `${interaction.user.tag}  [${interaction.user.id}]`,
+							name: `${Interaction.user.tag}  [${Interaction.user.id}]`,
 							// eslint-disable-next-line camelcase
-							icon_url: `${interaction.user.displayAvatarURL()}`
+							icon_url: `${Interaction.user.displayAvatarURL()}`
 						}
 					}
 				]
 			}).catch(err => {
 				// @ts-ignore
-				interaction.channel?.send({
+				Interaction.channel?.send({
 					content: `There was an error sending the action report: ${err}`
 				});
 			});
@@ -143,7 +143,7 @@ export default {
 			await user.send({
 				embeds: [
 					{
-						title: `You have been warned in ${interaction.guild!.name}`,
+						title: `You have been warned in ${Interaction.guild!.name}`,
 						description: `Your reason: ${warnStruct.reason}\nNote: ${warnStruct.note}`,
 						color: Colors.Yellow
 					}
@@ -158,6 +158,6 @@ export default {
 		}
 
 		// @ts-expect-error
-		interaction.followUp(messageStruct);
+		Interaction.followUp(messageStruct);
 	}
 } as SenkoCommand;

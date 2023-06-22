@@ -1,4 +1,126 @@
 {
+  "thx_pumpkin_pie": {
+    "class": "Consumables",
+    "name": "Pumpkin Pie",
+    "desc": "Yummy",
+    "price": 300,
+    "amount": 1,
+    "autosale": false,
+    "origin": "Autumn"
+  },
+  "thx_konnyaku": {
+    "class": "Consumables",
+    "name": "Konnyaku",
+    "desc": "A yam cake served with sweet or savory sauce.",
+    "price": 200,
+    "amount": 1,
+    "autosale": false,
+    "origin": "Autumn"
+  },
+  "thx_cheesecake": {
+    "class": "Consumables",
+    "name": "Cheesecake",
+    "desc": "This isn't your ordinary cheesecake, this is thanksgiving cheesecake!",
+    "price": 200,
+    "amount": 1,
+    "autosale": false,
+    "origin": "Autumn"
+  },
+  "thx_amaca": {
+    "class": "Consumables",
+    "name": "Amaca",
+    "desc": "A casserole filled with potato's, chestnuts and carrots.",
+    "price": 400,
+    "amount": 1,
+    "autosale": false,
+    "origin": "Autumn"
+  },
+  "thx_cornbread": {
+    "class": "Consumables",
+    "name": "Cornbread",
+    "desc": "I don't even know where to start on how good this is.",
+    "price": 400,
+    "amount": 1,
+    "autosale": false,
+    "origin": "Autumn"
+  },
+  "thx_leaf_badge": {
+    "class": "Badges",
+    "name": "🍂 Autumn Leaf",
+    "desc": "Soothing",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autosale": false,
+    "badge": "🍂",
+    "origin": "Autumn"
+  },
+  "thx_pie_badge": {
+    "class": "Badges",
+    "name": "🥧 Pie",
+    "desc": "Pie Badge",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autosale": false,
+    "badge": "🥧",
+    "origin": "Autumn"
+  },
+  "thx_pumpkin_badge": {
+    "class": "Badges",
+    "name": "🎃 Pumpkin",
+    "desc": "Pumpkin Badge",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autosale": false,
+    "badge": "🎃",
+    "origin": "Autumn"
+  },
+  "thx_corn_badge": {
+    "class": "Badges",
+    "name": "🌽 Corn",
+    "desc": "Corn Badge",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autosale": false,
+    "badge": "🌽",
+    "origin": "Autumn"
+  },
+  "thx_grateful_title": {
+    "class": "Titles",
+    "name": "The Grateful",
+    "desc": "Grateful for everything",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autosale": false,
+    "title": "The Grateful",
+    "origin": "Autumn"
+  },
+  "thx_thankful_title": {
+    "class": "Titles",
+    "name": "The Thankful",
+    "desc": "Thankful for everything",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autosale": false,
+    "title": "The Thankful",
+    "origin": "Autumn"
+  },
+  "thx_blessed_title": {
+    "class": "Titles",
+    "name": "The Blessed",
+    "desc": "Blessed for everything",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autosale": false,
+    "title": "The Blessed",
+    "origin": "Autumn"
+  },
   "tiny_green_hat": {
     "class": "Badges",
     "name": "Tiny Green Hat Badge",
@@ -26,7 +148,7 @@
     "amount": 1,
     "max": 1,
     "badge": "<:CandyCane:926930144852078672>",
-    "set": "Christmas",
+    "origin": "Christmas",
     "autoSale": false
   },
   "snowflake": {
@@ -37,7 +159,7 @@
     "amount": 1,
     "max": 1,
     "badge": "<a:snowflake_a:917908202459390042>",
-    "set": "Christmas",
+    "origin": "Christmas",
     "autoSale": false
   },
   "ChristmasTree": {
@@ -48,7 +170,7 @@
     "amount": 1,
     "max": 1,
     "badge": "🎄",
-    "set": "Christmas",
+    "origin": "Christmas",
     "autoSale": false
   },
   "cherry": {
@@ -114,7 +236,7 @@
       "isSeasonal": true,
       "season": "Valentines"
     },
-    "set": "Valentines"
+    "origin": "Valentines"
   },
   "turtle_badge": {
     "class": "Badges",
@@ -145,49 +267,107 @@
     "badge": "🦐",
     "autoSale": true
   },
-  "thx_leaf_badge": {
-    "class": "Badges",
-    "name": "🍂 Autumn Leaf",
-    "desc": "Soothing",
-    "price": 300,
+  "sakurashiro": {
+    "class": "Banners",
+    "name": "Shiro Sakura Banner",
+    "desc": "Shiro with some sakura on the edges!",
+    "price": 777,
     "amount": 1,
     "max": 1,
-    "autosale": false,
-    "badge": "🍂",
-    "set": "Autumn"
+    "type": "banner",
+    "autoSale": true,
+    "banner": "SakuraShiro.png",
+    "url": "https://cdn.senko.gg/public/banners/SakuraShiro.png"
   },
-  "thx_pie_badge": {
-    "class": "Badges",
-    "name": "🥧 Pie",
-    "desc": "Pie Badge",
-    "price": 300,
+  "senkobanner_1": {
+    "class": "Banners",
+    "name": "Senko Manga Banner",
+    "desc": "A banner made of Senkos from the manga!",
+    "price": 7777,
     "amount": 1,
-    "max": 1,
-    "autosale": false,
-    "badge": "🥧",
-    "set": "Autumn"
+    "type": "banner",
+    "banner": "SenkoBanner.png",
+    "url": "https://cdn.senko.gg/public/banners/SenkoBanner.png"
   },
-  "thx_pumpkin_badge": {
-    "class": "Badges",
-    "name": "🎃 Pumpkin",
-    "desc": "Pumpkin Badge",
-    "price": 300,
+  "thehelpfulfoxsenko": {
+    "class": "Banners",
+    "name": "Rustic Senko Pout Banner",
+    "desc": "A relic from the past, This helpful fox Senko-san is here for your pampering needs!",
+    "price": 7777,
     "amount": 1,
-    "max": 1,
-    "autosale": false,
-    "badge": "🎃",
-    "set": "Autumn"
+    "type": "banner",
+    "banner": "TheHelpfulFoxSenko-san.png",
+    "url": "https://cdn.senko.gg/public/banners/TheHelpfulFoxSenko-san.png"
   },
-  "thx_corn_badge": {
-    "class": "Badges",
-    "name": "🌽 Corn",
-    "desc": "Corn Badge",
+  "Christmas_Banner_21": {
+    "class": "Banners",
+    "name": "Senko's Christmas Present Banner",
+    "desc": "I hope it's everyone's favorite holiday!",
+    "price": 500,
+    "amount": 1,
+    "type": "banner",
+    "banner": "ChristmasBanner21.png",
+    "origin": "Christmas",
+    "url": "https://cdn.senko.gg/public/banners/ChristmasBanner21.png"
+  },
+  "shiro_wave": {
+    "class": "Banners",
+    "name": "Shiro Wave Banner",
+    "desc": "Shiro with wavy hair",
     "price": 300,
     "amount": 1,
-    "max": 1,
+    "autosale": true,
+    "type": "banner",
+    "banner": "ShiroWind.png",
+    "url": "https://cdn.senko.gg/public/banners/ShiroWind.png"
+  },
+  "discord_animated": {
+    "class": "Banners",
+    "name": "Discord Banner [Animated]",
+    "desc": "Discord branding",
+    "price": 0,
+    "amount": 1,
     "autosale": false,
-    "badge": "🌽",
-    "set": "Autumn"
+    "type": "banner",
+    "banner": "Discord.gif",
+    "origin": "Discord",
+    "url": "https://cdn.senko.gg/public/banners/Discord.gif"
+  },
+  "discord_characters": {
+    "class": "Banners",
+    "name": "Discord's Characters",
+    "desc": "Discord's Characters",
+    "price": 0,
+    "amount": 1,
+    "autosale": false,
+    "type": "banner",
+    "banner": "DiscordBanner2.png",
+    "origin": "Discord",
+    "url": "https://cdn.senko.gg/public/banners/DiscordBanner2.png"
+  },
+  "discord_holy_world": {
+    "class": "Banners",
+    "name": "Discord in the Holy World",
+    "desc": "Discord in the Holy World",
+    "price": 0,
+    "amount": 1,
+    "autosale": false,
+    "type": "banner",
+    "banner": "DiscordBanner.png",
+    "origin": "Discord",
+    "url": "https://cdn.senko.gg/public/banners/DiscordBanner.png"
+  },
+  "SenkoTailBanner": {
+    "class": "Banners",
+    "name": "Senko Tail Banner",
+    "desc": "A banner given to Contributors",
+    "price": 10000000000000000,
+    "amount": 1,
+    "max": 1,
+    "autoSale": false,
+    "type": "banner",
+    "banner": "SenkoTailBanner.png",
+    "url": "https://cdn.senko.gg/public/banners/SenkoTailBanner.png"
   },
   "color_purple": {
     "class": "Colors",
@@ -221,7 +401,7 @@
     "color": "#CC3333",
     "type": "color",
     "autoSale": false,
-    "set": "Christmas"
+    "origin": "Christmas"
   },
   "color_teal": {
     "class": "Colors",
@@ -232,7 +412,7 @@
     "max": 1,
     "color": "#4AD1FF",
     "type": "color",
-    "set": "Christmas",
+    "origin": "Christmas",
     "autoSale": false
   },
   "color_pg": {
@@ -245,7 +425,7 @@
     "color": "#1EFFB5",
     "type": "color",
     "autoSale": false,
-    "set": "Christmas"
+    "origin": "Christmas"
   },
   "light_blue_color": {
     "class": "Colors",
@@ -278,17 +458,6 @@
     "max": 1,
     "autoSale": true,
     "color": "#f8f060",
-    "type": "color"
-  },
-  "lime_green_color": {
-    "class": "Colors",
-    "name": "Lime Green card color",
-    "desc": "A greeny lime color",
-    "price": 100,
-    "amount": 1,
-    "max": 1,
-    "autoSale": true,
-    "color": "#17ff00",
     "type": "color"
   },
   "violet_color": {
@@ -544,6 +713,116 @@
     "type": "color",
     "autoSale": true
   },
+  "color_turquoise": {
+    "class": "Colors",
+    "name": "Turquoise Card Color",
+    "desc": "A vibrant turquoise color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#40E0D0",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_lavender": {
+    "class": "Colors",
+    "name": "Lavender Card Color",
+    "desc": "A soft lavender color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#E6E6FA",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_gold": {
+    "class": "Colors",
+    "name": "Gold Card Color",
+    "desc": "A shiny gold color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#FFD700",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_silver": {
+    "class": "Colors",
+    "name": "Silver Card Color",
+    "desc": "A shiny silver color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#C0C0C0",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_chocolate": {
+    "class": "Colors",
+    "name": "Chocolate Card Color",
+    "desc": "A rich chocolate brown color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#D2691E",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_aqua": {
+    "class": "Colors",
+    "name": "Aqua Card Color",
+    "desc": "A bright aqua blue color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#00FFFF",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_rust": {
+    "class": "Colors",
+    "name": "Rust Card Color",
+    "desc": "A warm reddish-brown color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#B7410E",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_sapphire": {
+    "class": "Colors",
+    "name": "Sapphire Card Color",
+    "desc": "A deep, rich blue color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#0F52BA",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_crimson": {
+    "class": "Colors",
+    "name": "Crimson Card Color",
+    "desc": "A deep, rich red color",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#DC143C",
+    "type": "color",
+    "autoSale": true
+  },
+  "color_chartreuse": {
+    "class": "Colors",
+    "name": "Chartreuse Card Color",
+    "desc": "A vibrant green-yellow color (mostly green though)",
+    "price": 100,
+    "amount": 1,
+    "max": 1,
+    "color": "#7FFF00",
+    "type": "color",
+    "autoSale": true
+  },
   "pumpkinpie": {
     "class": "Consumables",
     "name": "Pumpkin Pie",
@@ -737,7 +1016,7 @@
       "isSeasonal": true,
       "season": "Valentines"
     },
-    "set": "Valentines"
+    "origin": "Valentines"
   },
   "lemon_cake": {
     "class": "Consumables",
@@ -937,144 +1216,6 @@
     "autoSale": true,
     "type": "food"
   },
-  "thx_pumpkin_pie": {
-    "class": "Consumables",
-    "name": "Pumpkin Pie",
-    "desc": "Yummy",
-    "price": 300,
-    "amount": 1,
-    "autosale": false,
-    "set": "Autumn"
-  },
-  "thx_konnyaku": {
-    "class": "Consumables",
-    "name": "Konnyaku",
-    "desc": "A yam cake served with sweet or savory sauce.",
-    "price": 200,
-    "amount": 1,
-    "autosale": false,
-    "set": "Autumn"
-  },
-  "thx_cheesecake": {
-    "class": "Consumables",
-    "name": "Cheesecake",
-    "desc": "This isn't your ordinary cheesecake, this is thanksgiving cheesecake!",
-    "price": 200,
-    "amount": 1,
-    "autosale": false,
-    "set": "Autumn"
-  },
-  "thx_amaca": {
-    "class": "Consumables",
-    "name": "Amaca",
-    "desc": "A casserole filled with potato's, chestnuts and carrots.",
-    "price": 400,
-    "amount": 1,
-    "autosale": false,
-    "set": "Autumn"
-  },
-  "thx_cornbread": {
-    "class": "Consumables",
-    "name": "Cornbread",
-    "desc": "I don't even know where to start on how good this is.",
-    "price": 400,
-    "amount": 1,
-    "autosale": false,
-    "set": "Autumn"
-  },
-  "sakurashiro": {
-    "class": "Banners",
-    "name": "Shiro Sakura Banner",
-    "desc": "Shiro with some sakura on the edges!",
-    "price": 777,
-    "amount": 1,
-    "max": 1,
-    "type": "banner",
-    "autoSale": true,
-    "banner": "SakuraShiro.png"
-  },
-  "senkobanner_1": {
-    "class": "Banners",
-    "name": "Senko Manga Banner",
-    "desc": "A banner made of Senkos from the manga!",
-    "price": 7777,
-    "amount": 1,
-    "type": "banner",
-    "banner": "SenkoBanner.png"
-  },
-  "thehelpfulfoxsenko": {
-    "class": "Banners",
-    "name": "Rustic Senko Pout Banner",
-    "desc": "A relic from the past, This helpful fox Senko-san is here for your pampering needs!",
-    "price": 7777,
-    "amount": 1,
-    "type": "banner",
-    "banner": "TheHelpfulFoxSenko-san.png"
-  },
-  "Christmas_Banner_21": {
-    "class": "Banners",
-    "name": "Senko's Christmas Present Banner",
-    "desc": "I hope it's everyone's favorite holiday!",
-    "price": 500,
-    "amount": 1,
-    "type": "banner",
-    "banner": "ChristmasBanner21.png",
-    "set": "Christmas"
-  },
-  "shiro_wave": {
-    "class": "Banners",
-    "name": "Shiro Wave Banner",
-    "desc": "Shiro with wavy hair",
-    "price": 300,
-    "amount": 1,
-    "autosale": true,
-    "type": "banner",
-    "banner": "ShiroWind.png"
-  },
-  "discord_animated": {
-    "class": "Banners",
-    "name": "Discord Banner [Animated]",
-    "desc": "Discord branding",
-    "price": 0,
-    "amount": 1,
-    "autosale": false,
-    "type": "banner",
-    "banner": "Discord.gif",
-    "set": "Discord"
-  },
-  "discord_characters": {
-    "class": "Banners",
-    "name": "Discord's Characters",
-    "desc": "Discord's Characters",
-    "price": 0,
-    "amount": 1,
-    "autosale": false,
-    "type": "banner",
-    "banner": "DiscordBanner2.png",
-    "set": "Discord"
-  },
-  "discord_holy_world": {
-    "class": "Banners",
-    "name": "Discord in the Holy World",
-    "desc": "Discord in the Holy World",
-    "price": 0,
-    "amount": 1,
-    "autosale": false,
-    "type": "banner",
-    "banner": "DiscordBanner.png",
-    "set": "Discord"
-  },
-  "SenkoTailBanner": {
-    "class": "Banners",
-    "name": "Senko Tail Banner",
-    "desc": "A banner given to Contributors",
-    "price": 10000000000000000,
-    "amount": 1,
-    "max": 1,
-    "autoSale": false,
-    "type": "banner",
-    "banner": "SenkoTailBanner.png"
-  },
   "DefaultBanner": {
     "class": "Banners",
     "name": "Default Banner",
@@ -1082,8 +1223,10 @@
     "price": 0,
     "amount": 1,
     "max": 1,
+    "autosale": false,
     "banner": "DefaultBanner.png",
-    "onsale": false
+    "onsale": false,
+    "url": "https://cdn.senko.gg/public/banners/DefaultBanner.png"
   },
   "special_title_641851eb": {
     "class": "Titles",
@@ -1102,7 +1245,7 @@
     "amount": 1,
     "title": "🛠️ Developer Kitsune",
     "source": "For the developers @ Kitsune Labs",
-    "set": "Kitsune Labs"
+    "origin": "Kitsune Labs"
   },
   "divine_messenger": {
     "class": "Titles",
@@ -1112,7 +1255,7 @@
     "autoSale": false,
     "title": "<:toriigate:815386514636537857>  Divine Messenger",
     "source": "Be a Staff member in Senko's World!",
-    "set": "Messenger Kitsune"
+    "origin": "Messenger Kitsune"
   },
   "contributing_title": {
     "class": "Titles",
@@ -1122,7 +1265,7 @@
     "amount": 1,
     "title": "🏗️ Contributor Kitsune",
     "source": "Contribute to the development of Senko",
-    "set": "Contributor"
+    "origin": "Contributor"
   },
   "Community_Builder_title": {
     "class": "Titles",
@@ -1155,7 +1298,7 @@
     "type": "banner",
     "banner": "MooseKai.png",
     "source": "Won the Discord Snowsgiving 2021 event",
-    "set": "Christmas"
+    "origin": "Discord Snowsgiving 2021"
   },
   "master_thrower": {
     "class": "Titles",
@@ -1164,7 +1307,7 @@
     "price": 7777777,
     "amount": 1,
     "title": "☃️ Master Thrower",
-    "set": "Christmas"
+    "origin": "Christmas"
   },
   "sen_title": {
     "class": "Titles",
@@ -1173,7 +1316,7 @@
     "price": 7777777,
     "amount": 1,
     "title": "Super cool and also straight",
-    "set": "Messenger Kitsune"
+    "origin": "Messenger Kitsune"
   },
   "sam_title": {
     "class": "Titles",
@@ -1182,16 +1325,16 @@
     "price": 7777777,
     "amount": 1,
     "title": "Samīfokkusu",
-    "set": "Messenger Kitsune"
+    "origin": "Messenger Kitsune"
   },
   "NewYearsPresent_2021": {
     "class": "gift",
-    "name": "New Years Present - +5000 Yen",
+    "name": "2021 New Years Present (+5000 Yen)",
     "desc": "Thanks for being with us, Hopefully 2022 will be better!",
     "price": -5000,
     "amount": 1,
     "onsale": false,
-    "set": "New Years"
+    "origin": "New Years 2021"
   },
   "segg": {
     "class": "Misc",
@@ -1263,37 +1406,15 @@
     "title": "Coolest person",
     "source": "Won in a giveaway"
   },
-  "kitsunebi_orange": {
-    "class": "Materials",
-    "name": "Kitsune Bi - Orange",
-    "desc": "Maybe it can be used to craft a title?",
-    "price": 200,
-    "amount": 1,
-    "onsale": false
-  },
-  "kitsunebi_red": {
-    "class": "Materials",
-    "name": "Kitsune Bi - Red",
-    "desc": "Maybe it can be used to craft a title?",
-    "price": 200,
-    "amount": 1,
-    "onsale": false
-  },
-  "kitsunebi_blue": {
-    "class": "Materials",
-    "name": "Kitsune Bi - Blue",
-    "desc": "Maybe it can be used to craft a title?",
-    "price": 200,
-    "amount": 1,
-    "onsale": false
-  },
-  "pumpkin": {
-    "class": "Materials",
-    "name": "Pumpkin",
-    "desc": "An orange colored sphere.",
-    "price": 100,
-    "amount": 1,
-    "autoSale": true
+  "lime_green_color": {
+    "class": "Colors",
+    "name": "Lime Green card color",
+    "desc": "A greeny lime color",
+    "price": 7777777,
+    "autoSale": false,
+    "color": "#17ff00",
+    "type": "color",
+    "source": "Exclusive color"
   },
   "sknss_v1": {
     "class": "Manga",
@@ -1382,6 +1503,74 @@
     "amount": 1,
     "manga": "Tail_10",
     "autoSale": true
+  },
+  "kitsunebi_orange": {
+    "class": "Materials",
+    "name": "Kitsune Bi - Orange",
+    "desc": "Maybe it can be used to craft a title?",
+    "price": 200,
+    "amount": 1,
+    "onsale": false
+  },
+  "kitsunebi_red": {
+    "class": "Materials",
+    "name": "Kitsune Bi - Red",
+    "desc": "Maybe it can be used to craft a title?",
+    "price": 200,
+    "amount": 1,
+    "onsale": false
+  },
+  "kitsunebi_blue": {
+    "class": "Materials",
+    "name": "Kitsune Bi - Blue",
+    "desc": "Maybe it can be used to craft a title?",
+    "price": 200,
+    "amount": 1,
+    "onsale": false
+  },
+  "pumpkin": {
+    "class": "Materials",
+    "name": "Pumpkin",
+    "desc": "An orange colored sphere.",
+    "price": 100,
+    "amount": 1,
+    "autoSale": true
+  },
+  "senkokeychain": {
+    "class": "Misc",
+    "name": "Premium Senko Tail Keychain",
+    "desc": "An ultra-soft and cuddly Senko tail keychain, made from high-quality materials to ensure maximum fluffiness like Senko's tail!.",
+    "price": 3500,
+    "amount": 1,
+    "autoSale": true,
+    "origin": "Kitsune Collectibles"
+  },
+  "shirokeychain": {
+    "class": "Misc",
+    "name": "Deluxe Shiro Tail Keychain",
+    "desc": "A stylish Shiro tail keychain crafted with care, boasting intricate details that would surely impress Shiro herself.",
+    "price": 3500,
+    "amount": 1,
+    "autoSale": true,
+    "origin": "Kitsune Collectibles"
+  },
+  "yozorakeychain": {
+    "class": "Misc",
+    "name": "Elegant Yozora Tail Keychain",
+    "desc": "A beautifully designed Yozora tail keychain that captures her essence, making it the perfect accessory for her fans.",
+    "price": 3500,
+    "amount": 1,
+    "autoSale": true,
+    "origin": "Kitsune Collectibles"
+  },
+  "yokodoll": {
+    "class": "Misc",
+    "name": "Limited Edition Yokodoll",
+    "desc": "A highly-detailed and collectible Yokodoll of Nakano, crafted with love by artisans for the most dedicated enthusiasts.",
+    "price": 1000,
+    "amount": 1,
+    "autoSale": true,
+    "origin": "Kitsune Collectibles"
   },
   "md_1": {
     "class": "Music",
@@ -1523,38 +1712,6 @@
     "soundFile": "/src/Data/Sounds/none.mp3",
     "soundVolume": 0.5
   },
-  "senkokeychain": {
-    "class": "Misc",
-    "name": "Senko tail key-chain",
-    "desc": "The softest tail made",
-    "price": 3000,
-    "amount": 1,
-    "autoSale": true
-  },
-  "shirokeychain": {
-    "class": "Misc",
-    "name": "Shiro tail key-chain",
-    "desc": "Shiro won't like this I bet",
-    "price": 3000,
-    "amount": 1,
-    "autoSale": true
-  },
-  "yozorakeychain": {
-    "class": "Misc",
-    "name": "Yozora tail key-chain",
-    "desc": "What will Yozora think of this?",
-    "price": 3000,
-    "amount": 1,
-    "autoSale": true
-  },
-  "yokodoll": {
-    "class": "Misc",
-    "name": "Yokodoll",
-    "desc": "A little yoko doll of Nakano.",
-    "price": 750,
-    "amount": 1,
-    "autoSale": true
-  },
   "Pride_Flag": {
     "class": "Banners",
     "name": "Pride Flag Banner",
@@ -1564,7 +1721,7 @@
     "max": 1,
     "type": "banner",
     "banner": "PrideFlag.png",
-    "set": "All Love is Valid"
+    "origin": "All Love is Valid"
   },
   "Progressive_Pride_Flag": {
     "class": "Banners",
@@ -1575,7 +1732,7 @@
     "max": 1,
     "type": "banner",
     "banner": "ProgressivePrideFlag.png",
-    "set": "All Love is Valid"
+    "origin": "All Love is Valid"
   },
   "Transgender_Pride_Flag": {
     "class": "Banners",
@@ -1586,7 +1743,7 @@
     "max": 1,
     "type": "banner",
     "banner": "TransPrideFlag.png",
-    "set": "All Love is Valid"
+    "origin": "All Love is Valid"
   },
   "Nonbinary_Pride_Flag": {
     "class": "Banners",
@@ -1597,7 +1754,7 @@
     "max": 1,
     "type": "banner",
     "banner": "NonbinaryPrideFlag.png",
-    "set": "All Love is Valid"
+    "origin": "All Love is Valid"
   },
   "Asexual_Pride_Flag": {
     "class": "Banners",
@@ -1608,7 +1765,7 @@
     "max": 1,
     "type": "banner",
     "banner": "AsexualPrideFlag.png",
-    "set": "All Love is Valid"
+    "origin": "All Love is Valid"
   },
   "Pansexual_Pride_Flag": {
     "class": "Banners",
@@ -1619,7 +1776,7 @@
     "max": 1,
     "type": "banner",
     "banner": "PansexualPrideFlag.png",
-    "set": "All Love is Valid"
+    "origin": "All Love is Valid"
   },
   "NervousStatus": {
     "class": "Status",
@@ -1642,5 +1799,295 @@
     "autosale": false,
     "onsale": false,
     "status": "<:SenkosLab:990328255590580294>"
+  },
+  "divine_title": {
+    "class": "Titles",
+    "name": "Divine Title",
+    "desc": "Adds \"Divine\" to your profile name",
+    "price": 777,
+    "amount": 1,
+    "max": 1,
+    "title": "✨ Divine",
+    "autoSale": true
+  },
+  "holly_title": {
+    "class": "Titles",
+    "name": "Holly Title",
+    "desc": "Adds \"Holly\" to your profile name",
+    "price": 777,
+    "amount": 1,
+    "title": "🎁 Holly",
+    "origin": "Christmas",
+    "autoSale": false
+  },
+  "kitsune_title": {
+    "class": "Titles",
+    "name": "Kitsune Title",
+    "desc": "For true kitsune's",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🦊 Kitsune",
+    "autoSale": true
+  },
+  "fluffy_title": {
+    "class": "Titles",
+    "name": "Fluffy Title",
+    "desc": "For the fluffiest kitsune's out there!",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "autoSale": true,
+    "title": "Fluffy"
+  },
+  "astronaut_title": {
+    "class": "Titles",
+    "name": "Astronaut Title",
+    "desc": "To Mars and beyond!",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🚀 Astronaut",
+    "autoSale": true
+  },
+  "saint_title": {
+    "class": "Titles",
+    "name": "Saint Title",
+    "desc": "Saints!",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "⛪️ Saint",
+    "autoSale": true
+  },
+  "rainbow_title": {
+    "class": "Titles",
+    "name": "Rainbow Title Icon",
+    "desc": "Displays a 🌈 before your name",
+    "price": 200,
+    "amount": 1,
+    "max": 1,
+    "title": "🌈 ",
+    "autoSale": true
+  },
+  "fisher_title": {
+    "class": "Titles",
+    "name": "Fisher Title",
+    "desc": "Fisherman's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🎣 Fisher",
+    "autoSale": true
+  },
+  "sailor_title": {
+    "class": "Titles",
+    "name": "Sailor Title",
+    "desc": "Sailor's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "⛵️ Sailor",
+    "autoSale": true
+  },
+  "joker_title": {
+    "class": "Titles",
+    "name": "Joker Title",
+    "desc": "Joker's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🃏 Joker",
+    "autoSale": true
+  },
+  "panda_title": {
+    "class": "Titles",
+    "name": "Panda Title",
+    "desc": "Panda title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🐼 Panda",
+    "autoSale": true
+  },
+  "unicorn_title": {
+    "class": "Titles",
+    "name": "Unicorn Title",
+    "desc": "Unicorn title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🦄 Unicorn",
+    "autoSale": true
+  },
+  "magician_title": {
+    "class": "Titles",
+    "name": "Magician's Title",
+    "desc": "Magician's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🧙‍♂️ Magician",
+    "autoSale": true
+  },
+  "party_maker_title": {
+    "class": "Titles",
+    "name": "Party Maker Title",
+    "desc": "Party maker's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🎉 Party Maker",
+    "autoSale": true
+  },
+  "chef_title": {
+    "class": "Titles",
+    "name": "Chef Title",
+    "desc": "Chef's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🍽️ Chef",
+    "autoSale": true
+  },
+  "tourist_title": {
+    "class": "Titles",
+    "name": "Tourist Title",
+    "desc": "Tourist's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🌍 Tourist",
+    "autoSale": true
+  },
+  "pirate_title": {
+    "class": "Titles",
+    "name": "Pirate Title",
+    "desc": "Pirate's title",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "🏴‍☠️ Pirate",
+    "autoSale": true
+  },
+  "mystic_title": {
+    "class": "Titles",
+    "name": "Mystic Title",
+    "desc": "A title for the mysterious and enigmatic",
+    "price": 500,
+    "amount": 1,
+    "max": 1,
+    "title": "🔮 Mystic",
+    "autoSale": false
+  },
+  "enlightened_title": {
+    "class": "Titles",
+    "name": "Enlightened Title",
+    "desc": "A title for the wise and knowledgeable",
+    "price": 500,
+    "amount": 1,
+    "max": 1,
+    "title": "✨ Enlightened",
+    "autoSale": false
+  },
+  "nomad_title": {
+    "class": "Titles",
+    "name": "Nomad Title",
+    "desc": "A title for the wanderers and travelers",
+    "price": 300,
+    "amount": 1,
+    "max": 1,
+    "title": "Nomad",
+    "autoSale": false
+  },
+  "samurai_title": {
+    "class": "Titles",
+    "name": "Samurai Title",
+    "desc": "A title for the honorable and skilled warriors",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🗡 Samurai",
+    "autoSale": false
+  },
+  "Dragon_title": {
+    "class": "Titles",
+    "name": "Dragon Title",
+    "desc": "A title for the fierce and powerful",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🐲 Dragon",
+    "autoSale": false
+  },
+  "Ninja_title": {
+    "class": "Titles",
+    "name": "Ninja Title",
+    "desc": "A title for the stealthy and deadly",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🗡️ Ninja",
+    "autoSale": false
+  },
+  "scientist_title": {
+    "class": "Titles",
+    "name": "Scientist Title",
+    "desc": "A title for the curious and inquisitive",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🔬 Scientist",
+    "autoSale": false
+  },
+  "Friendly_title": {
+    "class": "Titles",
+    "name": "Friendly Title",
+    "desc": "A title for the friendly and kind",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🤗 Friendly",
+    "autoSale": false
+  },
+  "philosopher_title": {
+    "class": "Titles",
+    "name": "Philosopher Title",
+    "desc": "A title for the deep thinkers and intellectuals",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "💭 Philosopher",
+    "autoSale": false
+  },
+  "architect_title": {
+    "class": "Titles",
+    "name": "Architect Title",
+    "desc": "A title for the skilled designers and builders",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🏛️ Architect",
+    "autoSale": false
+  },
+  "musician_title": {
+    "class": "Titles",
+    "name": "Musician Title",
+    "desc": "A title for the talented and creative musicians",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🎵 Musician",
+    "autoSale": false
+  },
+  "artist_title": {
+    "class": "Titles",
+    "name": "Artist Title",
+    "desc": "A title for the imaginative and expressive artists",
+    "price": 600,
+    "amount": 1,
+    "max": 1,
+    "title": "🎨 Artist",
+    "autoSale": false
   }
 }

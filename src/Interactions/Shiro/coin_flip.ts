@@ -27,15 +27,15 @@ export default {
 		}
 	],
 	/**
-	 * @param {CommandInteraction} interaction
+	 * @param {CommandInteraction} Interaction
 	 */
-	start: async ({ senkoClient, interaction }) => {
-		await interaction.reply({
+	start: async ({ Senko, Interaction }) => {
+		await Interaction.reply({
 			embeds: [
 				{
 					title: "Ding!",
 					description: "Shiro flipped the coin and we're now anticipating the outcome.",
-					color: senkoClient.api.Theme.light,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/shiro/sneak1.png"
 					}
@@ -53,17 +53,17 @@ export default {
 
 		const RNG = Math.floor(Math.random() * 2);
 		// @ts-ignore
-		const UserChoice = interaction.options.getString("choice", true);
+		const UserChoice = Interaction.options.getString("choice", true);
 
 		await wait(2000);
 
 		if (Choices[RNG] === UserChoice) {
-			interaction.editReply({
+			Interaction.editReply({
 				embeds: [
 					{
 						title: "Thunk!",
 						description: "The coin flipped and the outcome is...\n\nA tie!?!?",
-						color: senkoClient.api.Theme.dark,
+						color: Senko.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/surprised1.png"
 						}
@@ -73,12 +73,12 @@ export default {
 		}
 
 		if (RNG > Choices[UserChoice]) {
-			interaction.editReply({
+			Interaction.editReply({
 				embeds: [
 					{
 						title: "Bonk!",
 						description: "The coin flipped and the outcome is...\n\nShiro won...",
-						color: senkoClient.api.Theme.dark,
+						color: Senko.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/superior.png"
 						}
@@ -88,13 +88,13 @@ export default {
 		}
 
 		if (RNG < Choices[UserChoice]) {
-			await addYen(interaction.user, 30);
-			interaction.editReply({
+			await addYen(Interaction.user, 30);
+			Interaction.editReply({
 				embeds: [
 					{
 						title: "Ting!",
 						description: `The coin flipped and the outcome is...\n\nYou won!\n\n— ${Icons.yen}  30x added`,
-						color: senkoClient.api.Theme.light,
+						color: Senko.Theme.light,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}

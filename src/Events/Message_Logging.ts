@@ -42,7 +42,7 @@ export default class {
 				embeds: [
 					{
 						title: "Message Deleted",
-						description: `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\n__**Attachment(s)**__\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`,
+						description: `Message URL\n<${message.url}>\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n__**Message Content**__\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\n__**Attachment(s)**__\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`,
 						color: Colors.Red,
 						footer: {
 							text: `Case ${caseId}`
@@ -58,7 +58,7 @@ export default class {
 						url: `${possibleLink}.gif`,
 						method: "GET",
 						headers: {
-							"User-Agent": senkoClient.api.UserAgent
+							"User-Agent": senkoClient.UserAgent
 						}
 					}).then(async (response) => {
 						messageStructure.embeds.push({
@@ -75,7 +75,7 @@ export default class {
 
 			if (guildData.AdvancedMessageLogging.message_deletions) {
 				messageStructure.embeds[0]!.title = "";
-				messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\n__**Attachment(s)**__\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+				messageStructure.embeds[0]!.description = `Message URL\n<${message.url}>\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? `\n\`\`\`diff\n- ${clean(message.content)}\`\`\`` : ""}${message.attachments.size > 0 ? `\n__**Attachment(s)**__\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 			}
 
 			if (message.attachments.size == 0) messageStructure.embeds[0]!.footer.text = "";
@@ -88,7 +88,7 @@ export default class {
 					method: "GET",
 					responseType: "stream",
 					headers: {
-						"User-Agent": senkoClient.api.UserAgent
+						"User-Agent": senkoClient.UserAgent
 					}
 				}).then(async (response) => {
 					const fileId = `case-${caseId}_${attachment.name}`;
@@ -114,9 +114,9 @@ export default class {
 
 			if (messageStructure.embeds[0]!.description.length >= 2048) {
 				if (guildData.AdvancedMessageLogging.message_deletions) {
-					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n__**Message Content**__```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+					messageStructure.embeds[0]!.description = `Message URL\n<${message.url}>\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n__**Message Content**__```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 				} else {
-					messageStructure.embeds[0]!.description = `Message URL\n${message.url}\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
+					messageStructure.embeds[0]!.description = `Message URL\n<${message.url}>\n\n${message.author.tag} in ${message.channel} (||user id: ${message.author.id}||) on <t:${Math.round(Date.now() / 1000)}:f>\n${message.content.length > 0 ? "\n```fix\nMessage is too big to fit in embed, see text file below (or above)```" : ""}${message.attachments.size > 0 ? `\nAttachment(s)\n\`\`\`${message.attachments.map((r: Attachment) => r.name)}\`\`\`` : ""}\n${emojis.length > 0 ? `\n__**Emoji's**__${emojis.map(em => `\n${em}`)}` : ""}${message.stickers.size > 0 ? `\n__**Stickers**__${message.stickers.map((s: Sticker) => `\n${s.url}`)}` : ""}`;
 				}
 				fs.writeFileSync(`./src/temp/${caseId}.txt`, `> DELETED MESSAGE\n\n\n\n${message.content}`);
 				linkedFiles.push(`./src/temp/${caseId}.txt`);

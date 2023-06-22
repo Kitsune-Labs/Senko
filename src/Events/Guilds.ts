@@ -121,7 +121,7 @@ export default class {
 						{
 							title: "New Kitsune",
 							description: `${member} [${member.id} | ${member.user.tag}]\n${member.user.bot ? "**IS a bot**" : "Not a bot"}\nCreated on <t:${Math.round(member.user.createdTimestamp / 1000)}>`,
-							color: senkoClient.api.Theme.light,
+							color: senkoClient.Theme.light,
 							thumbnail: { url: member.user.displayAvatarURL({ size: 4096 }) }
 						}
 					]

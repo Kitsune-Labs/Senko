@@ -1,8 +1,8 @@
 import { randomArrayItem } from "@kitsune-labs/utilities";
 import { Events } from "discord.js";
-import Paginate from "../API/Pagination/Event";
 import Manga from "../Data/MangaList.json";
 import type { SenkoClientTypes } from "../types/AllTypes";
+import Paginate from "../API/Paginate";
 
 export default class {
 	async execute(senkoClient: SenkoClientTypes) {
@@ -52,14 +52,16 @@ export default class {
 						image: {
 							url: SelectedManga[Page]
 						},
-						color: randomArrayItem([senkoClient.api.Theme.light, senkoClient.api.Theme.dark, senkoClient.api.Theme.dark_red, senkoClient.api.Theme.light_red])
+						color: randomArrayItem([senkoClient.Theme.light, senkoClient.Theme.dark, senkoClient.Theme.dark_red, senkoClient.Theme.light_red])
 					});
 
 					Page++;
 				}
 
-				// @ts-ignore
-				Paginate(Interaction, Embeds, 120000, false);
+				new Paginate(Interaction, Embeds, {
+					Time: 120000,
+					Ephemeral: false
+				});
 			}
 		});
 	}

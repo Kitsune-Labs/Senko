@@ -1,13 +1,10 @@
-import type { SenkoClientTypes, SenkoCommand, SenkoMessageOptions } from "../types/AllTypes";
+import type { SenkoClientTypes, SenkoMessageOptions } from "../types/AllTypes";
 
-import { fetchSuperGuild, fetchConfig, updateSuperUser } from "../API/super";
 import { PermissionFlagsBits, PermissionsBitField, Events, Interaction, GuildMember } from "discord.js";
-import { existsSync } from "fs";
-
-import { randomNumber } from "@kitsune-labs/utilities";
+import { Locales, senkoClient, winston } from "../SenkoClient";
+import SenkoProfile from "../API/SenkoProfile";
 import Icons from "../Data/Icons.json";
-import { senkoClient, winston } from "../SenkoClient";
-import { SenkoMember } from "../Classes/SenkoMember";
+import SenkoGuild from "../API/Guild";
 
 export const SenkoClientPermissions = [
 	PermissionFlagsBits.EmbedLinks,
@@ -33,12 +30,13 @@ winston.log("senko", `Bot Invite: https://discord.com/oauth2/authorize?client_id
 winston.log("senko", `Bot Invite w/ Mod: https://discord.com/oauth2/authorize?client_id=${senkoClient.user?.id}&scope=applications.commands%20bot&permissions=${SenkoClientModerationPermissionBits.bitfield}`);
 winston.log("senko", `Combined Invite: https://discord.com/oauth2/authorize?client_id=${senkoClient.user?.id}&scope=applications.commands%20bot&permissions=${SenkoClientPermissionBits.bitfield + SenkoClientModerationPermissionBits.bitfield}`);
 winston.info("");
+
 export default class {
 	async execute(SenkoClient: SenkoClientTypes) {
 		SenkoClient.on(Events.InteractionCreate, async (interaction: Interaction) => {
-			if (!interaction.isChatInputCommand() || !interaction.guild) return;
+			if (!interaction.isChatInputCommand() || !interaction.guild || !interaction.member || !SenkoClient.isReady()) return;
 
-			const LoadedInteractionCommand = SenkoClient.api.Commands.get(interaction.commandName) as SenkoCommand;
+			const LoadedInteractionCommand = SenkoClient.api.Commands.get(interaction.commandName);
 
 			if (!LoadedInteractionCommand) {
 				winston.log("warn", `User tried to run "${interaction.commandName}" but it doesn't exist in ${SenkoClient.api.Commands.keys}!`);
@@ -48,7 +46,7 @@ export default class {
 						{
 							title: "Oh dear...",
 							description: `It seems that ${interaction.commandName} has gone missing! I'll do my best to find it, please check back soon.`,
-							color: SenkoClient.api.Theme.dark,
+							color: SenkoClient.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
@@ -58,17 +56,24 @@ export default class {
 				});
 			}
 
-			const senkoMember = new SenkoMember(interaction.member as GuildMember);
+			const RawMember = new SenkoProfile(interaction.member as GuildMember);
+			const RawGuild = new SenkoGuild(interaction.guild);
 
-			const dataConfig = await fetchConfig();
-			const superGuildData = await fetchSuperGuild(interaction.guild);
-			const accountData = await senkoMember.fetchData();
+			const [Member, Guild] = await Promise.all([
+				RawMember.init(),
+				RawGuild.init()
+			]);
 
-			if (!superGuildData || !accountData || !dataConfig) return interaction.reply({
+			const [GuildData, MemberData] = await Promise.all([
+				Guild.data.fetch(),
+				Member.data.fetch()
+			]);
+
+			if (!GuildData || !MemberData) return interaction.reply({
 				embeds: [{
 					title: "Oh my!",
 					description: "It looks like there was an issue retrieving data, please try again later!",
-					color: SenkoClient.api.Theme.dark,
+					color: SenkoClient.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -78,11 +83,11 @@ export default class {
 
 			const CommandTime = Date.now();
 
-			if (dataConfig.OutlawedUsers[interaction.user.id] && !LoadedInteractionCommand.whitelist) return interaction.reply({
+			if (Member.Blacklisted && !LoadedInteractionCommand.whitelist) return interaction.reply({
 				embeds: [{
 					title: `${Icons.exclamation} You have been banished!`,
 					description: "You have been banished from using the Senko Bot for breaking our rules.",
-					color: SenkoClient.api.Theme.dark_red,
+					color: SenkoClient.Theme.dark_red,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/pout.png"
 					}
@@ -103,7 +108,7 @@ export default class {
 					embeds: [{
 						title: "Oh dear...",
 						description: "It looks like im missing some permissions, here is what I am missing:\n\n",
-						color: SenkoClient.api.Theme.dark
+						color: SenkoClient.Theme.dark
 					}],
 					ephemeral: true
 				};
@@ -128,12 +133,12 @@ export default class {
 				}
 			}
 
-			if (superGuildData.Channels.length > 0 && !superGuildData.Channels.includes(interaction.channelId) && !LoadedInteractionCommand.usableAnywhere) {
+			if (GuildData.Channels.length > 0 && !GuildData.Channels.includes(interaction.channelId) && !LoadedInteractionCommand.usableAnywhere) {
 				const messageStruct1 = {
 					embeds: [{
 						title: "S-Sorry dear!",
-						description: `${interaction.guild.name} has requested you use ${superGuildData.Channels.map(i => `<#${i}>`)}!`,
-						color: SenkoClient.api.Theme.dark,
+						description: `${interaction.guild.name} has requested you use ${GuildData.Channels.map(i => `<#${i}>`)}!`,
+						color: SenkoClient.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/senko/heh.png"
 						}
@@ -147,62 +152,25 @@ export default class {
 
 			winston.log("info", `Running command "${interaction.commandName}"`);
 
-			//! Start level
-			let xp = accountData.LocalUser.accountConfig.level.xp;
-			let level = accountData.LocalUser.accountConfig.level.level;
-			const Amount = 1500 * level;
-
-			if (xp > Amount) {
-				level += Math.floor(xp / Amount);
-				xp %= Amount;
-				interaction.channel?.send({
-					content: `${interaction.user}`,
-					embeds: [{
-						title: "Congratulations dear!",
-						description: `You are now level **${level}**`,
-						color: SenkoClient.api.Theme.light,
-						thumbnail: {
-							url: interaction.user.displayAvatarURL()
-						}
-					}]
-				});
-			} else {
-				xp += randomNumber(25);
-			}
-
-			accountData.LocalUser.accountConfig.level.xp = xp;
-			accountData.LocalUser.accountConfig.level.level = level;
-
-			updateSuperUser(interaction.user, {
-				LocalUser: accountData.LocalUser
-			});
-
-			//! End level
-
-			updateSuperUser(interaction.user, {
-				LastUsed: new Date().toISOString()
-			});
+			Member.activityTick();
 
 			// print(`Locale: ${interaction.locale} | ${interaction.locale}.json exists = ${existsSync(`./src/Data/Locales/${interaction.locale}.json`)}`);
 
 			LoadedInteractionCommand.start({
-				senkoClient: SenkoClient,
-				interaction: interaction,
-				guildData: superGuildData,
-				userData: accountData,
-				xpAmount: Amount,
-				locale: existsSync(`./src/Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`)[LoadedInteractionCommand.name] : require("../Data/Locales/en-US.json")[LoadedInteractionCommand.name],
-				generalLocale: existsSync(`./src/Data/Locales/${interaction.locale}.json`) ? require(`../Data/Locales/${interaction.locale}.json`).general : require("../Data/Locales/en-US.json").general,
-				Icons: Icons,
-				Theme: senkoClient.api.Theme,
-				winston: winston,
-				senkoMember: senkoMember
+				Interaction: interaction,
+				Senko: SenkoClient,
+				Member: Member,
+				MemberData: MemberData,
+				Guild: Guild,
+				GuildData: GuildData,
+				CommandLocale: Member.Locale[interaction.commandName] || Locales["en-US"][interaction.commandName],
+				GeneralLocale: Member.Locale.general || Locales["en-US"].general
 			}).catch(err => {
 				const messageStruct = {
 					embeds: [{
 						title: "Oh my...",
 						description: `It seems that ${LoadedInteractionCommand.name} had an error functioning correctly... Let me try to resolve the issue!`,
-						color: SenkoClient.api.Theme.dark,
+						color: SenkoClient.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/senko/heh.png"
 						}
@@ -223,7 +191,7 @@ export default class {
 					embeds: [{
 						title: "Senko - Command Error",
 						description: err.stack.toString(),
-						color: SenkoClient.api.Theme.light
+						color: SenkoClient.Theme.light
 					}]
 				});
 			}).finally(() => {

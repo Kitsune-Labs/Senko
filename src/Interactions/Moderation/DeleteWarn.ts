@@ -18,14 +18,14 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({ senkoClient, interaction, guildData }) => {
+	start: async ({ Senko, Interaction, GuildData }) => {
 		// @ts-ignore
-		if (!interaction.member!.permissions.has(Permissions.ModerateMembers)) return interaction.reply({
+		if (!Interaction.member!.permissions.has(Permissions.ModerateMembers)) return Interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
 					description: "You must be able to moderate members to use this!",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -34,41 +34,40 @@ export default {
 			ephemeral: true
 		});
 
-		await interaction.deferReply();
+		await Interaction.deferReply();
 
-		const warnId = interaction.options.getString("warn-id");
+		const warnId = Interaction.options.getString("warn-id");
 
-		for (var key in guildData.warns) {
-			const userWarn = guildData.warns[key];
+		for (var key in GuildData.warns) {
+			const userWarn = GuildData.warns[key];
 
 			if (!userWarn) break;
 
 			for (var warn of userWarn) {
 				if (warn.uuid === warnId) {
-					// @ts-expect-error
 					spliceArray(userWarn, warn);
 
-					await updateSuperGuild(interaction.guild!, {
-						warns: guildData.warns
+					await updateSuperGuild(Interaction.guild!, {
+						warns: GuildData.warns
 					});
 
-					(await interaction.guild!.members.fetch(key)).send({
+					(await Interaction.guild!.members.fetch(key)).send({
 						embeds: [
 							{
-								title: `One of your warns has been deleted in ${interaction.guild!.name}!`,
+								title: `One of your warns has been deleted in ${Interaction.guild!.name}!`,
 								description: `Here is some info about what warn was deleted\nWarn id: **${warnId}**\nWarn reason: ${warn.reason}\nWarn note: ${warn.note}`,
-								color: senkoClient.api.Theme.light,
+								color: Senko.Theme.light,
 								thumbnail: { url: "https://cdn.senko.gg/public/senko/book.png" }
 							}
 						]
 					}).catch();
 
-					return interaction.followUp({
+					return Interaction.followUp({
 						embeds: [
 							{
 								title: "All done!",
 								description: `I have deleted warn **${warnId}** from **${warn.userTag}**\n\n> ${warn.reason}\n> ${warn.note}`,
-								color: senkoClient.api.Theme.light,
+								color: Senko.Theme.light,
 								thumbnail: { url: "https://cdn.senko.gg/public/senko/book.png" }
 							}
 						]
@@ -77,12 +76,12 @@ export default {
 			}
 		}
 
-		interaction.followUp({
+		Interaction.followUp({
 			embeds: [
 				{
 					title: "I looked around",
 					description: `But I cannot find a warning that has **${warnId}** for it's ID...`,
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: { url: "https://cdn.senko.gg/public/senko/think.png" }
 				}
 			]

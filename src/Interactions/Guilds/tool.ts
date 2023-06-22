@@ -12,15 +12,15 @@ export default {
 			type: CommandOption.Subcommand
 		}
 	],
-	start: async ({ interaction, Theme }) => {
-		switch (interaction.options.getSubcommand()) {
+	start: async ({ Interaction, Senko }) => {
+		switch (Interaction.options.getSubcommand()) {
 			case "channel-id": {
-				return interaction.reply({
+				return Interaction.reply({
 					embeds: [
 						{
 							title: "Channel ID",
-							description: interaction.channelId.toString(),
-							color: Theme.light
+							description: Interaction.channelId.toString(),
+							color: Senko.Theme.light
 						}
 					],
 					ephemeral: true

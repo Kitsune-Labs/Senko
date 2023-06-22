@@ -7,12 +7,12 @@ export default {
 	ephemeral: true,
 	usableAnywhere: true,
 	category: "account",
-	start: async ({ senkoClient, interaction, userData }) => {
+	start: async ({ Senko, Interaction, MemberData }) => {
 		const ShopItems = await fetchMarket();
 		let currentColor = null;
 
 		// @ts-ignore
-		userData.LocalUser.profileConfig.Inventory.DefaultBanner = {
+		MemberData.LocalUser.profileConfig.Inventory.DefaultBanner = {
 			"class": "Banners",
 			"name": "Default Banner",
 			"desc": "The banner everyone gets",
@@ -23,25 +23,25 @@ export default {
 			"onsale": false
 		};
 
-		for (const item of Object.keys(userData.LocalUser.profileConfig.Inventory)) {
+		for (const item of Object.keys(MemberData.LocalUser.profileConfig.Inventory)) {
 			const ShopItem = ShopItems[item];
 
 			if (ShopItem && ShopItem.color) {
-				if (userData.LocalUser.profileConfig.cardColor === ShopItem.color) {
+				if (MemberData.LocalUser.profileConfig.cardColor === ShopItem.color) {
 					currentColor = ShopItem.name;
 				}
 			}
 		}
 
-		const invLength = Object.keys(userData.LocalUser.profileConfig.Inventory).length <= 0;
+		const invLength = Object.keys(MemberData.LocalUser.profileConfig.Inventory).length <= 0;
 
-		interaction.reply({
+		Interaction.reply({
 			embeds: [
 				{
 					title: "Profile Settings",
 					// @ts-ignore
-					description: `Here you can edit your profile card settings!\n\n**Title**: ${userData.LocalUser.profileConfig.title && ShopItems[userData.LocalUser.profileConfig.title] ? ShopItems[userData.LocalUser.profileConfig.title].title : "None!"}\n**Banner**: [${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].name}](${`https://cdn.senko.gg/public/banners/${ShopItems[userData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`})\n**Card Color**: ${currentColor || "Default"}\n**About Me**: ${userData.LocalUser.profileConfig.aboutMe || "Not Set!"}`,
-					color: senkoClient.api.Theme.light
+					description: `Here you can edit your profile card settings!\n\n**Title**: ${MemberData.LocalUser.profileConfig.title && ShopItems[MemberData.LocalUser.profileConfig.title] ? ShopItems[MemberData.LocalUser.profileConfig.title].title : "None!"}\n**Banner**: [${ShopItems[MemberData.LocalUser.profileConfig.banner.replace(".png", "")].name}](${`https://cdn.senko.gg/public/banners/${ShopItems[MemberData.LocalUser.profileConfig.banner.replace(".png", "")].banner}`})\n**Card Color**: ${currentColor || "Default"}\n**About Me**: ${MemberData.LocalUser.profileConfig.aboutMe || "Not Set!"}`,
+					color: Senko.Theme.light
 				}
 			],
 			components: [

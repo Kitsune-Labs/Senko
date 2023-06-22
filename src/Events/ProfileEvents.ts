@@ -3,17 +3,9 @@ import { fetchMarket, fetchSuperUser, updateSuperUser } from "../API/super";
 import type { SenkoClientTypes } from "../types/AllTypes";
 
 export default class {
-	async execute(senkoClient: SenkoClientTypes) {
-		senkoClient.on(Events.InteractionCreate, async (interaction: any) => {
-			let profile = null;
-			for (var index in senkoClient.api.loadedCommands) {
-				var entry = senkoClient.api.loadedCommands[index];
-				const commandEntry = entry[1];
-				// @ts-ignore
-				const { name } = senkoClient.api.Commands.get(commandEntry.name);
-
-				if (name === "profile") profile = commandEntry;
-			}
+	async execute(Senko: SenkoClientTypes) {
+		Senko.on(Events.InteractionCreate, async (interaction: any) => {
+			const profileCommand = Senko.api.loadedCommands.get("profile");
 
 			if (interaction.isButton()) {
 				const userData = await fetchSuperUser(interaction.user);
@@ -61,7 +53,7 @@ export default class {
 								{
 									title: "You don't own any titles!",
 									description: "You can buy them when they're avaliable in the shop!",
-									color: senkoClient.api.Theme.light,
+									color: Senko.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 								}
 							],
@@ -104,7 +96,7 @@ export default class {
 								{
 									title: "You don't own any banners!",
 									description: "You can buy them when they're avaliable in the shop!",
-									color: senkoClient.api.Theme.light,
+									color: Senko.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 								}
 							],
@@ -152,7 +144,7 @@ export default class {
 								{
 									title: "You don't own any card colors!",
 									description: "You can buy them when they're avaliable in the shop!",
-									color: senkoClient.api.Theme.light,
+									color: Senko.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 								}
 							],
@@ -194,7 +186,7 @@ export default class {
 								{
 									title: "You don't own any Status'!",
 									description: "You can buy them when they're avaliable in the shop!",
-									color: senkoClient.api.Theme.light,
+									color: Senko.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 								}
 							],
@@ -231,7 +223,7 @@ export default class {
 								{
 									title: "All done dear!",
 									description: "Your about me has been removed!",
-									color: senkoClient.api.Theme.light,
+									color: Senko.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/smile.png" }
 								}
 							],
@@ -251,9 +243,9 @@ export default class {
 				interaction.reply({
 					embeds: [
 						{
-							title: `${senkoClient.api.Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
-							description: `Check it out using ${profile ? `</profile:${profile.id}>` : "/profile"}`,
-							color: senkoClient.api.Theme.light,
+							title: `${Senko.Icons.exclamation}  I have updated your About Me ${interaction.user.username}`,
+							description: `Check it out using ${profileCommand ? `</profile:${profileCommand.id}>` : "/profile"}`,
+							color: Senko.Theme.light,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/package.png"
 							}
@@ -275,8 +267,8 @@ export default class {
 				interaction.reply({
 					embeds: [
 						{
-							description: `Status Updated, Check it out using ${profile ? `</profile:${profile.id}>` : "/profile"}`,
-							color: senkoClient.api.Theme.light
+							description: `Status Updated, Check it out using ${profileCommand ? `</profile:${profileCommand.id}>` : "/profile"}`,
+							color: Senko.Theme.light
 						}
 					],
 					ephemeral: true

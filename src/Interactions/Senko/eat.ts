@@ -9,7 +9,7 @@ export default {
 	desc: "eat",
 	userData: true,
 	category: "fun",
-	start: async ({ senkoClient, interaction, userData }) => {
+	start: async ({ Senko, Interaction, MemberData }) => {
 		const Market = await fetchMarket();
 		const possibleItems = [];
 		const chosenItems = {
@@ -19,7 +19,7 @@ export default {
 			3: { name: null, id: null }
 		};
 
-		for (const item of Object.keys(userData.LocalUser.profileConfig.Inventory)) {
+		for (const item of Object.keys(MemberData.LocalUser.profileConfig.Inventory)) {
 			const mItem = Market[item];
 
 			if (mItem && mItem.class == "Consumables") {
@@ -42,12 +42,12 @@ export default {
 			}
 		}
 
-		if (chosenItems[0].id === null) return interaction.reply({
+		if (chosenItems[0].id === null) return Interaction.reply({
 			embeds: [
 				{
 					title: `${Icons.exclamation}  We ran out of food!`,
 					description: "We should probably buy some more soon...",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/nervous.png"
 					}
@@ -61,7 +61,7 @@ export default {
 				{
 					title: `${Icons.question}  What should we have to eat?`,
 					description: "",
-					color: senkoClient.api.Theme.light,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: HardLinks.senkoThink
 					}
@@ -77,25 +77,25 @@ export default {
 
 		if (chosenItems[0].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[0].name, style: 2, customId: `eat-${chosenItems[0].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[0].name, style: 2, customId: `eat-${chosenItems[0].id}-${Interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n1. ${chosenItems[0].name}`;
 		}
 		if (chosenItems[1].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[1].name, style: 2, customId: `eat-${chosenItems[1].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[1].name, style: 2, customId: `eat-${chosenItems[1].id}-${Interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n2. ${chosenItems[1].name}`;
 		}
 		if (chosenItems[2].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[2].name, style: 2, customId: `eat-${chosenItems[2].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[2].name, style: 2, customId: `eat-${chosenItems[2].id}-${Interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n3. ${chosenItems[2].name}`;
 		}
 		if (chosenItems[3].name != null) {
 			// @ts-expect-error
-			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[3].name, style: 2, customId: `eat-${chosenItems[3].id}-${interaction.user.id}` });
+			messageStruct.components[0]!.components.push({ type: 2, label: chosenItems[3].name, style: 2, customId: `eat-${chosenItems[3].id}-${Interaction.user.id}` });
 			messageStruct.embeds[0]!.description += `\n4. ${chosenItems[3].name}`;
 		}
 
-		interaction.reply(messageStruct);
+		Interaction.reply(messageStruct);
 	}
 } as SenkoCommand;

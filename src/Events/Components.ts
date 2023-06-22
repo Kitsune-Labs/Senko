@@ -19,7 +19,7 @@ export default class {
 							embeds: [{
 								title: `${Icons.exclamation}  Alright dear`,
 								description: "All of the channels have been removed",
-								color: SenkoClient.api.Theme.light,
+								color: SenkoClient.Theme.light,
 								thumbnail: {
 									url: "attachment://image.png"
 								}
@@ -38,7 +38,7 @@ export default class {
 					embeds: [{
 						title: `${Icons.exclamation}  You can't eat that!`,
 						description: "That is not your food",
-						color: SenkoClient.api.Theme.dark,
+						color: SenkoClient.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/senko/pout.png"
 						}
@@ -75,7 +75,7 @@ export default class {
 						embeds: [{
 							title: `You and Senko had ${item?.name}!`,
 							description: `Senko says it was ${randomArrayItem(reactions)}\n\n— 1x ${item?.name} removed`,
-							color: SenkoClient.api.Theme.light,
+							color: SenkoClient.Theme.light,
 							thumbnail: {
 								url: randomArrayItem([HardLinks.senkoBless, HardLinks.senkoEat, HardLinks.senkoDrink])
 							}
@@ -189,7 +189,7 @@ export default class {
 							embeds: [{
 								title: "Advanced Message Log Settings",
 								description: `> ${DeleteCheck ? `Deleted messages will be sent to <#${guildData!.AdvancedMessageLogging.message_deletions}>` : "Deleted messages will be sent to the default message logging channel if applicable"}\n\n> ${EditCheck ? `Edited messages will be sent to <#${guildData!.AdvancedMessageLogging.message_edits}>` : "Edited messages will be sent to the default message logging channel if applicable"}`,
-								color: SenkoClient.api.Theme.light
+								color: SenkoClient.Theme.light
 							}],
 							ephemeral: true,
 							components: [{

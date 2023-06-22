@@ -9,10 +9,9 @@ import type { MarketItem } from "../../types/SupabaseTypes";
 export default {
 	name: "shop",
 	desc: "Buy item's from Senko's Market",
-	userData: true,
 	defer: true,
 	category: "economy",
-	start: async ({ senkoClient, interaction, userData }) => {
+	start: async ({ Senko, Interaction, MemberData }) => {
 		const ShopItems = await fetchMarket();
 		// const rawShopData = /*{ data: rawShopData } =*/ process.env.PSEUDO_MARKET === "true" ? require("../../Data/LocalSave/PseudoMarket.json") : await Supabase.from("config").select("*").eq("id", "all");
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all") as any;
@@ -60,13 +59,13 @@ export default {
 			if (!itemClasses[shopItem.class]) warn(`Item ${item.name} has no class!`);
 		}
 
-		const previewCommand = await senkoClient.api.loadedCommands.find((d: any) => d.name === "preview");
+		const previewCommand = Senko.api.loadedCommands.get("preview"); // Senko.api.loadedCommands.find((d: any) => d.name === "preview");
 
 		const marketResponse = {
 			title: "🛍️ Senko's Market",
-			description: `Please take your time to review what is available.\n\nUse </preview:${previewCommand ? previewCommand.id : 0}> to view details about an item like it's description, price, banner preview, and more!\n\n${Icons.package}  Market refresh <t:${shopData.updates}:R>\n${Icons.yen}  **${userData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
+			description: `Please take your time to review what is available.\n\nUse </preview:${previewCommand ? previewCommand.id : 0}> to view details about an item like it's description, price, banner preview, and more!\n\n${Icons.package}  Market refresh <t:${shopData.updates}:R>\n${Icons.yen}  **${MemberData.LocalUser.profileConfig.Currency.Yen}** in your savings`,
 			fields: [],
-			color: senkoClient.api.Theme.light,
+			color: Senko.Theme.light,
 			thumbnail: {
 				url: "https://cdn.senko.gg/public/senko/package.png"
 			}
@@ -80,11 +79,11 @@ export default {
 				// @ts-expect-error
 				marketResponse.fields.find(f => f.name === index).value += `> ${Icons.yen}  ${item.data.price == 0 ? "**FREE**" : item.data.price} **≻** ${item.data.name}${item.data.origin ? ` **(Part of the ${item.data.origin} set)**\n` : "\n"}`;
 
-				if (!MenuItems.find(i => i.label === item.data.name)) MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${interaction.user.id}#${Math.floor(Math.random() * 100)}` });
+				if (!MenuItems.find(i => i.label === item.data.name)) MenuItems.push({ label: `${item.data.name}`, value: `shopbuy#${item.id}#${Interaction.user.id}#${Math.floor(Math.random() * 100)}` });
 			});
 		}
 
-		interaction.followUp({
+		Interaction.followUp({
 			embeds: [marketResponse],
 			components: [
 				{

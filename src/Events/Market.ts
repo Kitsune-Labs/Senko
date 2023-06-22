@@ -23,7 +23,7 @@ export default class {
 						{
 							title: `${Icons.exclamation}  Sorry!`,
 							description: "There was an error fetching the shop data, please try again later!",
-							color: senkoClient.api.Theme.dark,
+							color: senkoClient.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
@@ -40,7 +40,7 @@ export default class {
 						{
 							title: `${Icons.exclamation}  Sorry!`,
 							description: "This item is out of stock right now check back next time!",
-							color: senkoClient.api.Theme.dark,
+							color: senkoClient.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
@@ -57,7 +57,7 @@ export default class {
 						{
 							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
 							description: `You may only have **${shopItem!.max}** total!`,
-							color: senkoClient.api.Theme.dark,
+							color: senkoClient.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
@@ -71,7 +71,7 @@ export default class {
 						{
 							title: `${Icons.exclamation}  Sorry ${interaction.user.username}`,
 							description: "You don't have enough Yen!",
-							color: senkoClient.api.Theme.dark,
+							color: senkoClient.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
@@ -86,7 +86,7 @@ export default class {
 						{
 							title: "Confirm Purchase",
 							description: `Are you sure you want to purchase **${shopItem!.name}** for ${Icons.yen} **${shopItem!.price}**?\nYou will have ${Icons.yen} **${accountData!.LocalUser.profileConfig.Currency.Yen - shopItem!.price}** left`,
-							color: senkoClient.api.Theme.light,
+							color: senkoClient.Theme.light,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/package.png"
 							}
@@ -119,7 +119,7 @@ export default class {
 						{
 							title: `${Icons.heart}  See you next time!`,
 							description: `Thanks for purchasing **${shopItem.name}** for ${Icons.yen} ${shopItem.price}x!`,
-							color: senkoClient.api.Theme.dark,
+							color: senkoClient.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/tofu.png"
 							}
@@ -156,7 +156,7 @@ export default class {
 						{
 							title: `${Icons.exclamation}  Very well then`,
 							description: "I'll put back your item and hopefully you can buy it next time!",
-							color: senkoClient.api.Theme.dark,
+							color: senkoClient.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/smile.png"
 							}
@@ -180,7 +180,7 @@ export default class {
 						{
 							title: `${shopItem.name}`,
 							description: `${shopItem.desc}\n`,
-							color: shopItem.color || senkoClient.api.Theme.dark,
+							color: shopItem.color || senkoClient.Theme.dark,
 							fields: [
 								{ name: `${Icons.yen}`, value: `${shopItem.price}x`, inline: true }
 							],

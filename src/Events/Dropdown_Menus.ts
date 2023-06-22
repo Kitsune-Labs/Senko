@@ -98,7 +98,7 @@ export default class {
 					embeds: [
 						{
 							title: "Profile Updated!",
-							color: senkoClient.api.Theme.light
+							color: senkoClient.Theme.light
 						}
 					],
 					components: []

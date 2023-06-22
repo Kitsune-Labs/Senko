@@ -86,34 +86,34 @@ export default {
 			]
 		}
 	],
-	start: async ({ senkoClient, interaction }) => {
-		const user = interaction.options.getUser("user", true);
-		const flag = interaction.options.getString("flag", true);
+	start: async ({ Senko, Interaction }) => {
+		const user = Interaction.options.getUser("user", true);
+		const flag = Interaction.options.getString("flag", true);
 		// @ts-expect-error
 		const flagBit = senkoClient.api.BitData[flag];
-		const BitData = senkoClient.api.BitData;
+		const BitData = Senko.api.BitData;
 
 		const userData = await fetchSuperUser(user);
-		if (!userData) return interaction.reply({ content: `User not found ${userData}`, ephemeral: true });
+		if (!userData) return Interaction.reply({ content: `User not found ${userData}`, ephemeral: true });
 		const flags = Bitfield.fromHex(userData.LocalUser.accountConfig.flags);
 
-		switch (interaction.options.getSubcommand()) {
+		switch (Interaction.options.getSubcommand()) {
 			case "view-guild":
-				var guild = await senkoClient.guilds.fetch(interaction.options.getString("guild-id", true)).catch(() => {
-					return interaction.reply({ content: "Guild not found", ephemeral: true });
+				var guild = await Senko.guilds.fetch(Interaction.options.getString("guild-id", true)).catch(() => {
+					return Interaction.reply({ content: "Guild not found", ephemeral: true });
 				}) as Guild;
 
 				var guildData = await fetchSuperGuild(guild, false);
-				if (!guildData) return interaction.reply({ content: `Guild not found: ${guildData}`, ephemeral: true });
+				if (!guildData) return Interaction.reply({ content: `Guild not found: ${guildData}`, ephemeral: true });
 				var guildFlags = Bitfield.fromHex(guildData.flags);
 
 				var message = `BanActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.BanActionDisabled)}\`\`\`\nKickActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.KickActionDisabled)}\`\`\`\nTimeoutActionDisabled: \`\`\`${guildFlags.get(BitData.ActionLogs.TimeoutActionDisabled)}\`\`\`\n\nModCommands: \`\`\`${guildFlags.get(BitData.BETAs.ModCommands)}\`\`\``;
 
-				interaction.reply({ content: message, ephemeral: true });
+				Interaction.reply({ content: message, ephemeral: true });
 				break;
 			case "view":
 				// @ts-expect-error
-				interaction.reply({ content: `Flag ${flag} is ${flags.get(flag)}`, ephemeral: true });
+				Interaction.reply({ content: `Flag ${flag} is ${flags.get(flag)}`, ephemeral: true });
 				break;
 			case "set":
 				flags.set(flagBit, !flags.get(flagBit));
@@ -124,7 +124,7 @@ export default {
 					LocalUser: userData.LocalUser
 				});
 
-				interaction.reply({ content: `${flag} is now ${flags.get(flagBit)}`, ephemeral: true });
+				Interaction.reply({ content: `${flag} is now ${flags.get(flagBit)}`, ephemeral: true });
 				break;
 		}
 	}

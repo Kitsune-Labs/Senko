@@ -23,23 +23,23 @@ export default {
 	usableAnywhere: true,
 	category: "utility",
 	whitelist: true,
-	start: async ({ senkoClient, interaction, guildData }) => {
-		const whoUser = await interaction.options.getUser("user") || interaction.user;
+	start: async ({ Senko, Interaction, GuildData }) => {
+		const whoUser = await Interaction.options.getUser("user") || Interaction.user;
 		// @ts-expect-error
-		const guildMember = interaction.guild!.members.cache.get(whoUser.id || whoUser);
+		const guildMember = Interaction.guild!.members.cache.get(whoUser.id || whoUser);
 		const AvatarURL = guildMember && guildMember.user ? guildMember.user.avatarURL({ size: 2048 }) : null;
 		// @ts-expect-error
-		const warns = guildData.warns[whoUser.id || whoUser] ? guildData.warns[whoUser.id || whoUser].length : 0;
+		const warns = GuildData.warns[whoUser.id || whoUser] ? GuildData.warns[whoUser.id || whoUser].length : 0;
 
 		axios({
 			url: `https://discord.com/api/users/${whoUser.id || whoUser}`,
 			method: "GET",
 			headers: {
-				"User-Agent": senkoClient.api.UserAgent,
-				"Authorization": `Bot ${senkoClient.token}`
+				"User-Agent": Senko.UserAgent,
+				"Authorization": `Bot ${Senko.token}`
 			}
 		}).then(async ({ data: userData }) => {
-			const banStatus = await interaction.guild!.bans.fetch(userData.id).catch(() => null);
+			const banStatus = await Interaction.guild!.bans.fetch(userData.id).catch(() => null);
 
 			/**
 			 * @type {Message}
@@ -71,8 +71,8 @@ export default {
 			};
 
 			// @ts-expect-error
-			if (interaction.options.getBoolean("show-roles") === true && guildMember) messageStruct.embeds[0]!.fields.push([
-				{ name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u => u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}` }
+			if (Interaction.options.getBoolean("show-roles") === true && guildMember) messageStruct.embeds[0]!.fields.push([
+				{ name: "Roles", value: `${guildMember.roles.cache.size === 1 ? "No Roles" : Interaction.options.getBoolean("show-roles") ? `${guildMember.roles.cache.map(u => u).join(" ").replace("@everyone", "")}` : `**${guildMember.roles.cache.size - 1}** roles`}` }
 			]);
 
 			if (userData.banner) {
@@ -84,7 +84,7 @@ export default {
 			}
 
 			// @ts-expect-error
-			return interaction.followUp(messageStruct);
+			return Interaction.followUp(messageStruct);
 		});
 	}
 } as SenkoCommand;

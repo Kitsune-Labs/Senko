@@ -29,11 +29,11 @@ export default {
 		}
 	],
 	category: "fun",
-	start: async ({ interaction }) => {
-		interaction.reply({
+	start: async ({ Interaction }) => {
+		Interaction.reply({
 			embeds: [
 				{
-					title: interaction.options.getString("text", true),
+					title: Interaction.options.getString("text", true),
 					description: randomArrayItem(responses)
 				}
 			]

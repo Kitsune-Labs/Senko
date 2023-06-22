@@ -33,20 +33,20 @@ export default {
 	],
 	defer: true,
 	category: "fun",
-	start: async ({ senkoClient, interaction, userData }) => {
-		const OptionalUser = interaction.options.getUser("user");
+	start: async ({ Senko, Interaction, MemberData }) => {
+		const OptionalUser = Interaction.options.getUser("user");
 
 		if (OptionalUser) {
 			const Messages = [
-				`${interaction.user} hugs ${OptionalUser}!`,
-				`${OptionalUser} has been hugged by ${interaction.user}!`
+				`${Interaction.user} hugs ${OptionalUser}!`,
+				`${OptionalUser} has been hugged by ${Interaction.user}!`
 			];
 
-			if (OptionalUser.id === interaction.user.id) return interaction.followUp({
+			if (OptionalUser.id === Interaction.user.id) return Interaction.followUp({
 				embeds: [
 					{
 						description: `${Icons.heart}  It's okay dear, ill hug you...`,
-						color: senkoClient.api.Theme.light,
+						color: Senko.Theme.light,
 						image: {
 							url: randomArrayItem(hardLinks.media.hugs)
 						}
@@ -54,14 +54,14 @@ export default {
 				]
 			});
 
-			return interaction.followUp({
+			return Interaction.followUp({
 				embeds: [
 					{
 						description: `${randomArrayItem(Messages)}`,
 						image: {
 							url: randomArrayItem(hardLinks.media.hugs)
 						},
-						color: senkoClient.api.Theme.light
+						color: Senko.Theme.light
 					}
 				]
 			});
@@ -71,8 +71,8 @@ export default {
 			embeds: [
 				{
 					title: "",
-					description: randomArrayItem(Responses).replace("_USER_", interaction.user.username),
-					color: senkoClient.api.Theme.light,
+					description: randomArrayItem(Responses).replace("_USER_", Interaction.user.username),
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/hug_tail.png"
 					}
@@ -80,11 +80,11 @@ export default {
 			]
 		};
 
-		if (calcTimeLeft(userData.RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
-			userData.RateLimits.Hug_Rate.Amount = 0;
-			userData.RateLimits.Hug_Rate.Date = Date.now();
+		if (calcTimeLeft(MemberData.RateLimits.Hug_Rate.Date, config.cooldowns.daily)) {
+			MemberData.RateLimits.Hug_Rate.Amount = 0;
+			MemberData.RateLimits.Hug_Rate.Date = Date.now();
 
-			await updateSuperUser(interaction.user, {
+			await updateSuperUser(Interaction.user, {
 				RateLimits: {
 					// eslint-disable-next-line camelcase
 					Hug_Rate: {
@@ -94,36 +94,36 @@ export default {
 				}
 			});
 
-			userData.RateLimits.Hug_Rate.Amount = 0;
+			MemberData.RateLimits.Hug_Rate.Amount = 0;
 		}
 
-		if (userData.RateLimits.Hug_Rate.Amount >= 20) {
-			MessageStruct.embeds[0]!.description = `${randomArrayItem(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((userData.RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
+		if (MemberData.RateLimits.Hug_Rate.Amount >= 20) {
+			MessageStruct.embeds[0]!.description = `${randomArrayItem(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor((MemberData.RateLimits.Hug_Rate.Date + config.cooldowns.daily) / 1000)}:R>`)}`;
 			MessageStruct.embeds[0]!.thumbnail.url = "https://cdn.senko.gg/public/senko/bummed.png";
 
-			return interaction.followUp(MessageStruct);
+			return Interaction.followUp(MessageStruct);
 		}
 
 		if (randomNumber(100) > 75) {
-			addYen(interaction.user, 50);
+			addYen(Interaction.user, 50);
 
-			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  50x added for interaction`;
+			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  50x added for Interaction`;
 		}
 
 		MessageStruct.embeds[0]!.title = randomArrayItem(Sounds);
 
-		userData.Stats.Hugs++;
-		userData.RateLimits.Hug_Rate.Amount++;
-		userData.RateLimits.Hug_Rate.Date = Date.now();
+		MemberData.Stats.Hugs++;
+		MemberData.RateLimits.Hug_Rate.Amount++;
+		MemberData.RateLimits.Hug_Rate.Date = Date.now();
 
-		await updateSuperUser(interaction.user, {
-			Stats: userData.Stats,
+		await updateSuperUser(Interaction.user, {
+			Stats: MemberData.Stats,
 
-			RateLimits: userData.RateLimits
+			RateLimits: MemberData.RateLimits
 		});
 
-		if (userData.RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0]!.description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
+		if (MemberData.RateLimits.Hug_Rate.Amount >= 20) MessageStruct.embeds[0]!.description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last hug for now`;
 
-		interaction.followUp(MessageStruct);
+		Interaction.followUp(MessageStruct);
 	}
 } as SenkoCommand;

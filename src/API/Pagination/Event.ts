@@ -1,6 +1,9 @@
 import type { Interaction, Embed, ButtonInteraction, CollectedInteraction } from "discord.js";
 
-export default async function(interaction: (Interaction|any), pages: Embed[], timeout = 120000, IsEphemeral = false): Promise<void> {
+/**
+ * @deprecated
+ */
+export default async function (interaction: (Interaction | any), pages: Embed[], timeout = 120000, IsEphemeral = false): Promise<void> {
 	let page = 0;
 
 	const MessageStructure = {
@@ -44,14 +47,14 @@ export default async function(interaction: (Interaction|any), pages: Embed[], ti
 	const filter = (i: ButtonInteraction) => i.customId === "page_left" || i.customId === "page_right";
 	const collector = await curPage.createMessageComponentCollector({ filter, time: timeout });
 
-	collector.on("collect", async (i: (CollectedInteraction|any)) => {
+	collector.on("collect", async (i: (CollectedInteraction | any)) => {
 		switch (i.customId) {
-		case "page_left":
-			page = page > 0 ? --page : pages.length - 1;
-			break;
-		case "page_right":
-			page = page + 1 < pages.length ? ++page : 0;
-			break;
+			case "page_left":
+				page = page > 0 ? --page : pages.length - 1;
+				break;
+			case "page_right":
+				page = page + 1 < pages.length ? ++page : 0;
+				break;
 		}
 
 		// @ts-ignore

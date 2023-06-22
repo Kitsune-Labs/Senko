@@ -48,24 +48,23 @@ export default {
 	usableAnywhere: true,
 	category: "admin",
 	permissions: [Permissions.BanMembers],
-	start: async ({ senkoClient, interaction, guildData, locale, generalLocale }) => {
+	start: async ({ Senko, Interaction, GuildData, GeneralLocale, CommandLocale }) => {
 		// It shouldn't need this but im hanging onto it just in case
 		// @ts-ignore
-		if (!interaction.member?.permissions.has(Permissions.BanMembers)) return;
-		await interaction.deferReply({ ephemeral: true });
+		if (!Interaction.member?.permissions.has(Permissions.BanMembers)) return;
+		await Interaction.deferReply({ ephemeral: true });
 
-		if (!Bitfield.fromHex(guildData.flags).get(senkoClient.api.BitData.BETAs.ModCommands)) return interaction.followUp({
-			content: generalLocale.invalid_mod,
+		if (!Bitfield.fromHex(GuildData.flags).get(Senko.api.BitData.BETAs.ModCommands)) return Interaction.followUp({
+			content: GeneralLocale.invalid_mod,
 			ephemeral: true
 		});
 
-
-		if (!interaction.guild?.members.me!.permissions.has(Permissions.BanMembers)) return interaction.reply({
+		if (!Interaction.guild?.members.me!.permissions.has(Permissions.BanMembers)) return Interaction.reply({
 			embeds: [
 				{
-					title: locale.Permissions.OhDear,
-					description: locale.Permissions.Desc,
-					color: senkoClient.api.Theme.dark,
+					title: CommandLocale,
+					description: CommandLocale.Permissions.Desc,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -74,17 +73,17 @@ export default {
 			ephemeral: true
 		});
 
-		const Reason = interaction.options.getString("reason") || "No reason provided.";
-		const Duration = interaction.options.getString("duration");
+		const Reason = Interaction.options.getString("reason") || "No reason provided.";
+		const Duration = Interaction.options.getString("duration");
 		const Accounts = [];
 		const ActionLog: SenkoMessageOptions = {
 			embeds: []
 		};
-		const ActionLogChannel = await interaction.guild!.channels.fetch(guildData.ActionLogs);
+		const ActionLogChannel = await Interaction.guild!.channels.fetch(GuildData.ActionLogs);
 
 
 		// @ts-expect-error
-		for (var option of interaction.options._hoistedOptions) {
+		for (var option of Interaction.options._hoistedOptions) {
 			if (option.name.startsWith("member")) Accounts.push(option);
 		}
 
@@ -94,23 +93,23 @@ export default {
 		};
 
 		function makeEmbed(member: GuildMember, sendFailed: boolean, customResponse?: any) {
-			const randomResponse = randomArrayItem(locale.randomResponse);
+			const randomResponse = randomArrayItem(CommandLocale.randomResponse);
 			const ReplyEmbed = {
-				title: customResponse ? locale.Reply.BanErrorTitle : locale.Reply.Title,
-				description: customResponse || locale.Reply.Desc,
+				title: customResponse ? CommandLocale.Reply.BanErrorTitle : CommandLocale.Reply.Title,
+				description: customResponse || CommandLocale.Reply.Desc,
 				color: Colors.Red,
 				thumbnail: { url: `https://cdn.senko.gg/public/senko/${randomResponse.image}.png` },
 				footer: {}
 			};
 
-			if (!customResponse && Reason) ReplyEmbed.description = locale.Reply.Desc2;
-			if (!customResponse && Duration && !Reason) ReplyEmbed.description = locale.Reply.Desc3;
-			if (!customResponse && Duration && Reason) ReplyEmbed.description = locale.Reply.Desc4;
+			if (!customResponse && Reason) ReplyEmbed.description = CommandLocale.Reply.Desc2;
+			if (!customResponse && Duration && !Reason) ReplyEmbed.description = CommandLocale.Reply.Desc3;
+			if (!customResponse && Duration && Reason) ReplyEmbed.description = CommandLocale.Reply.Desc4;
 
-			if (!customResponse) ReplyEmbed.description = ReplyEmbed.description.replace("_USER_", member.user.tag || member).replace("_REASON_", Reason || locale.Reply.NoReason).replace("_TIME_", `<t:${convertToMs(Duration || "")}>`).replace("_TIME2_", `<t:${convertToMs(Duration || "")}:R>`);
-			if (!customResponse) ReplyEmbed.description += `\n\n*${randomResponse.text}*`.replace(":KitsuneBi_Blue:", senkoClient.api.Icons.KitsuneBi_Blue);
+			if (!customResponse) ReplyEmbed.description = ReplyEmbed.description.replace("_USER_", member.user.tag || member).replace("_REASON_", Reason || CommandLocale.Reply.NoReason).replace("_TIME_", `<t:${convertToMs(Duration || "")}>`).replace("_TIME2_", `<t:${convertToMs(Duration || "")}:R>`);
+			if (!customResponse) ReplyEmbed.description += `\n\n*${randomResponse.text}*`.replace(":KitsuneBi_Blue:", Senko.Icons.KitsuneBi_Blue);
 
-			if (sendFailed) ReplyEmbed.footer = { text: locale.Reply.NoDM };
+			if (sendFailed) ReplyEmbed.footer = { text: CommandLocale.Reply.NoDM };
 
 			// @ts-expect-error
 			Reply.embeds.push(ReplyEmbed);
@@ -119,16 +118,16 @@ export default {
 		for (var account of Accounts) {
 			if (account.user && account.member) {
 				// @ts-ignore
-				if (account.user.id === senkoClient.user!.id || account.member.roles.highest.position >= interaction.member!.roles.highest.position || account.user.id === interaction.guild!.ownerId) makeEmbed(account, false, locale.Reply.BanError.replace("_USER_", account.user.tag || account));
+				if (account.user.id === Senko.user!.id || account.member.roles.highest.position >= Interaction.member!.roles.highest.position || account.user.id === Interaction.guild!.ownerId) makeEmbed(account, false, locale.Reply.BanError.replace("_USER_", account.user.tag || account));
 			} else {
-				const isMember = await interaction.guild!.members.fetch(account.value).catch(() => false);
+				const isMember = await Interaction.guild!.members.fetch(account.value).catch(() => false);
 
 				if (isMember) {
 					await account.user.send({
 						embeds: [
 							{
-								title: `You have been banned from ${interaction.guild!.name}`,
-								description: `Reason: ${Reason}${Duration ? `\n[__Banned until <t:${convertToMs(Duration)}>__]` : "\n[__Permanately Banned__]"} ${guildData.BanAppeal ? `\n\n${stringEndsWithS(interaction.guild!.name)} ban appeal:\n${guildData.BanAppeal}` : ""}`,
+								title: `You have been banned from ${Interaction.guild!.name}`,
+								description: `Reason: ${Reason}${Duration ? `\n[__Banned until <t:${convertToMs(Duration)}>__]` : "\n[__Permanately Banned__]"} ${GuildData.BanAppeal ? `\n\n${stringEndsWithS(Interaction.guild!.name)} ban appeal:\n${GuildData.BanAppeal}` : ""}`,
 								color: Colors.Red
 							}
 						]
@@ -137,24 +136,24 @@ export default {
 					makeEmbed(account, true);
 				}
 
-				await interaction.guild!.members.ban(account.user.id || account, { reason: `${interaction.user.tag} - ${Reason}`, deleteMessageSeconds: 24 * 60 * 60 });
+				await Interaction.guild!.members.ban(account.user.id || account, { reason: `${Interaction.user.tag} - ${Reason}`, deleteMessageSeconds: 24 * 60 * 60 });
 
 				ActionLog.embeds!.push({
 					title: "Action Report - Kitsune Banned",
 					description: `${account.user ? account.user.tag : account} [${account.user ? account.user.id : account}]\n> __${Reason}__\n${Duration ? `\n[__Banned until <t:${convertToMs(Duration)}>__]` : "\n[__Permanately Banned__]"}`,
 					color: Colors.Red,
 					author: {
-						name: `${interaction.user.tag}  [${interaction.user.id}]`,
+						name: `${Interaction.user.tag}  [${Interaction.user.id}]`,
 						// eslint-disable-next-line camelcase
-						icon_url: interaction.user.displayAvatarURL()
+						icon_url: Interaction.user.displayAvatarURL()
 					}
 				});
 			}
 		}
 
 		// @ts-expect-error
-		if (guildData.ActionLogs) ActionLogChannel!.send(ActionLog);
+		if (GuildData.ActionLogs) ActionLogChannel!.send(ActionLog);
 
-		interaction.followUp(Reply);
+		Interaction.followUp(Reply);
 	}
 } as SenkoCommand;

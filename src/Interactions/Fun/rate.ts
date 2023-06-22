@@ -14,15 +14,15 @@ export default {
 	],
 	usableAnywhere: true,
 	category: "fun",
-	start: async ({ senkoClient, interaction }) => {
-		const Item = interaction.options.getString("thing", true);
+	start: async ({ Senko, Interaction }) => {
+		const Item = Interaction.options.getString("thing", true);
 
 		const MessageBuild = {
 			embeds: [
 				{
 					title: "Let me think...",
 					description: `I rate **${Item}** a ${Math.floor(Math.random() * 10)}/10!`,
-					color: senkoClient.api.Theme.light,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/think.png"
 					}
@@ -37,6 +37,6 @@ export default {
 			MessageBuild.embeds[0]!.thumbnail.url = "https://cdn.senko.gg/public/senko/bless.png";
 		}
 
-		interaction.reply(MessageBuild);
+		Interaction.reply(MessageBuild);
 	}
 } as SenkoCommand;

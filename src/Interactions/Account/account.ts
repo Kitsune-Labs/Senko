@@ -36,20 +36,20 @@ export default {
 	],
 	usableAnywhere: true,
 	whitelist: true,
-	start: async ({ senkoClient, interaction, userData }) => {
-		switch (interaction.options.getSubcommand()) {
+	start: async ({ Senko, Interaction, MemberData }) => {
+		switch (Interaction.options.getSubcommand()) {
 			case "request":
-				await interaction.deferReply({ ephemeral: true });
+				await Interaction.deferReply({ ephemeral: true });
 
 				var zip = new jszip();
 
-				zip.file("user.json", JSON.stringify(userData));
+				zip.file("user.json", JSON.stringify(MemberData));
 
 				var array: any = {};
 				var data = await fetchAllGuilds();
 
 				if (data && data.length == 0 || data == null) {
-					interaction.followUp({ content: "There was an error in fetching guild data!", ephemeral: true });
+					Interaction.followUp({ content: "There was an error in fetching guild data!", ephemeral: true });
 					return;
 				}
 
@@ -60,7 +60,7 @@ export default {
 						// @ts-expect-error
 						var warn: GuildWarn = guild!.warns[index2];
 
-						if (index2 == interaction.user.id || warn.moderatorId === interaction.user.id) {
+						if (index2 == Interaction.user.id || warn.moderatorId === Interaction.user.id) {
 							// @ts-expect-error
 							for (var warn2 of warn) {
 								if (array[guild!.guildId]) {
@@ -82,7 +82,7 @@ export default {
 				}
 
 				zip.generateAsync({ type: "nodebuffer" }).then(async content => {
-					await interaction.followUp({
+					await Interaction.followUp({
 						files: [{
 							attachment: content,
 							name: "Account_Data.zip"
@@ -91,12 +91,12 @@ export default {
 				});
 				break;
 			case "delete":
-				interaction.reply({
+				Interaction.reply({
 					embeds: [
 						{
 							title: "Data Removal",
 							description: "Please confirm that you want to delete all your data.\n\n**⚠️ This is irreversible! ⚠️**",
-							color: senkoClient.api.Theme.dark,
+							color: Senko.Theme.dark,
 							thumbnail: { url: "https://cdn.senko.gg/public/senko/upset2.png" }
 						}
 					],
@@ -112,12 +112,12 @@ export default {
 				});
 				break;
 			case "settings":
-				var AccountFlags = Bitfield.fromHex(userData.LocalUser.accountConfig.flags);
+				var AccountFlags = Bitfield.fromHex(MemberData.LocalUser.accountConfig.flags);
 
 				var AccountEmbed = {
 					title: "Account Settings",
 					fields: [] as DJSEmbedField[],
-					color: senkoClient.api.Theme.light
+					color: Senko.Theme.light
 				};
 				var Components = [
 					{
@@ -130,9 +130,9 @@ export default {
 					{
 						type: 1,
 						components: [
-							{ type: 2, label: "30 day removal (Default)", style: userData.DeletionDays == 30 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:30", disabled: userData.DeletionDays == 30 ? true : false },
-							{ type: 2, label: "60 day removal", style: userData.DeletionDays == 60 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:60", disabled: userData.DeletionDays == 60 ? true : false },
-							{ type: 2, label: "1 year removal", style: userData.DeletionDays == 365 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:365", disabled: userData.DeletionDays == 365 ? true : false }
+							{ type: 2, label: "30 day removal (Default)", style: MemberData.DeletionDays == 30 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:30", disabled: MemberData.DeletionDays == 30 ? true : false },
+							{ type: 2, label: "60 day removal", style: MemberData.DeletionDays == 60 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:60", disabled: MemberData.DeletionDays == 60 ? true : false },
+							{ type: 2, label: "1 year removal", style: MemberData.DeletionDays == 365 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:365", disabled: MemberData.DeletionDays == 365 ? true : false }
 						]
 					}
 				];
@@ -142,35 +142,35 @@ export default {
 						AccountEmbed,
 						{
 							title: "Data Settings",
-							description: `Your data will be deleted in **__${userData.DeletionDays}__** days without use.`,
-							color: senkoClient.api.Theme.light
+							description: `Your data will be deleted in **__${MemberData.DeletionDays}__** days without use.`,
+							color: Senko.Theme.light
 						}
 					],
 					components: Components,
 					ephemeral: true
 				};
 
-				if (AccountFlags.get(senkoClient.api.BitData.IndefiniteData)) {
-					Components[1]!.components.push({ type: 2, label: "Keep Forever", style: userData.DeletionDays == 7777777 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:7777777", disabled: userData.DeletionDays == 7777777 ? true : false });
+				if (AccountFlags.get(Senko.api.BitData.IndefiniteData)) {
+					Components[1]!.components.push({ type: 2, label: "Keep Forever", style: MemberData.DeletionDays == 7777777 ? ButtonStyle.Success : ButtonStyle.Primary, customId: "removal:7777777", disabled: MemberData.DeletionDays == 7777777 ? true : false });
 				}
 
-				if (AccountFlags.get(senkoClient.api.BitData.Private)) {
-					AccountEmbed.fields.push({ name: "Private Profile", value: senkoClient.api.Icons.enabled });
+				if (AccountFlags.get(Senko.api.BitData.Private)) {
+					AccountEmbed.fields.push({ name: "Private Profile", value: Senko.Icons.enabled });
 					Components[0]!.components[0]!.style = 3;
 				} else {
-					AccountEmbed.fields.push({ name: "Private Profile", value: senkoClient.api.Icons.disabled });
+					AccountEmbed.fields.push({ name: "Private Profile", value: Senko.Icons.disabled });
 					Components[0]!.components[0]!.style = 4;
 				}
 
-				if (AccountFlags.get(senkoClient.api.BitData.DMAchievements)) {
-					AccountEmbed.fields.push({ name: "DM Achievements", value: senkoClient.api.Icons.enabled });
+				if (AccountFlags.get(Senko.api.BitData.DMAchievements)) {
+					AccountEmbed.fields.push({ name: "DM Achievements", value: Senko.Icons.enabled });
 					Components[0]!.components[1]!.style = 3;
 				} else {
-					AccountEmbed.fields.push({ name: "DM Achievements", value: senkoClient.api.Icons.disabled });
+					AccountEmbed.fields.push({ name: "DM Achievements", value: Senko.Icons.disabled });
 					Components[0]!.components[1]!.style = 4;
 				}
 
-				interaction.reply(ReturnMessage);
+				Interaction.reply(ReturnMessage);
 				break;
 		}
 	}

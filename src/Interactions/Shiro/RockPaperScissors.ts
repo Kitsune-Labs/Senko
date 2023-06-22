@@ -30,18 +30,18 @@ export default {
 			]
 		}
 	],
-	start: async ({ senkoClient, interaction }) => {
+	start: async ({ Senko, Interaction }) => {
 		const BotChoices = ["rps_rock", "rps_paper", "rps_scissors"];
 		const BotChoice = BotChoices[Math.floor(Math.random() * BotChoices.length)] as string;
 		// @ts-ignore
-		const UserChoice = interaction.options.getString("choice");
+		const UserChoice = Interaction.options.getString("choice");
 
-		await interaction.reply({
+		await Interaction.reply({
 			embeds: [
 				{
 					title: "Rock, Paper, Scissors",
 					description: "Shiro seems determined to win",
-					color: senkoClient.api.Theme.light,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/shiro/sneak1.png"
 					}
@@ -62,12 +62,12 @@ export default {
 		await wait(3000);
 
 		if (UserChoice === BotChoice) {
-			return interaction.editReply({
+			return Interaction.editReply({
 				embeds: [
 					{
 						title: `${things[UserChoice]} vs ${things[BotChoice]}`,
 						description: "It's a tie!\n\nShiro looks confused",
-						color: senkoClient.api.Theme.dark,
+						color: Senko.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/surprised1.png"
 						}
@@ -77,14 +77,14 @@ export default {
 		}
 
 		if (UserChoice === "rps_rock" && BotChoice === "rps_scissors") {
-			await addYen(interaction.user, 30);
+			await addYen(Interaction.user, 30);
 
-			return interaction.editReply({
+			return Interaction.editReply({
 				embeds: [
 					{
 						title: "🪨 vs ✂️",
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
-						color: senkoClient.api.Theme.light,
+						color: Senko.Theme.light,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}
@@ -94,13 +94,13 @@ export default {
 		}
 
 		if (UserChoice === "rps_paper" && BotChoice === "rps_rock") {
-			await addYen(interaction.user, 30);
-			return interaction.editReply({
+			await addYen(Interaction.user, 30);
+			return Interaction.editReply({
 				embeds: [
 					{
 						title: "🗞️ vs 🪨",
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
-						color: senkoClient.api.Theme.light,
+						color: Senko.Theme.light,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}
@@ -110,13 +110,13 @@ export default {
 		}
 
 		if (UserChoice === "rps_scissors" && BotChoice === "rps_paper") {
-			await addYen(interaction.user, 30);
-			return interaction.editReply({
+			await addYen(Interaction.user, 30);
+			return Interaction.editReply({
 				embeds: [
 					{
 						title: "✂️ vs 🗞️",
 						description: `Shiro lost!\n\nShiro does not look happy...\n\n— ${Icons.yen}  30x added`,
-						color: senkoClient.api.Theme.light,
+						color: Senko.Theme.light,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/pout1.png"
 						}
@@ -126,12 +126,12 @@ export default {
 		}
 
 		if (UserChoice === "rps_rock" && BotChoice === "rps_paper") {
-			return interaction.editReply({
+			return Interaction.editReply({
 				embeds: [
 					{
 						title: "🪨 vs 🗞️",
 						description: "Shiro won!\n\nShiro looks happy!",
-						color: senkoClient.api.Theme.dark,
+						color: Senko.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/ShiroSmug.png"
 						}
@@ -141,12 +141,12 @@ export default {
 		}
 
 		if (UserChoice === "rps_paper" && BotChoice === "rps_scissors") {
-			return interaction.editReply({
+			return Interaction.editReply({
 				embeds: [
 					{
 						title: "🗞️ vs ✂️",
 						description: "Shiro won!\n\nShiro looks happy!",
-						color: senkoClient.api.Theme.dark,
+						color: Senko.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/ShiroSmug.png"
 						}
@@ -156,12 +156,12 @@ export default {
 		}
 
 		if (UserChoice === "rps_scissors" && BotChoice === "rps_rock") {
-			return interaction.editReply({
+			return Interaction.editReply({
 				embeds: [
 					{
 						title: "✂️ vs 🪨",
 						description: "Shiro won!\n\nShiro looks happy!",
-						color: senkoClient.api.Theme.dark,
+						color: Senko.Theme.dark,
 						thumbnail: {
 							url: "https://cdn.senko.gg/public/shiro/ShiroSmug.png"
 						}

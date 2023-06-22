@@ -32,7 +32,7 @@ export default class {
 									{
 										title: "Data Settings",
 										description: "Your data will be deleted in **__30__** days without use.",
-										color: senkoClient.api.Theme.light
+										color: senkoClient.Theme.light
 									}
 								],
 								components: Interaction.message.components
@@ -61,7 +61,7 @@ export default class {
 									{
 										title: "Data Settings",
 										description: "Your data will be deleted in **__60__** days without use.",
-										color: senkoClient.api.Theme.light
+										color: senkoClient.Theme.light
 									}
 								],
 								components: Interaction.message.components
@@ -90,7 +90,7 @@ export default class {
 									{
 										title: "Data Settings",
 										description: "Your data will be deleted in **__365__** days without use.",
-										color: senkoClient.api.Theme.light
+										color: senkoClient.Theme.light
 									}
 								],
 								components: Interaction.message.components
@@ -117,7 +117,7 @@ export default class {
 									{
 										title: "Data Settings",
 										description: "Your data will be deleted in **__7777777__** days without use.",
-										color: senkoClient.api.Theme.light
+										color: senkoClient.Theme.light
 									}
 								],
 								components: Interaction.message.components
@@ -134,7 +134,7 @@ export default class {
 									{
 										title: "Data Removal",
 										description: "🗑️  Your data has been removed",
-										color: senkoClient.api.Theme.dark,
+										color: senkoClient.Theme.dark,
 										thumbnail: { url: "attachment://image.png" }
 									}
 								],

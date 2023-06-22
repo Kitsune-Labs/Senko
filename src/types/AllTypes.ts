@@ -1,7 +1,12 @@
 import type { Bitfield } from "bitfields";
-import type { ApplicationCommandOption, BaseMessageOptions, ChatInputCommandInteraction, Client, Collection, CommandInteraction, Events, Guild, WebhookClient } from "discord.js";
-import type { GuildData, UserData } from "./SupabaseTypes";
-import winston from "winston";
+import type { ApplicationCommand, ApplicationCommandOption, BaseMessageOptions, ChatInputCommandInteraction, Client, Events, Guild, WebhookClient } from "discord.js";
+import SenkoProfile from "../API/SenkoProfile";
+import SenkoGuild from "../API/Guild";
+import { UserData } from "./SupabaseTypes";
+import { LocaleInterface } from "./Locale";
+
+export const CommandCategories = ["fun", "economy", "social", "admin", "account", "utility", "uncategorized"];
+type winstonLevels = "senko" | "fatal" | "error" | "warn" | "info" | "debug" | "trace";
 
 export interface BitData {
 	Private: 1,
@@ -89,39 +94,31 @@ export interface SenkoTheme {
 
 export interface SenkoClientTypes extends Client {
 	api: {
-		Commands: Collection<string, CommandInteraction | SenkoCommand>;
-		Icons: SenkoIcons;
-		UserAgent: string;
-		Theme: SenkoTheme;
+		Commands: Map<string, SenkoCommand>;
 		Bitfield: Bitfield;
 		BitData: BitData;
-		loadedCommands: any;
+		loadedCommands: Map<string, ApplicationCommand>;
 		statusLog: WebhookClient;
 		SenkosWorld: Guild;
 	};
+	Icons: SenkoIcons;
+	UserAgent: string;
+	Theme: SenkoTheme;
+	winston: SenkoWinston;
 	on(event: Events, listener: (...args: any[]) => void): this;
 	once(event: Events, listener: (...args: any[]) => void): this;
 }
 
-import { SenkoMemberInterface } from "../Classes/SenkoMember";
-
 export interface SenkoCommandApi {
-	readonly senkoClient: SenkoClientTypes;
-	readonly interaction: ChatInputCommandInteraction;
-	readonly guildData: GuildData;
-	readonly userData: UserData;
-	readonly xpAmount: number;
-	readonly locale: any;
-	readonly generalLocale: any;
-	readonly Icons: SenkoIcons;
-	readonly Theme: SenkoTheme;
-	readonly winston: winston.Logger
-	readonly senkoMember: SenkoMemberInterface;
+	readonly Interaction: ChatInputCommandInteraction;
+	readonly Senko: SenkoClientTypes;
+	readonly Member: SenkoProfile;
+	readonly MemberData: UserData;
+	readonly Guild: SenkoGuild;
+	readonly GuildData: any;
+	readonly CommandLocale: any;
+	readonly GeneralLocale: LocaleInterface["general"];
 }
-
-export const CommandCategories = ["fun", "economy", "social", "admin", "account", "utility", "uncategorized"];
-
-type winstonLevels = "senko" | "fatal" | "error" | "warn" | "info" | "debug" | "trace";
 
 export interface SenkoWinston {
 	log: (level: winstonLevels, message: string) => void;

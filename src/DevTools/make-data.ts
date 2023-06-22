@@ -12,13 +12,13 @@ export default {
 			required: true
 		}
 	],
-	start: async ({ interaction }) => {
-		const check = await makeSuperUser(interaction.options.getUser("user", true));
+	start: async ({ Interaction }) => {
+		const check = await makeSuperUser(Interaction.options.getUser("user", true));
 
 		if (check) {
-			await interaction.reply({ content: `Done ${interaction.options.getUser("user", true).id}`, ephemeral: true });
+			await Interaction.reply({ content: `Done ${Interaction.options.getUser("user", true).id}`, ephemeral: true });
 		} else {
-			await interaction.reply({ content: "error", ephemeral: true });
+			await Interaction.reply({ content: "error", ephemeral: true });
 		}
 	}
 } as SenkoCommand;

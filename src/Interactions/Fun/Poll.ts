@@ -84,15 +84,15 @@ export default {
 			minLength: 1
 		}
 	],
-	start: async ({ senkoClient, interaction }) => {
-		const options = interaction.options.data.filter((option) => option.name.startsWith("option-"));
+	start: async ({ Senko, Interaction }) => {
+		const options = Interaction.options.data.filter((option) => option.name.startsWith("option-"));
 		const voteCounts = new Array(options.length).fill(0);
 
 		const PollMessage: any = {
 			embeds: [
 				{
-					description: `**${interaction.options.get("question", true)?.value}**\n\n${options.map((option, index) => `${index + 1}. ${option.value} (0 votes)`).join("\n")}`,
-					color: senkoClient.api.Theme.light,
+					description: `**${Interaction.options.get("question", true)?.value}**\n\n${options.map((option, index) => `${index + 1}. ${option.value} (0 votes)`).join("\n")}`,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/hat_think.png"
 					}
@@ -129,7 +129,7 @@ export default {
 			}
 		});
 
-		const Message = await interaction.reply(PollMessage);
+		const Message = await Interaction.reply(PollMessage);
 
 		const filter = (i: any) => i.customId.startsWith("poll-");
 		const collector = Message.createMessageComponentCollector({ filter, componentType: ComponentType.Button });
@@ -154,7 +154,7 @@ export default {
 				userVotes.set(i.user.id, index);
 				voteCounts[index] += 1;
 
-				PollMessage.embeds[0].description = `**${interaction.options.get("question", true)?.value}**\n\n${options.map((option, index) => `${index + 1}. ${option.value} (${voteCounts[index]} votes)`).join("\n")}`;
+				PollMessage.embeds[0].description = `**${Interaction.options.get("question", true)?.value}**\n\n${options.map((option, index) => `${index + 1}. ${option.value} (${voteCounts[index]} votes)`).join("\n")}`;
 				await i.update({ embeds: PollMessage.embeds, components: PollMessage.components });
 			}
 		});

@@ -28,15 +28,14 @@ const NoMore = [
 export default {
 	name: "sleep",
 	desc: "Sleep on Senko's lap",
-	userData: true,
 	defer: true,
 	category: "fun",
-	start: async ({ senkoClient, interaction, userData }) => {
+	start: async ({ Senko, Interaction, MemberData }) => {
 		const MessageStruct = {
 			embeds: [
 				{
-					description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", interaction.user.username)}*`,
-					color: senkoClient.api.Theme.light,
+					description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", Interaction.user.username)}*`,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: `https://cdn.senko.gg/public/senko/${randomArrayItem(["cuddle", "sleep"])}.png`
 					}
@@ -44,36 +43,36 @@ export default {
 			]
 		};
 
-		if (calcTimeLeft(userData.RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {
-			userData.RateLimits.Sleep_Rate.Amount = 0;
-			userData.RateLimits.Sleep_Rate.Date = Date.now();
+		if (calcTimeLeft(MemberData.RateLimits.Sleep_Rate.Date, config.cooldowns.daily)) {
+			MemberData.RateLimits.Sleep_Rate.Amount = 0;
+			MemberData.RateLimits.Sleep_Rate.Date = Date.now();
 
-			await updateSuperUser(interaction.user, {
-				RateLimits: userData.RateLimits
+			await updateSuperUser(Interaction.user, {
+				RateLimits: MemberData.RateLimits
 			});
 
-			userData.RateLimits.Sleep_Rate.Amount = 0;
+			MemberData.RateLimits.Sleep_Rate.Amount = 0;
 		}
 
 
-		if (userData.RateLimits.Sleep_Rate.Amount >= 1) {
-			MessageStruct.embeds[0]!.description = `${randomArrayItem(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(userData.RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+		if (MemberData.RateLimits.Sleep_Rate.Amount >= 1) {
+			MessageStruct.embeds[0]!.description = `${randomArrayItem(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(MemberData.RateLimits.Sleep_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
 			MessageStruct.embeds[0]!.thumbnail.url = `https://cdn.senko.gg/public/senko/${randomArrayItem(["huh", "think"])}.png`;
 
-			return interaction.followUp(MessageStruct);
+			return Interaction.followUp(MessageStruct);
 		}
 
-		userData.Stats.Sleeps++;
-		userData.RateLimits.Sleep_Rate.Amount++;
-		userData.RateLimits.Sleep_Rate.Date = Date.now();
+		MemberData.Stats.Sleeps++;
+		MemberData.RateLimits.Sleep_Rate.Amount++;
+		MemberData.RateLimits.Sleep_Rate.Date = Date.now();
 
-		await updateSuperUser(interaction.user, {
-			Stats: userData.Stats,
+		await updateSuperUser(Interaction.user, {
+			Stats: MemberData.Stats,
 
-			RateLimits: userData.RateLimits
+			RateLimits: MemberData.RateLimits
 		});
 
-		interaction.followUp(MessageStruct);
+		Interaction.followUp(MessageStruct);
 
 	}
 } as SenkoCommand;

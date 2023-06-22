@@ -14,40 +14,40 @@ export default {
 	description_localized: {
 		"jp": "モフ モフ！"
 	},
-	start: async ({ senkoClient, interaction, userData, locale, generalLocale }) => {
-		if (calcTimeLeft(userData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
-			userData.RateLimits.Fluff_Rate.Amount = 0;
-			userData.RateLimits.Fluff_Rate.Date = Date.now();
+	start: async ({ Senko, Interaction, MemberData, CommandLocale, GeneralLocale }) => {
+		if (calcTimeLeft(MemberData.RateLimits.Fluff_Rate.Date, config.cooldowns.daily)) {
+			MemberData.RateLimits.Fluff_Rate.Amount = 0;
+			MemberData.RateLimits.Fluff_Rate.Date = Date.now();
 
-			await updateSuperUser(interaction.user, {
-				RateLimits: userData.RateLimits
+			await updateSuperUser(Interaction.user, {
+				RateLimits: MemberData.RateLimits
 			});
 
-			userData.RateLimits.Fluff_Rate.Amount = 0;
+			MemberData.RateLimits.Fluff_Rate.Amount = 0;
 		}
 
-		if (userData.RateLimits.Fluff_Rate.Amount >= 50) return interaction.followUp({
+		if (MemberData.RateLimits.Fluff_Rate.Amount >= 50) return Interaction.followUp({
 			embeds: [{
-				description: locale.RateLimit.replace("_TIME_", `<t:${Math.floor((userData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R>`), //`I don't want to right now! W-We can <t:${Math.floor((userData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
+				description: CommandLocale.RateLimit.replace("_TIME_", `<t:${Math.floor((MemberData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R>`), //`I don't want to right now! W-We can <t:${Math.floor((MemberData.RateLimits.Fluff_Rate.Date + config.cooldowns.daily) / 1000)}:R> though...`,
 				thumbnail: { url: "https://cdn.senko.gg/public/senko/upset2.png" },
-				color: senkoClient.api.Theme.light
+				color: Senko.Theme.light
 			}]
 		});
 
-		userData.Stats.Fluffs++;
-		userData.RateLimits.Fluff_Rate.Amount++;
-		userData.RateLimits.Fluff_Rate.Date = Date.now();
+		MemberData.Stats.Fluffs++;
+		MemberData.RateLimits.Fluff_Rate.Amount++;
+		MemberData.RateLimits.Fluff_Rate.Date = Date.now();
 
-		// await updateSuperUser(interaction.user, {
-		// 	Stats: userData.Stats,
-		// 	RateLimits: userData.RateLimits
+		// await updateSuperUser(Interaction.user, {
+		// 	Stats: MemberData.Stats,
+		// 	RateLimits: MemberData.RateLimits
 		// });
 
 		const MessageStruct: SenkoMessageOptions = {
 			embeds: [{
-				title: randomArray(locale.UserInput).replace("_USER_", interaction.user.username),
-				description: randomArray(locale.Responses),
-				color: senkoClient.api.Theme.light,
+				title: randomArray(CommandLocale.UserInput).replace("_USER_", Interaction.user.username),
+				description: randomArray(CommandLocale.Responses),
+				color: Senko.Theme.light,
 				thumbnail: {
 					url: `https://cdn.senko.gg/public/senko/${randomArray(["fluffed", "fluffed2", "pout"])}.png`
 				}
@@ -55,21 +55,21 @@ export default {
 		};
 
 		if (randomNumber(100) > 75) {
-			addYen(interaction.user, 10);
+			addYen(Interaction.user, 10);
 
 			// @ts-expect-error - TS says that "embeds[0].description" may be undefined, even though its right above it
-			MessageStruct.embeds[0].description += generalLocale.YenAwarded.replace("_AMOUNT_", "10"); // `\n\n— ${Icons.yen}  10x added for interaction`;
+			MessageStruct.embeds[0].description += GeneralLocale.YenAwarded.replace("_AMOUNT_", "10"); // `\n\n— ${Icons.yen}  10x added for Interaction`;
 		}
 
 		if (randomNumber(500) < 5) {
 			// @ts-expect-error - TS says that "embeds[0].description" may be undefined, even though its right above it
-			MessageStruct.embeds[0].description += generalLocale.TofuAwarded.replace("_AMOUNT_", "1"); // `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
-			userData.LocalUser.profileConfig.Currency.Tofu++;
-			await updateSuperUser(interaction.user, {
-				LocalUser: userData.LocalUser
+			MessageStruct.embeds[0].description += GeneralLocale.TofuAwarded.replace("_AMOUNT_", "1"); // `\n\nYou found a rare item!\n— ${Icons.tofu}  1x tofu added`;
+			MemberData.LocalUser.profileConfig.Currency.Tofu++;
+			await updateSuperUser(Interaction.user, {
+				LocalUser: MemberData.LocalUser
 			});
 		}
 
-		interaction.followUp(MessageStruct);
+		Interaction.followUp(MessageStruct);
 	}
 } as SenkoCommand;

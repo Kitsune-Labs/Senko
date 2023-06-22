@@ -25,15 +25,14 @@ const NoMore = [
 export default {
 	name: "rest",
 	desc: "Rest on Senkos lap",
-	userData: true,
 	defer: true,
 	category: "fun",
-	start: async ({ senkoClient, interaction, userData }) => {
+	start: async ({ Senko, Interaction, MemberData }) => {
 		const MessageStruct = {
 			embeds: [
 				{
-					description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", interaction.user.username)}*`,
-					color: senkoClient.api.Theme.light,
+					description: `**${randomArrayItem(Responses)}**\n\n*${randomArrayItem(UserActions).replace("_USER_", Interaction.user.username)}*`,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/cuddle.png"
 					}
@@ -41,46 +40,46 @@ export default {
 			]
 		};
 
-		if (calcTimeLeft(userData.RateLimits.Rest_Rate.Date, config.cooldowns.daily)) {
-			userData.RateLimits.Rest_Rate.Amount = 0;
-			userData.RateLimits.Rest_Rate.Date = Date.now();
+		if (calcTimeLeft(MemberData.RateLimits.Rest_Rate.Date, config.cooldowns.daily)) {
+			MemberData.RateLimits.Rest_Rate.Amount = 0;
+			MemberData.RateLimits.Rest_Rate.Date = Date.now();
 
-			await updateSuperUser(interaction.user, {
-				RateLimits: userData.RateLimits
+			await updateSuperUser(Interaction.user, {
+				RateLimits: MemberData.RateLimits
 			});
 
-			userData.RateLimits.Rest_Rate.Amount = 0;
+			MemberData.RateLimits.Rest_Rate.Amount = 0;
 		}
 
 
-		if (userData.RateLimits.Rest_Rate.Amount >= 5) {
-			MessageStruct.embeds[0]!.description = `${randomArrayItem(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(userData.RateLimits.Rest_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+		if (MemberData.RateLimits.Rest_Rate.Amount >= 5) {
+			MessageStruct.embeds[0]!.description = `${randomArrayItem(NoMore).replace("_TIMELEFT_", `<t:${Math.floor(MemberData.RateLimits.Rest_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
 			MessageStruct.embeds[0]!.thumbnail.url = `https://cdn.senko.gg/public/senko/${randomArrayItem(["huh", "think"])}.png`;
 
-			return interaction.followUp(MessageStruct);
+			return Interaction.followUp(MessageStruct);
 		}
 
 
-		userData.Stats.Rests++;
-		userData.RateLimits.Rest_Rate.Amount++;
-		userData.RateLimits.Rest_Rate.Date = Date.now();
+		MemberData.Stats.Rests++;
+		MemberData.RateLimits.Rest_Rate.Amount++;
+		MemberData.RateLimits.Rest_Rate.Date = Date.now();
 
 		if (randomNumber(100) > 75) {
-			addYen(interaction.user, 50);
+			addYen(Interaction.user, 50);
 
-			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  50x added for interaction`;
+			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  50x added for Interaction`;
 		}
 
 
-		await updateSuperUser(interaction.user, {
-			Stats: userData.Stats,
+		await updateSuperUser(Interaction.user, {
+			Stats: MemberData.Stats,
 
-			RateLimits: userData.RateLimits
+			RateLimits: MemberData.RateLimits
 		});
 
-		if (userData.RateLimits.Rest_Rate.Amount >= 5) MessageStruct.embeds[0]!.description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop resting for today`;
+		if (MemberData.RateLimits.Rest_Rate.Amount >= 5) MessageStruct.embeds[0]!.description += `\n\n— ${Icons.bubble}  Senko-san asks you to stop resting for today`;
 
 
-		interaction.followUp(MessageStruct);
+		Interaction.followUp(MessageStruct);
 	}
 } as SenkoCommand;

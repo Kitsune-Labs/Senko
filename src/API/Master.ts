@@ -1,22 +1,12 @@
 import type { User } from "discord.js";
 import { updateSuperUser, fetchSuperUser } from "./super";
-// import { Bitfield } from "bitfields";
-// import { wait } from "@kitsune-labs/utilities";
-
 // import Achievements from "../Data/Achievements.json";
 import config from "../Data/DataConfig.json";
-// import Icons from "../Data/Icons.json";
-// import bits from "./Bits.json";
 
 export function stringEndsWithS(string: string) {
 	return string.endsWith("s") ? `${string}'` : `${string}'s`;
 }
 
-/**
- * Add yen to a user's profile.
- * @param {User} message.author
- * @param {Number} amount
- */
 export async function addYen(user: User, amount: number) {
 	const Data = await fetchSuperUser(user);
 
@@ -26,11 +16,6 @@ export async function addYen(user: User, amount: number) {
 	});
 }
 
-/**
- * Remove yen from a user's profile.
- * @param {User} user
- * @param {Number} amount
- */
 export async function removeYen(user: User, amount: number) {
 	const Data = await fetchSuperUser(user);
 
@@ -40,18 +25,10 @@ export async function removeYen(user: User, amount: number) {
 	});
 }
 
-/**
- * @param {string} Content
- * @returns {string}
- */
-export function clean(Content: string) {
+export function clean(Content: string): string {
 	return Content.toString().replace(/`/g, `\`${String.fromCharCode(8203)}`).replace(/@/g, `@${String.fromCharCode(8203)}`);
 }
 
-/**
- * Disables all components on a message.
- * @param {Interaction} interaction
- */
 export async function disableComponents(interaction: any) {
 	for (const component of interaction.message.components[0].components) {
 		component.disabled = true;
@@ -62,13 +39,7 @@ export async function disableComponents(interaction: any) {
 	});
 }
 
-/**
- *
- * @param {number} LastDate
- * @param {number} Cooldown
- * @returns `bool`
- */
-export function calcTimeLeft(LastDate: number, Cooldown: number) {
+export function calcTimeLeft(LastDate: number, Cooldown: number): boolean {
 	return Date.now() - LastDate > Cooldown;
 }
 

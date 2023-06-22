@@ -40,7 +40,7 @@ export default class {
 								{
 									title: "Senko-san",
 									description: `See you later!\n\nI wish we could talk together more ${interaction.user.username}...`,
-									color: senkoClient.api.Theme.dark,
+									color: senkoClient.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/bummed.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -51,7 +51,7 @@ export default class {
 								{
 									title: "Senko-san",
 									description: `Have a good day ${interaction.user.username}!`,
-									color: senkoClient.api.Theme.dark,
+									color: senkoClient.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/happy1.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -62,7 +62,7 @@ export default class {
 								{
 									title: "Senko-san",
 									description: `Sayōnara ${interaction.user.username}!`,
-									color: senkoClient.api.Theme.dark,
+									color: senkoClient.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/happy1.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -107,7 +107,7 @@ export default class {
 								{
 									title: `${Icons.heart} Senko-san`,
 									description: "Well hello then!\n\nI hope you're having a great day!",
-									color: senkoClient.api.Theme.dark,
+									color: senkoClient.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/happy.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -120,7 +120,7 @@ export default class {
 								{
 									title: "Senko-san",
 									description: "Im doing great; Thanks for asking!",
-									color: senkoClient.api.Theme.light,
+									color: senkoClient.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/happy.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -140,7 +140,7 @@ export default class {
 								{
 									title: `${Icons.tears} Senko-san`,
 									description: "Not so great, my favorite spoon broke...",
-									color: senkoClient.api.Theme.light,
+									color: senkoClient.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/nervous.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -162,7 +162,7 @@ export default class {
 								{
 									title: "Senko-san",
 									description: "Sadly there isn't, unless you can somehow travel back to the past...",
-									color: senkoClient.api.Theme.dark,
+									color: senkoClient.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/think.png" },
 									footer: { text: interaction.user.tag }
 								}
@@ -175,7 +175,7 @@ export default class {
 								{
 									title: "Senko-san",
 									description: "It's okay dear\n\nthere isn't a way to get another one like this anyways...",
-									color: senkoClient.api.Theme.dark,
+									color: senkoClient.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/heh2.png" },
 									footer: { text: interaction.user.tag }
 								}

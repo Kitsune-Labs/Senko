@@ -9,7 +9,7 @@ export default {
 	desc: "Preview an item from Senko's Market",
 	usableAnywhere: true,
 	category: "economy",
-	start: async ({ interaction }) => {
+	start: async ({ Interaction }) => {
 		const ShopItems = await fetchMarket();
 		const { data: rawShopData } = await Supabase.from("config").select("*").eq("id", "all") as any;
 
@@ -44,6 +44,6 @@ export default {
 		});
 
 		// @ts-expect-error
-		interaction.reply(messageStruct);
+		Interaction.reply(messageStruct);
 	}
 } as SenkoCommand;

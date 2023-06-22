@@ -20,21 +20,21 @@ export default {
 			required: true
 		}
 	],
-	start: async ({ senkoClient, interaction, Icons }) => {
-		if (interaction.user.id !== "609097445825052701") return;
+	start: async ({ Senko, Interaction }) => {
+		if (Interaction.user.id !== "609097445825052701") return;
 		const ShopItems = await fetchMarket();
-		const User = interaction.options.getString("user-id", true);
-		const DevItem = ShopItems[interaction.options.getString("item", true)];
-		const FetchedUser = await senkoClient.users.fetch(User);
+		const User = Interaction.options.getString("user-id", true);
+		const DevItem = ShopItems[Interaction.options.getString("item", true)];
+		const FetchedUser = await Senko.users.fetch(User);
 
-		if (!DevItem) return interaction.followUp({ content: "item null", ephemeral: true });
-		if (!FetchedUser) return interaction.followUp({ content: "user null", ephemeral: true });
+		if (!DevItem) return Interaction.followUp({ content: "item null", ephemeral: true });
+		if (!FetchedUser) return Interaction.followUp({ content: "user null", ephemeral: true });
 
 		const accountData = await fetchSuperUser(FetchedUser);
 
-		if (!accountData) return interaction.followUp({ content: "account data not found", ephemeral: true });
+		if (!accountData) return Interaction.followUp({ content: "account data not found", ephemeral: true });
 
-		accountData.LocalUser.profileConfig.claimableItems.push(interaction.options.getString("item", true));
+		accountData.LocalUser.profileConfig.claimableItems.push(Interaction.options.getString("item", true));
 
 		await updateSuperUser(FetchedUser, {
 			LocalUser: accountData!.LocalUser
@@ -43,15 +43,15 @@ export default {
 		FetchedUser.send({
 			embeds: [
 				{
-					title: `${Icons.package}  You received an item from Senko-san!`,
+					title: `${Senko.Icons.package}  You received an item from Senko-san!`,
 					description: `**I-I FOUND THIS FOR YOU!**\n\n__${DevItem.name}__ is now claimable with **/claim items**!`,
-					color: senkoClient.api.Theme.light,
+					color: Senko.Theme.light,
 					thumbnail: { url: "https://cdn.senko.gg/public/senko/excited.png" }
 				}
 			]
 		}).catch();
 
-		interaction.followUp({
+		Interaction.followUp({
 			content: `Added ${DevItem.name} to Claimable Items`,
 			ephemeral: true
 		});

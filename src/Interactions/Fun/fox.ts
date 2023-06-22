@@ -5,14 +5,14 @@ export default {
 	name: "fox",
 	desc: "Random fox pictures!",
 	category: "fun",
-	start: async ({ interaction, Theme }) => {
-		interaction.reply({
+	start: async ({ Senko, Interaction }) => {
+		Interaction.reply({
 			embeds: [
 				{
 					image: {
 						url: getFox()
 					},
-					color: Theme.light
+					color: Senko.Theme.light
 				}
 			]
 		});

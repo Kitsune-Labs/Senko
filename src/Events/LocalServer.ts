@@ -88,7 +88,7 @@ export default class {
 						{
 							title: `You have been warned in ${senkosWorld.name}`,
 							description: `Your reason: ${reason}\nNote: No note(s) provided`,
-							color: senkoClient.api.Theme.light
+							color: senkoClient.Theme.light
 						}
 					]
 				}).then(()=> {

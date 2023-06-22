@@ -30,16 +30,16 @@ const MoreResponses = [
 export default {
 	name: "drink",
 	desc: "Have Senko-san prepare you a drink",
-	userData: true,
+	MemberData: true,
 	defer: true,
 	category: "fun",
-	start: async ({ senkoClient, interaction, userData }) => {
+	start: async ({ Senko, Interaction, MemberData }) => {
 		const MessageStruct = {
 			embeds: [
 				{
 					title: "",
 					description: `${Icons.hojicha}  ${randomArrayItem(Responses)}`,
-					color: senkoClient.api.Theme.light,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/drink.png"
 					}
@@ -47,43 +47,43 @@ export default {
 			]
 		};
 
-		if (calcTimeLeft(userData.RateLimits.Drink_Rate.Date, config.cooldowns.daily)) {
-			userData.RateLimits.Drink_Rate.Amount = 0;
-			userData.RateLimits.Drink_Rate.Date = Date.now();
+		if (calcTimeLeft(MemberData.RateLimits.Drink_Rate.Date, config.cooldowns.daily)) {
+			MemberData.RateLimits.Drink_Rate.Amount = 0;
+			MemberData.RateLimits.Drink_Rate.Date = Date.now();
 
-			await updateSuperUser(interaction.user, {
-				RateLimits: userData.RateLimits
+			await updateSuperUser(Interaction.user, {
+				RateLimits: MemberData.RateLimits
 			});
 
-			userData.RateLimits.Drink_Rate.Amount = 0;
+			MemberData.RateLimits.Drink_Rate.Amount = 0;
 		}
 
-		if (userData.RateLimits.Drink_Rate.Amount >= 5) {
-			MessageStruct.embeds[0]!.description = `**${randomArrayItem(NoMore).replace("_USER_", interaction.user.username)}**\n\n${randomArrayItem(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(userData.RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
+		if (MemberData.RateLimits.Drink_Rate.Amount >= 5) {
+			MessageStruct.embeds[0]!.description = `**${randomArrayItem(NoMore).replace("_USER_", Interaction.user.username)}**\n\n${randomArrayItem(MoreResponses).replace("_TIMELEFT_", `<t:${Math.floor(MemberData.RateLimits.Drink_Rate.Date / 1000) + Math.floor(config.cooldowns.daily / 1000)}:R>`)}`;
 			MessageStruct.embeds[0]!.thumbnail.url = `https://cdn.senko.gg/public/senko/${randomArrayItem(["huh", "think"])}.png`;
 
-			return interaction.followUp(MessageStruct);
+			return Interaction.followUp(MessageStruct);
 		}
 
-		userData.RateLimits.Drink_Rate.Amount++;
-		userData.Stats.Drinks++;
+		MemberData.RateLimits.Drink_Rate.Amount++;
+		MemberData.Stats.Drinks++;
 
-		await updateSuperUser(interaction.user, {
-			Stats: userData.Stats,
-			RateLimits: userData.RateLimits
+		await updateSuperUser(Interaction.user, {
+			Stats: MemberData.Stats,
+			RateLimits: MemberData.RateLimits
 		});
 
-		if (userData.RateLimits.Drink_Rate.Amount >= 5) MessageStruct.embeds[0]!.description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last drink for today`;
+		if (MemberData.RateLimits.Drink_Rate.Amount >= 5) MessageStruct.embeds[0]!.description += `\n\n— ${Icons.bubble}  Senko-san says this should be our last drink for today`;
 
 		if (randomNumber(100) > 75) {
-			addYen(interaction.user, 50);
+			addYen(Interaction.user, 50);
 
-			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  50x added for interaction`;
+			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  50x added for Interaction`;
 		}
 
 		MessageStruct.embeds[0]!.title = randomArrayItem(Sounds);
 
 
-		interaction.followUp(MessageStruct);
+		Interaction.followUp(MessageStruct);
 	}
 } as SenkoCommand;

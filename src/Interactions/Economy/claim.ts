@@ -7,7 +7,7 @@ import type { SenkoCommand } from "../../types/AllTypes";
 export default {
 	name: "claim",
 	desc: "Claim rewards from Senko",
-	userData: true,
+	MemberData: true,
 	category: "economy",
 	options: [
 		{
@@ -26,21 +26,21 @@ export default {
 			type: CommandOption.Subcommand
 		}
 	],
-	start: async ({ senkoClient, interaction, userData }) => {
-		const Command = interaction.options.getSubcommand();
-		await interaction.deferReply();
+	start: async ({ Senko, Interaction, MemberData }) => {
+		const Command = Interaction.options.getSubcommand();
+		await Interaction.deferReply();
 
 		switch (Command) {
 			case "daily":
-				var DailyTimeStamp = userData.Rewards.Daily;
+				var DailyTimeStamp = MemberData.Rewards.Daily;
 				var DailyCooldown = 86400000;
 
-				if (DailyCooldown - (Date.now() - DailyTimeStamp) >= 0) return interaction.followUp({
+				if (DailyCooldown - (Date.now() - DailyTimeStamp) >= 0) return Interaction.followUp({
 					embeds: [
 						{
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: `I've already given you your daily yen, come back to me <t:${Math.floor((DailyTimeStamp + DailyCooldown) / 1000)}:R>!`,
-							color: senkoClient.api.Theme.dark,
+							color: Senko.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/heh.png"
 							}
@@ -49,20 +49,20 @@ export default {
 					ephemeral: true
 				});
 
-				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 200;
-				userData.Rewards.Daily = Date.now();
+				MemberData.LocalUser.profileConfig.Currency.Yen = MemberData.LocalUser.profileConfig.Currency.Yen + 200;
+				MemberData.Rewards.Daily = Date.now();
 
-				await updateSuperUser(interaction.user, {
-					LocalUser: userData.LocalUser,
-					Rewards: userData.Rewards
+				await updateSuperUser(Interaction.user, {
+					LocalUser: MemberData.LocalUser,
+					Rewards: MemberData.Rewards
 				});
 
-				interaction.followUp({
+				Interaction.followUp({
 					embeds: [
 						{
 							title: `${Icons.heart}  Here you go dear!`,
 							description: `Spend it wisely and come back tomorrow!\n\n— ${Icons.yen} 200x added`,
-							color: senkoClient.api.Theme.light,
+							color: Senko.Theme.light,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/happy.png"
 							}
@@ -72,15 +72,15 @@ export default {
 
 				break;
 			case "weekly":
-				var WeeklyTimeStamp = userData.Rewards.Weekly;
+				var WeeklyTimeStamp = MemberData.Rewards.Weekly;
 				var WeeklyCooldown = 604800000;
 
-				if (WeeklyCooldown - (Date.now() - WeeklyTimeStamp) >= 0) return interaction.followUp({
+				if (WeeklyCooldown - (Date.now() - WeeklyTimeStamp) >= 0) return Interaction.followUp({
 					embeds: [
 						{
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: `From what I can remember i've given you your weekly yen, come back <t:${Math.floor((WeeklyTimeStamp + WeeklyCooldown) / 1000)}:R>!`,
-							color: senkoClient.api.Theme.dark,
+							color: Senko.Theme.dark,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/hat_think.png"
 							}
@@ -89,20 +89,20 @@ export default {
 					ephemeral: true
 				});
 
-				userData.LocalUser.profileConfig.Currency.Yen = userData.LocalUser.profileConfig.Currency.Yen + 1400;
-				userData.Rewards.Weekly = Date.now();
+				MemberData.LocalUser.profileConfig.Currency.Yen = MemberData.LocalUser.profileConfig.Currency.Yen + 1400;
+				MemberData.Rewards.Weekly = Date.now();
 
-				await updateSuperUser(interaction.user, {
-					LocalUser: userData.LocalUser,
-					Rewards: userData.Rewards
+				await updateSuperUser(Interaction.user, {
+					LocalUser: MemberData.LocalUser,
+					Rewards: MemberData.Rewards
 				});
 
-				interaction.followUp({
+				Interaction.followUp({
 					embeds: [
 						{
 							title: `${Icons.heart}  It's that time again!`,
 							description: `Here is your Yen for this week; Now spend it wisely!\n\n— ${Icons.yen} 1400x added`,
-							color: senkoClient.api.Theme.light,
+							color: Senko.Theme.light,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/happy.png"
 							}
@@ -111,8 +111,8 @@ export default {
 				});
 				break;
 			case "items":
-				var CI = userData.LocalUser.profileConfig.claimableItems;
-				var inventory: any = userData.LocalUser.profileConfig.Inventory;
+				var CI = MemberData.LocalUser.profileConfig.claimableItems;
+				var inventory: any = MemberData.LocalUser.profileConfig.Inventory;
 				var market = await fetchMarket();
 
 				if (CI.length > 0) {
@@ -121,7 +121,7 @@ export default {
 							{
 								title: "Here we are!",
 								description: "I have these items for you to have!\n",
-								color: senkoClient.api.Theme.light,
+								color: Senko.Theme.light,
 								thumbnail: {
 									url: "https://cdn.senko.gg/public/senko/package.png"
 								}
@@ -139,19 +139,19 @@ export default {
 						}
 					} while (CI.length > 0);
 
-					await updateSuperUser(interaction.user, {
-						LocalUser: userData.LocalUser
+					await updateSuperUser(Interaction.user, {
+						LocalUser: MemberData.LocalUser
 					});
 
-					return interaction.followUp(claimMessage);
+					return Interaction.followUp(claimMessage);
 				}
 
-				interaction.followUp({
+				Interaction.followUp({
 					embeds: [
 						{
 							title: "Hmmm.....",
 							description: "I've scourged around and couldn't find anything",
-							color: senkoClient.api.Theme.light,
+							color: Senko.Theme.light,
 							thumbnail: {
 								url: "https://cdn.senko.gg/public/senko/smile2.png"
 							}

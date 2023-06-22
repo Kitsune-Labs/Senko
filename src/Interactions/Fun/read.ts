@@ -6,12 +6,12 @@ export default {
 	name: "read",
 	desc: "Read the manga chapters you get from the market!",
 	category: "fun",
-	start: async ({ senkoClient, interaction, userData }) => {
+	start: async ({ Senko, Interaction, MemberData }) => {
 		const ShopItems = await fetchMarket();
 		const OwnedChapters: any = [];
 
 		new Promise<void>((resolve) => {
-			for (var item of Object.keys(userData.LocalUser.profileConfig.Inventory)) {
+			for (var item of Object.keys(MemberData.LocalUser.profileConfig.Inventory)) {
 				const ShopItem = ShopItems[item] as MarketItem;
 				if (ShopItem && ShopItem.manga) {
 					OwnedChapters.push({ label: `${ShopItem.name}`, value: `read_${ShopItem.manga}`, description: `${ShopItem.desc}` });
@@ -20,19 +20,19 @@ export default {
 
 			resolve();
 		}).then(() => {
-			if (OwnedChapters.length === 0) return interaction.reply({
+			if (OwnedChapters.length === 0) return Interaction.reply({
 				embeds: [
 					{
 						title: "You don't own any chapters!",
 						description: "You can buy them when they're avaliable in the shop!",
-						color: senkoClient.api.Theme.light,
+						color: Senko.Theme.light,
 						thumbnail: { url: "https://cdn.senko.gg/public/senko/what.png" }
 					}
 				],
 				ephemeral: true
 			});
 
-			interaction.reply({
+			Interaction.reply({
 				content: "** **",
 				components: [
 					{

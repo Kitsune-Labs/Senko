@@ -32,7 +32,7 @@ export default class {
 				method: "GET",
 				url: `https://discord.com/api/users/${id}`,
 				headers: {
-					"User-Agent": senkoClient.api.UserAgent,
+					"User-Agent": senkoClient.UserAgent,
 					"Authorization": `Bot ${senkoClient.token}`
 				}
 			}).then(response => {
@@ -74,8 +74,8 @@ export default class {
 								},
 								title: "📄 Messenger Index",
 								// @ts-ignore
-								description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/senko)\n\n[Privacy Policy](https://senko.gg/privacy) - [Terms of Use](https://senko.gg/terms)\nPing: ${Math.floor(senkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
-								color: senkoClient.api.Theme.random()
+								description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/FMghXMP4mW)\n\n[Privacy Policy](https://senko.gg/privacy) - [Terms of Use](https://senko.gg/terms)\nPing: ${Math.floor(senkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
+								color: senkoClient.Theme.random()
 							}
 						],
 						components: [
@@ -108,7 +108,7 @@ export default class {
 								},
 								title: "📑 Fun Commands",
 								description: `${categories.fun.map(c => c).join("\n")}`,
-								color: senkoClient.api.Theme.random()
+								color: senkoClient.Theme.random()
 							}
 						],
 						components: [
@@ -141,7 +141,7 @@ export default class {
 								},
 								title: "📑 Economy Commands",
 								description: `${categories.economy.map(c => c).join("\n")}`,
-								color: senkoClient.api.Theme.random()
+								color: senkoClient.Theme.random()
 							}
 						],
 						components: [
@@ -174,7 +174,7 @@ export default class {
 								},
 								title: "📑 Social Commands",
 								description: `${categories.social.map(c => c).join("\n")}`,
-								color: senkoClient.api.Theme.random()
+								color: senkoClient.Theme.random()
 							}
 						],
 						components: [
@@ -207,7 +207,7 @@ export default class {
 								},
 								title: "📑 Administration Commands",
 								description: `${categories.admin.map(c => c).join("\n")}`,
-								color: senkoClient.api.Theme.random()
+								color: senkoClient.Theme.random()
 							}
 						],
 						components: [
@@ -240,7 +240,7 @@ export default class {
 								},
 								title: "📑 Account Commands",
 								description: `${categories.account.map(c => c).join("\n")}`,
-								color: senkoClient.api.Theme.random()
+								color: senkoClient.Theme.random()
 							}
 						],
 						components: [
@@ -273,7 +273,7 @@ export default class {
 								},
 								title: "⚙️ Utility Commands",
 								description: `${categories.utility.map(c => c).join("\n")}`,
-								color: senkoClient.api.Theme.random()
+								color: senkoClient.Theme.random()
 							}
 						],
 						components: [

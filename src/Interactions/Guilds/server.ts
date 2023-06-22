@@ -86,16 +86,16 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({ senkoClient, interaction, guildData }) => {
+	start: async ({ Senko, Interaction, GuildData }) => {
 		function checkAdmin() {
 			// @ts-ignore
-			if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
-				interaction.reply({
+			if (!Interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
+				Interaction.reply({
 					embeds: [
 						{
 							title: `${Icons.exclamation}  Sorry dear!`,
 							description: "I have to restrict this to Administrator's only",
-							color: senkoClient.api.Theme.dark,
+							color: Senko.Theme.dark,
 							thumbnail: { url: "https://cdn.senko.gg/public/senko/heh.png" }
 						}
 					],
@@ -105,18 +105,18 @@ export default {
 			}
 			return true;
 		}
-		const guildFlags = Bitfield.fromHex(guildData.flags);
+		const guildFlags = Bitfield.fromHex(GuildData.flags);
 
-		switch (interaction.options.getSubcommand()) {
+		switch (Interaction.options.getSubcommand()) {
 			case "settings":
 				if (!checkAdmin()) return;
 
-				interaction.reply({
+				Interaction.reply({
 					embeds: [
 						{
 							title: "Server Configuration",
-							description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${senkoClient.user!.id}&guild_id=${interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Logs: ${guildData.ActionLogs !== null ? `<#${guildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${guildData.MessageLogs !== null ? `<#${guildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${guildData.MemberLogs ? `<#${guildData.MemberLogs}>` : `${Icons.tick}  Not set`}`,
-							color: senkoClient.api.Theme.light_red,
+							description: `${Icons.exclamation}  We recommend you [update Senko with this invite](https://discord.com/api/oauth2/authorize?client_id=${Senko.user!.id}&guild_id=${Interaction.guildId}&permissions=1099511637126&scope=bot%20applications.commands) if you haven't\n\nAction Logs: ${GuildData.ActionLogs !== null ? `<#${GuildData.ActionLogs}>` : `${Icons.tick}  Not set`}\nMessage Logging: ${GuildData.MessageLogs !== null ? `<#${GuildData.MessageLogs}>` : `${Icons.tick}  Not set`}\nMember Logging: ${GuildData.MemberLogs ? `<#${GuildData.MemberLogs}>` : `${Icons.tick}  Not set`}`,
+							color: Senko.Theme.light_red,
 							fields: [
 								{ name: `Moderation Commands ${Icons.beta}`, value: `\`\`\`diff\n${guildFlags.get(bits.BETAs.ModCommands) ? "+ Enabled" : "- Disabled"}\`\`\`` }
 							]
@@ -129,7 +129,7 @@ export default {
 								{ name: "Kick Logs", value: `\`\`\`diff\n${guildFlags.get(bits.ActionLogs.KickActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n` },
 								{ name: "Timeout Logs", value: `\`\`\`diff\n${guildFlags.get(bits.ActionLogs.TimeoutActionDisabled) ? "- Disabled" : "+ Enabled"}\`\`\`\n` }
 							],
-							color: senkoClient.api.Theme.light_red
+							color: Senko.Theme.light_red
 						}
 					],
 					components: [
@@ -154,20 +154,20 @@ export default {
 			case "set":
 				if (!checkAdmin()) return;
 
-				switch (interaction.options.getSubcommandGroup()) {
+				switch (Interaction.options.getSubcommandGroup()) {
 					case "action-logs":
-						var actionChannel = interaction.options.get("channel", true).channel;
+						var actionChannel = Interaction.options.get("channel", true).channel;
 
-						await updateSuperGuild(interaction.guild!, {
+						await updateSuperGuild(Interaction.guild!, {
 							ActionLogs: actionChannel?.id
 						});
 
-						interaction.reply({
+						Interaction.reply({
 							embeds: [
 								{
 									title: `${Icons.exclamation}  okay dear`,
 									description: `I've set your Action Log channel to ${actionChannel}`,
-									color: senkoClient.api.Theme.light,
+									color: Senko.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 								}
 							],
@@ -176,18 +176,18 @@ export default {
 						});
 						break;
 					case "message-logging":
-						var messageChannel = interaction.options.get("channel", true).channel;
+						var messageChannel = Interaction.options.get("channel", true).channel;
 
-						await updateSuperGuild(interaction.guild!, {
+						await updateSuperGuild(Interaction.guild!, {
 							MessageLogs: messageChannel?.id
 						});
 
-						interaction.reply({
+						Interaction.reply({
 							embeds: [
 								{
 									title: `${Icons.exclamation}  okay dear`,
 									description: `I will send Edited & Deleted messages in ${messageChannel}`,
-									color: senkoClient.api.Theme.light,
+									color: Senko.Theme.light,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 								}
 							],
@@ -198,18 +198,18 @@ export default {
 				break;
 			case "remove":
 				if (!checkAdmin()) return;
-				switch (interaction.options.getSubcommandGroup()) {
+				switch (Interaction.options.getSubcommandGroup()) {
 					case "action-logs":
-						await updateSuperGuild(interaction.guild!, {
+						await updateSuperGuild(Interaction.guild!, {
 							ActionLogs: null
 						});
 
-						interaction.reply({
+						Interaction.reply({
 							embeds: [
 								{
 									title: `${Icons.question}  okay dear`,
 									description: "I don't know your reasoning, but I've done what you said and removed your Action Log channel!",
-									color: senkoClient.api.Theme.dark,
+									color: Senko.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 								}
 							],
@@ -217,7 +217,7 @@ export default {
 						});
 						break;
 					case "message-logging":
-						await updateSuperGuild(interaction.guild!, {
+						await updateSuperGuild(Interaction.guild!, {
 							MessageLogs: null,
 							AdvancedMessageLogging: {
 								// eslint-disable-next-line camelcase
@@ -227,12 +227,12 @@ export default {
 							}
 						});
 
-						interaction.reply({
+						Interaction.reply({
 							embeds: [
 								{
 									title: `${Icons.question}  okay dear`,
 									description: "If that's what you want I shall no longer look for edited or deleted messages",
-									color: senkoClient.api.Theme.dark,
+									color: Senko.Theme.dark,
 									thumbnail: { url: "https://cdn.senko.gg/public/senko/talk.png" }
 								}
 							],
@@ -242,25 +242,25 @@ export default {
 				}
 				break;
 			case "permissions":
-				interaction.reply({
+				Interaction.reply({
 					embeds: [
 						{
 							title: "Senko's Required Permissions",
-							description: `__**Required**__\nEmbed Links: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.EmbedLinks) ? Icons.check : Icons.tick}\nAttach Files: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.AttachFiles) ? Icons.check : Icons.tick}\nSend Messages: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.SendMessages) ? Icons.check : Icons.tick}\nUse External Emojis: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.UseExternalEmojis) ? Icons.check : Icons.tick}\n\n__**Moderation Requirements (Optional)**__\nBan Members: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.BanMembers) ? Icons.check : Icons.tick}\nKick Members: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.KickMembers) ? Icons.check : Icons.tick}\nModerate Members: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.ModerateMembers) ? Icons.check : Icons.tick}\nManage Messages: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.ManageMessages) ? Icons.check : Icons.tick}\nView Audit Log: ${interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.ViewAuditLog) ? Icons.check : Icons.tick}`,
-							color: senkoClient.api.Theme.light
+							description: `__**Required**__\nEmbed Links: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.EmbedLinks) ? Icons.check : Icons.tick}\nAttach Files: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.AttachFiles) ? Icons.check : Icons.tick}\nSend Messages: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.SendMessages) ? Icons.check : Icons.tick}\nUse External Emojis: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.UseExternalEmojis) ? Icons.check : Icons.tick}\n\n__**Moderation Requirements (Optional)**__\nBan Members: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.BanMembers) ? Icons.check : Icons.tick}\nKick Members: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.KickMembers) ? Icons.check : Icons.tick}\nModerate Members: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.ModerateMembers) ? Icons.check : Icons.tick}\nManage Messages: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.ManageMessages) ? Icons.check : Icons.tick}\nView Audit Log: ${Interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.ViewAuditLog) ? Icons.check : Icons.tick}`,
+							color: Senko.Theme.light
 						}
 					]
 				});
 				break;
 			case "info":
-				var guild = interaction.guild;
+				var guild = Interaction.guild;
 
-				interaction.reply({
+				Interaction.reply({
 					embeds: [
 						{
 							title: `${guild!.name}`,
-							description: `**Description**\n${guild!.description ? `${interaction.guild!.description}\n` : "No description"}\n**Vanity URL**: ${guild!.vanityURLCode ? `https://discord.gg/${guild!.vanityURLCode}  (${(await guild!.fetchVanityData()).uses} uses)` : "None"}\n**Region**: ${guild!.preferredLocale}\n**${guild!.memberCount}** members\n**${guild!.emojis.cache.size}** emojis\n**${guild!.stickers.cache.size}** stickers\n**${guild!.premiumSubscriptionCount}** boosts\n**${(await guild!.bans.fetch()).size}** bans`,
-							color: senkoClient.api.Theme.light,
+							description: `**Description**\n${guild!.description ? `${Interaction.guild!.description}\n` : "No description"}\n**Vanity URL**: ${guild!.vanityURLCode ? `https://discord.gg/${guild!.vanityURLCode}  (${(await guild!.fetchVanityData()).uses} uses)` : "None"}\n**Region**: ${guild!.preferredLocale}\n**${guild!.memberCount}** members\n**${guild!.emojis.cache.size}** emojis\n**${guild!.stickers.cache.size}** stickers\n**${guild!.premiumSubscriptionCount}** boosts\n**${(await guild!.bans.fetch()).size}** bans`,
+							color: Senko.Theme.light,
 							thumbnail: {
 								url: guild!.iconURL() as string
 							}
@@ -271,15 +271,15 @@ export default {
 				break;
 			case "advanced":
 				if (!checkAdmin()) return;
-				var EditCheck = guildData.AdvancedMessageLogging.message_edits ? true : false;
-				var DeleteCheck = guildData.AdvancedMessageLogging.message_deletions ? true : false;
+				var EditCheck = GuildData.AdvancedMessageLogging.message_edits ? true : false;
+				var DeleteCheck = GuildData.AdvancedMessageLogging.message_deletions ? true : false;
 
-				interaction.reply({
+				Interaction.reply({
 					embeds: [
 						{
 							title: "Advanced Message Log Settings",
-							description: `> ${DeleteCheck ? `Deleted messages will be sent to <#${guildData.AdvancedMessageLogging.message_deletions}>` : "Deleted messages will be sent to the default message logging channel if applicable"}\n\n> ${EditCheck ? `Edited messages will be sent to <#${guildData.AdvancedMessageLogging.message_edits}>` : "Edited messages will be sent to the default message logging channel if applicable"}`,
-							color: senkoClient.api.Theme.light
+							description: `> ${DeleteCheck ? `Deleted messages will be sent to <#${GuildData.AdvancedMessageLogging.message_deletions}>` : "Deleted messages will be sent to the default message logging channel if applicable"}\n\n> ${EditCheck ? `Edited messages will be sent to <#${GuildData.AdvancedMessageLogging.message_edits}>` : "Edited messages will be sent to the default message logging channel if applicable"}`,
+							color: Senko.Theme.light
 						}
 					],
 					ephemeral: true,

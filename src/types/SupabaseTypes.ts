@@ -25,7 +25,9 @@ export interface MarketItem {
 	soundFile?: string,
 	soundVolume?: number,
 	manga?: string,
-	set?: string
+	set?: string,
+	url?: string,
+	onsale: boolean;
 }
 
 export interface ConfigTypes {
@@ -87,7 +89,7 @@ export interface GuildData {
 }
 
 export interface UserData {
-	id: string;
+	readonly id: string;
 	Stats: {
 		Rests: number | 0;
 		Fluffs: number | 0;
@@ -174,10 +176,6 @@ export interface UserData {
 			}
 		}
 	};
-	LastUsed: Date;
-	MarriedTo: {
-		id: string | null;
-		since: number | null;
-	};
+	LastUsed: string;
 	DeletionDays: number;
 }

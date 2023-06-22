@@ -1,7 +1,7 @@
 import type { SenkoCommand } from "../../types/AllTypes";
 import { ApplicationCommandOptionType as CommandOption } from "discord.js";
 import Icons from "../../Data/Icons.json";
-import Paginate from "../../API/Pagination/Command";
+import Paginate from "../../API/Paginate";
 import type { GuildWarn } from "../../types/SupabaseTypes";
 
 export default {
@@ -18,11 +18,11 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({ senkoClient, interaction, guildData }) => {
-		const user = interaction.options.getUser("user") || interaction.user;
+	start: async ({ Senko, Interaction, GuildData }) => {
+		const user = Interaction.options.getUser("user") || Interaction.user;
 
-		if (guildData.warns[user.id]) {
-			const warns = guildData.warns[user.id] || [] as Array<GuildWarn>;
+		if (GuildData.warns[user.id]) {
+			const warns = GuildData.warns[user.id] || [] as Array<GuildWarn>;
 			const PageEstimate = Math.ceil(warns.length / 8) < 1 ? 1 : Math.ceil(warns.length / 8);
 			const Pages = [];
 
@@ -30,7 +30,7 @@ export default {
 				const Page = {
 					title: "",
 					description: "",
-					color: senkoClient.api.Theme.light
+					color: Senko.Theme.light
 				};
 
 				const start = i * 8;
@@ -61,14 +61,18 @@ export default {
 				Pages.push(Page);
 			}
 
-			Paginate(interaction, Pages, 60000, false);
+			// Paginate(Interaction, Pages, 60000, false);
+			new Paginate(Interaction, Pages, {
+				Time: 60000,
+				Ephemeral: false
+			});
 		} else {
-			interaction.reply({
+			Interaction.reply({
 				embeds: [
 					{
 						title: `${Icons.exclamation}  All clean`,
 						description: `${user.tag} doesn't have any warns!`,
-						color: senkoClient.api.Theme.dark,
+						color: Senko.Theme.dark,
 						thumbnail: { url: "https://cdn.senko.gg/public/senko/book.png" }
 					}
 				]

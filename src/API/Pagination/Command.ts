@@ -1,6 +1,9 @@
 import type { APIEmbed } from "discord.js";
 
-export default async function(interaction: any, pages: APIEmbed[] | any, timeout = 120000, isEphemeral = false): Promise<void> {
+/**
+ * @deprecated
+ */
+export default async function (interaction: any, pages: APIEmbed[] | any, timeout = 120000, isEphemeral = false): Promise<void> {
 	if (pages.length <= 0) throw new Error("No pages provided.");
 
 	let page = 0;
@@ -48,12 +51,12 @@ export default async function(interaction: any, pages: APIEmbed[] | any, timeout
 
 	collector.on("collect", async (i: any) => {
 		switch (i.customId) {
-		case "page_left":
-			page = page > 0 ? --page : pages.length - 1;
-			break;
-		case "page_right":
-			page = page + 1 < pages.length ? ++page : 0;
-			break;
+			case "page_left":
+				page = page > 0 ? --page : pages.length - 1;
+				break;
+			case "page_right":
+				page = page + 1 < pages.length ? ++page : 0;
+				break;
 		}
 
 		await i.deferUpdate();

@@ -22,11 +22,11 @@ export default {
 	usableAnywhere: true,
 	category: "utility",
 	whitelist: true,
-	start: async ({ senkoClient, interaction }) => {
-		const User: any = interaction.options.getUser("user") || interaction.member;
+	start: async ({ Senko, Interaction }) => {
+		const User: any = Interaction.options.getUser("user") || Interaction.member;
 		// @ts-ignore
 		const AvatarURL = User.user ? User.user.avatarURL({ size: 2048 }) : User.avatarURL({ size: 2048 }) as User;
-		// const blur = interaction.options.get("blur") ? "spoiler_" : "";
+		// const blur = Interaction.options.get("blur") ? "spoiler_" : "";
 
 		const messageStruct = {
 			embeds: [
@@ -39,7 +39,7 @@ export default {
 					image: {
 						url: AvatarURL ? AvatarURL : "https://cdn.senko.gg/public/DiscordAvatar.png"
 					},
-					color: senkoClient.api.Theme.light
+					color: Senko.Theme.light
 				}
 			],
 			components: [
@@ -57,8 +57,8 @@ export default {
 			url: `https://discord.com/api/v9/users/${User.id}`,
 			method: "GET",
 			headers: {
-				"User-Agent": senkoClient.api.UserAgent,
-				"Authorization": `Bot ${senkoClient.token}`
+				"User-Agent": Senko.UserAgent,
+				"Authorization": `Bot ${Senko.token}`
 			}
 		}).then(async (response) => {
 			if (response.data.banner) {
@@ -67,7 +67,7 @@ export default {
 				// @ts-expect-error
 				messageStruct.embeds.push({
 					title: "Banner",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					image: {
 						url: `https://cdn.discordapp.com/banners/${User.id}/${response.data.banner}${ext}?size=2048`
 					}
@@ -78,7 +78,7 @@ export default {
 			}
 
 			// @ts-expect-error
-			interaction.followUp(messageStruct);
+			Interaction.followUp(messageStruct);
 		});
 	}
 } as SenkoCommand;

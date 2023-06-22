@@ -14,12 +14,12 @@ export default {
 	name: "cuddle",
 	desc: "Cuddle with Senko-san!",
 	category: "fun",
-	start: async ({ senkoClient, interaction }) => {
+	start: async ({ Senko, Interaction }) => {
 		const MessageStruct = {
 			embeds: [
 				{
-					description: `**${randomArrayItem(Responses).replace("_USER_", interaction.user.username)}**`,
-					color: senkoClient.api.Theme.light,
+					description: `**${randomArrayItem(Responses).replace("_USER_", Interaction.user.username)}**`,
+					color: Senko.Theme.light,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/cuddle.png"
 					}
@@ -28,11 +28,11 @@ export default {
 		};
 
 		if (randomNumber(100) > 75) {
-			addYen(interaction.user, 10);
+			addYen(Interaction.user, 10);
 
 			MessageStruct.embeds[0]!.description += `\n\n— ${Icons.yen}  10x added for interaction`;
 		}
 
-		interaction.reply(MessageStruct);
+		Interaction.reply(MessageStruct);
 	}
 } as SenkoCommand;

@@ -1,4 +1,4 @@
-export default interface Locale {
+export interface LocaleInterface {
 	general: {
 		invalid_mod: string;
 		YenAwarded: string;
@@ -32,4 +32,4 @@ export default interface Locale {
 		UserInput: Array<any>;
 		Responses: Array<any>;
 	};
-};
+}

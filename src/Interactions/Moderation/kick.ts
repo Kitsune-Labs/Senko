@@ -22,19 +22,19 @@ export default {
 		}
 	],
 	whitelist: true,
-	start: async ({ senkoClient, interaction, guildData }) => {
-		if (!Bitfield.fromHex(guildData.flags).get(bits.BETAs.ModCommands)) return interaction.reply({
+	start: async ({ Senko, Interaction, GuildData }) => {
+		if (!Bitfield.fromHex(GuildData.flags).get(bits.BETAs.ModCommands)) return Interaction.reply({
 			content: "Your guild has not enabled Moderation Commands, ask your guild Administrator to enable them with `/server configuration`",
 			ephemeral: true
 		});
 
 		// @ts-ignore
-		if (!interaction.member!.permissions.has(Permissions.KickMembers)) return interaction.reply({
+		if (!Interaction.member!.permissions.has(Permissions.KickMembers)) return Interaction.reply({
 			embeds: [
 				{
 					title: "Sorry dear!",
 					description: "You must be able to kick members to use this!",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -43,12 +43,12 @@ export default {
 			ephemeral: true
 		});
 
-		if (!interaction.guild!.members.me!.permissions.has(Permissions.KickMembers)) return interaction.reply({
+		if (!Interaction.guild!.members.me!.permissions.has(Permissions.KickMembers)) return Interaction.reply({
 			embeds: [
 				{
 					title: "Oh dear...",
 					description: "It looks like I can't kick members! (Make sure I have the \"Kick Members\" permission)",
-					color: senkoClient.api.Theme.dark,
+					color: Senko.Theme.dark,
 					thumbnail: {
 						url: "https://cdn.senko.gg/public/senko/heh.png"
 					}
@@ -57,11 +57,11 @@ export default {
 			ephemeral: true
 		});
 
-		const userToKick = interaction.options.getUser("user");
-		const guildUser = interaction.options.getMember("user");
-		const reason = interaction.options.getString("reason") || "No reason provided";
+		const userToKick = Interaction.options.getUser("user");
+		const guildUser = Interaction.options.getMember("user");
+		const reason = Interaction.options.getString("reason") || "No reason provided";
 
-		if (userToKick!.id === interaction.user.id) return interaction.reply({
+		if (userToKick!.id === Interaction.user.id) return Interaction.reply({
 			embeds: [
 				{
 					title: "Kick error",
@@ -73,7 +73,7 @@ export default {
 		});
 
 		// @ts-ignore
-		if (guildUser!.roles.highest.rawPosition >= interaction.member!.roles.highest.rawPosition) return interaction.reply({
+		if (guildUser!.roles.highest.rawPosition >= Interaction.member!.roles.highest.rawPosition) return Interaction.reply({
 			embeds: [
 				{
 					title: "Kick error",
@@ -85,7 +85,7 @@ export default {
 			ephemeral: true
 		});
 
-		if (userToKick!.id === interaction.guild!.ownerId) return interaction.reply({
+		if (userToKick!.id === Interaction.guild!.ownerId) return Interaction.reply({
 			embeds: [
 				{
 					title: "Kick error",
@@ -96,7 +96,7 @@ export default {
 			ephemeral: true
 		});
 
-		await interaction.deferReply({ fetchReply: true });
+		await Interaction.deferReply({ fetchReply: true });
 
 		const kickStruct = {
 			embeds: [
@@ -105,9 +105,9 @@ export default {
 					description: `${typeof userToKick != "string" ? userToKick!.tag : userToKick} [${typeof userToKick != "string" ? userToKick!.id : userToKick}]\nReason: __${reason}__`,
 					color: Colors.Yellow,
 					author: {
-						name: `${interaction.user.tag}  [${interaction.user.id}]`,
+						name: `${Interaction.user.tag}  [${Interaction.user.id}]`,
 						// eslint-disable-next-line camelcase
-						icon_url: interaction.user.displayAvatarURL()
+						icon_url: Interaction.user.displayAvatarURL()
 					},
 					thumbnail: {}
 				}
@@ -130,7 +130,7 @@ export default {
 			await userToKick?.send({
 				embeds: [
 					{
-						title: `You have been kicked from ${interaction.guild!.name}`,
+						title: `You have been kicked from ${Interaction.guild!.name}`,
 						description: `Reason: ${reason}`,
 						color: Colors.Orange
 					}
@@ -139,9 +139,9 @@ export default {
 				responseStruct.embeds[0]!.description += `\n\n${err}`;
 			});
 
-			interaction.guild!.members.kick(userToKick!.id, `${interaction.user.tag} : ${reason}`);
+			Interaction.guild!.members.kick(userToKick!.id, `${Interaction.user.tag} : ${reason}`);
 		} else {
-			interaction.guild!.members.kick(userToKick, `${interaction.user.tag} : ${reason}`);
+			Interaction.guild!.members.kick(userToKick, `${Interaction.user.tag} : ${reason}`);
 		}
 
 		if (typeof userToKick != "string") {
@@ -150,13 +150,13 @@ export default {
 			};
 		}
 
-		if (guildData.ActionLogs) {
+		if (GuildData.ActionLogs) {
 			// @ts-ignore
-			(await interaction.guild.channels.fetch(guildData.ActionLogs)).send(kickStruct).catch(err => {
+			(await Interaction.guild.channels.fetch(GuildData.ActionLogs)).send(kickStruct).catch(err => {
 				responseStruct.embeds[0]!.description += `Cannot send action log: \n\n${err}`;
 			});
 		}
 
-		interaction.followUp(responseStruct);
+		Interaction.followUp(responseStruct);
 	}
 } as SenkoCommand;

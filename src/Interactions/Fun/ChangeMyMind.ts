@@ -13,14 +13,14 @@ export default {
 		}
 	],
 	category: "fun",
-	start: async ({ senkoClient, interaction }) => {
-		interaction.reply({
+	start: async ({ Senko, Interaction }) => {
+		Interaction.reply({
 			embeds: [
 				{
 					image: {
-						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${interaction.options.getString("text", true)}`)
+						url: encodeURI(`https://vacefron.nl/api/changemymind?text=${Interaction.options.getString("text", true)}`)
 					},
-					color: senkoClient.api.Theme.light
+					color: Senko.Theme.light
 				}
 			]
 		});
