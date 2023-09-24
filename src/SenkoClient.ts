@@ -1,4 +1,13 @@
 /* eslint-disable camelcase */
+
+process.on("unhandledRejection", async (unhandledRejection: any) => {
+	winston.log("fatal", unhandledRejection.stack || JSON.stringify(unhandledRejection, null, 2));
+});
+
+process.on("uncaughtException", async (uncaughtException) => {
+	winston.log("error", uncaughtException.stack || JSON.stringify(uncaughtException, null, 2));
+});
+
 import "dotenv/config";
 
 import { format } from "winston";
@@ -121,36 +130,6 @@ export const Locales = {
 	"en-US": require("./Data/Locales/en-US.json"),
 	"fr": require("./Data/Locales/fr.json")
 };
-
-process.on("unhandledRejection", async (unhandledRejection: any) => {
-	senkoClient.api.statusLog.send({
-		content: "<@609097445825052701>",
-		embeds: [
-			{
-				title: senkoClient.user!.username,
-				description: unhandledRejection.stack || unhandledRejection.toString(),
-				color: senkoClient.Theme.light
-			}
-		]
-	});
-
-	winston.log("fatal", unhandledRejection.stack || JSON.stringify(unhandledRejection, null, 2));
-});
-
-process.on("uncaughtException", async (uncaughtException) => {
-	senkoClient.api.statusLog.send({
-		content: "<@609097445825052701>",
-		embeds: [
-			{
-				title: senkoClient.user!.username,
-				description: uncaughtException.stack || uncaughtException.toString(),
-				color: senkoClient.Theme.light
-			}
-		]
-	});
-
-	winston.log("error", uncaughtException.stack || JSON.stringify(uncaughtException, null, 2));
-});
 
 senkoClient.on(Events.Debug, async (debug) => {
 	winston.log("debug", debug);
