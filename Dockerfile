@@ -9,6 +9,4 @@ COPY . .
 
 EXPOSE 7777
 
-RUN yarn build
-
 CMD [ "yarn", "start" ]

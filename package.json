@@ -3,7 +3,6 @@
     "scripts": {
         "start": "clear; ts-node ./src/SenkoClient.ts --trace-warnings",
         "dev": "clear; NIGHTLY='true' ts-node ./src/SenkoClient.ts --trace-warnings",
-        "build": "clear; tsc --build --verbose",
         "merge": "node ./src/Data/Market/Merge.js"
     },
     "dependencies": {
