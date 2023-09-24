@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/twitter/url?color=blue&label=Twitter&logo=Twitter&logoColor=white&url=https%3A%2F%2Ftwitter.com%2FTrueSenko&style=flat">
 </a>
 
-<a href="https://discord.gg/senko">
+<a href="https://senko.gg/discord">
     <img src="https://img.shields.io/discord/777251087592718336?color=5865F2&label=Community&logo=discord&logoColor=white">
 </a>
 

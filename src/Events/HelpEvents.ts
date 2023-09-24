@@ -74,7 +74,7 @@ export default class {
 								},
 								title: "📄 Messenger Index",
 								// @ts-ignore
-								description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/FMghXMP4mW)\n\n[Privacy Policy](https://senko.gg/privacy) - [Terms of Use](https://senko.gg/terms)\nPing: ${Math.floor(senkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
+								description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://senko.gg/discord)\n\n[Privacy Policy](https://senko.gg/privacy) - [Terms of Use](https://senko.gg/terms)\nPing: ${Math.floor(senkoClient.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}> (<t:${Math.ceil((Date.now() - senkoClient.uptime) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Social**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
 								color: senkoClient.Theme.random()
 							}
 						],

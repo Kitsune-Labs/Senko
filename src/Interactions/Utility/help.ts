@@ -16,7 +16,7 @@ export default {
 						name: "Index"
 					},
 					title: "📑 Messenger Index",
-					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://discord.gg/FMghXMP4mW)\n\n[Privacy Policy](https://senko.gg/privacy) - [Terms of Use](https://senko.gg/terms)\n\nPing: ${Math.floor(Senko.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - Senko.uptime!) / 1000)}> (<t:${Math.ceil((Date.now() - Senko.uptime!) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
+					description: `If you find an issue or want to suggest something please find us\n[in our community server!](https://senko.gg/discord)\n\n[Privacy Policy](https://senko.gg/privacy) - [Terms of Use](https://senko.gg/terms)\n\nPing: ${Math.floor(Senko.ws.ping)} ms\nUptime: Since <t:${Math.ceil((Date.now() - Senko.uptime!) / 1000)}> (<t:${Math.ceil((Date.now() - Senko.uptime!) / 1000)}:R>)\n\n≻ **Fun**\n≻ **Economy**\n≻ **Administration**\n≻ **Account**\n≻ **Utility**`,
 					color: Senko.Theme.random()
 				}
 			],
