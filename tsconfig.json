@@ -20,7 +20,6 @@
 		"noUnusedParameters": true,
 		"checkJs": false,
 		"allowJs": false,
-		"outDir": "comp",
 		"removeComments": true,
 		"resolveJsonModule": true,
 		"alwaysStrict": true
