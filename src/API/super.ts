@@ -2,7 +2,7 @@ import type { Guild, User } from "discord.js";
 import type { ConfigTypes, GuildData, MarketItems, UserData } from "../types/SupabaseTypes";
 import { createClient } from "@supabase/supabase-js";
 import { Bitfield } from "bitfields";
-import { winston, senkoClient } from "../SenkoClient";
+import { winston } from "../SenkoClient";
 
 export const Supabase = createClient(process.env["SUPABASE_URL"] as string, process.env["SUPABASE_KEY"] as string, {
 	auth: {
