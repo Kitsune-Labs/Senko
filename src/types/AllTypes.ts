@@ -98,7 +98,6 @@ export interface SenkoClientTypes extends Client {
 		Bitfield: Bitfield;
 		BitData: BitData;
 		loadedCommands: Map<string, ApplicationCommand>;
-		statusLog: WebhookClient;
 		SenkosWorld: Guild;
 	};
 	Icons: SenkoIcons;

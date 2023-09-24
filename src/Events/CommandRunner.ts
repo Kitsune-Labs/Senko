@@ -185,15 +185,6 @@ export default class {
 				}
 
 				winston.info("error", `Command ${LoadedInteractionCommand.name} encountered an error: ${err}`);
-
-				SenkoClient.api.statusLog.send({
-					content: "<@609097445825052701>",
-					embeds: [{
-						title: "Senko - Command Error",
-						description: err.stack.toString(),
-						color: SenkoClient.Theme.light
-					}]
-				});
 			}).finally(() => {
 				winston.log("info", `Command "${interaction.commandName}" finished in ${Date.now() - CommandTime}ms`);
 			});

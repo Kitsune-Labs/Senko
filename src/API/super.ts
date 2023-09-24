@@ -95,11 +95,6 @@ export async function deleteSuperGuild(guild: Guild): Promise<void> {
 
 	if (error) {
 		winston.log("fatal", `DELETING GUILD DATA FAILED FOR ${guild.id}: ${error}`);
-
-		senkoClient.api.statusLog.send({
-			content: "THERE IS AN ERROR DELETING GUILD DATA!"
-		});
-
 		return;
 	}
 

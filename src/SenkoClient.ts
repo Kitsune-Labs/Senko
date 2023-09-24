@@ -115,9 +115,6 @@ Reflect.set(senkoClient, "api", {
 	Commands: new Map(),
 	BitData: require("./API/Bits.json"),
 	loadedCommands: new Map(),
-	statusLog: new WebhookClient({
-		url: process.env["STATUS_URL"] as string
-	}),
 	SenkosWorld: senkoClient.guilds.fetch("1106366357039218722")
 });
 
