@@ -2,11 +2,7 @@ FROM node:lts
 
 WORKDIR /senko
 COPY package*.json ./
-COPY tsconfig.json ./
-RUN yarn install
-
+RUN npm install
 COPY . .
-
 EXPOSE 7777
-
-CMD [ "yarn", "start" ]
+CMD ["npm", "start"]
